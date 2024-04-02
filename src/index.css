@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+
+@layer base {
+    :root {
+        --rPrimaryWhite: #F5F5F5;
+        --rThemeRed: #F44730;
+        --rThemeOrange: #F4A154;
+        --rThemePurple: #69168F;
+        --rThemeDarkBlue: #0A2E72;
+        --rThemeBlue: #144BB1;
+        --rSlateGray: #6D6D6D;
+        --rSpaceBlue: #393D5E;
+        --rSpaceBlueSelected: #202338;
+        --rSelectorBlue: #4699E5;
+        --rGlassBackground: #010101;
+    }
+
+    
+    html,body {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
+    @font-face {
+        font-family: Ubuntu;
+        font-weight: 400;
+        src: url("public/Font/Ubuntu-Regular.ttf") format("ttf");
+    }
+    @font-face {
+        font-family: Ubuntu;
+        font-weight: 500;
+        src: url("public/Font/Ubuntu-Medium.ttf") format("ttf");
+    }
+    @font-face {
+        font-family: Ubuntu;
+        font-weight: 700;
+        src: url("public/Font/Ubuntu-Bold.ttf") format("ttf");
+    }
+
+    html{
+        @apply font-Ubuntu bg-PrimaryWhite;
+    }
+}
+
+@layer components {
+
+    .conic-gradient {
+        background:  
+            linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%)),
+            conic-gradient(at 45% -2%, var(--rThemePurple) 23%, var(--rThemeDarkBlue) 55%, var(--rThemeBlue) 80%);
+    }
+    .text-linear-gradient {
+        font-weight: 700;
+        background: -webkit-linear-gradient(339deg, var(--rThemeRed) 25%, var(--rThemeOrange));
+        @apply inline-block text-transparent bg-clip-text
+    }
+
+    .site-borders {
+        background: -webkit-linear-gradient(305deg, var(--rThemeRed) 25%, var(--rThemeOrange));
+    }
+}
+
+@layer utilities {
+
+    .Home_Section1 {
+        @apply w-full 
+        desktop:min-h-[960px] 
+        mLaptop:min-h-[800px] 
+        sLaptop:min-h-[640px] 
+        mMobile:min-h-[735px] 
+        min-h-[615px] 
+        relative;
+    }
+    .PM_Section2 {
+        @apply w-full
+        desktop:min-h-[980px]
+        mLaptop:min-h-[818px] 
+        sLaptop:min-h-[650px] 
+        mMobile:min-h-[700px] 
+        min-h-[690px]
+        relative; 
+    }
+}
