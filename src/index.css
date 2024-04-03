@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -31,23 +33,8 @@
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
     }
-    @font-face {
-        font-family: Ubuntu;
-        font-weight: 400;
-        src: url("public/Font/Ubuntu-Regular.ttf") format("ttf");
-    }
-    @font-face {
-        font-family: Ubuntu;
-        font-weight: 500;
-        src: url("public/Font/Ubuntu-Medium.ttf") format("ttf");
-    }
-    @font-face {
-        font-family: Ubuntu;
-        font-weight: 700;
-        src: url("public/Font/Ubuntu-Bold.ttf") format("ttf");
-    }
 
-    html{
+    html,body{
         @apply font-Ubuntu bg-PrimaryWhite;
     }
 }
@@ -89,5 +76,12 @@
         mMobile:min-h-[700px] 
         min-h-[690px]
         relative; 
+    }
+    .Pricing_Section3 {
+        @apply w-full  
+        sLaptop:min-h-[770px] 
+        mMobile:min-h-[1050px]
+        min-h-[870px]
+        relative;
     }
 }

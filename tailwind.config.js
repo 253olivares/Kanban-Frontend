@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        Ubuntu: ['Ubuntu','sans-serif']
+        Ubuntu: ['Ubuntu', 'sans-serif']
       },
       screens: {
         'sMobile': '640px',

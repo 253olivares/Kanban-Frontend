@@ -17,7 +17,20 @@ const Button = ({message}: {message:string}) => {
               mLaptop:p-[0.188rem]
               desktop:p-1 
               hover:shadow-xl'>
-        <span className='flex justify-center items-center w-full bg-SpaceBlue active:bg-SpaceBlueSelected sLaptop:rounded-md mLaptop:rounded-[0.438rem] desktop:rounded-lg mLaptop:py-1 desktop:py-2 sLaptop:px-[0.625rem] mLaptop:px-3 desktop:px-4'>
+        <span className='flex 
+        justify-center 
+        items-center 
+        w-full 
+        bg-SpaceBlue 
+        active:bg-SpaceBlueSelected 
+        sLaptop:rounded-md 
+        mLaptop:rounded-[0.438rem] 
+        desktop:rounded-lg 
+        mLaptop:py-1 
+        desktop:py-2 
+        sLaptop:px-[0.625rem] 
+        mLaptop:px-3 
+        desktop:px-4'>
             {message}
         </span>
     </button>

@@ -1,9 +1,10 @@
 import Button from "../Components/LargerButton"
+import triangle from '/assets/Polygon_4.svg'
 
 const index = () => {
   return (
     <section className="PM_Section2">
-      <div className="PM_Section2 max-w-[1920px] mx-auto z-20">
+      <div className="PM_Section2 max-w-[1920px] mx-auto ">
         <div className="w-full max-w-[85%] sMobile:max-w-[560px] mMobile:max-w-[650px] sLaptop:max-w-[82%] mx-auto">
           <h1 className="text-linear-gradient 
           font-bold 
@@ -23,11 +24,13 @@ const index = () => {
           <p className="text-Slate-gray 
           font-normal 
           mt-4 sMobile:mt-5 mMobile:mt-7 sLaptop:mt-5 desktop:mt-7  
-          text-xl sMobile:text-2xl mMobile:text-3xl sLaptop:text-2xl mLaptop:text-3xl desktop:text-[2.375rem]">Ease management trouble with our software. KB aims to make communication easy and task tracking a breeze. All you need to do is take the first step and sign up for an account.</p>
+          text-xl sMobile:text-2xl mMobile:text-3xl sLaptop:text-2xl mLaptop:text-3xl desktop:text-[2.375rem]">
+            Ease management trouble with our software. KB aims to make communication easy and task tracking a breeze. All you need to do is take the first step and sign up for an account.
+            </p>
           <div className="w-full flex justify-center sLaptop:justify-end mt-8 sMobile:mt-12 mMobile:mt-16 sLaptop:mt-8 mLaptop:mt-10 desktop:mt-14">
-            <Button message="Take Your First Step" />
+            <Button message="Take Your First Step" icon={triangle} />
           </div>
-          <p className="hidden sLaptop:block text-Slate-gray text-[1.125rem] leading-[1.5rem] mLaptop:text-xl desktop:text-2xl max-w-[370px] mLaptop:max-w-[460px] desktop:max-w-[560px] float-right text-right mt-3">Try out our free tier and if you like it update to a business or enterprise account.</p>
+          <p className="hidden font-normal sLaptop:block text-Slate-gray text-[1.125rem] leading-[1.5rem] mLaptop:text-xl desktop:text-2xl max-w-[370px] mLaptop:max-w-[460px] desktop:max-w-[560px] float-right text-right mt-3">Try out our free tier and if you like it update to a business or enterprise account.</p>
         </div>
       {/* top right bubblt */}
         <div className="absolute

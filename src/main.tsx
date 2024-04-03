@@ -7,6 +7,7 @@ import TestingApp from './testingComponents/TestingApp.tsx'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
+  // starting our route for the application
     <Router>
       <Routes>
         <Route path='/*' element={<App />} />
