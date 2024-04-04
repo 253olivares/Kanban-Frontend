@@ -59,6 +59,10 @@
 
 @layer utilities {
 
+    .customShadow {
+        box-shadow: 0 0.625rem 1.25rem 0 rgba(0,0,0,.5);
+    }
+
     .Home_Section1 {
         @apply w-full 
         desktop:min-h-[960px] 

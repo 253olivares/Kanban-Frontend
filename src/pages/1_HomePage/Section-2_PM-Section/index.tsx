@@ -23,10 +23,10 @@ const index = () => {
           <p className="text-Slate-gray 
           font-normal 
           mt-4 sMobile:mt-5 mMobile:mt-7 sLaptop:mt-5 desktop:mt-7  
-          text-xl sMobile:text-2xl mMobile:text-3xl sLaptop:text-2xl mLaptop:text-3xl desktop:text-[2.375rem]">
+          text-xl sMobile:text-2xl mMobile:text-3xl sLaptop:text-2xl mLaptop:text-3xl desktop:text-[2.375rem] largeDesktop:text-[3rem] largeDesktop:leading-[3.25rem]">
             Ease management trouble with our software. KB aims to make communication easy and task tracking a breeze. All you need to do is take the first step and sign up for an account.
             </p>
-          <div className="w-full flex justify-center sLaptop:justify-end mt-8 sMobile:mt-12 mMobile:mt-16 sLaptop:mt-8 mLaptop:mt-10 desktop:mt-14">
+          <div className="w-full flex justify-center sLaptop:justify-end mt-8 sMobile:mt-12 mMobile:mt-16 sLaptop:mt-10 mLaptop:mt-12 desktop:mt-20">
             <Button message="Take Your First Step"/>
           </div>
           <p className="hidden font-normal sLaptop:block text-Slate-gray text-[1.125rem] leading-[1.5rem] mLaptop:text-xl desktop:text-2xl max-w-[370px] mLaptop:max-w-[460px] desktop:max-w-[560px] float-right text-right mt-3">Try out our free tier and if you like it update to a business or enterprise account.</p>

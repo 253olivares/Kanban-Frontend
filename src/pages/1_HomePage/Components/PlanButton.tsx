@@ -13,12 +13,12 @@ const PlanButton = ({message}:{message:string}) => {
         rounded-[.65rem]
         mMobile:rounded-[1rem]
         sLaptop:rounded-[.8rem]
-        mLaptop:rounded-[1rem]
+        mLaptop:rounded-[.9rem]
         p-[.2rem]
         mMobile:p-[.2rem]
         sLaptop:p-[.15rem] 
         desktop:p-[.2rem]
-        hover:shadow-xl 
+        hover:customShadow
         w-auto
         '>
             <span className={`

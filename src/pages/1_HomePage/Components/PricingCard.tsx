@@ -1,19 +1,7 @@
-import PlanCard from '../Components/PlanButton';
+import PlanButton from '../Components/PlanButton';
+import { pricingPlansType } from '../Section-3_Pricing';
 
-const PricingCard = () => {
-
-    const Pricing = [
-        {
-        tier: "Starter Kit", 
-        Price: 0, 
-        Includes: [
-            "Workspace Per Account",
-            "5 Boards Per Account",
-            "Unlimited Lists",
-            "Unlimited Tasks",
-            "Max of 5 users per workspace"
-            ]
-        }]
+const PricingCard = ({plan}: {plan:pricingPlansType}) => {
 
   return (
     <div className="
@@ -25,15 +13,16 @@ const PricingCard = () => {
     desktop:p-[.3rem] 
     site-borders 
     rounded-[1.25rem] 
-    shadow-2xl">
+    customShadow
+    ">
         <div className="
         flex 
         flex-col
         w-[17rem]
         sMobile:w-[22.188rem]
         mMobile:w-[26.563rem]
-        sLaptop:w-[17.688rem]
-        mLaptop:w-[22.188rem] 
+        sLaptop:w-[17.5rem]
+        mLaptop:w-[22rem] 
         desktop:w-[26.563rem] 
         rounded-2xl 
         bg-PrimaryWhite
@@ -48,13 +37,13 @@ const PricingCard = () => {
             desktop:px-[2.15rem] desktop:pt-[2.625rem]
             text-[2.25rem]
             sMobile:text-[2.75rem]
-            mMobile:text-[3.25rem]
+            mMobile:text-[3.25rem] mMobile:leading-[4.5rem]
             sLaptop:text-4xl
             mLaptop:text-[2.813rem]
             desktop:text-[3.25rem]
             font-medium 
             text-black 
-            ">Starter Kit</h1>
+            ">{plan.tier}</h1>
             <div className="flex 
             items-center
             gap-2
@@ -76,11 +65,10 @@ const PricingCard = () => {
             font-medium 
             text-Slate-gray 
             mb-3
-            mMobile:my-3
             sLaptop:my-2
             mLaptop:my-3
             ">
-                <p>Free</p> <sup className="font-bold text-base mMobile:text-base sLaptop:text-xs mLaptop:text-base desktop:text-xl">/YR</sup>
+                <p>{plan.price === 0 ? "Free" :`$${plan.price}`}</p> <sup className="font-bold text-base mMobile:text-base sLaptop:text-xs mLaptop:text-base desktop:text-xl">/YR</sup>
             </div>
             <hr className="w-full
             h-[.3rem]
@@ -120,7 +108,29 @@ const PricingCard = () => {
             mMobile:mb-1 
             desktop:mb-1
             ">Includes:</p>
-            <ul className="
+            <div className='min-h-[15.625rem] mMobile:min-h-[18.5rem] sLaptop:min-h-[11rem] mLaptop:min-h-[14rem] desktop:min-h-[19.75rem]'>
+                {
+                    plan.tier === "Enterprise Kit" && 
+                    <p className='
+                px-5
+                sMobile:px-[1.85rem] 
+                mMobile:px-[2.15rem] 
+                sLaptop:px-6
+                mLaptop:px-7
+                desktop:px-[2.15rem]
+                text-lg
+                sMobile:text-xl
+                mMobile:text-[1.625rem]
+                sLaptop:text-base
+                mLaptop:text-xl
+                desktop:text-[1.625rem]
+                mMobile:leading-[2rem]
+                text-Slate-gray
+                font-medium
+                mt-2
+                    '> ALL UNLIMITED</p> 
+                }
+                <ul className="
             px-[2.6rem]
             sMobile:px-[3.15rem]
             mMobile:px-[3.75rem] 
@@ -129,49 +139,62 @@ const PricingCard = () => {
             desktop:px-[3.75rem]
             text-lg
             sMobile:text-xl
-            mMobile:text-[1.625rem]
+            mMobile:text-[1.55rem]
             sLaptop:text-base
             mLaptop:text-xl
             desktop:text-[1.625rem]
             mMobile:leading-[2rem]
             text-Slate-gray
             list-disc 
-            font-medium
-            mb-2 
-            desktop:mb-4
+            font-medium 
+            desktop:mb-2
             ">
-                <li className=" my-3 mMobile:my-5 sLaptop:my-3 mLaptop:my-4 desktop:my-5">Workspace Per Account</li>
-                <li className=" my-3 mMobile:my-5  sLaptop:my-3 mLaptop:my-4 desktop:my-5">5 Boards Per Account</li>
-                <li className=" my-3 mMobile:my-5  sLaptop:my-3 mLaptop:my-4 desktop:my-5">Unlimited Lists</li>
-                <li className=" my-3 mMobile:my-5  sLaptop:my-3 mLaptop:my-4 desktop:my-5">Unlimited Tasks</li>
-                <li className=" my-3 mMobile:my-5  sLaptop:my-3 mLaptop:my-4 *:desktop:my-5">Max of 5 users per workspace</li>
-            </ul>
-            <div className='flex justify-center items-center mt-[.25rem] min-h-[6.5rem] sMobile:min-h-[8.25rem] mMobile:min-h-[10rem] sLaptop:min-h-[6.5rem] mLaptop:min-h-[8rem] desktop:min-h-[10rem]'>
-                <PlanCard message='Select Plan' />
+                {
+                    plan.includes.map((plan,index)=> <li key={index} className=" my-2 mMobile:my-4 sLaptop:my-1 mLaptop:my-2 desktop:my-5">{plan}</li>
+                    )
+
+                }
+                </ul>
             </div>
-            {/* <div>
-                <hr className='w-full h-1 bg-[#8A8DA0]' /> 
-                <p className="
-                w-full
-                py-9
-                sMobile:py-12
-                mMobile:py-[3.75rem] 
-                sLaptop:py-9
-                mLaptop:py-[2.875rem]
-                desktop:py-[3.75rem] 
-                text-center 
-                rounded-br-2xl 
-                rounded-bl-2xl 
-                font-medium
-                text-2xl
-                sMobile:text-3xl
-                mMobile:text-4xl 
-                sLaptop:text-2xl 
-                mLaptop:text-3xl
-                desktop:text-4xl 
-                bg-SpaceBlue 
-                text-PrimaryWhite">DEFAULT PLAN</p>
-            </div> */}
+            {
+                plan.tier === "Starter Kit" ? 
+                    <div>
+                        <hr className='w-full h-1 bg-[#8A8DA0]' /> 
+                        <p className="
+                        w-full
+                        py-9
+                        sMobile:py-12
+                        mMobile:py-[3.75rem] 
+                        sLaptop:py-9
+                        mLaptop:py-[2.875rem]
+                        desktop:py-[3.75rem] 
+                        text-center 
+                        rounded-br-2xl 
+                        rounded-bl-2xl 
+                        font-medium
+                        text-2xl
+                        sMobile:text-3xl
+                        mMobile:text-4xl 
+                        sLaptop:text-2xl 
+                        mLaptop:text-3xl
+                        desktop:text-4xl 
+                        bg-SpaceBlue 
+                        text-PrimaryWhite">DEFAULT PLAN</p>
+                    </div>
+                :
+                    <div className='flex 
+                    justify-center 
+                    items-center 
+                    mt-[.25rem] 
+                    min-h-[6.5rem] 
+                    sMobile:min-h-[8.25rem] 
+                    mMobile:min-h-[10rem] 
+                    sLaptop:min-h-[6.5rem] 
+                    mLaptop:min-h-[8rem] 
+                    desktop:min-h-[10rem]'>
+                        <PlanButton message='Select Plan' />
+                    </div>
+            }
         </div>  
     </div>
   )

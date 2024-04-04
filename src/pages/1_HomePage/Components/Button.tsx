@@ -16,7 +16,7 @@ const Button = ({message}: {message:string}) => {
               sLaptop:p-[2px] 
               mLaptop:p-[0.188rem]
               desktop:p-1 
-              hover:shadow-xl'>
+              hover:customShadow'>
         <span className='flex 
         justify-center 
         items-center 
