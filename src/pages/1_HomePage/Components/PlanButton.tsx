@@ -3,14 +3,18 @@ const PlanButton = ({message}:{message:string}) => {
           <button className='
         site-borders
         text-PrimaryWhite
+        text-xl
+        sMobile:text-2xl
         mMobile:text-[2rem] 
         sLaptop:text-xl
         mLaptop:text-[1.688rem]
         desktop:text-[2rem] 
         font-bold
+        rounded-[.65rem]
         mMobile:rounded-[1rem]
         sLaptop:rounded-[.8rem]
         mLaptop:rounded-[1rem]
+        p-[.2rem]
         mMobile:p-[.2rem]
         sLaptop:p-[.15rem] 
         desktop:p-[.2rem]
@@ -24,13 +28,18 @@ const PlanButton = ({message}:{message:string}) => {
             w-full
             bg-SpaceBlue
             active:bg-SpaceBlueSelected
+            rounded-lg
             mMobile:rounded-xl
             sLaptop:rounded-[.7rem]
             mLaptop:rounded-xl
+            py-4
+            sMobile:py-[1.35rem]
             mMobile:py-6
             sLaptop:py-4 
             mLaptop:py-5
             desktop:py-6 
+            min-w-[12.5rem]
+            sMobile:min-w-[16.125rem]
             mMobile:min-w-[19.375rem]
             sLaptop:min-w-[12.813rem]
             mLaptop:min-w-[15.938rem]
@@ -39,6 +48,10 @@ const PlanButton = ({message}:{message:string}) => {
             after:content-[""] 
             after:bg-[url("/assets/Star_Icon.svg")]
             after:inline-block
+            after:w-6
+            after:h-6
+            sMobile:after:w-7
+            sMobile:after:h-7
             mMobile:after:w-10
             mMobile:after:h-10 
             sLaptop:after:w-6
@@ -51,6 +64,10 @@ const PlanButton = ({message}:{message:string}) => {
             hover:after:opacity-100
             after:bg-cover 
             after:bg-no-repeat
+            after:ml-[-1.5rem]
+            sMobile:after:ml-[-1.75rem]
+            hover:after:ml-[.5rem]
+            sMobile:hover:after:ml-[.75rem]
             mMobile:after:ml-[-2.5rem]
             sLaptop:after:ml-[-1.5rem]
             mLaptop:after:ml-[-2.15rem]

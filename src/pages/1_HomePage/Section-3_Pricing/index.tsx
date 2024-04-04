@@ -9,7 +9,8 @@ const index = () => {
       <div className="Pricing_Section3 
       z-[2] 
       max-w-[1920px] 
-      mx-auto 
+      mx-auto
+      pb-[8.75rem] 
       mMobile:pb-[10.438rem] 
       sLaptop:pb-[8.125rem] 
       mLaptop:pb-[10.75rem] 
@@ -25,13 +26,14 @@ const index = () => {
         mx-auto
         text-linear-gradient
         font-bold
+        text-[1.85rem] leading-[2.2rem]
         sMobile:text-[2.85rem] sMobile:leading-[3.25rem] 
         mMobile:text-[3.5rem] mMobile:leading-[3.938rem] 
         sLaptop:text-[3rem] sLaptop:leading-[3.3rem]
         mLaptop:text-[3.75rem] mLaptop:leading-[4.1rem]
         desktop:text-[4.4rem] desktop:leading-[5rem]  
         '>Affordable Pricing Plans</h1>
-        <div className='flex justify-center mMobile:mt-[3.125rem] sLaptop:mt-[4.5rem] mLaptop:mt-[5.5rem] desktop:mt-[6.5rem]'>
+        <div className='flex justify-center mt-10 mMobile:mt-[3.125rem] sLaptop:mt-[4.5rem] mLaptop:mt-[5.5rem] desktop:mt-[6.5rem]'>
           <PricingCard />
         </div>
       </div>

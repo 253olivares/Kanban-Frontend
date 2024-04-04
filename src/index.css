@@ -73,8 +73,9 @@
         desktop:min-h-[980px]
         mLaptop:min-h-[818px] 
         sLaptop:min-h-[650px] 
-        mMobile:min-h-[700px] 
-        min-h-[650px]
+        mMobile:min-h-[700px]
+        sMobile:min-h-[625px] 
+        min-h-[600px]
         relative; 
     }
     .Pricing_Section3 {
