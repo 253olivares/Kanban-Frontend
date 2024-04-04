@@ -16,7 +16,7 @@ const LargerButton = ({message}: {message:string}) => {
               sLaptop:p-[.2rem] 
               transition-[box-shadow] 
               ease-in-out 
-              duration-[800ms]
+              duration-[700ms]
               hover:customShadow'>
         <span className={`
         flex  

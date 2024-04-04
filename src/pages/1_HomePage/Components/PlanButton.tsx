@@ -20,7 +20,7 @@ const PlanButton = ({message}:{message:string}) => {
         desktop:p-[.2rem]
         transition-[box-shadow] 
         ease-in-out 
-        duration-[800ms]
+        duration-[700ms]
         hover:customShadow
         w-auto
         '>

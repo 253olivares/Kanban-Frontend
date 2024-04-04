@@ -14,6 +14,7 @@ const PricingCard = ({plan}: {plan:pricingPlansType}) => {
     site-borders 
     rounded-[1.25rem] 
     customShadow
+    largeDesktop:scale-[.975]
     ">
         <div className="
         flex 

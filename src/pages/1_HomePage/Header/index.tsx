@@ -1,7 +1,8 @@
 
 import LogoExport from '/assets/Logo_Export.svg';
 import Button from '../Components/Button';
-import HamburgerMenu from '/assets/Menu_Icon.svg'
+import HamburgerMenu from '/assets/Menu_Icon.svg';
+
 const index = () => {
   return (
     <header className="w-full py-8 sLaptop:py-11 mLaptop:py-[3.25rem] desktop:py-14 px-6 sMobile:px-10 mMobile:px-12 sLaptop:px-14 mLaptop:px-[4.563rem] desktop:px-[5.5rem] flex justify-between items-center">
