@@ -74,14 +74,11 @@
         mLaptop:min-h-[818px] 
         sLaptop:min-h-[650px] 
         mMobile:min-h-[700px] 
-        min-h-[690px]
+        min-h-[650px]
         relative; 
     }
     .Pricing_Section3 {
         @apply w-full  
-        sLaptop:min-h-[770px] 
-        mMobile:min-h-[1050px]
-        min-h-[870px]
         relative;
     }
 }

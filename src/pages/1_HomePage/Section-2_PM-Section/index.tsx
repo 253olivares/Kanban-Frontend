@@ -1,5 +1,4 @@
 import Button from "../Components/LargerButton"
-import triangle from '/assets/Polygon_4.svg'
 
 const index = () => {
   return (
@@ -28,7 +27,7 @@ const index = () => {
             Ease management trouble with our software. KB aims to make communication easy and task tracking a breeze. All you need to do is take the first step and sign up for an account.
             </p>
           <div className="w-full flex justify-center sLaptop:justify-end mt-8 sMobile:mt-12 mMobile:mt-16 sLaptop:mt-8 mLaptop:mt-10 desktop:mt-14">
-            <Button message="Take Your First Step" icon={triangle} />
+            <Button message="Take Your First Step"/>
           </div>
           <p className="hidden font-normal sLaptop:block text-Slate-gray text-[1.125rem] leading-[1.5rem] mLaptop:text-xl desktop:text-2xl max-w-[370px] mLaptop:max-w-[460px] desktop:max-w-[560px] float-right text-right mt-3">Try out our free tier and if you like it update to a business or enterprise account.</p>
         </div>

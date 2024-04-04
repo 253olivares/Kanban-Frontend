@@ -1,5 +1,5 @@
 
-const LargerButton = ({message, icon}: {message:string, icon:string}) => {
+const LargerButton = ({message}: {message:string}) => {
   return (
     <button className='
               site-borders
@@ -32,7 +32,7 @@ const LargerButton = ({message, icon}: {message:string, icon:string}) => {
         desktop:py-[1rem]
 
         after:contenet-[''] 
-        after:bg-[url('${icon}')]
+        after:bg-[url('/assets/Polygon_4.svg')]
         after:inline-block
         after:h-[1.35rem] 
         after:opacity-0
