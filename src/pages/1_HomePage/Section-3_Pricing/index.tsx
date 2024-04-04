@@ -124,12 +124,15 @@ const index = () => {
         <img className='
         block 
         absolute
-        top-[3rem] right-[2.75rem]
+        top-[2.8rem] right-[2.125rem]
+        mMobile:top-[3rem] mMobile:right-[2.75rem]
         sLaptop:top-[4rem] sLaptop:right-[7.5rem] 
         mLaptop:top-[5rem] mLaptop:right-[9.375rem]
         desktop:top-[6rem] desktop:right-[11.563rem] 
         rotate-[23deg]
-        w-[5.5rem]
+        w-[3.5rem]
+        sMobile:w-[4.5rem]
+        mMobile:w-[5.5rem]
         sLaptop:w-[3.75rem]
         mLaptop:w-[4.688rem] 
         desktop:w-[5.625rem]
@@ -140,12 +143,15 @@ const index = () => {
         <img className='
         block 
         absolute
-        top-[24rem] left-0
+        top-[24rem]
+        mMobile:top-[24rem] left-0
         sLaptop:top-[11.25rem] sLaptop:left-[-1.25rem]
         mLaptop:top-[14.375rem] mLaptop:left-[-1.5rem]  
         desktop:top-[17.9rem] desktop:left-[-1rem] 
-        rotate-[-14.3deg] 
-        w-[5.625rem]
+        rotate-[-14.3deg]
+        w-[4.25rem] 
+        sMobile:w-[4.625rem]
+        mMobile:w-[5.625rem]
         sLaptop:w-[6.25rem]
         mLaptop:w-[8.125rem]
         desktop:w-[9.375rem]
