@@ -13,7 +13,10 @@ const LargerButton = ({message}: {message:string}) => {
               rounded-[1rem]
               font-bold
               p-[.25rem]
-              sLaptop:p-[.2rem]
+              sLaptop:p-[.2rem] 
+              transition-[box-shadow] 
+              ease-in-out 
+              duration-[800ms]
               hover:customShadow'>
         <span className={`
         flex  

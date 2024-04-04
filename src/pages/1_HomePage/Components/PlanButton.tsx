@@ -18,6 +18,9 @@ const PlanButton = ({message}:{message:string}) => {
         mMobile:p-[.2rem]
         sLaptop:p-[.15rem] 
         desktop:p-[.2rem]
+        transition-[box-shadow] 
+        ease-in-out 
+        duration-[800ms]
         hover:customShadow
         w-auto
         '>

@@ -16,6 +16,9 @@ const Button = ({message}: {message:string}) => {
               sLaptop:p-[2px] 
               mLaptop:p-[0.188rem]
               desktop:p-1 
+              transition-[box-shadow] 
+              ease-in-out
+              duration-[800ms]
               hover:customShadow'>
         <span className='flex 
         justify-center 
