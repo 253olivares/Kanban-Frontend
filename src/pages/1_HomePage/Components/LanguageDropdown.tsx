@@ -29,9 +29,11 @@ const LanguageDropdown = () => {
   },[])
 
   return (
-    <div className='flex flex-col w-[22rem] sLaptop:w-[19rem] mLaptop:w-[22rem] desktop:w-[25rem] largeDesktop:w-[29rem] relative'>
+    <div className='flex flex-col w-[22rem] sMobile:w-[30rem] mMobile:w-[35rem] sLaptop:w-[19rem] mLaptop:w-[22rem] desktop:w-[25rem] largeDesktop:w-[29rem] relative'>
         <label className='
         text-2xl
+        sMobile:text-[2.125rem] sMobile:leading-[2.25rem]
+        mMobile:text-[2.5rem] mMobile:leading-[2.75rem]
         sLaptop:text-[1.25rem] sLaptop:leading-[1.5rem]
         mLaptop:text-[1.625rem] mLaptop:leading-[1.8rem]
         desktop:text-[1.875rem] desktop:leading-[2rem]
@@ -56,8 +58,14 @@ const LanguageDropdown = () => {
         }
         text-left 
         px-3 py-2 
+        sMobile:px-6 sMobile:py-3
+        mMobile:py-4
+        sLaptop:py-2
+        sLaptop:px-3
         largeDesktop:px-4 largeDesktop:py-3
         text-2xl
+        sMobile:text-[2rem]
+        mMobile:text-[2.5rem]
         sLaptop:text-xl
         mLaptop:text-2xl
         desktop:text-3xl
@@ -84,6 +92,8 @@ const LanguageDropdown = () => {
         duration-300
         w-full 
         text-2xl
+        sMobile:text-[2rem]
+        mMobile:text-[2.5rem]
         sLaptop:text-xl
         mLaptop:text-2xl
         desktop:text-3xl
@@ -101,6 +111,7 @@ const LanguageDropdown = () => {
             last:rounded-b-[0.5rem] 
             px-3 
             py-2
+            sMobile:px-6 sMobile:py-3
             largeDesktop:px-4 largeDesktop:py-3
             `}>{lang} </li>
             )

@@ -43,6 +43,8 @@ const index = () => {
         <div className="
         cursor-pointer
         py-3
+        sMobile:py-[.9rem]
+        mMobile:py-5
         sLaptop:py-3
         mLaptop:py-4
         desktop:py-5
@@ -50,6 +52,8 @@ const index = () => {
         w-full 
         text-center
         text-2xl
+        sMobile:text-3xl 
+        mMobile:text-4xl
         sLaptop:text-xl 
         mLaptop:text-2xl
         desktop:text-3xl
@@ -148,6 +152,8 @@ const index = () => {
             flex
             flex-col
             gap-6 py-8
+            sMobile:gap-7 sMobile:py-10 
+            mMobile:gap-8 sMobile:py-11
             sLaptop:gap-[1.125rem] sLaptop:py-[2.125rem]
             mLaptop:gap-5 mLaptop:py-10
             desktop:gap-7 desktop:py-[3.125rem]
@@ -163,11 +169,15 @@ const index = () => {
         {/* copyright info */}
         <div className="w-full
         mx-auto
-        py-5
+        py-4
+        sMobile:py-5
+        mMobile:py-6
         sLaptop:py-[0.813rem]
         mLaptop:py-4
         desktop:py-5
         px-7
+        sMobile:px-10
+        mMobile:px-[3.125rem]
         sLaptop:px-[3.625rem]
         mLaptop:px-[4.5rem]
         desktop:px-[5.375rem]
@@ -178,16 +188,20 @@ const index = () => {
         max-w-[1920px] 
         ">
           <div className='flex sLaptop:gap-6 mLaptop:gap-7 desktop:gap-9 largeDesktop:gap-14 items-center text-PrimaryWhite'>
-            <img className='w-10 sLaptop:w-[2.063rem] mLaptop:w-10 desktop:w-[3.125rem] largeDesktop:w-[3.75rem]' src={LogoExport} alt="Logo" />
+            <img className='w-10 sMobile:w-[2.813rem] mMobile:w-[3.438rem] sLaptop:w-[2.063rem] mLaptop:w-10 desktop:w-[3.125rem] largeDesktop:w-[3.75rem]' src={LogoExport} alt="Logo" />
             <p className=' hidden sLaptop:block font-medium sLaptop:text-base mLaptop:text-xl desktop:text-[1.5rem] largeDesktop:text-[1.75rem]'>@ Copyright Info 2024</p>
           </div>
 
-          <div className='flex gap-3 sLaptop:gap-6 mLaptop:gap-7 desktop:gap-9 largeDesktop:gap-14 items-center'>
-            <img className='w-7 sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75 hover:cursor-pointer' src={Instagram} alt="Instagram Icon" />
-            <img className='w-7 sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75 hover:cursor-pointer' src={Twitter} alt="Twitter Icon" />
-            <img className='w-7 sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75  hover:cursor-pointer' src={Facebook} alt="Facebook Icon" />
-            <img className='w-7 sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75  hover:cursor-pointer' src={Linkedin} alt="LinkedIn Icon" />
+          <div className='flex gap-3 sMobile:gap-5 mMobile:gap-6 sLaptop:gap-6 mLaptop:gap-7 desktop:gap-9 largeDesktop:gap-14 items-center'>
+            <img className='w-8 sMobile:w-[2.125rem] mMobile:w-[2.625rem] sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75 hover:cursor-pointer' src={Instagram} alt="Instagram Icon" />
+            <img className='w-8 sMobile:w-[2.125rem] mMobile:w-[2.625rem] sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75 hover:cursor-pointer' src={Twitter} alt="Twitter Icon" />
+            <img className='w-8 sMobile:w-[2.125rem] mMobile:w-[2.625rem] sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75  hover:cursor-pointer' src={Facebook} alt="Facebook Icon" />
+            <img className='w-8 sMobile:w-[2.125rem] mMobile:w-[2.625rem] sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75  hover:cursor-pointer' src={Linkedin} alt="LinkedIn Icon" />
           </div>
+        </div>
+        <div className='block sLaptop:hidden'>
+          <hr className='mx-auto w-[calc(100%-2rem)] sMobile:w-[calc(100%-2.5rem)] mMobile:w-[calc(100%-3.125rem)] bg-PrimaryWhite border-none h-[.15rem] rounded-lg' />
+          <p className=' text-center text-PrimaryWhite text-lg sMobile:text-xl mMobile:text-2xl py-5 font-medium'>@ copyright Info 2024  </p>
         </div>
     </section>
   )
