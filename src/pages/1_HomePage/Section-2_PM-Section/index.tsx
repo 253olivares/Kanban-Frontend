@@ -23,7 +23,7 @@ const index = () => {
           <p className="text-Slate-gray 
           font-normal 
           mt-4 sMobile:mt-5 mMobile:mt-7 sLaptop:mt-5 desktop:mt-7  
-          text-xl sMobile:text-2xl mMobile:text-3xl sLaptop:text-2xl mLaptop:text-3xl desktop:text-[2.375rem] largeDesktop:text-[3rem] largeDesktop:leading-[3.25rem]">
+          text-xl sMobile:text-2xl mMobile:text-3xl sLaptop:text-2xl mLaptop:text-3xl desktop:text-[2.375rem] largeDesktop:text-[2.75rem] largeDesktop:leading-[3rem]">
             Ease management trouble with our software. KB aims to make communication easy and task tracking a breeze. All you need to do is take the first step and sign up for an account.
             </p>
           <div className="w-full flex justify-center sLaptop:justify-end mt-8 sMobile:mt-12 mMobile:mt-16 sLaptop:mt-10 mLaptop:mt-12 desktop:mt-20">

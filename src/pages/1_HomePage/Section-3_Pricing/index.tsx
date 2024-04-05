@@ -85,14 +85,15 @@ const index = () => {
         largeDesktop:gap-16
         sLaptop:justify-center 
         overflow-x-auto 
+        no-scrollbar
         pt-10 
         mMobile:pt-[3.125rem] 
         sLaptop:pt-[4.5rem] 
         mLaptop:pt-[5.5rem] 
         desktop:pt-[6.5rem]
         largeDesktop:pt-[7rem]
-        pb-[8.75rem] 
-        mMobile:pb-[10.43Wx``8rem] 
+        pb-[7rem] 
+        mMobile:pb-[8rem] 
         sLaptop:pb-[8.125rem] 
         mLaptop:pb-[10.75rem] 
         desktop:pb-[12rem] 

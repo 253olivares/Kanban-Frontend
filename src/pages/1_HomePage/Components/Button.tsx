@@ -18,7 +18,7 @@ const Button = ({message}: {message:string}) => {
               desktop:p-1 
               transition-[box-shadow] 
               ease-in-out
-              duration-[700ms]
+              duration-300
               hover:customShadow'>
         <span className='flex 
         justify-center 

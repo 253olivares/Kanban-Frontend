@@ -17,7 +17,7 @@ const index = () => {
   // key value pairs
   const siteMap: siteMapInterface = {
     'Help': [
-      "submit Ticket",
+      "Submit Ticket",
       "View Ticket",
       "Contact Form",
       "Live Demo",
@@ -42,12 +42,18 @@ const index = () => {
         {/* back to top section */}
         <div className="
         cursor-pointer
+        py-3
         sLaptop:py-3
         mLaptop:py-4
+        desktop:py-5
+        largeDesktop:py-6
         w-full 
-        text-center 
+        text-center
+        text-2xl
         sLaptop:text-xl 
         mLaptop:text-2xl
+        desktop:text-3xl
+        largeDesktop:text-4xl
         font-medium 
         text-PrimaryWhite
         " onClick={()=> {window.scroll({
@@ -60,16 +66,27 @@ const index = () => {
         </div>
 
           {/* middle section */}
-        <div className="w-full flex linear-gradientFooter">
-          <div className='w-[60%] bg-PrimaryWhite hidden sLaptop:block sLaptop:rounded-r-[2rem] mLaptop:rounded-r-[2.5rem]'>
+        <div className="w-full flex justify-center 
+        linear-gradientFooter2 sLaptop:linear-gradientFooter">
+          <div className='w-[60%] bg-PrimaryWhite hidden 
+          sLaptop:block 
+          sLaptop:rounded-r-[2rem] 
+          mLaptop:rounded-r-[2.5rem] 
+          desktop:rounded-r-[3.125rem]'>
             <div className='
             w-full
             largeDesktop:w-[calc(1920px*.6)] 
             float-right
-            flex 
-            gap-12
+            flex
+             ga
+            sLaptop:gap-14
+            mLaptop:gap-16
+            desktop:gap-20 
+            largeDesktop:gap-32
             sLaptop:py-8
-            mLaptop:py-10
+            mLaptop:py-[3rem]
+            desktop:py-[3.25rem]
+            largeDesktop:py-[3.5rem]
             justify-center
             '>
               {
@@ -78,28 +95,41 @@ const index = () => {
                   <div key={index} className='flex flex-col'>
                     <p className='
                     text-black
-                    text-4xl 
+                    sLaptop:text-[1.75rem]
+                    mLaptop:text-4xl 
+                    desktop:text-[2.625rem] 
+                    largeDesktop:text-5xl
                     font-medium 
-                    pr-[2rem]
-                    pb-[.5rem]
+                    sLaptop:pr-[1.5rem]
+                    mLaptop:pr-[2rem]
+                    desktop:pr-9
+                    largeDesktop:pr-11
+                    sLaptop:pb-[.25rem]
+                    mLaptop:pb-[.4rem]
+                    desktop:pb-[.75rem]
                     '>{key}</p>
                     <hr className='
                     w-full 
-                    h-[.25rem]  
+                    h-[.25rem] 
+                    desktop:h-[.35rem] 
                     site-borders 
                     border-none
                     rounded-md 
                     mb-[.25rem]
+                    desktop:mb-[.5rem]
                     ' />
                     <ul className='
                     text-Slate-gray 
-                    text-lg
+                    sLaptop:text-[0.85rem]
+                    mLaptop:text-lg
+                    desktop:text-xl
+                    largeDesktop:text-2xl
                     font-medium
                     '>
                       {
                         // map our values from the key value pairs
                         values.map(
-                          (x,index)=> <li key={index} className='hover:underline py-[.05rem] text-base'>{x}</li>
+                          (x,index)=> <li key={index} className='hover:underline py-[.05rem] desktop:py-[.15rem] cursor-pointer'>{x}</li>
                           )
                       }
                     </ul>
@@ -116,9 +146,11 @@ const index = () => {
           '>
             <div className='
             flex
-            flex-col 
-            sLaptop:gap-[1.125rem] mLaptop:py-[2.125rem]
+            flex-col
+            gap-6 py-8
+            sLaptop:gap-[1.125rem] sLaptop:py-[2.125rem]
             mLaptop:gap-5 mLaptop:py-10
+            desktop:gap-7 desktop:py-[3.125rem]
             '>
               {/* language dropdown component */}
               <LanguageDropdown />  
@@ -131,25 +163,30 @@ const index = () => {
         {/* copyright info */}
         <div className="w-full
         mx-auto
+        py-5
         sLaptop:py-[0.813rem]
         mLaptop:py-4
+        desktop:py-5
+        px-7
         sLaptop:px-[3.625rem]
         mLaptop:px-[4.5rem]
+        desktop:px-[5.375rem]
+        largeDesktop:px-[6rem]
         flex 
         justify-between 
         items-center
         max-w-[1920px] 
         ">
-          <div className='flex sLaptop:gap-6 mLaptop:gap-7 items-center text-PrimaryWhite'>
-            <img className=' sLaptop:w-[2.063rem] mLaptop:w-10' src={LogoExport} alt="Logo" />
-            <p className='font-medium sLaptop:text-base mLaptop:text-xl'>@ Copyright Info 2024</p>
+          <div className='flex sLaptop:gap-6 mLaptop:gap-7 desktop:gap-9 largeDesktop:gap-14 items-center text-PrimaryWhite'>
+            <img className='w-10 sLaptop:w-[2.063rem] mLaptop:w-10 desktop:w-[3.125rem] largeDesktop:w-[3.75rem]' src={LogoExport} alt="Logo" />
+            <p className=' hidden sLaptop:block font-medium sLaptop:text-base mLaptop:text-xl desktop:text-[1.5rem] largeDesktop:text-[1.75rem]'>@ Copyright Info 2024</p>
           </div>
 
-          <div className='flex sLaptop:gap-6 mLaptop:gap-7 items-center'>
-            <img className='sLaptop:w-[1.75rem] mLaptop:w-9 hover:opacity-75 hover:cursor-pointer' src={Instagram} alt="Instagram Icon" />
-            <img className='sLaptop:w-[1.75rem] mLaptop:w-9 hover:opacity-75 hover:cursor-pointer' src={Twitter} alt="Twitter Icon" />
-            <img className='sLaptop:w-[1.75rem] mLaptop:w-9 hover:opacity-75  hover:cursor-pointer' src={Facebook} alt="Facebook Icon" />
-            <img className='sLaptop:w-[1.75rem] mLaptop:w-9 hover:opacity-75  hover:cursor-pointer' src={Linkedin} alt="LinkedIn Icon" />
+          <div className='flex gap-3 sLaptop:gap-6 mLaptop:gap-7 desktop:gap-9 largeDesktop:gap-14 items-center'>
+            <img className='w-7 sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75 hover:cursor-pointer' src={Instagram} alt="Instagram Icon" />
+            <img className='w-7 sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75 hover:cursor-pointer' src={Twitter} alt="Twitter Icon" />
+            <img className='w-7 sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75  hover:cursor-pointer' src={Facebook} alt="Facebook Icon" />
+            <img className='w-7 sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75  hover:cursor-pointer' src={Linkedin} alt="LinkedIn Icon" />
           </div>
         </div>
     </section>

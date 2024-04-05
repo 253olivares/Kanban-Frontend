@@ -29,12 +29,17 @@ const LanguageDropdown = () => {
   },[])
 
   return (
-    <div className='flex flex-col w-[22rem] relative'>
+    <div className='flex flex-col w-[22rem] sLaptop:w-[19rem] mLaptop:w-[22rem] desktop:w-[25rem] largeDesktop:w-[29rem] relative'>
         <label className='
-        text-[1.625rem] leading-[1.8rem]
+        text-2xl
+        sLaptop:text-[1.25rem] sLaptop:leading-[1.5rem]
+        mLaptop:text-[1.625rem] mLaptop:leading-[1.8rem]
+        desktop:text-[1.875rem] desktop:leading-[2rem]
+        largeDesktop:text-[2.25rem] largeDesktop:leading-[2.5rem]
         text-PrimaryWhite
         font-medium
         pb-[.45rem]
+        desktop:pb-[.5rem]
         '>Languages:</label>
         <button ref={htmlRef} onClick={()=> {
           setDropdown(true);
@@ -51,12 +56,19 @@ const LanguageDropdown = () => {
         }
         text-left 
         px-3 py-2 
+        largeDesktop:px-4 largeDesktop:py-3
         text-2xl
+        sLaptop:text-xl
+        mLaptop:text-2xl
+        desktop:text-3xl
+        largeDesktop:text-4xl
         w-full
         `}> 
         {language}
         <img className={`
-        w-7
+        sLaptop:w-6
+        mLaptop:w-7
+        desktop:w-8
         ${ dropDown && 'rotate-180'}
         transition-all
         duration-300
@@ -72,6 +84,10 @@ const LanguageDropdown = () => {
         duration-300
         w-full 
         text-2xl
+        sLaptop:text-xl
+        mLaptop:text-2xl
+        desktop:text-3xl
+        largeDesktop:text-4xl
         `}>
           {
             languagesList.map((lang,index) => 
@@ -85,6 +101,7 @@ const LanguageDropdown = () => {
             last:rounded-b-[0.5rem] 
             px-3 
             py-2
+            largeDesktop:px-4 largeDesktop:py-3
             `}>{lang} </li>
             )
           }        
