@@ -144,9 +144,11 @@ const index = () => {
           </div>
           <div className='
           w-[40%] 
-          max-w-[calc(1920px*.4)] 
-          flex justify-center
+          flex 
+          justify-center
+          largeDesktop:justify-start
           items-center
+          largeDesktop:ml-[calc((1920px*.4)/2-14.5rem)]
           '>
             <div className='
             flex
