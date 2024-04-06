@@ -153,7 +153,7 @@ const index = () => {
             flex-col
             gap-6 py-8
             sMobile:gap-7 sMobile:py-10 
-            mMobile:gap-8 sMobile:py-11
+            mMobile:gap-8 mMobile:py-11
             sLaptop:gap-[1.125rem] sLaptop:py-[2.125rem]
             mLaptop:gap-5 mLaptop:py-10
             desktop:gap-7 desktop:py-[3.125rem]
