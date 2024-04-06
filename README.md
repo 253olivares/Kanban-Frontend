@@ -4,6 +4,11 @@
 
 Project management clone of Trello
 
+#### Figma File Design:
+
+Application is being created with the following design in mind:
+https://www.figma.com/file/Xu6q9aFspjxtLXBJNqvCvK/Wire-Frame?type=design&node-id=235%3A922&mode=design&t=us45e7QXYl2POK7A-1
+
 #### Directory Creation Date:
 
 March 4th, 2024
