@@ -13,9 +13,9 @@ const Button = ({message}: {message:string}) => {
               mLaptop:rounded-[0.625rem]
               desktop:rounded-xl 
               font-bold
-              sLaptop:p-[2px] 
-              mLaptop:p-[0.188rem]
-              desktop:p-1 
+              sLaptop:p-[2.4px] 
+              mLaptop:p-[0.175rem]
+              desktop:p-[.2rem]
               transition-[box-shadow] 
               ease-in-out
               duration-300
