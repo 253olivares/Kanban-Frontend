@@ -2,6 +2,7 @@ import MoneySVG from '/assets/MoneyBottomSVG.svg';
 import MoneySVGMobile from '/assets/MoneyMobile.svg';
 import PricingCard from '../Components/PricingCard';
 import DollarSign from '/assets/Dollar_Sign_Icon.svg';
+import React from 'react';
 
 
 export type pricingPlansType = {
@@ -10,7 +11,9 @@ export type pricingPlansType = {
     includes: string[]
   }
 
-const index = () => {
+ // use memo caches our component and only updates when it detects changes have been made to the component itself
+//  difference of usecallback is that usememo updates depending on the return value which is our jsx
+const index = React.memo(() => {
   const pricingPlans: pricingPlansType[]  = [
     {
     tier: "Starter Kit", 
@@ -164,6 +167,6 @@ const index = () => {
       <img className='hidden sLaptop:block absolute bottom-0 w-full ' src={MoneySVG} alt="Money SVG Background" />
     </section>
   )
-}
+})
 
 export default index

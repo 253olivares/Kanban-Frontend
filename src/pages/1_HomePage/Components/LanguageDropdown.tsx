@@ -1,21 +1,23 @@
 import React from 'react';
 import Polygon from '/assets/Polygon_5.svg';
+import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
+import { getLanguages, getSelectLanguage, changeLanguage} from '../../../languages/languageSlice';
 
 const LanguageDropdown = () => {
-
-  const languagesList: string[] = [
-    'English',
-    'Spanish'
-  ]
-
-  // create this ref if needed
+   // create this ref if needed
   const htmlRef = React.useRef<HTMLButtonElement>(null);
   const [dropDown, setDropdown] = React.useState<Boolean>(false);
-  const [language, setLanguage] = React.useState<string>(languagesList[0]);
+
+  // get our dispatch for redux
+  const dispatch = useAppDispatch();
+
+  // get our language list and get our select language
+  const languagesList:string[] = useAppSelector(getLanguages);
+  const language = useAppSelector(getSelectLanguage);
 
   // listener to close our drop down
   const listening = () => {
-    console.log('test');
+    // our listener that we create so that we can close our drop don if user clicks anywhere outside our dropdown
     setDropdown(false)
     // remove listener when we click again
     window.removeEventListener('click', listening,true);
@@ -23,6 +25,8 @@ const LanguageDropdown = () => {
 
   React.useEffect(()=> {
    ()=> {
+    // a cleaner to remove our listener when we unmount this component
+    // use case a user changes pages when the dropdown is extended
     // remove our listener when our component unloads we dont need it
     window.removeEventListener('click', listening,true);
    }
@@ -102,7 +106,7 @@ const LanguageDropdown = () => {
         `}>
           {
             languagesList.map((lang,index) => 
-            <li key={index} onClick={()=>setLanguage(lang)} className={`
+            <li key={index} onClick={()=> dispatch(changeLanguage(lang))} className={`
             bg-PrimaryWhite 
             ${
               lang === language && 'font-bold'

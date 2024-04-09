@@ -1,4 +1,3 @@
-
 import LogoExport from '/assets/Logo_Export.svg';
 import Button from '../Components/Button';
 import HamburgerMenu from '/assets/Menu_Icon.svg';
@@ -7,6 +6,7 @@ import { openLogin } from '../../../modals/modalSlice';
 import { openCreateProfile } from '../../../modals/modalSlice';
 
 const index = () => {
+  // get our dispatch
   const dispatch = useAppDispatch();
 
   return (

@@ -4,8 +4,10 @@ import HomeCoverMobile from '/assets/Home_Cover_Mobile.svg'
 import LogoExport from '/assets/Logo_Export.svg';
 import DeskView from '/assets/Ipad_ImageSVG.svg';
 import MobileView from '/assets/MobileImageSVG.svg'
+import React from 'react';
 
-const index = () => {
+// use memo caches our component and only updates when it detects changes have been made to the component itself
+const index = React.memo(() => {
   return (
     <section className='conic-gradient Home_Section1'>
         <div className='Home_Section1 max-w-[1920px] mx-auto z-10 overflow-x-clip'>
@@ -173,6 +175,6 @@ const index = () => {
         <img className='block sLaptop:hidden absolute z-0 w-full bottom-0 left-0' src={HomeCoverMobile} alt="HomeCover" />
     </section>
   )
-}
+})
 
 export default index

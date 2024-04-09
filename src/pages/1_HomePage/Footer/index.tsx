@@ -5,6 +5,7 @@ import Facebook from '/assets/FacebookIcon.svg';
 import Linkedin from '/assets/LinkedInIcon.svg';
 import LanguageDropdown from '../Components/LanguageDropdown';
 import EmailInput from '../Components/EmailInput';
+import React from 'react';
 
 
 // key value pair
@@ -12,7 +13,7 @@ type siteMapInterface = {
   [key: string] : string[]
 }
 
-const index = () => {
+const index =React.memo(() => {
 
   // key value pairs
   const siteMap: siteMapInterface = {
@@ -207,6 +208,6 @@ const index = () => {
         </div>
     </section>
   )
-}
+})
 
 export default index

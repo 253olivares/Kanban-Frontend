@@ -1,9 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit'
 import modalReducer from '../modals/modalSlice'
+import langaugeReducer from '../languages/languageSlice'
 
 export const store = configureStore({
     reducer: {
-        modal: modalReducer
+        modal: modalReducer,
+        lang: langaugeReducer
     }
 })
 // type scripts we need for selectors and dispatch to comply with typescript

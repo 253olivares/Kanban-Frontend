@@ -10,10 +10,11 @@ const LargerButton = ({message, fn}: {message:string, fn: ()=> void}) => {
               mLaptop:text-[1.5rem] 
               desktop:text-3xl 
               largeDesktop:text-4xl
-              rounded-[1rem]
+              rounded-[.9rem]
+              mLaptop:rounded-[1rem]
               font-bold
-              p-[.25rem]
-              sLaptop:p-[.2rem] 
+              p-[.2rem]
+              mlaptop:p-[.25rem]
               transition-[box-shadow] 
               ease-in-out 
               duration-300
