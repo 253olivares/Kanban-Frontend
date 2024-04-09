@@ -16,11 +16,7 @@ const index = () => {
 
   return (
     <div className=" fixed z-20 top-0 left-0 w-screen h-screen flex justify-center items-center">
-      <div className="w-56 h-32 bg-PrimaryWhite">
-
-      </div>
-      <div onClick={()=> dispatch(closeModal())} className="absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]">
-      </div>
+      <div onClick={()=> dispatch(closeModal())} className="absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]" />
     </div>
   )
 }

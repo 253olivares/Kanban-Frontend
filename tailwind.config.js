@@ -23,8 +23,10 @@ export default {
         // => @media (min-width: 1280px) { ... }
 
         'desktop': '1536px',
+        // => @media (min-width: 1536px) { ... }
 
         'largeDesktop': '1830px'
+        // => @media (min-width: 1830px) { ... }
       },
       colors: {
         "PrimaryWhite" : "var(--rPrimaryWhite)",

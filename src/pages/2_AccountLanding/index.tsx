@@ -1,7 +1,9 @@
 
 const index = () => {
   return (
-    <h1>test AL</h1>
+    <main className="relative conic-gradient w-screen h-screen">
+
+    </main>
   )
 }
 
