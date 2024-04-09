@@ -83,6 +83,7 @@ const LanguageDropdown = () => {
         `} src={Polygon} alt="Polygon" />
         </button>
         <ul className={`
+        z-10
         absolute
         top-[100%]
         ${

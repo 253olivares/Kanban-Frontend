@@ -1,6 +1,8 @@
-const Button = ({message}: {message:string}) => {
+const Button = ({message, fn}: {message:string, fn: ()=>void}) => {
   return (
-    <button className='
+    <button
+    onClick={()=>fn()}
+    className='
               sLaptop:min-w-[135px]
               mLaptop:min-w-[165px]
               desktop:min-w-[205px] 

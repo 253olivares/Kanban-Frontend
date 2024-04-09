@@ -5,12 +5,20 @@ import LayoutAccount from './pages/components/AccountHeader';
 import AccountLanding from './pages/2_AccountLanding';
 import Workspace from './pages/3_Workspace';
 import Errorpage from './pages/0_404Page';
+import ModalContainer from './modals';
+import { useAppSelector } from "./reduxStore/hook";
+import { getModalStatus } from "./modals/modalSlice";
+
 
 // out app component to gather all our components
 function App(): JSX.Element {
+  const modalStatus = useAppSelector(getModalStatus)
+  console.log(modalStatus);
+
 // return our page
   return (
     <React.Fragment>
+      { modalStatus && <ModalContainer /> }
       <Routes>
         <Route path="/" element={<HomePage />}/>
         {/* our heading layout */}

@@ -1,7 +1,7 @@
 
-const LargerButton = ({message}: {message:string}) => {
+const LargerButton = ({message, fn}: {message:string, fn: ()=> void}) => {
   return (
-    <button className='
+    <button onClick={()=> fn()} className='
               site-borders
               text-PrimaryWhite
               text-[1.25rem] 
@@ -37,7 +37,7 @@ const LargerButton = ({message}: {message:string}) => {
         desktop:py-[1rem] 
         largeDesktop:py-[1.25rem]
 
-        after:contenet-[''] 
+        after:content-[''] 
         after:bg-[url('/assets/Polygon_4.svg')]
         after:inline-block
         after:h-[1.35rem] 

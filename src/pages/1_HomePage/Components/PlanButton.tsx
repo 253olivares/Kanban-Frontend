@@ -1,6 +1,6 @@
-const PlanButton = ({message}:{message:string}) => {
+const PlanButton = ({message, fn}:{message:string, fn: ()=> void}) => {
   return (
-          <button className='
+          <button onClick={()=> fn()} className='
         site-borders
         text-PrimaryWhite
         text-xl

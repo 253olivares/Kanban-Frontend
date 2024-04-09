@@ -1,8 +1,10 @@
 import PlanButton from '../Components/PlanButton';
 import { pricingPlansType } from '../Section-3_Pricing';
+import { useAppDispatch } from '../../../reduxStore/hook';
+import { openCreateProfile } from '../../../modals/modalSlice';
 
 const PricingCard = ({plan}: {plan:pricingPlansType}) => {
-
+    const dispatch = useAppDispatch();
   return (
     <div className="
     p-[.2rem]
@@ -193,7 +195,7 @@ const PricingCard = ({plan}: {plan:pricingPlansType}) => {
                     sLaptop:min-h-[6.5rem] 
                     mLaptop:min-h-[8rem] 
                     desktop:min-h-[10rem]'>
-                        <PlanButton message='Select Plan' />
+                        <PlanButton fn={()=> dispatch(openCreateProfile())} message='Select Plan' />
                     </div>
             }
         </div>  

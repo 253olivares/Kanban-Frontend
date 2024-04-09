@@ -3,6 +3,7 @@ import MoneySVGMobile from '/assets/MoneyMobile.svg';
 import PricingCard from '../Components/PricingCard';
 import DollarSign from '/assets/Dollar_Sign_Icon.svg';
 
+
 export type pricingPlansType = {
     tier:string,
     price:number,
@@ -10,7 +11,6 @@ export type pricingPlansType = {
   }
 
 const index = () => {
-
   const pricingPlans: pricingPlansType[]  = [
     {
     tier: "Starter Kit", 
