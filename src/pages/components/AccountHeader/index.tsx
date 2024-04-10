@@ -3,13 +3,11 @@ import { Outlet } from 'react-router-dom'
 
 const index = () => {
   return (
-    <>
+      <main className='relative w-screen h-screen conic-gradient-noshade overflow-hidden'>
         <div>index Account Header stuff</div>
-        <main>
-            <Outlet/>
-        </main>
-    </>
+        <Outlet/>
+      </main>
   )
 }
 
-export default index
+export default index  

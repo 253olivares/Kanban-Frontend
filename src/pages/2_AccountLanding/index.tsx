@@ -1,9 +1,9 @@
 
 const index = () => {
   return (
-    <main className="relative conic-gradient w-screen h-screen">
+    <div className="relative">
 
-    </main>
+    </div>
   )
 }
 
