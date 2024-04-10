@@ -80,6 +80,30 @@
         box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,.5);
     }
 
+    .animationDelay1s {
+        animation-direction: reverse;
+        animation-delay: .25s;
+    }
+    .animationDelay2s {
+        animation-direction: reverse;
+        animation-delay: .5s;
+    } 
+    .animationDelay3s {
+        animation-direction: reverse;
+        animation-delay: .75s;
+    } 
+
+    @keyframes reversebounce {
+        0%,100% {
+            transform: none;
+            animation-timing-function: cubic-bezier(0,0,0.2,1);
+        }
+        50% {
+            transform: translateY(-25%);
+            animation-timing-function: cubic-bezier(0.8,0,1,1);
+        }
+    }
+
     .Home_Section1 {
         @apply w-full 
         desktop:min-h-[960px] 
