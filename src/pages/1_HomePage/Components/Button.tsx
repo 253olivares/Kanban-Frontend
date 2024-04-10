@@ -1,4 +1,6 @@
-const Button = ({message, fn}: {message:string, fn: ()=>void}) => {
+import React from "react"
+
+const Button = React.memo(({message, fn}: {message:string, fn: ()=>void}) => {
   return (
     <button
     onClick={()=>fn()}
@@ -40,6 +42,6 @@ const Button = ({message, fn}: {message:string, fn: ()=>void}) => {
         </span>
     </button>
   )
-}
+})
 
 export default Button

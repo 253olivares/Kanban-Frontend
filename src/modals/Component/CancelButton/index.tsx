@@ -1,7 +1,8 @@
 import { useAppDispatch } from "../../../reduxStore/hook";
 import { closeModal } from "../../modalSlice";
+import React from "react";
 
-const Button = ({message}: {message:string}) => {
+const Button = React.memo(({message}: {message:string}) => {
     const dispatch = useAppDispatch();
     return (
       <button
@@ -44,6 +45,6 @@ const Button = ({message}: {message:string}) => {
           </span>
       </button>
     )
-  }
+  })
   
   export default Button
