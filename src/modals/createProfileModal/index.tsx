@@ -2,7 +2,7 @@ import React from 'react';
 import LogoExport from '/assets/Logo_Export.svg';
 import Button from '../Component/CancelButton';
 import CreateAccountButton from '../../pages/1_HomePage/Components/Button';
-import Inputs from './Components/EntryFields'
+import Inputs from '../Component/EntryFields'
 import PasswordReq from './Components/PasswordRequirments';
 import PasswordStrength from './Components/PasswordStrength'
 
@@ -33,7 +33,8 @@ const index = () => {
   return (
     <div className="bg-PrimaryWhite min-w-[39.375rem] block rounded-[0.906rem] overflow-hidden">
         <h1 className='
-        my-[2.25rem]
+        mt-[2.5rem]
+        mb-[1.75rem]
         text-center
         w-full
         text-[2.375rem]
@@ -43,7 +44,7 @@ const index = () => {
         <form className='
             flex 
             flex-col 
-            gap-2
+            gap-[.35rem]
             px-[4.5rem] 
             font-normal
         ' onSubmit={(e)=> e.preventDefault()}>
@@ -138,14 +139,14 @@ const index = () => {
                 <PasswordReq />
             </div>
             {/* submit button */}
-            <div className='flex justify-center my-[2.5rem]'>
+            <div className='flex justify-center mt-[1.75rem] mb-[2.4rem]'>
                 <CreateAccountButton message="Create Account" fn={()=>{}} />
             </div>
         </form>
         {/* footer */}
         <div className="relative conic-gradient min-w-[37.5rem] 
         flex justify-between items-center
-        px-[4.125rem] py-[1.875rem]">
+        px-[4.125rem] py-[1.75rem]">
             <Button message='Close' />
             <img className='
             w-[2.969rem] h-[2.969rem]
