@@ -71,11 +71,11 @@
 @layer utilities {
 
     .modalPasswordInputDiv {
-        @apply flex flex-col w-full text-[1.375rem] leading-snug
+        @apply flex flex-col gap-[.2rem] w-full text-[1.375rem] leading-snug
     }
 
     .modalHalfInputDiv{
-        @apply flex flex-col text-[1.375rem] leading-snug w-[14.75rem];
+        @apply flex flex-col gap-[.2rem]  text-[1.375rem] leading-snug w-[14.75rem];
     }
 
     .modalInputs {
