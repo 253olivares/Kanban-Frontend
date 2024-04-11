@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { HtmlHTMLAttributes, MutableRefObject } from 'react';
 import LogoExport from '/assets/Logo_Export.svg';
 import Button from '../Component/CancelButton';
 import CreateAccountButton from '../../pages/1_HomePage/Components/Button';
@@ -17,8 +17,9 @@ const index = () => {
         retypePassword: ''
     })
 
+    
     // update our password strength
-    const [passwordStrength, setPasswordStrength] = React.useState<0|1|2|3>(0);
+    const [passwordStrength, setPasswordStrength] = React.useState<0|1|2|3>(3);
     // this is to keep track of the ui that shows users hwat password requirments they are missing
     const [passwordRequirements, setPasswordRequirements] = React.useState<Record<string,boolean>>({
         charLimit: false,
@@ -131,12 +132,12 @@ const index = () => {
             {/* password strength */}
             {/* this will be a component */}
             <div>
-                <PasswordStrength />
+                <PasswordStrength status={passwordStrength} />
             </div>
             {/* password requirements */}
             {/* this will be a component */}
             <div>
-                <PasswordReq />
+                <PasswordReq reqs={passwordRequirements} />
             </div>
             {/* submit button */}
             <div className='flex justify-center mt-[1.75rem] mb-[2.4rem]'>
