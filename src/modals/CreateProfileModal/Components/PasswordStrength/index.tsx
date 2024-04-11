@@ -47,6 +47,9 @@ const index = React.memo(({status}:{status:0|1|2|3}) => {
             ${
               status === 3 ? index < 6 ? 'opacity-100' : 'opacity-25' : ''
             }
+            ${
+              status === 0 && 'opacity-25'
+            }
             `} key={k} src={v} alt={k} />
           )
         }

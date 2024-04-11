@@ -65,7 +65,7 @@ const index = () => {
       {/* Footer */}
       <div className="relative conic-gradient min-w-[37.5rem]
         flex justify-between items-center
-        px-[4.125rem] py-[1.75rem]">
+        px-[4.125rem] py-[1.6rem]">
           <Button message="close" />
           <img className='
             w-[2.969rem] h-[2.969rem]

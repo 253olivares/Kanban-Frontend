@@ -16,19 +16,23 @@ const index = () => {
         password: '',
         retypePassword: ''
     })
-
     
     // update our password strength
-    const [passwordStrength, setPasswordStrength] = React.useState<0|1|2|3>(3);
-    // this is to keep track of the ui that shows users hwat password requirments they are missing
+    const [passwordStrength, setPasswordStrength] = React.useState<0|1|2|3>(0);
+    // this is to keep track of the ui that shows users hwat password requirements they are missing
     const [passwordRequirements, setPasswordRequirements] = React.useState<Record<string,boolean>>({
         charLimit: false,
         numReq: false,
         specialChar:false
     })
 
-    const checkPassword = () => {
-
+    // our function that will run a check of user input making sure their password meets requirements 
+    const checkPassword = (e:React.ChangeEvent<HTMLInputElement>) => {
+        setUserInfo(x => ({...x, password:e.target.value}))
+    }
+    
+    const checkInputs = () => {
+        
     }
 
   return (
@@ -111,9 +115,7 @@ const index = () => {
                     type='password'
                     label='Password'
                     value={userInfo.password}
-                    func={(e:React.ChangeEvent<HTMLInputElement>)=>{
-                        setUserInfo(x => ({...x, password:e.target.value}
-                        ))}}
+                    func={(e:React.ChangeEvent<HTMLInputElement>)=>checkPassword(e)}
                     />
             </div>
             {/* retype password */}
@@ -147,7 +149,7 @@ const index = () => {
         {/* footer */}
         <div className="relative conic-gradient min-w-[37.5rem] 
         flex justify-between items-center
-        px-[4.125rem] py-[1.75rem]">
+        px-[4.125rem] py-[1.6rem]">
             <Button message='Close' />
             <img className='
             w-[2.969rem] h-[2.969rem]
