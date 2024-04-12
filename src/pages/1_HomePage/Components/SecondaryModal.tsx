@@ -1,4 +1,4 @@
-
+import { memo } from 'react'
 import Button from '../Components/MobileButton'
 import { useLockBodyScroll } from "@uidotdev/usehooks"
 import down from '/assets/Union.png'
@@ -6,7 +6,7 @@ import { useAppDispatch } from '../../../reduxStore/hook'
 import { openCreateProfile } from '../../../modals/modalSlice'
 import { openLogin } from '../../../modals/modalSlice'
 
-const SecondaryModal = ({closeMobile}:{closeMobile: ()=>void}) => {
+const SecondaryModal = memo(({closeMobile}:{closeMobile: ()=>void}) => {
 
   const dispatch = useAppDispatch();
 
@@ -18,7 +18,7 @@ const SecondaryModal = ({closeMobile}:{closeMobile: ()=>void}) => {
           <div onClick={closeMobile} className='w-full cursor-pointer'>
             <img className="mx-auto w-[2.625rem] mMobile:w-[3.125rem] my-5 mMobile:my-6" src={down} alt="Down button" />
           </div>
-          <div className=' my-[4rem] sMobile:my-[4.5rem] mMobile:my-[5.25rem] flex flex-col gap-[3.25rem] sMobile:gap-[3.75rem] mMobile:gap-[4rem] justify-center'>
+          <div className=' my-[3rem] sMobile:my-[4.5rem] mMobile:my-[5.25rem] flex flex-col gap-[1.75rem] sMobile:gap-[3.75rem] mMobile:gap-[4rem] justify-center'>
             <div className='text-center'>
               <Button message='Login' fn={()=> {
                 closeMobile()
@@ -36,6 +36,6 @@ const SecondaryModal = ({closeMobile}:{closeMobile: ()=>void}) => {
        <div onClick={closeMobile} className="block sLaptop:hidden absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]" />
     </div>
   )
-}
+})
 
 export default SecondaryModal

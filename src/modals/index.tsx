@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { useLockBodyScroll } from "@uidotdev/usehooks";
 import { useAppDispatch } from "../reduxStore/hook";
 import { closeModal } from "./modalSlice";
@@ -8,7 +9,7 @@ import LoginModal from './LoginModal';
 import ProfileModal from './ProfileModal';
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
-const index = () => {
+const index = memo(() => {
   // create a dispatch function from our redux store to trigger our reducers
   const dispatch = useAppDispatch();
   // get the modal we want to bring up
@@ -26,6 +27,6 @@ const index = () => {
       <div onClick={()=> dispatch(closeModal())} className="hidden sLaptop:block absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]" />
     </div>
   )
-}
+})
 
 export default index;

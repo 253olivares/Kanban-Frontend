@@ -1,7 +1,7 @@
-import React from "react";
+import { Fragment,Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { lazy } from "react";
-import LoadingSpinner from './pages/components/LoadingSpinner';
+import LoadingPage from './pages/components/LoadingSpinner';
 import Errorpage from './pages/0_404Page';
 
 const HomePage = lazy(()=> import('./pages/1_HomePage'));
@@ -14,8 +14,8 @@ const Workspace = lazy(()=> import('./pages/3_Workspace'));
 function App(): JSX.Element {
 // return our page
   return (
-    <React.Fragment>
-      <React.Suspense fallback={<LoadingSpinner />}>
+    <Fragment>
+      <Suspense fallback={<LoadingPage />}>
         <Routes>
             <Route path="/" element={<HomePage />}/>
             {/* our heading layout */}
@@ -30,8 +30,8 @@ function App(): JSX.Element {
             {/* 404 page */}
             <Route path="*" element={<Errorpage />} />
         </Routes>
-      </React.Suspense>
-    </React.Fragment>
+      </Suspense>
+    </Fragment>
   )
 }
 
