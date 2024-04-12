@@ -1,8 +1,8 @@
 import { useAppDispatch } from "../../../reduxStore/hook";
 import { closeModal } from "../../modalSlice";
-import React from "react";
+import { memo } from "react";
 
-const Button = React.memo(({message}: {message:string}) => {
+const Button = memo(({message}: {message:string}) => {
     const dispatch = useAppDispatch();
     return (
       <button

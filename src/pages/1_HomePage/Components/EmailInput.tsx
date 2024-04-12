@@ -1,10 +1,10 @@
-import React from "react"
+import { useState, FormEvent } from "react";
 
 const EmailInput = () => {
 
-    const [inputValue, setInputValue] = React.useState<string>('')
-    const [iserror, setError] = React.useState<boolean>(false);
-    const [submission,setSubmission] = React.useState<boolean>(false);
+    const [inputValue, setInputValue] = useState<string>('')
+    const [iserror, setError] = useState<boolean>(false);
+    const [submission,setSubmission] = useState<boolean>(false);
 
     // test email to make sure its valid
     function emailValidation (email:string):boolean {
@@ -12,7 +12,7 @@ const EmailInput = () => {
         return pattern.test(email);
     }
 
-    const validateAndSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+    const validateAndSubmit = (e:FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if(!emailValidation(inputValue)) {
             setError(true);

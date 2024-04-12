@@ -1,11 +1,11 @@
-import React from "react"
+import { useState } from 'react';
 import Inputs from '../Component/EntryFields'
 import CreateAccountButton from '../../pages/1_HomePage/Components/Button';
 import Footer from '../Component/Footer'
 
 const index = () => {
 
-  const [userInfo, setUserInfo] = React.useState({
+  const [userInfo, setUserInfo] = useState({
     username: '',
     password: '',
     remember: false

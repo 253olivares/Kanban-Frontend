@@ -1,12 +1,12 @@
-import React from 'react';
+import { useRef, useState, useEffect } from 'react';
 import Polygon from '/assets/Polygon_5.svg';
 import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
 import { getLanguages, getSelectLanguage, changeLanguage} from '../../../languages/languageSlice';
 
 const LanguageDropdown = () => {
    // create this ref if needed
-  const htmlRef = React.useRef<HTMLButtonElement>(null);
-  const [dropDown, setDropdown] = React.useState<Boolean>(false);
+  const htmlRef = useRef<HTMLButtonElement>(null);
+  const [dropDown, setDropdown] = useState<Boolean>(false);
 
   // get our dispatch for redux
   const dispatch = useAppDispatch();
@@ -23,7 +23,7 @@ const LanguageDropdown = () => {
     window.removeEventListener('click', listening,true);
   }
 
-  React.useEffect(()=> {
+  useEffect(()=> {
    ()=> {
     // a cleaner to remove our listener when we unmount this component
     // use case a user changes pages when the dropdown is extended

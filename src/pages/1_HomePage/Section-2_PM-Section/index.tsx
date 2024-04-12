@@ -1,10 +1,10 @@
 import Button from "../Components/LargerButton"
 import { useAppDispatch } from "../../../reduxStore/hook"
 import { openCreateProfile } from "../../../modals/modalSlice"
-import React from "react"
+import { memo } from "react"
 
 // use memo caches our component and only updates when it detects changes have been made to the component itself
-const index = React.memo(() => {
+const index = memo(() => {
   const dispatch = useAppDispatch();
   return (
     <section className="PM_Section2">

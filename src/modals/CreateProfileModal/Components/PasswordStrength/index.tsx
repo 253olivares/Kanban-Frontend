@@ -1,4 +1,4 @@
-import React, {MutableRefObject } from 'react';
+import { memo } from 'react';
 import svg1 from '/assets/passStrength/svg1.svg';
 import svg2 from '/assets/passStrength/svg2.svg';
 import svg3 from '/assets/passStrength/svg3.svg';
@@ -6,7 +6,7 @@ import svg4 from '/assets/passStrength/svg4.svg';
 import svg5 from '/assets/passStrength/svg5.svg';
 import svg6 from '/assets/passStrength/svg6.svg';
 
-const index = React.memo(({status}:{status:number}) => {
+const index = memo(({status}:{status:number}) => {
 
   const svgArray:Record<string,string> = {
       svg1,

@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import {useState, useLayoutEffect, useRef } from 'react';
 import CreateAccountButton from '../../pages/1_HomePage/Components/Button';
 import Inputs from '../Component/EntryFields'
 import PasswordReq from './Components/PasswordRequirments';
@@ -10,7 +10,7 @@ const index = () => {
     const repass = useRef<HTMLInputElement>(null)
 
     // keep track of all our values that the user inputs
-    const [userInfo, setUserInfo] = React.useState<Record<string,string>>({
+    const [userInfo, setUserInfo] = useState<Record<string,string>>({
         firstname: '',
         lastname: '',
         username: '',
@@ -20,10 +20,10 @@ const index = () => {
     })
     
     // update our password strength
-    const [passwordStrength, setPasswordStrength] = React.useState<number>(0);
+    const [passwordStrength, setPasswordStrength] = useState<number>(0);
 
     // this is to keep track of the ui that shows users hwat password requirements they are missing
-    const [passwordRequirements, setPasswordRequirements] = React.useState<Record<string,boolean>>({
+    const [passwordRequirements, setPasswordRequirements] = useState<Record<string,boolean>>({
         charLimit: false,
         numReq: false,
         specialChar:false

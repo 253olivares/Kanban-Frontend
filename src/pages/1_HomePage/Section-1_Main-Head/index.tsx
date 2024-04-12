@@ -4,10 +4,10 @@ import HomeCoverMobile from '/assets/Home_Cover_Mobile.svg'
 import LogoExport from '/assets/Logo_Export.svg';
 import DeskView from '/assets/Ipad_ImageSVG.svg';
 import MobileView from '/assets/MobileImageSVG.svg'
-import React from 'react';
+import { memo } from 'react';
 
 // use memo caches our component and only updates when it detects changes have been made to the component itself
-const index = React.memo(({openMobile}: {openMobile:()=>void}) => {
+const index = memo(({openMobile}: {openMobile:()=>void}) => {
   return (
     <section className='conic-gradient Home_Section1'>
         <div className='Home_Section1 max-w-[1920px] mx-auto z-10 overflow-x-clip'>

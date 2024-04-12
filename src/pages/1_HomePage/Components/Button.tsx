@@ -1,6 +1,6 @@
-import React from "react"
+import { memo } from "react"
 
-const Button = React.memo(({message, fn}: {message:string, fn: ()=>void}) => {
+const Button = memo(({message, fn}: {message:string, fn: ()=>void}) => {
   return (
     <button
     tabIndex={-1}
