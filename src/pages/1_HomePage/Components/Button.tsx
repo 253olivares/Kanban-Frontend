@@ -7,13 +7,17 @@ const Button = React.memo(({message, fn}: {message:string, fn: ()=>void}) => {
     onClick={()=>fn()}
     className='
               scale-100
-              min-w-[19.375rem]
+              min-w-[15rem]
+              sMobile:min-w-[16.25rem]
+              mMobile:min-w-[19.375rem]
               sLaptop:min-w-[8.438rem]
               mLaptop:min-w-[10.313rem]
               desktop:min-w-[12.813rem] 
               site-borders
-              text-PrimaryWhite 
-              text-3xl
+              text-PrimaryWhite
+              text-[1.5rem]
+              sMobile:text-[1.875rem] 
+              mMobile:text-3xl
               sLaptop:text-lg 
               mLaptop:text-[1.375rem]
               desktop:text-[1.688rem] 
@@ -40,8 +44,10 @@ const Button = React.memo(({message, fn}: {message:string, fn: ()=>void}) => {
         sLaptop:rounded-md 
         mLaptop:rounded-[0.438rem] 
         desktop:rounded-lg 
-        py-3
-        sLaptop:py-1 
+        py-[.25rem]
+        sMobile:py-[.5rem]
+        mMobile:py-3
+        sLaptop:py-[.2rem] 
         desktop:py-2 
         px-4
         sLaptop:px-[0.625rem] 

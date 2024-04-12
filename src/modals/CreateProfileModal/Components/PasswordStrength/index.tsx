@@ -32,7 +32,7 @@ const index = React.memo(({status}:{status:0|1|2|3}) => {
   }
 
   return (
-    <div className='flex gap-10 sLaptop:gap-5 items-center'>
+    <div className='flex gap-5 sMobile:gap-10 sLaptop:gap-5 items-center'>
       <div className='flex sLaptop:my-[.25rem] mLaptop:my-[.3rem] desktop:my-2 largeDesktop:my-[.6rem] '>
         {
           Object.entries(svgArray).map(([k,v], index)=> 
@@ -41,7 +41,9 @@ const index = React.memo(({status}:{status:0|1|2|3}) => {
             ml-[-.6rem]
             sLaptop:ml-[-.3rem]
             desktop:ml-[-.6rem]
-            h-7
+            h-[1rem]
+            sMobile:h-[1.35rem]
+            mMobile:h-7
             sLaptop:h-[.8rem]
             mLaptop:h-[1.1rem]
             desktop:h-[1.35rem]
@@ -65,7 +67,9 @@ const index = React.memo(({status}:{status:0|1|2|3}) => {
       <p className={`
        font-bold 
        leading-tight
-       text-2xl
+       text-[1rem]
+       sMobile:text-[1.25rem]
+       mMobile:text-2xl
        sLaptop:text-[.9rem]
        mLaptop:text-base
        desktop:text-lg

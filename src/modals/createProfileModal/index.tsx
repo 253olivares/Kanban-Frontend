@@ -17,13 +17,13 @@ const index = () => {
     })
     
     // update our password strength
-    const [passwordStrength, setPasswordStrength] = React.useState<0|1|2|3>(3);
+    const [passwordStrength, setPasswordStrength] = React.useState<0|1|2|3>(0);
 
     // this is to keep track of the ui that shows users hwat password requirements they are missing
     const [passwordRequirements, setPasswordRequirements] = React.useState<Record<string,boolean>>({
         charLimit: false,
         numReq: false,
-        specialChar:true
+        specialChar:false
     })
 
     // our function that will run a check of user input making sure their password meets requirements 
@@ -38,8 +38,12 @@ const index = () => {
   return (
     <div className="bg-PrimaryWhite block w-full h-full sLaptop:h-auto  sLaptop:w-[32.5rem]  mLaptop:w-[38rem] desktop:w-[39.663rem] largeDesktop:w-[42.5rem] sLaptop:rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
         <h1 className='
-        mt-[4.688rem]
-        mb-[2.813rem]
+        mt-[2.25rem]
+        mb-[1.25rem]
+        sMobile:mt-[4rem]
+        sMobile:mb-[2.25rem]
+        mMobile:mt-[4.688rem]
+        mMobile:mb-[2.813rem]
         sLaptop:mt-[1.8rem]
         sLaptop:mb-[1.15rem]
         mLaptop:mt-[2.4rem]
@@ -49,8 +53,10 @@ const index = () => {
         text-center
         w-full
         font-bold
-        text-linear-gradient 
-        text-[2.5rem]
+        text-linear-gradient
+        text-[1.25rem] 
+        sMobile:text-[2.063rem]
+        mMobile:text-[2.5rem]
         sLaptop:text-[1.4rem]
         mLaptop:text-[2rem]
         desktop:text-[2.375rem]
@@ -59,18 +65,21 @@ const index = () => {
         <form className='
             flex 
             flex-col 
-            gap-5
+            gap-4
+            sMobile:gap-5
             sLaptop:gap-[.25rem]
             mLaptop:gap-[.3rem]
             desktop:gap-[.35rem]
-            px-[6.25rem]
+            px-[2.5rem]
+            sMobile:px-[5.313rem]
+            mMobile:px-[6.25rem]
             sLaptop:px-[3.85rem]
             mLaptop:px-[4.2rem]
             desktop:px-[4.5rem] 
             font-normal
         ' onSubmit={(e)=> e.preventDefault()}>
             {/* first name last name */}
-            <div className='flex flex-col sLaptop:flex-row gap-5 sLaptop:gap-[.4rem] mLaptop:gap-[.6rem] desktop:gap-[.75rem]'>
+            <div className='flex flex-col sLaptop:flex-row gap-4 mMobile:gap-5 sLaptop:gap-[.4rem] mLaptop:gap-[.6rem] desktop:gap-[.75rem]'>
                 <div className='modalHalfInputDiv'>
                     <Inputs 
                     className='modalInputs'
@@ -97,7 +106,7 @@ const index = () => {
                 </div>
             </div>
             {/* username and email */}
-            <div className='flex flex-col sLaptop:flex-row gap-5 sLaptop:gap-[.4rem] mLaptop:gap-[.6rem] desktop:gap-[.75rem]'>
+            <div className='flex flex-col sLaptop:flex-row gap-4 mMobile:gap-5 sLaptop:gap-[.4rem] mLaptop:gap-[.6rem] desktop:gap-[.75rem]'>
                 <div className='modalHalfInputDiv'>
                     <Inputs 
                     className='modalInputs'
@@ -158,7 +167,8 @@ const index = () => {
                 <PasswordReq reqs={passwordRequirements} />
             </div>
             {/* submit button */}
-            <div className='flex justify-center sLaptop:scale-[1.15] mLaptop:scale-[.95] desktop:scale-[.875] largeDesktop:scale-95 pt-[3.75rem] pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
+            <div className='flex justify-center 
+            pt-[2.5rem] pb-[2.5rem] sMobile:pt-[3.75rem] sMobile:pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
                 <CreateAccountButton message="Create Account" fn={()=>{}} />
             </div>
         </form>

@@ -58,7 +58,6 @@ const index =React.memo(() => {
         sLaptop:text-xl 
         mLaptop:text-2xl
         desktop:text-3xl
-        largeDesktop:text-4xl
         font-medium 
         text-PrimaryWhite
         " onClick={()=> {window.scroll({
@@ -74,25 +73,26 @@ const index =React.memo(() => {
         <div className="w-full flex justify-center 
         linear-gradientFooter2 sLaptop:linear-gradientFooter">
           <div className='w-[60%] bg-PrimaryWhite hidden 
-          sLaptop:block 
+          sLaptop:flex
+          sLaptop:justify-end
+           largeDesktop:items-center
           sLaptop:rounded-r-[2rem] 
           mLaptop:rounded-r-[2.5rem] 
-          desktop:rounded-r-[3.125rem]'>
+          desktop:rounded-r-[3.125rem]
+          '>
             <div className='
             w-full
             largeDesktop:w-[calc(1920px*.6)] 
             float-right
             flex
-             ga
             sLaptop:gap-14
             mLaptop:gap-16
             desktop:gap-20 
-            largeDesktop:gap-32
             sLaptop:py-8
             mLaptop:py-[3rem]
             desktop:py-[3.25rem]
-            largeDesktop:py-[3.5rem]
             justify-center
+             largeDesktop:my-auto
             '>
               {
                 Object.entries(siteMap).map(
@@ -103,7 +103,6 @@ const index =React.memo(() => {
                     sLaptop:text-[1.75rem]
                     mLaptop:text-4xl 
                     desktop:text-[2.625rem] 
-                    largeDesktop:text-5xl
                     font-medium 
                     sLaptop:pr-[1.5rem]
                     mLaptop:pr-[2rem]
@@ -128,7 +127,6 @@ const index =React.memo(() => {
                     sLaptop:text-[0.85rem]
                     mLaptop:text-lg
                     desktop:text-xl
-                    largeDesktop:text-2xl
                     font-medium
                     '>
                       {

@@ -12,38 +12,47 @@ const index = () => {
   })
 
   return (
-    <div className="bg-PrimaryWhite block w-full h-full sLaptop:scale-[.925] sLaptop:w-[28.5rem] mLaptop:scale-95 mLaptop:w-[35rem] desktop:scale-100 desktop:w-[39.663rem] largeDesktop:w-[42.5rem] largeDesktop:scale-[1.2] rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
+    <div className="bg-PrimaryWhite block w-full h-full sLaptop:h-auto sLaptop:w-[28.5rem] mLaptop:w-[35rem]  desktop:w-[39.663rem] largeDesktop:w-[42.5rem] rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
       <h1 className="
-       mt-[4.688rem]
-       mb-[2.813rem]
-       sLaptop:mt-[1.8rem]
-       sLaptop:mb-[1.15rem]
-       mLaptop:mt-[2.4rem]
-       mLaptop:mb-[1.5rem]
-       desktop:mt-[2.5rem]
-       desktop:mb-[1.75rem]
-       largeDesktop:mb-[2rem]
-       text-center
-       w-full
-       font-bold
-       text-linear-gradient 
-       text-[2.5rem]
-       sLaptop:text-[1.4rem]
-       mLaptop:text-[2rem]
-       desktop:text-[2.375rem]
-       largeDesktop:text-[2.5rem] 
+        mt-[4rem]
+        mb-[2.25rem]
+        mMobile:mt-[4.688rem]
+        mMobile:mb-[2.813rem]
+        sLaptop:mt-[1.8rem]
+        sLaptop:mb-[1.15rem]
+        mLaptop:mt-[2.4rem]
+        mLaptop:mb-[1.5rem]
+        desktop:mt-[2.5rem]
+        desktop:mb-[1.75rem]
+        text-center
+        w-full
+        font-bold
+        text-linear-gradient 
+        text-[2.063rem]
+        mMobile:text-[2.5rem]
+        sLaptop:text-[1.4rem]
+        mLaptop:text-[2rem]
+        desktop:text-[2.375rem]
+        largeDesktop:text-[2.5rem]
       ">
         Sign In
       </h1>
       <form className="
+      my-auto
+      sLaptop:my-0
       flex flex-col 
       pb-[8.149rem]
+      sLaptop:pb-0
+      gap-[.25rem]
+      mMobile:gap-[.35rem]
       sLaptop:gap-[.25rem]
       mLaptop:gap-[.3rem]
-      gap-[.35rem]
+      px-[2rem]
+      sMobile:px-[5.313rem]
+      mMobile:px-[4.5rem]
       sLaptop:px-[3.85rem]
       mLaptop:px-[4.2rem]
-      px-[4.5rem] font-normal
+      font-normal
       " onSubmit={(e)=> e.preventDefault()}>
         {/* username */}
         <div className="modalPasswordInputDiv">
@@ -72,16 +81,17 @@ const index = () => {
           />
         </div>
         {/* remember checkbox */}
-        <div className="flex items-center gap-5 sLaptop:gap-3 my-14 sLaptop:my-5 desktop:my-9 sLaptop:ml-5 mLaptop:ml-7 desktop:ml-9">
-          <input checked={userInfo.remember} onChange={(e)=>setUserInfo(x=>({...x,remember:e.target.checked}))} className=" w-8 h-8 sLaptop:w-5 sLaptop:h-5 desktop:w-6 desktop:h-6" type="checkbox" id="rememberMe" />
-          <label className=" font-normal text-[1.688rem] sLaptop:text-[.85rem] mLaptop:text-[1.15rem] desktop:text-xl" htmlFor="rememberMe">Remember Me</label>
+        <div className="flex items-center gap-5 sLaptop:gap-3 my-7  sMobile:my-14 sLaptop:my-5 desktop:my-9 sLaptop:ml-5 mLaptop:ml-7 desktop:ml-9">
+          <input checked={userInfo.remember} onChange={(e)=>setUserInfo(x=>({...x,remember:e.target.checked}))} className=" w-7 h-7 mMobile:w-8 mMobile:h-8 sLaptop:w-5 sLaptop:h-5 desktop:w-6 desktop:h-6" type="checkbox" id="rememberMe" />
+          <label className=" font-normal sMobile:text-[1.5rem] mMobile:text-[1.688rem] sLaptop:text-[.85rem] mLaptop:text-[1.15rem] desktop:text-xl" htmlFor="rememberMe">Remember Me</label>
         </div>
-        <div  className='flex justify-center sLaptop:scale-[1.15] mLaptop:scale-[.95] desktop:scale-[.875] largeDesktop:scale-95 pt-[3.75rem] pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
+        <div  className='flex justify-center
+         pt-[2.5rem] pb-[2.5rem] sMobile:pt-[3.75rem] sMobile:pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
           <CreateAccountButton message="Login" fn={()=>{}} />
         </div>    
       </form>
       {/* Footer */}
-      <div className="absolute bottom-0 w-full">
+      <div className="absolute sLaptop:relative bottom-0 w-full">
         <Footer />
       </div>
     </div>
