@@ -32,12 +32,20 @@ const index = React.memo(({status}:{status:0|1|2|3}) => {
   }
 
   return (
-    <div className='flex gap-5 items-center'>
-      <div className='flex gap-[-1rem] my-2'>
+    <div className='flex gap-10 sLaptop:gap-5 items-center'>
+      <div className='flex sLaptop:my-[.25rem] mLaptop:my-[.3rem] desktop:my-2 largeDesktop:my-[.6rem] '>
         {
           Object.entries(svgArray).map(([k,v], index)=> 
             <img className={`
-            first:ml-0 ml-[-.6rem] 
+            first:ml-0 
+            ml-[-.6rem]
+            sLaptop:ml-[-.3rem]
+            desktop:ml-[-.6rem]
+            h-7
+            sLaptop:h-[.8rem]
+            mLaptop:h-[1.1rem]
+            desktop:h-[1.35rem]
+            largeDesktop:h-[1.45rem]
             ${
               status === 1 ? index < 2 ? 'opacity-100' : 'opacity-25' : ''
             }
@@ -56,7 +64,12 @@ const index = React.memo(({status}:{status:0|1|2|3}) => {
       </div>
       <p className={`
        font-bold 
-       text-lg
+       leading-tight
+       text-2xl
+       sLaptop:text-[.9rem]
+       mLaptop:text-base
+       desktop:text-lg
+       largeDesktop:text-2xl
        ${status == 1 && 'text-ThemeRed' }
        ${status == 2 && 'text-ThemeOrange' }
        ${status == 3 && 'text-[#30DD11]' }

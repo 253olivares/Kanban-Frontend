@@ -1,10 +1,9 @@
 import React, { HtmlHTMLAttributes, MutableRefObject } from 'react';
-import LogoExport from '/assets/Logo_Export.svg';
-import Button from '../Component/CancelButton';
 import CreateAccountButton from '../../pages/1_HomePage/Components/Button';
 import Inputs from '../Component/EntryFields'
 import PasswordReq from './Components/PasswordRequirments';
 import PasswordStrength from './Components/PasswordStrength'
+import Footer from '../Component/Footer';
 
 const index = () => {
     // keep track of all our values that the user inputs
@@ -18,12 +17,13 @@ const index = () => {
     })
     
     // update our password strength
-    const [passwordStrength, setPasswordStrength] = React.useState<0|1|2|3>(0);
+    const [passwordStrength, setPasswordStrength] = React.useState<0|1|2|3>(3);
+
     // this is to keep track of the ui that shows users hwat password requirements they are missing
     const [passwordRequirements, setPasswordRequirements] = React.useState<Record<string,boolean>>({
         charLimit: false,
         numReq: false,
-        specialChar:false
+        specialChar:true
     })
 
     // our function that will run a check of user input making sure their password meets requirements 
@@ -36,25 +36,41 @@ const index = () => {
     }
 
   return (
-    <div className="bg-PrimaryWhite min-w-[39.375rem] block rounded-[0.906rem] overflow-hidden">
+    <div className="bg-PrimaryWhite block w-full h-full sLaptop:h-auto  sLaptop:w-[32.5rem]  mLaptop:w-[38rem] desktop:w-[39.663rem] largeDesktop:w-[42.5rem] sLaptop:rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
         <h1 className='
-        mt-[2.5rem]
-        mb-[1.75rem]
+        mt-[4.688rem]
+        mb-[2.813rem]
+        sLaptop:mt-[1.8rem]
+        sLaptop:mb-[1.15rem]
+        mLaptop:mt-[2.4rem]
+        mLaptop:mb-[1.5rem]
+        desktop:mt-[2.5rem]
+        desktop:mb-[1.75rem]
         text-center
         w-full
-        text-[2.375rem]
         font-bold
         text-linear-gradient 
+        text-[2.5rem]
+        sLaptop:text-[1.4rem]
+        mLaptop:text-[2rem]
+        desktop:text-[2.375rem]
+        largeDesktop:text-[2.5rem]
         '>Create an Account</h1>
         <form className='
             flex 
             flex-col 
-            gap-[.35rem]
-            px-[4.5rem] 
+            gap-5
+            sLaptop:gap-[.25rem]
+            mLaptop:gap-[.3rem]
+            desktop:gap-[.35rem]
+            px-[6.25rem]
+            sLaptop:px-[3.85rem]
+            mLaptop:px-[4.2rem]
+            desktop:px-[4.5rem] 
             font-normal
         ' onSubmit={(e)=> e.preventDefault()}>
             {/* first name last name */}
-            <div className='flex gap-3 w-full'>
+            <div className='flex flex-col sLaptop:flex-row gap-5 sLaptop:gap-[.4rem] mLaptop:gap-[.6rem] desktop:gap-[.75rem]'>
                 <div className='modalHalfInputDiv'>
                     <Inputs 
                     className='modalInputs'
@@ -81,7 +97,7 @@ const index = () => {
                 </div>
             </div>
             {/* username and email */}
-            <div className='flex gap-3 w-full'>
+            <div className='flex flex-col sLaptop:flex-row gap-5 sLaptop:gap-[.4rem] mLaptop:gap-[.6rem] desktop:gap-[.75rem]'>
                 <div className='modalHalfInputDiv'>
                     <Inputs 
                     className='modalInputs'
@@ -133,7 +149,7 @@ const index = () => {
             </div>
             {/* password strength */}
             {/* this will be a component */}
-            <div>
+            <div >
                 <PasswordStrength status={passwordStrength} />
             </div>
             {/* password requirements */}
@@ -142,19 +158,12 @@ const index = () => {
                 <PasswordReq reqs={passwordRequirements} />
             </div>
             {/* submit button */}
-            <div className='flex justify-center mt-[1.75rem] mb-[2.4rem]'>
+            <div className='flex justify-center sLaptop:scale-[1.15] mLaptop:scale-[.95] desktop:scale-[.875] largeDesktop:scale-95 pt-[3.75rem] pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
                 <CreateAccountButton message="Create Account" fn={()=>{}} />
             </div>
         </form>
         {/* footer */}
-        <div className="relative conic-gradient min-w-[37.5rem] 
-        flex justify-between items-center
-        px-[4.125rem] py-[1.6rem]">
-            <Button message='Close' />
-            <img className='
-            w-[2.969rem] h-[2.969rem]
-            ' src={LogoExport} alt="Logo Icons" />
-        </div>
+        <Footer />
     </div>
   )
 }

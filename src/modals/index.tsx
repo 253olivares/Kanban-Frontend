@@ -9,7 +9,9 @@ import ProfileModal from './ProfileModal';
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const index = () => {
+  // create a dispatch function from our redux store to trigger our reducers
   const dispatch = useAppDispatch();
+  // get the modal we want to bring up
   const modal = useAppSelector(getModalType);
     // react hook by ui.dev that will over write the body overflow property
     // The hook as a use effect that overwrites our property and save its previous value then when the component unmounts it 

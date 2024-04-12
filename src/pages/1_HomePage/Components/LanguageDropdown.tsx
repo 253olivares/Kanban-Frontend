@@ -47,7 +47,7 @@ const LanguageDropdown = () => {
         pb-[.45rem]
         desktop:pb-[.5rem]
         '>Languages:</label>
-        <button ref={htmlRef} onClick={()=> {
+        <button tabIndex={-1} ref={htmlRef} onClick={()=> {
           setDropdown(true);
           // check to make sure we dont have this running already
           // set true to keep function from running when we don't need to

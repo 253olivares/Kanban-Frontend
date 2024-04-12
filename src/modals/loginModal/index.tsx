@@ -1,8 +1,7 @@
 import React from "react"
-import LogoExport from '/assets/Logo_Export.svg';
 import Inputs from '../Component/EntryFields'
 import CreateAccountButton from '../../pages/1_HomePage/Components/Button';
-import Button from "../Component/CancelButton";
+import Footer from '../Component/Footer'
 
 const index = () => {
 
@@ -13,19 +12,38 @@ const index = () => {
   })
 
   return (
-    <div className="bg-PrimaryWhite min-w-[39.375rem] block rounded-[0.906rem] overflow-hidden">
+    <div className="bg-PrimaryWhite block w-full h-full sLaptop:scale-[.925] sLaptop:w-[28.5rem] mLaptop:scale-95 mLaptop:w-[35rem] desktop:scale-100 desktop:w-[39.663rem] largeDesktop:w-[42.5rem] largeDesktop:scale-[1.2] rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
       <h1 className="
-      mt-[2.5rem] mb-[1.75rem]
-      text-center
-      w-full
-      text-[2.375rem]
-      font-bold
-      text-linear-gradient
+       mt-[4.688rem]
+       mb-[2.813rem]
+       sLaptop:mt-[1.8rem]
+       sLaptop:mb-[1.15rem]
+       mLaptop:mt-[2.4rem]
+       mLaptop:mb-[1.5rem]
+       desktop:mt-[2.5rem]
+       desktop:mb-[1.75rem]
+       largeDesktop:mb-[2rem]
+       text-center
+       w-full
+       font-bold
+       text-linear-gradient 
+       text-[2.5rem]
+       sLaptop:text-[1.4rem]
+       mLaptop:text-[2rem]
+       desktop:text-[2.375rem]
+       largeDesktop:text-[2.5rem] 
       ">
         Sign In
       </h1>
       <form className="
-      flex flex-col gap-[.35rem] px-[4.5rem] font-normal
+      flex flex-col 
+      pb-[8.149rem]
+      sLaptop:gap-[.25rem]
+      mLaptop:gap-[.3rem]
+      gap-[.35rem]
+      sLaptop:px-[3.85rem]
+      mLaptop:px-[4.2rem]
+      px-[4.5rem] font-normal
       " onSubmit={(e)=> e.preventDefault()}>
         {/* username */}
         <div className="modalPasswordInputDiv">
@@ -54,23 +72,18 @@ const index = () => {
           />
         </div>
         {/* remember checkbox */}
-        <div className="flex gap-3 my-9 ml-9">
-          <input checked={userInfo.remember} onChange={(e)=>setUserInfo(x=>({...x,remember:e.target.checked}))} className="w-6 h-6" type="checkbox" id="rememberMe" />
-          <label className=" font-normal text-xl" htmlFor="rememberMe">Remember Me</label>
+        <div className="flex items-center gap-5 sLaptop:gap-3 my-14 sLaptop:my-5 desktop:my-9 sLaptop:ml-5 mLaptop:ml-7 desktop:ml-9">
+          <input checked={userInfo.remember} onChange={(e)=>setUserInfo(x=>({...x,remember:e.target.checked}))} className=" w-8 h-8 sLaptop:w-5 sLaptop:h-5 desktop:w-6 desktop:h-6" type="checkbox" id="rememberMe" />
+          <label className=" font-normal text-[1.688rem] sLaptop:text-[.85rem] mLaptop:text-[1.15rem] desktop:text-xl" htmlFor="rememberMe">Remember Me</label>
         </div>
-        <div className="flex justify-center mb-16">
+        <div  className='flex justify-center sLaptop:scale-[1.15] mLaptop:scale-[.95] desktop:scale-[.875] largeDesktop:scale-95 pt-[3.75rem] pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
           <CreateAccountButton message="Login" fn={()=>{}} />
         </div>    
       </form>
       {/* Footer */}
-      <div className="relative conic-gradient min-w-[37.5rem]
-        flex justify-between items-center
-        px-[4.125rem] py-[1.6rem]">
-          <Button message="close" />
-          <img className='
-            w-[2.969rem] h-[2.969rem]
-            ' src={LogoExport} alt="Logo" />
-        </div>
+      <div className="absolute bottom-0 w-full">
+        <Footer />
+      </div>
     </div>
   )
 }

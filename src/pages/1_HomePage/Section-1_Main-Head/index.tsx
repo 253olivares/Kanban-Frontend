@@ -7,11 +7,11 @@ import MobileView from '/assets/MobileImageSVG.svg'
 import React from 'react';
 
 // use memo caches our component and only updates when it detects changes have been made to the component itself
-const index = React.memo(() => {
+const index = React.memo(({openMobile}: {openMobile:()=>void}) => {
   return (
     <section className='conic-gradient Home_Section1'>
         <div className='Home_Section1 max-w-[1920px] mx-auto z-10 overflow-x-clip'>
-          <Header/>
+          <Header mobileOpen={openMobile} />
           <div className='w-full relative px-8 sMobile:px-11 mMobile:px-14 sLaptop:px-[5.625rem] mLaptop:px-28 desktop:px-[8.4rem] largeDesktop:px-[10rem] mt-6 mMobile:mt-8 sLaptop:mt-6 mLaptop:mt-8 desktop:mt-9'>
             <div className='flex gap-3 sMobile:gap-4 sLaptop:gap-6 mLaptop:gap-7 desktop:gap-8'>
               <h1 className='

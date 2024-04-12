@@ -1,6 +1,6 @@
 const PlanButton = ({message, fn}:{message:string, fn: ()=> void}) => {
   return (
-          <button onClick={()=> fn()} className='
+          <button tabIndex={-1} onClick={()=> fn()} className='
         site-borders
         text-PrimaryWhite
         text-xl

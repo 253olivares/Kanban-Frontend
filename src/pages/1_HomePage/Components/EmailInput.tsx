@@ -88,6 +88,7 @@ const EmailInput = () => {
                     
                 <div className='flex'>
                     <input 
+                    tabIndex={-1}
                     className='
                     px-3 py-2 
                     sMobile:px-6 sMobile:py-3
@@ -113,7 +114,9 @@ const EmailInput = () => {
                     placeholder='Enter your email..' 
                     required
                     />
-                    <button className='
+                    <button
+                    tabIndex={-1}
+                    className='
                     py-2 px-5 
                     font-medium
                     text-2xl

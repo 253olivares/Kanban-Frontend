@@ -3,20 +3,26 @@ import React from "react"
 const Button = React.memo(({message, fn}: {message:string, fn: ()=>void}) => {
   return (
     <button
+    tabIndex={-1}
     onClick={()=>fn()}
     className='
-              sLaptop:min-w-[135px]
-              mLaptop:min-w-[165px]
-              desktop:min-w-[205px] 
+              scale-100
+              min-w-[19.375rem]
+              sLaptop:min-w-[8.438rem]
+              mLaptop:min-w-[10.313rem]
+              desktop:min-w-[12.813rem] 
               site-borders
               text-PrimaryWhite 
+              text-3xl
               sLaptop:text-lg 
               mLaptop:text-[1.375rem]
               desktop:text-[1.688rem] 
+              rounded-[.9rem]
               sLaptop:rounded-lg
               mLaptop:rounded-[0.625rem]
               desktop:rounded-xl 
               font-bold
+              p-[.2rem]
               sLaptop:p-[2.4px] 
               mLaptop:p-[0.175rem]
               desktop:p-[.2rem]
@@ -30,11 +36,14 @@ const Button = React.memo(({message, fn}: {message:string, fn: ()=>void}) => {
         w-full 
         bg-SpaceBlue 
         active:bg-SpaceBlueSelected 
+        rounded-[.8rem]
         sLaptop:rounded-md 
         mLaptop:rounded-[0.438rem] 
         desktop:rounded-lg 
-        mLaptop:py-1 
+        py-3
+        sLaptop:py-1 
         desktop:py-2 
+        px-4
         sLaptop:px-[0.625rem] 
         mLaptop:px-3 
         desktop:px-4'>
