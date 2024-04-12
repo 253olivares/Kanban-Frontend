@@ -19,7 +19,7 @@ const index = memo(():JSX.Element => {
       {/* open and close our modal */}
       { modalStatus &&  <ModalContainer /> }
       {/* secondary modal for mobile only  */}
-      { SecondaryModal && <SecondaryModalMobile closeMobile={()=>setSecondaryModal(false)} /> }
+      { SecondaryModal && <SecondaryModalMobile closeMobile={()=>setSecondaryModal(false)} />}
       {/* Main section 1 */}
         <MainSection openMobile={()=>setSecondaryModal(true)} />
         {/* Project Management Pitch section */}

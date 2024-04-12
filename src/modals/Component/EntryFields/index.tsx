@@ -1,13 +1,15 @@
-import React from "react"
-const index = React.memo((
-    {className,  id, type, label,value, func} :
-    {className:string, id:string, type:string, label:string, value:string, func: (e:React.ChangeEvent<HTMLInputElement>)=> void}
+import { forwardRef } from "react"
+import { Fragment } from "react/jsx-runtime"
+
+const index = forwardRef<HTMLInputElement|null,{className:string, id:string, type:string, label:string, value:string, func: (e:React.ChangeEvent<HTMLInputElement>)=> void}>((
+    {className,  id, type, label,value, func} , ref
     ) => {
+
   return (
-    <React.Fragment>
+    <Fragment>
         <label htmlFor={id}>{label}:</label>
-        <input onChange={(e)=> func(e)} value={value} className={className} id={id} type={type} required />
-    </React.Fragment>
+        <input ref={ref} onChange={(e)=> func(e)} value={value} className={className} id={id} type={type} required />
+    </Fragment>
   )
 })
 

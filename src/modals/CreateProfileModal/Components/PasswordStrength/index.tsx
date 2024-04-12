@@ -6,7 +6,7 @@ import svg4 from '/assets/passStrength/svg4.svg';
 import svg5 from '/assets/passStrength/svg5.svg';
 import svg6 from '/assets/passStrength/svg6.svg';
 
-const index = React.memo(({status}:{status:0|1|2|3}) => {
+const index = React.memo(({status}:{status:number}) => {
 
   const svgArray:Record<string,string> = {
       svg1,

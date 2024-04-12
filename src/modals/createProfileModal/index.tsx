@@ -1,4 +1,4 @@
-import React, { HtmlHTMLAttributes, MutableRefObject } from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import CreateAccountButton from '../../pages/1_HomePage/Components/Button';
 import Inputs from '../Component/EntryFields'
 import PasswordReq from './Components/PasswordRequirments';
@@ -6,6 +6,9 @@ import PasswordStrength from './Components/PasswordStrength'
 import Footer from '../Component/Footer';
 
 const index = () => {
+    // create a ref to allow us to motify our retypepassword input
+    const repass = useRef<HTMLInputElement>(null)
+
     // keep track of all our values that the user inputs
     const [userInfo, setUserInfo] = React.useState<Record<string,string>>({
         firstname: '',
@@ -17,7 +20,7 @@ const index = () => {
     })
     
     // update our password strength
-    const [passwordStrength, setPasswordStrength] = React.useState<0|1|2|3>(0);
+    const [passwordStrength, setPasswordStrength] = React.useState<number>(0);
 
     // this is to keep track of the ui that shows users hwat password requirements they are missing
     const [passwordRequirements, setPasswordRequirements] = React.useState<Record<string,boolean>>({
@@ -27,12 +30,168 @@ const index = () => {
     })
 
     // our function that will run a check of user input making sure their password meets requirements 
-    const checkPassword = (e:React.ChangeEvent<HTMLInputElement>) => {
-        setUserInfo(x => ({...x, password:e.target.value}))
+    const checkPassword = () => {
+        let totalPoints = 0;
+        let req ={
+            charLimit: false,
+            numReq: false,
+            specialChar:false 
+        }
+
+        // create a snapshot of our password that we are going to use to check
+        const passwordSnapshot = userInfo.password;
+        const specialChar = `~\`!@#$%^&*()_-+={[}]|\:;"'<,>.?/`
+        const leastOneNumber = '0123456789'
+
+        if (passwordSnapshot.length >= 12) {
+          totalPoints = totalPoints + 1;
+          req = {
+            ...req,
+            charLimit:true
+        }}
+
+        // for loop to check if we have a special character if we find one break the loop
+        for(let i=0; i<=specialChar.length-1; i++ ){
+            let found = false
+           for(let x=0; x<=passwordSnapshot.length-1; x++){
+            if(passwordSnapshot[x] === specialChar[i]){
+                totalPoints = totalPoints + 1;
+                req = {
+                    ...req,
+                    specialChar:true
+                }
+                found=true;
+                break;
+            }
+           }
+           if(found) break;
+        }
+
+        // checker for numbers now
+        for(let i=0; i<=leastOneNumber.length-1; i++ ){
+            let found = false
+           for(let x=0; x<=passwordSnapshot.length-1; x++){
+            if(passwordSnapshot[x] === leastOneNumber[i]){
+                totalPoints = totalPoints + 1;
+                req = {
+                    ...req,
+                    numReq:true
+                }
+                found=true;
+                break;
+            }
+           }
+           if(found) break;
+        }
+        // set our new reqs that meet conditions
+        setPasswordRequirements(()=> req);
+        // set our new strength value
+        setPasswordStrength(() => totalPoints);
     }
+    const checkifPasswordsMatch=()=> {
+        if(userInfo.retypePassword !=='')
+        if(userInfo.password !== userInfo.retypePassword){
+            if(repass.current){
+                repass.current.style.backgroundColor = "rgba(255,148,148,.5)"
+            }
+        } else if (userInfo.password === userInfo.retypePassword) {
+            if(repass.current) {
+                repass.current.style.backgroundColor = "rgba(195,255,139,.5)"
+            }
+
+        }
+    }
+
+    // layout effect to calculate if our password is valid
+    useLayoutEffect(()=> {
+        if(userInfo.password !== ''){
+            checkPassword();
+            checkifPasswordsMatch();
+        } else {
+            // otherwise if our password is blank reset our values
+            setPasswordRequirements({
+                charLimit: false,
+                numReq: false,
+                specialChar:false
+            })
+            setPasswordStrength(0)
+        }
+    },[userInfo.password])
+
+    // a layouteffect to see if our password match
+    useLayoutEffect(()=>{
+        if(userInfo.retypePassword !== '') {
+            checkifPasswordsMatch();
+        } else {
+            if(repass.current)
+            repass.current.style.backgroundColor = "#d9d9d9";
+        }
+    },[userInfo.retypePassword])
     
+
+    // validate our email
+    function emailValidation (email:string):boolean {
+        // email pattern
+        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // test it to see if it passes the check
+        return pattern.test(email);
+    }
+
+    // sanitizer our inputs 
+    // pass our input values and then return a string of them sanitized
+    function sanitize(string:string) {
+        const map:Record<string,string> = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#x27;',
+            "/": '&#x2F;',
+            "?": '&#63;',
+        };
+        // look for the following values
+        // create an array of the values I want to search for and declare it as incase sensitive
+        // and mark as a global search
+        const reg = /[&<>"'/?]/ig;
+        // replace each value as its found
+        return string.replace(reg, (match)=>(map[match]));
+      }
+
+    //   final check before submitting all user information
     const checkInputs = () => {
-        
+        let firstname = userInfo.firstname.trim();
+        let lastname = userInfo.lastname.trim();
+        let username = userInfo.username.trim();
+        let email = userInfo.email;
+        let password = userInfo.password;
+        let retypepassword = userInfo.retypePassword;
+
+        const emailValid = emailValidation(email);
+        const passwordMatch = password === retypepassword;
+        const sanitizedPassword = sanitize(password);
+        const sanitizedFirstname = sanitize(firstname);
+        const sanitizedLastname = sanitize(lastname);
+        const sanitizedUsername = sanitize(username);
+
+        if(passwordMatch && emailValid) {
+            alert(`Your information is:
+            firstname: ${sanitizedFirstname}
+            lastname: ${sanitizedLastname}
+            username: ${sanitizedUsername}
+            email:${email}
+            password:${sanitizedPassword}
+            `)
+            setUserInfo({
+                firstname: '',
+                lastname: '',
+                username: '',
+                email: '',
+                password: '',
+                retypePassword: ''
+            })
+        } else {
+            alert("Please make sure your passwords match and email is valid!")
+        }
     }
 
   return (
@@ -140,12 +299,15 @@ const index = () => {
                     type='password'
                     label='Password'
                     value={userInfo.password}
-                    func={(e:React.ChangeEvent<HTMLInputElement>)=>checkPassword(e)}
+                    func={(e:React.ChangeEvent<HTMLInputElement>)=>{
+                        setUserInfo(x => ({...x, password:e.target.value}))
+                    }}
                     />
             </div>
             {/* retype password */}
             <div className='modalPasswordInputDiv'>
                     <Inputs 
+                    ref={repass}
                     className='modalInputs'
                     id='retypePassword'
                     type='password'
@@ -169,7 +331,7 @@ const index = () => {
             {/* submit button */}
             <div className='flex justify-center 
             pt-[2.5rem] pb-[2.5rem] sMobile:pt-[3.75rem] sMobile:pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
-                <CreateAccountButton message="Create Account" fn={()=>{}} />
+                <CreateAccountButton message="Create Account" fn={()=>{checkInputs()}} />
             </div>
         </form>
         {/* footer */}

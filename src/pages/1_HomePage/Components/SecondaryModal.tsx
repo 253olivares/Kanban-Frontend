@@ -1,10 +1,11 @@
 import { memo } from 'react'
-import Button from '../Components/MobileButton'
-import { useLockBodyScroll } from "@uidotdev/usehooks"
-import down from '/assets/Union.png'
 import { useAppDispatch } from '../../../reduxStore/hook'
 import { openCreateProfile } from '../../../modals/modalSlice'
 import { openLogin } from '../../../modals/modalSlice'
+import { useLockBodyScroll } from "@uidotdev/usehooks"
+
+import Button from '../Components/MobileButton'
+import down from '/assets/Union.png'
 
 const SecondaryModal = memo(({closeMobile}:{closeMobile: ()=>void}) => {
 

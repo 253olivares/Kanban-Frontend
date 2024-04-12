@@ -1,8 +1,7 @@
-import React from 'react'
 import x from '/assets/x_Icon.svg'
 import check from '/assets/Check_MarkIcon.svg'
 
-const index = React.memo(({reqs}: {reqs:Record<string,Boolean>}) => {
+const index = ({reqs}: {reqs:Record<string,Boolean>}) => {
   return (
     <div>
       <p className='
@@ -38,6 +37,6 @@ const index = React.memo(({reqs}: {reqs:Record<string,Boolean>}) => {
       </div>
     </div>
   )
-})
+}
 
 export default index

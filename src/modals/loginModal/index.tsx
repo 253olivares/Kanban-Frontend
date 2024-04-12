@@ -11,6 +11,48 @@ const index = () => {
     remember: false
   })
 
+  // input sanitization function
+  // take in string and replace each input and replace with html code
+  function sanitize(string:string) {
+    const map:Record<string,string> = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+        "?": '&#63;',
+    };
+    // look for the following values
+    // create an array of the values I want to search for and declare it as incase sensitive
+    // and mark as a global search
+    const reg = /[&<>"'/?]/ig;
+    // replace each value as its found
+    return string.replace(reg, (match)=>(map[match]));
+  }
+
+  const checkInputs = () => {
+    let username = userInfo.username.trim();
+    let password = userInfo.password.trim();
+    let remember = userInfo.remember;
+    if(username !== '' && password !== '') {
+      let sanitizedUsername = sanitize(username);
+      let sanitizedPassword = sanitize(password);
+      alert(`User input information:
+        uername: ${sanitizedUsername}
+        password:${sanitizedPassword}
+        remember:${remember}
+      `)
+      setUserInfo({
+        username: '',
+        password: '',
+        remember: false
+      })
+    } else {
+      alert("Please make sure to input a username and password")
+    }
+  }
+
   return (
     <div className="bg-PrimaryWhite block w-full h-full sLaptop:h-auto sLaptop:w-[28.5rem] mLaptop:w-[35rem]  desktop:w-[39.663rem] largeDesktop:w-[42.5rem] rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
       <h1 className="
@@ -87,7 +129,7 @@ const index = () => {
         </div>
         <div  className='flex justify-center
          pt-[2.5rem] pb-[2.5rem] sMobile:pt-[3.75rem] sMobile:pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
-          <CreateAccountButton message="Login" fn={()=>{}} />
+          <CreateAccountButton message="Login" fn={()=>{checkInputs()}} />
         </div>    
       </form>
       {/* Footer */}
