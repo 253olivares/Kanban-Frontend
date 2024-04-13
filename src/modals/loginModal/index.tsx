@@ -22,11 +22,13 @@ const index = () => {
         "'": '&#x27;',
         "/": '&#x2F;',
         "?": '&#63;',
+        "$": "&#36;",
+        " ": "&#00;"
     };
     // look for the following values
     // create an array of the values I want to search for and declare it as incase sensitive
     // and mark as a global search
-    const reg = /[&<>"'/?]/ig;
+    const reg = /[&<>"'/?$ ]/ig;
     // replace each value as its found
     return string.replace(reg, (match)=>(map[match]));
   }
@@ -54,7 +56,7 @@ const index = () => {
   }
 
   return (
-    <div className="bg-PrimaryWhite block w-full h-full sLaptop:h-auto sLaptop:w-[28.5rem] mLaptop:w-[35rem]  desktop:w-[39.663rem] largeDesktop:w-[42.5rem] rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
+    <div className="bg-PrimaryWhite block w-full min-h-[100vh] sLaptop:min-h-0 sLaptop:w-[28.5rem] mLaptop:w-[35rem]  desktop:w-[39.663rem] largeDesktop:w-[42.5rem] rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
       <h1 className="
         mt-[4rem]
         mb-[2.25rem]
@@ -65,7 +67,7 @@ const index = () => {
         mLaptop:mt-[2.4rem]
         mLaptop:mb-[1.5rem]
         desktop:mt-[2.5rem]
-        desktop:mb-[1.75rem]
+        desktop:mb-[1.5rem]
         text-center
         w-full
         font-bold
@@ -128,6 +130,7 @@ const index = () => {
           <label className=" font-normal sMobile:text-[1.5rem] mMobile:text-[1.688rem] sLaptop:text-[.85rem] mLaptop:text-[1.15rem] desktop:text-xl" htmlFor="rememberMe">Remember Me</label>
         </div>
         <div  className='flex justify-center
+        desktop:scale-95
          pt-[2.5rem] pb-[2.5rem] sMobile:pt-[3.75rem] sMobile:pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
           <CreateAccountButton message="Login" fn={()=>{checkInputs()}} />
         </div>    

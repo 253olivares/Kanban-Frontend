@@ -32,7 +32,7 @@ const index = memo(({status}:{status:number}) => {
   }
 
   return (
-    <div className='flex gap-5 sMobile:gap-10 sLaptop:gap-5 items-center'>
+    <div className='flex gap-5 h-[1.5rem] sMobile:h-[1.875rem] mMobile:h-[2.25rem] sMobile:gap-10 sLaptop:gap-5 items-center'>
       <div className='flex sLaptop:my-[.25rem] mLaptop:my-[.3rem] desktop:my-2 largeDesktop:my-[.6rem] '>
         {
           Object.entries(svgArray).map(([k,v], index)=> 
@@ -64,21 +64,18 @@ const index = memo(({status}:{status:number}) => {
           )
         }
       </div>
-      <p className={`
-       font-bold 
-       leading-tight
-       text-[1rem]
+      <span className={`
+       font-bold
        sMobile:text-[1.25rem]
-       mMobile:text-2xl
-       sLaptop:text-[.9rem]
-       mLaptop:text-base
-       desktop:text-lg
-       largeDesktop:text-2xl
+       mMobile:text-[1.5rem]
+       sLaptop:text-[.85rem]
+       mLaptop:text-[1.1rem]
+       desktop:text-[1.25rem]
        ${status == 1 && 'text-ThemeRed' }
        ${status == 2 && 'text-ThemeOrange' }
        ${status == 3 && 'text-[#30DD11]' }
       `}
-      >{message}</p>
+      >{message}</span>
     </div>
   )
 })

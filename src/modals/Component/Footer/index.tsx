@@ -10,7 +10,7 @@ const index = () => {
         px-[1.25rem] py-[1.25rem]
         sMobile:px-[2.25rem] sMobile:py-[1.75rem]
         mMobile:px-12 mMobile:py-9
-        sLaptop:px-[3.75rem] sLaptop:py-[1.3rem]
+        sLaptop:px-[3.25rem] sLaptop:py-[1.25rem]
         mLaptop:px-[4rem] mLaptop:py-[1.5rem]
         desktop:px-[4.125rem] desktop:py-[1.6rem]
         largeDesktop:px-[4.25rem] largeDesktop:py-[1.85rem]
