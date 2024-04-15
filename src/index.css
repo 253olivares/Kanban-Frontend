@@ -32,9 +32,6 @@
     html,body {
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
-    }
-
-    html,body{
         @apply font-Ubuntu bg-PrimaryWhite;
     }
 }
