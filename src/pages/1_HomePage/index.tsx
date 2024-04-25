@@ -10,6 +10,9 @@ const PricingSection = lazy(()=> import('./Section-3_Pricing'));
 const Footer = lazy(()=> import('./Footer'));
 
 const index = memo(():JSX.Element => {
+
+  // check to see if a user is signed in
+
   // state to keep track of when our modal is open
   const modalStatus = useAppSelector(getModalStatus)
   const [SecondaryModal, setSecondaryModal] = useState<Boolean>(false)

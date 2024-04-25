@@ -8,7 +8,7 @@ import './index.css';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Provider store={store}>
-{/* starting our route for the application */}
+    {/* starting our route for the application */}
     <Router>
       <Routes>
         <Route path='/*' element={<App />} />

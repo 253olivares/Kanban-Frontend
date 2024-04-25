@@ -24,7 +24,7 @@ const LanguageDropdown = () => {
   }
 
   useEffect(()=> {
-   ()=> {
+   return ()=> {
     // a cleaner to remove our listener when we unmount this component
     // use case a user changes pages when the dropdown is extended
     // remove our listener when our component unloads we dont need it
