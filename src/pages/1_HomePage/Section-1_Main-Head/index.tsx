@@ -1,4 +1,4 @@
-import Header from '../Header'
+import Header from '../header'
 import HomeCover from '/assets/Home_Cover.svg'
 import HomeCoverMobile from '/assets/Home_Cover_Mobile.svg'
 import LogoExport from '/assets/Logo_Export.svg';

@@ -3,8 +3,8 @@ import Instagram from '/assets/InstagramIcon.svg';
 import Twitter from '/assets/TwitterIcon.svg';
 import Facebook from '/assets/FacebookIcon.svg';
 import Linkedin from '/assets/LinkedInIcon.svg';
-import LanguageDropdown from '../Components/LanguageDropdown';
-import EmailInput from '../Components/EmailInput';
+import LanguageDropdown from '../components/LanguageDropdown';
+import EmailInput from '../components/EmailInput';
 import React from 'react';
 
 

@@ -1,7 +1,7 @@
-import PlanButton from '../Components/PlanButton';
-import { pricingPlansType } from '../Section-3_Pricing';
+import PlanButton from '../components/PlanButton';
+import { pricingPlansType } from '../section-3_Pricing';
 import { useAppDispatch } from '../../../reduxStore/hook';
-import { openCreateProfile } from '../../../modals/modalSlice';
+import { openCreateProfile } from '../../../reduxStore/modal/modalSlice';
 
 const PricingCard = ({plan}: {plan:pricingPlansType}) => {
     const dispatch = useAppDispatch();

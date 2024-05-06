@@ -1,9 +1,9 @@
 import {useState, useLayoutEffect, useRef } from 'react';
-import CreateAccountButton from '../../pages/1_HomePage/Components/Button';
-import Inputs from '../Component/EntryFields'
-import PasswordReq from './Components/PasswordRequirments';
-import PasswordStrength from './Components/PasswordStrength'
-import Footer from '../Component/Footer';
+import CreateAccountButton from '../../pages/1_HomePage/components/Button';
+import Inputs from '../component/entryFields'
+import PasswordReq from './components/passwordRequirments';
+import PasswordStrength from './components/passwordStrength'
+import Footer from '../component/footer';
 
 const index = () => {
     // create a ref to allow us to motify our retypepassword input

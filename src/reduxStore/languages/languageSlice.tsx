@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../reduxStore/store";
+import { RootState } from "../store";
 
 type initialStateType = {
     selectLang: string

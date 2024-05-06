@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Inputs from '../Component/EntryFields'
-import CreateAccountButton from '../../pages/1_HomePage/Components/Button';
-import Footer from '../Component/Footer'
+import Inputs from '../component/entryFields'
+import CreateAccountButton from '../../pages/1_HomePage/components/Button';
+import Footer from '../component/footer'
 
 const index = () => {
 

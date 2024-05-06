@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import Polygon from '/assets/Polygon_5.svg';
 import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
-import { getLanguages, getSelectLanguage, changeLanguage} from '../../../languages/languageSlice';
+import { getLanguages, getSelectLanguage, changeLanguage } from '../../../reduxStore/languages/languageSlice';
 
 const LanguageDropdown = () => {
    // create this ref if needed

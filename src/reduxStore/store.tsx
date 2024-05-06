@@ -1,7 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit'
-import modalReducer from '../modals/modalSlice';
-import langaugeReducer from '../languages/languageSlice';
-import userReducer from '../users/userSlice';
+import modalReducer from './modal/modalSlice';
+import langaugeReducer from './languages/languageSlice';
+import userReducer from './users/userSlice';
 
 export const store = configureStore({
     reducer: {

@@ -1,9 +1,9 @@
 import LogoExport from '/assets/Logo_Export.svg';
-import Button from '../Components/Button';
+import Button from '../components/Button';
 import HamburgerMenu from '/assets/Menu_Icon.svg';
 import { useAppDispatch } from '../../../reduxStore/hook';
-import { openLogin } from '../../../modals/modalSlice';
-import { openCreateProfile } from '../../../modals/modalSlice';
+import { openLogin } from '../../../reduxStore/modal/modalSlice';
+import { openCreateProfile } from '../../../reduxStore/modal/modalSlice';
 
 const index = ({mobileOpen}: {mobileOpen: ()=> void}) => {
   // get our dispatch

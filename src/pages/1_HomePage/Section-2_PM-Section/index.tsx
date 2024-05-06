@@ -1,6 +1,6 @@
-import Button from "../Components/LargerButton"
+import Button from "../components/LargerButton"
 import { useAppDispatch } from "../../../reduxStore/hook"
-import { openCreateProfile } from "../../../modals/modalSlice"
+import { openCreateProfile } from "../../../reduxStore/modal/modalSlice"
 import { memo } from "react"
 
 // use memo caches our component and only updates when it detects changes have been made to the component itself

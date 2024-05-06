@@ -1,13 +1,13 @@
 import {memo, useState, lazy} from 'react';
 import { useAppSelector } from '../../reduxStore/hook';
-import { getModalStatus } from '../../modals/modalSlice';
+import { getModalStatus } from '../../reduxStore/modal/modalSlice';
 import ModalContainer from '../../modals'
-import SecondaryModalMobile from './Components/SecondaryModal';
+import SecondaryModalMobile from './components/SecondaryModal';
 
-const MainSection = lazy(()=> import('./Section-1_Main-Head'))
-const PMSection = lazy(()=>import('./Section-2_PM-Section'))
-const PricingSection = lazy(()=> import('./Section-3_Pricing'));
-const Footer = lazy(()=> import('./Footer'));
+const MainSection = lazy(()=> import('./section-1_Main-Head'))
+const PMSection = lazy(()=>import('./section-2_PM-Section'))
+const PricingSection = lazy(()=> import('./section-3_Pricing'));
+const Footer = lazy(()=> import('./footer'));
 
 const index = memo(():JSX.Element => {
 

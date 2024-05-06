@@ -1,19 +1,22 @@
 import { memo } from "react";
 import { useLockBodyScroll } from "@uidotdev/usehooks";
 import { useAppDispatch } from "../reduxStore/hook";
-import { closeModal } from "./modalSlice";
+import { closeModal } from "../reduxStore/modal/modalSlice";
 import { useAppSelector } from "../reduxStore/hook";
-import { getModalType } from "./modalSlice";
-import CreateProfileModal from './CreateProfileModal'
-import LoginModal from './LoginModal';
-import ProfileModal from './ProfileModal';
+import { getModalType } from "../reduxStore/modal/modalSlice";
+import CreateProfileModal from './createProfileModal'
+import LoginModal from './loginModal';
+import ProfileModal from './profileModal';
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const index = memo(() => {
+  
   // create a dispatch function from our redux store to trigger our reducers
   const dispatch = useAppDispatch();
+
   // get the modal we want to bring up
   const modal = useAppSelector(getModalType);
+
     // react hook by ui.dev that will over write the body overflow property
     // The hook as a use effect that overwrites our property and save its previous value then when the component unmounts it 
     // sets the overflow back to its original value

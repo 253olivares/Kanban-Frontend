@@ -1,6 +1,6 @@
 import MoneySVG from '/assets/MoneyBottomSVG.svg';
 import MoneySVGMobile from '/assets/MoneyMobile.svg';
-import PricingCard from '../Components/PricingCard';
+import PricingCard from '../components/PricingCard';
 import DollarSign from '/assets/Dollar_Sign_Icon.svg';
 import { memo } from 'react';
 

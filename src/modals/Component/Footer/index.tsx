@@ -1,4 +1,4 @@
-import Button from '../CancelButton';
+import Button from '../cancelButton';
 import LogoExport from '/assets/Logo_Export.svg';
 
 const index = () => {

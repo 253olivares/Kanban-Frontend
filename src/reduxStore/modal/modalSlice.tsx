@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { RootState } from "../reduxStore/store";
+import { RootState } from "../store";
 
 // just a slice to control when our modals are open and which modals we want to open
 
