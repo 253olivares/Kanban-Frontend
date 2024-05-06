@@ -15,22 +15,31 @@ function App(): JSX.Element {
 // return our page
   return (
     <Fragment>
+
       <Suspense fallback={<LoadingPage />}>
+
         <Routes>
+
             <Route path="/" element={<HomePage />}/>
             {/* our heading layout */}
 
             <Route path="u/:id" element={<LayoutAccount />} >
+
               {/* account landing page where users will arrive when they login */}
               <Route index element={<AccountLanding/>} />
+
               {/* Workspace Page that is where the user can view all ongoing tasks */}
               <Route path="workspace/:id" element={<Workspace />}/>
+              
             </Route>
 
             {/* 404 page */}
             <Route path="*" element={<Errorpage />} />
+
         </Routes>
+
       </Suspense>
+
     </Fragment>
   )
 }
