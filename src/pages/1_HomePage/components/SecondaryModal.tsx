@@ -1,8 +1,11 @@
-import { memo } from 'react'
-import { useAppDispatch } from '../../../reduxStore/hook'
-import { openCreateProfile } from '../../../reduxStore/modal/modalSlice'
-import { openLogin } from '../../../reduxStore/modal/modalSlice'
-import { useLockBodyScroll } from "@uidotdev/usehooks"
+import { useLockBodyScroll } from "@uidotdev/usehooks";
+import {motion} from 'framer-motion';
+import { memo } from 'react';
+
+import { openCreateProfile } from '../../../reduxStore/modal/modalSlice';
+import { openLogin } from '../../../reduxStore/modal/modalSlice';
+import { useAppDispatch } from '../../../reduxStore/hook';
+
 
 import Button from '../components/mobileButton'
 import down from '/assets/Union.png'
@@ -14,8 +17,25 @@ const SecondaryModal = memo(({closeMobile}:{closeMobile: ()=>void}) => {
   useLockBodyScroll();
 
   return (
-    <div className="fixed sLaptop:hidden z-20 top-0 left-0 w-screen h-screen flex justify-center items-center">
-        <div className=" absolute block bottom-0 w-full min-h-[10rem] bg-PrimaryWhite rounded-t-[1rem] mMobile:rounded-t-[1.25rem]">
+    <motion.div 
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{
+      duration:.25
+    }}
+    className="fixed sLaptop:hidden z-20 top-0 left-0 w-screen h-screen flex justify-center items-center">
+        <motion.div
+        initial={{
+          y:100
+        }}
+        animate={{
+            y:0
+        }}
+        exit={{
+            y:100
+        }}
+        className=" absolute block bottom-0 w-full min-h-[10rem] bg-PrimaryWhite rounded-t-[1rem] mMobile:rounded-t-[1.25rem]">
           <div onClick={closeMobile} className='w-full cursor-pointer'>
             <img className="mx-auto w-[2.625rem] mMobile:w-[3.125rem] my-5 mMobile:my-6" src={down} alt="Down button" />
           </div>
@@ -33,9 +53,9 @@ const SecondaryModal = memo(({closeMobile}:{closeMobile: ()=>void}) => {
               }} />
             </div>
           </div>
-        </div>
+        </motion.div>
        <div onClick={closeMobile} className="block sLaptop:hidden absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]" />
-    </div>
+    </motion.div>
   )
 })
 

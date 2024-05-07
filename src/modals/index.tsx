@@ -1,12 +1,14 @@
-import { memo } from "react";
-import { useLockBodyScroll } from "@uidotdev/usehooks";
-import { useAppDispatch } from "../reduxStore/hook";
-import { closeModal } from "../reduxStore/modal/modalSlice";
-import { useAppSelector } from "../reduxStore/hook";
+import { useAppDispatch,useAppSelector  } from "../reduxStore/hook";
 import { getModalType } from "../reduxStore/modal/modalSlice";
+import { closeModal } from "../reduxStore/modal/modalSlice";
+
+import { useLockBodyScroll } from "@uidotdev/usehooks";
+import {motion,AnimatePresence} from 'framer-motion';
+import { memo } from "react";
+
 import CreateProfileModal from './createProfileModal'
-import LoginModal from './loginModal';
 import ProfileModal from './profileModal';
+import LoginModal from './loginModal';
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const index = memo(() => {
@@ -23,12 +25,21 @@ const index = memo(() => {
     useLockBodyScroll();
 
   return (
-    <div className="fixed z-20 top-0 left-0 w-screen h-screen flex justify-center items-center">
+    <motion.div
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{
+      duration:.25
+    }}
+    className="fixed z-20 top-0 left-0 w-screen h-screen flex justify-center items-center">
+    <AnimatePresence>
       {modal == 'createProfile' && <CreateProfileModal />}
       {modal == 'logIn' && <LoginModal />}
       {modal == 'profile' && <ProfileModal />}
+    </AnimatePresence>
       <div onClick={()=> dispatch(closeModal())} className="hidden sLaptop:block absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]" />
-    </div>
+    </motion.div>
   )
 })
 

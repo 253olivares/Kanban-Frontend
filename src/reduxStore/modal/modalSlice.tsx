@@ -5,11 +5,13 @@ import { RootState } from "../store";
 
 type initialStateType = {
     openModal:boolean,
+    mobileModal:boolean,
     modal: 'logIn' | 'createProfile' | 'profile' | ''
 };
 
 const initialState: initialStateType = {
         openModal: false,
+        mobileModal:false,
         modal:''
     }
 
@@ -32,14 +34,21 @@ const modalSlice = createSlice({
             // set our modal to blank and close our modal
             state.modal = '';
             state.openModal = false;
+        },
+        openMobileModal(state){
+            state.mobileModal = true;
+        },
+        closeMobileModal(state){
+            state.mobileModal = false;
         }
     }
 })
 
 // get our state in redux
 export const getModalStatus = (state:RootState) => state.modal.openModal;
+export const getMobileModal = (state:RootState) => state.modal.mobileModal;
 export const getModalType = (state:RootState) => state.modal.modal;
 
-export const {openLogin, closeModal, openCreateProfile} = modalSlice.actions;
+export const {openLogin, closeModal, openCreateProfile, openMobileModal, closeMobileModal} = modalSlice.actions;
 
 export default modalSlice.reducer;

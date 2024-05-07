@@ -5,7 +5,12 @@ const index = () => {
   return (
     <main className="relative w-screen h-screen bg-PrimaryWhite flex flex-col items-center justify-center overflow-hidden">
       {/* bubbles coded from left to right */}
-      <div className="conic-gradient 
+      <div 
+      // top left buble
+      data-aos="fade-down"
+      data-aos-duration='800'
+      data-aos-delay='400'
+      className="conic-gradient 
       block absolute
       w-[6rem] h-[6rem]
       mMobile:w-[8rem] mMobile:h-[8rem]
@@ -16,7 +21,13 @@ const index = () => {
       sLaptop:top-[2rem] sLaptop:left-[2rem]
       largeDesktop:top-[2.5rem] largeDesktop:left-[2.5rem]
       rounded-full" />
-       <div className="conic-gradient 
+
+    {/* second bubble top right */}
+      <div 
+      data-aos="fade-down"
+      data-aos-duration='800'
+      data-aos-delay='800'
+      className="conic-gradient 
       block absolute
       w-[4.75rem] h-[4.75rem]
       mMobile:w-[5rem] mMobile:h-[5rem]
@@ -28,7 +39,13 @@ const index = () => {
       sLaptop:top-[8rem] sLaptop:right-[6rem]
       largeDesktop:top-[10rem] largeDesktop:right-[20rem]
       rounded-full" />
-      <div className="conic-gradient 
+
+    {/* 3rd Bubble bottom left */}
+      <div 
+      data-aos="fade-up"
+      data-aos-duration='800'
+      data-aos-delay='600'
+      className="conic-gradient 
       block absolute
       w-[4rem] h-[4rem]
       sLaptop:w-[5.5rem] sLaptop:h-[5.5rem]
@@ -39,7 +56,13 @@ const index = () => {
       sLaptop:bottom-[8rem] sLaptop:left-[12rem]
       largeDesktop:bottom-[18rem] largeDesktop:left-[25rem] 
       rounded-full" />
-      <div className="conic-gradient 
+
+    {/* 4th Bubble Bottom right */}
+      <div 
+      data-aos="fade-up"
+      data-aos-duration='800'
+      data-aos-delay='1000'
+      className="conic-gradient 
       block absolute
       w-[15rem] h-[15rem]
       sLaptop:w-[17.5rem] sLaptop:h-[17.5rem]
@@ -50,13 +73,21 @@ const index = () => {
       sLaptop:bottom-[-3rem] sLaptop:right-[6.5rem]
       largeDesktop:bottom-[-4rem] largeDesktop:right-[8rem]
       rounded-full" />
-      <p className="
+
+      <p 
+      
+      className="
       text-[4.25rem] mb-[.2rem]
       desktop:text-[5.75rem]
       largeDesktop:text-[7rem] largeDesktop:mb-[.25rem] 
       opacity-25 leading-tight 
       font-Ubuntu font-bold">404 PAGE</p>
-      <p className="
+
+      <p 
+      data-aos="fade"
+      data-aos-duration='800'
+      data-aos-delay='1250'
+      className="
       text-[1.35rem] mb-2 
       text-center px-[1rem]
       sMobile:max-w-[80%]
@@ -64,12 +95,19 @@ const index = () => {
       desktop:text-[1.75rem]
       largeDesktop:text-[2rem] largeDesktop:mb-3 
       text-Slate-gray font-bold">An error has occurred please return to the home page!</p>
-      <Link to='/'> <span className="
+
+      <Link to='/'> <span 
+      data-aos="fade"
+      data-aos-duration='800'
+      data-aos-delay='1250'
+      className="
       text-[1.6rem]
       desktop:text-[2rem]
       largeDesktop:text-[2.25rem] 
       text-blue-300 hover:text-blue-600 
-      font-bold underline">HOME</span></Link>
+      font-bold underline">HOME</span>
+      
+      </Link>
     </main> 
   )
 }

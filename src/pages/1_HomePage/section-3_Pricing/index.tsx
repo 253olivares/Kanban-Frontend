@@ -57,7 +57,11 @@ const index = memo(() => {
       max-w-[1920px] 
       mx-auto">
         {/* section name */}
-        <h1 className=' 
+        <h1 
+        data-aos='fade'
+        data-aos-duration='800'
+        data-aos-delay='0'
+        className=' 
         w-full 
         max-w-[85%]
         sMobile:max-w-[560px] 
@@ -104,13 +108,17 @@ const index = memo(() => {
         '>
           {
             pricingPlans.map((plan,index) => (
-              <PricingCard key={index} plan={plan} />
+              <PricingCard key={index} plan={plan} position={index} />
             ))
         }
         </div>
 
         {/* furthers right dollar sign */}
-        <img className='
+        <img 
+        data-aos='fade-down'
+        data-aos-duration='800'
+        data-aos-delay='200'
+        className='
         hidden
         sLaptop:block 
         absolute 
@@ -125,7 +133,11 @@ const index = memo(() => {
         ' src={DollarSign} alt="Dollar Sign" />
 
         {/* top second dollar sign */}
-        <img className='
+        <img 
+        data-aos='fade-down'
+        data-aos-duration='800'
+        data-aos-delay='400'
+        className='
         block 
         absolute
         top-[2.8rem] right-[2.125rem]
@@ -144,7 +156,11 @@ const index = memo(() => {
         ' src={DollarSign} alt="Dollar Sign" />
 
         {/* dollar sign 1 far left */}
-        <img className='
+        <img 
+        data-aos='fade-down'
+        data-aos-duration='800'
+        data-aos-delay='600'
+        className='
         block 
         absolute
         top-[24rem]
@@ -163,8 +179,12 @@ const index = memo(() => {
         ' src={DollarSign} alt="Dollar Sign" />
 
       </div>
-      <img className='block sLaptop:hidden absolute bottom-0 w-full' src={MoneySVGMobile} alt="MoneySVGMobile" />
-      <img className='hidden sLaptop:block absolute bottom-0 w-full ' src={MoneySVG} alt="Money SVG Background" />
+      <img data-aos='slide-up '
+        data-aos-duration='800'
+        data-aos-delay='250' className='block sLaptop:hidden absolute bottom-0 w-full' src={MoneySVGMobile} alt="MoneySVGMobile" />
+      <img data-aos='slide-up'
+        data-aos-duration='800'
+        data-aos-delay='250' className='hidden sLaptop:block absolute bottom-0 w-full ' src={MoneySVG} alt="Money SVG Background" />
     </section>
   )
 })

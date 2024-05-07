@@ -14,7 +14,11 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
           <Header mobileOpen={openMobile} />
           <div className='w-full relative px-8 sMobile:px-11 mMobile:px-14 sLaptop:px-[5.625rem] mLaptop:px-28 desktop:px-[8.4rem] largeDesktop:px-[10rem] mt-6 mMobile:mt-8 sLaptop:mt-6 mLaptop:mt-8 desktop:mt-9'>
             <div className='flex gap-3 sMobile:gap-4 sLaptop:gap-6 mLaptop:gap-7 desktop:gap-8'>
-              <h1 className='
+              <h1 
+              data-aos='fade'
+              data-aos-duration='800'
+              data-aos-delay='500'
+              className='
               font-bold 
               text-4xl
               sMobile:text-5xl 
@@ -28,7 +32,11 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
               text-PrimaryWhite'>
                 <span className='text-linear-gradient'>W</span>elcome <span className='text-linear-gradient'>T</span>o
               </h1>
-              <img className="
+              <img 
+              data-aos='fade'
+              data-aos-duration='800'
+              data-aos-delay='500'
+              className="
               w-8
               sMobile:w-11
               mMobile:w-14 
@@ -37,7 +45,11 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
               desktop:w-[4.688rem]" src={LogoExport} alt="Logo"/>
             </div>
 
-            <p className='text-PrimaryWhite 
+            <p 
+            data-aos='fade'
+            data-aos-duration='800'
+            data-aos-delay='750'
+            className='text-PrimaryWhite 
             text-lg
             sMobile:text-xl
             mMobile:text-2xl 
@@ -50,7 +62,11 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
             font-medium 
             tracking-wide'>Organization and communication begins here!</p>
 
-            <img className='
+            <img 
+            data-aos='fade-left'
+            data-aos-duration='800'
+            data-aos-delay='250'
+            className='
             block 
             sLaptop:hidden 
             z-10 
@@ -65,7 +81,11 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
             mMobile:right-[-1%]
             ' src={MobileView} alt="" />
 
-            <img className='
+            <img 
+            data-aos='fade-left'
+            data-aos-duration='800'
+            data-aos-delay='250'
+            className='
             hidden
             sLaptop:block 
             sLaptop:w-[37rem] mLaptop:w-[46rem] desktop:w-[52rem] 

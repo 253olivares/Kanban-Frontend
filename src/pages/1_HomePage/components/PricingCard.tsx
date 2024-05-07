@@ -3,10 +3,16 @@ import { pricingPlansType } from '../section-3_Pricing';
 import { useAppDispatch } from '../../../reduxStore/hook';
 import { openCreateProfile } from '../../../reduxStore/modal/modalSlice';
 
-const PricingCard = ({plan}: {plan:pricingPlansType}) => {
+const PricingCard = ({plan,position}: {plan:pricingPlansType,position:number}) => {
     const dispatch = useAppDispatch();
+    const delay = 250 * (position+1);
+    console.log(delay)
   return (
-    <div className="
+    <div 
+    data-aos='fade-down'
+    data-aos-duration='800'
+    data-aos-delay={delay}
+    className="
     p-[.2rem]
     sMobile:p-[.25rem]
     mMobile:p-[.3rem]

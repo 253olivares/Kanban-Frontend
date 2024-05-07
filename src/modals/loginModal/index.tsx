@@ -1,7 +1,10 @@
+import {motion} from 'framer-motion';
 import { useState } from 'react';
-import Inputs from '../component/entryFields'
+
 import CreateAccountButton from '../../pages/1_HomePage/components/Button';
-import Footer from '../component/footer'
+import Inputs from '../component/entryFields';
+import Footer from '../component/footer';
+
 
 const index = () => {
 
@@ -56,7 +59,17 @@ const index = () => {
   }
 
   return (
-    <div className="bg-PrimaryWhite block w-full min-h-[100vh] sLaptop:min-h-0 sLaptop:w-[28.5rem] mLaptop:w-[35rem]  desktop:w-[39.663rem] largeDesktop:w-[42.5rem] rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
+    <motion.div 
+    initial={{
+      y:25
+    }}
+    animate={{
+        y:0
+    }}
+    exit={{
+        y:25
+    }}
+    className="bg-PrimaryWhite block w-full min-h-[100vh] sLaptop:min-h-0 sLaptop:w-[28.5rem] mLaptop:w-[35rem]  desktop:w-[39.663rem] largeDesktop:w-[42.5rem] rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
       <h1 className="
         mt-[4rem]
         mb-[2.25rem]
@@ -139,7 +152,7 @@ const index = () => {
       <div className="absolute sLaptop:relative bottom-0 w-full">
         <Footer />
       </div>
-    </div>
+    </motion.div>
   )
 }
 

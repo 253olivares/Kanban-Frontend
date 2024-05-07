@@ -1,8 +1,10 @@
 import {useState, useLayoutEffect, useRef } from 'react';
+import {motion} from 'framer-motion';
+
 import CreateAccountButton from '../../pages/1_HomePage/components/Button';
-import Inputs from '../component/entryFields'
+import PasswordStrength from './components/passwordStrength';
 import PasswordReq from './components/passwordRequirments';
-import PasswordStrength from './components/passwordStrength'
+import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
 
 const index = () => {
@@ -198,7 +200,17 @@ const index = () => {
     }
 
   return (
-    <div className="bg-PrimaryWhite block w-full h-full sLaptop:h-auto  sLaptop:w-[31.5rem]  mLaptop:w-[38rem] desktop:w-[39.663rem] largeDesktop:w-[42.5rem] sLaptop:rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
+    <motion.div 
+    initial={{
+        y:25
+    }}
+    animate={{
+        y:0
+    }}
+    exit={{
+        y:25
+    }}
+    className="bg-PrimaryWhite block w-full h-full sLaptop:h-auto  sLaptop:w-[31.5rem]  mLaptop:w-[38rem] desktop:w-[39.663rem] largeDesktop:w-[42.5rem] sLaptop:rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
         <h1 className='
         mt-[2.25rem]
         mb-[1.25rem]
@@ -336,7 +348,7 @@ const index = () => {
         </form>
         {/* footer */}
         <Footer />
-    </div>
+    </motion.div>
   )
 }
 

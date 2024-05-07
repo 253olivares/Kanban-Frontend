@@ -1,6 +1,6 @@
-import { Fragment,Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import { lazy } from "react";
+import { lazy,Fragment,Suspense, useEffect  } from "react";
+
 import LoadingPage from './pages/components/loadingSpinner';
 import Errorpage from './pages/0_404Page';
 
@@ -9,9 +9,19 @@ const AccountLanding = lazy(()=> import('./pages/2_AccountLanding'));
 const LayoutAccount = lazy(()=> import('./pages/components/accountHeader'));
 const Workspace = lazy(()=> import('./pages/3_Workspace'));
 
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 // out app component to gather all our components
 function App(): JSX.Element {
+
+  useEffect(()=> {
+   AOS.init({
+    once:true,
+    easing:"ease-in-out-cubic"
+   });
+  },[])
+
 // return our page
   return (
     <Fragment>

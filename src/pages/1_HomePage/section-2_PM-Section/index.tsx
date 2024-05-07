@@ -10,7 +10,11 @@ const index = memo(() => {
     <section className="PM_Section2">
       <div className="PM_Section2 max-w-[1920px] mx-auto ">
         <div className="w-full max-w-[85%] sMobile:max-w-[560px] mMobile:max-w-[650px] sLaptop:max-w-[82%] mx-auto">
-          <h1 className="text-linear-gradient 
+          <h1 
+          data-aos='fade'
+          data-aos-duration='800'
+          data-aos-delay='0'
+          className="text-linear-gradient 
           font-bold 
           mt-[6.5rem] 
           sMobile:mt-[7.5rem] 
@@ -25,13 +29,20 @@ const index = memo(() => {
           mLaptop:max-w-[40rem] 
           desktop:max-w-[50rem]
           ">Project Management Made Easy</h1>
-          <p className="text-Slate-gray 
+          <p 
+          data-aos='fade'
+          data-aos-duration='800'
+          data-aos-delay='250'
+          className="text-Slate-gray 
           font-normal 
           mt-4 sMobile:mt-5 mMobile:mt-7 sLaptop:mt-5 desktop:mt-7  
           text-xl sMobile:text-2xl mMobile:text-3xl sLaptop:text-2xl mLaptop:text-3xl desktop:text-[2.375rem] largeDesktop:text-[2.75rem] largeDesktop:leading-[3rem]">
             Ease management trouble with our software. KB aims to make communication easy and task tracking a breeze. All you need to do is take the first step and sign up for an account.
             </p>
-          <div className="w-full flex justify-center sLaptop:justify-end mt-8 sMobile:mt-12 mMobile:mt-16 sLaptop:mt-10 mLaptop:mt-12 desktop:mt-20">
+          <div 
+            data-aos='fade-left'
+            data-aos-duration='800'
+            data-aos-delay='500' className="w-full flex justify-center sLaptop:justify-end mt-8 sMobile:mt-12 mMobile:mt-16 sLaptop:mt-10 mLaptop:mt-12 desktop:mt-20">
             <Button message="Take Your First Step" fn={()=> dispatch(openCreateProfile())}/>
           </div>
           <p className="hidden font-normal sLaptop:block text-Slate-gray text-[1.125rem] leading-[1.5rem] mLaptop:text-xl desktop:text-2xl max-w-[370px] mLaptop:max-w-[460px] desktop:max-w-[560px] float-right text-right mt-3">Try out our free tier and if you like it update to a business or enterprise account.</p>
