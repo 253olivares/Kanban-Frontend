@@ -1,35 +1,83 @@
-import Header from '../header'
-import HomeCover from '/assets/Home_Cover.svg'
-import HomeCoverMobile from '/assets/Home_Cover_Mobile.svg'
+import { memo } from 'react';
+
+import HomeCoverMobile from '/assets/Home_Cover_Mobile.svg';
+import MobileView from '/assets/MobileImageSVG.svg';
 import LogoExport from '/assets/Logo_Export.svg';
 import DeskView from '/assets/Ipad_ImageSVG.svg';
-import MobileView from '/assets/MobileImageSVG.svg'
-import { memo } from 'react';
+import HomeCover from '/assets/Home_Cover.svg';
+import Header from '../header';
+
 
 // use memo caches our component and only updates when it detects changes have been made to the component itself
 const index = memo(({openMobile}: {openMobile:()=>void}) => {
   return (
-    <section className='conic-gradient Home_Section1'>
-        <div className='Home_Section1 max-w-[1920px] mx-auto z-10 overflow-x-clip'>
+    <section className='
+  
+    conic-gradient 
+    Home_Section1'>
+        <div className='
+        Home_Section1 
+        max-w-[1920px]
+        mx-auto 
+        '>
           <Header mobileOpen={openMobile} />
-          <div className='w-full relative px-8 sMobile:px-11 mMobile:px-14 sLaptop:px-[5.625rem] mLaptop:px-28 desktop:px-[8.4rem] largeDesktop:px-[10rem] mt-6 mMobile:mt-8 sLaptop:mt-6 mLaptop:mt-8 desktop:mt-9'>
-            <div className='flex gap-3 sMobile:gap-4 sLaptop:gap-6 mLaptop:gap-7 desktop:gap-8'>
+
+          <div className='
+          w-full 
+          relative 
+
+          px-[6.5%]
+          sLaptop:px-[5.625rem] 
+          mLaptop:px-28 
+          desktop:px-[8.4rem] 
+          largeDesktop:px-[10rem] 
+
+          mt-[0.537rem]
+          mobile:mt-[0.716rem]
+          sMobile:mt-[1.145rem]
+          mMobile:mt-[1.375rem]
+          sLaptop:mt-6  
+          mLaptop:mt-8 
+          desktop:mt-9
+
+          pb-[10.864rem]
+          mobile:pb-[14.485rem]
+          sMobile:pb-[23.177rem]
+          mMobile:pb-[27.813rem]
+          
+          ' >
+            <div className='
+            flex 
+            gap-[0.504rem]
+            mobile:gap-[0.673rem]
+            sMobile:gap-[1.076rem]
+            mMobile:gap-[1.313rem]
+            sLaptop:gap-6
+            mLaptop:gap-7 
+            desktop:gap-8'
+            >
               <h1 
               data-aos='fade'
               data-aos-duration='800'
               data-aos-delay='500'
               className='
               font-bold 
-              text-4xl
-              sMobile:text-5xl 
-              mMobile:text-6xl
+
+              text-[1.465rem]
+              mobile:text-[1.953rem]
+              sMobile:text-[3.125rem]
+              mMobile:text-[3.75rem]
               sLaptop:text-[3.125rem] 
               mLaptop:text-[3.906rem] 
               desktop:text-[4.688rem]
-              sMobile:leading-[3.563rem] 
+              leading-[1.688rem]
+              mobile:leading-[2.25rem]
+              sMobile:leading-[3.563rem]
+              mMobile:leading-[4.313rem] 
               mLaptop:leading-[4.5rem]
               desktop:leading-[5.313rem] 
-              text-PrimaryWhite'>
+              text-PrimaryWhite
+              '>
                 <span className='text-linear-gradient'>W</span>elcome <span className='text-linear-gradient'>T</span>o
               </h1>
               <img 
@@ -37,9 +85,10 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
               data-aos-duration='800'
               data-aos-delay='500'
               className="
-              w-8
-              sMobile:w-11
-              mMobile:w-14 
+              w-[1.224rem]
+              mobile:w-[1.633rem]
+              sMobile:w-[2.612rem]
+              mMobile:w-[3.125rem]
               sLaptop:w-[3.125rem] 
               mLaptop:w-[3.906rem] 
               desktop:w-[4.688rem]" src={LogoExport} alt="Logo"/>
@@ -50,17 +99,23 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
             data-aos-duration='800'
             data-aos-delay='750'
             className='text-PrimaryWhite 
-            text-lg
-            sMobile:text-xl
-            mMobile:text-2xl 
+
+            text-[0.611rem]
+            mobile:text-[0.814rem]
+            sMobile:text-[1.302rem]
+            mMobile:text-[1.563rem]
             mLaptop:text-3xl
             desktop:text-4xl
-            max-w-[300px] 
-            sMobile:max-w-[400px]
+
+            max-w-[162.57px]
+            mobile:max-w-[216.76px] 
+            sMobile:max-w-[346.82px]
             mMobile:max-w-[415px]
             sLaptop:max-w-none 
+
             font-medium 
-            tracking-wide'>Organization and communication begins here!</p>
+            tracking-wide
+            '>Organization and communication begins here!</p>
 
             <img 
             data-aos='fade-left'
@@ -71,14 +126,18 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
             sLaptop:hidden 
             z-10 
             absolute 
-            w-[30rem]
-            sMobile:w-[34rem] 
-            mMobile:w-[38rem]
-            top-[3rem]
-            sMobile:top-5
-            right-[-1.25rem]
-            sMobile:right-[-2%]
-            mMobile:right-[-1%]
+
+            w-[8.006rem]
+            mobile:w-[10.675rem]
+            sMobile:w-[17.079rem]
+            mMobile:w-[20.495rem]
+            
+            right-[7%]
+
+            top-[0.366rem]
+            mobile:top-[0.488rem]
+            sMobile:top-[0.781rem]
+            mMobile:top-[0.938rem]
             ' src={MobileView} alt="" />
 
             <img 
@@ -95,53 +154,70 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
             top-0' 
             src={DeskView} alt="desktopView" />
           </div>
-          {/* bubbles */}
+
+
+        {/* bubbles */}
         {/* Far Right Bubble */}
         <div className='z-0 
+        
         absolute
-        right-[.5rem] 
-        sMobile:right-2
-        mMobile:right-3
+        right-[1.43%] 
         sLaptop:right-4 
         mLaptop:right-6
         desktop:right-7 
         largeDesktop:right-9 
-        top-[12rem]
-        mMobile:top-[13rem]
+
+        top-[4.882rem]
+        mobile:top-[6.510rem]
+        sMobile:top-[10.416rem]
+        mMobile:top-[12.5rem]
         mLaptop:top-[21rem]
         desktop:top-96 
         largeDesktop:top-[22rem] 
+
         rounded-full 
         bg-PrimaryWhite
-        w-10
-        h-10 
-        sMobile:w-12
-        sMobile:h-12 
+        w-[1.465rem]
+        h-[1.465rem]
+        mobile:w-[1.953rem]
+        mobile:h-[1.953rem]
+        sMobile:w-[3.125rem]
+        sMobile:h-[3.125rem]
+        mMobile:w-[3.75rem]
+        mMobile:h-[3.75rem]
         sLaptop:w-10
         sLaptop:h-10 
         mLaptop:w-16 
         mLaptop:h-16
         desktop:w-[4.5rem]  
-        desktop:h-[4.5rem]' />
+        desktop:h-[4.5rem]' 
+        />
         {/* Middle Top Bubble */}
         <div className='z-0 
+        
         absolute
-        right-[8rem]
-        sMobile:right-[10rem] 
-        mMobile:right-[12rem]
+        
+        right-[25.52%]
+        sLaptop:right-auto
         sLaptop:left-[48%]
-        top-[3.5rem] 
-        sMobile:top-[4.5rem]
-        mMobile:top-[5rem]
+
+        top-[2.048rem] 
+        mobile:top-[2.897rem]
+        sMobile:top-[4.636rem]
+        mMobile:top-[5.563rem]
         sLaptop:top-[5.375rem] 
         mLaptop:top-[6.75rem] 
         desktop:top-32 
         rounded-full 
         bg-PrimaryWhite
-        w-12
-        h-12 
-        sMobile:w-16
-        sMobile:h-16 
+        w-[1.904rem]
+        h-[1.904rem]
+        mobile:w-[2.539rem]
+        mobile:h-[2.539rem]
+        sMobile:w-[4.063rem]
+        sMobile:h-[4.063rem]
+        mMobile:w-[4.875rem]
+        mMobile:h-[4.875rem]
         sLaptop:w-[3.833rem] 
         sLaptop:h-[3.833rem] 
         mLaptop:w-[4.75rem] 
@@ -150,8 +226,12 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
         desktop:h-[5.5rem]' />
         {/* bottom Left Big bubble */}
         <div className='z-0 
-        absolute left-[4rem] bottom-[5rem] 
-        sMobile:left-[5.5rem] sMobile:bottom-24
+        
+        absolute 
+        left-[13.54%]
+        bottom-[2.929rem] 
+        mobile:bottom-[3.906rem]
+        sMobile:bottom-[6.249rem]
         mMobile:bottom-[7.5rem]
         sLaptop:left-20 
         mLaptop:left-24 
@@ -159,11 +239,14 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
         sLaptop:bottom-[6.375rem] 
         mLaptop:bottom-32 
         desktop:bottom-[9.4rem] 
+        
         rounded-full 
         bg-PrimaryWhite 
-        w-12 h-12
-        sMobile:w-16 sMobile:h-16 
-        mMobile:w-17 mMobile:h-17
+
+        w-[1.758rem] h-[1.758rem]
+        mobile:w-[2.344rem] mobile:h-[2.344rem]
+        sMobile:w-[3.75rem] sMobile:h-[3.75rem] 
+        mMobile:w-[4.5rem] mMobile:h-[4.5rem]
         sLaptop:w-[3rem] 
         sLaptop:h-[3rem] 
         mLaptop:w-16 
@@ -172,9 +255,14 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
         desktop:h-[4.5rem]' />
         {/* Bottom left small Bubble */}
         <div className='z-0 
-        absolute left-4 bottom-12 
-        sMobile:left-8 sMobile:bottom-14
-        mMobile:left-10
+       
+        absolute 
+        left-[3.03%] 
+
+        bottom-[1.67rem]
+        mobile:bottom-[2.226rem]
+        sMobile:bottom-[3.563rem]
+        mMobile:bottom-[4.25rem]
         sLaptop:left-12 
         mLaptop:left-14 
         desktop:left-20 
@@ -183,16 +271,34 @@ const index = memo(({openMobile}: {openMobile:()=>void}) => {
         desktop:bottom-20 
         rounded-full 
         bg-PrimaryWhite 
-        w-7 h-7
-        sMobile:w-9 sMobile:h-9
-        mMobile:w-10 mMobile:h-10 
+
+        w-[1.074rem] h-[1.074rem]
+        mobile:w-[1.433rem] mobile:h-[1.433rem]
+        sMobile:w-[2.292rem] sMobile:h-[2.292rem]
+        mMobile:w-[2.75rem] mMobile:h-[2.75rem]
         sLaptop:w-[1.875rem] sLaptop:h-[1.875rem] 
         mLaptop:w-9 mLaptop:h-9 
         desktop:h-11 desktop:w-11' />
         </div>
+
         {/* background wave */}
-        <img className='hidden sLaptop:block absolute z-0 w-full bottom-0 left-0' src={HomeCover} alt="HomeCover" />
-        <img className='block sLaptop:hidden absolute z-0 w-full bottom-0 left-0' src={HomeCoverMobile} alt="HomeCover" />
+        <img className='
+        absolute
+        hidden 
+        sLaptop:block 
+        z-0 
+        w-full 
+        bottom-0 
+        left-0' src={HomeCover} alt="HomeCover" />
+        <img className='
+        absolute
+        block 
+        sLaptop:hidden 
+        z-0 
+        w-full 
+        bottom-0 
+        left-0' 
+        src={HomeCoverMobile} alt="HomeCover" />
     </section>
   )
 })

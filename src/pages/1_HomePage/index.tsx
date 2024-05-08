@@ -24,7 +24,16 @@ const index = memo(():JSX.Element => {
 
   // In this page we are going to handle our popup states within here
   return (
-    <main>
+    <main
+    className='
+    block
+    relative
+    w-full
+    h-full
+    overflow-x-hidden
+    overflow-y-hidden
+    '
+    >
       <AnimatePresence>
         {/* open and close our modal */}
         { modalStatus &&  <ModalContainer /> }

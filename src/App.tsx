@@ -4,6 +4,7 @@ import { lazy,Fragment,Suspense, useEffect  } from "react";
 import LoadingPage from './pages/components/loadingSpinner';
 import Errorpage from './pages/0_404Page';
 
+
 const HomePage = lazy(()=> import('./pages/1_HomePage'));
 const AccountLanding = lazy(()=> import('./pages/2_AccountLanding'));
 const LayoutAccount = lazy(()=> import('./pages/components/accountHeader'));
@@ -25,11 +26,8 @@ function App(): JSX.Element {
 // return our page
   return (
     <Fragment>
-
       <Suspense fallback={<LoadingPage />}>
-
         <Routes>
-
             <Route path="/" element={<HomePage />}/>
             {/* our heading layout */}
 
@@ -45,11 +43,8 @@ function App(): JSX.Element {
 
             {/* 404 page */}
             <Route path="*" element={<Errorpage />} />
-
         </Routes>
-
       </Suspense>
-
     </Fragment>
   )
 }

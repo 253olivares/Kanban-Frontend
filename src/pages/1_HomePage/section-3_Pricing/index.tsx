@@ -51,7 +51,8 @@ const index = memo(() => {
   ]
 
   return (
-    <section className="Pricing_Section3 overflow-y-hidden overflow-x-hidden">
+    <section className="
+    Pricing_Section3 overflow-y-hidden overflow-x-hidden">
       <div className="Pricing_Section3 
       z-[2] 
       max-w-[1920px] 
@@ -181,10 +182,10 @@ const index = memo(() => {
       </div>
       <img data-aos='slide-up '
         data-aos-duration='800'
-        data-aos-delay='250' className='block sLaptop:hidden absolute bottom-0 w-full' src={MoneySVGMobile} alt="MoneySVGMobile" />
+        data-aos-delay='0' className='block sLaptop:hidden absolute bottom-0 w-full' src={MoneySVGMobile} alt="MoneySVGMobile" />
       <img data-aos='slide-up'
         data-aos-duration='800'
-        data-aos-delay='250' className='hidden sLaptop:block absolute bottom-0 w-full ' src={MoneySVG} alt="Money SVG Background" />
+        data-aos-delay='0' className='hidden sLaptop:block absolute bottom-0 w-full ' src={MoneySVG} alt="Money SVG Background" />
     </section>
   )
 })

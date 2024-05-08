@@ -39,7 +39,8 @@ const index =React.memo(() => {
 
 
   return (
-    <section className="conic-gradient">
+    <section className="
+    conic-gradient">
         {/* back to top section */}
         <div className="
         cursor-pointer

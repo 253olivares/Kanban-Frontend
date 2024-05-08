@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios,{CancelTokenSource} from "axios";
 
 type initialStateType = {
     user:userInformation | null,
@@ -26,6 +27,29 @@ const initialState:initialStateType = {
     error:null
 }
 
+export const checkLogin = createAsyncThunk('user/checkLogin', async(_,{rejectWithValue, signal})=> {
+    try{
+        const source:CancelTokenSource = axios.CancelToken.source();
+        signal.addEventListener('abort',()=> {
+            source.cancel();
+        })
+    }catch(error:unknown){
+        console.log(`checkLogin:${error}`);
+        return rejectWithValue(error);
+    }
+});
+
+export const createAccount = createAsyncThunk('user/createAccount',async(_,{rejectWithValue,signal})=>{
+    try{
+        const source:CancelTokenSource = axios.CancelToken.source();
+        signal.addEventListener('abort',()=> {
+            source.cancel();
+        })
+    }catch(error:unknown){
+        console.log(`createLogin:${error}`);
+        return rejectWithValue(error);
+    }
+});
 
 
 const userSlice = createSlice({

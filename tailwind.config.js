@@ -11,6 +11,9 @@ export default {
         Ubuntu: ['Ubuntu', 'sans-serif']
       },
       screens: {
+        'mobile':'400px',
+        // => @media (min-width: 400px) { ... }
+
         'sMobile': '640px',
         // => @media (min-width: 640px) { ... }
 

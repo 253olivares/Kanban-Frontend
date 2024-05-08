@@ -119,13 +119,12 @@
     }
 
     .Home_Section1 {
-        @apply w-full 
+        @apply 
+        w-full 
         desktop:min-h-[960px] 
         mLaptop:min-h-[800px] 
         sLaptop:min-h-[640px] 
-        mMobile:min-h-[735px] 
-        min-h-[615px] 
-        relative;
+        relative
     }
     .PM_Section2 {
         @apply w-full
