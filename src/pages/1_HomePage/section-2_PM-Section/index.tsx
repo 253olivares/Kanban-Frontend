@@ -154,13 +154,13 @@ const index = memo(() => {
         {/* Bottom Left Bubble */}
         <div className="absolute
         left-[-7.48%] 
-        top-[12.441rem] 
-        mobile:top-[16.589rem]
-        sMobile:top-[26.542rem]
-        mMobile:top-[31.875rem] 
+        top-[11.718rem] 
+        mobile:top-[15.624rem]
+        sMobile:top-[24.999rem]
+        mMobile:top-[30rem] 
         sLaptop:top-[22.25rem] sLaptop:left-[8rem] 
         mLaptop:top-[28rem]
-        desktop:top-[33.688rem] desktop:left-48 
+        desktop:top-[33.688rem] dsktop:left-48 
 
         w-[4.053rem] h-[4.053rem] 
         mobile:w-[5.404rem] mobile:h-[5.404rem]
