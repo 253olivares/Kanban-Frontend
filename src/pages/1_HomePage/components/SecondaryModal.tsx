@@ -2,7 +2,7 @@
 import {motion} from 'framer-motion';
 import { memo } from 'react';
 
-import { openCreateProfile } from '../../../reduxStore/modal/modalSlice';
+import { openCreateProfile,closeMobileModal } from '../../../reduxStore/modal/modalSlice';
 import { openLogin } from '../../../reduxStore/modal/modalSlice';
 import { useAppDispatch } from '../../../reduxStore/hook';
 
@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../../reduxStore/hook';
 import Button from '../components/mobileButton'
 import down from '/assets/Union.png'
 
-const SecondaryModal = memo(({closeMobile}:{closeMobile: ()=>void}) => {
+const SecondaryModal = memo(() => {
 
   const dispatch = useAppDispatch();
 
@@ -34,7 +34,7 @@ const SecondaryModal = memo(({closeMobile}:{closeMobile: ()=>void}) => {
             y:100
         }}
         className=" absolute block bottom-0 w-full min-h-[10rem] bg-PrimaryWhite rounded-t-[1rem] mMobile:rounded-t-[1.25rem]">
-          <div onClick={closeMobile} className='
+          <div onClick={()=>dispatch(closeMobileModal())} className='
           w-full cursor-pointer'>
             <img className="mx-auto 
             w-[1.244rem]  
@@ -59,19 +59,19 @@ const SecondaryModal = memo(({closeMobile}:{closeMobile: ()=>void}) => {
           justify-center'>
             <div className='text-center'>
               <Button message='Login' fn={()=> {
-                closeMobile()
+                dispatch(closeMobileModal())
                 dispatch(openLogin())
               }} />
             </div>
             <div className='text-center'>
               <Button message='CreateAccount' fn={()=> {
-                closeMobile()
+                dispatch(closeMobileModal())
                 dispatch(openCreateProfile())
               }} />
             </div>
           </div>
         </motion.div>
-       <div onClick={closeMobile} className="block sLaptop:hidden absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]" />
+       <div onClick={()=>dispatch(closeMobileModal())} className="block sLaptop:hidden absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]" />
     </motion.div>
   )
 })

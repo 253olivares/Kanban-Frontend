@@ -196,9 +196,6 @@
     .Home_Section1 {
         @apply 
         w-full 
-        desktop:min-h-[960px] 
-        mLaptop:min-h-[800px] 
-        sLaptop:min-h-[640px] 
         relative
     }
     .PM_Section2 {

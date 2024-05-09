@@ -1,5 +1,5 @@
-import { getMobileModal, getModalStatus, closeMobileModal,openMobileModal } from '../../reduxStore/modal/modalSlice';
-import { useAppSelector, useAppDispatch } from '../../reduxStore/hook';
+import { getMobileModal, getModalStatus, closeMobileModal } from '../../reduxStore/modal/modalSlice';
+import { useAppSelector } from '../../reduxStore/hook';
 import {memo, lazy} from 'react';
 
 import SecondaryModalMobile from './components/SecondaryModal';
@@ -13,7 +13,6 @@ const PricingSection = lazy(()=> import('./section-3_Pricing'));
 const Footer = lazy(()=> import('./footer'));
 
 const index = memo(():JSX.Element => {
-  const dispatch  = useAppDispatch();
 
   // check to see if a user is signed in
 
@@ -39,10 +38,10 @@ const index = memo(():JSX.Element => {
         {/* open and close our modal */}
         { modalStatus &&  <ModalContainer /> }
         {/* secondary modal for mobile only  */}
-        { SecondaryModal && <SecondaryModalMobile closeMobile={()=>dispatch(closeMobileModal())} />}
+        { SecondaryModal && <SecondaryModalMobile />}
       </AnimatePresence>
       {/* Main section 1 */}
-        <MainSection openMobile={()=>dispatch(openMobileModal())} />
+        <MainSection />
         {/* Project Management Pitch section */}
         <PMSection />
         {/* application pricing section */}

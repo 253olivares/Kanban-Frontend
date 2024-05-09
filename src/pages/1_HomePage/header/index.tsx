@@ -1,4 +1,4 @@
-import { openCreateProfile } from '../../../reduxStore/modal/modalSlice';
+import { openCreateProfile, openMobileModal } from '../../../reduxStore/modal/modalSlice';
 import { openLogin } from '../../../reduxStore/modal/modalSlice';
 import { useAppDispatch } from '../../../reduxStore/hook';
 
@@ -6,7 +6,7 @@ import HamburgerMenu from '/assets/Menu_Icon.svg';
 import LogoExport from '/assets/KbIconMobile.svg';
 import Button from '../components/Button';
 
-const index = ({mobileOpen}: {mobileOpen: ()=> void}) => {
+const index = () => {
   // get our dispatch
   const dispatch = useAppDispatch();
 
@@ -23,9 +23,7 @@ const index = ({mobileOpen}: {mobileOpen: ()=> void}) => {
     desktop:py-[3.938rem]
 
     px-[6.5%]
-    sLaptop:px-[3.625]
-    mLaptop:px-[4.583rem] 
-    desktop:px-[5.5rem] 
+    sLaptop:px-[5.66%]
 
     flex 
     justify-between 
@@ -39,7 +37,7 @@ const index = ({mobileOpen}: {mobileOpen: ()=> void}) => {
         sLaptop:w-[3.125rem] 
         mLaptop:w-[3.906rem] 
         desktop:w-[4.688rem]" src={LogoExport} alt="Application Logo" />
-        <img onClick={mobileOpen} className='
+        <img onClick={()=>dispatch(openMobileModal())} className='
         w-[1.757rem]
         mobile:w-[2.343rem]
         sMobile:w-[3.749rem]
@@ -47,12 +45,13 @@ const index = ({mobileOpen}: {mobileOpen: ()=> void}) => {
         block 
         sLaptop:hidden 
         cursor-pointer' src={HamburgerMenu} alt="Hamburger Menu" />
-        <div className='hidden 
+        <div className='
+        hidden 
         sLaptop:flex 
         sLaptop:gap-[0.965rem]
-        mLaptop:gap-[1.25rem]   
+        mLaptop:gap-[1.206rem]   
         desktop:gap-[1.448rem]
-        items-center'>
+        items-center'>  
           <Button message="Login" fn={()=> dispatch(openLogin())} />
           <Button message='Create Account' fn={()=> dispatch(openCreateProfile())} />
         </div>

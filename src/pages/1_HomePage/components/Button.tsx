@@ -6,39 +6,18 @@ const Button = memo(({message, fn}: {message:string, fn: ()=>void}) => {
     tabIndex={-1}
     onClick={()=>fn()}
     className='
-              min-w-[10.774rem]
-              mobile:ming-w-[14.365rem]
-              sMobile:min-w-[22.984rem]
-              mMobile:min-w-[27.581rem]
-              sLaptop:min-w-[8.438rem]
-              mLaptop:min-w-[10.313rem]
-              desktop:min-w-[12.813rem] 
-
               site-borders
               text-PrimaryWhite
 
-              text-[1.5rem]
-              mobile:text-[]
-              sMobile:text-[1.875rem] 
-              mMobile:text-[]
-              sLaptop:text-lg 
-              mLaptop:text-[1.375rem]
-              desktop:text-[1.688rem] 
-
-              rounded-[.9rem]
-              sLaptop:rounded-lg
-              mLaptop:rounded-[0.625rem]
-              desktop:rounded-xl 
+              sLaptop:rounded-[0.499rem]
+              mLaptop:rounded-[0.624rem]
+              desktop:rounded-[.75rem]
 
               font-bold
               
-              p-[]
-              mobile:p-[]
-              sMobile:p-[]
-              mMobile:p-[.5rem]
               sLaptop:p-[2.4px] 
               mLaptop:p-[0.175rem]
-              desktop:p-[.2rem]
+              desktop:p-[.25rem]
 
               transition-[box-shadow] 
               ease-in-out
@@ -53,22 +32,29 @@ const Button = memo(({message, fn}: {message:string, fn: ()=>void}) => {
         bg-SpaceBlue 
         active:bg-SpaceBlueSelected 
 
-        rounded-[.8rem]
-        sLaptop:rounded-md 
-        mLaptop:rounded-[0.438rem] 
-        desktop:rounded-lg 
+        sLaptop:min-w-[8.493rem]
+        mLaptop:min-w-[10.616rem]
+        desktop:min-w-[12.74rem] 
+       
+        sLaptop:rounded-[0.333rem]
+        mLaptop:rounded-[0.416rem] 
+        desktop:rounded-[.5rem]
 
-        h-[2.309rem]
-        mobile:h-[3.078rem]
-        sMobile:h-[4.925rem]
-        mMobile:h-[5.91rem]
-        sLaptop:h-auto
-        sLaptop:py-[.2rem] 
-        desktop:py-2 
+        sLaptop:h-[2.027rem]
+        mLaptop:h-[2.534rem]
+        desktop:h-[3.04rem]
+
+        sLaptop:text-[1.126rem] 
+        mLaptop:text-[1.408rem]
+        desktop:text-[1.689rem] 
+        sLaptop:leading-[2.027rem]
+        mLaptop:leading-[2.534rem]
+        desktop:leading-[3.04rem]
+
 
         sLaptop:px-[0.625rem] 
-        mLaptop:px-3 
-        desktop:px-4
+        mLaptop:px-[0.724rem]
+        desktop:px-[0.869rem]
         '>
             {message}
         </span>
