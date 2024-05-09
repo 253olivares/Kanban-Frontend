@@ -211,16 +211,15 @@ const index = memo(() => {
           absolute
           
           right-[25.52%]
-          sLaptop:right-auto
-          sLaptop:left-[48%]
+          sLaptop:right-[47.5%]
 
           top-[2.048rem] 
           mobile:top-[2.897rem]
           sMobile:top-[4.636rem]
           mMobile:top-[5.563rem]
-          sLaptop:top-[5.375rem] 
-          mLaptop:top-[6.75rem] 
-          desktop:top-32 
+          sLaptop:top-[5.417rem] 
+          mLaptop:top-[6.771rem] 
+          desktop:top-[8.125rem]
           rounded-full 
           bg-PrimaryWhite
           w-[1.904rem]
@@ -233,10 +232,10 @@ const index = memo(() => {
           mMobile:h-[4.875rem]
           sLaptop:w-[3.833rem] 
           sLaptop:h-[3.833rem] 
-          mLaptop:w-[4.75rem] 
-          mLaptop:h-[4.75rem] 
-          desktop:w-[5.5rem] 
-          desktop:h-[5.5rem]' />
+          mLaptop:w-[4.792rem] 
+          mLaptop:h-[4.792rem] 
+          desktop:w-[5.75rem] 
+          desktop:h-[5.75rem]' />
           {/* bottom Left Big bubble */}
           <div className='z-0 
           

@@ -206,7 +206,8 @@
         relative; 
     }
     .Pricing_Section3 {
-        @apply w-full  
+        @apply 
+        w-full  
         relative;
     }
     .FooterSocialLink{

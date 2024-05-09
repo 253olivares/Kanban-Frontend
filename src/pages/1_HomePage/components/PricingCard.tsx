@@ -20,15 +20,17 @@ const PricingCard = ({plan,position}: {plan:pricingPlansType,position:number}) =
     mobile:p-[0.169rem]
     sMobile:p-[0.270rem]
     mMobile:p-[.325rem]
-    sLaptop:p-[0.25rem]
-    mLaptop:p-[0.275rem]
-    desktop:p-[.3rem] 
+    sLaptop:p-[0.233rem]
+    mLaptop:p-[0.291rem]
+    desktop:p-[.35rem] 
 
     rounded-[0.488rem] 
     mobile:rounded-[0.651rem] 
     sMobile:rounded-[1.041rem] 
     mMobile:rounded-[1.25rem]
     sLaptop:rounded-[1.25rem] 
+    mLaptop:rounded-[]
+    desktop:rounded-[]
 
     customShadow
 
@@ -236,7 +238,6 @@ const PricingCard = ({plan,position}: {plan:pricingPlansType,position:number}) =
                 sMobile:text-[1.354rem]
                 mMobile:text-[1.625rem]
                 leading-tight
-                sLaptop:leading-[2rem]
                 sLaptop:text-base
                 mLaptop:text-xl
                 desktop:text-[1.625rem]
@@ -269,6 +270,9 @@ const PricingCard = ({plan,position}: {plan:pricingPlansType,position:number}) =
                         mobile:h-[0.208rem]
                         sMobile:h-[0.333rem]
                         mMobile:h-[.4rem]
+                        sLaptop:h-[0.249rem]
+                        mLaptop:h-[0.312rem]
+                        desktop:h-[0.375rem]
                         bg-[#8A8DA0]' /> 
                         <p className="
                         w-full
@@ -276,9 +280,9 @@ const PricingCard = ({plan,position}: {plan:pricingPlansType,position:number}) =
                         mobile:py-[1.953rem]
                         sMobile:py-[3.124rem]
                         mMobile:py-[3.75rem] 
-                        sLaptop:py-9
-                        mLaptop:py-[2.875rem]
-                        desktop:py-[3.75rem] 
+                        sLaptop:py-[2.438rem]
+                        mLaptop:py-[3.063rem]
+                        desktop:py-[3.688rem] 
                         text-center 
                         
                         font-medium
@@ -286,9 +290,9 @@ const PricingCard = ({plan,position}: {plan:pricingPlansType,position:number}) =
                         mobile:text-[1.139rem]
                         sMobile:text-[1.823rem]
                         mMobile:text-[2.188rem]
-                        sLaptop:text-2xl 
-                        mLaptop:text-3xl
-                        desktop:text-4xl 
+                        sLaptop:text-[1.458rem] 
+                        mLaptop:text-[1.823rem]
+                        desktop:text-[2.188rem]
                         bg-SpaceBlue 
                         text-PrimaryWhite
                         ">DEFAULT PLAN</p>
@@ -301,10 +305,10 @@ const PricingCard = ({plan,position}: {plan:pricingPlansType,position:number}) =
                     mobile:min-h-[5.822rem]
                     sMobile:min-h-[9.314rem] 
                     mMobile:min-h-[11.182rem] 
-                    sLaptop:min-h-[6.5rem] 
-                    mLaptop:min-h-[8rem] 
-                    desktop:min-h-[10rem]'
-                    >
+                    sLaptop:min-h-[7.31rem] 
+                    mLaptop:min-h-[9.171rem] 
+                    desktop:min-h-[11.032rem]
+                    '>
                         <PlanButton fn={()=> dispatch(openCreateProfile())} message='Select Plan' />
                     </div>
             }

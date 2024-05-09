@@ -55,12 +55,15 @@ const index = memo(() => {
     <section className="
     Pricing_Section3 
     overflow-y-hidden 
-    overflow-x-hidden">
+    overflow-x-hidden
+    ">
       <div className="
-      Pricing_Section3 
+      w-full
+      relative 
       z-[2] 
       max-w-[1920px] 
-      mx-auto">
+      mx-auto
+      ">
         {/* section name */}
         <h1 
         data-aos='fade'
@@ -68,11 +71,10 @@ const index = memo(() => {
         data-aos-delay='0'
         className=' 
         w-full 
-        sLaptop:max-w-[82%] 
         block 
 
         px-[6.5%]
-        sLaptop:px-0
+        sLaptop:px-[8.78%]
 
         sLaptop:mx-auto
 
@@ -84,9 +86,9 @@ const index = memo(() => {
         sMobile:text-[2.864rem] sMobile:leading-[3.313rem] 
         mMobile:text-[3.438rem] mMobile:leading-[3.938rem] 
 
-        sLaptop:text-[3rem] sLaptop:leading-[3.3rem]
-        mLaptop:text-[3.75rem] mLaptop:leading-[4.1rem]
-        desktop:text-[4.4rem] desktop:leading-[5rem]  
+        sLaptop:text-[2.917rem] sLaptop:leading-[3.375rem]
+        mLaptop:text-[3.646rem] mLaptop:leading-[4.188rem]
+        desktop:text-[4.375rem] desktop:leading-[5rem]  
         '>Affordable Pricing Plans</h1>
 
         {/* section content */}
@@ -100,9 +102,9 @@ const index = memo(() => {
 
         gap-[3.5rem]
         mMobile:gap-[6.25rem]
-        sLaptop:gap-10 
-        mLaptop:gap-14
-        largeDesktop:gap-16
+        sLaptop:gap-[2.604rem]
+        mLaptop:gap-[3.255rem]
+        desktop:gap-[3.906rem]
         sLaptop:justify-center 
 
         overflow-x-auto 
@@ -112,19 +114,19 @@ const index = memo(() => {
         mobile:pt-[1.616rem]
         sMobile:pt-[2.573rem]
         mMobile:pt-[3.125rem] 
-        sLaptop:pt-[4.5rem] 
-        mLaptop:pt-[5.5rem] 
-        desktop:pt-[6.5rem]
-        largeDesktop:pt-[7rem]
+        sLaptop:pt-[4.417rem] 
+        mLaptop:pt-[5.552rem] 
+        desktop:pt-[6.688rem]
+        largeDesktop:pt-[8.25rem]
 
         pb-[4.077rem] 
         mobile:pb-[5.449rem]
         sMobile:pb-[8.719rem]
         mMobile:pb-[10.438rem] 
-        sLaptop:pb-[8.125rem] 
-        mLaptop:pb-[10.75rem] 
-        desktop:pb-[12rem] 
-        largeDesktop:pb-[17rem]
+        sLaptop:pb-[8.188rem] 
+        mLaptop:pb-[10.25rem] 
+        desktop:pb-[12.313rem] 
+        largeDesktop:pb-[15.375rem]
         '>
           {
             pricingPlans.map((plan,index) => (
@@ -142,9 +144,10 @@ const index = memo(() => {
         hidden
         sLaptop:block 
         absolute 
-        sLaptop:top-[25rem] sLaptop:right-[-.25rem]
-        mLaptop:top-[31.25rem] mLaptop:right-[-.5rem]
+        sLaptop:top-[25rem]
+        mLaptop:top-[31.25rem] 
         desktop:top-[37.5rem]
+        right-0
         rotate-[-17deg]
         sLaptop:w-[2.75rem]
         mLaptop:w-[3.5rem]
