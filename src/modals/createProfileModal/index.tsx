@@ -1,8 +1,8 @@
 import {useState, useLayoutEffect, useRef } from 'react';
 import {motion} from 'framer-motion';
 
-import CreateAccountButton from '../../pages/1_HomePage/components/Button';
 import PasswordStrength from './components/passwordStrength';
+import CreateAccountButton from '../component/modalButton';
 import PasswordReq from './components/passwordRequirments';
 import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
@@ -210,27 +210,63 @@ const index = () => {
     exit={{
         y:25
     }}
-    className="bg-PrimaryWhite block w-full h-full sLaptop:h-auto  sLaptop:w-[31.5rem]  mLaptop:w-[38rem] desktop:w-[39.663rem] largeDesktop:w-[42.5rem] sLaptop:rounded-[0.906rem] overflow-y-scroll no-scrollbar sLaptop:overflow-hidden">
+    className="
+    relative
+    bg-PrimaryWhite 
+    w-full 
+    h-auto
+
+    min-h-screen
+
+
+    sLaptop:h-auto  
+    sLaptop:w-[31.5rem] 
+    mLaptop:w-[38rem]
+    desktop:w-[39.663rem] 
+    largeDesktop:w-[42.5rem] 
+
+    sLaptop:rounded-[0.906rem] 
+
+    overflow-y-scroll 
+    no-scrollbar 
+    sLaptop:overflow-hidden
+    ">
+    <div
+     className='
+     relative
+     w-full
+     pb-[3.026rem]
+     mobile:pb-[4.004rem]
+     sMobile:pb-[6.406rem]
+     mMobile:pb-[7.688rem]
+     sLaptop:pb-0
+     '
+    >
         <h1 className='
-        mt-[2.25rem]
-        mb-[1.25rem]
-        sMobile:mt-[4rem]
-        sMobile:mb-[2.25rem]
-        mMobile:mt-[4.688rem]
-        mMobile:mb-[2.813rem]
+        text-linear-gradient
+        text-center
+        font-bold
+        w-full
+
+        pt-[1.88rem]
+        pb-[1.097rem]
+        mobile:pt-[2.501rem]
+        mobile:pb-[1.463rem]
+        sMobile:pt-[4.011rem]
+        sMobile:pb-[2.364rem]
+        mMobile:pt-[4.813rem]
+        mMobile:pb-[2.813rem]
         sLaptop:mt-[1.65rem]
         sLaptop:mb-[1rem]
         mLaptop:mt-[2.4rem]
         mLaptop:mb-[1.5rem]
         desktop:mt-[2.5rem]
         desktop:mb-[1.5rem]
-        text-center
-        w-full
-        font-bold
-        text-linear-gradient
-        text-[1.25rem] 
-        sMobile:text-[2.063rem]
-        mMobile:text-[2.5rem]
+
+        text-[1.367rem]
+        mobile:text-[1.822rem]
+        sMobile:text-[2.916rem]
+        mMobile:text-[3.5rem]
         sLaptop:text-[1.4rem]
         mLaptop:text-[2rem]
         desktop:text-[2.375rem]
@@ -239,22 +275,34 @@ const index = () => {
         <form className='
             flex 
             flex-col 
-            gap-4
-            sMobile:gap-5
+
             sLaptop:gap-[.2rem]
             mLaptop:gap-[.3rem]
             desktop:gap-[.35rem]
-            px-[2.5rem]
-            sMobile:px-[5.313rem]
-            mMobile:px-[6.25rem]
+
+            px-[13.02%]
             sLaptop:px-[3.25rem]
             mLaptop:px-[4.2rem]
             desktop:px-[4.5rem] 
+
             font-normal
+
         ' onSubmit={(e)=> e.preventDefault()}>
             {/* first name last name */}
-            <div className='flex flex-col sLaptop:flex-row gap-4 mMobile:gap-5 sLaptop:gap-[.4rem] mLaptop:gap-[.6rem] desktop:gap-[.75rem]'>
-                <div className='modalHalfInputDiv'>
+            <div className='
+            flex 
+            flex-col 
+            sLaptop:flex-row 
+            sLaptop:gap-[.4rem] 
+            mLaptop:gap-[.6rem] 
+            desktop:gap-[.75rem]'>
+                <div className='modalHalfInputDiv
+                 pt-[0.488rem]
+                 mobile:pt-[0.651rem]
+                 sMobile:pt-[1.042rem]
+                 mMobile:pt-[1.25rem]
+                 sLaptop:pt-0
+                '>
                     <Inputs 
                     className='modalInputs'
                     id='fName'
@@ -266,7 +314,13 @@ const index = () => {
                         ))}}
                     />
                 </div>
-                <div className='modalHalfInputDiv'>
+                <div className='modalHalfInputDiv
+                 pt-[0.488rem]
+                 mobile:pt-[0.651rem]
+                 sMobile:pt-[1.042rem]
+                 mMobile:pt-[1.25rem]
+                 sLaptop:pt-0
+                '>
                     <Inputs 
                     className='modalInputs'
                     id='lName'
@@ -280,8 +334,22 @@ const index = () => {
                 </div>
             </div>
             {/* username and email */}
-            <div className='flex flex-col sLaptop:flex-row gap-4 mMobile:gap-5 sLaptop:gap-[.4rem] mLaptop:gap-[.6rem] desktop:gap-[.75rem]'>
-                <div className='modalHalfInputDiv'>
+            <div className='
+            flex 
+            flex-col 
+            sLaptop:flex-row 
+            sLaptop:gap-[.4rem] 
+            mLaptop:gap-[.6rem] 
+            desktop:gap-[.75rem]
+            
+            '>
+                <div className='modalHalfInputDiv 
+                 pt-[0.488rem]
+                 mobile:pt-[0.651rem]
+                 sMobile:pt-[1.042rem]
+                 mMobile:pt-[1.25rem]
+                 sLaptop:pt-0
+                '>
                     <Inputs 
                     className='modalInputs'
                     id='username'
@@ -293,7 +361,13 @@ const index = () => {
                         ))}}
                     />
                 </div>
-                <div className='modalHalfInputDiv'>
+                <div className='modalHalfInputDiv
+                 pt-[0.488rem]
+                 mobile:pt-[0.651rem]
+                 sMobile:pt-[1.042rem]
+                 mMobile:pt-[1.25rem]
+                 sLaptop:pt-0
+                '>
                     <Inputs 
                     className='modalInputs'
                     id='newEmail'
@@ -307,7 +381,13 @@ const index = () => {
                 </div>
             </div>
             {/* password */}
-            <div className='modalPasswordInputDiv'>
+            <div className='modalPasswordInputDiv
+             pt-[0.488rem]
+             mobile:pt-[0.651rem]
+             sMobile:pt-[1.042rem]
+             mMobile:pt-[1.25rem]
+             sLaptop:pt-0
+            '>
                     <Inputs 
                     className='modalInputs'
                     id='password'
@@ -320,7 +400,20 @@ const index = () => {
                     />
             </div>
             {/* retype password */}
-            <div className='modalPasswordInputDiv'>
+            <div className='modalPasswordInputDiv 
+            
+            pt-[0.488rem]
+            mobile:pt-[0.651rem]
+            sMobile:pt-[1.042rem]
+            mMobile:pt-[1.25rem]
+            sLaptop:pt-0
+
+            pb-[0.61rem]
+            mobile:pb-[0.814rem]
+            sMobile:pb-[1.302rem]
+            mMobile:pb-[1.563rem]
+            sLaptop:pb-0
+            '>
                     <Inputs 
                     ref={repass}
                     className='modalInputs'
@@ -340,14 +433,34 @@ const index = () => {
             {/* this will be a component */}
             <PasswordReq reqs={passwordRequirements} />
             {/* submit button */}
-            <div className='flex justify-center 
-             desktop:scale-95
-            pt-[2.5rem] pb-[2.5rem] sMobile:pt-[3.75rem] sMobile:pb-[3.75rem] sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] mLaptop:pt-[1.6rem] desktop:pt-[1.70rem] desktop:pb-[2.4rem] largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
+            <div className='
+            flex 
+            justify-center 
+            pt-[1.51rem] pb-[1.514rem] 
+            mobile:pt-[2.014] mobile:pb-[2.019rem]
+            sMobile:pt-[3.222rem] sMobile:pb-[3.855rem] 
+            mMobile:pt-[3.866rem] mMobile:pb-[3.876rem]
+            sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] 
+            mLaptop:pt-[1.6rem] 
+            desktop:pt-[1.70rem] desktop:pb-[2.4rem] 
+                largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
                 <CreateAccountButton message="Create Account" fn={()=>{checkInputs()}} />
             </div>
         </form>
+    </div>
         {/* footer */}
-        <Footer />
+    <div className='
+    absolute
+    bottom-[0]
+    w-full
+    h-[3.026rem]
+      mobile:h-[4.004rem]
+      sMobile:h-[6.406rem]
+      mMobile:h-[7.688rem]
+      sLaptop:relative 
+    '>
+         <Footer />
+    </div>
     </motion.div>
   )
 }

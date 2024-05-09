@@ -44,22 +44,34 @@ const index =React.memo(() => {
         {/* back to top section */}
         <div className="
         cursor-pointer
-        py-3
-        sMobile:py-[.9rem]
-        mMobile:py-5
+        w-full 
+     
+        h-[1.953rem]
+        mobile:h-[2.604rem]
+        sMobile:h-[4.166rem]
+        mMobile:h-[5rem]
+        sLaptop:h-auto
         sLaptop:py-3
         mLaptop:py-4
         desktop:py-5
         largeDesktop:py-6
-        w-full 
+
         text-center
-        text-2xl
-        sMobile:text-3xl 
-        mMobile:text-4xl
+
+        text-[0.854rem]
+        leading-[1.953rem]
+        mobile:text-[1.139rem]
+        mobile:leading-[2.604rem]
+        sMobile:text-[1.823rem] 
+        sMobile:leading-[4.166rem]
+        mMobile:text-[2.188rem]
+        mMobile:leading-[5rem]
         sLaptop:text-xl 
         mLaptop:text-2xl
         desktop:text-3xl
-        font-medium 
+
+        font-bold
+        sLaptop:font-medium 
         text-PrimaryWhite
         " onClick={()=> {window.scroll({
             top: 0,
@@ -71,12 +83,18 @@ const index =React.memo(() => {
         </div>
 
           {/* middle section */}
-        <div className="w-full flex justify-center 
-        linear-gradientFooter2 sLaptop:linear-gradientFooter">
-          <div className='w-[60%] bg-PrimaryWhite hidden 
+        <div className="
+        w-full 
+        flex justify-center 
+        linear-gradientFooter2 
+        sLaptop:linear-gradientFooter">
+          <div className='
+          w-[60%] 
+          bg-PrimaryWhite 
+          hidden 
           sLaptop:flex
           sLaptop:justify-end
-           largeDesktop:items-center
+          largeDesktop:items-center
           sLaptop:rounded-r-[2rem] 
           mLaptop:rounded-r-[2.5rem] 
           desktop:rounded-r-[3.125rem]
@@ -143,7 +161,8 @@ const index =React.memo(() => {
             </div>
           </div>
           <div className='
-          w-[40%] 
+          w-full
+          sLaptop:w-[40%] 
           flex 
           justify-center
           largeDesktop:justify-start
@@ -153,9 +172,10 @@ const index =React.memo(() => {
             <div className='
             flex
             flex-col
-            gap-6 py-8
-            sMobile:gap-7 sMobile:py-10 
-            mMobile:gap-8 mMobile:py-11
+            gap-[0.906rem] py-[1.148rem]
+            mobile:gap-[1.209rem] mobile:py-[1.53rem]
+            sMobile:gap-[1.934rem] sMobile:py-[2.448rem]
+            mMobile:gap-[2.32rem] mMobile:py-[2.938rem]
             sLaptop:gap-[1.125rem] sLaptop:py-[2.125rem]
             mLaptop:gap-5 mLaptop:py-10
             desktop:gap-7 desktop:py-[3.125rem]
@@ -189,21 +209,76 @@ const index =React.memo(() => {
         items-center
         max-w-[1920px] 
         ">
-          <div className='flex sLaptop:gap-6 mLaptop:gap-7 desktop:gap-9 largeDesktop:gap-14 items-center text-PrimaryWhite'>
-            <img className='w-10 sMobile:w-[2.813rem] mMobile:w-[3.438rem] sLaptop:w-[2.063rem] mLaptop:w-10 desktop:w-[3.125rem] largeDesktop:w-[3.75rem]' src={LogoExport} alt="Logo" />
-            <p className=' hidden sLaptop:block font-medium sLaptop:text-base mLaptop:text-xl desktop:text-[1.5rem] largeDesktop:text-[1.75rem]'>@ Copyright Info 2024</p>
+          <div className='
+          flex 
+          sLaptop:gap-6 
+          mLaptop:gap-7 
+          desktop:gap-9 
+          largeDesktop:gap-14 
+          items-center
+          text-PrimaryWhite'>
+            <img className='
+            w-[1.343rem]
+            mobile:w-[1.791rem]
+            sMobile:w-[2.864rem] 
+            mMobile:w-[3.438rem] 
+            sLaptop:w-[2.063rem] 
+            mLaptop:w-10 
+            desktop:w-[3.125rem] 
+            largeDesktop:w-[3.75rem]' src={LogoExport} alt="Logo" />
+            <p className='
+            hidden 
+            sLaptop:block 
+            font-medium 
+            sLaptop:text-base 
+            mLaptop:text-xl 
+            desktop:text-[1.5rem] 
+            largeDesktop:text-[1.75rem]'>@ Copyright Info 2024</p>
           </div>
 
-          <div className='flex gap-3 sMobile:gap-5 mMobile:gap-6 sLaptop:gap-6 mLaptop:gap-7 desktop:gap-9 largeDesktop:gap-14 items-center'>
-            <img className='w-8 sMobile:w-[2.125rem] mMobile:w-[2.625rem] sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75 hover:cursor-pointer' src={Instagram} alt="Instagram Icon" />
-            <img className='w-8 sMobile:w-[2.125rem] mMobile:w-[2.625rem] sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75 hover:cursor-pointer' src={Twitter} alt="Twitter Icon" />
-            <img className='w-8 sMobile:w-[2.125rem] mMobile:w-[2.625rem] sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75  hover:cursor-pointer' src={Facebook} alt="Facebook Icon" />
-            <img className='w-8 sMobile:w-[2.125rem] mMobile:w-[2.625rem] sLaptop:w-[1.75rem] mLaptop:w-9 desktop:w-[2.625rem] largeDesktop:w-[3rem] hover:opacity-75  hover:cursor-pointer' src={Linkedin} alt="LinkedIn Icon" />
+          <div className='flex 
+          gap-[0.611rem]
+          mobile:gap-[0.814rem]
+          sMobile:gap-[1.302rem] 
+          mMobile:gap-[1.563rem] 
+          sLaptop:gap-6 
+          mLaptop:gap-7 
+          desktop:gap-9 
+          largeDesktop:gap-14 
+          items-center'>
+            <img className='
+            FooterSocialLink' src={Instagram} alt="Instagram Icon" />
+            <img className='
+            FooterSocialLink' src={Twitter} alt="Twitter Icon" />
+            <img className='FooterSocialLink' src={Facebook} alt="Facebook Icon" />
+            <img className='FooterSocialLink' src={Linkedin} alt="LinkedIn Icon" />
           </div>
         </div>
-        <div className='block sLaptop:hidden'>
-          <hr className='mx-auto w-[calc(100%-2rem)] sMobile:w-[calc(100%-2.5rem)] mMobile:w-[calc(100%-3.125rem)] bg-PrimaryWhite border-none h-[.15rem] rounded-lg' />
-          <p className=' text-center text-PrimaryWhite text-lg sMobile:text-xl mMobile:text-2xl py-5 font-medium'>@ copyright Info 2024  </p>
+        <div className='
+        block 
+        sLaptop:hidden'>
+          <hr className='
+          mx-auto 
+          w-[92.18%]
+          bg-PrimaryWhite 
+          border-none 
+          h-[0.122rem]
+          mobile:h-[0.163rem]
+          sMobile:h-[0.260rem]
+          mMobile:h-[0.313rem] 
+          rounded-lg' />
+          <p className='
+          text-center 
+          text-PrimaryWhite 
+          text-[0.611rem]
+          mobile:text-[0.814rem]
+          sMobile:text-[1.302rem]
+          mMobile:text-[1.563rem] 
+          py-[0.753rem]
+          mobile:py-[0.983rem]
+          sMobile:py-[1.573rem]
+          mMobile:py-[1.875rem]
+          font-medium'>@ copyright Info 2024  </p>
         </div>
     </section>
   )

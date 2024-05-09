@@ -32,22 +32,55 @@ const index = memo(({status}:{status:number}) => {
   }
 
   return (
-    <div className='flex gap-5 h-[1.5rem] sMobile:h-[1.875rem] mMobile:h-[2.25rem] sMobile:gap-10 sLaptop:gap-5 items-center'>
-      <div className='flex sLaptop:my-[.25rem] mLaptop:my-[.3rem] desktop:my-2 largeDesktop:my-[.6rem] '>
+    <div className='
+    flex 
+    
+    h-[0.702rem] 
+    mobile:h-[0.889rem]
+    sMobile:h-[1.423rem] 
+    mMobile:h-[1.7075rem]
+
+    gap-[0.725rem]
+    mobile:gap-[0.966rem]
+    sMobile:gap-[1.546rem] 
+    mMobile:gap-[1.856rem]
+    sLaptop:gap-5 
+
+    mb-[0.359rem]
+    mobile:mb-[0.456rem]
+    sMobile:mb-[0.729rem]
+    mMobile:mb-[0.875rem]
+    sLaptop:mb-0
+
+    items-center'>
+      <div className='
+      flex 
+      sLaptop:my-[.25rem] 
+      mLaptop:my-[.3rem]
+      desktop:my-2 
+      largeDesktop:my-[.6rem] '>
         {
           Object.entries(svgArray).map(([k,v], index)=> 
             <img className={`
             first:ml-0 
-            ml-[-.6rem]
+            
+            ml-[-0.234rem]
+            mobile:ml-[-0.312rem]
+            sMobile:ml-[-0.499rem]
+            mMobile:ml-[-.6rem]
+
             sLaptop:ml-[-.3rem]
             desktop:ml-[-.6rem]
-            h-[1rem]
-            sMobile:h-[1.35rem]
-            mMobile:h-7
+
+            h-[0.702rem] 
+            mobile:h-[0.889rem]
+            sMobile:h-[1.423rem] 
+            mMobile:h-[1.7075rem]
             sLaptop:h-[.8rem]
             mLaptop:h-[1.1rem]
             desktop:h-[1.35rem]
             largeDesktop:h-[1.45rem]
+
             ${
               status === 1 ? index < 2 ? 'opacity-100' : 'opacity-25' : ''
             }
@@ -66,8 +99,10 @@ const index = memo(({status}:{status:number}) => {
       </div>
       <span className={`
        font-bold
-       sMobile:text-[1.25rem]
-       mMobile:text-[1.5rem]
+       text-[0.58rem]
+       mobile:text-[0.773rem]
+       sMobile:text-[1.237rem]
+       mMobile:text-[1.484rem]
        sLaptop:text-[.85rem]
        mLaptop:text-[1.1rem]
        desktop:text-[1.25rem]

@@ -30,15 +30,37 @@ const index = memo(() => {
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{
-      duration:.25
+      duration:.3
     }}
-    className="fixed z-20 top-0 left-0 w-screen h-screen flex justify-center items-center">
-    <AnimatePresence>
-      {modal == 'createProfile' && <CreateProfileModal />}
-      {modal == 'logIn' && <LoginModal />}
-      {modal == 'profile' && <ProfileModal />}
-    </AnimatePresence>
-      <div onClick={()=> dispatch(closeModal())} className="hidden sLaptop:block absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]" />
+    className="
+    absolute
+    z-20 
+
+    top-0 
+    left-0 
+    
+    w-screen 
+    h-screen
+
+    overflow-x-hidden
+    overflow-y-auto
+
+    sLaptop:flex 
+    sLaptop:justify-center 
+    sLaptop:items-center">
+      <AnimatePresence>
+        {modal == 'createProfile' && <CreateProfileModal />}
+        {modal == 'logIn' && <LoginModal />}
+        {modal == 'profile' && <ProfileModal />}
+      </AnimatePresence>
+      <div onClick={()=> dispatch(closeModal())} className="
+      hidden 
+      sLaptop:block 
+      sLaptop:absolute
+      sLaptop:z-[-1]
+      sLaptop:w-full 
+      sLaptop:h-full
+      sLaptop:bg-[rgba(0,0,0,0.75)]" />
     </motion.div>
   )
 })

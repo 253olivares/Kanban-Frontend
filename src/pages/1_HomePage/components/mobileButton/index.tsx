@@ -6,31 +6,53 @@ const Button = React.memo(({message, fn}: {message:string, fn: ()=>void}) => {
     tabIndex={-1}
     onClick={()=>fn()}
     className='
-              min-w-[20rem]
-              sMobile:min-w-[22.5rem]
-              mMobile:min-w-[27.5rem]
+              w-[60%]
+
               site-borders
+
               text-PrimaryWhite
-              text-[2rem] 
-              sMobile:text-[2.625rem]
-              mMobile:text-5xl
-              rounded-[1.1rem]
+
+              text-[1.283rem] 
+              mobile:text-[1.71rem]
+              sMobile:text-[2.736rem]
+              mMobile:text-[3.283rem]
+
+              rounded-[0.664rem]
+              mobile:rounded-[0.885rem]
+              sMobile:rounded-[1.416rem]
+              mMobile:rounded-[1.7rem]
+
               font-bold
-              p-[.3rem]
+              
+              p-[0.156rem]
+              mobile:p-[0.208rem]
+              sMobile:p-[0.333rem]
+              mMobile:p-[.4rem]
+
               transition-[box-shadow] 
               ease-in-out
               duration-300
-              hover:customShadow'>
+
+              hover:customShadow
+              '>
         <span className='flex 
         justify-center 
         items-center 
         w-full 
+
         bg-SpaceBlue 
         active:bg-SpaceBlueSelected 
-        rounded-[.8rem]
-        py-[.3rem]
-        sMobile:py-[.5rem]
-        mMobile:py-[.8rem]'>
+
+        rounded-[0.586rem]
+        mobile:rounded-[0.781rem]
+        sMobile:rounded-[1.250rem]
+        mMobile:rounded-[1.501rem]
+
+        h-[2.309rem]
+        mobile:h-[3.078rem]
+        sMobile:h-[4.925rem]
+        mMobile:h-[5.91rem]
+        '>
             {message}
         </span>
     </button>

@@ -25,14 +25,15 @@ const index = memo(():JSX.Element => {
   // In this page we are going to handle our popup states within here
   return (
     <main
-    className='
+    className={`
     block
     relative
     w-full
-    h-full
+    ${
+      SecondaryModal || modalStatus ? 'h-screen overflow-y-hidden' : ''
+    }
     overflow-x-hidden
-    overflow-y-hidden
-    '
+    `}
     >
       <AnimatePresence>
         {/* open and close our modal */}
