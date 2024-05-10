@@ -80,12 +80,16 @@ const index = () => {
     no-scrollbar
 
     sLaptop:min-h-0 
-    sLaptop:w-[28.5rem] 
-    mLaptop:w-[35rem]  
-    desktop:w-[39.663rem] 
-    largeDesktop:w-[42.5rem] 
+    sLaptop:w-[25rem] 
+    mLaptop:w-[31.247rem]  
+    desktop:w-[37.5rem] 
+    largeDesktop:w-[46.875rem]
+   
     
-    sLaptop:rounded-[0.906rem]
+    sLaptop:rounded-[0.5rem]
+    mLaptop:rounded-[0.625rem]
+    desktop:rounded-[0.75rem]
+    largeDesktop:rounded-[0.938rem]
     sLaptop:overflow-hidden
     ">
       <div 
@@ -109,12 +113,14 @@ const index = () => {
         sMobile:pb-[4.708rem]
         mMobile:pt-[6.25rem]
         mMobile:pb-[5.625rem]
-        sLaptop:pt-[1.8rem]
-        sLaptop:pb-[1.15rem]
-        mLaptop:pt-[2.4rem]
-        mLaptop:pb-[1.5rem]
+        sLaptop:pt-[1.667rem]
+        sLaptop:pb-[1.656rem]
+        mLaptop:pt-[2.083rem]
+        mLaptop:pb-[2.085rem]
         desktop:pt-[2.5rem]
-        desktop:pb-[1.5rem]
+        desktop:pb-[2.515rem]
+        largeDesktop:pt-[3.125rem]
+        largeDesktop:pb-[3.159rem]
 
         text-center
         w-full
@@ -125,9 +131,9 @@ const index = () => {
         mobile:text-[1.822rem]
         sMobile:text-[2.916rem]
         mMobile:text-[3.5rem]
-        sLaptop:text-[1.4rem]
-        mLaptop:text-[2rem]
-        desktop:text-[2.375rem]
+        sLaptop:text-[1.333rem]
+        mLaptop:text-[1.666rem]
+        desktop:text-[2rem]
         largeDesktop:text-[2.5rem]
       ">
         Sign In
@@ -138,12 +144,8 @@ const index = () => {
         my-auto
         sLaptop:my-0
 
-        sLaptop:gap-[.25rem]
-        mLaptop:gap-[.3rem]
-
         px-[13.02%]
-        sLaptop:px-[3.85rem]
-        mLaptop:px-[4.2rem]
+        sLaptop:px-[12.30%]
 
         font-normal
         " onSubmit={(e)=> e.preventDefault()}>
@@ -166,7 +168,10 @@ const index = () => {
           mobile:pt-[1.313rem]
           sMobile:pt-[2.063rem]
           mMobile:pt-[2.5rem]
-          sLaptop:pt-0
+          sLaptop:pt-[0.75rem]
+          mLaptop:pt-[0.938rem]
+          desktop:pt-[1.125rem]
+          largeDesktop:pt-[1.375rem]
           modalPasswordInputDiv
           ">
             <Inputs 
@@ -189,7 +194,10 @@ const index = () => {
           mobile:gap-[0.895rem]
           sMobile:gap-[1.433rem]
           mMobile:gap-[1.719rem]
-          sLaptop:gap-3 
+          sLaptop:gap-[0.733rem] 
+          mLaptop:gap-[0.917rem]
+          desktop:gap-[1.1rem]
+          largeDesktop:gap-[1.375rem]
 
           pt-[1.465rem]
           pb-[1.904rem]  
@@ -199,33 +207,46 @@ const index = () => {
           sMobile:pb-[4.063rem]
           mMobile:pt-[3.75rem]
           mMobile:pb-[4.875rem]
-          sLaptop:py-5 
-          desktop:py-9 
+          sLaptop:pt-[1.152rem] 
+          sLaptop:pb-[1.519rem]
+          mLaptop:pt-[1.375rem]
+          mLaptop:pb-[1.833rem]
+          desktop:pt-[1.65rem]
+          desktop:pb-[2.2rem]
+          largeDesktop:pt-[2.063rem]
+          largeDesktop:pb-[2.75rem]
 
           pl-[0.733rem]
           mobile:pl-[0.954rem]
           sMobile:pl-[1.563rem]
           mMobile:pl-[1.875rem]
-          sLaptop:pl-5 
-          mLaptop:pl-7 
-          desktop:pl-9">
+          sLaptop:pl-[1.283rem]
+          mLaptop:pl-[1.604rem] 
+          desktop:pl-[1.925rem]
+          largeDesktop:pl-[2.406rem]
+          ">
             <input checked={userInfo.remember} onChange={(e)=>setUserInfo(x=>({...x,remember:e.target.checked}))} 
             className="
             w-[1.074rem] h-[1.074rem]
             mobile:w-[1.432rem] mobile:h-[1.432rem]
             sMobile:w-[2.291rem] sMobile:h-[2.291rem]
             mMobile:w-[2.75rem] mMobile:h-[2.75rem]
-            sLaptop:w-5 sLaptop:h-5 
-            desktop:w-6 desktop:h-6" type="checkbox" id="rememberMe" />
+            sLaptop:w-[0.999rem] sLaptop:h-[0.999rem] 
+            mLaptop:w-[1.249rem] mLaptop:h-[1.249rem]
+            desktop:w-[1.5rem] desktop:h-[1.5rem]
+            largeDesktop:w-[1.875rem] largeDesktop:h-[1.875rem]
+            " type="checkbox" id="rememberMe" />
             <label className="
             font-normal 
             text-[0.781rem]
             mobile:text-[1.041rem]
             sMobile:text-[1.666rem] 
             mMobile:text-[2rem] 
-            sLaptop:text-[.85rem] 
-            mLaptop:text-[1.15rem] 
-            desktop:text-xl" htmlFor="rememberMe">Remember Me</label>
+            sLaptop:text-[0.733rem] 
+            mLaptop:text-[0.917rem] 
+            desktop:text-[1.1rem]
+            largeDesktop:text-[1.375rem]
+            " htmlFor="rememberMe">Remember Me</label>
           </div>
           <div  className='flex justify-center
           desktop:scale-95
@@ -237,13 +258,11 @@ const index = () => {
           sMobile:pb-[8.894rem] 
           mMobile:pt-[4.875rem]
           mMobile:pb-[10.673rem]
-          sLaptop:pt-[1.4rem] 
-          sLaptop:pb-[2rem] 
-          mLaptop:pt-[1.6rem] 
-          desktop:pt-[1.70rem] 
-          desktop:pb-[2.4rem] 
-          largeDesktop:pt-[2rem] 
-          largeDesktop:pb-[2.75rem]'>
+          sLaptop:pt-[0rem] 
+          sLaptop:pb-[2.355rem] 
+          mLaptop:pb-[2.939rem]
+          desktop:pb-[3.528rem] 
+          largeDesktop:pb-[4.409rem ]'>
             <CreateAccountBtn message="Login" fn={()=>{checkInputs()}} />
           </div>    
         </form>
@@ -257,6 +276,7 @@ const index = () => {
       mobile:h-[4.004rem]
       sMobile:h-[6.406rem]
       mMobile:h-[7.688rem]
+      sLaptop:h-auto
       sLaptop:relative ">
         <Footer />
       </div>

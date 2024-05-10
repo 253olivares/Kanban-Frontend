@@ -11,23 +11,6 @@ const Button = memo(({message}: {message:string}) => {
           site-borders
           text-PrimaryWhite
 
-          min-w-[5.479rem]
-          mobile:min-w-[7.306rem]
-          sMobile:min-w-[11.689rem]
-          mMobile:min-w-[14.028rem]
-                
-          sLaptop:min-w-[7.188rem]
-          mLaptop:min-w-[8.438rem]
-          desktop:min-w-[9.375rem] 
-
-          text-[0.912rem]
-          mobile:text-[1.216rem]
-          sMobile:text-[1.946rem]
-          mMobile:text-[2.335rem]
-          sLaptop:text-lg 
-          mLaptop:text-[1.375rem]
-          desktop:text-[1.406rem] 
-
           font-bold
 
           rounded-[0.488rem]
@@ -70,16 +53,34 @@ const Button = memo(({message}: {message:string}) => {
             mLaptop:rounded-[0.438rem] 
             desktop:rounded-lg 
 
+            min-w-[5.479rem]
+            mobile:min-w-[7.306rem]
+            sMobile:min-w-[11.689rem]
+            mMobile:min-w-[14.028rem]
+            sLaptop:min-w-0
+            sLaptop:w-[5.500rem]
+            mLaptop:w-[6.875rem]
+            desktop:w-[8.250rem]
+            largeDesktop:w-[10.313rem]
+
             h-[1.566rem]
             mobile:h-[2.088rem]
             sMobile:h-[3.34rem]
             mMobile:h-[4.008rem]
-            sLaptop:h-auto
-            sLaptop:py-1 
-            desktop:py-2 
-            sLaptop:px-[0.625rem] 
-            mLaptop:px-3 
-            desktop:px-4'>
+            sLaptop:h-[1.500rem]
+            mLaptop:h-[1.875rem]
+            desktop:h-[2.250rem]
+            largeDesktop:h-[2.813rem]
+            
+            text-[0.912rem]
+            mobile:text-[1.216rem]
+            sMobile:text-[1.946rem]
+            mMobile:text-[2.335rem]
+            sLaptop:text-[0.933rem]
+            mLaptop:text-[1.166rem]
+            desktop:text-[1.4rem] 
+            largeDesktop:text-[1.75rem] 
+            '>
                 {message}
             </span>
       </button>

@@ -44,21 +44,24 @@ const index = memo(({status}:{status:number}) => {
     mobile:gap-[0.966rem]
     sMobile:gap-[1.546rem] 
     mMobile:gap-[1.856rem]
-    sLaptop:gap-5 
+    sLaptop:gap-[0.784rem]
+    mLaptop:gap-[0.98rem]
+    desktop:gap-[1.176rem]
+    largeDesktop:gap-[1.471rem]
 
     mb-[0.359rem]
     mobile:mb-[0.456rem]
     sMobile:mb-[0.729rem]
     mMobile:mb-[0.875rem]
-    sLaptop:mb-0
+    sLaptop:mb-[0.379rem]
+    mLaptop:mb-[0.492rem]
+    desktop:mb-[0.569rem]
+    largeDesktop:mb-[0.723rem]
 
     items-center'>
       <div className='
       flex 
-      sLaptop:my-[.25rem] 
-      mLaptop:my-[.3rem]
-      desktop:my-2 
-      largeDesktop:my-[.6rem] '>
+       '>
         {
           Object.entries(svgArray).map(([k,v], index)=> 
             <img className={`
@@ -69,17 +72,19 @@ const index = memo(({status}:{status:number}) => {
             sMobile:ml-[-0.499rem]
             mMobile:ml-[-.6rem]
 
-            sLaptop:ml-[-.3rem]
-            desktop:ml-[-.6rem]
+            sLaptop:ml-[-0.213rem]
+            mLaptop:ml-[-0.266rem]
+            desktop:ml-[-0.32rem]
+            largeDesktop:ml-[-.4rem]
 
             h-[0.702rem] 
             mobile:h-[0.889rem]
             sMobile:h-[1.423rem] 
             mMobile:h-[1.7075rem]
-            sLaptop:h-[.8rem]
-            mLaptop:h-[1.1rem]
-            desktop:h-[1.35rem]
-            largeDesktop:h-[1.45rem]
+            sLaptop:h-[0.722rem]
+            mLaptop:h-[0.902rem]
+            desktop:h-[1.083rem]
+            largeDesktop:h-[1.353rem]
 
             ${
               status === 1 ? index < 2 ? 'opacity-100' : 'opacity-25' : ''
@@ -103,9 +108,10 @@ const index = memo(({status}:{status:number}) => {
        mobile:text-[0.773rem]
        sMobile:text-[1.237rem]
        mMobile:text-[1.484rem]
-       sLaptop:text-[.85rem]
-       mLaptop:text-[1.1rem]
-       desktop:text-[1.25rem]
+       sLaptop:text-[0.628rem]
+       mLaptop:text-[0.784rem]
+       desktop:text-[0.941rem]
+       largeDesktop:text-[1.176rem]
        ${status == 1 && 'text-ThemeRed' }
        ${status == 2 && 'text-ThemeOrange' }
        ${status == 3 && 'text-[#30DD11]' }

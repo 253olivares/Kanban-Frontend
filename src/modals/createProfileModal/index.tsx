@@ -217,15 +217,19 @@ const index = () => {
     h-auto
 
     min-h-screen
+    sLaptop:min-h-0
 
+    sLaptop:h-auto
 
-    sLaptop:h-auto  
-    sLaptop:w-[31.5rem] 
-    mLaptop:w-[38rem]
-    desktop:w-[39.663rem] 
-    largeDesktop:w-[42.5rem] 
+    sLaptop:w-[24.999rem] 
+    mLaptop:w-[31.249rem]
+    desktop:w-[37.5rem] 
+    largeDesktop:w-[46.875rem] 
 
-    sLaptop:rounded-[0.906rem] 
+    sLaptop:rounded-[0.471rem] 
+    mLaptop:rounded-[0.588rem]
+    desktop:rounded-[0.706rem]
+    largeDesktop:rounded-[0.883rem]
 
     overflow-y-scroll 
     no-scrollbar 
@@ -256,35 +260,30 @@ const index = () => {
         sMobile:pb-[2.364rem]
         mMobile:pt-[4.813rem]
         mMobile:pb-[2.813rem]
-        sLaptop:mt-[1.65rem]
-        sLaptop:mb-[1rem]
-        mLaptop:mt-[2.4rem]
-        mLaptop:mb-[1.5rem]
-        desktop:mt-[2.5rem]
-        desktop:mb-[1.5rem]
+        sLaptop:pt-[1.569rem]
+        sLaptop:pb-[1.354rem]
+        mLaptop:pt-[1.961rem]
+        mLaptop:pb-[1.678rem]
+        desktop:pt-[2.353rem]
+        desktop:pb-[2.001rem]
+        largeDesktop:pt-[2.943rem]
+        largeDesktop:pb-[2.549rem]
 
         text-[1.367rem]
         mobile:text-[1.822rem]
         sMobile:text-[2.916rem]
         mMobile:text-[3.5rem]
-        sLaptop:text-[1.4rem]
-        mLaptop:text-[2rem]
-        desktop:text-[2.375rem]
-        largeDesktop:text-[2.5rem]
+        sLaptop:text-[1.255rem]
+        mLaptop:text-[1.569rem]
+        desktop:text-[1.883rem]
+        largeDesktop:text-[2.353rem]
         '>Create an Account</h1>
         <form className='
             flex 
             flex-col 
 
-            sLaptop:gap-[.2rem]
-            mLaptop:gap-[.3rem]
-            desktop:gap-[.35rem]
-
             px-[13.02%]
-            sLaptop:px-[3.25rem]
-            mLaptop:px-[4.2rem]
-            desktop:px-[4.5rem] 
-
+            sLaptop:px-[11.5%]
             font-normal
 
         ' onSubmit={(e)=> e.preventDefault()}>
@@ -293,9 +292,11 @@ const index = () => {
             flex 
             flex-col 
             sLaptop:flex-row 
-            sLaptop:gap-[.4rem] 
-            mLaptop:gap-[.6rem] 
-            desktop:gap-[.75rem]'>
+            sLaptop:gap-[0.439rem] 
+            mLaptop:gap-[0.549rem] 
+            desktop:gap-[0.659rem]
+            largeDesktop:gap-[0.824rem]
+            '>
                 <div className='modalHalfInputDiv
                  pt-[0.488rem]
                  mobile:pt-[0.651rem]
@@ -338,10 +339,15 @@ const index = () => {
             flex 
             flex-col 
             sLaptop:flex-row 
-            sLaptop:gap-[.4rem] 
-            mLaptop:gap-[.6rem] 
-            desktop:gap-[.75rem]
-            
+            sLaptop:gap-[0.439rem] 
+            mLaptop:gap-[0.549rem] 
+            desktop:gap-[0.659rem]
+            largeDesktop:gap-[0.824rem]
+
+            sLaptop:pt-[0.251rem]
+            mLaptop:pt-[0.314rem]
+            desktop:pt-[0.376rem]
+            largeDesktop:pt-[0.471rem]
             '>
                 <div className='modalHalfInputDiv 
                  pt-[0.488rem]
@@ -386,7 +392,10 @@ const index = () => {
              mobile:pt-[0.651rem]
              sMobile:pt-[1.042rem]
              mMobile:pt-[1.25rem]
-             sLaptop:pt-0
+             sLaptop:pt-[0.251rem]
+             mLaptop:pt-[0.314rem]
+             desktop:pt-[0.376rem]
+             largeDesktop:pt-[0.471rem]
             '>
                     <Inputs 
                     className='modalInputs'
@@ -406,13 +415,19 @@ const index = () => {
             mobile:pt-[0.651rem]
             sMobile:pt-[1.042rem]
             mMobile:pt-[1.25rem]
-            sLaptop:pt-0
+            sLaptop:pt-[0.251rem]
+            mLaptop:pt-[0.314rem]
+            desktop:pt-[0.376rem]
+            largeDesktop:pt-[0.471rem]
 
             pb-[0.61rem]
             mobile:pb-[0.814rem]
             sMobile:pb-[1.302rem]
             mMobile:pb-[1.563rem]
-            sLaptop:pb-0
+            sLaptop:pb-[0.516rem]
+            mLaptop:pb-[0.519rem]
+            desktop:pb-[0.524rem]
+            largeDesktop:pb-[0.779rem]
             '>
                     <Inputs 
                     ref={repass}
@@ -440,10 +455,10 @@ const index = () => {
             mobile:pt-[2.014] mobile:pb-[2.019rem]
             sMobile:pt-[3.222rem] sMobile:pb-[3.855rem] 
             mMobile:pt-[3.866rem] mMobile:pb-[3.876rem]
-            sLaptop:pt-[1.4rem] sLaptop:pb-[2rem] 
-            mLaptop:pt-[1.6rem] 
-            desktop:pt-[1.70rem] desktop:pb-[2.4rem] 
-                largeDesktop:pt-[2rem] largeDesktop:pb-[2.75rem]'>
+            sLaptop:pt-[1.261rem] sLaptop:pb-[1.536rem] 
+            mLaptop:pt-[1.607rem] mLaptop:pb-[1.919rem]
+            desktop:pt-[1.829rem] desktop:pb-[2.303rem] 
+            largeDesktop:pt-[2.349rem] largeDesktop:pb-[2.879rem]'>
                 <CreateAccountButton message="Create Account" fn={()=>{checkInputs()}} />
             </div>
         </form>
@@ -454,10 +469,11 @@ const index = () => {
     bottom-[0]
     w-full
     h-[3.026rem]
-      mobile:h-[4.004rem]
-      sMobile:h-[6.406rem]
-      mMobile:h-[7.688rem]
-      sLaptop:relative 
+    mobile:h-[4.004rem]
+    sMobile:h-[6.406rem]
+    mMobile:h-[7.688rem]
+    sLaptop:relative 
+    sLaptop:h-auto
     '>
          <Footer />
     </div>
