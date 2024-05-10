@@ -1,4 +1,4 @@
-import { getMobileModal, getModalStatus, closeMobileModal } from '../../reduxStore/modal/modalSlice';
+import { getMobileModal, getModalStatus } from '../../reduxStore/modal/modalSlice';
 import { useAppSelector } from '../../reduxStore/hook';
 import {memo, lazy} from 'react';
 
