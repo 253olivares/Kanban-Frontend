@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import { store } from './reduxStore/store.tsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+
 // @ts-ignore ignore this component I keep loading it in for when I want to test a component and develope it
 import './index.css';
 
