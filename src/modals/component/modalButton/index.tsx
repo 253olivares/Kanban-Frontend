@@ -8,6 +8,16 @@ const index = ({message,fn}:{message:string,fn: ()=>void}) => {
     site-borders
     text-PrimaryWhite
 
+    font-bold
+
+    rounded-[0.488rem]
+    mobile:rounded-[0.651rem]
+    sMobile:rounded-[1.041rem]
+    mMobile:rounded-[1.25rem]
+    sLaptop:rounded-lg
+    mLaptop:rounded-[0.625rem]
+    desktop:rounded-xl 
+
     min-w-[7.661rem]
     mobile:min-w-[10.214rem]
     sMobile:min-w-[16.343rem]
@@ -17,34 +27,13 @@ const index = ({message,fn}:{message:string,fn: ()=>void}) => {
     desktop:min-w-[11.211rem]
     largeDesktop:min-w-[14.014rem]
 
-    text-[0.912rem]
-    mobile:text-[1.216rem]
-    sMobile:text-[1.946rem]
-    mMobile:text-[2.335rem]
-    sLaptop:text-[0.848rem]
-    mLaptop:text-[1.059rem]
-    desktop:text-[1.272rem]
-    largeDesktop:text-[1.858rem]
-
-    font-bold
-
     p-[0.175rem]
     mobile:p-[0.234rem]
     sMobile:p-[0.374rem]
     mMobile:p-[.45rem]
-    sLaptop:p-[0.159rem]
-    mLaptop:p-[0.199rem]
-    desktop:p-[0.24rem]
-    largeDesktop:p-[.3rem]
-
-    rounded-[0.585rem]
-    mobile:rounded-[0.781rem]
-    sMobile:rounded-[1.249rem]
-    mMobile:rounded-[1.5rem]
-    sLaptop:rounded-[0.612rem]
-    mLaptop:rounded-[0.766rem]
-    desktop:rounded-[0.92rem]
-    largeDesktop:rounded-[1.15rem]
+    sLaptop:p-[2.4px] 
+    mLaptop:p-[0.175rem]
+    desktop:p-[.2rem]
 
     transition-[box-shadow] 
     ease-in-out
@@ -54,13 +43,22 @@ const index = ({message,fn}:{message:string,fn: ()=>void}) => {
     >
       <span
       className="
-      flex justify-center
-      items-center
+    flex justify-center
+    items-center
 
       w-full
 
       bg-SpaceBlue 
       active:bg-SpaceBlueSelected 
+
+      rounded-[0.417rem]
+      mobile:rounded-[0.556rem]
+      sMobile:rounded-[0.889rem]
+      mMobile:rounded-[1.068rem]
+      sLaptop:rounded-md 
+      mLaptop:rounded-[0.438rem] 
+      desktop:rounded-lg 
+
       sLaptop:px-[0.45rem]
       mLaptop:px-[0.578rem]
       desktop:px-[0.75rem]
@@ -75,14 +73,18 @@ const index = ({message,fn}:{message:string,fn: ()=>void}) => {
       desktop:h-[2.75rem]
       largeDesktop:h-[3.438rem]
 
-      rounded-[0.417rem]
-      mobile:rounded-[0.556rem]
-      sMobile:rounded-[0.889rem]
-      mMobile:rounded-[1.068rem]
-      sLaptop:rounded-[0.533rem]
-      mLaptop:rounded-[0.666rem]
-      desktop:rounded-[0.8rem]
-      largeDesktop:rounded-[1rem]
+      text-[0.912rem]
+      mobile:text-[1.216rem]
+      sMobile:text-[1.946rem]
+      mMobile:text-[2.335rem]
+      sLaptop:text-[0.848rem]
+      sLaptop:leading-[1.833rem]
+      mLaptop:text-[1.059rem]
+      mLaptop:leading-[2.291rem]
+      desktop:text-[1.272rem]
+      desktop:leading-[2.75rem]
+      largeDesktop:text-[1.858rem]
+      largeDesktop:leading-[3.438rem]
       "
       >
         {message}

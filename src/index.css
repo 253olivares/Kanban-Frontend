@@ -47,6 +47,11 @@
         conic-gradient(at 45% -2%, var(--rThemePurple) 23%, var(--rThemeDarkBlue) 55%, var(--rThemeBlue) 80%);
 
     }
+    .glass-gradient {
+        background: 
+        linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%))
+        ;
+    }
     .conic-gradient {
         background:  
             linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%)),
@@ -54,6 +59,9 @@
     }
     .linear-gradientFooter {
         background: -webkit-linear-gradient(360deg, var(--rThemeRed) 75%, var(--rThemeOrange));
+    }
+    .hoverBlue{
+        background:-webkit-linear-gradient(360deg, var(--rSelectorBlue) 50%, var(--rSelectorBlue));
     }
     .linear-gradientFooter2 {
         background: -webkit-linear-gradient(360deg, var(--rThemeRed) 50%, var(--rThemeOrange));

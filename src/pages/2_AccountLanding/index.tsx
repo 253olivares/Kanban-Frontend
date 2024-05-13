@@ -1,10 +1,17 @@
+import { memo } from 'react';
+import AccountSettingModal from '../components/accountSettingModal';
 
-const index = () => {
+const index = memo(() => {
   return (
-    <div className="relative">
-
+    <div className="
+    relative
+    bg-SpaceBlue 
+    flex-grow
+    overflow-hidden
+    ">
+      <AccountSettingModal />
     </div>
   )
-}
+})
 
 export default index

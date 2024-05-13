@@ -78,7 +78,7 @@ const index = ({reqs}: {reqs:Record<string,Boolean>}) => {
             mLaptop:text-[0.833rem] 
             desktop:text-[1rem]
             largeDesktop:text-[1.25rem]
-            leading-snug'>12 Characters</p>
+            leading-snug'>8 Characters</p>
           </div>
           <div className='
           flex items-center 

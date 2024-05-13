@@ -1,15 +1,18 @@
 import {motion} from 'framer-motion';
 import { useState } from 'react';
 
+import { checkLogin } from '../../reduxStore/users/userSlice';
 import CreateAccountBtn from '../component/modalButton';
 import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
+import { useAppDispatch } from '../../reduxStore/hook';
 
 
 const index = () => {
+  const dispatch = useAppDispatch();
 
   const [userInfo, setUserInfo] = useState({
-    username: '',
+    email: '',
     password: '',
     remember: false
   })
@@ -37,22 +40,26 @@ const index = () => {
   }
 
   const checkInputs = () => {
-    let username = userInfo.username.trim();
+    let email = userInfo.email.trim();
     let password = userInfo.password.trim();
     let remember = userInfo.remember;
-    if(username !== '' && password !== '') {
-      let sanitizedUsername = sanitize(username);
+    if(email !== '' && password !== '') {
+      console.log('test1')
       let sanitizedPassword = sanitize(password);
-      alert(`User input information:
-        uername: ${sanitizedUsername}
-        password:${sanitizedPassword}
-        remember:${remember}
-      `)
+      console.log(email,sanitizedPassword,remember)
+
+      dispatch(checkLogin({
+        email:email,
+        password:sanitizedPassword,
+        remember:remember
+      }))
+
       setUserInfo({
-        username: '',
+        email: '',
         password: '',
         remember: false
       })
+
     } else {
       alert("Please make sure to input a username and password")
     }
@@ -153,12 +160,12 @@ const index = () => {
           <div className="modalPasswordInputDiv">
             <Inputs 
             className="modalInputs"
-            id="username"
+            id="loginEmail"
             type="text"
-            label="Username"
-            value={userInfo.username}
+            label="Email"
+            value={userInfo.email}
             func={(e:React.ChangeEvent<HTMLInputElement>)=> {
-              setUserInfo(x=> ({...x,username:e.target.value}))
+              setUserInfo(x=> ({...x,email:e.target.value}))
             }}
             />
           </div>

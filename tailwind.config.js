@@ -29,8 +29,10 @@ export default {
         'desktop': '1536px',
         // => @media (min-width: 1536px) { ... }
 
-        'largeDesktop': '1830px'
+        'largeDesktop': '1830px',
         // => @media (min-width: 1830px) { ... }
+
+        '4k': '2560px'
       },
       colors: {
         "PrimaryWhite" : "var(--rPrimaryWhite)",

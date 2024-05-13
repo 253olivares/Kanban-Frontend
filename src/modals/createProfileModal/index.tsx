@@ -1,4 +1,7 @@
+import { createAccount } from '../../reduxStore/users/userSlice';
 import {useState, useLayoutEffect, useRef } from 'react';
+import { checkIfEmailExists } from '../../customLogic';
+import { useAppDispatch } from '../../reduxStore/hook';
 import {motion} from 'framer-motion';
 
 import PasswordStrength from './components/passwordStrength';
@@ -7,7 +10,12 @@ import PasswordReq from './components/passwordRequirments';
 import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
 
+
+
 const index = () => {
+
+    const dispatch = useAppDispatch();
+
     // create a ref to allow us to motify our retypepassword input
     const repass = useRef<HTMLInputElement>(null)
 
@@ -45,7 +53,7 @@ const index = () => {
         const specialChar = `~\`!@#$%^&*()_-+={[}]|\:;"'<,>.?/`
         const leastOneNumber = '0123456789'
 
-        if (passwordSnapshot.length >= 12) {
+        if (passwordSnapshot.length >= 8) {
           totalPoints = totalPoints + 1;
           req = {
             ...req,
@@ -178,24 +186,40 @@ const index = () => {
         const sanitizedLastname = sanitize(lastname);
         const sanitizedUsername = sanitize(username);
 
-        if(passwordMatch && emailValid) {
-            alert(`Your information is:
-            firstname: ${sanitizedFirstname}
-            lastname: ${sanitizedLastname}
-            username: ${sanitizedUsername}
-            email:${email}
-            password:${sanitizedPassword}
-            `)
-            setUserInfo({
-                firstname: '',
-                lastname: '',
-                username: '',
-                email: '',
-                password: '',
-                retypePassword: ''
-            })
+        const match = checkIfEmailExists(email);
+
+        if(!match) {
+            if (firstname !== '' || lastname !== '' || username !== '' || email !== '' || password !== '' ) {
+                if(sanitizedPassword.length >= 20) {
+                    alert('Please make sure your password is not longer than 20 characters!')
+                } else{
+                    if(passwordMatch && emailValid) {
+        
+                        dispatch(createAccount({
+                            firstname: sanitizedFirstname, 
+                            lastname: sanitizedLastname,
+                            username: sanitizedUsername,
+                            email: email,
+                            password: sanitizedPassword
+                        }));
+        
+                        setUserInfo({
+                            firstname: '',
+                            lastname: '',
+                            username: '',
+                            email: '',
+                            password: '',
+                            retypePassword: ''
+                        })
+                    } else {
+                        alert("Please make sure your passwords match and email is valid!")
+                    }
+                }   
+            } else {
+                alert('Please make sure to fill out all fields!');
+            }
         } else {
-            alert("Please make sure your passwords match and email is valid!")
+            alert('Email already in use please try a different email!')
         }
     }
 

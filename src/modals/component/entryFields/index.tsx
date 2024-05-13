@@ -8,7 +8,7 @@ const index = forwardRef<HTMLInputElement|null,{className:string, id:string, typ
   return (
     <Fragment>
         <label htmlFor={id}>{label}:</label>
-        <input ref={ref} onChange={(e)=> func(e)} value={value} className={className} id={id} type={type} required />
+        <input ref={ref} onChange={(e)=> func(e)} value={value} className={className} id={id} type={type} />
     </Fragment>
   )
 })

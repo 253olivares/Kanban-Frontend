@@ -13,6 +13,7 @@ const index = memo(() => {
     relative
     px-[6.5%]
     sLaptop:px-0
+    mx-auto
     ">
        <div className="
        w-full
