@@ -188,8 +188,15 @@ const index = () => {
 
         const match = checkIfEmailExists(email);
 
+        console.log('sanitizedFirstname:',sanitizedFirstname);
+        console.log('sanitizsedLastname',sanitizedLastname);
+        console.log('sanitizedUsername:',sanitizedUsername);
+        console.log('sanitizedPassword:',sanitizedPassword)
+
         if(!match) {
-            if (firstname !== '' || lastname !== '' || username !== '' || email !== '' || password !== '' ) {
+            if (sanitizedFirstname === '' || sanitizedLastname === '' || sanitizedUsername === '' || email === '' || sanitizedPassword === '' ) {
+                alert('Please make sure to fill out all fields!');
+            } else {
                 if(sanitizedPassword.length >= 20) {
                     alert('Please make sure your password is not longer than 20 characters!')
                 } else{
@@ -215,8 +222,6 @@ const index = () => {
                         alert("Please make sure your passwords match and email is valid!")
                     }
                 }   
-            } else {
-                alert('Please make sure to fill out all fields!');
             }
         } else {
             alert('Email already in use please try a different email!')
@@ -258,6 +263,7 @@ const index = () => {
     overflow-y-scroll 
     no-scrollbar 
     sLaptop:overflow-hidden
+    sLaptop:scale-90
     ">
     <div
      className='

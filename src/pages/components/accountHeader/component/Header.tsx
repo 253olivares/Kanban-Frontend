@@ -1,9 +1,13 @@
 import {user} from '../../../../reduxStore/users/userSlice';
 import { useNavigate } from 'react-router-dom';
 import icon from '/assets/Logo_Export.svg';
+import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
+import { getAccountSettings, openAccountModal } from '../../../../reduxStore/modal/modalSlice';
 
 // pass out user information to our header
 const Header = ({user}:{user:user}) => {
+    const accountSettings = useAppSelector(getAccountSettings);
+    const dispatch = useAppDispatch();
     const navigate = useNavigate();
   return (
     <div className={`
@@ -56,21 +60,32 @@ const Header = ({user}:{user:user}) => {
             src={icon} alt="" />
         </div>
         {/* account icon */}
-        <div className='
-        p-[0.071rem]
-        mobile:p-[0.095rem]
-        sMobile:p-[0.153rem]
-        mMobile:p-[0.183rem
-        sLaptop:p-[0.113rem]
-        mLaptop:p-[0.141rem]
-        desktop:p-[0.169rem]
-        largeDesktop:p-[0.211rem]
-        4k:p-[0.281rem]
-        linear-gradientFooter
-        sLaptop:hover:hoverBlue
-        sLaptop:hover:cursor-pointer
-        rounded-full 
-        '>
+        <div 
+        onClick={()=> {dispatch(openAccountModal())}}
+        className={`
+         p-[0.071rem]
+         mobile:p-[0.095rem]
+         sMobile:p-[0.153rem]
+         mMobile:p-[0.183rem
+         sLaptop:p-[0.113rem]
+         mLaptop:p-[0.141rem]
+         desktop:p-[0.169rem]
+         largeDesktop:p-[0.211rem]
+         4k:p-[0.281rem]
+         ${
+            accountSettings ?
+            `
+            hoverBlue
+            ` 
+            :
+            `
+            linear-gradientFooter
+            sLaptop:hover:hoverBlue
+            `
+         }
+         sLaptop:hover:cursor-pointer
+         rounded-full 
+        `}>
             <img 
             className='
             w-[1.587rem]

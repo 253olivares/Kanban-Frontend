@@ -45,27 +45,31 @@
     .conic-gradient-noshade {
         background:  
         conic-gradient(at 45% -2%, var(--rThemePurple) 23%, var(--rThemeDarkBlue) 55%, var(--rThemeBlue) 80%);
-
     }
+
     .glass-gradient {
         background: 
-        linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%))
-        ;
+        linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%));
     }
+
     .conic-gradient {
         background:  
             linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%)),
             conic-gradient(at 45% -2%, var(--rThemePurple) 23%, var(--rThemeDarkBlue) 55%, var(--rThemeBlue) 80%);
     }
+
     .linear-gradientFooter {
         background: -webkit-linear-gradient(360deg, var(--rThemeRed) 75%, var(--rThemeOrange));
     }
+
     .hoverBlue{
         background:-webkit-linear-gradient(360deg, var(--rSelectorBlue) 50%, var(--rSelectorBlue));
     }
+
     .linear-gradientFooter2 {
         background: -webkit-linear-gradient(360deg, var(--rThemeRed) 50%, var(--rThemeOrange));
     }
+
     .text-linear-gradient {
         font-weight: 700;
         background: -webkit-linear-gradient(339deg, var(--rThemeRed) 25%, var(--rThemeOrange));
@@ -178,6 +182,10 @@
 
     .customShadow {
         box-shadow: 0 0.5rem 1rem 0 rgba(0,0,0,.5);
+    }
+
+    .dropDownShadow {
+        box-shadow: 0 1.176rem 2.353rem 0 rgba(0,0,0,.5);
     }
 
     .animationDelay1s {

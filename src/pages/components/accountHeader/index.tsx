@@ -2,10 +2,10 @@ import { checkRemembered, getUser } from '../../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
 import { Link, useNavigate } from 'react-router-dom';
 import { Outlet } from 'react-router-dom';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect, useLayoutEffect, memo } from 'react';
 import Header from './component/Header';
 
-const index = () => {
+const index = memo(() => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -103,6 +103,6 @@ const index = () => {
         }
       </main>
   )
-}
+})
 
 export default index  

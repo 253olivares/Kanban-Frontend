@@ -6,14 +6,16 @@ import { RootState } from "../store";
 type initialStateType = {
     openModal:boolean,
     mobileModal:boolean,
-    modal: 'logIn' | 'createProfile' | 'profile' | ''
-};
+    modal: 'logIn' | 'createProfile' | 'profile' | '',
+    accountSettings:boolean
+}
 
 const initialState: initialStateType = {
-        openModal: false,
-        mobileModal:false,
-        modal:''
-    }
+    openModal: false,
+    mobileModal:false,
+    modal:'',
+    accountSettings:false,
+}   
 
 // create a slice of our state
 const modalSlice = createSlice({
@@ -40,6 +42,12 @@ const modalSlice = createSlice({
         },
         closeMobileModal(state){
             state.mobileModal = false;
+        },
+        openAccountModal(state) {
+            state.accountSettings = true;
+        },
+        closeAccountModal(state){
+            state.accountSettings = false
         }
     }
 })
@@ -48,7 +56,8 @@ const modalSlice = createSlice({
 export const getModalStatus = (state:RootState) => state.modal.openModal;
 export const getMobileModal = (state:RootState) => state.modal.mobileModal;
 export const getModalType = (state:RootState) => state.modal.modal;
+export const getAccountSettings = (state:RootState) => state.modal.accountSettings;
 
-export const {openLogin, closeModal, openCreateProfile, openMobileModal, closeMobileModal} = modalSlice.actions;
+export const {openLogin, closeModal, openCreateProfile, openMobileModal, closeMobileModal,openAccountModal,closeAccountModal} = modalSlice.actions;
 
 export default modalSlice.reducer;

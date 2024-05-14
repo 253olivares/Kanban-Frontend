@@ -85,13 +85,13 @@ const index = () => {
 
     overflow-y-scroll
     no-scrollbar
+    sLaptop:scale-90
 
     sLaptop:min-h-0 
     sLaptop:w-[25rem] 
     mLaptop:w-[31.247rem]  
     desktop:w-[37.5rem] 
     largeDesktop:w-[46.875rem]
-   
     
     sLaptop:rounded-[0.5rem]
     mLaptop:rounded-[0.625rem]

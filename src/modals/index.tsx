@@ -40,6 +40,7 @@ const index = memo(() => {
 
     overflow-x-hidden
     overflow-y-auto
+    no-scrollbar
 
     sLaptop:flex 
     sLaptop:justify-center 
