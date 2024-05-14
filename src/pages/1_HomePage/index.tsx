@@ -1,4 +1,4 @@
-import { getMobileModal, getModalStatus } from '../../reduxStore/modal/modalSlice';
+import { closeModal, getMobileModal, getModalStatus } from '../../reduxStore/modal/modalSlice';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
 import {memo, lazy, useLayoutEffect, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
@@ -29,6 +29,7 @@ const index = memo(():JSX.Element => {
   useEffect(()=> {
     if(user){
       console.log('User found page should redirect!');
+      dispatch(closeModal());
       navigate(`/u/${user.u_id}`);
     }
   },[user])

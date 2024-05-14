@@ -19,10 +19,7 @@ const index = memo(() => {
   // get the modal we want to bring up
   const modal = useAppSelector(getModalType);
 
-    // react hook by ui.dev that will over write the body overflow property
-    // The hook as a use effect that overwrites our property and save its previous value then when the component unmounts it 
-    // sets the overflow back to its original value
-    useLockBodyScroll();
+ 
 
   return (
     <motion.div
