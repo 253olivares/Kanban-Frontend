@@ -71,7 +71,6 @@ type KanBanStorage = {
         taskList:task[],
         listList:list[],
         boardList:board[],
-        sensitiveInfoUsers:user[],
         workspaceList:workspace[],
         commentList:comments[]
 }
@@ -90,7 +89,6 @@ const appSetUp:KanBanStorage = {
         taskList:[],
         listList:[],
         boardList:[],
-        sensitiveInfoUsers:[],
         workspaceList:[],
         commentList:[]
 }
