@@ -1,8 +1,7 @@
-  import { useAppDispatch,useAppSelector  } from "../reduxStore/hook";
+import { useAppDispatch,useAppSelector  } from "../reduxStore/hook";
 import { getModalType } from "../reduxStore/modal/modalSlice";
 import { closeModal } from "../reduxStore/modal/modalSlice";
 
-import { useLockBodyScroll } from "@uidotdev/usehooks"  ;
 import {motion,AnimatePresence} from 'framer-motion';
 import { memo } from "react";
 
