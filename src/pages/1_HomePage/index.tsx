@@ -15,20 +15,22 @@ const PricingSection = lazy(()=> import('./section-3_Pricing'));
 const Footer = lazy(()=> import('./footer'));
 
 const index = memo(():JSX.Element => {
+  
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   // check to see if a user is signed in
   const user = useAppSelector(getUser);
 
   useLayoutEffect(()=> {
-    console.log('useLayoutEffectRan')
+
     // check to see if a user has their credentials saved for next login
     dispatch(checkRemembered());
   },[])
 
   useEffect(()=> {
     if(user){
-      console.log('User found page should redirect!');
+    
       dispatch(closeModal());
       navigate(`/u/${user.u_id}`);
     }

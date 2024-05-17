@@ -1,0 +1,109 @@
+import editIcon from '/assets/Edit_Icon.svg';
+import { memo } from 'react';
+
+type propTypes = {
+    css:string,
+    edit:boolean,
+    type:string,
+    label:string,
+    value:string,
+    enableField: ()=> void,
+    changeField: (e:React.ChangeEvent<HTMLInputElement>)=> void
+}
+
+const RestrictedInputBoxes = memo(({
+  css,
+  edit,
+  type,
+  label,
+  value,
+  enableField,
+  changeField
+}:propTypes) => {
+
+  console.log(css);
+
+  return (
+    <div
+     className="
+     w-full
+     flex flex-col
+      sLaptop:gap-[0.32rem]
+      mLaptop:gap-[0.4rem]
+      desktop:gap-[0.48rem]
+      largeDesktop:gap-[0.6rem]
+     "
+    >
+        <div 
+        onClick={()=>enableField()}
+        className="
+        w-full
+        flex justify-between
+        items-center
+        sLaptop:hover:cursor-pointer
+        group
+        ">
+            <label 
+            className='
+            labelCss
+            pointer-events-none
+            group-hover:
+            '
+            htmlFor={label}>{label}:</label>
+            <img className={`
+            ${edit ?
+              `
+              opacity-100
+              ` 
+              :
+              `
+              opacity-50  
+              group
+              group-hover:opacity-100
+              `}
+            sLaptop:w-[1rem]
+            mLaptop:w-[1.25rem]
+            desktop:w-[1.5rem]
+            largeDesktop:w-[1.875rem]
+            `} src={editIcon} alt="Edit_button" />
+        </div>
+        <input 
+        onChange={(e)=> changeField(e)}
+        disabled={!edit}
+        className={`
+        ${
+          !edit && 'pointer-events-none'
+        }
+          
+        inputCss
+
+        ${
+          edit ? 
+          `
+          ring-0
+          focus:bg-PrimaryWhite
+          focus:ring-SelectorBlue
+          sLaptop:focus:ring-[0.08rem]
+          mLaptop:focus:ring-[0.1rem]
+          desktop:focus:ring-[0.12rem]
+          largeDesktop:focus:ring-[0.15rem]
+          `
+          :
+          `
+          opacity-50
+          ring
+          ring-Slate-gray
+          sLaptop:ring-[0.08rem]
+          mLaptop:ring-[0.1rem]
+          desktop:ring-[0.12rem]
+          largeDesktop:ring-[0.15rem]
+          `
+        }`}
+        value={value}
+        id={label}
+        type={type} />
+    </div>
+  )
+})
+
+export default RestrictedInputBoxes

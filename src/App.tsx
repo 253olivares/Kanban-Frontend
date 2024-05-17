@@ -3,6 +3,7 @@ import { lazy,Fragment,Suspense, useEffect  } from "react";
 import { useAppDispatch } from "./reduxStore/hook";
 import { Route, Routes } from "react-router-dom";
 
+import { AppProvider } from "./pages/appRefContext";
 import LoadingPage from './pages/components/loadingSpinner';
 import Errorpage from './pages/0_404Page';
 
@@ -34,10 +35,11 @@ function App(): JSX.Element {
   return (
     <Fragment>
       <Suspense fallback={<LoadingPage />}>
+      <AppProvider>
         <Routes>
             <Route path="/" element={<HomePage />}/>
-            {/* our heading layout */}
 
+            {/* our heading layout */}
             <Route path="u/:id" element={<LayoutAccount />} >
 
               {/* account landing page where users will arrive when they login */}
@@ -45,12 +47,13 @@ function App(): JSX.Element {
 
               {/* Workspace Page that is where the user can view all ongoing tasks */}
               <Route path="workspace/:id" element={<Workspace />}/>
-              
+                
             </Route>
 
             {/* 404 page */}
             <Route path="*" element={<Errorpage />} />
         </Routes>
+      </AppProvider>
       </Suspense>
     </Fragment>
   )

@@ -1,22 +1,17 @@
- import {motion} from 'framer-motion';
-import { useState } from 'react';
+import {motion} from 'framer-motion';
 
 import { checkLogin } from '../../reduxStore/users/userSlice';
 import CreateAccountBtn from '../component/modalButton';
 import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
-import { useAppDispatch } from '../../reduxStore/hook';
-
+import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
+import { getUserInfo, changeUserInfoEmail,changeUserInfoPassword,changeUserInfoRemember } from '../../reduxStore/users/userSlice';
 
 const index = () => {
   const dispatch = useAppDispatch();
 
-  const [userInfo, setUserInfo] = useState({
-    email: '',
-    password: '',
-    remember: false
-  })
-
+  const userInfo = useAppSelector(getUserInfo);
+ 
   // input sanitization function
   // take in string and replace each input and replace with html code
   function sanitize(string:string) {
@@ -53,13 +48,6 @@ const index = () => {
         password:sanitizedPassword,
         remember:remember
       }))
-
-      setUserInfo({
-        email: '',
-        password: '',
-        remember: false
-      })
-
     } else {
       alert("Please make sure to input a username and password")
     }
@@ -76,6 +64,9 @@ const index = () => {
     exit={{
         y:25
     }}
+    transition={{
+      duration:.3
+    }}
     className="
     relative
     bg-PrimaryWhite 
@@ -85,7 +76,6 @@ const index = () => {
 
     overflow-y-scroll
     no-scrollbar
-    sLaptop:scale-90
 
     sLaptop:min-h-0 
     sLaptop:w-[25rem] 
@@ -159,13 +149,12 @@ const index = () => {
           {/* username */}
           <div className="modalPasswordInputDiv">
             <Inputs 
-            className="modalInputs"
             id="loginEmail"
             type="text"
             label="Email"
             value={userInfo.email}
             func={(e:React.ChangeEvent<HTMLInputElement>)=> {
-              setUserInfo(x=> ({...x,email:e.target.value}))
+              dispatch(changeUserInfoEmail(e.target.value))
             }}
             />
           </div>
@@ -179,16 +168,16 @@ const index = () => {
           mLaptop:pt-[0.938rem]
           desktop:pt-[1.125rem]
           largeDesktop:pt-[1.375rem]
+          
           modalPasswordInputDiv
           ">
             <Inputs 
-            className="modalInputs"
             id="password"
             type="password"
             label="Password"
             value={userInfo.password}
             func={(e:React.ChangeEvent<HTMLInputElement>)=> {
-              setUserInfo(x=> ({...x,password:e.target.value}))
+              dispatch(changeUserInfoPassword(e.target.value))
             }}
             />
           </div>
@@ -232,7 +221,7 @@ const index = () => {
           desktop:pl-[1.925rem]
           largeDesktop:pl-[2.406rem]
           ">
-            <input checked={userInfo.remember} onChange={(e)=>setUserInfo(x=>({...x,remember:e.target.checked}))} 
+            <input checked={userInfo.remember} onChange={()=>dispatch(changeUserInfoRemember())} 
             className="
             w-[1.074rem] h-[1.074rem]
             mobile:w-[1.432rem] mobile:h-[1.432rem]
@@ -256,7 +245,7 @@ const index = () => {
             " htmlFor="rememberMe">Remember Me</label>
           </div>
           <div  className='flex justify-center
-          desktop:scale-95
+          sLaptop:scale-95
           pt-[1.904rem] 
           pb-[4.169rem] 
           mobile:pt-[2.539rem]
@@ -269,7 +258,7 @@ const index = () => {
           sLaptop:pb-[2.355rem] 
           mLaptop:pb-[2.939rem]
           desktop:pb-[3.528rem] 
-          largeDesktop:pb-[4.409rem ]'>
+          largeDesktop:pb-[4.409rem]'>
             <CreateAccountBtn message="Login" fn={()=>{checkInputs()}} />
           </div>    
         </form>

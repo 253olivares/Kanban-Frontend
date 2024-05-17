@@ -79,95 +79,6 @@
     .site-borders {
         background: -webkit-linear-gradient(305deg, var(--rThemeRed) 25%, var(--rThemeOrange));
     }
-}
-
-@layer utilities {
-
-
-    .modalPasswordInputDiv {    
-        @apply 
-        flex 
-        flex-col 
-
-        gap-[0.59rem]
-        mobile:gap-[0.784rem]
-        sMobile:gap-[1.188rem]
-        mMobile:gap-[1.438rem]
-        sLaptop:gap-[0.313rem] 
-        mLaptop:gap-[0.383rem] 
-        desktop:gap-[0.473rem] 
-        largeDesktop:gap-[0.544rem]
-
-        text-[0.878rem]
-        mobile:text-[1.171rem]
-        sMobile:text-[1.874rem] 
-        mMobile:text-[2.25rem] 
-        sLaptop:text-[0.917rem] 
-        mLaptop:text-[1.146rem] 
-        desktop:text-[1.375rem] 
-        largeDesktop:text-[1.719rem]
-        leading-none
-    }
-
-    .modalHalfInputDiv{
-        @apply 
-        flex flex-col 
-
-        gap-[0.59rem]
-        mobile:gap-[0.784rem]
-        sMobile:gap-[1.188rem]
-        mMobile:gap-[1.438rem]
-        sLaptop:gap-[0.313rem] 
-        mLaptop:gap-[0.383rem] 
-        desktop:gap-[0.473rem] 
-        largeDesktop:gap-[0.544rem]
-
-        text-[0.878rem]
-        mobile:text-[1.171rem]
-        sMobile:text-[1.874rem] 
-        mMobile:text-[2.25rem] 
-        sLaptop:text-[0.917rem] 
-        mLaptop:text-[1.146rem] 
-        desktop:text-[1.375rem] 
-        largeDesktop:text-[1.719rem]
-        leading-none
-        sLaptop:w-[calc(50%-(0.439rem/2))] 
-        mLaptop:w-[calc(50%-(0.549rem/2))] 
-        desktop:w-[calc(50%-(0.659rem/2))] 
-        largeDesktop:w-[calc(50%-(0.824rem/2))]
-    }
-
-    .modalInputs {
-        @apply 
-
-        bg-[#D9D9D9]
-
-        h-[1.562rem]
-        mobile:h-[2.083rem]
-        sMobile:h-[3.333rem]
-        mMobile:h-[4rem]
-        sLaptop:h-auto
-        sLaptop:py-[.125rme]
-        mLaptop:py-[.2rem] 
-        desktop:py-[.25rem] 
-
-        px-[3%]     
-        sLaptop:px-[.35rem]
-        mLaptop:px-[.4rem] 
-        desktop:px-[.5rem] 
-        sLaptop:leading-normal
-
-        rounded-[0.324rem]
-        mobile:rounded-[0.431rem]
-        sMobile:rounded-[0.69rem]
-        mMobile:rounded-[0.828rem]
-        sLaptop:rounded-[.25rem] 
-        
-        focus:outline-none 
-        focus:ring 
-        focus:ring-SelectorBlue 
-        focus:bg-PrimaryWhite;
-    }   
 
     /* Hide scrollbar for Chrome, Safari and Opera */
     .no-scrollbar::-webkit-scrollbar {
@@ -211,6 +122,222 @@
             animation-timing-function: cubic-bezier(0.8,0,1,1);
         }
     }
+}
+
+@layer utilities {
+
+    .labelCss{
+        @apply
+        leading-none
+        text-[0.878rem]
+        mobile:text-[1.171rem]
+        sMobile:text-[1.874rem] 
+        mMobile:text-[2.25rem]
+        sLaptop:text-[0.95rem]
+        sLaptop:leading-[1rem]
+        mLaptop:text-[1.188rem]
+        mLaptop:leading-[1.25rem]
+        desktop:text-[1.425rem]
+        desktop:leading-[1.875rem]
+        largeDesktop:text-[1.781rem]
+        largeDesktop:leading-[1.875rem]
+    }
+
+    .labelcssAdjusted{
+        @apply
+        leading-none
+        text-[0.878rem]
+        mobile:text-[1.171rem]
+        sMobile:text-[1.874rem] 
+        mMobile:text-[2.25rem]
+        sLaptop:text-[0.854rem]
+        sLaptop:leading-[0.899rem]
+        mLaptop:text-[1.067rem]
+        mLaptop:leading-[1.124rem]
+        desktop:text-[1.281rem]
+        desktop:leading-[1.349rem]
+        largeDesktop:text-[1.602rem]
+        largeDesktop:leading-[1.687rem]
+    }
+
+    .inputCss{
+        @apply
+        w-full
+
+        text-[0.878rem]
+        leading-[1.562rem]
+        mobile:text-[1.171rem]
+        mobile:leading-[2.083rem]
+        sMobile:text-[1.874rem] 
+        sMobile:leading-[3.333rem]
+        mMobile:text-[2.25rem] 
+        mMobile:leading-[4rem]
+        sLaptop:text-[.95rem]
+        mLaptop:text-[1.188rem]
+        desktop:text-[1.425rem]
+        largeDesktop:text-[1.781rem]
+        sLaptop:leading-none
+
+        h-[1.562rem]
+        mobile:h-[2.083rem]
+        sMobile:h-[3.333rem]
+        mMobile:h-[4rem]
+        sLaptop:h-auto
+        sLaptop:py-[0.2rem]
+        mLaptop:py-[0.25rem]
+        desktop:py-[0.3rem]
+        largeDesktop:py-[0.375rem]
+
+        px-[3%]  
+        sLaptop:px-[0.4rem]
+        mLaptop:px-[0.5rem]
+        desktop:px-[0.6rem]
+        largeDesktop:px-[0.75rem]
+
+        rounded-[0.324rem]
+        mobile:rounded-[0.431rem]
+        sMobile:rounded-[0.69rem]
+        mMobile:rounded-[0.828rem]
+        sLaptop:rounded-[0.304rem]
+        mLaptop:rounded-[0.38rem]
+        desktop:rounded-[0.456rem]
+        largeDesktop:rounded-[0.57rem] 
+
+        focus:outline-none
+        focus:ring
+
+        bg-[#B3B3B3]
+
+        ring-0
+        focus:bg-PrimaryWhite
+        focus:ring-SelectorBlue
+        sLaptop:focus:ring-[0.08rem]
+        mLaptop:focus:ring-[0.1rem]
+        desktop:focus:ring-[0.12rem]
+        largeDesktop:focus:ring-[0.15rem]
+    }
+
+    .profilePassReqText{
+        @apply 
+
+        sLaptop:text-[0.533rem] 
+        sLaptop:leading-[0.533rem]
+        mLaptop:text-[0.733rem]
+        mLaptop:leading-[0.733rem] 
+        desktop:text-[0.88rem]
+        desktop:leading-[0.88rem]
+        largeDesktop:text-[1.1rem]
+        largeDesktop:leading-[1.1rem]
+        leading-snug
+    }
+    .profilePassReqImg{
+        @apply
+        sLaptop:h-auto 
+        sLaptop:w-[0.533rem] 
+        mLaptop:w-[0.733rem] 
+        desktop:w-[0.88rem]
+        largeDesktop:w-[1.1rem]
+    }
+    .profilePassHolder{
+        @apply
+        flex justify-start items-start
+
+        sLaptop:gap-[0.346rem]
+        mLaptop:gap-[0.433rem]
+        desktop:gap-[0.52rem]
+        largeDesktop:gap-[0.65rem]
+    }
+
+    .modalPasswordInputDiv {    
+        @apply 
+        flex 
+        flex-col 
+
+        gap-[0.59rem]
+        mobile:gap-[0.784rem]
+        sMobile:gap-[1.188rem]
+        mMobile:gap-[1.438rem]
+        sLaptop:gap-[0.313rem] 
+        mLaptop:gap-[0.383rem] 
+        desktop:gap-[0.473rem] 
+        largeDesktop:gap-[0.544rem]
+    }
+
+    .modalHalfInputDiv{
+        @apply 
+        flex flex-col 
+
+        gap-[0.59rem]
+        mobile:gap-[0.784rem]
+        sMobile:gap-[1.188rem]
+        mMobile:gap-[1.438rem]
+        sLaptop:gap-[0.313rem] 
+        mLaptop:gap-[0.383rem] 
+        desktop:gap-[0.473rem] 
+        largeDesktop:gap-[0.544rem]
+
+        sLaptop:w-[calc(50%-(0.439rem/2))] 
+        mLaptop:w-[calc(50%-(0.549rem/2))] 
+        desktop:w-[calc(50%-(0.659rem/2))] 
+        largeDesktop:w-[calc(50%-(0.824rem/2))]
+    }
+
+    .modalInputs {
+        @apply 
+        w-full
+
+        text-[0.878rem]
+        leading-[1.562rem]
+        mobile:text-[1.171rem]
+        mobile:leading-[2.083rem]
+        sMobile:text-[1.874rem] 
+        sMobile:leading-[3.333rem]
+        mMobile:text-[2.25rem] 
+        mMobile:leading-[4rem]
+        sLaptop:text-[.95rem]
+        mLaptop:text-[1.188rem]
+        desktop:text-[1.425rem]
+        largeDesktop:text-[1.781rem]
+        sLaptop:leading-none
+
+        h-[1.562rem]
+        mobile:h-[2.083rem]
+        sMobile:h-[3.333rem]
+        mMobile:h-[4rem]
+        sLaptop:h-auto
+        sLaptop:py-[0.133rem]
+        mLaptop:py-[0.166rem]
+        desktop:py-[0.2rem]
+        largeDesktop:py-[0.25rem]
+
+        px-[3%]  
+        sLaptop:px-[0.4rem]
+        mLaptop:px-[0.5rem]
+        desktop:px-[0.6rem]
+        largeDesktop:px-[0.75rem]
+
+        rounded-[0.324rem]
+        mobile:rounded-[0.431rem]
+        sMobile:rounded-[0.69rem]
+        mMobile:rounded-[0.828rem]
+        sLaptop:rounded-[0.304rem]
+        mLaptop:rounded-[0.38rem]
+        desktop:rounded-[0.456rem]
+        largeDesktop:rounded-[0.57rem] 
+
+        focus:outline-none
+        focus:ring
+
+        bg-[#B3B3B3]
+
+        ring-0
+        focus:bg-PrimaryWhite
+        focus:ring-SelectorBlue
+        sLaptop:focus:ring-[0.08rem]
+        mLaptop:focus:ring-[0.1rem]
+        desktop:focus:ring-[0.12rem]
+        largeDesktop:focus:ring-[0.15rem]
+    }   
 
     .Home_Section1 {
         @apply 

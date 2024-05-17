@@ -1,9 +1,14 @@
 import { checkRemembered, getUser } from '../../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
-import { Link, useNavigate } from 'react-router-dom';
-import { Outlet } from 'react-router-dom';
+import { getModalStatus } from '../../../reduxStore/modal/modalSlice';
 import { useEffect, useLayoutEffect, memo } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { Outlet } from 'react-router-dom';
+
+import ModalContainer from '../../../modals';
 import Header from './component/Header';
+
 
 const index = memo(() => {
   const dispatch = useAppDispatch();
@@ -11,6 +16,8 @@ const index = memo(() => {
 
   // check to make sure a user exists and is logged in
   const user = useAppSelector(getUser);
+
+  const modalStatus = useAppSelector(getModalStatus);
 
   // a cache check to have the application ato login a user 
   // if they click on this page
@@ -34,7 +41,8 @@ const index = memo(() => {
       <main className={`
       relative 
       z-[0]
-      w-screen h-screen 
+      w-screen 
+      h-screen 
       conic-gradient-noshade 
       overflow-hidden
       flex 
@@ -54,12 +62,14 @@ const index = memo(() => {
         `
       }
       `}>
+        <AnimatePresence>
+          { modalStatus && <ModalContainer /> }
+        </AnimatePresence>
         {/* in the off change a user is not redirected 
         we have the page display different information that lets
         the user know no credentials are saved and they need to login
         */}
-        {
-          !user ?
+        {!user ?
           <>
             <h1 className='
             text-white

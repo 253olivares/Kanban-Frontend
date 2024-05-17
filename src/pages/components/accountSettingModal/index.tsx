@@ -1,20 +1,32 @@
 import { getUser, logOut } from "../../../reduxStore/users/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../reduxStore/hook";
 import {motion} from 'framer-motion';
-import { memo, useEffect, useRef } from 'react';
-import { closeAccountModal } from "../../../reduxStore/modal/modalSlice";
+import { memo, useContext, useEffect} from 'react';
+import { closeAccountModal, openProfile } from "../../../reduxStore/modal/modalSlice";
+import { AppContext } from "../../appRefContext";
 
 const index = memo(() => {
     const dispatch = useAppDispatch();
 
-    const modalRef = useRef<HTMLDivElement>(null);
+    const appContext = useContext(AppContext);
+    const {accountSettingsRef, modalRef} = appContext!;
+ 
     const user = useAppSelector(getUser);
 
     useEffect(()=> {
       const clickOnOutside = (e:MouseEvent | TouchEvent)=> {
         const element = e.target;
-        if(modalRef.current && !modalRef.current.contains(element as Node)){
-          dispatch(closeAccountModal());
+
+        if(accountSettingsRef.current && modalRef.current){
+          if(accountSettingsRef.current.contains(element as Node) || modalRef.current.contains(element as Node)){
+            console.log('clicked Inside');
+          } else {
+            dispatch(closeAccountModal());
+          }
+        } else {
+          if(accountSettingsRef.current && !accountSettingsRef.current.contains(element as Node)){
+            dispatch(closeAccountModal());
+          }
         }
       }
       window.addEventListener('click',clickOnOutside,true);
@@ -39,7 +51,7 @@ const index = memo(() => {
     transition={{
       duration:.3
     }}
-    ref={modalRef}
+    ref={accountSettingsRef}
     className="
     absolute
     top-0
@@ -236,7 +248,8 @@ const index = memo(() => {
         largeDesktop:text-[1.723rem]
         4k:text-[2.298rem]
 
-        leading-none
+        leading-tight
+        sLaptop:leading-none
 
         gap-[0.708rem]
         mobile:gap-[0.944rem]
@@ -264,7 +277,11 @@ const index = memo(() => {
         largeDesktop:pl-[0.828rem]
         4k:pl-[1.103rem]
         " >
-          <p className="
+          <p 
+          onClick={()=>{
+            dispatch(openProfile());
+          }}
+          className="
           text-center
           sLaptop:text-left
           sLaptop:hover:opacity-50

@@ -3,11 +3,12 @@ import { getModalType } from "../reduxStore/modal/modalSlice";
 import { closeModal } from "../reduxStore/modal/modalSlice";
 
 import {motion,AnimatePresence} from 'framer-motion';
-import { memo } from "react";
+import { memo, useContext } from "react";
 
 import CreateProfileModal from './createProfileModal'
 import ProfileModal from './profileModal';
 import LoginModal from './loginModal';
+import { AppContext } from "../pages/appRefContext";
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const index = memo(() => {
@@ -15,10 +16,11 @@ const index = memo(() => {
   // create a dispatch function from our redux store to trigger our reducers
   const dispatch = useAppDispatch();
 
+  const appContext = useContext(AppContext);
+  const {modalRef} = appContext!;
+
   // get the modal we want to bring up
   const modal = useAppSelector(getModalType);
-
- 
 
   return (
     <motion.div
@@ -28,6 +30,7 @@ const index = memo(() => {
     transition={{
       duration:.3
     }}
+    ref={modalRef}
     className="
     absolute
     z-20 

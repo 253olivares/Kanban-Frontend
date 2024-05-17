@@ -1,7 +1,7 @@
-import { createAccount } from '../../reduxStore/users/userSlice';
+import { changeCreateAccountEmail, changeCreateAccountFirstname, changeCreateAccountLastname, changeCreateAccountPassword, changeCreateAccountUsername, changeCreateAccountretypePassword, createAccount, getCreateAccountInfo } from '../../reduxStore/users/userSlice';
 import {useState, useLayoutEffect, useRef } from 'react';
 import { checkIfEmailExists } from '../../customLogic';
-import { useAppDispatch } from '../../reduxStore/hook';
+import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
 import {motion} from 'framer-motion';
 
 import PasswordStrength from './components/passwordStrength';
@@ -13,21 +13,13 @@ import Footer from '../component/footer';
 
 
 const index = () => {
-
     const dispatch = useAppDispatch();
 
     // create a ref to allow us to motify our retypepassword input
     const repass = useRef<HTMLInputElement>(null)
 
     // keep track of all our values that the user inputs
-    const [userInfo, setUserInfo] = useState<Record<string,string>>({
-        firstname: '',
-        lastname: '',
-        username: '',
-        email: '',
-        password: '',
-        retypePassword: ''
-    })
+    const userInfo = useAppSelector(getCreateAccountInfo);
     
     // update our password strength
     const [passwordStrength, setPasswordStrength] = useState<number>(0);
@@ -98,6 +90,7 @@ const index = () => {
         // set our new strength value
         setPasswordStrength(() => totalPoints);
     }
+
     const checkifPasswordsMatch=()=> {
         if(userInfo.retypePassword !=='')
         if(userInfo.password !== userInfo.retypePassword){
@@ -108,7 +101,6 @@ const index = () => {
             if(repass.current) {
                 repass.current.style.backgroundColor = "rgba(195,255,139,.5)"
             }
-
         }
     }
 
@@ -134,9 +126,9 @@ const index = () => {
             checkifPasswordsMatch();
         } else {
             if(repass.current)
-            repass.current.style.backgroundColor = "#d9d9d9";
+            repass.current.style.backgroundColor = "#B3B3B3";
         }
-    },[userInfo.retypePassword])
+    },[userInfo.retypePassword,userInfo.password])
     
 
     // validate our email
@@ -167,7 +159,7 @@ const index = () => {
         const reg = /[&<>"'/?$ ]/ig;
         // replace each value as its found
         return string.replace(reg, (match)=>(map[match]));
-      }
+    }
     
 
     //   final check before submitting all user information
@@ -193,38 +185,24 @@ const index = () => {
         console.log('sanitizedUsername:',sanitizedUsername);
         console.log('sanitizedPassword:',sanitizedPassword)
 
-        if(!match) {
-            if (sanitizedFirstname === '' || sanitizedLastname === '' || sanitizedUsername === '' || email === '' || sanitizedPassword === '' ) {
-                alert('Please make sure to fill out all fields!');
-            } else {
-                if(sanitizedPassword.length >= 20) {
-                    alert('Please make sure your password is not longer than 20 characters!')
-                } else{
-                    if(passwordMatch && emailValid) {
-        
-                        dispatch(createAccount({
-                            firstname: sanitizedFirstname, 
-                            lastname: sanitizedLastname,
-                            username: sanitizedUsername,
-                            email: email,
-                            password: sanitizedPassword
-                        }));
-        
-                        setUserInfo({
-                            firstname: '',
-                            lastname: '',
-                            username: '',
-                            email: '',
-                            password: '',
-                            retypePassword: ''
-                        })
-                    } else {
-                        alert("Please make sure your passwords match and email is valid!")
-                    }
-                }   
-            }
-        } else {
+        if(match){
             alert('Email already in use please try a different email!')
+        } else if (sanitizedFirstname === '' || sanitizedLastname === '' || sanitizedUsername === '' || email === '' || sanitizedPassword === ''){
+            alert('Please make sure to fill out all fields!');
+        } else if(sanitizedPassword.length >= 20){
+            alert('Please make sure your password is not longer than 20 characters!')
+        } else if (passwordStrength!== 3){
+            alert('Please make sure your password meets all its requirements!')
+        } else if (!passwordMatch || !emailValid){
+            alert("Please make sure your passwords match and email is valid!")
+        } else {
+            dispatch(createAccount({
+                firstname: sanitizedFirstname, 
+                lastname: sanitizedLastname,
+                username: sanitizedUsername,
+                email: email,
+                password: sanitizedPassword
+            }));
         }
     }
 
@@ -239,6 +217,9 @@ const index = () => {
     exit={{
         y:25
     }}
+    transition={{
+        duration:.3
+      }}
     className="
     relative
     bg-PrimaryWhite 
@@ -263,7 +244,7 @@ const index = () => {
     overflow-y-scroll 
     no-scrollbar 
     sLaptop:overflow-hidden
-    sLaptop:scale-90
+
     ">
     <div
      className='
@@ -307,6 +288,7 @@ const index = () => {
         mLaptop:text-[1.569rem]
         desktop:text-[1.883rem]
         largeDesktop:text-[2.353rem]
+        leading-none
         '>Create an Account</h1>
         <form className='
             flex 
@@ -335,14 +317,11 @@ const index = () => {
                  sLaptop:pt-0
                 '>
                     <Inputs 
-                    className='modalInputs'
                     id='fName'
                     type='text'
                     label='First Name'
-                    value={userInfo.firstName}
-                    func={(e:React.ChangeEvent<HTMLInputElement>)=>{
-                        setUserInfo(x => ({...x, firstname:e.target.value}
-                        ))}}
+                    value={userInfo.firstname}
+                    func={(e:React.ChangeEvent<HTMLInputElement>)=>dispatch(changeCreateAccountFirstname(e.target.value))}
                     />
                 </div>
                 <div className='modalHalfInputDiv
@@ -353,14 +332,11 @@ const index = () => {
                  sLaptop:pt-0
                 '>
                     <Inputs 
-                    className='modalInputs'
                     id='lName'
                     type='text'
                     label='Last Name'
                     value={userInfo.lastname}
-                    func={(e:React.ChangeEvent<HTMLInputElement>)=>{
-                        setUserInfo(x => ({...x, lastname:e.target.value}
-                        ))}}
+                    func={(e:React.ChangeEvent<HTMLInputElement>)=>dispatch(changeCreateAccountLastname(e.target.value))}
                     />
                 </div>
             </div>
@@ -387,14 +363,11 @@ const index = () => {
                  sLaptop:pt-0
                 '>
                     <Inputs 
-                    className='modalInputs'
                     id='username'
                     type='text'
                     label='Username'
                     value={userInfo.username}
-                    func={(e:React.ChangeEvent<HTMLInputElement>)=>{
-                        setUserInfo(x => ({...x, username:e.target.value}
-                        ))}}
+                    func={(e:React.ChangeEvent<HTMLInputElement>)=>dispatch(changeCreateAccountUsername(e.target.value))}
                     />
                 </div>
                 <div className='modalHalfInputDiv
@@ -405,14 +378,11 @@ const index = () => {
                  sLaptop:pt-0
                 '>
                     <Inputs 
-                    className='modalInputs'
                     id='newEmail'
                     type='email'
                     label='Email'
                     value={userInfo.email}
-                    func={(e:React.ChangeEvent<HTMLInputElement>)=>{
-                        setUserInfo(x => ({...x, email:e.target.value}
-                        ))}}
+                    func={(e:React.ChangeEvent<HTMLInputElement>)=>dispatch(changeCreateAccountEmail(e.target.value))}
                     />
                 </div>
             </div>
@@ -428,14 +398,11 @@ const index = () => {
              largeDesktop:pt-[0.471rem]
             '>
                     <Inputs 
-                    className='modalInputs'
                     id='password'
                     type='password'
                     label='Password'
                     value={userInfo.password}
-                    func={(e:React.ChangeEvent<HTMLInputElement>)=>{
-                        setUserInfo(x => ({...x, password:e.target.value}))
-                    }}
+                    func={(e:React.ChangeEvent<HTMLInputElement>)=>dispatch(changeCreateAccountPassword(e.target.value))}
                     />
             </div>
             {/* retype password */}
@@ -461,14 +428,11 @@ const index = () => {
             '>
                     <Inputs 
                     ref={repass}
-                    className='modalInputs'
                     id='retypePassword'
                     type='password'
                     label='Re-type Password'
                     value={userInfo.retypePassword}
-                    func={(e:React.ChangeEvent<HTMLInputElement>)=>{
-                        setUserInfo(x => ({...x, retypePassword:e.target.value}
-                        ))}}
+                    func={(e:React.ChangeEvent<HTMLInputElement>)=>dispatch(changeCreateAccountretypePassword(e.target.value))}
                     />
             </div>
             {/* password strength */}
@@ -479,16 +443,17 @@ const index = () => {
             <PasswordReq reqs={passwordRequirements} />
             {/* submit button */}
             <div className='
+            sLaptop:scale-95
             flex 
             justify-center 
             pt-[1.51rem] pb-[1.514rem] 
             mobile:pt-[2.014] mobile:pb-[2.019rem]
             sMobile:pt-[3.222rem] sMobile:pb-[3.855rem] 
             mMobile:pt-[3.866rem] mMobile:pb-[3.876rem]
-            sLaptop:pt-[1.261rem] sLaptop:pb-[1.536rem] 
-            mLaptop:pt-[1.607rem] mLaptop:pb-[1.919rem]
-            desktop:pt-[1.829rem] desktop:pb-[2.303rem] 
-            largeDesktop:pt-[2.349rem] largeDesktop:pb-[2.879rem]'>
+            sLaptop:py-[1.261rem] 
+            mLaptop:py-[1.607rem]
+            desktop:py-[1.829rem] 
+            largeDesktop:py-[2.349rem]'>
                 <CreateAccountButton message="Create Account" fn={()=>{checkInputs()}} />
             </div>
         </form>

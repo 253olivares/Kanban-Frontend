@@ -2,11 +2,7 @@ import { createDefaultBaseImage, passwordEncrption, checkPasswordMatch, addUser,
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
-type initialStateType = {
-    user:user | null,
-    status:'idle' | 'fulfilled' | 'failed' | 'pending',
-    error: string | null
-}
+
 
 // this is to create a list of users that we can invite to workspaces
 // without getting sensitive userData;
@@ -32,11 +28,6 @@ export type user = {
     lists: string[],
 }
 
-const initialState:initialStateType = {
-    user:null,
-    status:'idle',
-    error:null
-}
 // function that will check to see if a users login information is cached 
 // to be used on auto login next time the user access the page
 export const checkRemembered = createAsyncThunk('user/checkRemember', async (_,{rejectWithValue}) => {
@@ -130,7 +121,7 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
         const accountCreation = new Date; 
 
         const hashedPassword = passwordEncrption(password); 
-        const checkIfMatch = checkPasswordMatch (password,hashedPassword);
+        const checkIfMatch = checkPasswordMatch(password,hashedPassword);
 
         const imageTest = createDefaultBaseImage(firstname[0].toUpperCase(),lastname[0].toUpperCase());
 
@@ -161,12 +152,76 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
     }
 });
 
+type initialStateType = {
+    user:user | null,
+    status:'idle' | 'fulfilled' | 'failed' | 'pending',
+    error: string | null,
+    loginUserInfo: {
+        email:string,
+        password:string,
+        remember:boolean
+    },
+    createUserInfo:{
+        firstname:string,
+        lastname:string,
+        username:string,
+        email:string,
+        password:string,
+        retypePassword:string
+    }
+}
+
+const initialState:initialStateType = {
+    user:null,
+    status:'idle',
+    error:null,
+    loginUserInfo: {
+        email: '',
+        password: '',
+        remember: false
+    },
+    createUserInfo: {
+        firstname:'',
+        lastname:'',
+        username:'',
+        email:'',
+        password:'',
+        retypePassword:''
+    }
+}
 
 // Our user slice that handles all the use logins
 const userSlice = createSlice({
     name:'user',
     initialState,
     reducers:{
+        changeCreateAccountFirstname(state,action){
+            state.createUserInfo.firstname = action.payload;
+        },
+        changeCreateAccountLastname(state,action){
+            state.createUserInfo.lastname = action.payload;
+        },
+        changeCreateAccountUsername(state,action){
+            state.createUserInfo.username = action.payload;
+        },
+        changeCreateAccountEmail(state,action){
+            state.createUserInfo.email = action.payload;
+        },
+        changeCreateAccountPassword(state,action){
+            state.createUserInfo.password = action.payload;
+        },
+        changeCreateAccountretypePassword(state,action){
+            state.createUserInfo.retypePassword = action.payload;
+        },
+        changeUserInfoEmail(state,action){
+            state.loginUserInfo.email = action.payload;
+        },
+        changeUserInfoPassword (state,action){
+            state.loginUserInfo.password = action.payload;
+        },
+        changeUserInfoRemember (state) {
+            state.loginUserInfo.remember = !state.loginUserInfo.remember
+        },
         logOut (state) {
             resetRemember();
             state.user = null;
@@ -175,11 +230,24 @@ const userSlice = createSlice({
     extraReducers: (builder)=> {
        builder
             .addCase(createAccount.fulfilled,(state,action:PayloadAction<user>)=> {
-                state.user= action.payload;
+                state.user = action.payload;
+                state.createUserInfo = {
+                    firstname:'',
+                    lastname:'',
+                    username:'',
+                    email:'',
+                    password:'',
+                    retypePassword:''
+                }
             })
             .addCase(checkLogin.fulfilled,(state,action:PayloadAction<user>)=> {
                 console.log(action.payload)
                 state.user= action.payload;
+                state.loginUserInfo = {
+                    email: '',
+                    password: '',
+                    remember: false
+                }
             })
             .addCase(checkRemembered.fulfilled, (state,action:PayloadAction<user>)=> {
                 state.user = action.payload;
@@ -188,7 +256,19 @@ const userSlice = createSlice({
 })
 
 export const getUser = (state:RootState) => state.user.user;
+export const getUserInfo = (state:RootState) => state.user.loginUserInfo;
+export const getCreateAccountInfo = (state:RootState) => state.user.createUserInfo;
 
-export const {logOut} =userSlice.actions;
+export const {
+    changeCreateAccountFirstname,
+    changeCreateAccountLastname,
+    changeCreateAccountUsername,
+    changeCreateAccountEmail,
+    changeCreateAccountPassword,
+    changeCreateAccountretypePassword,
+    changeUserInfoEmail,
+    changeUserInfoPassword,
+    changeUserInfoRemember,
+    logOut} =userSlice.actions;
 
 export default userSlice.reducer;

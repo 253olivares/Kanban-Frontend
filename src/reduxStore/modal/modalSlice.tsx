@@ -7,7 +7,7 @@ type initialStateType = {
     openModal:boolean,
     mobileModal:boolean,
     modal: 'logIn' | 'createProfile' | 'profile' | '',
-    accountSettings:boolean
+    accountSettings:boolean,
 }
 
 const initialState: initialStateType = {
@@ -30,6 +30,10 @@ const modalSlice = createSlice({
         openCreateProfile (state) {
             // set our modal to true and tell our application that we want to create profile modal
             state.modal= 'createProfile';
+            state.openModal = true;
+        },
+        openProfile (state){
+            state.modal = 'profile';
             state.openModal = true;
         },
         closeModal (state) {
@@ -58,6 +62,15 @@ export const getMobileModal = (state:RootState) => state.modal.mobileModal;
 export const getModalType = (state:RootState) => state.modal.modal;
 export const getAccountSettings = (state:RootState) => state.modal.accountSettings;
 
-export const {openLogin, closeModal, openCreateProfile, openMobileModal, closeMobileModal,openAccountModal,closeAccountModal} = modalSlice.actions;
+export const {
+    openLogin, 
+    closeModal, 
+    openCreateProfile, 
+    openProfile, 
+    openMobileModal, 
+    closeMobileModal, 
+    openAccountModal, 
+    closeAccountModal
+} = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -1,14 +1,21 @@
+import { getAccountSettings, openAccountModal } from '../../../../reduxStore/modal/modalSlice';
+import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
+
+import { memo } from 'react';
+
 import {user} from '../../../../reduxStore/users/userSlice';
 import { useNavigate } from 'react-router-dom';
 import icon from '/assets/Logo_Export.svg';
-import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
-import { getAccountSettings, openAccountModal } from '../../../../reduxStore/modal/modalSlice';
+
 
 // pass out user information to our header
-const Header = ({user}:{user:user}) => {
+const Header = memo(({user}:{user:user}) => {
+    
     const accountSettings = useAppSelector(getAccountSettings);
+
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
   return (
     <div className={`
     relative
@@ -103,6 +110,6 @@ const Header = ({user}:{user:user}) => {
         </div>
     </div>
   )
-}
+})
 
 export default Header

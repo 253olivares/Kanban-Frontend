@@ -1,7 +1,8 @@
-import x from '/assets/x_Icon.svg'
-import check from '/assets/Check_MarkIcon.svg'
+import x from '/assets/x_Icon.svg';
+import check from '/assets/Check_MarkIcon.svg';
+import {memo} from 'react';
 
-const index = ({reqs}: {reqs:Record<string,Boolean>}) => {
+const index = memo(({reqs}: {reqs:Record<string,Boolean>}) => {
   return (
     <div className='flex flex-col'>
       <span className='
@@ -166,6 +167,6 @@ const index = ({reqs}: {reqs:Record<string,Boolean>}) => {
       </div>
     </div>
   )
-}
+})
 
 export default index

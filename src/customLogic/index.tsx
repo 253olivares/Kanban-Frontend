@@ -106,6 +106,27 @@ export const checkIfEmailExists = (email:string):boolean | null => {
     }
 }
 
+// this is an adjusted email checker for when user edits their password
+// this takes two params with the second param being the email the user already had
+export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | null => {
+    const storageKey = 'KanBanServerInstance';
+    const data = localStorage.getItem(storageKey);
+    if(data) {
+        const users:Record<string,user> = JSON.parse(data).userList;
+        let match = false;
+        if(Object.keys(users).length >=1) {
+            for (const [_, value] of Object.entries(users)) {
+                if (value.email === email && value.email !== prevEmail) {
+                    match = true;
+                }
+            }
+        }
+        return match
+    } else {
+        return null
+    } 
+}
+
 export const passwordEncrption = (password:string):string => {
     return bcrypt.hashSync(password, encryptionKey); 
 }

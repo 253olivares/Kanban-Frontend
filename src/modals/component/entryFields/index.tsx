@@ -1,16 +1,16 @@
-import { forwardRef } from "react"
+import { forwardRef,memo } from "react"
 import { Fragment } from "react/jsx-runtime"
 
-const index = forwardRef<HTMLInputElement|null,{className:string, id:string, type:string, label:string, value:string, func: (e:React.ChangeEvent<HTMLInputElement>)=> void}>((
-    {className,  id, type, label,value, func} , ref
+const index = memo(forwardRef<HTMLInputElement|null,{ id:string, type:string, label:string, value:string, func: (e:React.ChangeEvent<HTMLInputElement>)=> void}>((
+    { id, type, label,value, func} , ref
     ) => {
 
   return (
     <Fragment>
-        <label htmlFor={id}>{label}:</label>
-        <input ref={ref} onChange={(e)=> func(e)} value={value} className={className} id={id} type={type} />
+        <label className="labelcssAdjusted" htmlFor={id}>{label}:</label>
+        <input ref={ref} onChange={(e)=> func(e)} value={value} className='modalInputs' id={id} type={type} />
     </Fragment>
   )
-})
+}))
 
 export default index

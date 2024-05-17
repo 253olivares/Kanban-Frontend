@@ -11,13 +11,31 @@ const index = memo(() => {
     relative
     bg-SpaceBlue 
     flex-grow
-    overflow-hidden 
+    overflow-hidden
+    
+    flex flex-row
+
     ">
     <AnimatePresence>
       {
        accountSettings ? <AccountSettingModal /> : ''
       }
     </AnimatePresence>
+      <div className='
+      w-[26%]
+      h-[100%]
+      glass-gradient
+      flex items-center justify-center
+      '>
+        <p className='font-bold text-white'>This is the side bar to display boards and workspaces!</p>
+      </div> 
+      <div className='
+      w-[74%]
+      h-[100%]
+      flex items-center justify-center
+      '>
+        <p className='font-bold text-white'>Lists users are involved in will display here! Oldest to newsest</p>
+      </div> 
     </div>
   )
 })
