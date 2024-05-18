@@ -8,6 +8,7 @@ type initialStateType = {
     mobileModal:boolean,
     modal: 'logIn' | 'createProfile' | 'profile' | '',
     accountSettings:boolean,
+    accountLandingMobile:boolean
 }
 
 const initialState: initialStateType = {
@@ -15,6 +16,7 @@ const initialState: initialStateType = {
     mobileModal:false,
     modal:'',
     accountSettings:false,
+    accountLandingMobile:false
 }   
 
 // create a slice of our state
@@ -51,7 +53,13 @@ const modalSlice = createSlice({
             state.accountSettings = true;
         },
         closeAccountModal(state){
-            state.accountSettings = false
+            state.accountSettings = false;
+        },
+        openAccountLadingModal(state){
+            state.accountLandingMobile = true;
+        },
+        closeAccountLandingModal(state){
+            state.accountLandingMobile = false;
         }
     }
 })
@@ -61,6 +69,7 @@ export const getModalStatus = (state:RootState) => state.modal.openModal;
 export const getMobileModal = (state:RootState) => state.modal.mobileModal;
 export const getModalType = (state:RootState) => state.modal.modal;
 export const getAccountSettings = (state:RootState) => state.modal.accountSettings;
+export const getAccountLandingModal = (state:RootState) => state.modal.accountLandingMobile;
 
 export const {
     openLogin, 
@@ -70,7 +79,9 @@ export const {
     openMobileModal, 
     closeMobileModal, 
     openAccountModal, 
-    closeAccountModal
+    closeAccountModal,
+    openAccountLadingModal,
+    closeAccountLandingModal
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

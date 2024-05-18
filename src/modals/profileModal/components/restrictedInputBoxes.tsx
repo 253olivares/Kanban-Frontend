@@ -28,10 +28,14 @@ const RestrictedInputBoxes = memo(({
      className="
      w-full
      flex flex-col
-      sLaptop:gap-[0.32rem]
-      mLaptop:gap-[0.4rem]
-      desktop:gap-[0.48rem]
-      largeDesktop:gap-[0.6rem]
+     gap-[0.355rem]
+     mobile:gap-[0.474rem]
+     sMobile:gap-[0.759rem]
+     mMobile:gap-[0.911rem]
+     sLaptop:gap-[0.32rem]
+     mLaptop:gap-[0.4rem]
+     desktop:gap-[0.48rem]
+     largeDesktop:gap-[0.6rem]
      "
     >
         <div 
@@ -58,9 +62,12 @@ const RestrictedInputBoxes = memo(({
               :
               `
               opacity-50  
-              group
               group-hover:opacity-100
               `}
+            w-[1.220rem]
+            mobile:w-[1.627rem]
+            sMobile:w-[2.604rem]
+            mMobile:w-[3.125rem]
             sLaptop:w-[1rem]
             mLaptop:w-[1.25rem]
             desktop:w-[1.5rem]

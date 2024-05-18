@@ -19,10 +19,14 @@ const password = memo(forwardRef<HTMLInputElement | null,propTypes>(({
     <div className='
     w-full
     flex flex-col
+    gap-[0.355rem]
+    mobile:gap-[0.474rem]
+    sMobile:gap-[0.759rem]
+    mMobile:gap-[0.911rem]
     sLaptop:gap-[0.32rem]
-      mLaptop:gap-[0.4rem]
-      desktop:gap-[0.48rem]
-      largeDesktop:gap-[0.6rem]
+    mLaptop:gap-[0.4rem]
+    desktop:gap-[0.48rem]
+    largeDesktop:gap-[0.6rem]
     '>
         <div
         className='

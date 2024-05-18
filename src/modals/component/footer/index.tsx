@@ -11,6 +11,8 @@ const index = () => {
         flex justify-between items-center
 
         px-[6.51%] 
+        sLaptop:px-[8.5%]
+        desktop:px-[11.07%]
 
         h-[3.026rem]
         mobile:h-[4.004rem]
@@ -18,10 +20,10 @@ const index = () => {
         mMobile:h-[7.688rem]
         
         sLaptop:h-auto
-        sLaptop:px-[3.25rem] sLaptop:py-[1.25rem]
-        mLaptop:px-[4rem] mLaptop:py-[1.5rem]
-        desktop:px-[4.125rem] desktop:py-[1.6rem]
-        largeDesktop:px-[4.25rem] largeDesktop:py-[1.85rem]
+        sLaptop:py-[1.25rem]
+        mLaptop:py-[1.5rem]
+        desktop:py-[1.6rem]
+       largeDesktop:py-[1.85rem]
         ">
             <Button message='Close' />
             <img className='
@@ -29,9 +31,9 @@ const index = () => {
             mobile:w-[1.562rem]
             sMobile:w-[2.499rem]
             mMobile:w-[3rem]
-            sLaptop:w-[2.25rem]
-            mLaptop:w-[2.75rem]
-            desktop:w-[2.969rem]
+            sLaptop:w-[1.679rem]
+            mLaptop:w-[2.099rem]
+            desktop:w-[2.52rem]
             largeDesktop:w-[3.15rem]
             ' src={LogoExport} alt="Logo Icons" />
     </div>

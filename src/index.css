@@ -128,11 +128,14 @@
 
     .labelCss{
         @apply
-        leading-none
-        text-[0.878rem]
-        mobile:text-[1.171rem]
-        sMobile:text-[1.874rem] 
-        mMobile:text-[2.25rem]
+        text-[1.057rem]
+        leading-[1.220rem]
+        mobile:text-[1.409rem]
+        mobile:leading-[1.627rem]
+        sMobile:text-[2.254rem]
+        sMobile:leading-[2.604rem] 
+        mMobile:text-[2.705rem]
+        mMobile:leading-[3.125rem]
         sLaptop:text-[0.95rem]
         sLaptop:leading-[1rem]
         mLaptop:text-[1.188rem]
@@ -145,11 +148,14 @@
 
     .labelcssAdjusted{
         @apply
-        leading-none
-        text-[0.878rem]
-        mobile:text-[1.171rem]
-        sMobile:text-[1.874rem] 
-        mMobile:text-[2.25rem]
+        text-[1.057rem]
+        leading-[1.220rem]
+        mobile:text-[1.409rem]
+        mobile:leading-[1.627rem]
+        sMobile:text-[2.254rem]
+        sMobile:leading-[2.604rem] 
+        mMobile:text-[2.705rem]
+        mMobile:leading-[3.125rem]
         sLaptop:text-[0.854rem]
         sLaptop:leading-[0.899rem]
         mLaptop:text-[1.067rem]
@@ -164,25 +170,20 @@
         @apply
         w-full
 
-        text-[0.878rem]
-        leading-[1.562rem]
-        mobile:text-[1.171rem]
-        mobile:leading-[2.083rem]
-        sMobile:text-[1.874rem] 
-        sMobile:leading-[3.333rem]
-        mMobile:text-[2.25rem] 
-        mMobile:leading-[4rem]
+        text-[1.057rem]
+        mobile:text-[1.409rem]
+        sMobile:text-[2.254rem] 
+        mMobile:text-[2.705rem] 
         sLaptop:text-[.95rem]
         mLaptop:text-[1.188rem]
         desktop:text-[1.425rem]
         largeDesktop:text-[1.781rem]
         sLaptop:leading-none
 
-        h-[1.562rem]
-        mobile:h-[2.083rem]
-        sMobile:h-[3.333rem]
-        mMobile:h-[4rem]
-        sLaptop:h-auto
+        py-[0.247rem]
+        mobile:py-[0.330rem]
+        sMobile:py-[0.528rem]
+        mMobile:py-[0.634rem]
         sLaptop:py-[0.2rem]
         mLaptop:py-[0.25rem]
         desktop:py-[0.3rem]
@@ -206,7 +207,7 @@
         focus:outline-none
         focus:ring
 
-        bg-[#B3B3B3]
+        bg-[#CECECE]
 
         ring-0
         focus:bg-PrimaryWhite
@@ -219,7 +220,14 @@
 
     .profilePassReqText{
         @apply 
-
+        text-[0.683rem]
+        leading-[0.781rem]
+        mobile:text-[0.911rem]
+        mobile:leading-[1.041rem]
+        sMobile:text-[1.458rem]
+        sMobile:leading-[1.666rem]
+        mMobile:text-[1.75rem]
+        mMobile:leading-[2rem]
         sLaptop:text-[0.533rem] 
         sLaptop:leading-[0.533rem]
         mLaptop:text-[0.733rem]
@@ -228,11 +236,13 @@
         desktop:leading-[0.88rem]
         largeDesktop:text-[1.1rem]
         largeDesktop:leading-[1.1rem]
-        leading-snug
     }
     .profilePassReqImg{
         @apply
-        sLaptop:h-auto 
+        w-[0.781rem]
+        mobile:w-[1.041rem]
+        sMobile:w-[1.666rem]
+        mMobile:w-[2rem]
         sLaptop:w-[0.533rem] 
         mLaptop:w-[0.733rem] 
         desktop:w-[0.88rem]
@@ -241,7 +251,10 @@
     .profilePassHolder{
         @apply
         flex justify-start items-start
-
+        gap-[0.292rem]
+        mobile:gap-[0.390rem]
+        sMobile:gap-[0.624rem]
+        mMobile:gap-[.75rem]
         sLaptop:gap-[0.346rem]
         mLaptop:gap-[0.433rem]
         desktop:gap-[0.52rem]
@@ -286,24 +299,20 @@
         @apply 
         w-full
 
-        text-[0.878rem]
-        leading-[1.562rem]
-        mobile:text-[1.171rem]
-        mobile:leading-[2.083rem]
-        sMobile:text-[1.874rem] 
-        sMobile:leading-[3.333rem]
-        mMobile:text-[2.25rem] 
-        mMobile:leading-[4rem]
+        text-[1.057rem]
+        mobile:text-[1.409rem]
+        sMobile:text-[2.254rem] 
+        mMobile:text-[2.705rem] 
         sLaptop:text-[.95rem]
         mLaptop:text-[1.188rem]
         desktop:text-[1.425rem]
         largeDesktop:text-[1.781rem]
         sLaptop:leading-none
 
-        h-[1.562rem]
-        mobile:h-[2.083rem]
-        sMobile:h-[3.333rem]
-        mMobile:h-[4rem]
+        py-[0.247rem]
+        mobile:py-[0.330rem]
+        sMobile:py-[0.528rem]
+        mMobile:py-[0.634rem]
         sLaptop:h-auto
         sLaptop:py-[0.133rem]
         mLaptop:py-[0.166rem]
@@ -328,7 +337,7 @@
         focus:outline-none
         focus:ring
 
-        bg-[#B3B3B3]
+        bg-[#CECECE]
 
         ring-0
         focus:bg-PrimaryWhite

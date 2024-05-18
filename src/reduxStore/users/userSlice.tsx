@@ -1,4 +1,4 @@
-import { createDefaultBaseImage, passwordEncrption, checkPasswordMatch, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList } from "../../customLogic";
+import { createDefaultBaseImage, passwordEncrption, checkPasswordMatch, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser} from "../../customLogic";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 
@@ -140,6 +140,7 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
         }
 
         if(checkIfMatch) {
+            setRemember(newUser);
             addUser(newUser);
             return newUser;
         } else {
@@ -151,6 +152,25 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
         return rejectWithValue(error);
     }
 });
+
+export const changeAccountDetails = createAsyncThunk('user/changeAccountDetails',async(user:user,{rejectWithValue}) => {
+    try{
+        const checkRemember = getRemember();
+
+        if(checkRemember){
+            setRemember(user);
+        }
+
+        updateUser(user);
+
+        alert('Information has been updated!');
+        return user
+    } catch (error:unknown){
+        console.log(`Update userInformation:${error}`);
+        return rejectWithValue(error);
+    }
+
+})
 
 type initialStateType = {
     user:user | null,
@@ -250,6 +270,9 @@ const userSlice = createSlice({
                 }
             })
             .addCase(checkRemembered.fulfilled, (state,action:PayloadAction<user>)=> {
+                state.user = action.payload;
+            })
+            .addCase(changeAccountDetails.fulfilled, (state,action:PayloadAction<user>)=> {
                 state.user = action.payload;
             })
     }

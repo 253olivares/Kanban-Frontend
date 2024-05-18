@@ -87,6 +87,7 @@ const index = () => {
     mLaptop:rounded-[0.625rem]
     desktop:rounded-[0.75rem]
     largeDesktop:rounded-[0.938rem]
+    
     sLaptop:overflow-hidden
     ">
       <div 

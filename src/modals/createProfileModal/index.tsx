@@ -126,7 +126,7 @@ const index = () => {
             checkifPasswordsMatch();
         } else {
             if(repass.current)
-            repass.current.style.backgroundColor = "#B3B3B3";
+            repass.current.style.backgroundColor = "#CECECE";
         }
     },[userInfo.retypePassword,userInfo.password])
     

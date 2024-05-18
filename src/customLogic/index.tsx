@@ -16,6 +16,8 @@ export const setRemember = (user:user) => {
         }
         const newData = {...JSON.parse(data),RememberUser:rememberData}
         localStorage.setItem(storageKey,JSON.stringify(newData));
+    } else {
+        reloadApplication();
     }
 }
 
@@ -26,6 +28,7 @@ export const getRemember = () => {
         const rememberStatus = JSON.parse(data).RememberUser;
         return rememberStatus;
     } else {
+        reloadApplication();
         return false;
     }
 }
@@ -34,14 +37,14 @@ export const getUserFromList = (id:string) => {
     const storageKey = 'KanBanServerInstance';
     const data = localStorage.getItem(storageKey);
     if(data) {
-        const users:Record<string,user>      = JSON.parse(data).userList;
+        const users:Record<string,user> = JSON.parse(data).userList;
         if(users){
            return users[id];
         } else {
             console.log('userlist is missing')
         }
     } else {
-        console.log('database doesnt exist!');
+        reloadApplication();
     }
 }
 
@@ -61,6 +64,8 @@ export const searchUser = (email:string,password:string)=> {
                 }
             }
         }
+    } else {
+        reloadApplication();
     }
     return user
 }
@@ -71,6 +76,21 @@ export const resetRemember = () => {
     if(data) {
         const newData = {...JSON.parse(data),RememberUser:null}
         localStorage.setItem(storageKey,JSON.stringify(newData));
+    } else {
+        reloadApplication();
+    }
+}
+
+export const updateUser = (newUserInfo:user) => {
+    const storageKey = 'KanBanServerInstance';
+    const data = localStorage.getItem(storageKey);
+    if(data){
+        let users:Record<string,user> = JSON.parse(data).userList;
+        users[newUserInfo.u_id] = newUserInfo;
+        const newData = {...JSON.parse(data), userList:users};
+        localStorage.setItem(storageKey,JSON.stringify(newData));
+    } else {
+        reloadApplication();
     }
 }
 
@@ -83,7 +103,7 @@ export const addUser = (newUser:user) => {
         const newData = {...JSON.parse(data),userList:users};
         localStorage.setItem(storageKey,JSON.stringify(newData));
     } else {
-        console.log('Kanban storage does not exist. ')
+        reloadApplication();
     }
 }
 
@@ -102,6 +122,7 @@ export const checkIfEmailExists = (email:string):boolean | null => {
         }
         return match
     } else {
+        reloadApplication();
         return null
     }
 }
@@ -123,8 +144,14 @@ export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | 
         }
         return match
     } else {
+        reloadApplication();
         return null
     } 
+}
+
+export const reloadApplication = ()=> {
+    alert('Application has ran into an issue where database does not exist. Application will reload!');
+    location.reload();
 }
 
 export const passwordEncrption = (password:string):string => {

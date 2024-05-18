@@ -1,5 +1,7 @@
-import { getUser } from '../../reduxStore/users/userSlice';
-import { useAppSelector } from '../../reduxStore/hook';
+import { changeAccountDetails, getUser } from '../../reduxStore/users/userSlice';
+import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
+import { checkIfEmailExistsEdit, checkPasswordMatch, passwordEncrption } from '../../customLogic';
+
 
 import {motion} from 'framer-motion'
 import { useLayoutEffect, useRef, useState } from 'react';
@@ -10,7 +12,20 @@ import PasswordReq from './components/passwordRequirments';
 import RestrictedInputBoxes from './components/restrictedInputBoxes';
 import PasswordInput from './components/password';
 import Footer from '../component/footer';
-import { checkIfEmailExistsEdit, checkPasswordMatch } from '../../customLogic';
+
+type userInfo = {
+    firstname:string,
+    firstnameEdit:boolean,
+    lastname:string,
+    lastnameEdit:boolean,
+    newPassword:string,
+    reTypeNewPassword:string,
+    email:string,
+    emailEdit:boolean,
+    username:string,
+    usernameEdit:boolean,
+    pfp:string,
+}
 
 const index = () => {
   const user = useAppSelector(getUser);
@@ -19,9 +34,11 @@ const index = () => {
     return;
   }
 
+  const dispatch = useAppDispatch();
+
   const repass = useRef<HTMLInputElement|null>(null);
 
-  const [userInfo,setUserInfo] = useState({
+  const [userInfo,setUserInfo] = useState<userInfo>({
     firstname:user.first_name,
     firstnameEdit:false,
     lastname:user.last_name,
@@ -55,7 +72,6 @@ const index = () => {
     const passwordSnapshot = userInfo.newPassword;
     const specialChar = `~\`!@#$%^&*()_-+={[}]|\:;"'<,>.?/`
     const leastOneNumber = '0123456789';
-
     
     if (passwordSnapshot.length >= 8) {
       totalPoints = totalPoints + 1;
@@ -164,7 +180,7 @@ const index = () => {
       checkifPasswordsMatch()
     } else {
       if(repass.current)
-      repass.current.style.background = "#B3B3B3";
+      repass.current.style.background = "#CECECE";
     }
   },[userInfo.reTypeNewPassword,userInfo.newPassword])
 
@@ -192,10 +208,33 @@ const index = () => {
       alert('Please make sure your new password is not longer than 20 letters!');
     } else if (passwordStrength!==3 && userInfo.newPassword !== ''){
       alert('Please make sure your new password meets all its requirements!');
-    } else if (checkEncryptionPassword === true){
+    } else if (checkEncryptionPassword){
       alert('Please make sure your new password does not match your previous password!');
     } else {
-      alert('Changes to your account have been made');
+      if(sanitizedPassword !== '') {
+        dispatch(changeAccountDetails({
+          ...user,
+          first_name:sanitizedFirstname,
+          last_name:sanitizedLastname,
+          username:sanitizedUsername,
+          email:userInfo.email,
+          password:passwordEncrption(sanitizedPassword),
+          pfp:userInfo.pfp
+        }));
+      }else {
+        dispatch(changeAccountDetails({
+          ...user,
+          first_name:sanitizedFirstname,
+          last_name:sanitizedLastname,
+          username:sanitizedUsername,
+          email:userInfo.email,
+          pfp:userInfo.pfp
+        }));
+      }
+      setUserInfo((x) => ({...x,
+        newPassword:'',
+        reTypeNewPassword:'',
+      }))
     }  
   }
 
@@ -218,12 +257,12 @@ const index = () => {
     bg-PrimaryWhite 
     w-full 
     h-auto
-
     min-h-screen
+
+    overflow-y-scroll
+    no-scrollbar
+
     sLaptop:min-h-0
-
-    sLaptop:h-auto
-
     sLaptop:w-[30rem] 
     mLaptop:w-[37.496rem]
     desktop:w-[45rem] 
@@ -234,8 +273,6 @@ const index = () => {
     desktop:rounded-[0.706rem]
     largeDesktop:rounded-[0.883rem]
 
-    overflow-y-scroll
-    no-scrollbar
     sLaptop:overflow-hidden
     '
     >
@@ -243,20 +280,47 @@ const index = () => {
       className='
       relative
       w-full
+
+      px-[13.02%]
       sLaptop:px-[7.5%]
+
       pb-[3.026rem]
       mobile:pb-[4.004rem]
       sMobile:pb-[6.406rem]
       mMobile:pb-[7.688rem]
       sLaptop:pb-0
+
       flex
       flex-col
+
       sLaptop:flex-row
+
       sLaptop:gap-[1.32rem]
       mLaptop:gap-[1.65rem]
       desktop:gap-[1.98rem]
       largeDesktop:gap-[2.475rem]
       '>
+        <h1 className='
+        w-full
+        text-center
+
+        text-linear-gradient 
+        text-[1.333rem]
+        mobile:text-[1.666rem]
+        sMobile:text-[2rem]
+        mMobile:text-[2.5rem]
+
+        pt-[2.686rem]
+        pb-[1.658rem]
+        mobile:pt-[3.581rem]
+        mobile:pb-[2.224rem]
+        sMobile:pt-[5.729rem]
+        sMobile:pb-[3.563rem]
+        mMobile:pt-[6.875rem]
+        mMobile:pb-[4.25rem]
+
+        sLaptop:hidden
+        '>Account Details</h1>
         {/* left items */}
         <div
          className='
@@ -276,6 +340,10 @@ const index = () => {
           desktop:pt-[2.58rem]
           largeDesktop:pt-[3.225rem]
 
+          gap-[1.227rem]
+          mobile:gap-[1.636rem]
+          sMobile:gap-[2.618rem]
+          mMobile:gap-[3.141rem]
           sLaptop:gap-[0.8rem]
           mLaptop:gap-[1rem]
           desktop:gap-[1.2rem]
@@ -284,15 +352,17 @@ const index = () => {
           '>
             <div 
             className='
+
             p-[0.224rem]
             mobile:p-[0.298rem]
             sMobile:p-[0.477rem]
-            mMobile:p-[0.573rem
+            mMobile:p-[0.573rem]
             sLaptop:p-[0.12rem]
             mLaptop:p-[0.15rem]
             desktop:p-[0.18rem]
             largeDesktop:p-[0.225rem]
-            linear-gradientFooter
+
+            bg-[#b1b1b1]
             rounded-full 
             '>
               <img 
@@ -305,33 +375,81 @@ const index = () => {
               mLaptop:w-[9.629rem]
               desktop:w-[11.556rem]
               largeDesktop:w-[14.445rem]
+
               rounded-full
               '
               src={`data:image/png;base64,${userInfo.pfp}`} alt="AccountImage" />
             </div>
             <label className='
+
+            font-bold 
+            sLaptop:font-medium
+
+            text-[0.674rem]
+            mobile:text-[0.899rem]
+            sMobile:text-[1.438rem]
+            mMobile:text-[1.725rem]
+            leading-none
+            sLaptop:leading-normal
             sLaptop:text-[0.92rem]
             mLaptop:text-[1.15rem]
             desktop:text-[1.38rem]
             largeDesktop:text-[1.725rem]
-            font-medium
+
+            px-[0.512rem]
+            mobile:px-[0.683rem]
+            sMobile:px-[1.094rem]
+            mMobile:px-[1.313rem]
+
+            py-[0.449rem]
+            mobile:py-[0.598rem]
+            sMobile:py-[0.958rem]
+            mMobile:py-[1.15rem]
+
+            rounded-[0.175rem]
+            mobile:rounded-[0.234rem]
+            sMobile:rounded-[0.374rem]
+            mMobile:rounded-[0.45rem]
+
+            bg-[#CECECE]
+            sLaptop:bg-transparent
+
             text-Slate-gray
+
             sLaptop:cursor-pointer
             sLaptop:hover:underline
-            ' htmlFor="image-upload">
+            ' 
+            htmlFor="image-upload">
               Change Icon
             </label>
-            <input className='
+            <input 
+            onChange={(e:React.ChangeEvent<HTMLInputElement>)=> {
+              if(e.target.files) {
+                if (e.target.files.length > 0 && e.target.files.length <2) {
+                  console.log(e.target.files[0])
+                  console.log('test');
+                }
+              }
+            }}
+            className='
             hidden
             ' id="image-upload" type="file"/>
           </div>
           {/* username and email inputs */}
           <div className='
+          mt-[1.216rem]
+          mobile:mt-[1.621rem]
+          sMobile:mt-[2.594rem]
+          mMobile:mt-[3.113rem]
           sLaptop:mt-[1.24rem]
           mLaptop:mt-[1.55rem]
           desktop:mt-[1.86rem]
           largeDesktop:mt-[2.325rem]
-
+          
+          gap-[0.878rem]
+          mobile:gap-[1.171rem]
+          sMobile:gap-[1.874rem]
+          mMobile:gap-[2.25rem]
           sLaptop:gap-[0.900rem]
           mLaptop:gap-[1.125rem]
           desktop:gap-[1.350rem]
@@ -382,6 +500,10 @@ const index = () => {
         w-full
         sLaptop:w-[50%]
 
+        mt-[0.878rem]
+        mobile:mt-[1.171rem]
+        sMobile:mt-[1.874rem]
+        mMobile:mt-[2.25rem]
         sLaptop:mt-[3.88rem]
         mLaptop:mt-[4.849rem]
         desktop:mt-[5.82rem]
@@ -389,7 +511,11 @@ const index = () => {
         '>
           <div className='
           flex flex-col
-          
+
+          gap-[0.878rem]
+          mobile:gap-[1.171rem]
+          sMobile:gap-[1.874rem]
+          mMobile:gap-[2.25rem]
           sLaptop:gap-[0.338rem]
           mLaptop:gap-[0.4rem]
           desktop:gap-[0.48rem]
@@ -451,8 +577,12 @@ const index = () => {
             </div>
             <div className='
             flex
-            justify-between
+            flex-col
+            sLaptop:flex-row
+            justify-start
+            sLaptop:justify-between
             items-center
+            w-full
 
             sLaptop:my-[0.399rem]
             mLaptop:my-[0.499rem]

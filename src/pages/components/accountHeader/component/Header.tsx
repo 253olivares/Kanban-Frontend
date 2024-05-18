@@ -18,9 +18,11 @@ const Header = memo(({user}:{user:user}) => {
 
   return (
     <div className={`
+
     relative
     z-[5]
     w-full
+    
     h-[3.051rem]
     mobile:h-[4.069rem]
     sMobile:h-[6.510rem]
@@ -30,6 +32,7 @@ const Header = memo(({user}:{user:user}) => {
     desktop:h-[5rem]
     largeDesktop:h-[6.25rem]
     4k:h-[8.333rem]
+
     glass-gradient
     border-b-[0.122rem]
     mobile:border-b-[0.163rem]
@@ -70,6 +73,7 @@ const Header = memo(({user}:{user:user}) => {
         <div 
         onClick={()=> {dispatch(openAccountModal())}}
         className={`
+        
          p-[0.071rem]
          mobile:p-[0.095rem]
          sMobile:p-[0.153rem]
@@ -79,6 +83,7 @@ const Header = memo(({user}:{user:user}) => {
          desktop:p-[0.169rem]
          largeDesktop:p-[0.211rem]
          4k:p-[0.281rem]
+
          ${
             accountSettings ?
             `

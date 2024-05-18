@@ -38,11 +38,19 @@ const passwordStrength = memo(({status}:{status:number}) => {
                 className={`
                 first:ml-0 
 
+                ml-[]
+                mobile:ml-[]
+                sMobile:ml-[]
+                mMobile:ml-[-.5rem]
                 sLaptop:ml-[-0.319rem]
                 mLaptop:ml-[-0.399rem]
                 desktop:ml-[-0.48rem]
                 largeDesktop:ml-[-.6rem]
 
+                h-[0.648rem]
+                mobile:h-[0.864rem]
+                sMobile:h-[1.382rem]
+                mMobile:h-[1.659rem]
                 sLaptop:h-[0.874rem]
                 mLaptop:h-[1.092rem]
                 desktop:h-[1.311rem]
