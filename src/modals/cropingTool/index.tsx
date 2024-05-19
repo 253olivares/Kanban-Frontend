@@ -8,6 +8,8 @@ import { getCroppingImage } from '../../reduxStore/modal/modalSlice';
 const index = () => {
   // @ts-ignore
   const cropImage = useAppSelector(getCroppingImage);
+  // @ts-ignore
+  const cImage = useAppSelector(getCroppingImage);
 
   return (
     <motion.div
@@ -45,27 +47,83 @@ const index = () => {
         <div className='
         grow
         flex items-center justify-center
+        bg-black
         '>
 
         </div>
         <div className='
-        
         absolute
         bottom-0
         
         sLaptop:bottom-auto
         sLaptop:relative
 
-        flex justify-between
-        
-        px-[7.5%]
-        sLaptop:py-[1.333rem]
-        mLaptop:py-[1.666rem]
-        desktop:py-[2rem]
-        largeDesktop:py-[2.5rem]
+        flex flex-col        
         '>
+          <div className='
+          flex justify-center
+          items-center
+          sLaptop:
+          mLaptop:
+          desktop:
+          largeDesktop:h-[6.438rem]
+          '>
+            <label 
+            className='
+            text-white
+            bg-SelectorBlue
+            font-bold
+            
+            rounded-full
+
+            sLaptop:px-[1.066rem]
+            mLaptop:px-[1.333rem]
+            desktop:px-[1.6rem]
+            largeDesktop:px-[2rem]
+
+            sLaptop:text-[0.92rem]
+            sLaptop:leading-[1.84rem]
+            mLaptop:text-[1.15rem]
+            mLaptop:leading-[2.3rem]
+            desktop:text-[1.38rem]
+            desktop:leading-[2.76rem]
+            largeDesktop:text-[1.725rem]
+            largeDesktop:leading-[3.45rem]
+
+            sLaptop:h-[1.84rem]
+            mLaptop:h-[2.3rem]
+            desktop:h-[2.76rem]
+            largeDesktop:h-[3.45rem]
+
+            sLaptop:hover:opacity-75
+            sLaptop:hover:cursor-pointer  
+            transition-all
+            duration-300
+          
+            '
+            htmlFor="ImageSubmission">
+              Submit New Image
+            </label>
+            <input 
+              id='ImageSubmission' 
+              type="file" 
+              onChange={()=> {}}
+              className='hidden'
+              />
+          </div>
+          <div className='
+          flex justify-between
+        
+          px-[7.5%]
+        
+          sLaptop:pb-[1.333rem] 
+          mLaptop:pb-[1.666rem]     
+          desktop:pb-[2rem]
+          largeDesktop:pb-[2.5rem]
+          '>
             <CancelButton/>
             <SaveButton/>
+          </div>
         </div>
     </motion.div>
   )

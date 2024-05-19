@@ -134,8 +134,8 @@
         mobile:leading-[1.627rem]
         sMobile:text-[2.254rem]
         sMobile:leading-[2.604rem] 
-        mMobile:text-[2.705rem]
-        mMobile:leading-[3.125rem]
+        /* mMobile:text-[2.705rem]
+        mMobile:leading-[3.125rem] */
         sLaptop:text-[0.95rem]
         sLaptop:leading-[1rem]
         mLaptop:text-[1.188rem]
@@ -154,8 +154,8 @@
         mobile:leading-[1.627rem]
         sMobile:text-[2.254rem]
         sMobile:leading-[2.604rem] 
-        mMobile:text-[2.705rem]
-        mMobile:leading-[3.125rem]
+        /* mMobile:text-[2.705rem]
+        mMobile:leading-[3.125rem] */
         sLaptop:text-[0.854rem]
         sLaptop:leading-[0.899rem]
         mLaptop:text-[1.067rem]
@@ -173,7 +173,7 @@
         text-[1.057rem]
         mobile:text-[1.409rem]
         sMobile:text-[2.254rem] 
-        mMobile:text-[2.705rem] 
+        /* mMobile:text-[2.705rem]  */
         sLaptop:text-[.95rem]
         mLaptop:text-[1.188rem]
         desktop:text-[1.425rem]
@@ -183,7 +183,7 @@
         py-[0.247rem]
         mobile:py-[0.330rem]
         sMobile:py-[0.528rem]
-        mMobile:py-[0.634rem]
+        /* mMobile:py-[0.634rem] */
         sLaptop:py-[0.2rem]
         mLaptop:py-[0.25rem]
         desktop:py-[0.3rem]
@@ -198,7 +198,7 @@
         rounded-[0.324rem]
         mobile:rounded-[0.431rem]
         sMobile:rounded-[0.69rem]
-        mMobile:rounded-[0.828rem]
+        /* mMobile:rounded-[0.828rem] */
         sLaptop:rounded-[0.304rem]
         mLaptop:rounded-[0.38rem]
         desktop:rounded-[0.456rem]
@@ -226,8 +226,8 @@
         mobile:leading-[1.041rem]
         sMobile:text-[1.458rem]
         sMobile:leading-[1.666rem]
-        mMobile:text-[1.75rem]
-        mMobile:leading-[2rem]
+        /* mMobile:text-[1.75rem]
+        mMobile:leading-[2rem] */
         sLaptop:text-[0.533rem] 
         sLaptop:leading-[0.533rem]
         mLaptop:text-[0.733rem]
@@ -242,7 +242,7 @@
         w-[0.781rem]
         mobile:w-[1.041rem]
         sMobile:w-[1.666rem]
-        mMobile:w-[2rem]
+        /* mMobile:w-[2rem] */
         sLaptop:w-[0.533rem] 
         mLaptop:w-[0.733rem] 
         desktop:w-[0.88rem]
@@ -254,7 +254,7 @@
         gap-[0.292rem]
         mobile:gap-[0.390rem]
         sMobile:gap-[0.624rem]
-        mMobile:gap-[.75rem]
+        /* mMobile:gap-[.75rem] */
         sLaptop:gap-[0.346rem]
         mLaptop:gap-[0.433rem]
         desktop:gap-[0.52rem]
@@ -269,7 +269,7 @@
         gap-[0.59rem]
         mobile:gap-[0.784rem]
         sMobile:gap-[1.188rem]
-        mMobile:gap-[1.438rem]
+        /* mMobile:gap-[1.438rem] */
         sLaptop:gap-[0.313rem] 
         mLaptop:gap-[0.383rem] 
         desktop:gap-[0.473rem] 
@@ -283,7 +283,7 @@
         gap-[0.59rem]
         mobile:gap-[0.784rem]
         sMobile:gap-[1.188rem]
-        mMobile:gap-[1.438rem]
+        /* mMobile:gap-[1.438rem] */
         sLaptop:gap-[0.313rem] 
         mLaptop:gap-[0.383rem] 
         desktop:gap-[0.473rem] 
@@ -302,7 +302,7 @@
         text-[1.057rem]
         mobile:text-[1.409rem]
         sMobile:text-[2.254rem] 
-        mMobile:text-[2.705rem] 
+        /* mMobile:text-[2.705rem]  */
         sLaptop:text-[.95rem]
         mLaptop:text-[1.188rem]
         desktop:text-[1.425rem]
@@ -312,7 +312,7 @@
         py-[0.247rem]
         mobile:py-[0.330rem]
         sMobile:py-[0.528rem]
-        mMobile:py-[0.634rem]
+        /* mMobile:py-[0.634rem] */
         sLaptop:h-auto
         sLaptop:py-[0.133rem]
         mLaptop:py-[0.166rem]
@@ -328,7 +328,7 @@
         rounded-[0.324rem]
         mobile:rounded-[0.431rem]
         sMobile:rounded-[0.69rem]
-        mMobile:rounded-[0.828rem]
+        /* mMobile:rounded-[0.828rem] */
         sLaptop:rounded-[0.304rem]
         mLaptop:rounded-[0.38rem]
         desktop:rounded-[0.456rem]
@@ -370,7 +370,7 @@
         w-[1.055rem]
         mobile:w-[1.406rem]
         sMobile:w-[2.25rem] 
-        mMobile:w-[2.698rem] 
+        /* mMobile:w-[2.698rem]  */
         sLaptop:w-[1.75rem] 
         mLaptop:w-9 
         desktop:w-[2.625rem] 

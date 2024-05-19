@@ -17,7 +17,8 @@ export default {
         'sMobile': '640px',
         // => @media (min-width: 640px) { ... }
 
-        'mMobile': '768px',
+        // disabled for now for testing ui
+        // 'mMobile': '768px',
         // => @media (min-width: 768px) { ... }
 
         'sLaptop': '1024px',
