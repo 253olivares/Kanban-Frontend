@@ -13,8 +13,9 @@ const AccountLanding = lazy(()=> import('./pages/2_AccountLanding'));
 const LayoutAccount = lazy(()=> import('./pages/components/accountHeader'));
 const Workspace = lazy(()=> import('./pages/3_Workspace'));
 
-import AOS from "aos";
+import 'react-image-crop/dist/ReactCrop.css';
 import "aos/dist/aos.css";
+import AOS from "aos";
 
 // out app component to gather all our components
 function App(): JSX.Element {

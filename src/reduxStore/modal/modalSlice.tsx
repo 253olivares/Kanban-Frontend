@@ -8,7 +8,9 @@ type initialStateType = {
     mobileModal:boolean,
     modal: 'logIn' | 'createProfile' | 'profile' | '',
     accountSettings:boolean,
-    accountLandingMobile:boolean
+    accountLandingMobile:boolean,
+    croppingTool:boolean,
+    croppingImageData:string | null
 }
 
 const initialState: initialStateType = {
@@ -16,7 +18,9 @@ const initialState: initialStateType = {
     mobileModal:false,
     modal:'',
     accountSettings:false,
-    accountLandingMobile:false
+    accountLandingMobile:false,
+    croppingTool:false,
+    croppingImageData:null
 }   
 
 // create a slice of our state
@@ -24,6 +28,9 @@ const modalSlice = createSlice({
     name: 'modal',
     initialState,
     reducers: {
+        openCloseCroppingTool(state){
+          state.croppingTool = !state.croppingTool;  
+        },
         openLogin (state) {
             // access state and set our modal to open and tell it we want our login
             state.modal = 'logIn';
@@ -70,8 +77,11 @@ export const getMobileModal = (state:RootState) => state.modal.mobileModal;
 export const getModalType = (state:RootState) => state.modal.modal;
 export const getAccountSettings = (state:RootState) => state.modal.accountSettings;
 export const getAccountLandingModal = (state:RootState) => state.modal.accountLandingMobile;
+export const getCroppingTool = (state:RootState) => state.modal.croppingTool;
+export const getCroppingImage = (state:RootState) => state.modal.croppingImageData;
 
 export const {
+    openCloseCroppingTool,
     openLogin, 
     closeModal, 
     openCreateProfile, 

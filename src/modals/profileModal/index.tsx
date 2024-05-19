@@ -2,16 +2,17 @@ import { changeAccountDetails, getUser } from '../../reduxStore/users/userSlice'
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
 import { checkIfEmailExistsEdit, checkPasswordMatch, passwordEncrption } from '../../customLogic';
 
-
-import {motion} from 'framer-motion'
 import { useLayoutEffect, useRef, useState } from 'react';
+import {motion, AnimatePresence} from 'framer-motion';
 
+import CroppingTool from '../cropingTool';
 import PasswordStrength from './components/passwordStrength';
 import SaveButton from './components/saveButton';
 import PasswordReq from './components/passwordRequirments';
 import RestrictedInputBoxes from './components/restrictedInputBoxes';
 import PasswordInput from './components/password';
 import Footer from '../component/footer';
+import { getCroppingTool, openCloseCroppingTool } from '../../reduxStore/modal/modalSlice';
 
 type userInfo = {
     firstname:string,
@@ -35,6 +36,7 @@ const index = () => {
   }
 
   const dispatch = useAppDispatch();
+  const cropperTool = useAppSelector(getCroppingTool);
 
   const repass = useRef<HTMLInputElement|null>(null);
 
@@ -276,6 +278,11 @@ const index = () => {
     sLaptop:overflow-hidden
     '
     >
+      <AnimatePresence>
+        {
+          cropperTool && <CroppingTool />
+        }
+      </AnimatePresence>
       <div
       className='
       relative
@@ -380,8 +387,9 @@ const index = () => {
               '
               src={`data:image/png;base64,${userInfo.pfp}`} alt="AccountImage" />
             </div>
-            <label className='
-
+            <button 
+            onClick={()=> dispatch(openCloseCroppingTool())}
+            className='
             font-bold 
             sLaptop:font-medium
 
@@ -418,22 +426,9 @@ const index = () => {
 
             sLaptop:cursor-pointer
             sLaptop:hover:underline
-            ' 
-            htmlFor="image-upload">
+            ' >
               Change Icon
-            </label>
-            <input 
-            onChange={(e:React.ChangeEvent<HTMLInputElement>)=> {
-              if(e.target.files) {
-                if (e.target.files.length > 0 && e.target.files.length <2) {
-                  console.log(e.target.files[0])
-                  console.log('test');
-                }
-              }
-            }}
-            className='
-            hidden
-            ' id="image-upload" type="file"/>
+            </button>
           </div>
           {/* username and email inputs */}
           <div className='
@@ -458,10 +453,10 @@ const index = () => {
           flex
           flex-col
 
-          sLaptop:mb-[3.333rem]
-          mLaptop:mb-[4.166rem]
-          desktop:mb-[5rem]
-          largeDesktop:mb-[6.25rem]
+          sLaptop:mb-[2.399rem]
+          mLaptop:mb-[2.999rem]
+          desktop:mb-[3.6rem]
+          largeDesktop:mb-[4.5rem]
 
           '>
             <RestrictedInputBoxes

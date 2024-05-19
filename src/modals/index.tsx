@@ -1,14 +1,14 @@
+import { getCroppingTool, getModalType } from "../reduxStore/modal/modalSlice";
 import { useAppDispatch,useAppSelector  } from "../reduxStore/hook";
-import { getModalType } from "../reduxStore/modal/modalSlice";
 import { closeModal } from "../reduxStore/modal/modalSlice";
 
 import {motion,AnimatePresence} from 'framer-motion';
+import { AppContext } from "../pages/appRefContext";
 import { memo, useContext } from "react";
 
-import CreateProfileModal from './createProfileModal'
+import CreateProfileModal from './createProfileModal';
 import ProfileModal from './profileModal';
 import LoginModal from './loginModal';
-import { AppContext } from "../pages/appRefContext";
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const index = memo(() => {
@@ -21,6 +21,7 @@ const index = memo(() => {
 
   // get the modal we want to bring up
   const modal = useAppSelector(getModalType);
+  const croppingTool = useAppSelector(getCroppingTool);
 
   return (
     <motion.div
@@ -48,12 +49,18 @@ const index = memo(() => {
     sLaptop:flex 
     sLaptop:justify-center 
     sLaptop:items-center">
+      
       <AnimatePresence>
         {modal == 'createProfile' && <CreateProfileModal />}
         {modal == 'logIn' && <LoginModal />}
         {modal == 'profile' && <ProfileModal />}
       </AnimatePresence>
-      <div onClick={()=> dispatch(closeModal())} className="
+      <div onClick={()=> {
+        if(!croppingTool){
+          dispatch(closeModal())
+        }
+      }} 
+      className="
       hidden 
       sLaptop:block 
       sLaptop:absolute

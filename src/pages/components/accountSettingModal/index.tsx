@@ -2,7 +2,7 @@ import { getUser, logOut } from "../../../reduxStore/users/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../reduxStore/hook";
 import {motion} from 'framer-motion';
 import { memo, useContext, useEffect} from 'react';
-import { closeAccountModal, openProfile } from "../../../reduxStore/modal/modalSlice";
+import { closeAccountModal,openProfile } from "../../../reduxStore/modal/modalSlice";
 import { AppContext } from "../../appRefContext";
 
 const index = memo(() => {
@@ -19,7 +19,7 @@ const index = memo(() => {
 
         if(accountSettingsRef.current && modalRef.current){
           if(accountSettingsRef.current.contains(element as Node) || modalRef.current.contains(element as Node)){
-            console.log('clicked Inside');
+         
           } else {
             dispatch(closeAccountModal());
           }
@@ -279,7 +279,7 @@ const index = memo(() => {
         " >
           <p 
           onClick={()=>{
-            dispatch(openProfile());
+            dispatch(openProfile())
           }}
           className="
           text-center

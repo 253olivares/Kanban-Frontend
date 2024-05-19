@@ -21,8 +21,6 @@ const RestrictedInputBoxes = memo(({
   changeField
 }:propTypes) => {
 
-  console.log(css);
-
   return (
     <div
      className="
