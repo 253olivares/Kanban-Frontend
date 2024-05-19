@@ -11,8 +11,7 @@ type propTypes = {
     changeField: (e:React.ChangeEvent<HTMLInputElement>)=> void
 }
 
-const RestrictedInputBoxes = memo(({
-  css,
+const RestrictedInputBoxes = memo(({  
   edit,
   type,
   label,
