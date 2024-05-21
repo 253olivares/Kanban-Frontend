@@ -2,7 +2,7 @@ import { getUser, logOut } from "../../../reduxStore/users/userSlice";
 import { useAppDispatch, useAppSelector } from "../../../reduxStore/hook";
 import {motion} from 'framer-motion';
 import { memo, useContext, useEffect} from 'react';
-import { closeAccountModal,openProfile } from "../../../reduxStore/modal/modalSlice";
+import { closeAccountModal,getCroppingImage,openProfile, setCroppingImageData } from "../../../reduxStore/modal/modalSlice";
 import { AppContext } from "../../appRefContext";
 
 const index = memo(() => {
@@ -12,6 +12,7 @@ const index = memo(() => {
     const {accountSettingsRef, modalRef} = appContext!;
  
     const user = useAppSelector(getUser);
+    const dataURL = useAppSelector(getCroppingImage);
 
     useEffect(()=> {
       const clickOnOutside = (e:MouseEvent | TouchEvent)=> {
@@ -333,6 +334,10 @@ const index = memo(() => {
           onClick={()=> {
             // change modal state that hides the menu options
             dispatch(closeAccountModal());
+            if(dataURL) {
+              // incase user changed their profile image we set the value back to null
+              dispatch(setCroppingImageData(null));
+            }
             // log out user
             dispatch(logOut());
           }}

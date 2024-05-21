@@ -47,7 +47,8 @@ const index = () => {
         email:email,
         password:sanitizedPassword,
         remember:remember
-      }))
+      }));
+
     } else {
       alert("Please make sure to input a username and password")
     }
