@@ -37,6 +37,13 @@
 }
 
 @layer components {
+
+    .womp{
+        object-fit: contain;
+        display: block;
+        width: auto;
+    }
+
     /* fix overflow bug */
     .overflowFix{
         -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC); /* this fixes the overflow:hidden in Chrome/Opera */
@@ -125,6 +132,61 @@
 }
 
 @layer utilities {
+    .croppingToolButton {
+        @apply
+        opacity-50
+        hover:opacity-100   
+
+        h-[1.289rem]
+        mobile:h-[1.718rem]
+        sMobile:h-[2.75rem]
+        /* mMobile:h-[3.3rem] */
+        sLaptop:h-[1.84rem]
+        mLaptop:h-[2.3rem]
+        desktop:h-[2.76rem]
+        largeDesktop:h-[3.45rem]
+        
+        w-[3.75rem]
+        mobile:w-[5rem]
+        sMobile:w-[8rem]
+        /* mMobile:w-[9.6rem] */
+        sLaptop:w-auto
+        sLaptop:px-[1.399rem]
+        mLaptop:px-[1.749rem]
+        desktop:px-[2.1rem]
+        largeDesktop:px-[2.625rem]
+
+        text-[0.773rem]
+        leading-[1.289rem]
+        mobile:text-[1.031rem]
+        mobile:leading-[1.718rem]
+        sMobile:text-[1.65rem]
+        sMobile:leading-[2.75rem]
+        /* mMobile:text-[1.98rem]
+        mMobile:leading-[3.3rem] */
+        sLaptop:text-[0.92rem]
+        sLaptop:leading-[1.84rem]
+        mLaptop:text-[1.15rem]
+        mLaptop:leading-[2.3rem]
+        desktop:text-[1.38rem]
+        desktop:leading-[2.76rem]
+        largeDesktop:text-[1.725rem]
+        largeDesktop:leading-[3.45rem]
+
+        font-bold
+
+        rounded-[0.140rem]
+        mobile:rounded-[0.187rem]
+        sMobile:rounded-[.3rem]
+        /* mMobile:rounded-[0.36rem] */
+        sLaptop:rounded-[0.24rem]
+        mLaptop:rounded-[0.3rem]
+        desktop:rounded-[0.36rem]
+        largeDesktop:rounded-[0.45rem]
+
+        transition-all
+        duration-500
+    }
 
     .styling{
         @apply
@@ -245,13 +307,21 @@
     .profilePassReqImg{
         @apply
         w-[0.781rem]
+        h-[0.781rem]
         mobile:w-[1.041rem]
+        mobile:h-[1.041rem]
         sMobile:w-[1.666rem]
+        sMobile:h-[1.666rem]
         /* mMobile:w-[2rem] */
+        /* mMobile:h-[2rem] */
         sLaptop:w-[0.533rem] 
-        mLaptop:w-[0.733rem] 
+        sLaptop:h-[0.533rem]
+        mLaptop:w-[0.733rem]
+        mLaptop:h-[0.733rem] 
         desktop:w-[0.88rem]
+        desktop:h-[0.88rem]
         largeDesktop:w-[1.1rem]
+        largeDesktop:h-[1.1rem]
     }
     .profilePassHolder{
         @apply

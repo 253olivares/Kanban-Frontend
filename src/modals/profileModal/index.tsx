@@ -266,7 +266,6 @@ const index = () => {
     ${
       cropperTool ?
       `
-      h-screen
       overflow-y-hidden
       sLaptop:h-auto
       `
@@ -423,16 +422,19 @@ const index = () => {
             mobile:px-[0.683rem]
             sMobile:px-[1.094rem]
             mMobile:px-[1.313rem]
+            sLaptop:px-0
 
             py-[0.449rem]
             mobile:py-[0.598rem]
             sMobile:py-[0.958rem]
             mMobile:py-[1.15rem]
+            sLaptop:py-0
 
             rounded-[0.175rem]
             mobile:rounded-[0.234rem]
             sMobile:rounded-[0.374rem]
             mMobile:rounded-[0.45rem]
+            sLaptop:rounded-none
 
             bg-[#CECECE]
             sLaptop:bg-transparent
@@ -594,10 +596,14 @@ const index = () => {
             items-center
             w-full
 
-            sLaptop:my-[0.399rem]
-            mLaptop:my-[0.499rem]
-            desktop:my-[0.6rem]
-            largeDesktop:my-[0.75rem]
+            sLaptop:mt-[0.399rem]
+            mLaptop:mt-[0.499rem]
+            desktop:mt-[0.6rem]
+            largeDesktop:mt-[0.75rem]
+            sLaptop:mb-[1.596rem]
+            mLaptop:mb-[1.996rem]
+            desktop:mb-[2.4rem]
+            largeDesktop:mb-[3rem]
             '>
               <PasswordReq reqs={passwordReq}/>
               <SaveButton fn={()=>checkSubmission()}/>

@@ -7,7 +7,7 @@ import CancelButton from './components/cancelButton';
 
 import { getCroppingImage, setCroppingImageData } from '../../reduxStore/modal/modalSlice';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { setCropImage } from './components/setCanvasPreview';
 
 const ASPECT_RATIO = 1;
@@ -18,27 +18,51 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
   
   const dispatch = useAppDispatch();
 
+  // our refs we are creating to track elements for whenever element is being resized
+  // we are doing this due to a bug with using our cropper tool and tailwind css
+  // normally we shouldnt have any issues just setting height percentages and having css
+  // resize our elements but bc for cropping tool it bugs and the image expands pass our element
+
+  // image ref is for our image
   const imageRef = useRef<HTMLImageElement>(null);
+  // canvas is for our canvas ref
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  // controller keeps track of our controller elements
+  const controlsRef = useRef<HTMLDivElement>(null);
+  // this is our ref for our holder
+  const imageHolderRef = useRef<HTMLDivElement>(null);
+  // this is our ref for our entire element. This is what we are using to attach an event listener to our div
+  // allow is to resize our elements when changes are detected
+  const cropperRef = useRef<HTMLDivElement>(null);
   
+  // grab our image from our state
   const cImage = useAppSelector(getCroppingImage);
 
+  // create a crop state for our cropping tool
   const [crop, setCrop] = useState<Crop>();
 
+  // get our extension of our file
   const getExtension = (fileName:string) => {
+    // split file name at . extension
     const ext = fileName.split('.');
     return ext[ext.length - 1];
   }
 
+  // return our extension and check if it matches any of our switch statements
   const checkIfImage = (fileName:string):boolean => {
+    // return extension
     const extension =  getExtension(fileName);
+    // check if it matches
     switch(extension){
       case 'jpg':
       case 'jpeg':
       case 'webp':
       case 'png':
+        // return true if our file is of valid format
         return true
     }
+    // else return false and let the user know they need to submit
+    // a valid file 
     return false
   }
 
@@ -90,6 +114,8 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
       height
     )
     const centeredCrop = centerCrop(crop,width,height);
+
+
     setCrop(centeredCrop);
   }
 
@@ -106,11 +132,62 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
           )
       );
       const dataURL = canvasRef.current.toDataURL();
+      
       setUserImage(dataURL);
     } else {
       alert('Please make sure a provide an image to crop first.');
     }
   }
+
+  // This use effect only exists to set our image when it loads
+  // since our image loading does not set off our resize observer 
+  // we want to run this code separately when it first loads
+  useEffect(()=> {
+    if(imageHolderRef.current && imageRef.current){
+      const controlsHeight = imageHolderRef.current.offsetHeight;
+      imageRef.current.style.maxHeight = `${controlsHeight}px`;
+    }
+  },[cImage])
+
+  useEffect(()=> {
+   let prevHeight = 0;
+
+  //  function to change our element heights
+  // since its all refs no need to update on each react render
+   const setHeights = () => {
+    if(controlsRef.current && imageHolderRef.current && cropperRef.current){
+      const controlsHeight = controlsRef.current.offsetHeight;
+      imageHolderRef.current.style.height = `${cropperRef.current.offsetHeight - controlsHeight}px`;
+    }
+    if(imageHolderRef.current && imageRef.current){
+      const controlsHeight = imageHolderRef.current.offsetHeight;
+      imageRef.current.style.maxHeight = `${controlsHeight}px`;
+    }
+   }
+
+   const observer = new ResizeObserver(entries=> {
+    for( const entry of entries){
+      const height = entry.contentRect.height;
+      // only run our function when our height changes
+      if(typeof height === 'number' && height !== prevHeight){
+      
+        setHeights();
+        // set our height for checking when it changes
+        prevHeight = height;
+      }
+    }
+   });
+
+   if(cropperRef.current){
+    observer.observe(cropperRef.current);
+   }
+   return ()=>{
+    // disconnect our observer when we unload our component
+    if(observer){
+      observer.disconnect();
+    }
+   }
+  },[])
 
   return (
     <motion.div
@@ -129,48 +206,40 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
     transition={{
       duration:.3
     }}
+    ref={cropperRef}
     aria-modal="true"
     className="
-    absolute
+    fixed
+    sLaptop:absolute
+    top-0
+    left-0
     z-[20]
 
     bg-SpaceBlue  
 
-    w-full
-    h-full
-    max-h-[full]
+    w-screen
+    h-screen
+    sLaptop:w-full
+    sLaptop:h-full
 
     flex flex-col
+    justify-between
 
     overflow-y-scroll 
     no-scrollbar 
     sLaptop:overflow-hidden
     ">
         <div 
+        ref={imageHolderRef}
         className={
           `
           flex 
           items-center 
           justify-center
           w-full
-          sLaptop:h-[21.246rem]
-          mLaptop:h-[26.158rem]
-          desktop:h-[31.132rem]
-          largeDesktop:h-[37.166rem]
-          ${
-            cImage ? 
-            `
-            bg-black
-            `
-            :
-            `
-            bg-SpaceBlue
-            `
-          }
-          `
-        }>
-          {
-            cImage ?
+          ${ cImage ? ` bg-black`:`bg-SpaceBlue`}
+          `}>
+          {  cImage ?
              <ReactCrop 
              crop={crop}
              circularCrop
@@ -181,13 +250,7 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
              onChange={(_,percentCrop)=>setCrop(percentCrop)}>
               <img 
               ref={imageRef}
-              className='
-              object-contain
-              sLaptop:h-[21.246rem]
-              mLaptop:h-[26.158rem]
-              desktop:h-[31.132rem]
-              largeDesktop:h-[37.166rem]
-              '
+              className='womp'
               src={cImage} alt="Crop_Image" onLoad={onImageLoad}/>
              </ReactCrop>
             :
@@ -196,10 +259,10 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
 
             font-bold
             
-            text0p
+            text-[]
             mobile:text-[]
-            sMobile:text-[]
-            mMobile:text-[2.25rem]
+            sMobile:text-[1.5rem]
+            mMobile:text-[]
             sLaptop:text-[0.799rem]
             mLaptop:text-[0.999rem]
             desktop:text-[1.2rem]
@@ -207,8 +270,8 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
 
             py-[]
             mobile:py-[]
-            sMobile:py-[]
-            mMobile:py-[12rem]
+            sMobile:py-[10rem]
+            mMobile:py-[]
 
             sLaptop:py-[5.333rem]
             mLaptop:py-[6.666rem]
@@ -217,8 +280,8 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
 
             rounded-[]
             mobile:rounded-[]
-            sMobile:rounded-[]
-            mMobile:rounded-[1.25rem]
+            sMobile:rounded-[1.25rem]
+            mMobile:rounded-[]
 
             sLaptop:rounded-[1.066rem]
             mLaptop:rounded-[1.333rem]
@@ -232,8 +295,8 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
             
             border-[]
             mobile:border-[]
-            sMobile:border-[]
-            mMobile:border-[0.3rem]
+            sMobile:border-[0.3rem]
+            mMobile:border-[]
             sLaptop:border-[0.239rem]
             mLaptop:borer-[0.299rem]
             desktop:border-[0.36rem]
@@ -252,19 +315,27 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
             </label>
           }
         </div>
-        <div className='
+        <div
+        ref={controlsRef}
+        className='
         flex flex-col        
         '>
           <div className='
-          flex justify-center
+          flex 
+          justify-center
           items-center
+        
+          h-[3.632rem]
+          mobile:h-[4.843rem]
+          sMobile:h-[7.75rem]
+          mMobile:h-[9.3rem]
           sLaptop:h-[3.733rem]
           mLaptop:h-[4.666rem]
           desktop:h-[5.6rem]
           largeDesktop:h-[7rem]
           '>
             {
-              cImage ?
+              !cImage ?
               <label 
               className='
               relative
@@ -275,16 +346,32 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
               bg-SelectorBlue
               font-bold
               
+              rounded-[0.140rem]
+              mobile:rounded-[0.187rem]
+              sMobile:rounded-[.3rem]
+              mMobile:rounded-[0.36rem]
               sLaptop:rounded-[0.24rem]
               mLaptop:rounded-[0.3rem]
               desktop:rounded-[0.36rem]
               largeDesktop:rounded-[0.45rem]
 
+              px-[0.656rem]
+              mobile:px-[0.875rem]
+              sMobile:px-[1.4rem]
+              mMobile:px-[1.68rem]
               sLaptop:px-[1.066rem]
               mLaptop:px-[1.333rem]
               desktop:px-[1.6rem]
               largeDesktop:px-[2rem]
 
+              text-[0.773rem]
+              leading-[1.289rem]
+              mobile:text-[1.031rem]
+              mobile:leading-[1.718rem]
+              sMobile:text-[1.65rem]
+              sMobile:leading-[2.75rem]
+              mMobile:text-[1.98rem]
+              mMobile:leading-[3.3rem]
               sLaptop:text-[0.799rem]
               sLaptop:leading-[1.733rem]
               mLaptop:text-[0.999rem]
@@ -294,6 +381,10 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
               largeDesktop:text-[1.5rem]
               largeDesktop:leading-[3.25rem]
 
+              h-[1.289rem]
+              mobile:h-[1.718rem]
+              sMobile:h-[2.75rem]
+              mMobile:h-[3.3rem]
               sLaptop:h-[1.733rem]
               mLaptop:h-[2.166rem]
               desktop:h-[2.6rem]
@@ -323,8 +414,13 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
           flex 
           justify-between
         
-          px-[7.5%]
+          px-[8%]
+          sLaptop:px-[7.5%]
         
+          pb-[0.867rem]
+          mobile:pb-[1.156rem]
+          sMobile:pb-[1.85rem]
+          mMobile:pb-[2.22rem]
           sLaptop:pb-[1.333rem] 
           mLaptop:pb-[1.666rem]     
           desktop:pb-[2rem]
@@ -333,7 +429,12 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
             <CancelButton/>
             <SaveButton fn={()=>cropImage()}/>
           </div>
-          {
+        </div>
+        {/* this is our canvas that creates our crop when we save
+        // when the user clicks the save button it grabs our canvas ref and turns it into 
+        // a data url
+        */}
+        {
             cImage &&
             <canvas
             ref={canvasRef}
@@ -345,7 +446,6 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
             }}
             ></canvas>
           }
-        </div>
     </motion.div>
   )
 }

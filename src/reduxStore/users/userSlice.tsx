@@ -166,6 +166,7 @@ export const changeAccountDetails = createAsyncThunk('user/changeAccountDetails'
         alert('Information has been updated!');
         return user
     } catch (error:unknown){
+        
         console.log(`Update userInformation:${error}`);
         return rejectWithValue(error);
     }
@@ -274,6 +275,12 @@ const userSlice = createSlice({
             })
             .addCase(changeAccountDetails.fulfilled, (state,action:PayloadAction<user>)=> {
                 state.user = action.payload;
+            })
+            .addCase(changeAccountDetails.rejected, (_,action)=> {
+                // @ts-ignore
+                if(action.payload.code === 22){
+                    alert('File size too large for local storage! Please make a smaller crop or use a smaller image. Thank you');
+                }
             })
     }
 })

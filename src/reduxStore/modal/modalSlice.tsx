@@ -10,7 +10,7 @@ type initialStateType = {
     accountSettings:boolean,
     accountLandingMobile:boolean,
     croppingTool:boolean,
-    croppingImageData:string | null
+    croppingImageData:string | null,
 }
 
 const initialState: initialStateType = {
@@ -20,7 +20,7 @@ const initialState: initialStateType = {
     accountSettings:false,
     accountLandingMobile:false,
     croppingTool:false,
-    croppingImageData:null
+    croppingImageData:null,
 }   
 
 // create a slice of our state
