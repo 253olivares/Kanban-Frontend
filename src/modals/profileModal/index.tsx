@@ -54,6 +54,11 @@ const index = () => {
     pfp:user.pfp,
   })
 
+  const changeImage = (dataUrl:string) => {
+    setUserInfo(x=> ({...x,pfp:dataUrl}));
+    dispatch(openCloseCroppingTool());
+  }
+
   const [passwordReq,setPasswordReq] = useState<Record<string,boolean>>({
     charLimit: false,
     numReq: false,
@@ -254,15 +259,25 @@ const index = () => {
     transition={{
       duration:.3
     }}
-    className='
+    className={`
     relative
     bg-PrimaryWhite 
     w-full 
-    h-auto
-    min-h-screen
-
-    overflow-y-scroll
-    no-scrollbar
+    ${
+      cropperTool ?
+      `
+      h-screen
+      overflow-y-hidden
+      sLaptop:h-auto
+      `
+      :
+      `
+      h-auto
+      min-h-screen
+      overflow-y-scroll
+      no-scrollbar
+      `
+    }
 
     sLaptop:min-h-0
     sLaptop:w-[30rem] 
@@ -276,11 +291,11 @@ const index = () => {
     largeDesktop:rounded-[0.883rem]
 
     sLaptop:overflow-hidden
-    '
+    `}
     >
       <AnimatePresence>
         {
-          cropperTool && <CroppingTool />
+          cropperTool && <CroppingTool setUserImage={changeImage} />
         }
       </AnimatePresence>
       <div
@@ -385,7 +400,7 @@ const index = () => {
 
               rounded-full
               '
-              src={`data:image/png;base64,${userInfo.pfp}`} alt="AccountImage" />
+              src={`${userInfo.pfp}`} alt="AccountImage" />
             </div>
             <button 
             onClick={()=> dispatch(openCloseCroppingTool())}

@@ -57,7 +57,7 @@ export const searchUser = (email:string,password:string)=> {
         if(Object.keys(users).length >= 1) {
             for(const [_, value] of Object.entries(users)){
                 console.log(value.email);
-                if(value.email === email){
+                if(value.email.toUpperCase() === email.toUpperCase()){
                     if(checkPasswordMatch(password,value.password)){
                         user = value;
                     }
@@ -115,7 +115,7 @@ export const checkIfEmailExists = (email:string):boolean | null => {
         let match = false;
         if(Object.keys(users).length >=1) {
             for (const [_, value] of Object.entries(users)) {
-                if (value.email === email) {
+                if (value.email.toUpperCase() === email.toUpperCase()) {
                     match = true;
                 }
               }
@@ -137,7 +137,7 @@ export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | 
         let match = false;
         if(Object.keys(users).length >=1) {
             for (const [_, value] of Object.entries(users)) {
-                if (value.email === email && value.email !== prevEmail) {
+                if (value.email.toUpperCase() === email.toUpperCase() && value.email.toUpperCase() !== prevEmail.toUpperCase()) {
                     match = true;
                 }
             }
@@ -215,7 +215,7 @@ export const createDefaultBaseImage = (firstLetter:string,lastLetter:string):str
     // return our base 64 code of our image
     // remove beginning section of the data url so we only
     // have the image data itself
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+    return dataURL;
 }
 
 export const convertImageToBase64 = ():void => {

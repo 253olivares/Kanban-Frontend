@@ -155,7 +155,7 @@ const index = memo(() => {
 
               rounded-full
               "
-              src={`data:image/png;base64,${user?.pfp}`} alt="" />
+              src={`${user?.pfp}`} alt="" />
             </div>
             <div className="
             flex 

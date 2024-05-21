@@ -33,7 +33,7 @@ const index = memo(() => {
     }}
     ref={modalRef}
     className="
-    absolute
+    fixed
     z-20 
 
     top-0 

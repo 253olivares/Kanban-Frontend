@@ -48,7 +48,14 @@ const index = memo(():JSX.Element => {
     relative
     w-full
     ${
-      SecondaryModal || modalStatus ? 'h-screen overflow-y-hidden' : ''
+      SecondaryModal || modalStatus ? 
+      `
+      overflow-y-hidden
+      `
+      : 
+      `
+      h-auto
+      `
     }
     overflow-x-hidden
     `}

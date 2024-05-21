@@ -111,7 +111,7 @@ const Header = memo(({user}:{user:user}) => {
             4k:w-[6.25rem]
             rounded-full
             '
-            src={`data:image/png;base64,${user.pfp}`} alt="" />
+            src={`${user.pfp}`} alt="" />
         </div>
     </div>
   )

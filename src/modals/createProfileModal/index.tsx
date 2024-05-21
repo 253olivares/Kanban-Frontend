@@ -446,10 +446,10 @@ const index = () => {
             sLaptop:scale-95
             flex 
             justify-center 
-            pt-[1.51rem] pb-[1.514rem] 
-            mobile:pt-[2.014] mobile:pb-[2.019rem]
-            sMobile:pt-[3.222rem] sMobile:pb-[3.855rem] 
-            mMobile:pt-[3.866rem] mMobile:pb-[3.876rem]
+            pt-[1.51rem] pb-[3.428rem] 
+            mobile:pt-[2.014] mobile:pb-[4.57rem]
+            sMobile:pt-[3.222rem] sMobile:pb-[7.312rem] 
+            mMobile:pt-[3.866rem] mMobile:pb-[8.776rem]
             sLaptop:py-[1.261rem] 
             mLaptop:py-[1.607rem]
             desktop:py-[1.829rem] 

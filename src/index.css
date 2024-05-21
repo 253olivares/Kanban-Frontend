@@ -126,6 +126,11 @@
 
 @layer utilities {
 
+    .styling{
+        @apply
+        h-[31.18rem]
+    }
+
     .labelCss{
         @apply
         text-[1.057rem]

@@ -1,7 +1,9 @@
 
-const saveButton = () => {
+const saveButton = ({fn}:{fn:()=>void}) => {
   return (
     <button
+    onClick={fn}
+
    className="
     
     bg-white
