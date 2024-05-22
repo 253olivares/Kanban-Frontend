@@ -223,14 +223,11 @@ const index = () => {
     className="
     relative
     bg-PrimaryWhite 
+
     w-full 
-    h-auto
+    min-h-dvh
 
-    min-h-screen
     sLaptop:min-h-0
-
-    sLaptop:h-auto
-
     sLaptop:w-[24.999rem] 
     mLaptop:w-[31.249rem]
     desktop:w-[37.5rem] 
@@ -250,6 +247,7 @@ const index = () => {
      className='
      relative
      w-full
+
      pb-[3.026rem]
      mobile:pb-[4.004rem]
      sMobile:pb-[6.406rem]
@@ -460,15 +458,15 @@ const index = () => {
     </div>
         {/* footer */}
     <div className='
-    absolute
-    bottom-[0]
-    w-full
-    h-[3.026rem]
-    mobile:h-[4.004rem]
-    sMobile:h-[6.406rem]
-    mMobile:h-[7.688rem]
-    sLaptop:relative 
-    sLaptop:h-auto
+     absolute
+     bottom-0
+     w-full
+     h-[3.026rem]
+     mobile:h-[4.004rem]
+     sMobile:h-[6.406rem]
+     mMobile:h-[7.688rem]
+     sLaptop:relative 
+     sLaptop:h-auto
     '>
          <Footer />
     </div>

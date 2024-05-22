@@ -267,11 +267,9 @@ const index = () => {
       cropperTool ?
       `
       overflow-y-hidden
-      sLaptop:h-auto
       `
       :
       `
-      h-auto
       min-h-dvh
       overflow-y-scroll
       no-scrollbar

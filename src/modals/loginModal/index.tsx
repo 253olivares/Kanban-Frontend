@@ -71,12 +71,9 @@ const index = () => {
     className="
     relative
     bg-PrimaryWhite 
-    w-full
-    h-auto
-    min-h-dvh
 
-    overflow-y-scroll
-    no-scrollbar
+    w-full
+    min-h-dvh
 
     sLaptop:min-h-0 
     sLaptop:w-[25rem] 
@@ -84,17 +81,20 @@ const index = () => {
     desktop:w-[37.5rem] 
     largeDesktop:w-[46.875rem]
     
-    sLaptop:rounded-[0.5rem]
-    mLaptop:rounded-[0.625rem]
-    desktop:rounded-[0.75rem]
-    largeDesktop:rounded-[0.938rem]
+    sLaptop:rounded-[0.471rem] 
+    mLaptop:rounded-[0.588rem]
+    desktop:rounded-[0.706rem]
+    largeDesktop:rounded-[0.883rem]
     
+    overflow-y-scroll
+    no-scrollbar
     sLaptop:overflow-hidden
     ">
       <div 
       className='
       relative
       w-full
+
       pb-[3.026rem]
       mobile:pb-[4.004rem]
       sMobile:pb-[6.406rem]
@@ -267,15 +267,16 @@ const index = () => {
       </div>
       {/* Footer */}
       <div className="
-      absolute 
-      bottom-[0]
-      w-full
-      h-[3.026rem]
-      mobile:h-[4.004rem]
-      sMobile:h-[6.406rem]
-      mMobile:h-[7.688rem]
-      sLaptop:h-auto
-      sLaptop:relative ">
+       absolute
+       bottom-0
+       w-full
+       h-[3.026rem]
+       mobile:h-[4.004rem]
+       sMobile:h-[6.406rem]
+       mMobile:h-[7.688rem]
+       sLaptop:relative 
+       sLaptop:h-auto
+     ">
         <Footer />
       </div>
     </motion.div>
