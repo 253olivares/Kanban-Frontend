@@ -1,6 +1,6 @@
 import { closeModal, getMobileModal, getModalStatus } from '../../reduxStore/modal/modalSlice';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
-import {memo, lazy, useLayoutEffect, useEffect} from 'react';
+import {memo, lazy, useLayoutEffect, useEffect, useContext} from 'react';
 import { useNavigate } from "react-router-dom";
 
 import SecondaryModalMobile from './components/SecondaryModal';
@@ -8,6 +8,7 @@ import ModalContainer from '../../modals'
 
 import { AnimatePresence } from 'framer-motion';
 import { checkRemembered, getUser } from '../../reduxStore/users/userSlice';
+import { AppContext } from '../appRefContext';
 
 const MainSection = lazy(()=> import('./section-1_Main-Head'))
 const PMSection = lazy(()=>import('./section-2_PM-Section'))
@@ -18,6 +19,9 @@ const index = memo(():JSX.Element => {
   
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const appContext= useContext(AppContext);
+  const {pageRef} = appContext!;
 
   // check to see if a user is signed in
   const user = useAppSelector(getUser);
@@ -43,21 +47,15 @@ const index = memo(():JSX.Element => {
   // In this page we are going to handle our popup states within here
   return (
     <main
+    ref={pageRef}
     className={`
+    z-[0]
     block
     relative
     w-full
-    ${
-      SecondaryModal || modalStatus ? 
-      `
-      overflow-y-hidden
-      `
-      : 
-      `
-      h-auto
-      `
-    }
+    
     overflow-x-hidden
+    no-scrollbar
     `}
     >
       <AnimatePresence>

@@ -7,7 +7,7 @@ const saveButton = ({fn}:{fn:()=>void}) => {
    className="
     
     bg-white
-    opacity-50
+    sLaptop:opacity-50
     sLaptop:hover:opacity-100
     sLaptop:hover:bg-SelectorBlue
     sLaptop:hover:text-white

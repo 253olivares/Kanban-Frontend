@@ -15,7 +15,7 @@ const index = memo(() => {
   
     conic-gradient 
     Home_Section1
-    sss'>
+    '>
         <div className='
         Home_Section1 
         max-w-[1920px]
@@ -132,7 +132,7 @@ const index = memo(() => {
             className='
             block 
             sLaptop:hidden 
-            z-10 
+            z-[8]
             absolute 
 
             w-[8.006rem]
@@ -158,7 +158,7 @@ const index = memo(() => {
             sLaptop:w-[32.688rem] 
             mLaptop:w-[40.563rem] 
             desktop:w-[49.25rem] 
-            z-10 
+            z-[8]
             absolute 
             right-[8.5%]
             sLaptop:top-[4.75rem]

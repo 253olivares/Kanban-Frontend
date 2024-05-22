@@ -73,7 +73,7 @@ const index = () => {
     bg-PrimaryWhite 
     w-full
     h-auto
-    min-h-screen
+    min-h-dvh
 
     overflow-y-scroll
     no-scrollbar

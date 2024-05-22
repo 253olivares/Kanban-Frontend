@@ -30,13 +30,22 @@
 
     
     html,body {
+        width: 100dvw;
+        height: 100dvh;
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
-        @apply font-Ubuntu bg-PrimaryWhite;
+        @apply font-Ubuntu bg-PrimaryWhite
     }
 }
 
 @layer components {
+
+    .modal--opened{
+        position: fixed;
+        left: 0;
+        right: 0;
+    }
+    
 
     .womp{
         object-fit: contain;
@@ -134,35 +143,33 @@
 @layer utilities {
     .croppingToolButton {
         @apply
-        opacity-50
-        hover:opacity-100   
 
-        h-[1.289rem]
-        mobile:h-[1.718rem]
-        sMobile:h-[2.75rem]
-        /* mMobile:h-[3.3rem] */
+        h-[2.021rem]
+        mobile:h-[2.695rem]
+        sMobile:h-[4.312rem]
+        /* mMobile:h-[5.175rem] */
         sLaptop:h-[1.84rem]
         mLaptop:h-[2.3rem]
         desktop:h-[2.76rem]
         largeDesktop:h-[3.45rem]
         
-        w-[3.75rem]
-        mobile:w-[5rem]
-        sMobile:w-[8rem]
-        /* mMobile:w-[9.6rem] */
+        w-[4.687rem]
+        mobile:w-[6.25rem]
+        sMobile:w-[10rem]
+        /* mMobile:w-[12rem] */
         sLaptop:w-auto
         sLaptop:px-[1.399rem]
         mLaptop:px-[1.749rem]
         desktop:px-[2.1rem]
         largeDesktop:px-[2.625rem]
 
-        text-[0.773rem]
-        leading-[1.289rem]
-        mobile:text-[1.031rem]
-        mobile:leading-[1.718rem]
-        sMobile:text-[1.65rem]
-        sMobile:leading-[2.75rem]
-        /* mMobile:text-[1.98rem]
+        text-[1.010rem]
+        leading-[2.021rem]
+        mobile:text-[1.347rem]
+        mobile:leading-[2.695rem]
+        sMobile:text-[2.156rem]
+        sMobile:leading-[4.312rem]
+        /* mMobile:text-[2.588rem]
         mMobile:leading-[3.3rem] */
         sLaptop:text-[0.92rem]
         sLaptop:leading-[1.84rem]
@@ -175,10 +182,10 @@
 
         font-bold
 
-        rounded-[0.140rem]
-        mobile:rounded-[0.187rem]
-        sMobile:rounded-[.3rem]
-        /* mMobile:rounded-[0.36rem] */
+        rounded-[0.263rem]
+        mobile:rounded-[0.351rem]
+        sMobile:rounded-[0.562rem]
+        /* mMobile:rounded-[0.675rem] */
         sLaptop:rounded-[0.24rem]
         mLaptop:rounded-[0.3rem]
         desktop:rounded-[0.36rem]

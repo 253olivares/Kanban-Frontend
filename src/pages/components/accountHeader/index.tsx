@@ -41,8 +41,8 @@ const index = memo(() => {
       <main className={`
       relative 
       z-[0]
-      w-screen 
-      h-screen 
+      w-dvw
+      h-dvh
       conic-gradient-noshade 
       overflow-hidden
       flex 

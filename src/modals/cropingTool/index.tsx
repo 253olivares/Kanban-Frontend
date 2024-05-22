@@ -211,14 +211,15 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
     className="
     fixed
     sLaptop:absolute
+    z-[20]
+
     top-0
     left-0
-    z-[20]
 
     bg-SpaceBlue  
 
-    w-screen
-    h-screen
+    w-dvw
+    h-dvh
     sLaptop:w-full
     sLaptop:h-full
 
@@ -259,29 +260,29 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
 
             font-bold
             
-            text-[]
-            mobile:text-[]
+            text-[0.703rem]
+            mobile:text-[0.937rem]
             sMobile:text-[1.5rem]
-            mMobile:text-[]
+            mMobile:text-[1.8rem]
             sLaptop:text-[0.799rem]
             mLaptop:text-[0.999rem]
             desktop:text-[1.2rem]
             largeDesktop:text-[1.5rem]
 
-            py-[]
-            mobile:py-[]
+            py-[4.687rem]
+            mobile:py-[6.25rem]
             sMobile:py-[10rem]
-            mMobile:py-[]
+            mMobile:py-[12rem]
 
             sLaptop:py-[5.333rem]
             mLaptop:py-[6.666rem]
             desktop:py-[8rem]
             largeDesktop:py-[10rem]
 
-            rounded-[]
-            mobile:rounded-[]
+            rounded-[0.585rem]
+            mobile:rounded-[0.781rem]
             sMobile:rounded-[1.25rem]
-            mMobile:rounded-[]
+            mMobile:rounded-[1.5rem]
 
             sLaptop:rounded-[1.066rem]
             mLaptop:rounded-[1.333rem]
@@ -293,10 +294,10 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
 
             border-dashed
             
-            border-[]
-            mobile:border-[]
+            border-[0.140rem]
+            mobile:border-[0.187rem]
             sMobile:border-[0.3rem]
-            mMobile:border-[]
+            mMobile:border-[.36rem]
             sLaptop:border-[0.239rem]
             mLaptop:borer-[0.299rem]
             desktop:border-[0.36rem]
@@ -325,17 +326,17 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
           justify-center
           items-center
         
-          h-[3.632rem]
-          mobile:h-[4.843rem]
-          sMobile:h-[7.75rem]
-          mMobile:h-[9.3rem]
-          sLaptop:h-[3.733rem]
+          h-[4.6875rem]
+          mobile:h-[6.25rem]
+          sMobile:h-[10rem]
+          mMobile:h-[12rem]
+          sLaptop:h-[3.733rem]  
           mLaptop:h-[4.666rem]
           desktop:h-[5.6rem]
           largeDesktop:h-[7rem]
           '>
             {
-              !cImage ?
+              cImage ?
               <label 
               className='
               relative
@@ -343,17 +344,12 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
               z-[30]
             
               text-white
+
               bg-SelectorBlue
+
               font-bold
               
-              rounded-[0.140rem]
-              mobile:rounded-[0.187rem]
-              sMobile:rounded-[.3rem]
-              mMobile:rounded-[0.36rem]
-              sLaptop:rounded-[0.24rem]
-              mLaptop:rounded-[0.3rem]
-              desktop:rounded-[0.36rem]
-              largeDesktop:rounded-[0.45rem]
+              rounded-full
 
               px-[0.656rem]
               mobile:px-[0.875rem]
@@ -364,14 +360,14 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
               desktop:px-[1.6rem]
               largeDesktop:px-[2rem]
 
-              text-[0.773rem]
-              leading-[1.289rem]
-              mobile:text-[1.031rem]
-              mobile:leading-[1.718rem]
-              sMobile:text-[1.65rem]
-              sMobile:leading-[2.75rem]
-              mMobile:text-[1.98rem]
-              mMobile:leading-[3.3rem]
+              text-[1.010rem]
+              leading-[2.021rem]
+              mobile:text-[1.347rem]
+              mobile:leading-[2.695rem]
+              sMobile:text-[2.156rem]
+              sMobile:leading-[4.312rem]
+              mMobile:text-[2.588rem]
+              mMobile:leading-[5.175rem]
               sLaptop:text-[0.799rem]
               sLaptop:leading-[1.733rem]
               mLaptop:text-[0.999rem]
@@ -381,16 +377,16 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
               largeDesktop:text-[1.5rem]
               largeDesktop:leading-[3.25rem]
 
-              h-[1.289rem]
-              mobile:h-[1.718rem]
-              sMobile:h-[2.75rem]
-              mMobile:h-[3.3rem]
+              h-[2.021rem]
+              mobile:h-[2.695rem]
+              sMobile:h-[4.312rem]
+              mMobile:h-[5.175rem] 
               sLaptop:h-[1.733rem]
               mLaptop:h-[2.166rem]
               desktop:h-[2.6rem]
               largeDesktop:h-[3.25rem]
 
-              sLaptop:hover:opacity-75
+              sLaptop:hover:opacity-65
               sLaptop:hover:cursor-pointer  
               transition-all
               duration-300
@@ -417,10 +413,10 @@ const index = ({setUserImage}: {setUserImage:(dataUrl:string)=>void}) => {
           px-[8%]
           sLaptop:px-[7.5%]
         
-          pb-[0.867rem]
-          mobile:pb-[1.156rem]
-          sMobile:pb-[1.85rem]
-          mMobile:pb-[2.22rem]
+          pb-[0.9375rem]
+          mobile:pb-[1.25rem]
+          sMobile:pb-[2rem]
+          mMobile:pb-[2.4rem]
           sLaptop:pb-[1.333rem] 
           mLaptop:pb-[1.666rem]     
           desktop:pb-[2rem]

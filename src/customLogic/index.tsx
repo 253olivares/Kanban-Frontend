@@ -218,6 +218,15 @@ export const createDefaultBaseImage = (firstLetter:string,lastLetter:string):str
     return dataURL;
 }
 
-export const convertImageToBase64 = ():void => {
-
+export function toggleModal() {
+    let offset;
+    if (document.body.classList.contains('modal--opened')) {
+        offset = parseInt(document.body.style.top, 10);
+        document.body.classList.remove('modal--opened');
+        document.body.scrollTop = (offset * -1);
+    } else {
+        offset = document.body.scrollTop;
+        document.body.style.top = (offset * -1) + 'px';
+        document.body.classList.add('modal--opened');
+    }
 }

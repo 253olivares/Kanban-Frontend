@@ -23,6 +23,7 @@ const index = memo(() => {
   const modal = useAppSelector(getModalType);
   const croppingTool = useAppSelector(getCroppingTool);
 
+
   return (
     <motion.div
     initial={{ opacity: 0 }}
@@ -34,16 +35,16 @@ const index = memo(() => {
     ref={modalRef}
     className="
     fixed
-    z-20 
-
+    z-[15]
     top-0 
     left-0 
-    
-    w-screen 
-    h-screen
+
+    w-dvw
+    h-dvh
 
     overflow-x-hidden
     overflow-y-auto
+
     no-scrollbar
 
     sLaptop:flex 
@@ -55,6 +56,7 @@ const index = memo(() => {
         {modal == 'logIn' && <LoginModal />}
         {modal == 'profile' && <ProfileModal />}
       </AnimatePresence>
+
       <div onClick={()=> {
         if(!croppingTool){
           dispatch(closeModal())

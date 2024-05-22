@@ -21,7 +21,7 @@ export const setCropImage= (
     canvas.height = Math.floor(crop.height * scaleY * pixelRatio);
 
     ctx.scale(pixelRatio, pixelRatio);
-    ctx.imageSmoothingQuality = 'high';
+    ctx.imageSmoothingQuality = 'medium';
 
     ctx.save();
 

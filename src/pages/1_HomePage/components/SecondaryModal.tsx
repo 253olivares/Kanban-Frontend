@@ -1,6 +1,6 @@
-
 import {motion} from 'framer-motion';
 import { memo } from 'react';
+
 
 import { openCreateProfile,closeMobileModal } from '../../../reduxStore/modal/modalSlice';
 import { openLogin } from '../../../reduxStore/modal/modalSlice';
@@ -9,6 +9,7 @@ import { useAppDispatch } from '../../../reduxStore/hook';
 
 import Button from '../components/mobileButton'
 import down from '/assets/Union.png'
+
 
 const SecondaryModal = memo(() => {
 
@@ -22,7 +23,19 @@ const SecondaryModal = memo(() => {
     transition={{
       duration:.25
     }}
-    className="fixed sLaptop:hidden z-20 top-0 left-0 w-screen h-screen flex justify-center items-center">
+    className="
+    fixed
+    z-[10]
+    top-0 
+    left-0 
+    w-dvw
+    h-dvh
+    flex
+    flex-col
+    justify-end
+
+    sLaptop:hidden 
+    ">
         <motion.div
         initial={{
           y:100
@@ -33,10 +46,19 @@ const SecondaryModal = memo(() => {
         exit={{
             y:100
         }}
-        className=" absolute block bottom-0 w-full min-h-[10rem] bg-PrimaryWhite rounded-t-[1rem] mMobile:rounded-t-[1.25rem]">
+        className=" 
+        relative
+        z-[12]
+        block 
+        w-full 
+        min-h-[10rem] 
+        bg-PrimaryWhite 
+        rounded-t-[1rem] 
+        mMobile:rounded-t-[1.25rem]">
           <div onClick={()=>dispatch(closeMobileModal())} className='
           w-full cursor-pointer'>
-            <img className="mx-auto 
+            <img className="
+            mx-auto 
             w-[1.244rem]  
             mobile:w-[1.658rem]
             sMobile:w-[2.653rem]
@@ -71,7 +93,13 @@ const SecondaryModal = memo(() => {
             </div>
           </div>
         </motion.div>
-       <div onClick={()=>dispatch(closeMobileModal())} className="block sLaptop:hidden absolute z-[-1] w-full h-full bg-[rgba(0,0,0,0.75)]" />
+       <div onClick={()=>dispatch(closeMobileModal())} className="
+       block 
+       sLaptop:hidden 
+       absolute 
+       w-full 
+       h-full 
+       bg-[rgba(0,0,0,0.75)]" />
     </motion.div>
   )
 })

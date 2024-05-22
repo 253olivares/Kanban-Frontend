@@ -272,7 +272,7 @@ const index = () => {
       :
       `
       h-auto
-      min-h-screen
+      min-h-dvh
       overflow-y-scroll
       no-scrollbar
       `
@@ -600,10 +600,10 @@ const index = () => {
             mLaptop:mt-[0.499rem]
             desktop:mt-[0.6rem]
             largeDesktop:mt-[0.75rem]
-            sLaptop:mb-[1.596rem]
-            mLaptop:mb-[1.996rem]
-            desktop:mb-[2.4rem]
-            largeDesktop:mb-[3rem]
+            sLaptop:mb-[1.466rem]
+            mLaptop:mb-[1.833rem]
+            desktop:mb-[2.2rem]
+            largeDesktop:mb-[2.75rem]
             '>
               <PasswordReq reqs={passwordReq}/>
               <SaveButton fn={()=>checkSubmission()}/>
