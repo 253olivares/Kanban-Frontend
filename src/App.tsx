@@ -43,7 +43,7 @@ function App(): JSX.Element {
             {/* our heading layout */}
             <Route path="u/:id" element={<LayoutAccount />} >
 
-              {/* account landing page where users will arrive when they login */}
+              {/* account landing page where users will arrive when they login */}` `
               <Route index element={<AccountLanding/>} />
 
               {/* Workspace Page that is where the user can view all ongoing tasks */}

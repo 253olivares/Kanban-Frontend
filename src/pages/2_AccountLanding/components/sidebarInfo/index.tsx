@@ -1,9 +1,12 @@
 
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { useAppSelector } from '../../../../reduxStore/hook';
 import { getAccountLandingModal } from '../../../../reduxStore/modal/modalSlice';
-import WorkspaceBoardHeader from '../workspaceBoardsHeader';
 import { AppContext } from '../../../appRefContext';
+
+import SidebarBoards from '../sidebarBoards';
+import SidebarWorkspaces from '../sidebarWorksspaces';
+import WorkspaceBoardHeader from '../workspaceBoardsHeader';
 
 const index = () => {
     const modal = useAppSelector(getAccountLandingModal);
@@ -11,10 +14,15 @@ const index = () => {
     const appContext = useContext(AppContext);
     const {mobileSideBarRef} = appContext!;
 
+    const [selectWorkspace,setSelectWorkspace] = useState<string>('');
+
+    const getUserWorkSpaces:unknown[] = [];
+
   return (
     <div
     ref={mobileSideBarRef}
     className={`
+      z-10
       absolute
     ${
         modal ?
@@ -39,6 +47,8 @@ const index = () => {
       duration-500
       ease-in-out
 
+      bg-SpaceBlue
+      sLaptop:bg-transparent
       sLaptop:top-auto
 
       flex items-center 
@@ -62,13 +72,37 @@ const index = () => {
         >
           <WorkspaceBoardHeader />
         </div>
+        {/* px-[4%] */}
         <div 
         className='
         w-full
+        flex
+        flex-col-reverse
+        sLaptop:flex-col
         flex-grow
-        glass-gradient
         '>
+          <SidebarBoards selectWorkspace={selectWorkspace} />
+          <hr className='
+          w-[90%]
+          sLaptop:w-[91%]
 
+          mx-auto
+
+          bg-white
+          opacity-50
+
+          rounded-full
+
+          h-[0.122rem]
+          mobile:h-[0.163rem]
+          sMobile:h-[0.260rem]
+          mMobile:h-[0.313rem]
+          sLaptop:h-[0.166rem]
+          mLaptop:h-[0.208rem]
+          desktop:h-[0.250rem]
+          largeDesktop:h-[0.313rem]
+          ' />
+          <SidebarWorkspaces setWorkspace={(string)=> setSelectWorkspace(string)} workspaces={getUserWorkSpaces} /> 
         </div>
       </div>
   )

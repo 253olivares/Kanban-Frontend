@@ -32,7 +32,6 @@ const PlanButton = ({message, fn}:{message:string, fn: ()=> void}) => {
         transition-[box-shadow] 
         ease-in-out 
         duration-300
-        hover:customShadow
         w-auto
         '>
             <span className={`

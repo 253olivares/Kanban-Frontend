@@ -1,14 +1,50 @@
 
+import UserActiveTasks from '../activeUserTasks';
+import Heading from '../mainPageHeader';
+
 const index = () => {
+
+  const getUserTasks = [];
+
   return (
     <div className='
       w-full
       sLaptop:w-[74%]
       h-[100%]
-      flex items-center 
+      flex 
+      flex-col
+      items-center 
       justify-center
       '>
-        <p className='font-bold text-white text-center'>Lists users are involved in will display here! Oldest to newsest</p>
+         <Heading />
+        {
+          getUserTasks.length === 0
+          ?
+          <div className='
+          w-full
+          flex-grow
+          flex
+          items-center
+          justify-center
+          '>
+            <p className='
+            font-bold
+          text-white
+            text-[0.878rem]
+            mobile:text-[1.171rem]
+            sMobile:text-[1.874rem]
+            mMobile:text-[2.25rem]
+            sLaptop:text-[1.466rem]
+            mLaptop:text-[1.833rem]
+            desktop:text-[2.2rem]
+            largeDesktop:text-[2.75rem]
+            px-[5%]
+            text-center
+            '>No tasks currently found! <br/> All caught up!</p>
+          </div>
+          : 
+          <UserActiveTasks />
+        }
     </div> 
   )
 }
