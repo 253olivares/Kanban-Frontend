@@ -12,6 +12,7 @@ type initialStateType = {
     accountLandingMobile:boolean,
     croppingTool:boolean,
     croppingImageData:string | null,
+    filterModal:boolean
 }
 
 const initialState: initialStateType = {
@@ -22,6 +23,7 @@ const initialState: initialStateType = {
     accountLandingMobile:false,
     croppingTool:false,
     croppingImageData:null,
+    filterModal: false
 }   
 
 // create a slice of our state
@@ -82,6 +84,9 @@ const modalSlice = createSlice({
         },
         closeAccountLandingModal(state){
             state.accountLandingMobile = false;
+        },
+        setOpenModal (state, action){
+            state.filterModal = action.payload as boolean;
         }
     }
 })
@@ -94,6 +99,7 @@ export const getAccountSettings = (state:RootState) => state.modal.accountSettin
 export const getAccountLandingModal = (state:RootState) => state.modal.accountLandingMobile;
 export const getCroppingTool = (state:RootState) => state.modal.croppingTool;
 export const getCroppingImage = (state:RootState) => state.modal.croppingImageData;
+export const getFilterModal = (state:RootState) => state.modal.filterModal;
 
 export const {
     setCroppingImageData,
@@ -107,7 +113,8 @@ export const {
     openAccountModal, 
     closeAccountModal,
     openAccountLadingModal,
-    closeAccountLandingModal
+    closeAccountLandingModal,
+    setOpenModal
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

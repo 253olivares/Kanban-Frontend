@@ -58,7 +58,7 @@ export const checkRemembered = createAsyncThunk('user/checkRemember', async (_,{
                 throw new Error('Authentication is out of date!')
             } else {
                 const user = getUserFromList(rem.userId);
-                console.log('check rememer after get user',user);
+                // console.log('check rememer after get user',user);
                 if(user){
                     return user;
                 } else {

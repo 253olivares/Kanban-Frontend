@@ -7,7 +7,6 @@ import PlanButton from '../components/PlanButton';
 const PricingCard = ({plan,position}: {plan:pricingPlansType,position:number}) => {
     const dispatch = useAppDispatch();
     const delay = 250 * (position+1);
-    console.log(delay)
   return (
     <div 
     data-aos='fade-down'

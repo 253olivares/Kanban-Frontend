@@ -1,5 +1,7 @@
+import { memo } from "react";
+
 // sidebarBoards
-const index = ({selectWorkspace}:{selectWorkspace:string}) => {
+const index = memo(({selectWorkspace}:{selectWorkspace:string}) => {
 
   const getBoardsFromSelectWorkspace:unknown[] = [];
 
@@ -95,6 +97,6 @@ const index = ({selectWorkspace}:{selectWorkspace:string}) => {
       </div>
     </div>
   )
-}
+})
 
 export default index

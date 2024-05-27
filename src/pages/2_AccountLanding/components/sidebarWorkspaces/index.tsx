@@ -1,5 +1,5 @@
-import addWorkspace from '/assets/Add_New_Workspace.svg'
-import { memo } from 'react'
+import addWorkspace from '/assets/Add_New_Workspace.svg';
+import { memo } from 'react';
 
 const index = memo((
   {

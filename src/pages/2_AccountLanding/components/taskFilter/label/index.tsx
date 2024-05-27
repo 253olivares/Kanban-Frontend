@@ -34,6 +34,10 @@ const index = ({k,v}: {k:string, v:boolean}) => {
         <input
 
         className="
+
+        hidden
+        sLaptop:block
+
         sLaptop:w-[0.927rem]
         sLaptop:h-[0.927rem]
         mLaptop:w-[1.16rem]
@@ -65,7 +69,11 @@ const index = ({k,v}: {k:string, v:boolean}) => {
         className={`
         text-white
          font-medium
-
+        
+         text-[1.098rem]
+         mobile:text-[1.465rem]
+         sMobile:text-[2.344rem]
+         mMobile:text-[2.813rem]
          sLaptop:text-[0.668rem]
          mLaptoP:text-[0.835rem]
          desktop:text-[1.003rem]
@@ -73,16 +81,28 @@ const index = ({k,v}: {k:string, v:boolean}) => {
 
          leading-none
 
+         py-[0.195rem]
+         mobile:py-[0.260rem]
+         sMobile:py-[0.416rem]
+         mMobile:py-[0.5rem]
          sLaptop:py-[0.125rem]
          mLaptop:py-[0.156rem]
          desktop:py-[0.188rem]
          largeDesktop:py-[0.235rem]
 
+         rounded-[0.159rem]
+         mobile:rounded-[0.213rem]
+         sMobile:rounded-[0.340rem]
+         mMobile:rounded-[0.409rem]
          sLaptop:rounded-[0.125rem]
          mLaptop:rounded-[0.156rem]
          desktop:rounded-[0.188rem]
          largeDesktop:rounded-[0.235rem]
 
+         w-[8.178rem]
+         mobile:w-[10.905rem]
+         sMobile:w-[17.448rem]
+         mMobile:w-[20.938rem]
          sLaptop:w-[3.800rem]
          mLaptop:w-[4.750rem]
          desktop:w-[5.701rem]
@@ -91,6 +111,15 @@ const index = ({k,v}: {k:string, v:boolean}) => {
          text-center
 
          ${css}
+
+         ${
+            v ? 
+            'opacity-100'
+            : 
+            'opacity-50'
+         }
+
+         sLaptop:opacity-100
         `}
         htmlFor={`taskFilter${k}`} 
         >{capitalized}</label>

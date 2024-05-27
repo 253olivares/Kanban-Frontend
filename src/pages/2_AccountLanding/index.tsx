@@ -1,15 +1,17 @@
-import AccountSettingModal from '../components/accountSettingModal';
 import {AnimatePresence} from 'framer-motion';
 import { memo } from 'react';
 import { useAppSelector } from '../../reduxStore/hook';
-import { getAccountSettings } from '../../reduxStore/modal/modalSlice';
+import { getAccountSettings, getFilterModal } from '../../reduxStore/modal/modalSlice';
 
-import SidebarInfo from './components/sidebarInfo';
+import AccountSettingModal from '../components/accountSettingModal';
 import UserTasks from './components/currentInvolvedTasks';
+import FilterModal from './components/taskFilter/filterModal';
+import SidebarInfo from './components/sidebarInfo';
 
 const index = memo(() => {
   
   const accountSettings = useAppSelector(getAccountSettings);
+  const openFilterModal = useAppSelector(getFilterModal);
   
   return (
     <div className="
@@ -215,6 +217,11 @@ const index = memo(() => {
       <AnimatePresence>
       {
        accountSettings ? <AccountSettingModal /> : ''
+      }
+      </AnimatePresence>
+      <AnimatePresence>
+      {
+        openFilterModal  ? <FilterModal /> : ''
       }
       </AnimatePresence>
       <SidebarInfo />

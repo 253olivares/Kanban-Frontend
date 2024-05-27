@@ -7,7 +7,9 @@ export type contextType = {
     pageRef:MutableRefObject<HTMLDivElement|null>,
     filterRef:MutableRefObject<HTMLDivElement|null>,
     filterRefHead:MutableRefObject<HTMLDivElement|null>,
-    profileRef:MutableRefObject<HTMLDivElement|null>
+    profileRef:MutableRefObject<HTMLDivElement|null>,
+    filterModalRef:MutableRefObject<HTMLDivElement|null>,
+    closeFilterModal:MutableRefObject<HTMLButtonElement|null>
 }
 
 export const AppContext = createContext<contextType | null>(null);
@@ -24,6 +26,8 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
 
     const filterRef = useRef<HTMLDivElement>(null);
     const filterRefHead = useRef<HTMLDivElement>(null);
+    const filterModalRef = useRef<HTMLDivElement>(null);
+    const closeFilterModal  = useRef<HTMLButtonElement>(null);
 
     const contextValues = {
         accountSettingsRef,
@@ -32,7 +36,9 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
         pageRef,
         filterRef,
         filterRefHead,
-        profileRef
+        profileRef,
+        filterModalRef,
+        closeFilterModal
     }
 
     return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

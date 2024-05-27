@@ -1,36 +1,54 @@
 import { useContext, useEffect, useState } from "react"
 
 import { getFilters } from "../../../../reduxStore/tasks/tasksSlice";
-import { useAppSelector } from "../../../../reduxStore/hook";
+import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
 import { AppContext } from "../../../appRefContext";
 
 import arrow from '/assets/Polygon_4.svg'
 
 import FilterLabels from './label'
+import { getFilterModal, setOpenModal } from "../../../../reduxStore/modal/modalSlice";
 
 
 const index = () => {
 
   // @ts-ignore
-    const [openModal, setOpenModal] = useState<boolean>(false);
 
     const appContext= useContext(AppContext);
-    const {filterRef,filterRefHead} = appContext!;
+    const {filterRef,filterRefHead,filterModalRef, closeFilterModal} = appContext!;
+
+    const dispatch = useAppDispatch();
 
     const filters = useAppSelector(getFilters);
-
+    const openModal = useAppSelector(getFilterModal);
 
     const listening = (e:MouseEvent | TouchEvent) => {
-      
-      if(filterRef.current && !filterRef.current.contains(e.target as Node)){
 
-        if(filterRefHead.current && !filterRefHead.current.contains(e.target as Node)) setOpenModal(false);
+      // check to see if we are clicking inside our filter mobile modal
+      if(filterModalRef.current && filterModalRef.current.contains(e.target as Node)){
+
+        // if we are clicking inside our filter mobile modal then check if we are clicking
+        // on our close button
+        if(closeFilterModal.current && closeFilterModal.current.contains(e.target as Node)) {
+          dispatch(setOpenModal(false))
+          window.removeEventListener('click',listening,true);
+        }
+        // otherwise if the user clicked inside the mobile modal and not on the close button do nothing
+
+        // afterwhich we check to see if the user clicks outside the desktop modal
+      }else if(filterRef.current && !filterRef.current.contains(e.target as Node)){
+
+        // if user clickeds outside the modal ref and its not the head for the modal that brings it down
+        // then run our state function to clode the modal
+        if(filterRefHead.current && !filterRefHead.current.contains(e.target as Node)) dispatch(setOpenModal(false))
       
+        // remove our our listener either way we dont need it anymore
         window.removeEventListener('click',listening,true);
       } 
     }
 
     useEffect(()=> {
+      // remove listener when component unmounts to avoid memory leak
       return () => {
         window.removeEventListener('click',listening,true);
       }
@@ -43,11 +61,12 @@ const index = () => {
       <div
       ref={filterRefHead}
       onClick={()=> {
+        // open our modal and create an click event listener
         if(!openModal) {
-          setOpenModal(true)
+          dispatch(setOpenModal(true))
           window.addEventListener('click',listening,true);
         } else {
-          setOpenModal(false)
+          dispatch(setOpenModal(false))
         }
       }}
       className="
@@ -135,6 +154,10 @@ const index = () => {
       className={`
       absolute
 
+      hidden
+      sLaptop:flex
+      flex-col
+
       w-full
       bg-PrimaryWhite
 
@@ -144,8 +167,6 @@ const index = () => {
       mLaptop:rounded-b-[0.371rem]
       desktop:rounded-b-[0.446rem]
       largeDesktop:rounded-b-[0.557rem]
-
-      min-h-28
 
       sLaptop:top-[calc(100%-0.533rem)]
       mLaptop:top-[calc(100%-0.666rem)]
@@ -176,9 +197,6 @@ const index = () => {
       mLaptop:pb-[0.677rem]
       desktop:pb-[0.813rem]
       largeDesktop:pb-[1.016]
-      
-      flex
-      flex-col
 
       sLaptop:gap-[0.375rem]
       mLaptop:gap-[0.469rem]
@@ -188,6 +206,8 @@ const index = () => {
       transition-all
       duration-300
       `}>
+        {/* display all our filter options from our filter state that keeps track of our
+        importance levels and if they are triggered or not */}
         {
           Object.entries(filters).map(([k,v],index)=> 
             <FilterLabels key={index} k={k} v={v} />
