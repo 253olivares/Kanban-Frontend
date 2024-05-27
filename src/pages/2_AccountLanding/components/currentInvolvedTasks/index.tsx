@@ -1,8 +1,9 @@
 
+import { memo } from 'react';
 import UserActiveTasks from '../activeUserTasks';
 import Heading from '../mainPageHeader';
 
-const index = () => {
+const index = memo(() => {
 
   const getUserTasks = [];
 
@@ -47,6 +48,6 @@ const index = () => {
         }
     </div> 
   )
-}
+})
 
 export default index

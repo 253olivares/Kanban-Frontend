@@ -9,28 +9,33 @@ const index = memo(() => {
     const dispatch = useAppDispatch();
 
     const appContext = useContext(AppContext);
-    const {accountSettingsRef, modalRef} = appContext!;
+    const {accountSettingsRef, modalRef,profileRef} = appContext!;
  
     const user = useAppSelector(getUser);
     const dataURL = useAppSelector(getCroppingImage);
 
     useEffect(()=> {
       const clickOnOutside = (e:MouseEvent | TouchEvent)=> {
+
         const element = e.target;
 
-        if(accountSettingsRef.current && modalRef.current){
-          if(accountSettingsRef.current.contains(element as Node) || modalRef.current.contains(element as Node)){
-         
-          } else {
-            dispatch(closeAccountModal());
-          }
-        } else {
-          if(accountSettingsRef.current && !accountSettingsRef.current.contains(element as Node)){
-            dispatch(closeAccountModal());
-          }
+        // check to see if any of these conditions are meet
+        // if they are do nothing as the user is not clicking a element to close the modal
+        if (
+          modalRef.current && modalRef.current.contains(element as Node)
+          ||
+          accountSettingsRef.current && accountSettingsRef.current.contains(element as Node)
+          ||
+          profileRef.current && profileRef.current.contains(element as Node)
+          ) {
+          // do Nothing
+        } else { 
+          dispatch(closeAccountModal()); 
         }
       }
+
       window.addEventListener('click',clickOnOutside,true);
+
       return () => {
         window.removeEventListener('click',clickOnOutside,true);
       }
@@ -57,7 +62,7 @@ const index = memo(() => {
     absolute
     top-0
     right-0
-    z-[3]
+    z-[10]
 
     w-full
     sLaptop:w-[13.566rem]

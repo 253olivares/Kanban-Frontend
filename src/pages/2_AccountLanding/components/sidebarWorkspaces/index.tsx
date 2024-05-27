@@ -1,6 +1,7 @@
 import addWorkspace from '/assets/Add_New_Workspace.svg'
+import { memo } from 'react'
 
-const index = (
+const index = memo((
   {
     setWorkspace,
     workspaces
@@ -70,7 +71,11 @@ const index = (
         transition-[background-color]
         duration-500
         '>
-          <img className='
+          <img 
+          onClick={()=>{
+            alert('Currently working on adding additional features.')
+          }}
+          className='
           sLaptop:w-[0.933rem]
           mLaptop:w-[1.166rem]
           desktop:w-[1.4rem]
@@ -83,22 +88,71 @@ const index = (
       <div className="
       w-full
       flex
-      flex-col
-      pt-[0.712rem]
-      pb-[0.549rem]
-      mobile:pt-[0.949rem]
-      mobile:pb-[0.732rem]
-      sMobile:pt-[1.519rem]
-      sMobile:pb-[1.171rem]
-      mMobile:pt-[1.823rem]
-      mMobile:pb-[1.406rem]
+      flex-row
+      sLaptop:flex-col
+      pt-[0.854rem]
+      pb-[0.659rem]
+      px-[4.55%]
+      mobile:pt-[1.139rem]
+      mobile:pb-[0.879rem]
+      sMobile:pt-[1.823rem]
+      sMobile:pb-[1.406rem]
+      mMobile:pt-[2.188rem]
+      mMobile:pb-[1.688rem]
       sLaptop:pt-0
       sLaptop:pb-0
       ">
-        <p className=' sLaptop:hidden text-PrimaryWhite'>test</p>
+        <div 
+        onClick={()=>{
+          alert('Currently working on adding additional features.')
+        }}
+        className=' 
+        flex
+        sLaptop:hidden
+        justify-between
+        items-center
+        gap-[0.585rem]
+        mobile:gap-[0.937rem]
+        sMobile:gap-[1.5rem]
+        mMobile:gap-[1.8rem]
+        px-[1.025rem]
+        mobile:px-[1.367rem]
+        sMobile:px-[2.187rem]
+        mMobile:px-[2.625rem]
+        py-[0.659rem]
+        mobile:py-[0.879rem]
+        sMobile:py-[1.406rem]
+        mMobile:py-[1.688rem]
+
+        rounded-[0.244rem]
+        mobile:rounded-[0.325rem]
+        sMobile:rounded-[0.520rem]
+        mMobile:rounded-[0.625rem]
+
+        hover:bg-SpaceBlueSelected
+        hover:cursor-pointer
+
+        '>
+          <span className='
+          text-PrimaryWhite
+          text-[0.854rem]
+          mobile:text-[1.139rem]
+          sMobile:text-[1.823rem]
+          mMobile:text-[2.188rem]
+          leading-none
+
+          font-medium
+          '>Add Workspace</span>
+          <img className='
+          w-[0.683rem]
+          mobile:w-[1.093rem]
+          sMobile:w-[1.75rem]
+          mMobile:w-[2.1rem]
+          ' src={addWorkspace} alt="Add Workspace" />
+        </div>
       </div>
     </div>
   )
-}
+})
 
 export default index

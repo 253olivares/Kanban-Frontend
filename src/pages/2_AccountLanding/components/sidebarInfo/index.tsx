@@ -1,14 +1,14 @@
 
-import { useContext, useState } from 'react';
+import { memo, useContext, useState } from 'react';
 import { useAppSelector } from '../../../../reduxStore/hook';
 import { getAccountLandingModal } from '../../../../reduxStore/modal/modalSlice';
 import { AppContext } from '../../../appRefContext';
 
 import SidebarBoards from '../sidebarBoards';
-import SidebarWorkspaces from '../sidebarWorksspaces';
+import SidebarWorkspaces from '../sidebarWorkspaces';
 import WorkspaceBoardHeader from '../workspaceBoardsHeader';
 
-const index = () => {
+const index = memo(() => {
     const modal = useAppSelector(getAccountLandingModal);
 
     const appContext = useContext(AppContext);
@@ -106,6 +106,6 @@ const index = () => {
         </div>
       </div>
   )
-}
+})
 
 export default index

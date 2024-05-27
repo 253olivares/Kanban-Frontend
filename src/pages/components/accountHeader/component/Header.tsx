@@ -1,11 +1,12 @@
-import { getAccountSettings, openAccountModal } from '../../../../reduxStore/modal/modalSlice';
+import { closeAccountModal, getAccountSettings, openAccountModal } from '../../../../reduxStore/modal/modalSlice';
 import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 
 import {user} from '../../../../reduxStore/users/userSlice';
 import { useNavigate } from 'react-router-dom';
 import icon from '/assets/Logo_Export.svg';
+import { AppContext } from '../../../appRefContext';
 
 
 // pass out user information to our header
@@ -15,6 +16,9 @@ const Header = memo(({user}:{user:user}) => {
 
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+
+    const appContext = useContext(AppContext);
+    const {profileRef} = appContext!;
 
   return (
     <div className={`
@@ -71,7 +75,14 @@ const Header = memo(({user}:{user:user}) => {
         </div>
         {/* account icon */}
         <div 
-        onClick={()=> {dispatch(openAccountModal())}}
+        ref={profileRef}
+        onClick={()=> {
+            if(!accountSettings){
+                dispatch(openAccountModal())
+            } else {
+                dispatch(closeAccountModal())
+            }
+        }}
         className={`
         
          p-[0.071rem]

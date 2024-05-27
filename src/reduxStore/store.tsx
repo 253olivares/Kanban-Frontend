@@ -4,13 +4,15 @@ import languageReducer from './languages/languageSlice';
 import modalReducer from './modal/modalSlice';
 import storageReducer from './localStorage/localStorageSlice';
 import userReducer from './users/userSlice';
+import taskReducer from './tasks/tasksSlice';
 
 export const store = configureStore({
     reducer: {
         storage: storageReducer,
         modal: modalReducer,
         lang: languageReducer,
-        user: userReducer
+        user: userReducer,
+        tasks: taskReducer
     }
 })
 // type scripts we need for selectors and dispatch to comply with typescript
