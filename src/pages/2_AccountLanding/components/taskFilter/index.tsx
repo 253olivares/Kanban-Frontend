@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react"
+import { useContext, useEffect } from "react"
 
 import { getFilters } from "../../../../reduxStore/tasks/tasksSlice";
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
@@ -12,7 +12,6 @@ import { getFilterModal, setOpenModal } from "../../../../reduxStore/modal/modal
 
 const index = () => {
 
-  // @ts-ignore
 
     const appContext= useContext(AppContext);
     const {filterRef,filterRefHead,filterModalRef, closeFilterModal} = appContext!;
