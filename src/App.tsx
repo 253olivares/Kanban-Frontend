@@ -1,5 +1,5 @@
 import { checkStorage } from "./reduxStore/localStorage/localStorageSlice";
-import { lazy,Fragment,Suspense, useEffect  } from "react";
+import { lazy,Fragment,Suspense, useLayoutEffect  } from "react";
 import { useAppDispatch } from "./reduxStore/hook";
 import { Route, Routes } from "react-router-dom";
 
@@ -21,7 +21,7 @@ import AOS from "aos";
 function App(): JSX.Element {
   const dispatch = useAppDispatch();
 
-  useEffect(()=> {
+  useLayoutEffect(()=> {
     // initiate our animate on scroll
    AOS.init({
     once:true,

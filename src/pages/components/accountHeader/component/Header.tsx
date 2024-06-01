@@ -12,13 +12,13 @@ import { AppContext } from '../../../appRefContext';
 // pass out user information to our header
 const Header = memo(({user}:{user:user}) => {
     
-    const accountSettings = useAppSelector(getAccountSettings);
-
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const appContext = useContext(AppContext);
     const {profileRef} = appContext!;
+
+    const accountSettings = useAppSelector(getAccountSettings);
 
   return (
     <div className={`

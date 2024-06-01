@@ -1,14 +1,14 @@
-import { closeModal, getMobileModal, getModalStatus } from '../../reduxStore/modal/modalSlice';
-import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
-import {memo, lazy, useLayoutEffect, useEffect, useContext} from 'react';
+import {memo, lazy, useLayoutEffect, useContext} from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
+
+import { closeModal, getMobileModal, getModalStatus } from '../../reduxStore/modal/modalSlice';
+import { checkRemembered, getUser } from '../../reduxStore/users/userSlice';
+import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
+import { AppContext } from '../appRefContext';
 
 import SecondaryModalMobile from './components/SecondaryModal';
 import ModalContainer from '../../modals'
-
-import { AnimatePresence } from 'framer-motion';
-import { checkRemembered, getUser } from '../../reduxStore/users/userSlice';
-import { AppContext } from '../appRefContext';
 
 const MainSection = lazy(()=> import('./section-1_Main-Head'))
 const PMSection = lazy(()=>import('./section-2_PM-Section'))
@@ -23,26 +23,26 @@ const index = memo(():JSX.Element => {
   const appContext= useContext(AppContext);
   const {pageRef} = appContext!;
 
-  // check to see if a user is signed in
-  const user = useAppSelector(getUser);
-
   useLayoutEffect(()=> {
-
     // check to see if a user has their credentials saved for next login
     dispatch(checkRemembered());
   },[])
 
-  useEffect(()=> {
-    if(user){
-    
-      dispatch(closeModal());
-      navigate(`/u/${user.u_id}`);
-    }
-  },[user])
+  // check to see if a user is signed in
+  const user = useAppSelector(getUser);
 
   // state to keep track of when our modal is open
   const modalStatus = useAppSelector(getModalStatus)
   const SecondaryModal = useAppSelector(getMobileModal)
+
+  // changed this to layout effect to prevent page from rendering or painting
+  useLayoutEffect(()=> {
+    if(user){
+      // close modal
+      dispatch(closeModal());
+      navigate(`/u/${user.u_id}`);
+    }
+  },[user])
 
   // In this page we are going to handle our popup states within here
   return (
@@ -56,8 +56,7 @@ const index = memo(():JSX.Element => {
     
     overflow-x-hidden
     no-scrollbar
-    `}
-    >
+    `}>
       <AnimatePresence>
         {/* open and close our modal */}
         { modalStatus &&  <ModalContainer /> }

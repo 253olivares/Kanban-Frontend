@@ -1,7 +1,7 @@
 import { checkRemembered, getUser } from '../../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
 import { getModalStatus } from '../../../reduxStore/modal/modalSlice';
-import { useEffect, useLayoutEffect, memo } from 'react';
+import { useLayoutEffect, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Outlet } from 'react-router-dom';
@@ -29,7 +29,7 @@ const index = memo(() => {
     }
   },[])
 
-  useEffect(()=> {
+  useLayoutEffect(()=> {
     // after dispatch if has not found a user to remember then
     // make our user navigate to the home page
     if(!user){
