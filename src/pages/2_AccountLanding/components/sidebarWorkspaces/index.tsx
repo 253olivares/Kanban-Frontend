@@ -25,6 +25,7 @@ const index = memo((
 
     z-0
     ">
+      {/* Workspaces */}
       <div className="
       w-full
       hidden

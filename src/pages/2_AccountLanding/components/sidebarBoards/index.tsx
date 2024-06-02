@@ -13,14 +13,12 @@ const index = memo(({selectWorkspace}:{selectWorkspace:string}) => {
 
     grow
     sLaptop:grow-0
-
     ${
       selectWorkspace === '' ? 
       'sLaptop:h-[35%]'
       :
       'sLaptop:h-[61.5%]'
     }
-
     transition-[height]
     duration-700
 
@@ -53,12 +51,10 @@ const index = memo(({selectWorkspace}:{selectWorkspace:string}) => {
 
         text-white
         ">Boards</h1>
-        {
-          selectWorkspace === '' ?
+        { selectWorkspace === '' ?
           ''
           :
-          <p>Workspace Name</p>
-        }
+          <p>Workspace Name</p>}
       </div>
 
       <div className={`
