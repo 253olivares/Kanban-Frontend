@@ -36,10 +36,7 @@ const initialState:initialStateType = boardsAdapter.getInitialState({
 const boardSlice = createSlice({
     name:'boards',
     initialState,
-    reducers:{},
-    
-    extraReducers (_builder){
-    }
+    reducers:{}
 })
 
 export const {

@@ -1,3 +1,4 @@
+
 import { createEntityAdapter,createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../store"
@@ -46,8 +47,6 @@ const workspaceSlice = createSlice({
             state.selectWorkspace = action.payload;
         }
 
-    },
-    extraReducers (_builder){
     }
 })
 
