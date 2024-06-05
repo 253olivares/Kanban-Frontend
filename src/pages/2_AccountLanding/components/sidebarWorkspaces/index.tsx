@@ -1,9 +1,11 @@
-import addWorkspace from '/assets/Add_New_Workspace.svg';
 import { AnimatePresence } from 'framer-motion';
-import { useAppSelector } from '../../../../reduxStore/hook';
+import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 
+import { changeModal, getWorkSpaceModal } from '../../../../reduxStore/workspace/workspace';
 import { memo } from 'react';
-import { getWorkSpaceModal } from '../../../../reduxStore/workspace/workspace';
+
+import addWorkspace from '/assets/Add_New_Workspace.svg';
+import WorkspaceModal from '../addWorksapace';
 
 const index = memo((
   {
@@ -16,6 +18,7 @@ const index = memo((
     workspaces:unknown[]
   }
   ) => {
+    const dispatch = useAppDispatch();
     
     const openModal:boolean = useAppSelector(getWorkSpaceModal);
 
@@ -24,6 +27,7 @@ const index = memo((
   return (
     <div className="
     w-full
+
     flex
     flex-col
 
@@ -35,9 +39,12 @@ const index = memo((
       {/* Workspaces */}
       <div className="
       w-full
+
       hidden
       sLaptop:flex
+
       flex-row
+
       justify-between
       items-center
 
@@ -83,7 +90,7 @@ const index = memo((
         '>
           <img 
           onClick={()=>{
-            alert('Currently working on adding additional features.')
+            dispatch(changeModal(!openModal));
           }}
           className='
           sLaptop:w-[0.933rem]
@@ -95,7 +102,7 @@ const index = memo((
           alt="Add Workspace" />
         </div>
         <AnimatePresence>
-          {openModal ?  'modal' : ''}
+          {openModal ? <WorkspaceModal/>  : ''}
         </AnimatePresence>
       </div>
       <div className="

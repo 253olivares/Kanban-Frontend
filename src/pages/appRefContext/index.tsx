@@ -9,7 +9,9 @@ export type contextType = {
     filterRefHead:MutableRefObject<HTMLDivElement|null>,
     profileRef:MutableRefObject<HTMLDivElement|null>,
     filterModalRef:MutableRefObject<HTMLDivElement|null>,
-    closeFilterModal:MutableRefObject<HTMLButtonElement|null>
+    closeFilterModal:MutableRefObject<HTMLButtonElement|null>,
+    newWorkspaceModal:MutableRefObject<HTMLDivElement|null>,
+    newWorkspaceModalClose:MutableRefObject<HTMLDivElement|null>
 }
 
 export const AppContext = createContext<contextType | null>(null);
@@ -29,6 +31,9 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
     const filterModalRef = useRef<HTMLDivElement>(null);
     const closeFilterModal  = useRef<HTMLButtonElement>(null);
 
+    const newWorkspaceModal = useRef<HTMLDivElement>(null);
+    const newWorkspaceModalClose = useRef<HTMLDivElement>(null);
+
     const contextValues = {
         accountSettingsRef,
         modalRef,
@@ -38,7 +43,9 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
         filterRefHead,
         profileRef,
         filterModalRef,
-        closeFilterModal
+        closeFilterModal,
+        newWorkspaceModal,
+        newWorkspaceModalClose
     }
 
     return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>
