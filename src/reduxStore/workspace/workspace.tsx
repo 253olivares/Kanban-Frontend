@@ -1,7 +1,7 @@
 
-import { createEntityAdapter,createSlice } from "@reduxjs/toolkit"
-import { PayloadAction } from "@reduxjs/toolkit"
-import { RootState } from "../store"
+import { createEntityAdapter,createSlice } from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 export type workspace = {
     w_id:string,
