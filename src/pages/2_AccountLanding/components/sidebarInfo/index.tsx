@@ -1,5 +1,5 @@
 
-import { memo, useContext, useState } from 'react';
+import { memo, useContext} from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 import { getAccountLandingModal } from '../../../../reduxStore/modal/modalSlice';
 import { AppContext } from '../../../appRefContext';

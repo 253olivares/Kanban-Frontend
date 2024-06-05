@@ -47,7 +47,7 @@ const workspaceSlice = createSlice({
         }
 
     },
-    extraReducers (builder){
+    extraReducers (_builder){
     }
 })
 

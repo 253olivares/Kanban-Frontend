@@ -37,7 +37,8 @@ const boardSlice = createSlice({
     name:'boards',
     initialState,
     reducers:{},
-    extraReducers (builder){
+    
+    extraReducers (_builder){
     }
 })
 
