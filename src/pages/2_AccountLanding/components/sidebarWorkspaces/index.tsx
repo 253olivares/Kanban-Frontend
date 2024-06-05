@@ -1,5 +1,9 @@
 import addWorkspace from '/assets/Add_New_Workspace.svg';
+import { AnimatePresence } from 'framer-motion';
+import { useAppSelector } from '../../../../reduxStore/hook';
+
 import { memo } from 'react';
+import { getWorkSpaceModal } from '../../../../reduxStore/workspace/workspace';
 
 const index = memo((
   {
@@ -12,6 +16,9 @@ const index = memo((
     workspaces:unknown[]
   }
   ) => {
+    
+    const openModal:boolean = useAppSelector(getWorkSpaceModal);
+
     console.log(setWorkspace);
     console.log(workspaces);
   return (
@@ -33,6 +40,8 @@ const index = memo((
       flex-row
       justify-between
       items-center
+
+      relative
 
       sLaptop:px-[7.5%]
 
@@ -85,6 +94,9 @@ const index = memo((
           src={addWorkspace} 
           alt="Add Workspace" />
         </div>
+        <AnimatePresence>
+          {openModal ?  'modal' : ''}
+        </AnimatePresence>
       </div>
       <div className="
       w-full

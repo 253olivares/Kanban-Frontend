@@ -1,24 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {user,rememberUser} from '../users/userSlice';
-
+import { workspace } from "../workspace/workspace";
+import { board } from "../boards/boardsSlice";
 
 export const storageKey = 'KanBanServerInstance';
-
-type workspace = {
-    w_id:string,
-    u_id:string,
-    boards:string[],
-    members:string[]
-}
-
-type board = {
-    b_id:string,
-    u_id:string,
-    w_id:string,
-    name:string,
-    lists:string[],
-    label:string[]
-}
 
 type list = {
     l_id:string,

@@ -1,7 +1,7 @@
 import { memo } from "react";
 
 // sidebarBoards
-const index = memo(({selectWorkspace}:{selectWorkspace:string}) => {
+const index = memo(({selectWorkspace}:{selectWorkspace:null | string}) => {
 
   const getBoardsFromSelectWorkspace:unknown[] = [];
 

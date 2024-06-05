@@ -1,20 +1,24 @@
 
 import { memo, useContext, useState } from 'react';
-import { useAppSelector } from '../../../../reduxStore/hook';
+import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 import { getAccountLandingModal } from '../../../../reduxStore/modal/modalSlice';
 import { AppContext } from '../../../appRefContext';
 
 import SidebarBoards from '../sidebarBoards';
 import SidebarWorkspaces from '../sidebarWorkspaces';
 import WorkspaceBoardHeader from '../workspaceBoardsHeader';
+import { getWorkspaceSelect, setNewSelect } from '../../../../reduxStore/workspace/workspace';
 
 const index = memo(() => {
-    const modal = useAppSelector(getAccountLandingModal);
+    const modal: boolean  = useAppSelector(getAccountLandingModal);
+    const dispatch = useAppDispatch();
 
     const appContext = useContext(AppContext);
     const {mobileSideBarRef} = appContext!;
 
-    const [selectWorkspace,setSelectWorkspace] = useState<string>('');
+    const selectWorkspace: null | string = useAppSelector(getWorkspaceSelect);
+
+    const setSelectWorkspace  = (x:string) => dispatch(setNewSelect(x));
 
     const getUserWorkSpaces:unknown[] = [];
 
