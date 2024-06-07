@@ -1,4 +1,3 @@
-
 import { memo } from 'react';
 import UserActiveTasks from '../activeUserTasks';
 import Heading from '../mainPageHeader';

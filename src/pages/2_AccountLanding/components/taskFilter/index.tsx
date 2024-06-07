@@ -11,38 +11,40 @@ import { getFilterModal, setOpenModal } from "../../../../reduxStore/modal/modal
 
 
 const index = () => {
-
+    const dispatch = useAppDispatch();
 
     const appContext= useContext(AppContext);
     const {filterRef,filterRefHead,filterModalRef, closeFilterModal} = appContext!;
-
-    const dispatch = useAppDispatch();
 
     const filters = useAppSelector(getFilters);
     const openModal = useAppSelector(getFilterModal);
 
     const listening = (e:MouseEvent | TouchEvent) => {
+      const element = e.target as Node;
+
+      if(!filterRef.current) window.removeEventListener('click',listening,true);
+      if(!filterModalRef.current) window.removeEventListener('click',listening,true);
 
       // check to see if we are clicking inside our filter mobile modal
-      if(filterModalRef.current && filterModalRef.current.contains(e.target as Node)){
+      if(filterModalRef.current && filterModalRef.current.contains(element)){
 
         // if we are clicking inside our filter mobile modal then check if we are clicking
         // on our close button
-        if(closeFilterModal.current && closeFilterModal.current.contains(e.target as Node)) {
-          dispatch(setOpenModal(false))
+        if(closeFilterModal.current && closeFilterModal.current.contains(element)) {
           window.removeEventListener('click',listening,true);
+          dispatch(setOpenModal(false))
         }
         // otherwise if the user clicked inside the mobile modal and not on the close button do nothing
 
         // afterwhich we check to see if the user clicks outside the desktop modal
-      }else if(filterRef.current && !filterRef.current.contains(e.target as Node)){
+      }else if(filterRef.current && !filterRef.current.contains(element)){
+
+        // remove our our listener either way we dont need it anymore
+        window.removeEventListener('click',listening,true);
 
         // if user clickeds outside the modal ref and its not the head for the modal that brings it down
         // then run our state function to clode the modal
-        if(filterRefHead.current && !filterRefHead.current.contains(e.target as Node)) dispatch(setOpenModal(false))
-      
-        // remove our our listener either way we dont need it anymore
-        window.removeEventListener('click',listening,true);
+        if(filterRefHead.current && !filterRefHead.current.contains(element)) dispatch(setOpenModal(false));
       } 
     }
 
@@ -62,8 +64,8 @@ const index = () => {
       onClick={()=> {
         // open our modal and create an click event listener
         if(!openModal) {
-          dispatch(setOpenModal(true))
           window.addEventListener('click',listening,true);
+          dispatch(setOpenModal(true))
         } else {
           dispatch(setOpenModal(false))
         }
@@ -112,6 +114,7 @@ const index = () => {
 
       sLaptop:hover:cursor-pointer
       ">
+
         <span className="
         text-[0.763rem]
         mobile:text-[1.017rem]
@@ -128,6 +131,7 @@ const index = () => {
 
         text-PrimaryWhite
         ">Filter List</span>
+
         <img className={`
         hidden
         sLaptop:block
@@ -135,7 +139,6 @@ const index = () => {
         mLaptop:w-[1.166rem]
         desktop:w-[1.4rem]
         largeDesktop:w-[1.75rem]
-
         ${
           openModal ?
           'rotate-[270deg]'
@@ -145,9 +148,10 @@ const index = () => {
         transition-[transform]
         duration-300
         `}
-        
         src={arrow} alt="Arrow" />
+
       </div>
+
       <div
       ref={filterRef}
       className={`
@@ -172,8 +176,7 @@ const index = () => {
       desktop:top-[calc(100%-0.8rem)]
       largeDesktop:top-[calc(100%-1rem)]
 
-      ${
-        openModal ? 
+      ${openModal ? 
         `
         visible 
         scale-100 
@@ -183,8 +186,7 @@ const index = () => {
         `
         invisible 
         scale-[.985] 
-        opacity-0
-        `
+        opacity-0`
       }
       
       sLaptop:pt-[calc(0.533rem+0.541rem)]
@@ -207,11 +209,11 @@ const index = () => {
       `}>
         {/* display all our filter options from our filter state that keeps track of our
         importance levels and if they are triggered or not */}
+
         {
-          Object.entries(filters).map(([k,v],index)=> 
-            <FilterLabels key={index} k={k} v={v} />
-          )
+          Object.entries(filters).map(([k,v],index)=> <FilterLabels key={index} k={k} v={v} />)
         }
+
       </div>
     </div>
   )

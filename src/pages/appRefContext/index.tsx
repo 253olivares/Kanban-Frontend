@@ -10,6 +10,7 @@ export type contextType = {
     profileRef:MutableRefObject<HTMLDivElement|null>,
     filterModalRef:MutableRefObject<HTMLDivElement|null>,
     closeFilterModal:MutableRefObject<HTMLButtonElement|null>,
+    openSpaceModal:MutableRefObject<HTMLDivElement|null>,
     newWorkspaceModal:MutableRefObject<HTMLDivElement|null>,
     newWorkspaceModalClose:MutableRefObject<HTMLDivElement|null>
 }
@@ -31,6 +32,7 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
     const filterModalRef = useRef<HTMLDivElement>(null);
     const closeFilterModal  = useRef<HTMLButtonElement>(null);
 
+    const openSpaceModal = useRef<HTMLDivElement>(null);
     const newWorkspaceModal = useRef<HTMLDivElement>(null);
     const newWorkspaceModalClose = useRef<HTMLDivElement>(null);
 
@@ -44,6 +46,7 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
         profileRef,
         filterModalRef,
         closeFilterModal,
+        openSpaceModal,
         newWorkspaceModal,
         newWorkspaceModalClose
     }

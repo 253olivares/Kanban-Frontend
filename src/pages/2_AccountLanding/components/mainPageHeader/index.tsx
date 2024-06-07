@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import FilterList from '../taskFilter';
 
-const index = () => {
+const index =memo(() => {
   return (
     <div className="
     w-full
@@ -52,6 +53,6 @@ const index = () => {
       <FilterList />
     </div>
   )
-}
+})
 
 export default index

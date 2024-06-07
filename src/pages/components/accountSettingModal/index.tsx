@@ -14,32 +14,31 @@ const index = memo(() => {
     const user = useAppSelector(getUser);
     const dataURL = useAppSelector(getCroppingImage);
 
+    // just exit if no user is found
+    if(!user) return;
+
     useEffect(()=> {
       const clickOnOutside = (e:MouseEvent | TouchEvent)=> {
-
-        const element = e.target;
+        // console.log("test");
+        const element = e.target as Node;
 
         // check to see if any of these conditions are meet
         // if they are do nothing as the user is not clicking a element to close the modal
-        if (
-          modalRef.current && modalRef.current.contains(element as Node)
-          ||
-          accountSettingsRef.current && accountSettingsRef.current.contains(element as Node)
-          ||
-          profileRef.current && profileRef.current.contains(element as Node)
-          ) {
-          // do Nothing
-        } else { 
-          dispatch(closeAccountModal()); 
-        }
+        // just a list of items we do not want to trigger our dispatch
+        if(profileRef.current && !profileRef.current.contains(element) 
+          && accountSettingsRef.current && !accountSettingsRef.current.contains(element) 
+        ) {
+            // close settings when modal is not open
+            if(!modalRef.current) dispatch(closeAccountModal());
+          }  
       }
-
       window.addEventListener('click',clickOnOutside,true);
 
       return () => {
         window.removeEventListener('click',clickOnOutside,true);
       }
-    },[])
+    },[]);
+    
   return (
     <motion.div
     initial={{ 
@@ -161,7 +160,7 @@ const index = memo(() => {
 
               rounded-full
               "
-              src={`${user?.pfp}`} alt="" />
+              src={`${user.pfp}`} alt="" />
             </div>
             <div className="
             flex 
@@ -194,7 +193,7 @@ const index = memo(() => {
               4k:text-[2.298rem]
 
               leading-none
-              ">{user?.username}</h1>
+              ">{user.username}</h1>
               <p className="
               font-medium
               text-PrimaryWhite
@@ -211,7 +210,7 @@ const index = memo(() => {
 
               opacity-50
               leading-none
-              ">{user?.email}</p>
+              ">{user.email}</p>
             </div>  
           </div>
         </div>
@@ -337,12 +336,12 @@ const index = memo(() => {
         ">
           <button 
           onClick={()=> {
+             // incase user changed their profile image we set the value back to null
+             if(dataURL) dispatch(setCroppingImageData(null));
+
             // change modal state that hides the menu options
             dispatch(closeAccountModal());
-            if(dataURL) {
-              // incase user changed their profile image we set the value back to null
-              dispatch(setCroppingImageData(null));
-            }
+
             // log out user
             dispatch(logOut());
           }}

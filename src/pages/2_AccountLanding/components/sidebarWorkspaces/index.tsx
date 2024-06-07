@@ -2,15 +2,16 @@ import { AnimatePresence } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 
 import { changeModal, getWorkSpaceModal } from '../../../../reduxStore/workspace/workspace';
-import { memo } from 'react';
+import { memo, useContext } from 'react';
 
 import addWorkspace from '/assets/Add_New_Workspace.svg';
 import WorkspaceModal from '../addWorksapace';
+import { AppContext } from '../../../appRefContext';
 
 const index = memo((
   {
-    setWorkspace,
-    workspaces
+    // setWorkspace,
+    // workspaces
   }
   :
   {
@@ -22,8 +23,11 @@ const index = memo((
     
     const openModal:boolean = useAppSelector(getWorkSpaceModal);
 
-    console.log(setWorkspace);
-    console.log(workspaces);
+    const appContext = useContext(AppContext);
+    const {openSpaceModal} = appContext!;
+
+    // console.log(setWorkspace);
+    // console.log(workspaces);
   return (
     <div className="
     w-full
@@ -70,7 +74,12 @@ const index = memo((
         text-white
         "
         >Workspaces</h1>
-        <div className='
+        <div 
+        ref={openSpaceModal}
+        onClick={()=>{
+          dispatch(changeModal(!openModal));
+        }}
+        className='
         sLaptop:hover:bg-SpaceBlueSelected
         
         sLaptop:p-[0.266rem]
@@ -89,9 +98,6 @@ const index = memo((
         duration-500
         '>
           <img 
-          onClick={()=>{
-            dispatch(changeModal(!openModal));
-          }}
           className='
           sLaptop:w-[0.933rem]
           mLaptop:w-[1.166rem]
