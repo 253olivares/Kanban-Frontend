@@ -46,6 +46,8 @@ const index = ({k,v}: {k:string, v:boolean}) => {
         desktop:h-[1.392rem]
         largeDesktop:w-[1.74rem]
         largeDesktop:h-[1.74rem]
+        4k:w-[2.319rem]
+        4k:h-[2.319rem]
         "
 
         onChange={()=> {
@@ -78,6 +80,7 @@ const index = ({k,v}: {k:string, v:boolean}) => {
          mLaptoP:text-[0.835rem]
          desktop:text-[1.003rem]
          largeDesktop:text-[1.253rem]
+         4k:text-[1.670rem]
 
          leading-none
 
@@ -89,6 +92,7 @@ const index = ({k,v}: {k:string, v:boolean}) => {
          mLaptop:py-[0.156rem]
          desktop:py-[0.188rem]
          largeDesktop:py-[0.235rem]
+         4k:py-[0.313rem]
 
          rounded-[0.159rem]
          mobile:rounded-[0.213rem]
@@ -98,6 +102,7 @@ const index = ({k,v}: {k:string, v:boolean}) => {
          mLaptop:rounded-[0.156rem]
          desktop:rounded-[0.188rem]
          largeDesktop:rounded-[0.235rem]
+         4k:rounded-[0.313rem]
 
          w-[8.178rem]
          mobile:w-[10.905rem]
@@ -107,6 +112,7 @@ const index = ({k,v}: {k:string, v:boolean}) => {
          mLaptop:w-[4.750rem]
          desktop:w-[5.701rem]
          largeDesktop:w-[7.126rem]
+         4k:w-[9.501rem]
 
          text-center
 

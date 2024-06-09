@@ -38,6 +38,8 @@ const index = memo(() => {
             mLaptop:text-[1.833rem]
             desktop:text-[2.2rem]
             largeDesktop:text-[2.75rem]
+            4k:text-[3.666rem]
+
             px-[5%]
             text-center
             '>No tasks currently found! <br/> All caught up!</p>

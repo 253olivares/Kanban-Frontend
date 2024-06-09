@@ -80,11 +80,13 @@ const index = () => {
       mLaptop:rounded-[0.677rem]
       desktop:rounded-[0.812rem]
       largeDesktop:rounded-[1.016rem]
+      4k:rounded-[1.354rem]
 
       sLaptop:w-[13.33rem]
       mLaptop:w-[16.66rem]
       desktop:w-[20rem]
       largeDesktop:w-[25rem]
+      4k:w-[33.333rem]
 
       ring-[2.25px]
       ring-SelectorBlue 
@@ -104,22 +106,27 @@ const index = () => {
         mLaptop:pt-[0.625rem]
         desktop:pt-[0.750rem]
         largeDesktop:pt-[0.938rem]
+        4k:pt-[1.250rem]
 
         sLaptop:pb-[0.333rem]
         mLaptop:pb-[0.416rem]
         desktop:pb-[0.5rem]
         largeDesktop:pb-[0.625rem]
+        4k:pb-[0.833rem]
 
         sLaptop:px-[0.533rem]
         mLaptop:px-[0.416rem]
         desktop:px-[.8rem]
         largeDesktop:px-[1rem]
+        4k:px-[1.333rem]
         ">
           <label htmlFor="newWorkSpaceInput" className="
           sLaptop:text-[0.799rem]
           mLaptop:text-[0.999rem]
           desktop:text-[1.2rem]
           largeDesktop:text-[1.5rem]
+          4k:text-[1.999rem]
+
           font-medium
           leading-none
           text-white
@@ -142,11 +149,13 @@ const index = () => {
         mLaptop:px-[0.666rem]
         desktop:px-[0.8rem]
         largeDesktop:px-[1rem]
+        4k:px-[1.333rem]
         
         sLaptop:pb-[0.500rem]
         mLaptop:pb-[0.625rem]
         desktop:pb-[0.750rem]
         largeDesktop:pb-[0.938rem]
+        4k:pb-[1.250rem]
 
         ">  
           <TextInput />

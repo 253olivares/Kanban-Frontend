@@ -67,6 +67,7 @@ const index = memo(() => {
         mLaptop:gap-[1.333rem]
         desktop:gap-[1.6rem]
         largeDesktop:gap-[2rem]
+        4k:gap-[2.666rem]
         `
       }
       `}>
@@ -94,6 +95,7 @@ const index = memo(() => {
               mLaptop:text-[1.999rem]
               desktop:text-[2.4rem]
               largeDesktop:text-[3rem]
+              4k:text-[3.999rem]
               font-medium
               text-center
               w-[80%]
@@ -113,6 +115,7 @@ const index = memo(() => {
             mLaptop:text-[1.666rem]
             desktop:text-[2rem]
             largeDesktop:text-[2.5rem]
+            4k:text-[3.333rem]
             underline' to={'/'}>Go Home</Link>
           </>
           :

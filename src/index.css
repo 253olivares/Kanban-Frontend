@@ -151,6 +151,9 @@
         desktop:h-[1.44rem]
         largeDesktop:w-[1.8rem]
         largeDesktop:h-[1.8rem]
+        4k:w-[2.399rem]
+        4k:h-[2.399rem]
+
         relative
         hover:cursor-pointer
     }
@@ -163,6 +166,8 @@
         desktop:top-[calc(1.44rem/2)]
         largeDesktop:left-[calc(1.8rem/2)] 
         largeDesktop:top-0
+        4k:left-[calc(2.399rem/2)]
+
         sLaptop:w-[0.959rem]
         sLaptop:h-[2.266px]
         mLaptop:w-[1.199rem]
@@ -171,6 +176,8 @@
         desktop:w-[1.44rem]
         largeDesktop:h-[1.8rem]
         largeDesktop:w-[4.25px]
+        4k:h-[2.399rem]
+        4k:w-[5.666px]
         rounded-full
         bg-white
     }
@@ -216,6 +223,9 @@
         desktop:h-[1.2rem]
         largeDesktop:w-[1.5rem]
         largeDesktop:h-[1.5rem]
+        4k:w-[1.999rem]
+        4k:h-[1.999rem]
+
         absolute
         sLaptop:top-[calc(50%-(0.799rem/2))]
         mLaptop:top-[calc(50%-(0.999rem/2))]
@@ -225,6 +235,8 @@
         mLaptop:left-[calc(-0.999rem/2)]
         desktop:left-[calc(-1.2rem/2)]
         largeDesktop:left-[calc(-1.5rem/2)]
+        4k:left-[calc(-1.999rem/2)]
+
         rotate-45   
         bg-SpaceBlue
     }

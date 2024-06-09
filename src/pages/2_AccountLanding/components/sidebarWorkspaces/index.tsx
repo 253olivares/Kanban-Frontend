@@ -61,12 +61,14 @@ const index = memo((
       mLaptop:pt-[1.405rem]
       desktop:pt-[1.687rem]
       largeDesktop:pt-[2.109rem]
+      4k:pt-[2.811rem]
       ">
         <h1 className="
         sLaptop:text-[1.25rem]
         mLaptop:text-[1.562rem]
         desktop:text-[1.875rem]
         largeDesktop:text-[2.344rem]
+        4k:text-[3.125rem]
 
         leading-snug
 
@@ -88,11 +90,13 @@ const index = memo((
         mLaptop:p-[0.333rem]
         desktop:p-[0.4rem]
         largeDesktop:p-[.5rem]
+        4k:p-[0.666rem]
 
         sLaptop:rounded-[0.133rem]
         mLaptop:rounded-[0.166rem]
         desktop:rounded-[0.2rem]
         largeDesktop:rounded-[.25rem]
+        4k:rounded-[0.333rem]
         
         sLaptop:hover:cursor-pointer
 
@@ -105,6 +109,7 @@ const index = memo((
           mLaptop:w-[1.166rem]
           desktop:w-[1.4rem]
           largeDesktop:w-[1.75rem]
+          4k:w-[2.333rem]
           ' 
           src={addWorkspace} 
           alt="Add Workspace" />

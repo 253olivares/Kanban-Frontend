@@ -105,6 +105,7 @@ const index = memo(() => {
           mLaptop:h-[0.208rem]
           desktop:h-[0.250rem]
           largeDesktop:h-[0.313rem]
+          4k:h-[0.417rem]
           ' />
           <SidebarWorkspaces setWorkspace={(string)=> setSelectWorkspace(string)} workspaces={getUserWorkSpaces} /> 
         </div>

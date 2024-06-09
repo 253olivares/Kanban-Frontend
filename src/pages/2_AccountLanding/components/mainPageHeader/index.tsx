@@ -19,6 +19,7 @@ const index =memo(() => {
     mLaptop:pt-[2.208rem]
     desktop:pt-[2.650rem]
     largeDesktop:pt-[3.313rem]
+    4k:pt-[4.417rem]
 
     pb-[0.268rem]
     mobile:pb-[0.358rem]
@@ -28,6 +29,7 @@ const index =memo(() => {
     mLaptoP:pb-[0.572rem]
     desktop:pb-[0.687rem]
     largeDesktop:pb-[0.859rem]
+    4k:pb-[1.145rem]
 
     px-[6.5%]
     sLaptop:px-[11%]
@@ -42,6 +44,8 @@ const index =memo(() => {
       mLaptop:text-[2.083rem]
       desktop:text-[2.5rem]
       largeDesktop:text-[3.125rem]
+      4k:text-[4.166rem]
+
       leading-snug
       
       font-bold

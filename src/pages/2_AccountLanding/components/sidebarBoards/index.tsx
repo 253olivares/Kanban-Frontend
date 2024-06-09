@@ -34,6 +34,7 @@ const index = memo(({selectWorkspace}:{selectWorkspace:null | string}) => {
       mLaptop:pt-[1.198rem]
       desktop:pt-[1.438rem]
       largeDesktop:pt-[1.797rem]
+      4k:pt-[2.395rem]
 
       ">
         <h1 className="
@@ -44,6 +45,7 @@ const index = memo(({selectWorkspace}:{selectWorkspace:null | string}) => {
         mLaptop:text-[1.562rem]
         desktop:text-[1.875rem]
         largeDesktop:text-[2.344rem]
+        4k:text-[3.125rem]
 
         leading-snug
 
@@ -83,6 +85,7 @@ const index = memo(({selectWorkspace}:{selectWorkspace:null | string}) => {
           mLaptop:text-[0.999rem]
           desktop:text-[1.2rem]
           largeDesktop:text-[1.5rem]
+          4k:text-[1.999rem]
 
           text-center
           ">Please make sure to select a workspace or create a workspace to get started!</p>

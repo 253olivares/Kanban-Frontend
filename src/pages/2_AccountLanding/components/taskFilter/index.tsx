@@ -84,6 +84,7 @@ const index = () => {
       mLaptop:gap-[1.125rem]
       desktop:gap-[1.350rem]
       largeDesktop:gap-[1.688rem]
+      4k:gap-[2.250rem]
 
       rounded-[0.218rem]
       mobile:rounded-[0.291rem]
@@ -93,6 +94,7 @@ const index = () => {
       mLaptop:rounded-[0.371rem]
       desktop:rounded-[0.445rem]
       largeDesktop:rounded-[0.557rem]
+      4k:rounded-[0.742rem]
 
       py-[0.244rem]
       mobile:py-[0.325rem]
@@ -102,6 +104,7 @@ const index = () => {
       mLaptop:py-[0.416rem]
       desktop:py-[0.5rem]
       largeDesktop:py-[0.625rem]
+      4k:py-[0.833rem]
 
       px-[1.025rem]
       mobile:px-[1.367rem]
@@ -111,6 +114,7 @@ const index = () => {
       mLaptop:px-[0.625rem]
       desktop:px-[0.750rem]
       largeDesktop:px-[0.938rem]
+      4k:px-[1.250rem]
 
       sLaptop:hover:cursor-pointer
       ">
@@ -124,6 +128,7 @@ const index = () => {
         mLaptop:text-[1.299rem]
         desktop:text-[1.559rem]
         largeDesktop:text-[1.949rem]
+        4k:text-[2.598rem]
 
         leading-none
 
@@ -139,6 +144,7 @@ const index = () => {
         mLaptop:w-[1.166rem]
         desktop:w-[1.4rem]
         largeDesktop:w-[1.75rem]
+        4k:w-[2.333rem]
         ${
           openModal ?
           'rotate-[270deg]'
@@ -170,11 +176,13 @@ const index = () => {
       mLaptop:rounded-b-[0.371rem]
       desktop:rounded-b-[0.446rem]
       largeDesktop:rounded-b-[0.557rem]
+      4k:rounded-b-[0.742rem]
 
       sLaptop:top-[calc(100%-0.533rem)]
       mLaptop:top-[calc(100%-0.666rem)]
       desktop:top-[calc(100%-0.8rem)]
       largeDesktop:top-[calc(100%-1rem)]
+      4k:top-[calc(100%-1.333rem)]
 
       ${openModal ? 
         `
@@ -192,28 +200,29 @@ const index = () => {
       sLaptop:pt-[calc(0.533rem+0.541rem)]
       mLaptop:pt-[calc(0.666rem+0.677rem)]
       desktop:pt-[calc(0.8rem+0.813rem)]
-      largeDesktop:pt-[calc(1rem+1.016)]
+      largeDesktop:pt-[calc(1rem+1.016rem)]
+      4k:pt-[calc(1.333rem+1.354rem)]
 
       sLaptop:pb-[0.541rem]
       mLaptop:pb-[0.677rem]
       desktop:pb-[0.813rem]
-      largeDesktop:pb-[1.016]
+      largeDesktop:pb-[1.016rem]
+      4k:pb-[1.354rem]
 
       sLaptop:gap-[0.375rem]
       mLaptop:gap-[0.469rem]
       desktop:gap-[0.563rem]
       largeDesktop:gap-[0.703rem]
+      4k:gap-[0.937rem]
 
       transition-all
       duration-300
       `}>
         {/* display all our filter options from our filter state that keeps track of our
         importance levels and if they are triggered or not */}
-
         {
           Object.entries(filters).map(([k,v],index)=> <FilterLabels key={index} k={k} v={v} />)
         }
-
       </div>
     </div>
   )
