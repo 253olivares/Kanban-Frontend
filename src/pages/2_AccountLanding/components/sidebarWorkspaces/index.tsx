@@ -7,6 +7,7 @@ import { memo, useContext } from 'react';
 import addWorkspace from '/assets/Add_New_Workspace.svg';
 import WorkspaceModal from '../addWorksapace';
 import { AppContext } from '../../../appRefContext';
+import { openAccountLadingModal } from '../../../../reduxStore/modal/modalSlice';
 
 const index = memo((
   {
@@ -77,6 +78,7 @@ const index = memo((
         <div 
         ref={openSpaceModal}
         onClick={()=>{
+          dispatch(openAccountLadingModal());
           dispatch(changeModal(!openModal));
         }}
         className='
@@ -129,8 +131,9 @@ const index = memo((
       sLaptop:pb-0
       ">
         <div 
+
         onClick={()=>{
-          alert('Currently working on adding additional features.')
+          dispatch(changeModal(!openModal));
         }}
         className=' 
         flex

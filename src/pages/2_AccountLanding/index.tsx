@@ -15,14 +15,17 @@ const index = memo(() => {
   
   return (
     <div className="
+    z-0
     relative
+    
     bg-SpaceBlue 
+
     flex-grow
+
     overflow-hidden
     
     flex flex-row
 
-    z-0
     ">
       {/* design circles that sit in the background of the app */}
       {/* from left to right */}
@@ -224,6 +227,7 @@ const index = memo(() => {
         openFilterModal  ? <FilterModal /> : ''
       }
       </AnimatePresence>
+      
       <SidebarInfo />
 
       <UserTasks />

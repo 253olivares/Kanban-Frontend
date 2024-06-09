@@ -14,7 +14,7 @@ const index = () => {
  
   // input sanitization function
   // take in string and replace each input and replace with html code
-  function sanitize(string:string) {
+  async function sanitize(string:string):Promise<string> {
     const map:Record<string,string> = {
         '&': '&amp;',
         '<': '&lt;',
@@ -34,16 +34,15 @@ const index = () => {
     return string.replace(reg, (match)=>(map[match]));
   }
 
-  const checkInputs = () => {
+  const checkInputs = async () => {
     let email = userInfo.email.trim();
     let password = userInfo.password.trim();
     let remember = userInfo.remember;
     if(email !== '' && password !== '') {
-      console.log('test1')
-      let sanitizedPassword = sanitize(password);
-      console.log(email,sanitizedPassword,remember)
+    
+      let sanitizedPassword = await sanitize(password);
 
-      dispatch(checkLogin({
+      await dispatch(checkLogin({
         email:email,
         password:sanitizedPassword,
         remember:remember
@@ -90,6 +89,7 @@ const index = () => {
     no-scrollbar
     sLaptop:overflow-hidden
     ">
+
       <div 
       className='
       relative
@@ -99,11 +99,10 @@ const index = () => {
       mobile:pb-[4.004rem]
       sMobile:pb-[6.406rem]
       mMobile:pb-[7.688rem]
-      sLaptop:pb-0
-      '
+      sLaptop:pb-0'
       >
-        <h1 className="
-
+        <h1 
+        className="
         pt-[2.441rem]
         pb-[2.196rem]
         mobile:pt-[3.255rem]
@@ -133,10 +132,10 @@ const index = () => {
         sLaptop:text-[1.333rem]
         mLaptop:text-[1.666rem]
         desktop:text-[2rem]
-        largeDesktop:text-[2.5rem]
-      ">
+        largeDesktop:text-[2.5rem]">
         Sign In
         </h1>
+
         <form className="
         flex flex-col 
 
@@ -261,10 +260,14 @@ const index = () => {
           mLaptop:pb-[2.939rem]
           desktop:pb-[3.528rem] 
           largeDesktop:pb-[4.409rem]'>
-            <CreateAccountBtn message="Login" fn={()=>{checkInputs()}} />
+            <CreateAccountBtn message="Login" fn={async()=>{
+              checkInputs();
+              }} />
           </div>    
         </form>
+
       </div>
+
       {/* Footer */}
       <div className="
        absolute
@@ -275,8 +278,8 @@ const index = () => {
        sMobile:h-[6.406rem]
        mMobile:h-[7.688rem]
        sLaptop:relative 
-       sLaptop:h-auto
-     ">
+       sLaptop:h-auto"
+      >
         <Footer />
       </div>
     </motion.div>

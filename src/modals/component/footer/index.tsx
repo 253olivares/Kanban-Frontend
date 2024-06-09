@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import Button from '../cancelButton';
 import LogoExport from '/assets/Logo_Export.svg';
 
-const index = () => {
+const index = memo(() => {
   return (
     <div className="
         relative conic-gradient 
@@ -38,6 +39,6 @@ const index = () => {
             ' src={LogoExport} alt="Logo Icons" />
     </div>
   )
-}
+})
 
 export default index

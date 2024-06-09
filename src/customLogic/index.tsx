@@ -2,9 +2,17 @@ import {user} from '../reduxStore/users/userSlice';
 import bcrypt from 'bcryptjs';
 
 const encryptionKey = '$2a$10$CwTycUXWue0Thq9StjUM0u';
+const storageKey = 'KanBanServerInstance';
+
+// const rememberKey ='RememberUser';
+// const boardKey = 'boardList';
+// const commentKey = 'commentList';
+// const listKey = 'listList';
+// const taskKey = 'taskList';
+// const userKey = 'userList';
+// const workspaceList = 'workspaceList';
 
 export const setRemember = (user:user) => {
-    const storageKey = 'KanBanServerInstance';
     const data = localStorage.getItem(storageKey);
     if(data) {
         const loginDate = new Date;
@@ -14,15 +22,13 @@ export const setRemember = (user:user) => {
             email:user.email,
             password:user.password
         }
-        const newData = {...JSON.parse(data),RememberUser:rememberData}
-        localStorage.setItem(storageKey,JSON.stringify(newData));
+        localStorage.setItem(storageKey,JSON.stringify({...JSON.parse(data),RememberUser:rememberData}));
     } else {
         reloadApplication();
     }
 }
 
 export const getRemember = () => {
-    const storageKey = 'KanBanServerInstance';
     const data = localStorage.getItem(storageKey);
     if(data){
         const rememberStatus = JSON.parse(data).RememberUser;
@@ -34,7 +40,6 @@ export const getRemember = () => {
 }
 
 export const getUserFromList = (id:string) => {
-    const storageKey = 'KanBanServerInstance';
     const data = localStorage.getItem(storageKey);
     if(data) {
         const users:Record<string,user> = JSON.parse(data).userList;
@@ -48,18 +53,18 @@ export const getUserFromList = (id:string) => {
     }
 }
 
-export const searchUser = (email:string,password:string)=> {
-    const storageKey = 'KanBanServerInstance';
+export const searchUser = async (email:string,password:string):Promise<user|null> => {
     let user = null;
-    const data = localStorage.getItem(storageKey);
+    const data = await localStorage.getItem(storageKey);
     if(data) {
-        const users:Record<string,user> = JSON.parse(data).userList; 
+        const users:Record<string,user> = await JSON.parse(data).userList; 
         if(Object.keys(users).length >= 1) {
             for(const [_, value] of Object.entries(users)){
-                console.log(value.email);
-                if(value.email.toUpperCase() === email.toUpperCase()){
-                    if(checkPasswordMatch(password,value.password)){
+                if( await value.email.toUpperCase() === await email.toUpperCase()){
+                    if( await checkPasswordMatch(password,value.password)){
                         user = value;
+                        // stop searching immediately
+                        break;
                     }
                 }
             }
@@ -67,11 +72,10 @@ export const searchUser = (email:string,password:string)=> {
     } else {
         reloadApplication();
     }
-    return user
+    return user;
 }
 
 export const resetRemember = () => {
-    const storageKey = 'KanBanServerInstance';
     const data = localStorage.getItem(storageKey);
     if(data) {
         const newData = {...JSON.parse(data),RememberUser:null}
@@ -82,7 +86,6 @@ export const resetRemember = () => {
 }
 
 export const updateUser = (newUserInfo:user) => {
-    const storageKey = 'KanBanServerInstance';
     const data = localStorage.getItem(storageKey);
     if(data){
         let users:Record<string,user> = JSON.parse(data).userList;
@@ -95,7 +98,6 @@ export const updateUser = (newUserInfo:user) => {
 }
 
 export const addUser = (newUser:user) => {
-    const storageKey = 'KanBanServerInstance';
     const data = localStorage.getItem(storageKey);
     if(data) {
         let users:Record<string,user> = JSON.parse(data).userList;
@@ -108,7 +110,6 @@ export const addUser = (newUser:user) => {
 }
 
 export const checkIfEmailExists = (email:string):boolean | null => {
-    const storageKey = 'KanBanServerInstance';
     const data = localStorage.getItem(storageKey);
     if(data) {
         const users:Record<string,user> = JSON.parse(data).userList;
@@ -130,7 +131,6 @@ export const checkIfEmailExists = (email:string):boolean | null => {
 // this is an adjusted email checker for when user edits their password
 // this takes two params with the second param being the email the user already had
 export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | null => {
-    const storageKey = 'KanBanServerInstance';
     const data = localStorage.getItem(storageKey);
     if(data) {
         const users:Record<string,user> = JSON.parse(data).userList;
@@ -158,8 +158,8 @@ export const passwordEncrption = (password:string):string => {
     return bcrypt.hashSync(password, encryptionKey); 
 }
 
-export const checkPasswordMatch = (password:string,encryption:string):boolean => {
-    return bcrypt.compareSync(password, encryption);
+export const checkPasswordMatch = async (password:string,encryption:string):Promise<boolean> => {
+    return await bcrypt.compareSync(password, encryption);
 }
 
 // custom function to create a image for our user
@@ -217,16 +217,17 @@ export const createDefaultBaseImage = (firstLetter:string,lastLetter:string):str
     // have the image data itself
     return dataURL;
 }
-
+let offset;
 export function toggleModal() {
-    let offset;
     if (document.body.classList.contains('modal--opened')) {
         offset = parseInt(document.body.style.top, 10);
+        console.log(offset)
         document.body.classList.remove('modal--opened');
         document.body.scrollTop = (offset * -1);
     } else {
         offset = document.body.scrollTop;
-        document.body.style.top = (offset * -1) + 'px';
-        document.body.classList.add('modal--opened');
+        console.log(offset)
+        // document.body.style.top = (offset * -1) + 'px';
+        // document.body.classList.add('modal--opened');
     }
 }

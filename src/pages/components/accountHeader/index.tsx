@@ -8,7 +8,8 @@ import { Outlet } from 'react-router-dom';
 
 import ModalContainer from '../../../modals';
 import Header from './component/Header';
-
+import { getWorkSpaceModal } from '../../../reduxStore/workspace/workspace';
+import MobileWorkspace from '../../2_AccountLanding/components/mobileAddWorkspace';
 
 const index = memo(() => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,7 @@ const index = memo(() => {
   const user = useAppSelector(getUser);
 
   const modalStatus = useAppSelector(getModalStatus);
+  const mobileWorkspace = useAppSelector(getWorkSpaceModal);
 
   // a cache check to have the application ato login a user 
   // if they click on this page
@@ -32,21 +34,27 @@ const index = memo(() => {
   useLayoutEffect(()=> {
     // after dispatch if has not found a user to remember then
     // make our user navigate to the home page
+
+    document.body.style.overflowY ="hidden";
+
     if(!user){
       navigate(`/`);
+      document.body.style.overflowY ="scroll";
     }
   },[user])
 
   return (
       <main className={`
-      relative 
       z-[0]
+      relative 
+
+      flex 
+      flex-col
+
       w-dvw
       h-dvh
       conic-gradient-noshade 
       overflow-hidden
-      flex 
-      flex-col
       ${
         !user && `
         justify-center 
@@ -62,6 +70,11 @@ const index = memo(() => {
         `
       }
       `}>
+        <AnimatePresence>
+        {
+          mobileWorkspace ? <MobileWorkspace /> : ''
+        }
+        </AnimatePresence>
         <AnimatePresence>
           { modalStatus && <ModalContainer /> }
         </AnimatePresence>

@@ -83,18 +83,16 @@ type loginType = {
 // Our function to log in the user when they fill in the login modal information
 export const checkLogin = createAsyncThunk('user/checkLogin', async({email,password,remember}:loginType,{rejectWithValue})=> {
     try{
-        const user:user|null = searchUser(email,password);
-        console.log('user',user);
+        const user:user|null = await searchUser(email,password);
+     
         if(!user) {
             alert('No credentials found please check ur username and password again!')
             throw new Error('No user was found')
-        } else {
-           if(remember){
-                console.log('add this user to remember so that they are automatically logged in next time!');
-                setRemember(user);
-           }
-           return user;
-        }
+        } 
+        // console.log('Add this user to remember so that they are automatically logged in next time!');
+        if(remember) setRemember(user);
+        return await user;
+
     }catch(error:unknown){
         console.log(`checkLogin:${error}`);
         return rejectWithValue(null);
@@ -139,7 +137,7 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
             lists: [],
         }
 
-        if(checkIfMatch) {
+        if( await checkIfMatch) {
             setRemember(newUser);
             addUser(newUser);
             return newUser;

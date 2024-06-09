@@ -2,13 +2,16 @@ import { useContext, useEffect } from "react"
 import { AppContext } from "../../../appRefContext"
 import { useAppDispatch } from "../../../../reduxStore/hook";
 import { changeModal } from "../../../../reduxStore/workspace/workspace";
+import { motion } from "framer-motion";
+
+import TextInput from './textBox';
 
 const index = () => {
   const dispatch = useAppDispatch();
 
   // import a ref so we can track if the user clicks inside and what is clicked
   const appContext = useContext(AppContext);
-  const {openSpaceModal,newWorkspaceModal, newWorkspaceModalClose} = appContext!;
+  const {openSpaceModal,newWorkspaceModal, newWorkspaceModalClose, mobileAddNewWorkspace} = appContext!;
 
   // this will create a listener which will watch to see if user clicks outside our modal
   // if they do close our modal
@@ -31,9 +34,14 @@ const index = () => {
         newWorkspaceModalClose.current && 
         newWorkspaceModalClose.current.contains(element)
         ){
-          window.removeEventListener('click',checkClick,true);
-          dispatch(changeModal(false));} 
+          if(!mobileAddNewWorkspace.current?.contains(element)){
+            window.removeEventListener('click',checkClick,true);
+            dispatch(changeModal(false));
+          }
+        }
+            
     }
+
     
     window.addEventListener('click',checkClick,true);
 
@@ -44,35 +52,107 @@ const index = () => {
 
   return (
     // this will be our state for added new workspaces
-    <div
+    <motion.div
+    initial={{ 
+      opacity: 0, 
+      scale: .9
+    }}
+    animate={{ 
+      opacity: 1,
+      scale:1 
+    }}
+    exit={{ 
+      opacity: 0 ,
+      scale: .9
+    }}
     ref={newWorkspaceModal}
     className={`
-     hidden
-     sLaptop:flex
-
-     flex-col
-
-     absolute
-     bottom-[-10%]
-     z-[5]
-     sLaptop:min-h-[150px]
-     sLaptop:w-[]
-     mLaptop:w-[]
-     desktop:w-[]
-     largeDesktop:w-[23.75rem]
-     left-[100%]
-     bg-black
+    speechBubbleCss
+    shadow-2xl
     `}>
-      {/* h1 and close icon */}
       <div className="
-      w-full
       flex
-      flex-row
-      justify-between
-      "></div>
-      {/* our input */}
-      <div></div>
-    </div>
+      flex-col
+
+      bg-SpaceBlue
+
+      sLaptop:rounded-[0.541rem]
+      mLaptop:rounded-[0.677rem]
+      desktop:rounded-[0.812rem]
+      largeDesktop:rounded-[1.016rem]
+
+      sLaptop:w-[13.33rem]
+      mLaptop:w-[16.66rem]
+      desktop:w-[20rem]
+      largeDesktop:w-[25rem]
+
+      ring-[2.25px]
+      ring-SelectorBlue 
+      ">
+        {/* h1 and close icon */}
+        <div className="
+        w-full
+
+        flex
+        flex-row
+
+        items-center
+
+        justify-between
+
+        sLaptop:pt-[0.500rem]
+        mLaptop:pt-[0.625rem]
+        desktop:pt-[0.750rem]
+        largeDesktop:pt-[0.938rem]
+
+        sLaptop:pb-[0.333rem]
+        mLaptop:pb-[0.416rem]
+        desktop:pb-[0.5rem]
+        largeDesktop:pb-[0.625rem]
+
+        sLaptop:px-[0.533rem]
+        mLaptop:px-[0.416rem]
+        desktop:px-[.8rem]
+        largeDesktop:px-[1rem]
+        ">
+          <label htmlFor="newWorkSpaceInput" className="
+          sLaptop:text-[0.799rem]
+          mLaptop:text-[0.999rem]
+          desktop:text-[1.2rem]
+          largeDesktop:text-[1.5rem]
+          font-medium
+          leading-none
+          text-white
+          ">New Workspace Name:</label>
+          <div
+          ref={newWorkspaceModalClose}
+          className="
+          closeMark
+          " />
+        </div>
+        {/* our input */}
+        <div className="
+        w-full
+        flex 
+        flex-row
+        relative
+        z-[10]
+
+        sLaptop:px-[0.533rem]
+        mLaptop:px-[0.666rem]
+        desktop:px-[0.8rem]
+        largeDesktop:px-[1rem]
+        
+        sLaptop:pb-[0.500rem]
+        mLaptop:pb-[0.625rem]
+        desktop:pb-[0.750rem]
+        largeDesktop:pb-[0.938rem]
+
+        ">  
+          <TextInput />
+        </div>
+      </div>
+    </motion.div> 
   )
 }
 

@@ -191,7 +191,7 @@ const index = () => {
     }
   },[userInfo.reTypeNewPassword,userInfo.newPassword])
 
-  const checkSubmission = () => {
+  const checkSubmission = async () => {
     const emailValid = emailValidation(userInfo.email);
     const passwordMatch = userInfo.newPassword === userInfo.reTypeNewPassword;
     const sanitizedPassword = sanitize(userInfo.newPassword);
@@ -215,7 +215,7 @@ const index = () => {
       alert('Please make sure your new password is not longer than 20 letters!');
     } else if (passwordStrength!==3 && userInfo.newPassword !== ''){
       alert('Please make sure your new password meets all its requirements!');
-    } else if (checkEncryptionPassword){
+    } else if (await checkEncryptionPassword){
       alert('Please make sure your new password does not match your previous password!');
     } else {
       if(sanitizedPassword !== '') {

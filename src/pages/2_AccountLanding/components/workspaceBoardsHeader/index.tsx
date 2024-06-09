@@ -10,12 +10,12 @@ const index = () => {
     const modalState = useAppSelector(getAccountLandingModal);
 
     const appContext = useContext(AppContext);
-    const {mobileSideBarRef} = appContext!;
+    const {mobileSideBarRef,mobileAddNewWorkspace} = appContext!;
 
     const listening = (e:MouseEvent | TouchEvent) => {
-      const elements = e.target;
-      if(mobileSideBarRef.current && !mobileSideBarRef.current.contains(elements as Node)){
-        dispatch(closeAccountLandingModal())
+      const elements = e.target as Node;
+      if(mobileSideBarRef.current && !mobileSideBarRef.current.contains(elements)){
+        if(!mobileAddNewWorkspace.current?.contains(elements)) dispatch(closeAccountLandingModal())
       }
     }
 

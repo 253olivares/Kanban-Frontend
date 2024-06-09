@@ -184,7 +184,7 @@ const EmailInput = () => {
                     mobile:rounded-r-[0.358rem]
                     sMobile:rounded-r-[0.573rem]
                     mMobile:rounded-r-[0.688rem]
-                    sLaptop:rounded-l-[.4rem]
+                    sLaptop:rounded-l-[0rem]
 
                     active:bg-SpaceBlueSelected'
                     type="submit"

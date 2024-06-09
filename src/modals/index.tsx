@@ -4,7 +4,7 @@ import { closeModal } from "../reduxStore/modal/modalSlice";
 
 import {motion,AnimatePresence} from 'framer-motion';
 import { AppContext } from "../pages/appRefContext";
-import { memo, useContext } from "react";
+import { memo, useContext} from "react";
 
 import CreateProfileModal from './createProfileModal';
 import ProfileModal from './profileModal';
@@ -22,7 +22,6 @@ const index = memo(() => {
   // get the modal we want to bring up
   const modal = useAppSelector(getModalType);
   const croppingTool = useAppSelector(getCroppingTool);
-
 
   return (
     <motion.div
@@ -51,17 +50,17 @@ const index = memo(() => {
     sLaptop:justify-center 
     sLaptop:items-center">
       
-      <AnimatePresence>
-        {modal == 'createProfile' && <CreateProfileModal />}
-        {modal == 'logIn' && <LoginModal />}
-        {modal == 'profile' && <ProfileModal />}
-      </AnimatePresence>
+      <div className={`
+ 
+      `}>
+        <AnimatePresence>
+          {modal == 'createProfile' && <CreateProfileModal />}
+          {modal == 'logIn' && <LoginModal />}
+          {modal == 'profile' && <ProfileModal />}
+        </AnimatePresence>
+      </div>
 
-      <div onClick={()=> {
-        if(!croppingTool){
-          dispatch(closeModal())
-        }
-      }} 
+      <div onClick={()=> !croppingTool && dispatch(closeModal())} 
       className="
       hidden 
       sLaptop:block 

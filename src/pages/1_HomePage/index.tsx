@@ -31,10 +31,6 @@ const index = memo(():JSX.Element => {
   // check to see if a user is signed in
   const user = useAppSelector(getUser);
 
-  // state to keep track of when our modal is open
-  const modalStatus = useAppSelector(getModalStatus)
-  const SecondaryModal = useAppSelector(getMobileModal)
-
   // changed this to layout effect to prevent page from rendering or painting
   useLayoutEffect(()=> {
     if(user){
@@ -44,18 +40,18 @@ const index = memo(():JSX.Element => {
     }
   },[user])
 
+  // state to keep track of when our modal is open
+  const modalStatus = useAppSelector(getModalStatus)
+  const SecondaryModal = useAppSelector(getMobileModal)
+
   // In this page we are going to handle our popup states within here
   return (
     <main
     ref={pageRef}
     className={`
-    z-[0]
+    z-0
     block
     relative
-    w-full
-    
-    overflow-x-hidden
-    no-scrollbar
     `}>
       <AnimatePresence>
         {/* open and close our modal */}

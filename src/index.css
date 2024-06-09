@@ -29,23 +29,17 @@
     }
 
     
-    html,body {
-        width: 100dvw;
-        height: 100dvh;
-        -ms-overflow-style: none;  /* IE and Edge */
-        scrollbar-width: none;  /* Firefox */
+    html, body {
+        width: 100dvw; 
         @apply font-Ubuntu bg-PrimaryWhite
+    }
+    body{
+        overflow-x: hidden;
+        overflow-y: scroll;
     }
 }
 
-@layer components {
-
-    .modal--opened{
-        position: fixed;
-        left: 0;
-        right: 0;
-    }
-    
+@layer components { 
 
     .womp{
         object-fit: contain;
@@ -66,6 +60,11 @@
     .glass-gradient {
         background: 
         linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%));
+    }
+
+    .glass-gradient-loading {
+        background: 
+        linear-gradient(to right, rgb(0 0 0 / 50%), rgb(0 0 0 / 50%));
     }
 
     .conic-gradient {
@@ -141,6 +140,102 @@
 }
 
 @layer utilities {
+
+    .closeMark{
+        @apply
+        sLaptop:w-[0.959rem]
+        sLaptop:h-[0.959rem]
+        mLaptop:w-[1.199rem]
+        mLaptop:h-[1.199rem]
+        desktop:w-[1.44rem]
+        desktop:h-[1.44rem]
+        largeDesktop:w-[1.8rem]
+        largeDesktop:h-[1.8rem]
+        relative
+        hover:cursor-pointer
+    }
+    .closeMark::before, .closeMark::after{
+        @apply 
+        content-[""]
+        absolute
+        sLaptop:top-[calc(0.959rem/2)]
+        mLaptop:top-[calc(1.199rem/2)]
+        desktop:top-[calc(1.44rem/2)]
+        largeDesktop:left-[calc(1.8rem/2)] 
+        largeDesktop:top-0
+        sLaptop:w-[0.959rem]
+        sLaptop:h-[2.266px]
+        mLaptop:w-[1.199rem]
+        mLaptop:h-[2.833px]
+        desktop:h-[3.4px]
+        desktop:w-[1.44rem]
+        largeDesktop:h-[1.8rem]
+        largeDesktop:w-[4.25px]
+        rounded-full
+        bg-white
+    }
+
+    .closeMark::before{
+        @apply rotate-45
+    }
+
+    .closeMark::after{
+        @apply rotate-[-45deg]
+    }
+
+    .speechBubbleCss{
+        @apply 
+        hidden
+        sLaptop:block
+   
+        absolute
+        z-[5]
+   
+        left-[100%]
+        
+        /* before:content-[""]
+        before:w-[2rem]
+        before:h-[2rem]
+        before:absolute
+        before:bottom-[15%]
+        before:z-[-1]
+        before:left-[calc(-2rem/2)]
+        before:rotate-45
+        before:bg-black
+        before:ring-[2px]
+        before:ring-SelectorBlue  */
+    }
+    .speechBubbleCss::before, .speechBubbleCss::after{
+        @apply
+        content-[""]
+        sLaptop:w-[0.799rem]
+        sLaptop:h-[0.799rem]
+        mLaptop:w-[0.999rem]
+        mLaptop:h-[0.999rem]
+        desktop:w-[1.2rem]
+        desktop:h-[1.2rem]
+        largeDesktop:w-[1.5rem]
+        largeDesktop:h-[1.5rem]
+        absolute
+        sLaptop:top-[calc(50%-(0.799rem/2))]
+        mLaptop:top-[calc(50%-(0.999rem/2))]
+        desktop:top-[calc(50%-(1.2rem/2))]
+        largeDesktop:top-[calc(50%-(1.5rem/2))]
+        sLaptop:left-[calc(-0.799rem/2)]
+        mLaptop:left-[calc(-0.999rem/2)]
+        desktop:left-[calc(-1.2rem/2)]
+        largeDesktop:left-[calc(-1.5rem/2)]
+        rotate-45   
+        bg-SpaceBlue
+    }
+
+    .speechBubbleCss::before{
+        @apply 
+        ring-[2.25px]
+        ring-SelectorBlue
+        z-[-1]
+    }
+
     .croppingToolButton {
         @apply
 
