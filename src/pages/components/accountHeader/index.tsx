@@ -8,8 +8,12 @@ import { Outlet } from 'react-router-dom';
 
 import ModalContainer from '../../../modals';
 import Header from './component/Header';
-import { getWorkSpaceModal } from '../../../reduxStore/workspace/workspace';
+import { getWorkSpaceModal, initiateWorkspace } from '../../../reduxStore/workspace/workspaceSlice';
 import MobileWorkspace from '../../2_AccountLanding/components/mobileAddWorkspace';
+import { initializeBoards } from '../../../reduxStore/boards/boardsSlice';
+import { initialComments } from '../../../reduxStore/comments/commentsSlice';
+import { initiateList } from '../../../reduxStore/lists/listsSlice';
+import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
 
 const index = memo(() => {
   const dispatch = useAppDispatch();
@@ -28,7 +32,15 @@ const index = memo(() => {
     // check to see if a user is logged in
     if(!user){
       dispatch(checkRemembered());
+    } else {
+      // grab all our data for workspaces from local storage
+      dispatch(initiateWorkspace());
+      dispatch(initializeBoards());
+      dispatch(initiateList());
+      dispatch(initiateTask());
+      dispatch(initialComments());
     }
+
   },[])
 
   useLayoutEffect(()=> {

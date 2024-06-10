@@ -1,4 +1,5 @@
-import { createEntityAdapter, createSlice } from "@reduxjs/toolkit"
+import { createAsyncThunk, createEntityAdapter, createSlice, isRejectedWithValue } from "@reduxjs/toolkit"
+import { getBoards } from "../../customLogic"
 
 export type board = {
     b_id:string,
@@ -13,7 +14,7 @@ export type board = {
 type initialStateType = {
     ids:string[],
     entities: Record<string,board>,
-    status: 'idle' | 'loading' | ' succeeded' | 'failed',
+    status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: null | string ,
     addBoardModal:boolean,
     newBoardName:string
@@ -23,6 +24,18 @@ const boardsAdapter = createEntityAdapter({
     selectId: (boards:board) => boards.b_id,
     sortComparer: (a,b) => a.b_id.localeCompare(b.b_id)
 });
+
+export const initializeBoards = createAsyncThunk('boards/initialize', async(_,{rejectWithValue})=>{
+    try{
+        const data: board[] | null = getBoards();
+        if(!data) throw new Error("Ran into issues!");
+        return data;
+        
+    }catch(e:any){
+        console.log("Ran into issue getting all the workspace data!");
+        rejectWithValue(e);
+    }
+})
 
 
 
@@ -36,7 +49,19 @@ const initialState:initialStateType = boardsAdapter.getInitialState({
 const boardSlice = createSlice({
     name:'boards',
     initialState,
-    reducers:{}
+    reducers:{},
+    extraReducers:(builder) => {
+        builder.addCase(initializeBoards.pending,(state,_)=> {
+            state.status = 'loading';
+        })
+        .addCase(initializeBoards.rejected,(state,_)=> {
+            state.status = 'failed';
+        })
+        .addCase(initializeBoards.fulfilled,(state,action)=> {
+            state.status = 'succeeded';
+            boardsAdapter.upsertMany(state,action.payload as board[])
+        })
+    }
 })
 
 export const {

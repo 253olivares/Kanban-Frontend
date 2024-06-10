@@ -1,4 +1,9 @@
+import { board } from '../reduxStore/boards/boardsSlice';
+import { comments } from '../reduxStore/comments/commentsSlice';
+import { list } from '../reduxStore/lists/listsSlice';
+import { task } from '../reduxStore/tasks/tasksSlice';
 import {rememberUser, user} from '../reduxStore/users/userSlice';
+import { workspace } from '../reduxStore/workspace/workspaceSlice';
 
 export const rememberKey ='RememberUser';
 export const boardKey = 'boardList';
@@ -6,7 +11,52 @@ export const commentKey = 'commentList';
 export const listKey = 'listList';
 export const taskKey = 'taskList';
 export const userKey = 'userList';
-export const workspaceList = 'workspaceList';
+export const workspaceKey = 'workspaceList';
+
+export const getTask = ():task[] | null => {
+    const data = localStorage.getItem(taskKey);
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+    return JSON.parse(data);
+}
+
+export const getList = ():list[] | null => {
+    const data = localStorage.getItem(listKey);
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+    return JSON.parse(data);
+};
+
+export const getComments = ():comments[] | null => {
+    const data = localStorage.getItem(commentKey);
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+    return JSON.parse(data);
+};
+
+export const getBoards = ():board[] | null => {
+    const data = localStorage.getItem(boardKey);
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+    return JSON.parse(data);
+}
+
+export const getWorkspaces = ():workspace[] | null => {
+    const data = localStorage.getItem(workspaceKey);
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+    return JSON.parse(data);
+}
 
 export const setRemember = (user:user):void => {
     if(!localStorage.getItem(rememberKey)) {
@@ -150,12 +200,12 @@ export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | 
 export const checkStorages= async():Promise<void> => {
 
     !localStorage.getItem(rememberKey)&& localStorage.setItem(rememberKey,JSON.stringify(null));
-    !localStorage.getItem(boardKey)&& localStorage.setItem(boardKey,JSON.stringify({}));
-    !localStorage.getItem(commentKey)&& localStorage.setItem(commentKey,JSON.stringify({}));
-    !localStorage.getItem(listKey)&& localStorage.setItem(listKey,JSON.stringify({}));
-    !localStorage.getItem(taskKey)&& localStorage.setItem(taskKey,JSON.stringify({}));
+    !localStorage.getItem(boardKey)&& localStorage.setItem(boardKey,JSON.stringify([]));
+    !localStorage.getItem(commentKey)&& localStorage.setItem(commentKey,JSON.stringify([]));
+    !localStorage.getItem(listKey)&& localStorage.setItem(listKey,JSON.stringify([]));
+    !localStorage.getItem(taskKey)&& localStorage.setItem(taskKey,JSON.stringify([]));
     !localStorage.getItem(userKey)&& localStorage.setItem(userKey,JSON.stringify({}));
-    !localStorage.getItem(workspaceList)&& localStorage.setItem(workspaceList,JSON.stringify({}));
+    !localStorage.getItem(workspaceKey)&& localStorage.setItem(workspaceKey,JSON.stringify([]));
 
 }
 
@@ -228,3 +278,30 @@ export const createDefaultBaseImage = (firstLetter:string,lastLetter:string):str
     // have the image data itself
     return dataURL;
 }
+
+export function sanitize(string:string):string {
+    const map:Record<string,string> = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+        "?": '&#63;',
+        "$": "&#36;",
+        " ": "&#00;"
+    };
+    // look for the following values
+    // create an array of the values I want to search for and declare it as incase sensitive
+    // and mark as a global search
+    const reg = /[&<>"'/?$ ]/ig;
+    // replace each value as its found
+    return string.replace(reg, (match)=>(map[match]));
+  }
+
+  export function emailValidation (email:string):boolean {
+    // email pattern
+    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // test it to see if it passes the check
+    return pattern.test(email);
+  }

@@ -13,6 +13,7 @@ import RestrictedInputBoxes from './components/restrictedInputBoxes';
 import PasswordInput from './components/password';
 import Footer from '../component/footer';
 import { getCroppingTool, openCloseCroppingTool } from '../../reduxStore/modal/modalSlice';
+import { sanitize, emailValidation} from '../../customLogic';
 
 type userInfo = {
     firstname:string,
@@ -127,32 +128,9 @@ const index = () => {
     }
   }
 
-  function emailValidation (email:string):boolean {
-    // email pattern
-    const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // test it to see if it passes the check
-    return pattern.test(email);
-  }
+  
 
-  function sanitize(string:string) {
-  const map:Record<string,string> = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#x27;',
-      "/": '&#x2F;',
-      "?": '&#63;',
-      "$": "&#36;",
-      " ": "&#00;"
-  };
-  // look for the following values
-  // create an array of the values I want to search for and declare it as incase sensitive
-  // and mark as a global search
-  const reg = /[&<>"'/?$ ]/ig;
-  // replace each value as its found
-  return string.replace(reg, (match)=>(map[match]));
-  }
+ 
 
   useLayoutEffect(()=> {
     if(userInfo.newPassword !== ''){

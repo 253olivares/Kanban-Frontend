@@ -7,7 +7,7 @@ import { AppContext } from '../../../appRefContext';
 import SidebarBoards from '../sidebarBoards';
 import SidebarWorkspaces from '../sidebarWorkspaces';
 import WorkspaceBoardHeader from '../workspaceBoardsHeader';
-import { getWorkspaceSelect, setNewSelect } from '../../../../reduxStore/workspace/workspace';
+import { getWorkspaceSelect, setNewSelect } from '../../../../reduxStore/workspace/workspaceSlice';
 
 const index = memo(() => {
     const modal: boolean  = useAppSelector(getAccountLandingModal);

@@ -1,11 +1,20 @@
 import { motion } from "framer-motion"
 import { useAppDispatch } from "../../../../../reduxStore/hook"
-import { changeModal } from "../../../../../reduxStore/workspace/workspace";
+import { addNewWorkspace, changeModal } from "../../../../../reduxStore/workspace/workspaceSlice";
 import { useState } from "react";
+import { sanitize } from "../../../../../customLogic";
 
 const workspaceModal = () => {
     const dispatch = useAppDispatch();
+    
     const [newWorkspaceName,setNewWorkspaceName] = useState<string>("");
+
+    const checkInput = ():void => {
+        dispatch(addNewWorkspace(sanitize(newWorkspaceName)))
+            .unwrap()
+            .then(()=>setNewWorkspaceName(''))
+    }
+
   return (
     <motion.div
     initial={{
@@ -164,10 +173,8 @@ const workspaceModal = () => {
             bg-SelectorBlue
 
             " 
-            onClick={()=> {
-                alert("Working on features!");
-                setNewWorkspaceName('');
-            }}>Save</button>
+            onClick={()=> checkInput()}
+            >Save</button>
         </div>
     </motion.div>
   )

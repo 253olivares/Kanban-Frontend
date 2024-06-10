@@ -1,8 +1,19 @@
 import { useState } from "react"
+import { useAppDispatch } from "../../../../../reduxStore/hook";
+import { addNewWorkspace } from "../../../../../reduxStore/workspace/workspaceSlice";
+import { sanitize } from "../../../../../customLogic";
 
 const index = () => {
 
+  const dispatch = useAppDispatch();
+
   const [text,setText] = useState<string>('');
+
+  const checkInput = ():void => {
+    dispatch(addNewWorkspace(sanitize(text)))
+      .unwrap()
+      .then(()=>setText(''))
+  }
 
   return (
     <>
@@ -37,7 +48,7 @@ const index = () => {
           "
           id="newWorkSpaceInput" type="text" />
         <button 
-        onClick={()=>alert("Working on feature!")}
+        onClick={()=>checkInput()}
         className="
           text-white
           site-borders

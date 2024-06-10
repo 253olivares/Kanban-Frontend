@@ -1,7 +1,8 @@
 
-import { createEntityAdapter,createSlice } from "@reduxjs/toolkit";
-import { PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createEntityAdapter,createSlice,PayloadAction  } from "@reduxjs/toolkit";
+
 import { RootState } from "../store";
+import { getWorkspaces } from "../../customLogic";
 
 export type workspace = {
     w_id:string,
@@ -13,7 +14,7 @@ export type workspace = {
 type initialStateType = {
     ids: string[],
     entities: Record<string,workspace>,
-    status: 'idle' | 'loading' | ' succeeded' | 'failed',
+    status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: null | string ,
     addWorkspaceModal: boolean,
     newWorkspaceName: string,
@@ -33,6 +34,21 @@ const initialState:initialStateType = workspaceAdapter.getInitialState({
     selectWorkspace:''
 })
 
+export const initiateWorkspace = createAsyncThunk('workspace/getWorkspaces', async(_,{rejectWithValue})=>{
+    try{
+        const data:workspace[] | null = getWorkspaces();
+        if(!data) throw new Error("Ran into issue");
+        return data;
+    }catch(e:any){
+        console.log("ran into issue getting all workspace data!");
+        rejectWithValue(e);
+    }
+})
+
+export const addNewWorkspace = createAsyncThunk('workspace/addWorkspaces', async(workspaceName:string,{rejectWithValue,requestId})=>{
+    console.log(requestId);
+})
+
 const workspaceSlice = createSlice({
     name:'workspace',
     initialState,
@@ -46,7 +62,19 @@ const workspaceSlice = createSlice({
         setNewSelect(state,action:PayloadAction<string>){
             state.selectWorkspace = action.payload;
         }
-
+    },
+    extraReducers:(builder)=> {
+        builder
+            .addCase(initiateWorkspace.pending,(state,_)=>{
+                state.status = 'loading';
+            })
+            .addCase(initiateWorkspace.rejected,(state,_)=>{
+                state.status = 'failed';
+            })
+            .addCase(initiateWorkspace.fulfilled,(state,action)=>{
+                state.status = 'succeeded';
+                workspaceAdapter.upsertMany(state,action.payload as workspace[]);
+            })
     }
 })
 

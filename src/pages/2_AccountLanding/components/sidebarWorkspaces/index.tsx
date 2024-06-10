@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 
-import { changeModal, getWorkSpaceModal } from '../../../../reduxStore/workspace/workspace';
+import { changeModal, getWorkSpaceModal } from '../../../../reduxStore/workspace/workspaceSlice';
 import { memo, useContext } from 'react';
 
 import addWorkspace from '/assets/Add_New_Workspace.svg';

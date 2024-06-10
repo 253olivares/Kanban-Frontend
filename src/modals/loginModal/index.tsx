@@ -6,6 +6,7 @@ import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
 import { getUserInfo, changeUserInfoEmail,changeUserInfoPassword,changeUserInfoRemember } from '../../reduxStore/users/userSlice';
+import { sanitize } from '../../customLogic';
 
 const index = () => {
   const dispatch = useAppDispatch();
@@ -14,25 +15,7 @@ const index = () => {
  
   // input sanitization function
   // take in string and replace each input and replace with html code
-  async function sanitize(string:string):Promise<string> {
-    const map:Record<string,string> = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#x27;',
-        "/": '&#x2F;',
-        "?": '&#63;',
-        "$": "&#36;",
-        " ": "&#00;"
-    };
-    // look for the following values
-    // create an array of the values I want to search for and declare it as incase sensitive
-    // and mark as a global search
-    const reg = /[&<>"'/?$ ]/ig;
-    // replace each value as its found
-    return string.replace(reg, (match)=>(map[match]));
-  }
+ 
 
   const checkInputs = async () => {
     let email = userInfo.email.trim();
@@ -40,7 +23,7 @@ const index = () => {
 
     if(email !== '' && password !== '') {
     
-      let sanitizedPassword = await sanitize(password);
+      let sanitizedPassword = sanitize(password);
 
       dispatch(checkLogin({
         email:email,

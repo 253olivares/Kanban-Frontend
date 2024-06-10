@@ -9,8 +9,7 @@ import CreateAccountButton from '../component/modalButton';
 import PasswordReq from './components/passwordRequirments';
 import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
-
-
+import { sanitize,emailValidation } from '../../customLogic';
 
 const index = () => {
     const dispatch = useAppDispatch();
@@ -155,38 +154,6 @@ const index = () => {
             repass.current.style.backgroundColor = "#CECECE";
         }
     },[userInfo.retypePassword,userInfo.password])
-    
-
-    // validate our email
-    function emailValidation (email:string):boolean {
-        // email pattern
-        const pattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        // test it to see if it passes the check
-        return pattern.test(email);
-    }
-
-    // sanitizer our inputs 
-    // pass our input values and then return a string of them sanitized
-    function sanitize(string:string) {
-        const map:Record<string,string> = {
-            '&': '&amp;',
-            '<': '&lt;',
-            '>': '&gt;',
-            '"': '&quot;',
-            "'": '&#x27;',
-            "/": '&#x2F;',
-            "?": '&#63;',
-            "$": "&#36;",
-            " ": "&#00;"
-        };
-        // look for the following values
-        // create an array of the values I want to search for and declare it as incase sensitive
-        // and mark as a global search
-        const reg = /[&<>"'/?$ ]/ig;
-        // replace each value as its found
-        return string.replace(reg, (match)=>(map[match]));
-    }
-    
 
     //   final check before submitting all user information
     const checkInputs = () => {

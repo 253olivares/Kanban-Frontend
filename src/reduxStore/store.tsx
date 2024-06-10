@@ -5,8 +5,10 @@ import modalReducer from './modal/modalSlice';
 import storageReducer from './localStorage/localStorageSlice';
 import userReducer from './users/userSlice';
 import taskReducer from './tasks/tasksSlice';
-import workspaceReducer from './workspace/workspace';
+import workspaceReducer from './workspace/workspaceSlice';
 import boardsReducer from './boards/boardsSlice';
+import listReducer from './lists/listsSlice';
+import commentReducer from './comments/commentsSlice';
 
 export const store = configureStore({
     reducer: {
@@ -16,7 +18,9 @@ export const store = configureStore({
         user: userReducer,
         tasks: taskReducer,
         workspace:workspaceReducer,
-        boards: boardsReducer
+        boards: boardsReducer,
+        list:listReducer,
+        comments:commentReducer
     }
 })
 // type scripts we need for selectors and dispatch to comply with typescript
