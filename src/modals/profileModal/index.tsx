@@ -1,6 +1,6 @@
 import { changeAccountDetails, getUser } from '../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
-import { checkIfEmailExistsEdit, checkPasswordMatch, passwordEncrption } from '../../customLogic';
+import { checkIfEmailExistsEdit} from '../../customLogic';
 
 import { useLayoutEffect, useRef, useState } from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
@@ -87,40 +87,27 @@ const index = () => {
         charLimit:true
     }}
 
-    
-    // for loop to check if we have a special character if we find one break the loop
-    for(let i=0; i<=specialChar.length-1; i++ ){
-      let found = false
-     for(let x=0; x<=passwordSnapshot.length-1; x++){
-      if(passwordSnapshot[x] === specialChar[i]){
-          totalPoints = totalPoints + 1;
+    for (const char of specialChar){
+      if(passwordSnapshot.includes(char)){
+        totalPoints ++;
           req = {
               ...req,
               specialChar:true
-          }
-          found=true;
+          };
           break;
       }
-     }
-     if(found) break;
     }
 
-   // checker for numbers now
-   for(let i=0; i<=leastOneNumber.length-1; i++ ){
-    let found = false
-   for(let x=0; x<=passwordSnapshot.length-1; x++){
-    if(passwordSnapshot[x] === leastOneNumber[i]){
-        totalPoints = totalPoints + 1;
+    for (const letter of leastOneNumber){
+      if(passwordSnapshot.includes(letter)){
+        totalPoints ++;
         req = {
             ...req,
             numReq:true
-        }
-        found=true;
+        };
         break;
+      }
     }
-   }
-   if(found) break;
-   }
 
     // set our new reqs that meet conditions
     setPasswordReq(()=> req);
@@ -129,15 +116,14 @@ const index = () => {
   }
 
   const checkifPasswordsMatch = () => {
-    if(userInfo.reTypeNewPassword !== '')
-    if(userInfo.newPassword !== userInfo.reTypeNewPassword){
-      if(repass.current){
-        repass.current.style.backgroundColor = "rgba(255,148,148,.5)"
-      }
-    } else if(userInfo.newPassword === userInfo.reTypeNewPassword){
-      if(repass.current) {
-        repass.current.style.backgroundColor = "rgba(195,255,139,.5)"
-      }
+    const refCheck = repass.current;
+    const passChecking = userInfo.reTypeNewPassword;
+
+    if(passChecking !==''&& refCheck)
+    if(userInfo.newPassword !== passChecking){
+        refCheck.style.backgroundColor = "rgba(255,148,148,.5)";
+    } else {
+        refCheck.style.backgroundColor = "rgba(195,255,139,.5)";
     }
   }
 
@@ -171,7 +157,6 @@ const index = () => {
   useLayoutEffect(()=> {
     if(userInfo.newPassword !== ''){
       checkPassword()
-      checkifPasswordsMatch()
     } else {
       setPasswordReq({
         charLimit: false,
@@ -201,8 +186,6 @@ const index = () => {
 
     const match = checkIfEmailExistsEdit(userInfo.email,user.email);
 
-    const checkEncryptionPassword = checkPasswordMatch(sanitizedPassword,user.password);
-
     if(match){
       alert('Email is already in use please try a different email!');
     } else if (!passwordMatch) {
@@ -215,8 +198,6 @@ const index = () => {
       alert('Please make sure your new password is not longer than 20 letters!');
     } else if (passwordStrength!==3 && userInfo.newPassword !== ''){
       alert('Please make sure your new password meets all its requirements!');
-    } else if (await checkEncryptionPassword){
-      alert('Please make sure your new password does not match your previous password!');
     } else {
       if(sanitizedPassword !== '') {
         dispatch(changeAccountDetails({
@@ -225,9 +206,14 @@ const index = () => {
           last_name:sanitizedLastname,
           username:sanitizedUsername,
           email:userInfo.email,
-          password:passwordEncrption(sanitizedPassword),
+          password:sanitizedPassword,
           pfp:userInfo.pfp
-        }));
+        })).unwrap().then(()=>{
+          setUserInfo((x) => ({...x,
+            newPassword:'',
+            reTypeNewPassword:'',
+          }))
+        });
       }else {
         dispatch(changeAccountDetails({
           ...user,
@@ -238,10 +224,6 @@ const index = () => {
           pfp:userInfo.pfp
         }));
       }
-      setUserInfo((x) => ({...x,
-        newPassword:'',
-        reTypeNewPassword:'',
-      }))
     }  
   }
 

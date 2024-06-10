@@ -1,10 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {user,rememberUser} from '../users/userSlice';
-import { workspace } from "../workspace/workspace";
-import { board } from "../boards/boardsSlice";
+import { checkStorages } from "../../customLogic";
 
 export const storageKey = 'KanBanServerInstance';
-
+// @ts-ignore
 type list = {
     l_id:string,
     b_id:string,
@@ -12,7 +10,7 @@ type list = {
     order:string, 
     description:string
 }
-
+// @ts-ignore
 type task = {
     t_id:string,
     l_id:string,
@@ -27,7 +25,7 @@ type task = {
     createdAt:Date,
     updatedAt:Date,
 }
-
+// @ts-ignore
 type comments = {
     c_id:string,
     u_id:string,
@@ -48,17 +46,17 @@ type comments = {
 }
 
 
-type KanBanStorage = {
-        RememberUser: rememberUser | null,
-        userList:{
-            [key:string] : user
-        },
-        taskList:task[],
-        listList:list[],
-        boardList:board[],
-        workspaceList:workspace[],
-        commentList:comments[]
-}
+// type KanBanStorage = {
+//         RememberUser: rememberUser | null,
+//         userList:{
+//             [key:string] : user
+//         },
+//         taskList:task[],
+//         listList:list[],
+//         boardList:board[],
+//         workspaceList:workspace[],
+//         commentList:comments[]
+// }
 
 type initalStateType = {
     applicationStorage:boolean
@@ -68,40 +66,22 @@ const initialState:initalStateType = {
     applicationStorage:false
 }
 
-const appSetUp:KanBanStorage = {
-        RememberUser:null,
-        userList:{},
-        taskList:[],
-        listList:[],
-        boardList:[],
-        workspaceList:[],
-        commentList:[]
-}
+// const appSetUp:KanBanStorage = {
+//         RememberUser:null,
+//         userList:{},
+//         taskList:{},
+//         listList:{},
+//         boardList:{},
+//         workspaceList:{},
+//         commentList:{}
+// }
 
-const setStorage = async () => {
-    const status = localStorage.setItem(storageKey,JSON.stringify(appSetUp));
-    console.log(status);
-}
-
-const getStorage = async () => {
-    const checkExistance = localStorage.getItem(storageKey);
-    if(checkExistance) return true;
-    return false;
-}
 
 export const checkStorage = createAsyncThunk('user/checkStorage',async(_,{rejectWithValue})=> {
     try {
-    const checkExistance = await getStorage();
-
-        if(!checkExistance) {
-            console.log('Application storage is not set up. Setting it up right now.');
-            await setStorage();
-        } else {
-            console.log('Application storage is set up.');
-        }
-
+        await checkStorages();
     }catch(error:unknown){
-        console.log(`checkingStorage:${error}`);
+        alert("Ran into issues setting up localStorage!");
         return rejectWithValue(error);
     }
 })

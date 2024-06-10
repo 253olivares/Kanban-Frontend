@@ -1,8 +1,6 @@
-import { createDefaultBaseImage, passwordEncrption, checkPasswordMatch, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser} from "../../customLogic";
+import { createDefaultBaseImage, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser} from "../../customLogic";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-
-
 
 // this is to create a list of users that we can invite to workspaces
 // without getting sensitive userData;
@@ -33,40 +31,29 @@ export type user = {
 export const checkRemembered = createAsyncThunk('user/checkRemember', async (_,{rejectWithValue}) => {
     try{
    
-        const rem:rememberUser = await getRemember();
+        const rem:rememberUser|null = await getRemember();
      
-        if(!rem){
+        if(!rem) throw new Error()
+        
+        const formatedDate = new Date(rem.rememberDate);
+        const currentDate = new Date;
+            
+        if(currentDate.getFullYear() - formatedDate.getFullYear() >=1 || 
+            currentDate.getMonth() - formatedDate.getMonth() >= 1 || 
+            currentDate.getDate() - formatedDate.getDate() >= 2 ) {
 
-            throw new Error('No user found - Failed at checking rem');
+            alert('Authentication is expired! Please log in again');
+            resetRemember();
+            throw new Error('Authentication is out of date!')
 
         } else {
-         
-            const formatedDate = new Date(rem.rememberDate);
-
-            const timestampDay = formatedDate.getDate();
-            const timestampYear = formatedDate.getFullYear();
-            const timestampMonth = formatedDate.getMonth() + 1;
-
-            const currentDate = new Date;
-            const currentDay = currentDate.getDate();
-            const currentYear = currentDate.getFullYear();
-            const currentMonth = currentDate.getMonth() + 1;
+            const user:user | void = await getUserFromList(rem.userId);
+            // console.log('check rememer after get user',user);
+            if(!user)  throw new Error('Authentication credentials invalid');
             
-            if(currentYear - timestampYear >=1 || currentMonth - timestampMonth >= 1 || currentDay - timestampDay >= 2 ) {
-                alert('Authentication is expired! Please log in again');
-                resetRemember();
-                throw new Error('Authentication is out of date!')
-            } else {
-                const user = getUserFromList(rem.userId);
-                // console.log('check rememer after get user',user);
-                if(user){
-                    return user;
-                } else {
-                    throw new Error('Authentication credentials invalid');
-                }
-            }
+            return user;
         }
-    } catch (error:unknown) {
+    } catch (error:any) {
         console.log('No user found');
         console.log(error);
         return rejectWithValue(null);
@@ -83,15 +70,16 @@ type loginType = {
 // Our function to log in the user when they fill in the login modal information
 export const checkLogin = createAsyncThunk('user/checkLogin', async({email,password,remember}:loginType,{rejectWithValue})=> {
     try{
-        const user:user|null = await searchUser(email,password);
-     
+        const user:user|null = searchUser(email,password);
+    
         if(!user) {
             alert('No credentials found please check ur username and password again!')
             throw new Error('No user was found')
         } 
         // console.log('Add this user to remember so that they are automatically logged in next time!');
         if(remember) setRemember(user);
-        return await user;
+
+        return user;
 
     }catch(error:unknown){
         console.log(`checkLogin:${error}`);
@@ -111,39 +99,27 @@ type createPayload = {
 // function that runs when the user fills out the create modal
 export const createAccount = createAsyncThunk('user/createAccount',async({firstname,lastname,username,email,password}:createPayload,{rejectWithValue,requestId})=>{
     try{
+        // encrypt our password
+        // const hashedPassword = passwordEncrption(password); 
+        // removing encryption to help with performance
 
-        console.log(requestId);
-
-        const id = `user_${requestId}`;
-
-        const accountCreation = new Date; 
-
-        const hashedPassword = passwordEncrption(password); 
-        const checkIfMatch = checkPasswordMatch(password,hashedPassword);
-
+        // create our image
         const imageTest = createDefaultBaseImage(firstname[0].toUpperCase(),lastname[0].toUpperCase());
 
         const newUser:user = {
-            u_id:id,
+            u_id:`user_${requestId}`,
             first_name:firstname,
             last_name:lastname,
             username:username,
             email:email,    
-            password:hashedPassword,
+            password:password,
             pfp: imageTest? imageTest : 'null',
-            createdAt:accountCreation.toLocaleString(),
+            createdAt:(new Date).toLocaleString(),
             workspaces: [],
             boards: [],
             lists: [],
         }
-
-        if( await checkIfMatch) {
-            setRemember(newUser);
-            addUser(newUser);
-            return newUser;
-        } else {
-            throw new Error('Ran into an issues within the API.');
-        }
+        return newUser;
 
     }catch(error:unknown){
         console.log(`createLogin:${error}`);
@@ -153,18 +129,15 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
 
 export const changeAccountDetails = createAsyncThunk('user/changeAccountDetails',async(user:user,{rejectWithValue}) => {
     try{
-        const checkRemember = getRemember();
+        const checkRemember:rememberUser | null = await getRemember();
 
-        if(checkRemember){
-            setRemember(user);
-        }
+        if(checkRemember) setRemember(user);
 
         updateUser(user);
 
         alert('Information has been updated!');
         return user
     } catch (error:unknown){
-        
         console.log(`Update userInformation:${error}`);
         return rejectWithValue(error);
     }
@@ -250,6 +223,12 @@ const userSlice = createSlice({
        builder
             .addCase(createAccount.fulfilled,(state,action:PayloadAction<user>)=> {
                 state.user = action.payload;
+                 // we are ust gonna set user to be remembered by default
+                setRemember(action.payload);
+                // add user to 
+                addUser(action.payload);
+
+                // reset our input for user login modal
                 state.createUserInfo = {
                     firstname:'',
                     lastname:'',
@@ -260,8 +239,7 @@ const userSlice = createSlice({
                 }
             })
             .addCase(checkLogin.fulfilled,(state,action:PayloadAction<user>)=> {
-                console.log(action.payload)
-                state.user= action.payload;
+                state.user = action.payload;
                 state.loginUserInfo = {
                     email: '',
                     password: '',

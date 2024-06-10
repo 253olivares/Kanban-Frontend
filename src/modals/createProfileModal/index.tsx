@@ -46,45 +46,70 @@ const index = () => {
         const leastOneNumber = '0123456789'
 
         if (passwordSnapshot.length >= 8) {
-          totalPoints = totalPoints + 1;
+          totalPoints++;
           req = {
             ...req,
             charLimit:true
         }}
 
-        // for loop to check if we have a special character if we find one break the loop
-        for(let i=0; i<=specialChar.length-1; i++ ){
-            let found = false
-           for(let x=0; x<=passwordSnapshot.length-1; x++){
-            if(passwordSnapshot[x] === specialChar[i]){
-                totalPoints = totalPoints + 1;
+        // code improvements
+        // for loop to check if we have a special character if we find one break the loop'
+        for(const char of specialChar){
+            if(passwordSnapshot.includes(char)){
+                totalPoints++;
                 req = {
                     ...req,
                     specialChar:true
                 }
-                found=true;
                 break;
             }
-           }
-           if(found) break;
         }
 
-        // checker for numbers now
-        for(let i=0; i<=leastOneNumber.length-1; i++ ){
-            let found = false
-           for(let x=0; x<=passwordSnapshot.length-1; x++){
-            if(passwordSnapshot[x] === leastOneNumber[i]){
-                totalPoints = totalPoints + 1;
+        for(const number of leastOneNumber){
+            if(passwordSnapshot.includes(number)){
+                totalPoints++;
                 req = {
                     ...req,
                     numReq:true
                 }
-                found=true;
                 break;
             }
-           }
-           if(found) break;
         }
+
+        // previous loops left to show code improvements left
+
+        // for(let i=0; i<=specialChar.length-1; i++ ){
+        //     let found = false
+        //    for(let x=0; x<=passwordSnapshot.length-1; x++){
+        //     if(passwordSnapshot[x] === specialChar[i]){
+        //         totalPoints = totalPoints + 1;
+        //         req = {
+        //             ...req,
+        //             specialChar:true
+        //         }
+        //         found=true;
+        //         break;
+        //     }
+        //    }
+        //    if(found) break;
+        // }
+
+        // // checker for numbers now
+        // for(let i=0; i<=leastOneNumber.length-1; i++ ){
+        //     let found = false
+        //    for(let x=0; x<=passwordSnapshot.length-1; x++){
+        //     if(passwordSnapshot[x] === leastOneNumber[i]){
+        //         totalPoints = totalPoints + 1;
+        //         req = {
+        //             ...req,
+        //             numReq:true
+        //         }
+        //         found=true;
+        //         break;
+        //     }
+        //    }
+        //    if(found) break;
+        // }
         // set our new reqs that meet conditions
         setPasswordRequirements(()=> req);
         // set our new strength value
@@ -92,23 +117,24 @@ const index = () => {
     }
 
     const checkifPasswordsMatch=()=> {
-        if(userInfo.retypePassword !=='')
-        if(userInfo.password !== userInfo.retypePassword){
-            if(repass.current){
-                repass.current.style.backgroundColor = "rgba(255,148,148,.5)"
-            }
-        } else if (userInfo.password === userInfo.retypePassword) {
-            if(repass.current) {
-                repass.current.style.backgroundColor = "rgba(195,255,139,.5)"
-            }
+
+        // Minor improvements in readability
+        const refCheck = repass.current;
+        const passChecking = userInfo.retypePassword;
+ 
+        if(passChecking !==''&& refCheck)
+        if(userInfo.password !== passChecking){
+            refCheck.style.backgroundColor = "rgba(255,148,148,.5)";
+        } else {
+            refCheck.style.backgroundColor = "rgba(195,255,139,.5)";
         }
     }
-
+    
     // layout effect to calculate if our password is valid
     useLayoutEffect(()=> {
         if(userInfo.password !== ''){
             checkPassword();
-            checkifPasswordsMatch();
+            // checkifPasswordsMatch();
         } else {
             // otherwise if our password is blank reset our values
             setPasswordRequirements({
@@ -164,26 +190,22 @@ const index = () => {
 
     //   final check before submitting all user information
     const checkInputs = () => {
-        let firstname = userInfo.firstname.trim();
-        let lastname = userInfo.lastname.trim();
-        let username = userInfo.username.trim();
-        let email = userInfo.email;
-        let password = userInfo.password;
-        let retypepassword = userInfo.retypePassword;
+
+        let {password,email} = userInfo;
 
         const emailValid = emailValidation(email);
-        const passwordMatch = password === retypepassword;
+        const passwordMatch = password === userInfo.retypePassword;
         const sanitizedPassword = sanitize(password);
-        const sanitizedFirstname = sanitize(firstname);
-        const sanitizedLastname = sanitize(lastname);
-        const sanitizedUsername = sanitize(username);
+        const sanitizedFirstname = sanitize(userInfo.firstname.trim());
+        const sanitizedLastname = sanitize(userInfo.lastname.trim());
+        const sanitizedUsername = sanitize(userInfo.username.trim());
 
         const match = checkIfEmailExists(email);
 
-        console.log('sanitizedFirstname:',sanitizedFirstname);
-        console.log('sanitizsedLastname',sanitizedLastname);
-        console.log('sanitizedUsername:',sanitizedUsername);
-        console.log('sanitizedPassword:',sanitizedPassword)
+        // console.log('sanitizedFirstname:',sanitizedFirstname);
+        // console.log('sanitizsedLastname',sanitizedLastname);
+        // console.log('sanitizedUsername:',sanitizedUsername);
+        // console.log('sanitizedPassword:',sanitizedPassword)
 
         if(match){
             alert('Email already in use please try a different email!')

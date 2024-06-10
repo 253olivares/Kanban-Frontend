@@ -1,166 +1,177 @@
-import {user} from '../reduxStore/users/userSlice';
-import bcrypt from 'bcryptjs';
+import {rememberUser, user} from '../reduxStore/users/userSlice';
 
-const encryptionKey = '$2a$10$CwTycUXWue0Thq9StjUM0u';
-const storageKey = 'KanBanServerInstance';
+export const rememberKey ='RememberUser';
+export const boardKey = 'boardList';
+export const commentKey = 'commentList';
+export const listKey = 'listList';
+export const taskKey = 'taskList';
+export const userKey = 'userList';
+export const workspaceList = 'workspaceList';
 
-// const rememberKey ='RememberUser';
-// const boardKey = 'boardList';
-// const commentKey = 'commentList';
-// const listKey = 'listList';
-// const taskKey = 'taskList';
-// const userKey = 'userList';
-// const workspaceList = 'workspaceList';
-
-export const setRemember = (user:user) => {
-    const data = localStorage.getItem(storageKey);
-    if(data) {
-        const loginDate = new Date;
-        const rememberData = {
-            rememberDate : loginDate.toLocaleString(),
-            userId : user.u_id,
-            email:user.email,
-            password:user.password
-        }
-        localStorage.setItem(storageKey,JSON.stringify({...JSON.parse(data),RememberUser:rememberData}));
-    } else {
+export const setRemember = (user:user):void => {
+    if(!localStorage.getItem(rememberKey)) {
         reloadApplication();
+        return;
     }
+
+    const rememberData = {
+        rememberDate : (new Date).toLocaleString(),
+        userId : user.u_id,
+        email:user.email,
+        password:user.password
+    }
+    
+    localStorage.setItem(rememberKey,JSON.stringify(rememberData));
 }
 
-export const getRemember = () => {
-    const data = localStorage.getItem(storageKey);
-    if(data){
-        const rememberStatus = JSON.parse(data).RememberUser;
-        return rememberStatus;
-    } else {
+export const getRemember = async ():Promise<rememberUser | null> => {
+    const data = localStorage.getItem(rememberKey);
+    if(!data){
         reloadApplication();
-        return false;
+        return null;
     }
+
+    const rememberUser = JSON.parse(data);
+    return rememberUser;
 }
 
-export const getUserFromList = (id:string) => {
-    const data = localStorage.getItem(storageKey);
-    if(data) {
-        const users:Record<string,user> = JSON.parse(data).userList;
-        if(users){
-           return users[id];
-        } else {
-            console.log('userlist is missing')
-        }
-    } else {
+export const getUserFromList = async (id:string):Promise<user|void> => {
+    const data = localStorage.getItem(userKey);
+    if(!data){
         reloadApplication();
+        return;
     }
+    const users:Record<string,user> = JSON.parse(data);
+
+    return users[id];
 }
 
-export const searchUser = async (email:string,password:string):Promise<user|null> => {
+export const searchUser = (email:string,password:string):user|null => {
+    
     let user = null;
-    const data = await localStorage.getItem(storageKey);
-    if(data) {
-        const users:Record<string,user> = await JSON.parse(data).userList; 
-        if(Object.keys(users).length >= 1) {
-            for(const [_, value] of Object.entries(users)){
-                if( await value.email.toUpperCase() === await email.toUpperCase()){
-                    if( await checkPasswordMatch(password,value.password)){
-                        user = value;
-                        // stop searching immediately
-                        break;
-                    }
-                }
-            }
-        }
-    } else {
+    const data = localStorage.getItem(userKey);
+
+    if(!data){
         reloadApplication();
+        return null;
     }
+    
+    const users:Record<string,user> = JSON.parse(data); 
+
+    for(const[_,value] of Object.entries(users)){
+        if(value.email.toUpperCase() === email.toUpperCase() && 
+            password === value.password){
+                user = value;
+                break;
+        }
+    }
+
     return user;
 }
 
 export const resetRemember = () => {
-    const data = localStorage.getItem(storageKey);
-    if(data) {
-        const newData = {...JSON.parse(data),RememberUser:null}
-        localStorage.setItem(storageKey,JSON.stringify(newData));
-    } else {
-        reloadApplication();
-    }
+    // if(!localStorage.getItem(storageKey)) reloadApplication();
+    localStorage.setItem(rememberKey,JSON.stringify(null));
 }
 
-export const updateUser = (newUserInfo:user) => {
-    const data = localStorage.getItem(storageKey);
-    if(data){
-        let users:Record<string,user> = JSON.parse(data).userList;
-        users[newUserInfo.u_id] = newUserInfo;
-        const newData = {...JSON.parse(data), userList:users};
-        localStorage.setItem(storageKey,JSON.stringify(newData));
-    } else {
+export const updateUser = (newUserInfo:user):void => {
+
+    const data = localStorage.getItem(userKey);
+
+    if(!data){
         reloadApplication();
+        return;
     }
+
+    let users:Record<string,user> = JSON.parse(data);
+    users[newUserInfo.u_id] = newUserInfo;
+
+    localStorage.setItem(userKey,JSON.stringify(users));
 }
 
-export const addUser = (newUser:user) => {
-    const data = localStorage.getItem(storageKey);
-    if(data) {
-        let users:Record<string,user> = JSON.parse(data).userList;
-        users[newUser.u_id] = newUser;
-        const newData = {...JSON.parse(data),userList:users};
-        localStorage.setItem(storageKey,JSON.stringify(newData));
-    } else {
+export const addUser = (newUser:user):void => {
+
+    const data = localStorage.getItem(userKey);
+
+    if(!data){
         reloadApplication();
+        return;
     }
+    let users:Record<string,user> = JSON.parse(data);
+    users[newUser.u_id] = newUser;
+
+    localStorage.setItem(userKey,JSON.stringify(users));
 }
 
 export const checkIfEmailExists = (email:string):boolean | null => {
-    const data = localStorage.getItem(storageKey);
-    if(data) {
-        const users:Record<string,user> = JSON.parse(data).userList;
-        let match = false;
-        if(Object.keys(users).length >=1) {
-            for (const [_, value] of Object.entries(users)) {
-                if (value.email.toUpperCase() === email.toUpperCase()) {
-                    match = true;
-                }
-              }
-        }
-        return match
-    } else {
+    const data = localStorage.getItem(userKey);
+    
+    // shorten code previously tp make easier to read by removing any unneeded code 
+    if(!data){
         reloadApplication();
         return null
     }
+
+    const users:Record<string,user> = JSON.parse(data);
+
+    let match = false;
+    for(const[_,value] of Object.entries(users)){
+        if(value.email.toUpperCase()=== email.toUpperCase()){
+            match = true;
+            // Stop our loop we are done searching
+            break;
+        }
+    }
+    return match
 }
 
 // this is an adjusted email checker for when user edits their password
 // this takes two params with the second param being the email the user already had
 export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | null => {
-    const data = localStorage.getItem(storageKey);
-    if(data) {
-        const users:Record<string,user> = JSON.parse(data).userList;
-        let match = false;
-        if(Object.keys(users).length >=1) {
-            for (const [_, value] of Object.entries(users)) {
-                if (value.email.toUpperCase() === email.toUpperCase() && value.email.toUpperCase() !== prevEmail.toUpperCase()) {
-                    match = true;
-                }
-            }
-        }
-        return match
-    } else {
+    const data = localStorage.getItem(userKey);
+
+    if(!data){
         reloadApplication();
         return null
-    } 
+    }
+
+    const users:Record<string,user> = JSON.parse(data);
+    let match = false;
+    for(const [_,value] of Object.entries(users)){
+        if(value.email.toUpperCase() === email.toUpperCase() && 
+        value.email.toUpperCase() !== prevEmail.toUpperCase()){
+            match = true;
+        }
+    }
+
+    return match;
 }
+
+export const checkStorages= async():Promise<void> => {
+
+    !localStorage.getItem(rememberKey)&& localStorage.setItem(rememberKey,JSON.stringify(null));
+    !localStorage.getItem(boardKey)&& localStorage.setItem(boardKey,JSON.stringify({}));
+    !localStorage.getItem(commentKey)&& localStorage.setItem(commentKey,JSON.stringify({}));
+    !localStorage.getItem(listKey)&& localStorage.setItem(listKey,JSON.stringify({}));
+    !localStorage.getItem(taskKey)&& localStorage.setItem(taskKey,JSON.stringify({}));
+    !localStorage.getItem(userKey)&& localStorage.setItem(userKey,JSON.stringify({}));
+    !localStorage.getItem(workspaceList)&& localStorage.setItem(workspaceList,JSON.stringify({}));
+
+}
+
 
 export const reloadApplication = ()=> {
     alert('Application has ran into an issue where database does not exist. Application will reload!');
     location.reload();
 }
 
-export const passwordEncrption = (password:string):string => {
-    return bcrypt.hashSync(password, encryptionKey); 
-}
+// export const passwordEncrption = (password:string):string => {
+//     return bcrypt.hashSync(password, encryptionKey); 
+// }
 
-export const checkPasswordMatch = async (password:string,encryption:string):Promise<boolean> => {
-    return await bcrypt.compareSync(password, encryption);
-}
+// export const checkPasswordMatch = async (password:string,encryption:string):Promise<boolean> => {
+//     return await bcrypt.compareSync(password, encryption);
+// }
 
 // custom function to create a image for our user
 export const createDefaultBaseImage = (firstLetter:string,lastLetter:string):string|null => {
@@ -216,18 +227,4 @@ export const createDefaultBaseImage = (firstLetter:string,lastLetter:string):str
     // remove beginning section of the data url so we only
     // have the image data itself
     return dataURL;
-}
-let offset;
-export function toggleModal() {
-    if (document.body.classList.contains('modal--opened')) {
-        offset = parseInt(document.body.style.top, 10);
-        console.log(offset)
-        document.body.classList.remove('modal--opened');
-        document.body.scrollTop = (offset * -1);
-    } else {
-        offset = document.body.scrollTop;
-        console.log(offset)
-        // document.body.style.top = (offset * -1) + 'px';
-        // document.body.classList.add('modal--opened');
-    }
 }

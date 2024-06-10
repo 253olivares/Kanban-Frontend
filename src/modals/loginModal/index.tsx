@@ -37,15 +37,15 @@ const index = () => {
   const checkInputs = async () => {
     let email = userInfo.email.trim();
     let password = userInfo.password.trim();
-    let remember = userInfo.remember;
+
     if(email !== '' && password !== '') {
     
       let sanitizedPassword = await sanitize(password);
 
-      await dispatch(checkLogin({
+      dispatch(checkLogin({
         email:email,
         password:sanitizedPassword,
-        remember:remember
+        remember:userInfo.remember
       }));
 
     } else {
