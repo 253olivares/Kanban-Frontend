@@ -1,4 +1,4 @@
-import { createAsyncThunk, createEntityAdapter, createSlice, isRejectedWithValue } from "@reduxjs/toolkit"
+import { createAsyncThunk, createEntityAdapter, createSlice} from "@reduxjs/toolkit"
 import { getBoards } from "../../customLogic"
 
 export type board = {

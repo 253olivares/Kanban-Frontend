@@ -45,8 +45,9 @@ export const initiateWorkspace = createAsyncThunk('workspace/getWorkspaces', asy
     }
 })
 
-export const addNewWorkspace = createAsyncThunk('workspace/addWorkspaces', async(workspaceName:string,{rejectWithValue,requestId})=>{
+export const addNewWorkspace = createAsyncThunk('workspace/addWorkspaces', async(workspaceName:string,{requestId})=>{
     console.log(requestId);
+    console.log(workspaceName);
 })
 
 const workspaceSlice = createSlice({
