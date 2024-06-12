@@ -2,11 +2,12 @@
 import { createAsyncThunk, createEntityAdapter,createSlice,PayloadAction  } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
-import { getWorkspaces } from "../../customLogic";
+import { addWorkspace, getWorkspaces, updateUser } from "../../customLogic";
 
 export type workspace = {
     w_id:string,
     u_id:string,
+    name:string,
     boards:string[],
     members:string[]
 }
@@ -45,9 +46,37 @@ export const initiateWorkspace = createAsyncThunk('workspace/getWorkspaces', asy
     }
 })
 
-export const addNewWorkspace = createAsyncThunk('workspace/addWorkspaces', async(workspaceName:string,{requestId})=>{
-    console.log(requestId);
-    console.log(workspaceName);
+export const addNewWorkspace = createAsyncThunk('workspace/addWorkspaces', async(workspaceName:string,{requestId,getState,rejectWithValue})=>{
+    try{
+
+        // take in our new workspace name and get our state.
+        // doing this allows us to access our user state which should have our user id
+        const state = getState() as RootState;
+
+        // if no new user is found then throw an error
+        if(!state.user.user) throw new Error('No user is logged in!');
+
+        // create a new object of the workspace
+        const newWorkspace = {
+            w_id:`workspace_${requestId}`,
+            u_id:state.user.user!.u_id,
+            name:workspaceName,
+            boards:[],
+            members:[]
+        }
+
+        const newUserInfo = {
+            ...state.user.user,
+            workspaces:[...state.user.user.workspaces,newWorkspace.w_id]
+        }
+
+        // return the workspace, and a array of all our previous workspace
+    return {newWorkspace:newWorkspace,prevStates:selectAll(state),newUserInfo};
+
+    } catch(e:any){
+        console.log("Ran into issue adding new workspace!")
+        rejectWithValue(e);
+    }
 })
 
 const workspaceSlice = createSlice({
@@ -75,6 +104,20 @@ const workspaceSlice = createSlice({
             .addCase(initiateWorkspace.fulfilled,(state,action)=>{
                 state.status = 'succeeded';
                 workspaceAdapter.upsertMany(state,action.payload as workspace[]);
+            })
+            // take in our previous state and action payload and pass it to our function with custome code
+            // this code is in charge of communicating with our local storage
+            .addCase(addNewWorkspace.fulfilled,(state,action)=> {
+                state.status = 'succeeded';
+                updateUser(action.payload!.newUserInfo);
+                addWorkspace(action.payload!.newWorkspace,action.payload!.prevStates);
+                workspaceAdapter.addOne(state,action.payload!.newWorkspace as workspace);
+            })  
+            .addCase(addNewWorkspace.pending,(state,_)=> {
+                state.status = 'loading';
+            })
+            .addCase(addNewWorkspace.rejected,(state,_)=>{
+                state.status = 'failed';
             })
     }
 })

@@ -12,7 +12,8 @@ const index = () => {
   const checkInput = ():void => {
     dispatch(addNewWorkspace(sanitize(text)))
       .unwrap()
-      .then(()=>setText(''))
+      // if successful clear text
+      .then(()=>setText(''));
   }
 
   return (

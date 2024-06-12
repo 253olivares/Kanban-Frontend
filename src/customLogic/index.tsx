@@ -58,6 +58,14 @@ export const getWorkspaces = ():workspace[] | null => {
     return JSON.parse(data);
 }
 
+export const addWorkspace = (newWorkSpace:workspace ,prevState:workspace[]):void => {
+    if(!localStorage.getItem(workspaceKey)) {
+        reloadApplication();
+        return;
+    }
+    localStorage.setItem(workspaceKey,JSON.stringify( [...prevState, newWorkSpace]))
+}
+
 export const setRemember = (user:user):void => {
     if(!localStorage.getItem(rememberKey)) {
         reloadApplication();
