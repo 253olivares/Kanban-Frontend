@@ -1,5 +1,6 @@
-import { createAsyncThunk, createEntityAdapter, createSlice} from "@reduxjs/toolkit"
+import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit"
 import { getBoards } from "../../customLogic"
+import { RootState } from "../store"
 
 export type board = {
     b_id:string,
@@ -49,7 +50,14 @@ const initialState:initialStateType = boardsAdapter.getInitialState({
 const boardSlice = createSlice({
     name:'boards',
     initialState,
-    reducers:{},
+    reducers:{
+        changeBoardModal(state,action:PayloadAction<boolean>){
+            state.addBoardModal = action.payload;
+        },
+        newBoardNameUpdate(state,action:PayloadAction<string>){
+            state.newBoardName = action.payload;
+        }
+    },
     extraReducers:(builder) => {
         builder.addCase(initializeBoards.pending,(state,_)=> {
             state.status = 'loading';
@@ -68,6 +76,10 @@ export const {
     selectAll
 } = boardsAdapter.getSelectors((state:{boards:initialStateType})=> state.boards);
 
-export const {} = boardSlice.actions;
+export const getBoardName = (state:RootState) => state.boards.newBoardName;
+
+export const getBoardModal = (state:RootState) => state.boards.addBoardModal;
+
+export const {changeBoardModal,newBoardNameUpdate} = boardSlice.actions;
 
 export default boardSlice.reducer;

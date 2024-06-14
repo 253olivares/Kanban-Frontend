@@ -1,13 +1,16 @@
 import { memo } from "react";
 import { useAppSelector } from "../../../../reduxStore/hook";
 import { selectById } from "../../../../reduxStore/workspace/workspaceSlice";
+import AddNewBoards from './components/addNewBoardHolder';
 
 // sidebarBoards
 const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
 
-  const getBoardsFromSelectWorkspace:unknown[] = [];
-
   const workspace = useAppSelector(state=>selectById(state,selectWorkspace))
+
+  const getBoardsFromSelectWorkspace:string[] = workspace?.boards || [];
+
+  console.log(getBoardsFromSelectWorkspace);
 
   return (
     <div className={`
@@ -17,6 +20,12 @@ const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
 
     grow
     sLaptop:grow-0
+
+    sLaptop:gap-[0.333rem]
+    mLaptop:gap-[0.416rem]
+    desktop:gap-[0.5rem]
+    largeDesktop:gap-[1.25rem]
+
     ${
       selectWorkspace === '' ? 
       'sLaptop:h-[35%]'
@@ -65,13 +74,12 @@ const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
           hidden
 
           sLaptop:block
-          sLaptop:text-[0.746rem]
-          mLaptop:text-[0.933rem]
-          desktop:text-[1.12rem]
-          largeDesktop:text-[1.40rem]
-          4k:text-[1.5625rem]
+          sLaptop:text-[0.833rem]
+          mLaptop:text-[1.041rem]
+          desktop:text-[1.25rem]
+          largeDesktop:text-[1.562rem]
 
-          leading-relaxed
+          leading-normal
 
           self-end
           font-medium
@@ -84,13 +92,15 @@ const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
       flex-col 
       items-center
 
-      ${getBoardsFromSelectWorkspace.length === 0 && 'justify-center'}
+      justify-start
 
+    
       p-[4.3%]
 
       grow
       `}>
         {
+          // will display when no workspace is selected
           selectWorkspace === '' ?
           <p className="
     
@@ -111,6 +121,11 @@ const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
           ">Please make sure to select a workspace or create a workspace to get started!</p>
           :
           <>
+          {/* add workspace div */}
+          <AddNewBoards key={`addBoard_${workspace.w_id}`} />
+            {/* <AnimatePresence>
+              <AddNewBoards key={`addBoard_${workspace.w_id}`} />
+            </AnimatePresence> */}
           </>
         }
       </div>
