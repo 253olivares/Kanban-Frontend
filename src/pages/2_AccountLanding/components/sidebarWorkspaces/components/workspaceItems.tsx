@@ -19,8 +19,6 @@ const workspaceItems = memo((
 
     if(!item) return;
 
-    console.log(selectedWorkspace === item.w_id)
-
   return (
     <div 
     className={`
