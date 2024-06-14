@@ -2,7 +2,7 @@
 import { createAsyncThunk, createEntityAdapter,createSlice,PayloadAction  } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
-import { addWorkspace, getWorkspaces, updateUser } from "../../customLogic";
+import { addWorkspace, getWorkspaces} from "../../customLogic";
 
 export type workspace = {
     w_id:string,
@@ -19,13 +19,13 @@ type initialStateType = {
     error: null | string ,
     addWorkspaceModal: boolean,
     newWorkspaceName: string,
-    selectWorkspace: null | string
+    selectWorkspace: string
 }
 
 const workspaceAdapter = createEntityAdapter({
     selectId: (workspace:workspace) => workspace.w_id,
     sortComparer:(a,b) => a.w_id.localeCompare(b.w_id)
-})
+})  
 
 const initialState:initialStateType = workspaceAdapter.getInitialState({
     status:'idle',
@@ -57,21 +57,21 @@ export const addNewWorkspace = createAsyncThunk('workspace/addWorkspaces', async
         if(!state.user.user) throw new Error('No user is logged in!');
 
         // create a new object of the workspace
-        const newWorkspace = {
+        const newWorkspace:workspace = {
             w_id:`workspace_${requestId}`,
             u_id:state.user.user!.u_id,
             name:workspaceName,
             boards:[],
-            members:[]
+            members:[state.user.user.u_id]
         }
 
-        const newUserInfo = {
-            ...state.user.user,
-            workspaces:[...state.user.user.workspaces,newWorkspace.w_id]
-        }
+        // const newUserInfo = {
+        //     ...state.user.user,
+        //     workspaces:[...state.user.user.workspaces,newWorkspace.w_id]
+        // }
 
         // return the workspace, and a array of all our previous workspace
-    return {newWorkspace:newWorkspace,prevStates:selectAll(state),newUserInfo};
+    return {newWorkspace:newWorkspace,prevStates:selectAll(state)};
 
     } catch(e:any){
         console.log("Ran into issue adding new workspace!")
@@ -109,7 +109,7 @@ const workspaceSlice = createSlice({
             // this code is in charge of communicating with our local storage
             .addCase(addNewWorkspace.fulfilled,(state,action)=> {
                 state.status = 'succeeded';
-                updateUser(action.payload!.newUserInfo);
+                // updateUser(action.payload!.newUserInfo);
                 addWorkspace(action.payload!.newWorkspace,action.payload!.prevStates);
                 workspaceAdapter.addOne(state,action.payload!.newWorkspace as workspace);
             })  
@@ -123,7 +123,8 @@ const workspaceSlice = createSlice({
 })
 
 export const {
-    selectAll
+    selectAll,
+    selectById
 } = workspaceAdapter.getSelectors((state:{workspace:initialStateType})=>state.workspace);
 
 export const {

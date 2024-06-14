@@ -1,7 +1,8 @@
 import { useState } from "react"
-import { useAppDispatch } from "../../../../../reduxStore/hook";
-import { addNewWorkspace } from "../../../../../reduxStore/workspace/workspaceSlice";
+import { useAppDispatch} from "../../../../../reduxStore/hook";
+import { addNewWorkspace, changeModal } from "../../../../../reduxStore/workspace/workspaceSlice";
 import { sanitize } from "../../../../../customLogic";
+import { updateUserWorkspaces } from "../../../../../reduxStore/users/userSlice";
 
 const index = () => {
 
@@ -13,7 +14,14 @@ const index = () => {
     dispatch(addNewWorkspace(sanitize(text)))
       .unwrap()
       // if successful clear text
-      .then(()=>setText(''));
+      .then((x)=> {
+        alert('New Workspace successfully added!');
+        if(x?.newWorkspace) {
+          dispatch(updateUserWorkspaces(x.newWorkspace));
+        }
+        dispatch(changeModal(false));
+        setText('');
+      });
   }
 
   return (
@@ -49,6 +57,7 @@ const index = () => {
           "
           id="newWorkSpaceInput" type="text" />
         <button 
+        disabled={text.trim() === ''}
         onClick={()=>checkInput()}
         className="
           text-white

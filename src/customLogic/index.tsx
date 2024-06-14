@@ -288,23 +288,30 @@ export const createDefaultBaseImage = (firstLetter:string,lastLetter:string):str
 }
 
 export function sanitize(string:string):string {
-    const map:Record<string,string> = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#x27;',
-        "/": '&#x2F;',
-        "?": '&#63;',
-        "$": "&#36;",
-        " ": "&#00;"
-    };
-    // look for the following values
-    // create an array of the values I want to search for and declare it as incase sensitive
-    // and mark as a global search
-    const reg = /[&<>"'/?$ ]/ig;
-    // replace each value as its found
-    return string.replace(reg, (match)=>(map[match]));
+    // const map:Record<string,string> = {
+    //     '&': '&amp;',
+    //     '<': '&lt;',
+    //     '>': '&gt;',
+    //     '"': '&quot;',
+    //     "'": '&#x27;',
+    //     "/": '&#x2F;',
+    //     "?": '&#63;',
+    //     "$": "&#36;"
+    // };
+    // // // look for the following values
+    // // // create an array of the values I want to search for and declare it as incase sensitive
+    // // // and mark as a global search
+    // const reg = /[&<>"'/?$ ]/ig;
+    // // // replace each value as its found
+    // return string.replace(reg, (match)=>(map[match]));
+
+    // recently found out react does not need input sanitization
+    // React automatically provides XSS protection preventing string example that would result in a xss attack
+    
+
+    // only time sanitization is needed is in instances where the user input needs to include html and not a string
+   
+    return string;
   }
 
   export function emailValidation (email:string):boolean {

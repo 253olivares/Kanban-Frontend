@@ -7,7 +7,8 @@ import { AppContext } from '../../../appRefContext';
 import SidebarBoards from '../sidebarBoards';
 import SidebarWorkspaces from '../sidebarWorkspaces';
 import WorkspaceBoardHeader from '../workspaceBoardsHeader';
-import { getWorkspaceSelect, setNewSelect } from '../../../../reduxStore/workspace/workspaceSlice';
+import { getWorkspaceSelect, setNewSelect} from '../../../../reduxStore/workspace/workspaceSlice';
+import { getUserWorkspaces } from '../../../../reduxStore/users/userSlice';
 
 const index = memo(() => {
     const modal: boolean  = useAppSelector(getAccountLandingModal);
@@ -16,11 +17,12 @@ const index = memo(() => {
     const appContext = useContext(AppContext);
     const {mobileSideBarRef} = appContext!;
 
-    const selectWorkspace: null | string = useAppSelector(getWorkspaceSelect);
+    const selectWorkspace: string = useAppSelector(getWorkspaceSelect);
 
-    const setSelectWorkspace  = (x:string) => dispatch(setNewSelect(x));
+    const setSelectWorkspace = (x:string) => dispatch(setNewSelect(x));
 
-    const getUserWorkSpaces:unknown[] = [];
+    const getUserWorkSpaces:string[] = useAppSelector(getUserWorkspaces) as string[];
+  
 
   return (
     <div
@@ -55,7 +57,8 @@ const index = memo(() => {
       sLaptop:bg-transparent
       sLaptop:top-auto
 
-      flex items-center 
+      flex 
+      items-center 
       flex-col
 
       w-full
@@ -84,6 +87,8 @@ const index = memo(() => {
         flex-col-reverse
         sLaptop:flex-col
         flex-grow
+        sLaptop:flex-grow-0
+        sLaptop:h-full
         '>
           <SidebarBoards selectWorkspace={selectWorkspace} />
           <hr className='
@@ -107,7 +112,10 @@ const index = memo(() => {
           largeDesktop:h-[0.313rem]
           4k:h-[0.417rem]
           ' />
-          <SidebarWorkspaces setWorkspace={(string)=> setSelectWorkspace(string)} workspaces={getUserWorkSpaces} /> 
+          <SidebarWorkspaces 
+          setWorkspace={(string)=> setSelectWorkspace(string)} 
+          workspaces={getUserWorkSpaces} 
+          selectedWorkspace={selectWorkspace} /> 
         </div>
       </div>
   )

@@ -1,9 +1,13 @@
 import { memo } from "react";
+import { useAppSelector } from "../../../../reduxStore/hook";
+import { selectById } from "../../../../reduxStore/workspace/workspaceSlice";
 
 // sidebarBoards
-const index = memo(({selectWorkspace}:{selectWorkspace:null | string}) => {
+const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
 
   const getBoardsFromSelectWorkspace:unknown[] = [];
+
+  const workspace = useAppSelector(state=>selectById(state,selectWorkspace))
 
   return (
     <div className={`
@@ -53,11 +57,27 @@ const index = memo(({selectWorkspace}:{selectWorkspace:null | string}) => {
 
         text-white
         ">Boards</h1>
-        { selectWorkspace === '' ?
-          ''
-          :
-          <p>Workspace Name</p>}
-      </div>
+        {
+          selectWorkspace === '' ? 
+          '' :
+          <p className="
+          text-white
+          hidden
+
+          sLaptop:block
+          sLaptop:text-[0.746rem]
+          mLaptop:text-[0.933rem]
+          desktop:text-[1.12rem]
+          largeDesktop:text-[1.40rem]
+          4k:text-[1.5625rem]
+
+          leading-relaxed
+
+          self-end
+          font-medium
+          ">{workspace.name}</p>
+        }
+      </div>  
 
       <div className={`
       flex 

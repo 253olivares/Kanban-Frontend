@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../../../../reduxStore/hook"
 import { addNewWorkspace, changeModal } from "../../../../../reduxStore/workspace/workspaceSlice";
 import { useState } from "react";
 import { sanitize } from "../../../../../customLogic";
+import { updateUserWorkspaces } from "../../../../../reduxStore/users/userSlice";
 
 const workspaceModal = () => {
     const dispatch = useAppDispatch();
@@ -12,7 +13,12 @@ const workspaceModal = () => {
     const checkInput = ():void => {
         dispatch(addNewWorkspace(sanitize(newWorkspaceName)))
             .unwrap()
-            .then(()=>setNewWorkspaceName(''))
+            .then((x)=>{
+                alert('New workspace successfully added!');
+                if(x?.newWorkspace) dispatch(updateUserWorkspaces(x.newWorkspace));
+                dispatch(changeModal(false));
+                setNewWorkspaceName('')
+            })
     }
 
   return (

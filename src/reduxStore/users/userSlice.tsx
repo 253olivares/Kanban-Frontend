@@ -1,6 +1,7 @@
 import { createDefaultBaseImage, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser} from "../../customLogic";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { workspace } from "../workspace/workspaceSlice";
 
 // this is to create a list of users that we can invite to workspaces
 // without getting sensitive userData;
@@ -217,7 +218,13 @@ const userSlice = createSlice({
         logOut (state) {
             resetRemember();
             state.user = null;
-        }
+        },
+        updateUserWorkspaces (state,action:PayloadAction<workspace>){
+            if(state.user) {
+                state.user.workspaces= [...state.user.workspaces,action.payload.w_id];
+                updateUser(state.user);
+            }
+        }   
     },
     extraReducers: (builder)=> {
        builder
@@ -264,6 +271,7 @@ const userSlice = createSlice({
 export const getUser = (state:RootState) => state.user.user;
 export const getUserInfo = (state:RootState) => state.user.loginUserInfo;
 export const getCreateAccountInfo = (state:RootState) => state.user.createUserInfo;
+export const getUserWorkspaces = (state:RootState) => state.user.user?.workspaces;
 
 export const {
     changeCreateAccountFirstname,
@@ -275,6 +283,7 @@ export const {
     changeUserInfoEmail,
     changeUserInfoPassword,
     changeUserInfoRemember,
-    logOut} =userSlice.actions;
+    logOut,
+    updateUserWorkspaces} =userSlice.actions;
 
 export default userSlice.reducer;
