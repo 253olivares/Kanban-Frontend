@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { useAppSelector } from '../../../../../reduxStore/hook'
 import { selectById } from '../../../../../reduxStore/workspace/workspaceSlice';
+import trashIcon from '/assets/Trash_IconRed.svg'
 
 const workspaceItems = memo((
     {
@@ -24,11 +25,12 @@ const workspaceItems = memo((
     className={`
     sLaptop:w-full
 
-    flex
+    flex-row
     justify-center
     items-center
 
-    sLaptop:block
+    sLaptop:flex
+    sLaptop:justify-between
  
     shrink-0
     
@@ -69,12 +71,13 @@ const workspaceItems = memo((
     mLaptop:rounded-[0.417rem]
     desktop:rounded-[0.5rem]
     largeDesktop:rounded-[0.625rem]
+    relative
     `}
     onClick={()=>setWorkspacefn(item.w_id)}>
         <h1
         className='
-        leading-none
 
+        leading-none
         text-[0.854rem]
         mobile:text-[1.139rem]
         sMobile:text-[1.823rem]
@@ -84,13 +87,30 @@ const workspaceItems = memo((
         desktop:text-[1.563rem]
         mLaptop:text-[1.302rem]
         sLaptop:text-[1.042rem]
+        
 
         font-medium
+        sLaptop:w-[75%]
 
         text-white
         text-nowrap
         '
         >{item.name}</h1>
+
+        {
+            selectedWorkspace === item.w_id ?
+            <img 
+            onClick={()=> alert("Adding delete Feature!")}
+            className='
+            opacity-50
+            hover:opacity-100
+            hover:cursor-pointer
+            sLaptop:h-[0.999rem]
+            mLaptop:h-[1.249rem]
+            desktop:h-[1.5rem]
+            largeDesktop:h-[1.875rem]
+            ' src={trashIcon} alt="trashIcon" /> : ''
+        }
     </div>
   )
 })
