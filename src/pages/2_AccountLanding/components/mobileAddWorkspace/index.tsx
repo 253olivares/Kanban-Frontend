@@ -1,13 +1,39 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { useContext } from "react"
-import { AppContext } from "../../../appRefContext"
+import { AppContext } from "../../../appRefContext";
+import { useState } from "react";
 
-import AddWorkspaceModal from './component/workspaceModal';
+import AddModal from './component/workspaceModal';
+import { useAppDispatch } from "../../../../reduxStore/hook";
+import { addNewWorkspace, changeModal } from "../../../../reduxStore/workspace/workspaceSlice";
+import { sanitize } from "../../../../customLogic";
+import { updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
+import { changeBoardModal } from "../../../../reduxStore/boards/boardsSlice";
 
-const index = () => {
+const index = ({boardsModal,mobileWorkspace}:{boardsModal:boolean,mobileWorkspace:boolean}) => {
 
     const appContext= useContext(AppContext);
     const {mobileAddNewWorkspace} = appContext!;
+
+    const dispatch = useAppDispatch();
+
+    const [newWorkspaceName,setNewWorkspaceName] = useState<string>("");
+    const [newBoardName, setNewBoardName] = useState<string>("");
+
+    const checkInputNewworkspace = ():void => {
+      dispatch(addNewWorkspace(sanitize(newWorkspaceName)))
+          .unwrap()
+          .then((x)=>{
+              alert('New workspace successfully added!');
+              if(x?.newWorkspace) dispatch(updateUserWorkspaces(x.newWorkspace));
+              dispatch(changeModal(false));
+              setNewWorkspaceName('')
+          })
+    };
+
+    const checkInputNewBoard = ():void => {
+      alert("Adding feature!")
+    } 
 
   return (
     <motion.div 
@@ -41,9 +67,32 @@ const index = () => {
 
     sLaptop:hidden
     ">
+      {
+        mobileWorkspace ? 
         <AnimatePresence>
-            <AddWorkspaceModal />
-        </AnimatePresence>
+            <AddModal 
+            label="Add New Workspace:"
+            placeholder="New Workspace..."
+            valueHolder = {newWorkspaceName}
+            setHolder = {(e:React.ChangeEvent<HTMLInputElement>)=> setNewWorkspaceName(e.target.value)}
+            checkInputHolder = {checkInputNewworkspace}
+            closeModal = {()=>dispatch(changeModal(false))}
+            />
+        </AnimatePresence> : ''
+      }
+      {
+        boardsModal ? 
+        <AnimatePresence>
+            <AddModal 
+            label="Add New Board:"
+            placeholder="New Board..."
+            valueHolder={newBoardName}
+            setHolder = {(e:React.ChangeEvent<HTMLInputElement>)=> setNewBoardName(e.target.value)}
+            checkInputHolder = {checkInputNewBoard}
+            closeModal={()=> dispatch(changeBoardModal(false))}
+            />
+        </AnimatePresence> : ''
+      }
     </motion.div>
   )
 }

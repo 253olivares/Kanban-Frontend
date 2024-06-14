@@ -1,25 +1,23 @@
 import { motion } from "framer-motion"
-import { useAppDispatch } from "../../../../../reduxStore/hook"
-import { addNewWorkspace, changeModal } from "../../../../../reduxStore/workspace/workspaceSlice";
-import { useState } from "react";
-import { sanitize } from "../../../../../customLogic";
-import { updateUserWorkspaces } from "../../../../../reduxStore/users/userSlice";
+import { memo } from "react"
 
-const workspaceModal = () => {
-    const dispatch = useAppDispatch();
-    
-    const [newWorkspaceName,setNewWorkspaceName] = useState<string>("");
+const workspaceModal = memo(({
+    label,
+    placeholder,
+    valueHolder,
+    setHolder,
+    checkInputHolder,
+    closeModal
 
-    const checkInput = ():void => {
-        dispatch(addNewWorkspace(sanitize(newWorkspaceName)))
-            .unwrap()
-            .then((x)=>{
-                alert('New workspace successfully added!');
-                if(x?.newWorkspace) dispatch(updateUserWorkspaces(x.newWorkspace));
-                dispatch(changeModal(false));
-                setNewWorkspaceName('')
-            })
-    }
+}:{
+    label:string,
+    placeholder:string,
+    valueHolder:string,
+    setHolder:(e:React.ChangeEvent<HTMLInputElement>)=> void,
+    checkInputHolder:()=>void,
+    closeModal:()=>void
+
+}) => {
 
   return (
     <motion.div
@@ -40,15 +38,18 @@ const workspaceModal = () => {
 
     bg-SpaceBlue
 
-    block
-    min-h-[100px]
+    flex
+    flex-col
 
-    min-w-[16.699rem]
-    mobile:min-w-[22.265rem]
-    sMobile:min-w-[35.625rem]
-    mMobile:min-w-[42.75rem]
+    w-[16.699rem]
+    mobile:w-[22.265rem]
+    sMobile:w-[35.625rem]
+    mMobile:w-[42.75rem]
     
-    px-[5%]
+    px-[0.854rem]
+    mobile:px-[1.139rem]
+    sMobile:px-[1.823rem]
+    mMobile:px-[2.188rem]
 
     rounded-[0.390rem]
     mobile:rounded-[0.520rem]
@@ -70,11 +71,11 @@ const workspaceModal = () => {
          sMobile:py-[1.563rem]
          mMobile:py-[1.875rem]
          "
-        >Add New Workspace</h1>
+        >{label}</h1>
         <input 
-        value={newWorkspaceName}
-        onChange={(e)=> setNewWorkspaceName(e.target.value)}
-        placeholder="New Workspace..."
+        value={valueHolder}
+        onChange={(e)=>setHolder(e)}
+        placeholder={placeholder}
         className="
         w-full
 
@@ -146,9 +147,9 @@ const workspaceModal = () => {
             opacity-75
 
             " 
-            onClick={()=>dispatch(changeModal(false))} >Cancel</button>
+            onClick={()=>closeModal()} >Cancel</button>
 
-            <button disabled={newWorkspaceName.trim()===''} className="
+            <button disabled={valueHolder.trim()===''} className="
             
             font-bold
 
@@ -179,11 +180,11 @@ const workspaceModal = () => {
             bg-SelectorBlue
 
             " 
-            onClick={()=> checkInput()}
+            onClick={()=> checkInputHolder()}
             >Save</button>
         </div>
     </motion.div>
   )
-}
+})
 
 export default workspaceModal

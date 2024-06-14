@@ -9,8 +9,8 @@ import { Outlet } from 'react-router-dom';
 import ModalContainer from '../../../modals';
 import Header from './component/Header';
 import { getWorkSpaceModal, initiateWorkspace } from '../../../reduxStore/workspace/workspaceSlice';
-import MobileWorkspace from '../../2_AccountLanding/components/mobileAddWorkspace';
-import { initializeBoards } from '../../../reduxStore/boards/boardsSlice';
+import MobileModal from '../../2_AccountLanding/components/mobileAddWorkspace';
+import { getBoardModal, initializeBoards } from '../../../reduxStore/boards/boardsSlice';
 import { initialComments } from '../../../reduxStore/comments/commentsSlice';
 import { initiateList } from '../../../reduxStore/lists/listsSlice';
 import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
@@ -24,6 +24,7 @@ const index = memo(() => {
 
   const modalStatus = useAppSelector(getModalStatus);
   const mobileWorkspace = useAppSelector(getWorkSpaceModal);
+  const boardsModal = useAppSelector(getBoardModal);
 
   // a cache check to have the application ato login a user 
   // if they click on this page
@@ -85,7 +86,11 @@ const index = memo(() => {
       `}>
         <AnimatePresence>
         {
-          mobileWorkspace ? <MobileWorkspace /> : ''
+          mobileWorkspace || boardsModal ? 
+          <MobileModal 
+          boardsModal={boardsModal} 
+          mobileWorkspace={mobileWorkspace}  
+          /> : ''
         }
         </AnimatePresence>
         <AnimatePresence>
