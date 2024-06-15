@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../../reduxStore/hook'
-import { removeExistingWorkspace, selectById } from '../../../../../reduxStore/workspace/workspaceSlice';
+import { selectById } from '../../../../../reduxStore/workspace/workspaceSlice';
 import trashIcon from '/assets/Trash_IconRed.svg'
 import { openConfirmDelete } from '../../../../../reduxStore/modal/modalSlice';
 
