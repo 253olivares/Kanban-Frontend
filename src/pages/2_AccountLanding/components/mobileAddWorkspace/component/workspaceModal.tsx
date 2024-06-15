@@ -121,7 +121,7 @@ const workspaceModal = memo(({
         justify-between
         ">
             <button className="
-            font-medium
+            font-bold
             bg-PrimaryWhite
 
             text-[0.703rem]

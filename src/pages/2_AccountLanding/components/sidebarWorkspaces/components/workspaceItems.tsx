@@ -22,10 +22,6 @@ const workspaceItems = memo((
 
     const item = useAppSelector((state) => selectById(state,String(workspaceId)));
 
-    // const deleteWorkspace = (worksapceId:string)=> {
-    //     dispatch(removeExistingWorkspace(worksapceId)).unwrap()
-    // }
-
     if(!item) return;
 
   return (
@@ -33,14 +29,20 @@ const workspaceItems = memo((
     className={`
     sLaptop:w-full
 
+    flex
     flex-row
     justify-center
     items-center
 
-    sLaptop:flex
     sLaptop:justify-between
  
     shrink-0
+
+    gap-[0.937rem]
+    mobile:gap-[1.25rem]
+    sMobile:gap-[2rem]
+    mMobile:gap-[]
+    sLaptop:gap-0
     
     px-[1.025rem]
     mobile:px-[1.367rem]
@@ -110,9 +112,15 @@ const workspaceItems = memo((
             <img 
             onClick={()=>dispatch(openConfirmDelete())}
             className='
-            opacity-50
-            hover:opacity-100
-            hover:cursor-pointer
+            sLaptop:opacity-50
+            sLaptop:hover:opacity-100
+            sLaptop:hover:cursor-pointer
+
+            h-[0.878rem]
+            mobile:h-[1.171rem]
+            sMobile:h-[1.875rem]
+            mMobile:h-[2.25rem]
+
             sLaptop:h-[0.999rem]
             mLaptop:h-[1.249rem]
             desktop:h-[1.5rem]

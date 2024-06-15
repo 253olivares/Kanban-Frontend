@@ -139,6 +139,7 @@ const workspaceSlice = createSlice({
             })
             .addCase(removeExistingWorkspace.fulfilled,(state,action)=> {
                 state.status = 'succeeded';
+                state.selectWorkspace = '';
                 removeWorkspace(action.payload!.plannedRemove,action.payload!.workspaceState as workspace[]);
                 workspaceAdapter.removeOne(state,action.payload!.plannedRemove as string);
             })

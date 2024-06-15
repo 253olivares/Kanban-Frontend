@@ -7,7 +7,7 @@ const cancelButton = () => {
     <button
     className="
   text-white
-    bg-[#ff6161]
+    bg-[#F9453E]
     sLaptop:opacity-50
     sLaptop:hover:opacity-100   
     croppingToolButton

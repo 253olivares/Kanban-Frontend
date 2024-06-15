@@ -224,7 +224,13 @@ const userSlice = createSlice({
                 state.user.workspaces= [...state.user.workspaces,action.payload.w_id];
                 updateUser(state.user);
             }
-        }   
+        },
+        removeUserWorkspace (state,action:PayloadAction<string>) {
+            if(state.user){
+                state.user.workspaces = state.user.workspaces.filter(w=>w!==action.payload)
+                updateUser(state.user);
+            }
+        }
     },
     extraReducers: (builder)=> {
        builder
@@ -284,6 +290,8 @@ export const {
     changeUserInfoPassword,
     changeUserInfoRemember,
     logOut,
-    updateUserWorkspaces} =userSlice.actions;
+    updateUserWorkspaces,
+    removeUserWorkspace
+} =userSlice.actions;
 
 export default userSlice.reducer;

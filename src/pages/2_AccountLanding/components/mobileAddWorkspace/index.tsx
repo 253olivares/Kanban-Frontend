@@ -4,13 +4,14 @@ import { AppContext } from "../../../appRefContext";
 import { useState } from "react";
 
 import AddModal from './component/workspaceModal';
+import ConfirmDelete from './component/confirmDelete';
 import { useAppDispatch } from "../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal } from "../../../../reduxStore/workspace/workspaceSlice";
 import { sanitize } from "../../../../customLogic";
 import { updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
 import { changeBoardModal } from "../../../../reduxStore/boards/boardsSlice";
 
-const index = ({boardsModal,mobileWorkspace}:{boardsModal:boolean,mobileWorkspace:boolean}) => {
+const index = ({boardsModal,mobileWorkspace,modaal}:{boardsModal:boolean,mobileWorkspace:boolean,modaal:string}) => {
 
     const appContext= useContext(AppContext);
     const {mobileAddNewWorkspace} = appContext!;
@@ -51,11 +52,12 @@ const index = ({boardsModal,mobileWorkspace}:{boardsModal:boolean,mobileWorkspac
       }}
     className="
     absolute
-    z-[15]
+    z-[20]
     top-0
     left-0
     w-dvw
     h-dvh
+    
     overflow-x-hidden
     overflow-y-auto
     no-scrollbar
@@ -91,6 +93,12 @@ const index = ({boardsModal,mobileWorkspace}:{boardsModal:boolean,mobileWorkspac
             checkInputHolder = {checkInputNewBoard}
             closeModal={()=> dispatch(changeBoardModal(false))}
             />
+        </AnimatePresence> : ''
+      }
+      {
+        modaal === 'deleteConfirm' ? 
+        <AnimatePresence>
+            <ConfirmDelete />
         </AnimatePresence> : ''
       }
     </motion.div>
