@@ -9,6 +9,7 @@ import { memo, useContext} from "react";
 import CreateProfileModal from './createProfileModal';
 import ProfileModal from './profileModal';
 import LoginModal from './loginModal';
+import DeleteWorkspace from './deleteWorkspace';
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const index = memo(() => {
@@ -51,12 +52,12 @@ const index = memo(() => {
     sLaptop:items-center">
       
       <div className={`
- 
       `}>
         <AnimatePresence>
           {modal == 'createProfile' && <CreateProfileModal />}
           {modal == 'logIn' && <LoginModal />}
           {modal == 'profile' && <ProfileModal />}
+          {modal == 'deleteConfirm' && <DeleteWorkspace />}
         </AnimatePresence>
       </div>
 

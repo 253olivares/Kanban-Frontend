@@ -58,6 +58,13 @@ export const getWorkspaces = ():workspace[] | null => {
     return JSON.parse(data);
 }
 
+export const removeWorkspace = (id:string, state:workspace[]):void => {
+    if(!localStorage.getItem(workspaceKey)){
+        return;
+    }    
+    localStorage.setItem(workspaceKey,JSON.stringify(state.filter(x=> x.w_id !== id)));
+}
+
 export const addWorkspace = (newWorkSpace:workspace ,prevState:workspace[]):void => {
     if(!localStorage.getItem(workspaceKey)) {
         reloadApplication();

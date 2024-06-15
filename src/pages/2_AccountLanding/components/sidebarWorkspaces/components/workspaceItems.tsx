@@ -1,7 +1,8 @@
 import { memo } from 'react'
-import { useAppSelector } from '../../../../../reduxStore/hook'
-import { selectById } from '../../../../../reduxStore/workspace/workspaceSlice';
+import { useAppDispatch, useAppSelector } from '../../../../../reduxStore/hook'
+import { removeExistingWorkspace, selectById } from '../../../../../reduxStore/workspace/workspaceSlice';
 import trashIcon from '/assets/Trash_IconRed.svg'
+import { openConfirmDelete } from '../../../../../reduxStore/modal/modalSlice';
 
 const workspaceItems = memo((
     {
@@ -16,7 +17,14 @@ const workspaceItems = memo((
         selectedWorkspace:string
     }
 ) => {
+
+    const dispatch = useAppDispatch();
+
     const item = useAppSelector((state) => selectById(state,String(workspaceId)));
+
+    // const deleteWorkspace = (worksapceId:string)=> {
+    //     dispatch(removeExistingWorkspace(worksapceId)).unwrap()
+    // }
 
     if(!item) return;
 
@@ -100,7 +108,7 @@ const workspaceItems = memo((
         {
             selectedWorkspace === item.w_id ?
             <img 
-            onClick={()=> alert("Adding delete Feature!")}
+            onClick={()=>dispatch(openConfirmDelete())}
             className='
             opacity-50
             hover:opacity-100

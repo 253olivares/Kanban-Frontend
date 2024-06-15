@@ -227,7 +227,7 @@ const index = memo(() => {
         openFilterModal  ? <FilterModal /> : ''
       }
       </AnimatePresence>
-      
+  
       <SidebarInfo />
 
       <UserTasks />

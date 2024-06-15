@@ -7,12 +7,13 @@ import { RootState } from "../store";
 type initialStateType = {
     openModal:boolean,
     mobileModal:boolean,
-    modal: 'logIn' | 'createProfile' | 'profile' | '',
+    modal: 'logIn' | 'createProfile' | 'profile' | 'deleteConfirm' | '',
     accountSettings:boolean,
     accountLandingMobile:boolean,
     croppingTool:boolean,
     croppingImageData:string | null,
-    filterModal:boolean
+    filterModal:boolean,
+    deleteWorkspace:boolean
 }
 
 const initialState: initialStateType = {
@@ -23,7 +24,8 @@ const initialState: initialStateType = {
     accountLandingMobile:false,
     croppingTool:false,
     croppingImageData:null,
-    filterModal: false
+    filterModal: false,
+    deleteWorkspace: false
 }   
 
 // create a slice of our state
@@ -50,6 +52,10 @@ const modalSlice = createSlice({
         openProfile (state){
             // toggleModal();
             state.modal = 'profile';
+            state.openModal = true;
+        },
+        openConfirmDelete (state) {
+            state.modal = 'deleteConfirm';
             state.openModal = true;
         },
         closeModal (state) {
@@ -90,6 +96,7 @@ export const getAccountLandingModal = (state:RootState) => state.modal.accountLa
 export const getCroppingTool = (state:RootState) => state.modal.croppingTool;
 export const getCroppingImage = (state:RootState) => state.modal.croppingImageData;
 export const getFilterModal = (state:RootState) => state.modal.filterModal;
+export const getDeleteWorkspace = (state:RootState) => state.modal.deleteWorkspace;
 
 export const {
     setCroppingImageData,
@@ -100,6 +107,7 @@ export const {
     openProfile, 
     openMobileModal, 
     closeMobileModal, 
+    openConfirmDelete,
     openAccountModal, 
     closeAccountModal,
     openAccountLadingModal,

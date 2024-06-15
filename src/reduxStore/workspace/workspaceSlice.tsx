@@ -2,7 +2,7 @@
 import { createAsyncThunk, createEntityAdapter,createSlice,PayloadAction  } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
-import { addWorkspace, getWorkspaces} from "../../customLogic";
+import { addWorkspace, getWorkspaces, removeWorkspace} from "../../customLogic";
 
 export type workspace = {
     w_id:string,
@@ -42,6 +42,18 @@ export const initiateWorkspace = createAsyncThunk('workspace/getWorkspaces', asy
         return data;
     }catch(e:any){
         console.log("ran into issue getting all workspace data!");
+        rejectWithValue(e);
+    }
+})
+ 
+export const removeExistingWorkspace = createAsyncThunk('workspace/removeWorkspaces', async(workspaceId:string,{getState,rejectWithValue})=> {
+    try{
+
+        const state = getState() as RootState;
+
+        return{plannedRemove:workspaceId,workspaceState:selectAll(state)};
+    }catch(e:any){
+        console.log("Ran into issue removing the workspace!")
         rejectWithValue(e);
     }
 })
@@ -118,6 +130,17 @@ const workspaceSlice = createSlice({
             })
             .addCase(addNewWorkspace.rejected,(state,_)=>{
                 state.status = 'failed';
+            })
+            .addCase(removeExistingWorkspace.rejected,(state,_)=>{
+                state.status = 'failed';
+            })
+            .addCase(removeExistingWorkspace.pending,(state,_)=>{
+                state.status = 'loading';
+            })
+            .addCase(removeExistingWorkspace.fulfilled,(state,action)=> {
+                state.status = 'succeeded';
+                removeWorkspace(action.payload!.plannedRemove,action.payload!.workspaceState as workspace[]);
+                workspaceAdapter.removeOne(state,action.payload!.plannedRemove as string);
             })
     }
 })
