@@ -10,11 +10,12 @@ const index = () => {
 
   const [text,setText] = useState<string>('');
 
+  // add something to check for character 12 character limit
   const checkInput = ():void => {
     dispatch(addNewWorkspace(sanitize(text)))
       .unwrap()
       // if successful clear text
-      .then((x)=> {
+      .then((x:any)=> {
         alert('New Workspace successfully added!');
         if(x?.newWorkspace) {
           dispatch(updateUserWorkspaces(x.newWorkspace));
