@@ -2,7 +2,8 @@ import { motion } from "framer-motion"
 import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook"
 import { getWorkspaceSelect, removeExistingWorkspace, selectWorkspaceById } from "../../../../../reduxStore/workspace/workspaceSlice"
 import { closeModal} from "../../../../../reduxStore/modal/modalSlice"
-import { removeUserWorkspace } from "../../../../../reduxStore/users/userSlice"
+import { removeUserBoards, removeUserWorkspace } from "../../../../../reduxStore/users/userSlice"
+import { removeBoardsFromWorkspace } from "../../../../../reduxStore/boards/boardsSlice"
 
 const confirmDelete = () => {
     const dispatch = useAppDispatch();
@@ -139,8 +140,12 @@ const confirmDelete = () => {
 
                 <button
                  onClick={()=>{
-                    dispatch(removeExistingWorkspace(workspaceId)).unwrap().then(()=>{
-                        dispatch(removeUserWorkspace(workspaceId));
+                    dispatch(removeExistingWorkspace(workspaceId))
+                    .unwrap()
+                    .then((x)=>{
+                        dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
+                        dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
+                        dispatch(removeUserBoards(x.workspaceInfo));
                         dispatch(closeModal());
                     }).catch(()=>alert("Issue encountered trying to delete"+workspace.name))
                  }}

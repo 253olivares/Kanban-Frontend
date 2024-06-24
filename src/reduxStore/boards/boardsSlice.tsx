@@ -1,6 +1,7 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit"
-import { addBoard, getBoards } from "../../customLogic"
+import { addBoard, getBoards, removeBoardsFromWorkspaceLS } from "../../customLogic"
 import { RootState } from "../store"
+import { workspace } from "../workspace/workspaceSlice"
 export type board = {
     b_id:string,
     u_id:string,
@@ -83,6 +84,10 @@ const boardSlice = createSlice({
         },
         newBoardNameUpdate(state,action:PayloadAction<string>){
             state.newBoardName = action.payload;
+        },
+        removeBoardsFromWorkspace(state,action:PayloadAction<workspace>){
+            removeBoardsFromWorkspaceLS(action.payload.boards);
+            boardsAdapter.removeMany(state,action.payload.boards);
         }
     },
     extraReducers:(builder) => {
@@ -121,6 +126,10 @@ export const getBoardName = (state:RootState) => state.boards.newBoardName;
 
 export const getBoardModal = (state:RootState) => state.boards.addBoardModal;
 
-export const {changeBoardModal,newBoardNameUpdate} = boardSlice.actions;
+export const {
+    changeBoardModal,
+    newBoardNameUpdate,
+    removeBoardsFromWorkspace
+} = boardSlice.actions;
 
 export default boardSlice.reducer;

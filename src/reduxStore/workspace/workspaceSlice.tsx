@@ -51,8 +51,9 @@ export const removeExistingWorkspace = createAsyncThunk('workspace/removeWorkspa
     try{
 
         const state = getState() as RootState;
+        const workspaceInfo = selectWorkspaceById(state,workspaceId)
 
-        return{plannedRemove:workspaceId,workspaceState:selectAllWorkspaces(state)};
+        return{workspaceInfo:workspaceInfo,workspaceState:selectAllWorkspaces(state)};
     }catch(e:any){
         console.log("Ran into issue removing the workspace!")
         return rejectWithValue(e);
@@ -147,11 +148,11 @@ const workspaceSlice = createSlice({
             .addCase(removeExistingWorkspace.pending,(state,_)=>{
                 state.status = 'loading';
             })
-            .addCase(removeExistingWorkspace.fulfilled,(state,action:PayloadAction<{plannedRemove:string,workspaceState:workspace[]}>)=> {
+            .addCase(removeExistingWorkspace.fulfilled,(state,action:PayloadAction<{workspaceInfo:workspace,workspaceState:workspace[]}>)=> {
                 state.status = 'succeeded';
                 state.selectWorkspace = '';
-                removeWorkspace(action.payload.plannedRemove,action.payload.workspaceState);
-                workspaceAdapter.removeOne(state,action.payload!.plannedRemove);
+                removeWorkspace(action.payload.workspaceInfo.w_id,action.payload.workspaceState);
+                workspaceAdapter.removeOne(state,action.payload.workspaceInfo.w_id);
             })
             .addCase(updateWorkspaceBoard.fulfilled, (state,action:PayloadAction<{newBoard:board,updatedWorkspace:workspace, prevState:workspace[]}>)=> {
                 console.log(action.payload);

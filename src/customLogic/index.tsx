@@ -40,6 +40,19 @@ export const getComments = ():comments[] | null => {
     return JSON.parse(data);
 };
 
+export const removeBoardsFromWorkspaceLS = (boardsToRemove:string[]) => {
+    const data = localStorage.getItem(boardKey);
+    if(!data){
+        reloadApplication();
+        return;
+    }
+    const parsedData = JSON.parse(data);
+
+    const updatedBoardList = parsedData.filter((x:board) => !boardsToRemove.includes(x.b_id));
+
+    localStorage.setItem(boardKey,JSON.stringify(updatedBoardList));    
+}
+
 export const addBoard = (newBoard:board, prevState:board[]):void => {
     if(!localStorage.getItem(boardKey)) {
         reloadApplication();

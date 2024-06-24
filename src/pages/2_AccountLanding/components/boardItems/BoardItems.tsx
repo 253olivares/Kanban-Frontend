@@ -21,9 +21,9 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
       break;
   }
 
-  console.log(boardCss);
+  // console.log(boardCss);
 
-  console.log("Duration",durat);
+  // console.log("Duration",durat);
 
   return (
     // boards

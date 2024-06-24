@@ -238,9 +238,10 @@ const userSlice = createSlice({
                 updateUser(state.user);
             }
         },
-        removeUserBoards(state,action: PayloadAction<string>){
+        removeUserBoards(state,action: PayloadAction<workspace>){
             if(state.user){
-                state.user.boards = state.user.boards.filter(b=> b !== action.payload);
+                state.user.boards = state.user.boards.filter(b=> !action.payload.boards.includes(b));
+                updateUser(state.user);
             }
         }
     },
