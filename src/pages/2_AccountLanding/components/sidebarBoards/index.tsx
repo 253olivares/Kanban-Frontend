@@ -175,7 +175,7 @@ const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
           :
           <>
           {
-            getBoardsFromSelectWorkspace.map((x,index)=> 
+            [...getBoardsFromSelectWorkspace].reverse().map((x,index)=> 
               <BoardItem boardId={x} durat={(index+1)*.15} key={x} />
             )
           }

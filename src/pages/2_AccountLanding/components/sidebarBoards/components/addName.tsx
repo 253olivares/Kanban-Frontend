@@ -17,8 +17,8 @@ const addName = ({workspace}:{workspace:string}) => {
     const [boardsName, setBoardName] = useState<string>('');
 
     const submitBoardName = () => {
-      if(boardsName.trim().length > 15) {
-        alert('Please make sure the board name is less than 15 characters. (Includes spaces)');
+      if(boardsName.trim().length > 16) {
+        alert('Please make sure the board name is less than 16 characters. (Includes spaces)');
         return;
       }
       dispatch(addBoards({boardName:boardsName.trim(),workspaceId:workspace}))
@@ -36,7 +36,7 @@ const addName = ({workspace}:{workspace:string}) => {
 
     // set 12 characters Limit 
     useEffect(()=> {
-      if(inputRef.current && boardsName.trim().length > 15) {
+      if(inputRef.current && boardsName.trim().length > 16) {
         inputRef.current.style.color = "red";
       } else {
         if(inputRef.current) inputRef.current.style.color="black";

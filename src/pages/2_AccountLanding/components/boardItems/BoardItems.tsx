@@ -1,13 +1,18 @@
 import { selectBoardById } from "../../../../reduxStore/boards/boardsSlice"
 import { useAppSelector } from "../../../../reduxStore/hook"
 import { motion } from "framer-motion";
+import backgroundMobile from '/assets/Rectangle_207.png';
+import background from '/assets/Rectangle_207Desktop.png'
+import { useNavigate } from "react-router-dom";
 
 const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
   const board  = useAppSelector(state => selectBoardById(state,boardId));
 
-  if(!board) return;
+  const navigate = useNavigate();
 
+  if(!board) return;
   // baord css
+  // need to come backa nd add more styling
   let boardCss = '';
   switch(board.background){
     case 0:
@@ -20,11 +25,8 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
     boardCss = '';
       break;
   }
-
   // console.log(boardCss);
-
   // console.log("Duration",durat);
-
   return (
     // boards
     <motion.div
@@ -36,7 +38,7 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
       delay:durat
     }}
 
-    onClick={()=> alert('Working on this feature to open board page!')}
+    onClick={()=> navigate(`workspace/${board.b_id}`)}
     className={`
     
     w-[15.789rem]
@@ -96,36 +98,97 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
     `}
     >
       {/* Board name */}
-      <div className="
+      <div className={`
       absolute
       top-0
       left-0
 
-      text-PrimaryWhite
+      w-full
 
-      font-medium
-     
+      z-[2]
+      `}>
+        <span
+        className="
 
-      ">
-        {board.name}
+        text-ellipsis
+        overflow-hidden
+
+        max-w-[63.5%]
+        sLaptop:Max-w-[62.5%]
+
+        font-medium
+
+        leading-[2.608rem]
+        text-[0.823rem]
+        mobile:leading-[3.477rem]
+        mobile:text-[1.098rem]
+        sMobile:leading-[5.564rem]
+        sMobile:text-[1.757rem]
+        mMobile:leading-[6.676rem]
+        mMobile:text-[2.109rem]
+        sLaptop:leading-[2.083rem]
+        sLaptop:text-[0.749rem]
+        mLaptop:leading-[2.604rem]
+        mLaptop:text-[0.937rem]
+        desktop:leading-[2.5rem]
+        desktop:text-[1.125rem]
+        largeDesktop:leading-[3.906rem]
+        largeDesktop:text-[1.406rem]
+
+        px-[0.457rem]
+        mobile:px-[0.610rem]
+        sMobile:px-[0.976rem]
+        mMobile:px-[1.172rem]
+        sLaptop:px-[0.416rem]
+        mLaptop:px-[0.520rem]
+        desktop:px-[0.625rem]
+        largeDesktop:px-[0.781rem]
+
+        text-PrimaryWhite
+        relative
+        z-[3]
+        "
+        >{board.name}</span>
+        <img className="
+        w-full
+        absolute  
+        top-0
+        left-0
+        hidden
+        sLaptop:block
+        z-[2]
+        " src={background} alt="background" />
+        <img className="  
+        w-full
+        absolute
+        top-0
+        left-0
+        blocks
+        sLaptop:hidden
+        z-[2]
+        " src={backgroundMobile} alt="" />
       </div>
+      {/* transparent glass */}
+      <div
+      className={`
+      
+      boardGlass  
+
+      absolute
+
+      z-[1]
+
+      w-full
+      h-full
+      block
+      `}
+       />
       {
         board.background === 2 ? 
         <>
         </> 
         : ''
       }
-      {/* transparent glass */}
-      <div
-      className={`
-      ${boardCss}
-
-      absolute
-
-      w-full
-      h-full
-      `}
-       />
     </motion.div>
   )
 }
