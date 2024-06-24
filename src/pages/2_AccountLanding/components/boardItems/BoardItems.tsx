@@ -4,29 +4,13 @@ import { motion } from "framer-motion";
 import backgroundMobile from '/assets/Rectangle_207.png';
 import background from '/assets/Rectangle_207Desktop.png'
 import { useNavigate } from "react-router-dom";
-import { useEffect, useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 
 const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
   const board  = useAppSelector(state => selectBoardById(state,boardId));
 
   const spanRef = useRef<HTMLSpanElement>(null);
   const divRef = useRef<HTMLImageElement>(null);
-
-  // useLayoutEffect(()=> {
-
-  //   const resizeObserver = new ResizeObserver((entries)=> {
-  //     for (const _ of entries){
-  //       console.log("TEST!");
-  //       console.log(`${divRef.current?.naturalHeight}px`);
-  //       console.log(spanRef.current?.style.lineHeight);
-  //       if(spanRef.current && divRef.current) spanRef.current.style.lineHeight = `${divRef.current.height}px`;
-  //     }
-  //   })
-  //   if(divRef.current) resizeObserver.observe(divRef.current)
-  //   return ()=> {
-  //       resizeObserver.disconnect();
-  //   }
-  // },[])
 
   const navigate = useNavigate();
 
