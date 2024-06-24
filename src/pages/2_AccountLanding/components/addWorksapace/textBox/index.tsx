@@ -13,8 +13,8 @@ const index = () => {
 
   // add something to check for character 12 character limit
   const checkInput = ():void => {
-    if(text.trim().length > 14 ) {
-      alert("Please make sure your workspace name is less than 14 characters! (Including spaces)");
+    if(text.trim().length > 15 ) {
+      alert("Please make sure your workspace name is less than 15 characters! (Including spaces)");
       return;
     }
     dispatch(addNewWorkspace(sanitize(text.trim())))
@@ -32,9 +32,9 @@ const index = () => {
 
   useEffect(()=> {
 
-    if(inputRef.current && text.trim().length > 14) {
+    if(inputRef.current && text.trim().length > 15) {
       inputRef.current.style.color = 'red';
-    } else if (inputRef.current && text.trim().length <= 14) {
+    } else if (inputRef.current && text.trim().length <= 15) {
       inputRef.current.style.color = 'black';
     }
 

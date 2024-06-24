@@ -27,8 +27,8 @@ const index = ({boardsModal,mobileWorkspace,modaal}:{boardsModal:boolean,mobileW
     const [newBoardName, setNewBoardName] = useState<string>("");
 
     const checkInputNewworkspace = ():void => {
-      if(newWorkspaceName.trim().length > 14){
-        alert('Please make sure your workspace name is less than 14 characters. (Including spaces)');
+      if(newWorkspaceName.trim().length > 15){
+        alert('Please make sure your workspace name is less than 15 characters. (Including spaces)');
         return;
       }
       dispatch(addNewWorkspace(sanitize(newWorkspaceName.trim())))
@@ -61,13 +61,13 @@ const index = ({boardsModal,mobileWorkspace,modaal}:{boardsModal:boolean,mobileW
 
     useEffect(()=> {
 
-      if(workspaceRef.current && newWorkspaceName.trim().length >14){
+      if(workspaceRef.current && newWorkspaceName.trim().length >15){
         workspaceRef.current.style.color = 'red';
-      } else if (boardRef.current && newBoardName.trim().length >15){
+      } else if (boardRef.current && newBoardName.trim().length >16){
         boardRef.current.style.color = 'red';
-      } else if (workspaceRef.current && newWorkspaceName.trim().length <= 14){
+      } else if (workspaceRef.current && newWorkspaceName.trim().length <= 15){
         workspaceRef.current.style.color = 'black';
-      } else if (boardRef.current && newBoardName.trim().length <= 15){
+      } else if (boardRef.current && newBoardName.trim().length <= 16){
         boardRef.current.style.color = 'black';
       }
 

@@ -4,9 +4,29 @@ import { motion } from "framer-motion";
 import backgroundMobile from '/assets/Rectangle_207.png';
 import background from '/assets/Rectangle_207Desktop.png'
 import { useNavigate } from "react-router-dom";
+import { useEffect, useLayoutEffect, useRef } from "react";
 
 const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
   const board  = useAppSelector(state => selectBoardById(state,boardId));
+
+  const spanRef = useRef<HTMLSpanElement>(null);
+  const divRef = useRef<HTMLImageElement>(null);
+
+  // useLayoutEffect(()=> {
+
+  //   const resizeObserver = new ResizeObserver((entries)=> {
+  //     for (const _ of entries){
+  //       console.log("TEST!");
+  //       console.log(`${divRef.current?.naturalHeight}px`);
+  //       console.log(spanRef.current?.style.lineHeight);
+  //       if(spanRef.current && divRef.current) spanRef.current.style.lineHeight = `${divRef.current.height}px`;
+  //     }
+  //   })
+  //   if(divRef.current) resizeObserver.observe(divRef.current)
+  //   return ()=> {
+  //       resizeObserver.disconnect();
+  //   }
+  // },[])
 
   const navigate = useNavigate();
 
@@ -98,7 +118,8 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
     `}
     >
       {/* Board name */}
-      <div className={`
+      <div
+      className={`
       absolute
       top-0
       left-0
@@ -108,6 +129,7 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
       z-[2]
       `}>
         <span
+        ref={spanRef}
         className="
 
         text-ellipsis
@@ -120,7 +142,7 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
 
         leading-[2.608rem]
         text-[0.823rem]
-        mobile:leading-[3.477rem]
+        mobile:leading-[3.478rem]
         mobile:text-[1.098rem]
         sMobile:leading-[5.564rem]
         sMobile:text-[1.757rem]
@@ -130,10 +152,12 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
         sLaptop:text-[0.749rem]
         mLaptop:leading-[2.604rem]
         mLaptop:text-[0.937rem]
-        desktop:leading-[2.5rem]
+        desktop:leading-[3.125rem]
         desktop:text-[1.125rem]
         largeDesktop:leading-[3.906rem]
         largeDesktop:text-[1.406rem]
+        4k:leading-[5.208rem]
+        4k:text-[1.874rem]
 
         px-[0.457rem]
         mobile:px-[0.610rem]
@@ -149,7 +173,9 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
         z-[3]
         "
         >{board.name}</span>
-        <img className="
+        <img 
+        ref={divRef}
+        className="
         w-full
         absolute  
         top-0
@@ -158,7 +184,9 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
         sLaptop:block
         z-[2]
         " src={background} alt="background" />
-        <img className="  
+        <img 
+        ref={divRef}
+        className="  
         w-full
         absolute
         top-0

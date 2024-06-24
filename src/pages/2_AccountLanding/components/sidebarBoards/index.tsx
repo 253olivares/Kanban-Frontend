@@ -134,7 +134,7 @@ const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
     
       p-[4.3%]
       
-      gap-[1.220]
+      gap-[1.220rem]
       mobile:gap-[1.627rem]
       sMobile:gap-[3.125rem]
       mMobile:gap-[3.125rem]
