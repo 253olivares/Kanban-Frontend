@@ -31,22 +31,22 @@ const index = memo(() => {
       z-10
       absolute
     ${
-        modal ?
+      modal ?
         `
-        top-0
+          top-0
         `
         :
         `
-        rounded-t-[0.390rem]
-        mobile:rounded-t-[0.520rem]
-        sMobile:rounded-t-[0.833rem]
-        mMobile:rounded-t-[1rem]
-        sLaptop:rounded-none
+          rounded-t-[0.390rem]
+          mobile:rounded-t-[0.520rem]
+          sMobile:rounded-t-[0.833rem]
+          mMobile:rounded-t-[1rem]
+          sLaptop:rounded-none
 
-        top-[calc(100%-2.933rem)]
-        mobile:top-[calc(100%-3.666rem)]
-        sMobile:top-[calc(100%-4.4rem)]
-        mMobile:top-[calc(100%-5.5rem)]
+          top-[calc(100%-2.933rem)]
+          mobile:top-[calc(100%-3.666rem)]
+          sMobile:top-[calc(100%-4.4rem)]
+          mMobile:top-[calc(100%-5.5rem)]
         `
     }
       transition-[top]
@@ -62,12 +62,11 @@ const index = memo(() => {
       flex-col
 
       w-full
-      sLaptop:w-[26%]
+      sLaptop:w-[25%]
       h-[100%]
 
       sLaptop:relative
 
-      overflow-hidden
       sLaptop:overflow-visible
     `}>
         <div
@@ -83,12 +82,20 @@ const index = memo(() => {
         <div 
         className='
         w-full
+        
         flex
         flex-col-reverse
         sLaptop:flex-col
-        flex-grow
-        sLaptop:flex-grow-0
+
+        
+        flex-grow-0
+        h-[calc(100%-2.933rem)]
+        mobile:h-[calc(100%-3.666rem)]
+        sMobile:h-[calc(100%-4.4rem)]
+        mMobile:h-[calc(100%-5.5rem)]
         sLaptop:h-full
+
+        relative
         '>
           <SidebarBoards selectWorkspace={selectWorkspace} />
           <hr className='
@@ -111,6 +118,7 @@ const index = memo(() => {
           desktop:h-[0.250rem]
           largeDesktop:h-[0.313rem]
           4k:h-[0.417rem]
+          
           ' />
           <SidebarWorkspaces 
           setWorkspace={(string)=> setSelectWorkspace(string)} 

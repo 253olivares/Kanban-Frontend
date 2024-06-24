@@ -67,6 +67,10 @@
         linear-gradient(to right, rgb(0 0 0 / 50%), rgb(0 0 0 / 50%));
     }
 
+    .boardGlass {
+        background: linear-gradient( to right, rgba(44, 47, 72,.5), rgba(44, 47, 72,.5));
+    }
+
     .conic-gradient {
         background:  
             linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%)),
@@ -90,6 +94,10 @@
         background: -webkit-linear-gradient(339deg, var(--rThemeRed) 25%, var(--rThemeOrange));
         @apply inline-block text-transparent bg-clip-text
     }
+/*     
+    .background-option3 {
+        background: ;
+    } */
 
     .site-borders {
         background: -webkit-linear-gradient(305deg, var(--rThemeRed) 25%, var(--rThemeOrange));

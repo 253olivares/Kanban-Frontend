@@ -48,11 +48,13 @@ const openModal = () => {
             mLaptop:w-[3.594rem]
             desktop:w-[4.313rem]
             largeDesktop:w-[5.391rem]
+            4k:w-[7.187rem]
 
             sLaptop:h-[2.875rem]
             mLaptop:h-[3.594rem]
             desktop:h-[4.313rem]
             largeDesktop:h-[5.391rem]
+            4k:h-[7.187rem]
             ">
                 <img 
                 className="
@@ -60,11 +62,13 @@ const openModal = () => {
                 mLaptop:w-[1.719rem]
                 desktop:w-[2.063rem]
                 largeDesktop:w-[2.578rem]
+                4k:w-[3.437rem]
 
                 sLaptop:h-[1.375rem]
                 mLaptop:h-[1.719rem]
                 desktop:h-[2.063rem]
                 largeDesktop:h-[2.578rem]
+                4k:h-[3.437rem]
                 "
                 src={plusButton} alt="Plus Button" />
             </div>

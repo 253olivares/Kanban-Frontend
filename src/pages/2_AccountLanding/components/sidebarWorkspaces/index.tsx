@@ -30,9 +30,6 @@ const index = memo((
     const appContext = useContext(AppContext);
     const {openSpaceModal} = appContext!;
 
-    // console.log(setWorkspace);
-    // console.log(workspaces);
-    // console.log(workspaces);
   return (
     <div className={`
     w-full
@@ -43,12 +40,11 @@ const index = memo((
     sLaptop:grow
 
     ${
-      selectedWorkspace !== '' ? 
-      'sLaptop:h-[calc(100%-61.5%)]'
-      :
+      selectedWorkspace == '' ? 
       'sLaptop:h-[calc(100%-35%)]'
+      :
+      'sLaptop:h-[calc(100%-61.5%)]'
     }
-
     z-0
     `}>
       {/* Workspaces */}
@@ -158,6 +154,8 @@ const index = memo((
       desktop:pb-[0.8rem]
       largeDesktop:pt-[1rem]
       largeDesktop:pb-[1rem]
+      4k:pt-[1.333rem]
+      4k:pb-[1.333rem]
 
       px-[4.55%]
       sLaptop:px-[7.5%]
@@ -170,6 +168,7 @@ const index = memo((
       mLaptop:gap-[0.416rem]
       desktop:gap-[0.5rem]
       largeDesktop:gap-[0.625rem]
+      4k:gap-[0.833rem]
 
       ">
         <div 

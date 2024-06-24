@@ -9,7 +9,7 @@ const index = memo(() => {
   return (
     <div className='
       w-full
-      sLaptop:w-[74%]
+      sLaptop:w-[75%]
       h-[100%]
       flex 
       flex-col

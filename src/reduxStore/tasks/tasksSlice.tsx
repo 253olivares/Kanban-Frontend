@@ -47,7 +47,7 @@ export const initiateTask = createAsyncThunk('task/getTask', async(_,{rejectWith
         return data;
     }catch(e:any) {
         console.log('Ran into issue getting all task data!');
-        rejectWithValue(e);
+        return rejectWithValue(e);
     }
 })
 
@@ -70,9 +70,9 @@ const taskSlice = createSlice ({
         .addCase(initiateTask.rejected, (state,_)=> {
             state.status = 'failed';
         })
-        .addCase(initiateTask.fulfilled, (state,action)=> {
+        .addCase(initiateTask.fulfilled, (state,action:PayloadAction<task[]>)=> {
             state.status = 'succeeded';
-            taskAdapter.upsertMany(state,action.payload as task[]);
+            taskAdapter.upsertMany(state,action.payload);
         })
     }
 })

@@ -64,12 +64,15 @@ const workspaceModal = memo(({
          mobile:text-[1.139rem]
          sMobile:text-[1.823rem]
          mMobile:text-[2.187rem]
+
          text-white
          font-medium
+         
          py-[0.732rem]
          mobile:py-[0.976rem]
          sMobile:py-[1.563rem]
          mMobile:py-[1.875rem]
+
          "
         >{label}</h1>
         <input 

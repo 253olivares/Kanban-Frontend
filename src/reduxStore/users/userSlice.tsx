@@ -2,6 +2,7 @@ import { createDefaultBaseImage, addUser, searchUser, resetRemember, getRemember
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { workspace } from "../workspace/workspaceSlice";
+import { board } from "../boards/boardsSlice";
 
 // this is to create a list of users that we can invite to workspaces
 // without getting sensitive userData;
@@ -122,7 +123,7 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
         }
         return newUser;
 
-    }catch(error:unknown){
+    }catch(error:any){
         console.log(`createLogin:${error}`);
         return rejectWithValue(error);
     }
@@ -138,7 +139,7 @@ export const changeAccountDetails = createAsyncThunk('user/changeAccountDetails'
 
         alert('Information has been updated!');
         return user
-    } catch (error:unknown){
+    } catch (error:any){
         console.log(`Update userInformation:${error}`);
         return rejectWithValue(error);
     }
@@ -230,6 +231,17 @@ const userSlice = createSlice({
                 state.user.workspaces = state.user.workspaces.filter(w=>w!==action.payload)
                 updateUser(state.user);
             }
+        },
+        updateUserBoards (state,action:PayloadAction<board>) {
+            if(state.user){
+                state.user.boards = [...state.user.boards, action.payload.b_id];
+                updateUser(state.user);
+            }
+        },
+        removeUserBoards(state,action: PayloadAction<string>){
+            if(state.user){
+                state.user.boards = state.user.boards.filter(b=> b !== action.payload);
+            }
         }
     },
     extraReducers: (builder)=> {
@@ -291,7 +303,9 @@ export const {
     changeUserInfoRemember,
     logOut,
     updateUserWorkspaces,
-    removeUserWorkspace
+    removeUserWorkspace,
+    updateUserBoards,
+    removeUserBoards
 } =userSlice.actions;
 
 export default userSlice.reducer;

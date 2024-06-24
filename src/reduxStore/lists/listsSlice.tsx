@@ -1,4 +1,4 @@
-import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit"
 import { getList } from "../../customLogic"
 
 export type list = {
@@ -33,7 +33,7 @@ export const initiateList = createAsyncThunk('list/getList', async(_,{rejectWith
         return data;
     }catch(e:any) {
         console.log('Ran into issue gathering the list data!');
-        rejectWithValue(e);
+        return rejectWithValue(e);
     }
 })
 
@@ -50,9 +50,9 @@ const listSlice = createSlice({
         .addCase(initiateList.rejected,(state,_)=> {
             state.status = 'failed';
         })
-        .addCase(initiateList.fulfilled, (state,action)=> {
+        .addCase(initiateList.fulfilled, (state,action:PayloadAction<list[]>)=> {
             state.status = 'succeeded';
-            listAdapter.upsertMany(state,action.payload as list[]);
+            listAdapter.upsertMany(state,action.payload);
         })
     }
 })

@@ -40,6 +40,14 @@ export const getComments = ():comments[] | null => {
     return JSON.parse(data);
 };
 
+export const addBoard = (newBoard:board, prevState:board[]):void => {
+    if(!localStorage.getItem(boardKey)) {
+        reloadApplication();
+        return;
+    }
+    localStorage.setItem(boardKey,JSON.stringify([...prevState,newBoard]))
+}
+
 export const getBoards = ():board[] | null => {
     const data = localStorage.getItem(boardKey);
     if(!data){
@@ -65,12 +73,20 @@ export const removeWorkspace = (id:string, state:workspace[]):void => {
     localStorage.setItem(workspaceKey,JSON.stringify(state.filter(x=> x.w_id !== id)));
 }
 
+export const updateWorkspaceBoardLS = (updatedWorkspace:workspace, prevState:workspace[])=> {
+    if(!localStorage.getItem(workspaceKey)){
+        reloadApplication();
+        return;
+    }
+    localStorage.setItem(workspaceKey,JSON.stringify(prevState.map(w=> w.w_id === updatedWorkspace.w_id ? updatedWorkspace : w)))
+}
+
 export const addWorkspace = (newWorkSpace:workspace ,prevState:workspace[]):void => {
     if(!localStorage.getItem(workspaceKey)) {
         reloadApplication();
         return;
     }
-    localStorage.setItem(workspaceKey,JSON.stringify( [...prevState, newWorkSpace]))
+    localStorage.setItem(workspaceKey,JSON.stringify([...prevState, newWorkSpace]))
 }
 
 export const setRemember = (user:user):void => {

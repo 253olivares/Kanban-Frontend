@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook"
-import { getWorkspaceSelect, removeExistingWorkspace, selectById } from "../../../../../reduxStore/workspace/workspaceSlice"
+import { getWorkspaceSelect, removeExistingWorkspace, selectWorkspaceById } from "../../../../../reduxStore/workspace/workspaceSlice"
 import { closeModal} from "../../../../../reduxStore/modal/modalSlice"
 import { removeUserWorkspace } from "../../../../../reduxStore/users/userSlice"
 
@@ -9,10 +9,9 @@ const confirmDelete = () => {
 
     const workspaceId = useAppSelector(getWorkspaceSelect);
 
-    const workspace = useAppSelector(state => selectById(state,workspaceId));
+    const workspace = useAppSelector(state => selectWorkspaceById(state,workspaceId));
 
     if(!workspace) return;
-
   return (
     <motion.div
     initial={{

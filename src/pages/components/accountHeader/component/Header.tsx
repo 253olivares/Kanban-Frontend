@@ -47,11 +47,17 @@ const Header = memo(({user}:{user:user}) => {
     desktop:border-b-[0.312rem]
     largeDesktop:border-b-[0.391rem]
     4k:border-b-[0.521rem]
+    
     border-[#6B6E86]
+
     flex
     justify-between
     items-center
+    
+    shrink-0
+
     px-[5.62%]
+
     `}>
         {/* app Icon and workspace info */}
         <div>

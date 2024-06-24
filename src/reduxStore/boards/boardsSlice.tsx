@@ -1,7 +1,6 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit"
-import { getBoards } from "../../customLogic"
+import { addBoard, getBoards } from "../../customLogic"
 import { RootState } from "../store"
-
 export type board = {
     b_id:string,
     u_id:string,
@@ -31,10 +30,38 @@ export const initializeBoards = createAsyncThunk('boards/initialize', async(_,{r
         const data: board[] | null = getBoards();
         if(!data) throw new Error("Ran into issues!");
         return data;
-        
     }catch(e:any){
         console.log("Ran into issue getting all the workspace data!");
-        rejectWithValue(e);
+        return rejectWithValue(e);
+    }
+})
+
+export const addBoards = createAsyncThunk('boards/addBoard', async({
+    boardName,
+    workspaceId
+}:{
+    boardName:string,
+    workspaceId:string
+},{requestId,getState,rejectWithValue})=> {
+    try{
+        const state = getState() as RootState;
+
+        if(!state.user.user) throw new Error('No user is logged in!')
+
+        const newBoard:board = {
+            b_id: `board_${requestId}`,
+            u_id: state.user.user.u_id,
+            w_id: workspaceId,
+            name: boardName,
+            lists: [],
+            label: [],
+            background: 0
+        }
+
+        return {newBoard:newBoard, prevStates:selectAllBoards(state)}
+    } catch(e:any) {
+        console.log(e);
+        return rejectWithValue(e);
     }
 })
 
@@ -65,15 +92,29 @@ const boardSlice = createSlice({
         .addCase(initializeBoards.rejected,(state,_)=> {
             state.status = 'failed';
         })
-        .addCase(initializeBoards.fulfilled,(state,action)=> {
+        .addCase(initializeBoards.fulfilled,(state,action: PayloadAction<board[]>)=> {
             state.status = 'succeeded';
-            boardsAdapter.upsertMany(state,action.payload as board[])
+            boardsAdapter.upsertMany(state,action.payload);
+        })
+        .addCase(addBoards.fulfilled,(state,action: PayloadAction<{newBoard:board,prevStates:board[]}>)=> {
+            
+            state.status = 'succeeded';
+            addBoard(action.payload.newBoard,action.payload.prevStates);
+            boardsAdapter.addOne(state,action.payload.newBoard);
+        })
+        .addCase(addBoards.pending,(state,_)=> {
+            state.status = 'loading';
+        })
+        .addCase(addBoards.rejected,(state,_)=> {
+            state.status = 'failed';
         })
     }
 })
 
 export const {
-    selectAll
+    selectAll:selectAllBoards,
+    selectById:selectBoardById
+
 } = boardsAdapter.getSelectors((state:{boards:initialStateType})=> state.boards);
 
 export const getBoardName = (state:RootState) => state.boards.newBoardName;

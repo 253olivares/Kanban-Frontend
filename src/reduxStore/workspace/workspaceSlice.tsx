@@ -2,7 +2,8 @@
 import { createAsyncThunk, createEntityAdapter,createSlice,PayloadAction  } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
-import { addWorkspace, getWorkspaces, removeWorkspace} from "../../customLogic";
+import { addWorkspace, getWorkspaces, removeWorkspace, updateWorkspaceBoardLS} from "../../customLogic";
+import { board } from "../boards/boardsSlice";
 
 export type workspace = {
     w_id:string,
@@ -42,7 +43,7 @@ export const initiateWorkspace = createAsyncThunk('workspace/getWorkspaces', asy
         return data;
     }catch(e:any){
         console.log("ran into issue getting all workspace data!");
-        rejectWithValue(e);
+        return rejectWithValue(e);
     }
 })
  
@@ -51,10 +52,10 @@ export const removeExistingWorkspace = createAsyncThunk('workspace/removeWorkspa
 
         const state = getState() as RootState;
 
-        return{plannedRemove:workspaceId,workspaceState:selectAll(state)};
+        return{plannedRemove:workspaceId,workspaceState:selectAllWorkspaces(state)};
     }catch(e:any){
         console.log("Ran into issue removing the workspace!")
-        rejectWithValue(e);
+        return rejectWithValue(e);
     }
 })
 
@@ -77,17 +78,26 @@ export const addNewWorkspace = createAsyncThunk('workspace/addWorkspaces', async
             members:[state.user.user.u_id]
         }
 
-        // const newUserInfo = {
-        //     ...state.user.user,
-        //     workspaces:[...state.user.user.workspaces,newWorkspace.w_id]
-        // }
-
-        // return the workspace, and a array of all our previous workspace
-    return {newWorkspace:newWorkspace,prevStates:selectAll(state)};
+    return {newWorkspace:newWorkspace,prevStates:selectAllWorkspaces(state)};
 
     } catch(e:any){
         console.log("Ran into issue adding new workspace!")
-        rejectWithValue(e);
+        return rejectWithValue(e);
+    }
+})
+
+export const updateWorkspaceBoard = createAsyncThunk('workspace/updateWorkspace', async(newBoard:board, {getState,rejectWithValue})=> {
+    try{
+        const state = getState() as RootState
+        const selectWorkspace = selectWorkspaceById(state,newBoard.w_id);
+        const updatedWorkspace = {
+            ...selectWorkspace,
+            boards: [...selectWorkspace.boards,newBoard.b_id]
+        }
+        return {newBoard:newBoard, updatedWorkspace:updatedWorkspace, prevState:selectAllWorkspaces(state)}
+    } catch(e:any){
+        console.log('ran into error adding board to workspace')
+        return rejectWithValue(e);
     }
 })
 
@@ -113,17 +123,17 @@ const workspaceSlice = createSlice({
             .addCase(initiateWorkspace.rejected,(state,_)=>{
                 state.status = 'failed';
             })
-            .addCase(initiateWorkspace.fulfilled,(state,action)=>{
+            .addCase(initiateWorkspace.fulfilled,(state,action:PayloadAction<workspace[]>)=>{
                 state.status = 'succeeded';
-                workspaceAdapter.upsertMany(state,action.payload as workspace[]);
+                workspaceAdapter.upsertMany(state,action.payload);
             })
             // take in our previous state and action payload and pass it to our function with custome code
             // this code is in charge of communicating with our local storage
-            .addCase(addNewWorkspace.fulfilled,(state,action)=> {
+            .addCase(addNewWorkspace.fulfilled,(state,action:PayloadAction<{newWorkspace:workspace,prevStates:workspace[]}>)=> {
                 state.status = 'succeeded';
                 // updateUser(action.payload!.newUserInfo);
-                addWorkspace(action.payload!.newWorkspace,action.payload!.prevStates);
-                workspaceAdapter.addOne(state,action.payload!.newWorkspace as workspace);
+                addWorkspace(action.payload.newWorkspace,action.payload.prevStates);
+                workspaceAdapter.addOne(state,action.payload.newWorkspace);
             })  
             .addCase(addNewWorkspace.pending,(state,_)=> {
                 state.status = 'loading';
@@ -137,18 +147,23 @@ const workspaceSlice = createSlice({
             .addCase(removeExistingWorkspace.pending,(state,_)=>{
                 state.status = 'loading';
             })
-            .addCase(removeExistingWorkspace.fulfilled,(state,action)=> {
+            .addCase(removeExistingWorkspace.fulfilled,(state,action:PayloadAction<{plannedRemove:string,workspaceState:workspace[]}>)=> {
                 state.status = 'succeeded';
                 state.selectWorkspace = '';
-                removeWorkspace(action.payload!.plannedRemove,action.payload!.workspaceState as workspace[]);
-                workspaceAdapter.removeOne(state,action.payload!.plannedRemove as string);
+                removeWorkspace(action.payload.plannedRemove,action.payload.workspaceState);
+                workspaceAdapter.removeOne(state,action.payload!.plannedRemove);
+            })
+            .addCase(updateWorkspaceBoard.fulfilled, (state,action:PayloadAction<{newBoard:board,updatedWorkspace:workspace, prevState:workspace[]}>)=> {
+                console.log(action.payload);
+                updateWorkspaceBoardLS(action.payload.updatedWorkspace,action.payload.prevState);
+                workspaceAdapter.updateOne(state,{id:action.payload.updatedWorkspace.w_id,changes:action.payload.updatedWorkspace});
             })
     }
 })
 
 export const {
-    selectAll,
-    selectById
+    selectAll:selectAllWorkspaces,
+    selectById:selectWorkspaceById
 } = workspaceAdapter.getSelectors((state:{workspace:initialStateType})=>state.workspace);
 
 export const {

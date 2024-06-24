@@ -1,4 +1,4 @@
-import { createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { getComments } from "../../customLogic";
 
 export type comments = {
@@ -44,7 +44,7 @@ export const initialComments = createAsyncThunk('comments/getComments',async(_,{
         return data;
     }catch(e:any) {
         console.log('Ran into issues getting comments!');
-        rejectWithValue(e);
+        return rejectWithValue(e);
     }
 })
 
@@ -62,9 +62,9 @@ const commentSlice = createSlice({
         .addCase(initialComments.rejected, (state,_)=>{
             state.status = 'failed';
         })
-        .addCase(initialComments.fulfilled, (state,action)=> {
+        .addCase(initialComments.fulfilled, (state,action:PayloadAction<comments[]>)=> {
             state.status = 'succeeded';
-            commentAdapter.upsertMany(state,action.payload as comments[]);
+            commentAdapter.upsertMany(state,action.payload);
         })
     }
 })

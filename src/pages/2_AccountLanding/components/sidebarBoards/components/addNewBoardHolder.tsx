@@ -9,11 +9,13 @@ import { memo } from "react"
 import AddName from './addName';
 import OpenModal from './openModal';
 
-const addNewBoardHolder = memo(() => {
+const addNewBoardHolder = memo(({workspace,durat}:{workspace:string,durat:number}) => {
 
     const dispatch = useAppDispatch();
 
     const boardsModal = useAppSelector(getBoardModal);
+
+    console.log("Duration:",durat);
 
   return (
     <motion.div 
@@ -21,10 +23,12 @@ const addNewBoardHolder = memo(() => {
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{
-        duration:.5
+        duration: .5,
+        delay:durat
     }}
     
     className={`
+    
     w-[15.789rem]
     mobile:w-[21.051rem]
     sMobile:w-[33.684rem]
@@ -33,6 +37,7 @@ const addNewBoardHolder = memo(() => {
     mLaptop:w-[15.624rem]
     desktop:w-[18.75rem]
     largeDesktop:w-[23.437rem]
+    4k:w-[31.249rem]
 
     h-[6.578rem]
     mobile:h-[8.771rem]
@@ -42,8 +47,12 @@ const addNewBoardHolder = memo(() => {
     mLaptop:h-[6.510rem]
     desktop:h-[7.813rem]
     largeDesktop:h-[9.766rem]
+    4k:h-[13.021rem]
 
     block
+    relative
+
+    shrink-0
 
     rounded-[0.366rem]
     mobile:rounded-[0.488rem]
@@ -53,6 +62,7 @@ const addNewBoardHolder = memo(() => {
     mLaptop:rounded-[0.416rem]
     desktop:rounded-[0.5rem]
     largeDesktop:rounded-[0.625rem]
+    4k:rounded-[0.833rem]
 
     conic-gradient
 
@@ -63,7 +73,8 @@ const addNewBoardHolder = memo(() => {
     sLaptop:ring-[1.999px]
     mLaptop:ring-[2.499px]
     desktop:ring-[3px]
-    largeDesktop:ring-[3.75px
+    largeDesktop:ring-[3.75px]
+    4k:ring-[4.999px]
 
     ${boardsModal?
     `
@@ -132,7 +143,7 @@ const addNewBoardHolder = memo(() => {
         {
         boardsModal ?
             <AnimatePresence>
-                <AddName/>
+                <AddName workspace = {workspace} />
             </AnimatePresence>
             :
             <AnimatePresence>
