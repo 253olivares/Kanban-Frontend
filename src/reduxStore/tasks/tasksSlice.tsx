@@ -77,6 +77,10 @@ const taskSlice = createSlice ({
     }
 })
 
+export const {
+    selectAll:selectAllTasks
+} = taskAdapter.getSelectors((state:RootState)=>state.tasks);
+
 export const getFilters = (state:RootState) => state.tasks.filters;
 
 export const {changeFilter} = taskSlice.actions;

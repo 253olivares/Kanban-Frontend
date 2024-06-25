@@ -4,9 +4,11 @@ import {motion} from 'framer-motion';
 import { memo, useContext, useEffect} from 'react';
 import { closeAccountModal,getCroppingImage,openProfile, setCroppingImageData } from "../../../reduxStore/modal/modalSlice";
 import { AppContext } from "../../appRefContext";
+import { useNavigate } from "react-router-dom";
 
 const index = memo(() => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     const appContext = useContext(AppContext);
     const {accountSettingsRef, modalRef,profileRef} = appContext!;
@@ -336,14 +338,20 @@ const index = memo(() => {
         ">
           <button 
           onClick={()=> {
-             // incase user changed their profile image we set the value back to null
+            try {
+              // incase user changed their profile image we set the value back to null
              if(dataURL) dispatch(setCroppingImageData(null));
 
-            // change modal state that hides the menu options
-            dispatch(closeAccountModal());
-
-            // log out user
-            dispatch(logOut());
+              // change modal state that hides the menu options
+              dispatch(closeAccountModal());
+ 
+              // log out user
+              dispatch(logOut());
+             
+              navigate('/');
+            } catch(e:any){
+              alert("Ran into issue logging out!");
+            }
           }}
           className="
           w-full

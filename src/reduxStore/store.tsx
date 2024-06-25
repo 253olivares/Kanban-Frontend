@@ -9,6 +9,7 @@ import workspaceReducer from './workspace/workspaceSlice';
 import boardsReducer from './boards/boardsSlice';
 import listReducer from './lists/listsSlice';
 import commentReducer from './comments/commentsSlice';
+import userListReducer from './userList/userList';
 
 export const store = configureStore({
     reducer: {
@@ -20,7 +21,8 @@ export const store = configureStore({
         workspace:workspaceReducer,
         boards: boardsReducer,
         list:listReducer,
-        comments:commentReducer
+        comments:commentReducer,
+        userList: userListReducer
     }
 })
 // type scripts we need for selectors and dispatch to comply with typescript

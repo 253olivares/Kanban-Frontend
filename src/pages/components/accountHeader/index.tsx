@@ -4,9 +4,9 @@ import { getModalStatus, getModalType } from '../../../reduxStore/modal/modalSli
 import { useLayoutEffect, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useParams } from 'react-router-dom';
 
-import ModalContainer from '../../../modals';
+import ModalContainer from '../../../modals'; 
 import Header from './component/Header';
 import { getWorkSpaceModal, initiateWorkspace } from '../../../reduxStore/workspace/workspaceSlice';
 import MobileModal from '../../2_AccountLanding/components/mobileAddWorkspace';
@@ -14,12 +14,18 @@ import { getBoardModal, initializeBoards } from '../../../reduxStore/boards/boar
 import { initialComments } from '../../../reduxStore/comments/commentsSlice';
 import { initiateList } from '../../../reduxStore/lists/listsSlice';
 import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
+import { initiateUserList } from '../../../reduxStore/userList/userList';
 
 const index = memo(() => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // check to make sure a user exists and is logged in
+  const params = useParams();
+
+  // console.log('Location: ', location);
+  // console.log('params', params);
+
+  // check to make sure a user exists and isx logged in
   const user = useAppSelector(getUser);
 
   const modalStatus = useAppSelector(getModalStatus);
@@ -30,32 +36,40 @@ const index = memo(() => {
   // a cache check to have the application ato login a user 
   // if they click on this page
   useLayoutEffect(()=> {
+    document.body.style.overflowY ="hidden";
     // if a user who does not have a user account visit this page check first if they do not have an account
     // check to see if a user is logged in
     if(!user){
-      dispatch(checkRemembered());
-    } else {
-      // grab all our data for workspaces from local storage
-      dispatch(initiateWorkspace());
-      dispatch(initializeBoards());
-      dispatch(initiateList());
-      dispatch(initiateTask());
-      dispatch(initialComments());
-    }
+      dispatch(checkRemembered()).unwrap().then((x)=> {
+        console.log("User exists");
 
+        // security checks to make sure user is logged into correct account and not access boards not registered to them or shared
+        // check url for userId entered
+        console.log('check userId')
+        
+        if(params.userId && params.userId !== x.u_id) navigate(`/u/${x.u_id}`);
+
+        if(params.workspaceId && !x.boards.includes(params.workspaceId)){
+
+          alert('Board does not exist or you do not have permission to view board!');
+
+          // check found
+          navigate(`/u/${x.u_id}`);
+        } 
+
+      }).catch(()=>{
+        console.log("No user found or wrong user logged in!");
+        navigate('/');
+      });
+    }
+    // initiate our states
+    dispatch(initiateWorkspace());
+    dispatch(initializeBoards());
+    dispatch(initiateList());
+    dispatch(initiateTask());
+    dispatch(initialComments());
+    dispatch(initiateUserList());
   },[])
-
-  useLayoutEffect(()=> {
-    // after dispatch if has not found a user to remember then
-    // make our user navigate to the home page
-
-    document.body.style.overflowY ="hidden";
-
-    if(!user){
-      navigate(`/`);
-      document.body.style.overflowY ="scroll";
-    }
-  },[user])
 
   return (
       <main className={`
@@ -140,10 +154,9 @@ const index = memo(() => {
           :
           <>
           {/* our app header */}
-            <Header user={user}/>
+            <Header user={user} params={params} />
             {/* our application itself */}
             <Outlet/>
-            
           </>
         }
       </main>

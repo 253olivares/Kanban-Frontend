@@ -2,8 +2,8 @@ import {memo, lazy, useLayoutEffect, useContext} from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useNavigate } from "react-router-dom";
 
-import { closeModal, getMobileModal, getModalStatus } from '../../reduxStore/modal/modalSlice';
-import { checkRemembered, getUser } from '../../reduxStore/users/userSlice';
+import { getMobileModal, getModalStatus } from '../../reduxStore/modal/modalSlice';
+import { checkRemembered } from '../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
 import { AppContext } from '../appRefContext';
 
@@ -23,22 +23,21 @@ const index = memo(():JSX.Element => {
   const appContext= useContext(AppContext);
   const {pageRef} = appContext!;
 
+  // // check to see if a user is signed in
+  // const user = useAppSelector(getUser);
+
   useLayoutEffect(()=> {
+    document.body.style.overflowY ="scroll";
     // check to see if a user has their credentials saved for next login
-    dispatch(checkRemembered());
+    dispatch(checkRemembered())
+    .unwrap()
+    .then((x) => {
+      console.log("Successful User Found",x);
+      navigate(`u/${x.u_id}`);
+    }).catch((x) => {
+      console.log("No user found: ",x);
+    });
   },[])
-
-  // check to see if a user is signed in
-  const user = useAppSelector(getUser);
-
-  // changed this to layout effect to prevent page from rendering or painting
-  useLayoutEffect(()=> {
-    if(user){
-      // close modal
-      dispatch(closeModal());
-      navigate(`/u/${user.u_id}`);
-    }
-  },[user])
 
   // state to keep track of when our modal is open
   const modalStatus = useAppSelector(getModalStatus)

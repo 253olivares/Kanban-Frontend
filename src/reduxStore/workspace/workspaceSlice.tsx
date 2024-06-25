@@ -165,7 +165,7 @@ const workspaceSlice = createSlice({
 export const {
     selectAll:selectAllWorkspaces,
     selectById:selectWorkspaceById
-} = workspaceAdapter.getSelectors((state:{workspace:initialStateType})=>state.workspace);
+} = workspaceAdapter.getSelectors((state:RootState)=>state.workspace);
 
 export const {
     changeModal,

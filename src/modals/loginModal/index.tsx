@@ -7,9 +7,12 @@ import Footer from '../component/footer';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
 import { getUserInfo, changeUserInfoEmail,changeUserInfoPassword,changeUserInfoRemember } from '../../reduxStore/users/userSlice';
 import { sanitize } from '../../customLogic';
+import { closeModal } from '../../reduxStore/modal/modalSlice';
+import { useNavigate } from 'react-router-dom';
 
 const index = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const userInfo = useAppSelector(getUserInfo);
  
@@ -29,7 +32,12 @@ const index = () => {
         email:email,
         password:sanitizedPassword,
         remember:userInfo.remember
-      }));
+      }))
+      .unwrap().then((x)=>{
+        console.log("Login successful!");
+        dispatch(closeModal());
+        navigate(`u/${x.u_id}`);
+      }).catch();
 
     } else {
       alert("Please make sure to input a username and password")

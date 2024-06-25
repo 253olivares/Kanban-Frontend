@@ -3,14 +3,14 @@ import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 
 import { memo, useContext } from 'react';
 
-import {user} from '../../../../reduxStore/users/userSlice';
-import { useNavigate } from 'react-router-dom';
+import { user } from '../../../../reduxStore/users/userSlice';
+import { Params, useNavigate } from 'react-router-dom';
 import icon from '/assets/Logo_Export.svg';
 import { AppContext } from '../../../appRefContext';
 
 
 // pass out user information to our header
-const Header = memo(({user}:{user:user}) => {
+const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>}) => {
     
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
@@ -18,7 +18,11 @@ const Header = memo(({user}:{user:user}) => {
     const appContext = useContext(AppContext);
     const {profileRef} = appContext!;
 
+    console.log(params);
+
     const accountSettings = useAppSelector(getAccountSettings);
+
+    if(!user) return;
 
   return (
     <div className={`

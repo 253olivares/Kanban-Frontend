@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit"
 import { getList } from "../../customLogic"
+import { RootState } from "../store"
 
 export type list = {
     l_id:string,
@@ -57,6 +58,11 @@ const listSlice = createSlice({
     }
 })
 
+export const {
+    selectAll:selectAllLists
+} = listAdapter.getSelectors((state:RootState)=>state.list);
+
 export const {} = listSlice.actions;
+
 
 export default listSlice.reducer;

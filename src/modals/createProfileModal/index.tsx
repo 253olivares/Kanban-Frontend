@@ -10,9 +10,12 @@ import PasswordReq from './components/passwordRequirments';
 import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
 import { sanitize,emailValidation } from '../../customLogic';
+import { closeModal } from '../../reduxStore/modal/modalSlice';
+import { useNavigate } from 'react-router-dom';
 
 const index = () => {
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
 
     // create a ref to allow us to motify our retypepassword input
     const repass = useRef<HTMLInputElement>(null)
@@ -191,7 +194,12 @@ const index = () => {
                 username: sanitizedUsername,
                 email: email,
                 password: sanitizedPassword
-            }));
+            }))
+            .unwrap().then((x)=> {
+                console.log("Create account successful!");
+                dispatch(closeModal());
+                navigate(`u/${x.u_id}`);
+            }).catch();
         }
     }
 

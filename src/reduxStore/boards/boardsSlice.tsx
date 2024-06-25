@@ -119,8 +119,7 @@ const boardSlice = createSlice({
 export const {
     selectAll:selectAllBoards,
     selectById:selectBoardById
-
-} = boardsAdapter.getSelectors((state:{boards:initialStateType})=> state.boards);
+} = boardsAdapter.getSelectors((state:RootState)=> state.boards);
 
 export const getBoardName = (state:RootState) => state.boards.newBoardName;
 

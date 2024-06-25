@@ -2,9 +2,10 @@ import { motion } from "framer-motion";
 import closeButton from '/assets/Add_New_Workspace.svg';
 import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook";
 import { addBoards, changeBoardModal, getBoardModal } from "../../../../../reduxStore/boards/boardsSlice";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { updateUserBoards } from "../../../../../reduxStore/users/userSlice";
 import { updateWorkspaceBoard } from "../../../../../reduxStore/workspace/workspaceSlice";
+import { AppContext } from "../../../../appRefContext";
 
 
 const addName = ({workspace}:{workspace:string}) => {
@@ -15,6 +16,9 @@ const addName = ({workspace}:{workspace:string}) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     const [boardsName, setBoardName] = useState<string>('');
+
+    const appContext = useContext(AppContext);
+    const {newAddBoard, mobileAddNewWorkspace} = appContext!;
 
     const submitBoardName = () => {
       if(boardsName.trim().length > 16) {
@@ -43,6 +47,29 @@ const addName = ({workspace}:{workspace:string}) => {
       }
     },[boardsName])
 
+    useEffect(()=> {
+
+      const checkClick = (e:MouseEvent | TouchEvent):void => {
+        const element = e.target as Node;
+
+        console.log('test');
+
+        if(!newAddBoard.current) window.removeEventListener('click', checkClick, true);
+
+        if(!newAddBoard.current?.contains(element) &&
+          !mobileAddNewWorkspace.current?.contains(element)){
+          window.removeEventListener('click',checkClick,true);
+          dispatch(changeBoardModal(false));
+        }
+      }
+
+      window.addEventListener('click',checkClick,true);
+
+      return () => {
+        window.removeEventListener('click',checkClick,true);
+      }
+    },[])
+
   return (
     <motion.div 
     
@@ -52,6 +79,8 @@ const addName = ({workspace}:{workspace:string}) => {
     transition={{
         duration:.5
     }}
+
+    ref={newAddBoard}
 
     className={`
       w-full

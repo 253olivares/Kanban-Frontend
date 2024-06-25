@@ -1,5 +1,6 @@
 import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
 import { getComments } from "../../customLogic";
+import { RootState } from "../store";
 
 export type comments = {
     c_id:string,
@@ -68,7 +69,13 @@ const commentSlice = createSlice({
         })
     }
 })
+
+export const {
+    selectAll:selectAllComments,
+} = commentAdapter.getSelectors((state:RootState)=> state.comments);
  
 export const {} = commentSlice.actions;
+
+export const getCommenets = (state:RootState) => state.comments;
 
 export default commentSlice.reducer;

@@ -121,6 +121,7 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
             boards: [],
             lists: [],
         }
+        
         return newUser;
 
     }catch(error:any){
