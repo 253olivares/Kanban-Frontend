@@ -125,7 +125,7 @@ export const getBoardName = (state:RootState) => state.boards.newBoardName;
 
 export const getBoardModal = (state:RootState) => state.boards.addBoardModal;
 
-export const {
+export const {  
     changeBoardModal,
     newBoardNameUpdate,
     removeBoardsFromWorkspace

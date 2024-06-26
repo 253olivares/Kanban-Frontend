@@ -8,6 +8,11 @@ import { Params, useNavigate } from 'react-router-dom';
 import icon from '/assets/Logo_Export.svg';
 import { AppContext } from '../../../appRefContext';
 
+import InputHeader from '../../../3_Workspace/components/headComponents/BoardNameInput';
+import FilterBoard from '../../../3_Workspace/components/headComponents/BoardPageFilter';
+import MemebersBoard from '../../../3_Workspace/components/headComponents/BoardPageMemebers';
+import { selectBoardById } from '../../../../reduxStore/boards/boardsSlice';
+
 
 // pass out user information to our header
 const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>}) => {
@@ -18,9 +23,10 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
     const appContext = useContext(AppContext);
     const {profileRef} = appContext!;
 
-    console.log(params);
-
     const accountSettings = useAppSelector(getAccountSettings);
+    const selectBoard = useAppSelector(state => selectBoardById(state,params?.workspaceId || '')) || null;
+
+    console.log("Select board: ",selectBoard);
 
     if(!user) return;
 
@@ -64,7 +70,21 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
 
     `}>
         {/* app Icon and workspace info */}
-        <div>
+        <div className={`
+        flex
+        items-center
+        ${
+            params.workspaceId &&
+            `
+            justify-between
+
+            sLaptop:gap-[1.666rem]
+            mLaptop:gap-[2.083rem]
+            desktop:gap-[2.5rem]
+            largeDesktop:gap-[3.125rem]
+            ` 
+        }
+        `}>
             <img 
             onClick={()=> {
                 navigate(`/u/${user.u_id}`);
@@ -82,6 +102,18 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
             sLaptop:hover:cursor-pointer
             `}
             src={icon} alt="" />
+        
+            {
+            params.workspaceId && selectBoard ?
+                <>
+                    <InputHeader board={selectBoard} />
+                    <FilterBoard board={selectBoard} />
+                    <MemebersBoard board={selectBoard} />
+                </>
+                    :
+                ``
+                }
+            
         </div>
         {/* account icon */}
         <div 
