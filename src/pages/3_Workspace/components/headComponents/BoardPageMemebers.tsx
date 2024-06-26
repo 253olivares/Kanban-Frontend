@@ -6,6 +6,9 @@ import { getMembersModal, setOpenMemberModal } from "../../../../reduxStore/moda
 import triangle from '/assets/Polygon_6.svg';
 import membersIcon from '/assets/User_Icon.svg'
 
+import MemberBody from './BoardPageMembersBody';
+import { AnimatePresence } from "framer-motion";
+
 const BoardPageMemebers = memo(({boardMembers}:{boardMembers:string[][]}) => {
   
   console.log(boardMembers);
@@ -14,8 +17,6 @@ const BoardPageMemebers = memo(({boardMembers}:{boardMembers:string[][]}) => {
 
   const membersModal = useAppSelector(getMembersModal);
 
-  console.log(membersModal);
-
   const appContext = useContext(AppContext);
   const {membersRefHead} = appContext!;
 
@@ -23,10 +24,8 @@ const BoardPageMemebers = memo(({boardMembers}:{boardMembers:string[][]}) => {
     <div className="
       relative
 
-      sLaptop:px-[0.749rem]
-      mLaptop:px-[0.937rem]
-      desktop:px-[1.125rem]
-      largeDesktop:px-[1.406rem]
+      hidden
+      sLaptop:block
 
       shrink-0
     ">
@@ -45,6 +44,11 @@ const BoardPageMemebers = memo(({boardMembers}:{boardMembers:string[][]}) => {
         mLaptop:gap-[0.937rem]
         desktop:gap-[1.125rem]
         largeDesktop:gap-[1.406rem]
+
+        sLaptop:px-[0.749rem]
+        mLaptop:px-[0.937rem]
+        desktop:px-[1.125rem]
+        largeDesktop:px-[1.406rem]
 
         ${
           membersModal ?
@@ -66,10 +70,10 @@ const BoardPageMemebers = memo(({boardMembers}:{boardMembers:string[][]}) => {
       `}
       >
         <img className="
-          sLaptop:w-[1.353rem]
-          mLaptop:w-[1.692rem]
-          desktop:w-[2.031rem]
-          largeDesktop:w-[2.538rem]
+          sLaptop:w-[1.312rem]
+          mLaptop:w-[1.640rem]
+          desktop:w-[1.969rem]
+          largeDesktop:w-[2.461rem]
         " src={membersIcon} alt="Members Icon" />
 
         <h1 className="
@@ -101,6 +105,11 @@ const BoardPageMemebers = memo(({boardMembers}:{boardMembers:string[][]}) => {
         src={triangle} alt="Members arrow" />
 
       </div>
+      <AnimatePresence>
+        {
+          membersModal ? <MemberBody members={boardMembers} /> : ''
+        }
+      </AnimatePresence>
     </div>
   )
 })

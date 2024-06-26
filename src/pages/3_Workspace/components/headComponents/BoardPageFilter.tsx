@@ -5,6 +5,9 @@ import { getFilterModal, setOpenModal } from "../../../../reduxStore/modal/modal
 import { useDispatch } from "react-redux";
 import { AppContext } from "../../../appRefContext";
 
+import BoardPageFilterBody from "./BoardPageFilterBody";
+import { AnimatePresence } from "framer-motion";
+
 const BoardPageFilter = memo(({filters}:{filters:Record<string,boolean>}) => {
   
   console.log(filters);
@@ -20,10 +23,8 @@ const BoardPageFilter = memo(({filters}:{filters:Record<string,boolean>}) => {
     <div className="
       relative
 
-      sLaptop:px-[0.749rem]
-      mLaptop:px-[0.937rem]
-      desktop:px-[1.125rem]
-      largeDesktop:px-[1.406rem]
+      hidden
+      sLaptop:block
 
       shrink-0
     ">
@@ -44,6 +45,11 @@ const BoardPageFilter = memo(({filters}:{filters:Record<string,boolean>}) => {
         mLaptop:gap-[2.109rem]
         desktop:gap-[2.531rem]
         largeDesktop:gap-[3.163rem]
+
+        sLaptop:px-[0.749rem]
+        mLaptop:px-[0.937rem]
+        desktop:px-[1.125rem]
+        largeDesktop:px-[1.406rem]
 
         ${
           filterModal ?
@@ -86,6 +92,11 @@ const BoardPageFilter = memo(({filters}:{filters:Record<string,boolean>}) => {
         `}
         src={triangle} alt="Arrow for filter" />
       </div>
+      <AnimatePresence>
+        {
+          filterModal ? <BoardPageFilterBody /> : ''
+        }
+      </AnimatePresence>
     </div>
   )
 })
