@@ -1,13 +1,14 @@
-import { board } from "../../../../reduxStore/boards/boardsSlice"
+import { memo, useState } from "react"
 
-const BoardNameInput = ({board}:{board:board}) => {
-  
+const BoardNameInput = memo(({boardName}:{boardName:string}) => {
+
+  const [boardNameState, setBoardNameState] = useState<string>(boardName);
 
   return (
     <input 
 
     className="
-    bg-black
+    bg-transparent
     text-PrimaryWhite
 
     focus:outline-none
@@ -24,14 +25,38 @@ const BoardNameInput = ({board}:{board:board}) => {
     desktop:text-[1.6rem]
     largeDesktop:text-[2rem]
 
+    px-[2%]
+
+    sLaptop:py-[0.233rem]
+    mLaptop:py-[0.291rem]
+    desktop:py-[.35rem]
+    largeDesktop:py-[0.437rem]
+
+    sLaptop:rounded-[0.299rem]
+    mLaptop:rounded-[0.374rem]
+    desktop:rounded-[0.45rem]
+    largeDesktop:rounded-[0.562rem]
+
     text-ellipsis
     overflow-hidden
+
+    hover:opacity-75
+    hover:cursor-pointer
+
+    hover:ring-SelectorBlue
+    hover:ring-[3px]
+    hover:glass-gradient
+
+    focus:ring-SelectorBlue
+    focus:ring-[3px]
+    focus:glass-gradient
     "
 
     type="text" 
-    value={board.name}
+    value={boardNameState}
+    onChange={(e)=> setBoardNameState(e.target.value)}
     />
   )
-}
+})
 
 export default BoardNameInput

@@ -13,6 +13,7 @@ type initialStateType = {
     croppingTool:boolean,
     croppingImageData:string | null,
     filterModal:boolean,
+    memberModal:boolean,
     deleteWorkspace:boolean
 }
 
@@ -25,6 +26,7 @@ const initialState: initialStateType = {
     croppingTool:false,
     croppingImageData:null,
     filterModal: false,
+    memberModal:false,
     deleteWorkspace: false
 }   
 
@@ -83,6 +85,9 @@ const modalSlice = createSlice({
         },
         setOpenModal (state, action){
             state.filterModal = action.payload as boolean;
+        },
+        setOpenMemberModal (state,action) {
+            state.memberModal = action.payload as boolean;
         }
     }
 })
@@ -97,6 +102,7 @@ export const getCroppingTool = (state:RootState) => state.modal.croppingTool;
 export const getCroppingImage = (state:RootState) => state.modal.croppingImageData;
 export const getFilterModal = (state:RootState) => state.modal.filterModal;
 export const getDeleteWorkspace = (state:RootState) => state.modal.deleteWorkspace;
+export const getMembersModal = (state:RootState) => state.modal.memberModal;
 
 export const {
     setCroppingImageData,
@@ -112,7 +118,8 @@ export const {
     closeAccountModal,
     openAccountLadingModal,
     closeAccountLandingModal,
-    setOpenModal
+    setOpenModal,
+    setOpenMemberModal
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

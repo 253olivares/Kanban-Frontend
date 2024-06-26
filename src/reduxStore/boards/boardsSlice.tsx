@@ -7,6 +7,7 @@ export type board = {
     u_id:string,
     w_id:string,
     name:string,
+    members:string[][],
     lists:string[],
     label:string[],
     background:number
@@ -54,6 +55,7 @@ export const addBoards = createAsyncThunk('boards/addBoard', async({
             u_id: state.user.user.u_id,
             w_id: workspaceId,
             name: boardName,
+            members: [[state.user.user.u_id,'admin']],
             lists: [],
             label: [],
             background: 0

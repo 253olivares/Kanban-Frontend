@@ -152,7 +152,7 @@ const index = () => {
           'rotate-90'
         }
         transition-[transform]
-        duration-300
+        duration-500
         `}
         src={arrow} alt="Arrow" />
 

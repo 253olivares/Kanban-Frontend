@@ -29,8 +29,8 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
     boardCss = '';
       break;
   }
-  // console.log(boardCss);
-  // console.log("Duration",durat);
+ 
+  
   return (
     // boards
     <motion.div

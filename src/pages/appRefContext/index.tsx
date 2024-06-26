@@ -15,7 +15,9 @@ export type contextType = {
     newWorkspaceModalClose:MutableRefObject<HTMLDivElement|null>,
     workspaceModalArrow:MutableRefObject<HTMLDivElement|null>,
     mobileAddNewWorkspace:MutableRefObject<HTMLDivElement | null>,
-    newAddBoard:MutableRefObject<HTMLDivElement | null>
+    newAddBoard:MutableRefObject<HTMLDivElement | null>,
+    filterRefHead2:MutableRefObject<HTMLDivElement | null>,
+    membersRefHead:MutableRefObject<HTMLDivElement | null>
 }
 
 export const AppContext = createContext<contextType | null>(null);
@@ -43,6 +45,10 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
 
     const newAddBoard = useRef<HTMLDivElement>(null);
 
+    const filterRefHead2 = useRef<HTMLDivElement>(null)
+
+    const membersRefHead = useRef<HTMLDivElement>(null);
+
     const contextValues = {
         accountSettingsRef,
         modalRef,
@@ -58,7 +64,9 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
         newWorkspaceModalClose,
         workspaceModalArrow,
         mobileAddNewWorkspace,
-        newAddBoard
+        newAddBoard,
+        filterRefHead2,
+        membersRefHead
     }
 
     return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

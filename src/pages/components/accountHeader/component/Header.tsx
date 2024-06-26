@@ -12,6 +12,7 @@ import InputHeader from '../../../3_Workspace/components/headComponents/BoardNam
 import FilterBoard from '../../../3_Workspace/components/headComponents/BoardPageFilter';
 import MemebersBoard from '../../../3_Workspace/components/headComponents/BoardPageMemebers';
 import { selectBoardById } from '../../../../reduxStore/boards/boardsSlice';
+import { getFilters } from '../../../../reduxStore/tasks/tasksSlice';
 
 
 // pass out user information to our header
@@ -25,11 +26,9 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
 
     const accountSettings = useAppSelector(getAccountSettings);
     const selectBoard = useAppSelector(state => selectBoardById(state,params?.workspaceId || '')) || null;
-
-    console.log("Select board: ",selectBoard);
+    const filters = useAppSelector(getFilters);
 
     if(!user) return;
-
   return (
     <div className={`
 
@@ -106,9 +105,9 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
             {
             params.workspaceId && selectBoard ?
                 <>
-                    <InputHeader board={selectBoard} />
-                    <FilterBoard board={selectBoard} />
-                    <MemebersBoard board={selectBoard} />
+                    <InputHeader boardName={selectBoard.name} />
+                    <FilterBoard filters={filters} />
+                    <MemebersBoard boardMembers={selectBoard.members} />
                 </>
                     :
                 ``
@@ -125,6 +124,7 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
                 dispatch(closeAccountModal())
             }
         }}
+        
         className={`
         
          p-[0.071rem]
