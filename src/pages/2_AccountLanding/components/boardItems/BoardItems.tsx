@@ -9,7 +9,7 @@ import { useRef } from "react";
 const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
   const board  = useAppSelector(state => selectBoardById(state,boardId));
 
-  const spanRef = useRef<HTMLSpanElement>(null);
+  const spanRef = useRef<HTMLParagraphElement>(null);
   const divRef = useRef<HTMLImageElement>(null);
 
   const navigate = useNavigate();
@@ -112,15 +112,15 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
 
       z-[2]
       `}>
-        <span
+        <p
         ref={spanRef}
         className="
 
         text-ellipsis
         overflow-hidden
 
-        max-w-[63.5%]
-        sLaptop:Max-w-[62.5%]
+        w-[63.5%]
+        sLaptop:w-[62.5%]
 
         font-medium
 
@@ -133,30 +133,30 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
         mMobile:leading-[6.676rem]
         mMobile:text-[2.109rem]
         sLaptop:leading-[2.083rem]
-        sLaptop:text-[0.749rem]
+        sLaptop:text-[0.693rem]
         mLaptop:leading-[2.604rem]
-        mLaptop:text-[0.937rem]
+        mLaptop:text-[0.866rem]
         desktop:leading-[3.125rem]
-        desktop:text-[1.125rem]
+        desktop:text-[1.04rem]
         largeDesktop:leading-[3.906rem]
-        largeDesktop:text-[1.406rem]
+        largeDesktop:text-[1.3rem]
         4k:leading-[5.208rem]
-        4k:text-[1.874rem]
+        4k:text-[1.733rem]
 
-        px-[0.457rem]
-        mobile:px-[0.610rem]
-        sMobile:px-[0.976rem]
-        mMobile:px-[1.172rem]
-        sLaptop:px-[0.416rem]
-        mLaptop:px-[0.520rem]
-        desktop:px-[0.625rem]
-        largeDesktop:px-[0.781rem]
+        pl-[0.457rem]
+        mobile:pl-[0.610rem]
+        sMobile:pl-[0.976rem]
+        mMobile:pl-[1.172rem]
+        sLaptop:pl-[0.416rem]
+        mLaptop:pl-[0.520rem]
+        desktop:pl-[0.625rem]
+        largeDesktop:pl-[0.781rem]
 
         text-PrimaryWhite
         relative
         z-[3]
         "
-        >{board.name}</span>
+        >{board.name}</p>
         <img 
         ref={divRef}
         className="
