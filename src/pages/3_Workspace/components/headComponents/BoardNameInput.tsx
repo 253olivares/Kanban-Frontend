@@ -19,7 +19,7 @@ const BoardNameInput = memo(({boardName, boardId}:{boardName:string, boardId:str
     }
     
 
-    if(boardNameState.trim().length<=16){
+    if(boardNameState.trim().length<16){
       // save to state and update localStorage
 
       console.log("Should run save!");
@@ -34,7 +34,7 @@ const BoardNameInput = memo(({boardName, boardId}:{boardName:string, boardId:str
 
   useEffect(()=>{
 
-    if(inputRef.current && boardNameState.trim().length >= 16){
+    if(inputRef.current && boardNameState.trim().length > 16){
       setLimit(true);
     } else {
       if(inputRef.current) setLimit(false);
