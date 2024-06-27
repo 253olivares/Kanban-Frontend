@@ -32,6 +32,9 @@ const BoardNameInput = memo(({boardName}:{boardName:string}) => {
     ${limit ? 'text-red-500' : 'text-PrimaryWhite'}
 
     focus:outline-none
+    
+    hidden
+    sLaptop:block
 
     sLaptop:w-[14.999rem]
     mLaptop:w-[18.749rem]

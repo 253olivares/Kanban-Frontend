@@ -8,6 +8,7 @@ import { Params, useNavigate } from 'react-router-dom';
 import icon from '/assets/Logo_Export.svg';
 import { AppContext } from '../../../appRefContext';
 
+import InputHeaderMobile from '../../../3_Workspace/components/headComponents/BoardNameInputMobile';
 import InputHeader from '../../../3_Workspace/components/headComponents/BoardNameInput';
 import FilterBoard from '../../../3_Workspace/components/headComponents/BoardPageFilter';
 import MemebersBoard from '../../../3_Workspace/components/headComponents/BoardPageMemebers';
@@ -114,6 +115,10 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
                 }
             
         </div>
+        {
+            params.workspaceId && selectBoard ?
+            <InputHeaderMobile  boardName={selectBoard.name} /> : ''
+        }
         {/* account icon */}
         <div>
             <div 
