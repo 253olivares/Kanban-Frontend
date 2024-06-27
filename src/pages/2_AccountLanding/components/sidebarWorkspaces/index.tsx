@@ -9,6 +9,9 @@ import WorkspaceModal from '../addWorksapace';
 import { AppContext } from '../../../appRefContext';
 import { openAccountLadingModal } from '../../../../reduxStore/modal/modalSlice';
 import WorkspaceItem from './components/workspaceItems';
+import scrollbarImage from '/assets/scrollBarTrack.png';
+import scrollbarImageX from '/assets/scrollBarTrackX.png'
+
 
 const index = memo((
   {
@@ -38,6 +41,8 @@ const index = memo((
     flex-col
 
     sLaptop:grow
+
+    py-[1.5%]
 
     ${
       selectedWorkspace == '' ? 
@@ -126,7 +131,11 @@ const index = memo((
       </div>
 
 
-      <div className="
+      <div 
+      // @ts-ignore
+      style={{"--img": `url(${scrollbarImage})`,
+              "--img2": `url(${scrollbarImageX})`}}
+      className="
       w-full
       
       flex
@@ -135,8 +144,8 @@ const index = memo((
     
       sLaptop:flex-grow
 
-      overflow-x-auto
-      sLaptop:overflow-y-auto
+      boardsScrollx 
+      sLaptop:boardsScroll
 
       pt-[0.854rem]
       pb-[0.659rem]
@@ -149,13 +158,9 @@ const index = memo((
       sLaptop:pt-[0.533rem]
       sLaptop:pb-[0.533rem]
       mLaptop:pt-[0.666rem]
-      mLaptoP:pb-[0.666rem]
       desktop:pt-[0.8rem]
-      desktop:pb-[0.8rem]
       largeDesktop:pt-[1rem]
-      largeDesktop:pb-[1rem]
       4k:pt-[1.333rem]
-      4k:pb-[1.333rem]
 
       px-[4.55%]
       sLaptop:px-[7.5%]

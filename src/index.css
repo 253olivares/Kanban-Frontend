@@ -41,6 +41,58 @@
 
 @layer components { 
 
+    .boardsScroll {
+        overflow-y: auto;
+    }
+    .boardsScroll::-webkit-scrollbar,
+    ::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-track { 
+        width: 10px;
+        border: none;
+        background: transparent;
+    }
+    .boardsScroll::-webkit-scrollbar-button,
+    ::-webkit-scrollbar-track-piece,
+    ::-webkit-scrollbar-corner,
+    ::-webkit-resizer {
+        display: none;
+    }
+    .boardsScroll::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: -webkit-linear-gradient( var(--rThemeRed), var(--rThemeOrange));
+    }
+    .boardsScroll::-webkit-scrollbar-track {
+        background-image: var(--img);
+        background-repeat: repeat-y;
+        background-size: contain;
+    }
+
+    .boardsScrollx {
+        overflow-x: auto;
+    }
+    .boardsScrollx::-webkit-scrollbar,
+    ::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-track { 
+        height: 10px;
+        border: none;
+        background: transparent;
+    }
+    .boardsScrollx::-webkit-scrollbar-button,
+    ::-webkit-scrollbar-track-piece,
+    ::-webkit-scrollbar-corner,
+    ::-webkit-resizer {
+        display: none;
+    }
+    .boardsScrollx::-webkit-scrollbar-thumb {
+        border-radius: 10px;
+        background: -webkit-linear-gradient( var(--rThemeRed), var(--rThemeOrange));
+    }
+    .boardsScrollx::-webkit-scrollbar-track {
+        background-image: var(--img2);
+        background-repeat: repeat-x;
+        background-size: contain;
+    }
+
     .womp{
         object-fit: contain;
         display: block;

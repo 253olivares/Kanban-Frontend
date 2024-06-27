@@ -2,7 +2,7 @@ import { memo } from "react";
 import { useAppSelector } from "../../../../reduxStore/hook";
 import { selectWorkspaceById } from "../../../../reduxStore/workspace/workspaceSlice";
 import AddNewBoards from './components/addNewBoardHolder';
-
+import scrollbarImage from '/assets/scrollBarTrack.png'
 
 import BoardItem from '../boardItems/BoardItems'
 
@@ -118,7 +118,10 @@ const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
         }
       </div>  
 
-      <div className={`
+      <div
+      // @ts-ignore
+      style={{"--img": `url(${scrollbarImage})`}}
+      className={`
       w-full
 
       flex 
@@ -127,12 +130,12 @@ const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
       grow-0
       sLaptop:flex-grow
 
-      overflow-y-auto
+      boardsScroll
 
       items-center
       justify-start
     
-      p-[4.3%]
+      p-[3.5%]
       
       gap-[1.220rem]
       mobile:gap-[1.627rem]
