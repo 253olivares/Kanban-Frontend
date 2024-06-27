@@ -56,7 +56,8 @@ const BoardPageMembersBody = ({members}: {members:string[][]}) => {
      absolute
      top-[160%]
 
-     block
+     hidden
+     sLaptop:block
      w-[300px]
      h-[300px]
 

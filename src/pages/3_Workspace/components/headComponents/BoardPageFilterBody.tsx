@@ -52,7 +52,8 @@ const BoardPageFilterBody = () => {
      top-[160%]
      left-0
 
-     block
+     hidden
+     sLaptop:block
      w-[300px]
      h-[300px] 
 
