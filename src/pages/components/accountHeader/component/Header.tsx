@@ -1,31 +1,24 @@
-import { closeAccountModal, getAccountSettings, openAccountModal } from '../../../../reduxStore/modal/modalSlice';
-import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
+import { useAppSelector } from '../../../../reduxStore/hook';
 
-import { memo, useContext } from 'react';
+import { memo} from 'react';
 
 import { user } from '../../../../reduxStore/users/userSlice';
-import { Params, useNavigate } from 'react-router-dom';
-import icon from '/assets/Logo_Export.svg';
-import { AppContext } from '../../../appRefContext';
+import { Params } from 'react-router-dom';
+
+import AppIcon from './AppIcon';
 
 import InputHeaderMobile from '../../../3_Workspace/components/headComponents/BoardNameInputMobile';
 import InputHeader from '../../../3_Workspace/components/headComponents/BoardNameInput';
 import FilterBoard from '../../../3_Workspace/components/headComponents/BoardPageFilter';
 import MemebersBoard from '../../../3_Workspace/components/headComponents/BoardPageMemebers';
+import CogBoard from '../../../3_Workspace/components/headComponents/BoardSpaceSetting';
 import { selectBoardById } from '../../../../reduxStore/boards/boardsSlice';
 import { getFilters } from '../../../../reduxStore/tasks/tasksSlice';
-
+import ProfileIcon from './ProfileIcon';
 
 // pass out user information to our header
 const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>}) => {
     
-    const dispatch = useAppDispatch();
-    const navigate = useNavigate();
-
-    const appContext = useContext(AppContext);
-    const {profileRef} = appContext!;
-
-    const accountSettings = useAppSelector(getAccountSettings);
     const selectBoard = useAppSelector(state => selectBoardById(state,params?.workspaceId || '')) || null;
     const filters = useAppSelector(getFilters);
 
@@ -78,30 +71,15 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
             `
             justify-between
 
-            sLaptop:gap-[1.666rem]
-            mLaptop:gap-[2.083rem]
-            desktop:gap-[2.5rem]
-            largeDesktop:gap-[3.125rem]
+            sLaptop:gap-[1.083rem]
+            mLaptop:gap-[1.354rem]
+            desktop:gap-[1.625rem]
+            largeDesktop:gap-[2.031rem]
             ` 
         }
         `}>
-            <img 
-            onClick={()=> {
-                navigate(`/u/${user.u_id}`);
-            }}
-            className={`
-            w-[1.221rem]
-            mobile:w-[1.628rem]
-            sMobile:w-[2.604rem]
-            mMobile:w-[3.125rem]
-            sLaptop:w-[2.083rem]
-            mLaptop:w-[2.604rem]
-            desktop:w-[3.125rem]
-            largeDesktop:w-[3.906rem]
-            4k:w-[5.208rem]
-            sLaptop:hover:cursor-pointer
-            `}
-            src={icon} alt="" />
+            
+            <AppIcon user={user} />
         
             {
             params.workspaceId && selectBoard ?
@@ -120,58 +98,21 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
             <InputHeaderMobile  boardName={selectBoard.name} /> : ''
         }
         {/* account icon */}
-        <div>
-            <div 
-            ref={profileRef}
-            onClick={()=> {
-                if(!accountSettings){
-                    dispatch(openAccountModal())
-                } else {
-                    dispatch(closeAccountModal())
-                }
-            }}
-            
-            className={`
-            
-            p-[0.071rem]
-            mobile:p-[0.095rem]
-            sMobile:p-[0.153rem]
-            mMobile:p-[0.183rem
-            sLaptop:p-[0.113rem]
-            mLaptop:p-[0.141rem]
-            desktop:p-[0.169rem]
-            largeDesktop:p-[0.211rem]
-            4k:p-[0.281rem]
+        <div className='
+        flex
+        flex-row
 
-            ${
-                accountSettings ?
-                `
-                hoverBlue
-                ` 
-                :
-                `
-                linear-gradientFooter
-                sLaptop:hover:hoverBlue
-                `
+        sLaptop:gap-[1.499rem]
+        mLaptop:gap-[1.874rem]
+        desktop:gap-[2.25rem]
+        largeDesktop:gap-[2.812rem]
+        '>
+            {
+                params.workspaceId && selectBoard ?
+                <CogBoard /> : ''
             }
-            sLaptop:hover:cursor-pointer
-            rounded-full 
-            `}>
-                <img 
-                className='
-                w-[1.587rem]
-                mobile:w-[2.116rem]
-                sMobile:w-[3.386rem]
-                mMobile:w-[4.063rem]
-                sLaptop:w-[2.5rem]  
-                mLaptop:w-[3.125rem]
-                desktop:w-[3.75rem]
-                largeDesktop:w-[4.688rem]
-                4k:w-[6.25rem]
-                rounded-full
-                '
-                src={`${user.pfp}`} alt="" />
-            </div>
+
+            <ProfileIcon user={user} />
         </div>
     </div>  
   )

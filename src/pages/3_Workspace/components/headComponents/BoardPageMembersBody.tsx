@@ -61,6 +61,8 @@ const BoardPageMembersBody = ({members}: {members:string[][]}) => {
      w-[300px]
      h-[300px]
 
+     dropDownShadow
+
      bg-PrimaryWhite
 
      sLaptop:rounded-[0.381rem]

@@ -19,7 +19,9 @@ export type contextType = {
     filterRefHead2:MutableRefObject<HTMLDivElement | null>,
     membersRefHead:MutableRefObject<HTMLDivElement | null>,
     filterBodyRef:MutableRefObject<HTMLDivElement | null>,
-    memberBodyRef:MutableRefObject<HTMLDivElement | null>
+    memberBodyRef:MutableRefObject<HTMLDivElement | null>,
+    settingsRef:MutableRefObject<HTMLImageElement | null>,
+    settingsBodyRef:MutableRefObject<HTMLDivElement | null>
 }
 
 export const AppContext = createContext<contextType | null>(null);
@@ -47,13 +49,14 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
 
     const newAddBoard = useRef<HTMLDivElement>(null);
 
-    const filterRefHead2 = useRef<HTMLDivElement>(null)
-
-    const membersRefHead = useRef<HTMLDivElement>(null);
-
+    const filterRefHead2 = useRef<HTMLDivElement>(null);
     const filterBodyRef = useRef<HTMLDivElement>(null);
 
+    const membersRefHead = useRef<HTMLDivElement>(null);
     const memberBodyRef = useRef<HTMLDivElement>(null);
+
+    const settingsRef = useRef<HTMLImageElement>(null);
+    const settingsBodyRef = useRef<HTMLDivElement>(null);
 
     const contextValues = {
         accountSettingsRef,
@@ -74,7 +77,9 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
         filterRefHead2,
         membersRefHead,
         filterBodyRef,
-        memberBodyRef
+        memberBodyRef,
+        settingsRef,
+        settingsBodyRef
     }
 
     return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

@@ -8,7 +8,12 @@ const BoardNameInput = memo(({boardName}:{boardName:string}) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const updateBoardName = (e:React.ChangeEvent<HTMLInputElement>) =>{
-    setBoardNameState(e.target.value)
+    if(e.target.value.length !> 18){
+      alert('Please make sure your name is workspace name is less then 16 letters or until letters are no longer red!');
+    } else {
+      setBoardNameState(e.target.value)
+    }
+    
     if(boardNameState.trim().length!>16){
       // save to state and update localstorage
     }
@@ -48,7 +53,7 @@ const BoardNameInput = memo(({boardName}:{boardName:string}) => {
     desktop:text-[1.6rem]
     largeDesktop:text-[2rem]
 
-    px-[2%]
+    px-[1.75%]
 
     sLaptop:py-[0.233rem]
     mLaptop:py-[0.291rem]

@@ -87,7 +87,7 @@ const BoardPageMemebers = memo(({boardMembers}:{boardMembers:string[][]}) => {
 
           font-medium
         ">
-         {boardMembers.length} Members
+         {boardMembers.length} Member{boardMembers.length !==1? 's':''}
         </h1>
 
         <img 

@@ -56,6 +56,8 @@ const BoardPageFilterBody = () => {
      sLaptop:block
      w-[300px]
      h-[300px] 
+     
+     dropDownShadow
 
      bg-PrimaryWhite
 

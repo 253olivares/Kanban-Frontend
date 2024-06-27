@@ -1,6 +1,7 @@
+import { memo } from "react"
 
 
-const BoardNameInputMobile = ({boardName}:{boardName:string}) => {
+const BoardNameInputMobile = memo(({boardName}:{boardName:string}) => {
   return (
     <h1 className="
     block
@@ -15,6 +16,6 @@ const BoardNameInputMobile = ({boardName}:{boardName:string}) => {
 
     ">{boardName}</h1>
   )
-}
+})
 
 export default BoardNameInputMobile
