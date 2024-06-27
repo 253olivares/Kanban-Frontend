@@ -1,5 +1,5 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit"
-import { addBoard, getBoards, removeBoardsFromWorkspaceLS } from "../../customLogic"
+import { addBoard, getBoards, removeBoardsFromWorkspaceLS, updateBoardNameFromWorkspaceLS } from "../../customLogic"
 import { RootState } from "../store"
 import { workspace } from "../workspace/workspaceSlice"
 export type board = {
@@ -68,7 +68,18 @@ export const addBoards = createAsyncThunk('boards/addBoard', async({
     }
 })
 
+export const updateBoardNameFromWorkspace = createAsyncThunk('boards/updateBoardName',async({boardName,boardId}: {boardName:string, boardId:string}, 
+    {rejectWithValue, getState}) => {
+        try {
+            const state = getState() as RootState;
 
+            return{boardName:boardName, boardId:boardId, prevStates:selectAllBoards(state)}
+
+        } catch (e:any){
+            console.log(e);
+            return rejectWithValue(e);
+        }
+})
 
 const initialState:initialStateType = boardsAdapter.getInitialState({
     status: 'idle',
@@ -91,6 +102,11 @@ const boardSlice = createSlice({
             removeBoardsFromWorkspaceLS(action.payload.boards);
             boardsAdapter.removeMany(state,action.payload.boards);
         }
+        // updateBoardNameFromWorkspace(state,action:PayloadAction<{boardName:string,boardId:string}>){
+        //     const {boardId,boardName} = action.payload;
+
+        //     boardsAdapter.updateOne(state,{id:boardId,changes:{...state.entities[boardId],name:boardName }})
+        // }
     },
     extraReducers:(builder) => {
         builder.addCase(initializeBoards.pending,(state,_)=> {
@@ -115,6 +131,11 @@ const boardSlice = createSlice({
         .addCase(addBoards.rejected,(state,_)=> {
             state.status = 'failed';
         })
+        .addCase(updateBoardNameFromWorkspace.fulfilled,(state,action:PayloadAction<{boardName:string,boardId:string,prevStates:board[]}>)=> {
+            const {boardId,boardName,prevStates} = action.payload;
+            updateBoardNameFromWorkspaceLS(boardId,boardName,prevStates);
+            boardsAdapter.updateOne(state,{id:boardId,changes:{...state.entities[boardId],name:boardName}});
+        })
     }
 })
 
@@ -131,6 +152,7 @@ export const {
     changeBoardModal,
     newBoardNameUpdate,
     removeBoardsFromWorkspace
+    // updateBoardNameFromWorkspace
 } = boardSlice.actions;
 
 export default boardSlice.reducer;

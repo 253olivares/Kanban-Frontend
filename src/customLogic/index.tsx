@@ -53,6 +53,17 @@ export const removeBoardsFromWorkspaceLS = (boardsToRemove:string[]) => {
     localStorage.setItem(boardKey,JSON.stringify(updatedBoardList));    
 }
 
+export const updateBoardNameFromWorkspaceLS = (boardName:string, boardId:string,prevStates:board[]) => {
+    if(!localStorage.getItem(boardKey)){
+        reloadApplication();
+        return
+    }
+    localStorage.setItem(boardKey,JSON.stringify(prevStates.map(b => b.b_id === boardId ? {
+        ...b,
+        name:boardName
+    }:b)))
+}
+
 export const addBoard = (newBoard:board, prevState:board[]):void => {
     if(!localStorage.getItem(boardKey)) {
         reloadApplication();

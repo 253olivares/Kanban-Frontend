@@ -1,6 +1,10 @@
 import { memo, useEffect, useRef, useState } from "react"
+import { useAppDispatch } from "../../../../reduxStore/hook";
+import { updateBoardNameFromWorkspace } from "../../../../reduxStore/boards/boardsSlice";
 
-const BoardNameInput = memo(({boardName}:{boardName:string}) => {
+const BoardNameInput = memo(({boardName, boardId}:{boardName:string, boardId:string}) => {
+
+  const dispatch = useAppDispatch();
 
   const [boardNameState, setBoardNameState] = useState<string>(boardName);
   const [limit, setLimit] = useState<boolean>(false);
@@ -14,14 +18,23 @@ const BoardNameInput = memo(({boardName}:{boardName:string}) => {
       setBoardNameState(e.target.value)
     }
     
-    if(boardNameState.trim().length!>16){
-      // save to state and update localstorage
+
+    if(boardNameState.trim().length<=16){
+      // save to state and update localStorage
+
+      console.log("Should run save!");
+
+      dispatch(updateBoardNameFromWorkspace({boardName:e.target.value.trim(),boardId:boardId}))
+      .unwrap().catch(()=>{
+        alert("Ran into problem updating board name!")
+      })
+
     }
   }
 
   useEffect(()=>{
 
-    if(inputRef.current && boardNameState.trim().length > 16){
+    if(inputRef.current && boardNameState.trim().length >= 16){
       setLimit(true);
     } else {
       if(inputRef.current) setLimit(false);

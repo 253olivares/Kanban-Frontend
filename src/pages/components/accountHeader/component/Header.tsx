@@ -84,7 +84,7 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
             {
             params.workspaceId && selectBoard ?
                 <>
-                    <InputHeader boardName={selectBoard.name} />
+                    <InputHeader boardName={selectBoard.name} boardId = {selectBoard.b_id} />
                     <FilterBoard filters={filters} />
                     <MemebersBoard boardMembers={selectBoard.members} />
                 </>

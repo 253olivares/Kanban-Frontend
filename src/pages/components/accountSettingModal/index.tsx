@@ -5,6 +5,7 @@ import { memo, useContext, useEffect} from 'react';
 import { closeAccountModal,getCroppingImage,openProfile, setCroppingImageData } from "../../../reduxStore/modal/modalSlice";
 import { AppContext } from "../../appRefContext";
 import { useNavigate } from "react-router-dom";
+import { setNewSelect } from "../../../reduxStore/workspace/workspaceSlice";
 
 const index = memo(() => {
     const dispatch = useAppDispatch();
@@ -347,6 +348,8 @@ const index = memo(() => {
  
               // log out user
               dispatch(logOut());
+
+              dispatch(setNewSelect(''));
              
               navigate('/');
             } catch(e:any){
