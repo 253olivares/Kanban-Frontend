@@ -252,6 +252,18 @@ export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | 
     return match;
 }
 
+export const resetBackend = async() => {
+    localStorage.removeItem(rememberKey);
+    localStorage.removeItem(boardKey);
+    localStorage.removeItem(commentKey);
+    localStorage.removeItem(listKey);
+    localStorage.removeItem(taskKey);
+    localStorage.removeItem(userKey);
+    localStorage.removeItem(workspaceKey);
+
+    reloadApplication();
+}
+
 export const checkStorages= async():Promise<void> => {
 
     !localStorage.getItem(rememberKey)&& localStorage.setItem(rememberKey,JSON.stringify(null));
