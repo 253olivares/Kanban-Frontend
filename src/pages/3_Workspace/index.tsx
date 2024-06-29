@@ -4,7 +4,9 @@ import { getAccountSettings, getFilterModal } from "../../reduxStore/modal/modal
 import { AnimatePresence } from "framer-motion";
 
 import AccountSettingModal from '../components/accountSettingModal/index';
-import FilterModal from '../2_AccountLanding/components/taskFilter/filterModal'
+import FilterModal from '../2_AccountLanding/components/taskFilter/filterModal';
+import BoardAndWorkspaces from '../3_Workspace/components/boardPageWorkspace&BoardSelector/Container';
+import ListHolder from "./components/listsHolder/ListHolder";
 
 const index = memo(() => {
   
@@ -18,6 +20,7 @@ const index = memo(() => {
     flex-grow
     overflow-hidden
     ">
+      <BoardAndWorkspaces />
       <AnimatePresence>
         {
           accountSettings ? <AccountSettingModal /> : ''
@@ -28,6 +31,7 @@ const index = memo(() => {
           openFilterModal ? <FilterModal /> : ''
         }
       </AnimatePresence>
+      <ListHolder />
     </div>
   )
 })
