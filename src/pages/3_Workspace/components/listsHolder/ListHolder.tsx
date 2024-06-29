@@ -1,3 +1,4 @@
+import AddList from "./components/addList/AddList"
 
 
 // Our holder for our div this is where we will be holding all our tasks
@@ -9,13 +10,20 @@ const ListHolder = () => {
 
     overflow-auto
 
-    sLaptop:p-[]
-    mLaptop:p-[]
+    sLaptop:p-[1.249rem]
+    mLaptop:p-[1.562rem]
     desktop:p-[1.875rem]
-    largeDesktop:p-[]
+    largeDesktop:p-[2.343rem]
 
+    flex
+    flex-row
+
+    sLaptop:gap-[1.041rem]
+    mLaptop:gap-[1.302rem]
+    desktop:gap-[1.563rem]
+    largeDesktop:gap-[1.953rem]
     ">
-        
+        <AddList />
     </div>
   )
 }
