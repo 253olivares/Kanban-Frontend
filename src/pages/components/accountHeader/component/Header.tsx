@@ -27,9 +27,6 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
     if(selectBoard !== null && !selectBoard.members){
         alert('Project has recently been updated with new back end build! If you are getting this error it needs to be updated. Project will soon reset the localstorage to make sure its build is up to date!');
     }
-    if(selectBoard !== null && useAppSelector(getWorkspaceSelect) !== ''){
-        console.log('need to set workspace for account page!')
-    }   
   return (
     <div className={`
 
