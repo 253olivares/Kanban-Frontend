@@ -1,6 +1,6 @@
-import { useAppSelector } from '../../../../reduxStore/hook';
+import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 
-import { memo} from 'react';
+import { memo, useEffect} from 'react';
 
 import { user } from '../../../../reduxStore/users/userSlice';
 import { Params } from 'react-router-dom';
@@ -15,18 +15,26 @@ import CogBoard from '../../../3_Workspace/components/headComponents/BoardSpaceS
 import { selectBoardById } from '../../../../reduxStore/boards/boardsSlice';
 import { getFilters } from '../../../../reduxStore/tasks/tasksSlice';
 import ProfileIcon from './ProfileIcon';
-import { getWorkspaceSelect } from '../../../../reduxStore/workspace/workspaceSlice';
+import { getWorkspaceSelect, setNewSelect } from '../../../../reduxStore/workspace/workspaceSlice';
 
 // pass out user information to our header
 const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>}) => {
     
+    const dispatch = useAppDispatch();
+
     const selectBoard = useAppSelector(state => selectBoardById(state,params?.workspaceId || '')) || null;
     const filters = useAppSelector(getFilters);
+    const workspaceSelect = useAppSelector(getWorkspaceSelect);
 
     if(!user) return;
     if(selectBoard !== null && !selectBoard.members){
         alert('Project has recently been updated with new back end build! If you are getting this error it needs to be updated. Project will soon reset the localstorage to make sure its build is up to date!');
     }
+    useEffect(()=> {
+        if(selectBoard !== null && workspaceSelect === ''){
+            dispatch(setNewSelect(selectBoard.w_id))
+        }   
+    },[])
   return (
     <div className={`
 
