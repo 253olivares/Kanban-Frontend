@@ -73,6 +73,8 @@ export const updateBoardNameFromWorkspace = createAsyncThunk('boards/updateBoard
         try {
             const state = getState() as RootState;
 
+           console.log("From slice:", boardName);
+
             return{boardName:boardName, boardId:boardId, prevStates:selectAllBoards(state)}
 
         } catch (e:any){
@@ -133,6 +135,7 @@ const boardSlice = createSlice({
         })
         .addCase(updateBoardNameFromWorkspace.fulfilled,(state,action:PayloadAction<{boardName:string,boardId:string,prevStates:board[]}>)=> {
             const {boardId,boardName,prevStates} = action.payload;
+            console.log("From toolkit listener:",boardName)
             updateBoardNameFromWorkspaceLS(boardId,boardName,prevStates);
             boardsAdapter.updateOne(state,{id:boardId,changes:{...state.entities[boardId],name:boardName}});
         })

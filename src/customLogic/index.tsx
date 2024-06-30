@@ -53,15 +53,23 @@ export const removeBoardsFromWorkspaceLS = (boardsToRemove:string[]) => {
     localStorage.setItem(boardKey,JSON.stringify(updatedBoardList));    
 }
 
-export const updateBoardNameFromWorkspaceLS = (boardName:string, boardId:string,prevStates:board[]) => {
+export const updateBoardNameFromWorkspaceLS = (boardId:string, boardName:string, prevStates:board[]) => {
     if(!localStorage.getItem(boardKey)){
         reloadApplication();
         return
     }
-    localStorage.setItem(boardKey,JSON.stringify(prevStates.map(b => b.b_id === boardId ? {
-        ...b,
-        name:boardName
-    }:b)))
+    console.log('From function to update Local storage:',boardName);
+
+    const newArray = prevStates.map(b=> {
+        if(b.b_id === boardId){
+            return {
+                ...b,
+                name:boardName
+            }
+        }
+        return b
+    })
+    localStorage.setItem(boardKey,JSON.stringify(newArray));
 }
 
 export const addBoard = (newBoard:board, prevState:board[]):void => {
@@ -94,7 +102,8 @@ export const removeWorkspace = (id:string, state:workspace[]):void => {
     if(!localStorage.getItem(workspaceKey)){
         return;
     }    
-    localStorage.setItem(workspaceKey,JSON.stringify(state.filter(x=> x.w_id !== id)));
+    const newArray = state.filter(x => x.w_id !== id);
+    localStorage.setItem(workspaceKey,JSON.stringify(newArray));
 }
 
 export const updateWorkspaceBoardLS = (updatedWorkspace:workspace, prevState:workspace[])=> {
@@ -102,7 +111,8 @@ export const updateWorkspaceBoardLS = (updatedWorkspace:workspace, prevState:wor
         reloadApplication();
         return;
     }
-    localStorage.setItem(workspaceKey,JSON.stringify(prevState.map(w=> w.w_id === updatedWorkspace.w_id ? updatedWorkspace : w)))
+    const newArray = prevState.map(w=> w.w_id === updatedWorkspace.w_id ? updatedWorkspace : w)
+    localStorage.setItem(workspaceKey,JSON.stringify(newArray));
 }
 
 export const addWorkspace = (newWorkSpace:workspace ,prevState:workspace[]):void => {

@@ -3,6 +3,8 @@ import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../../../../appRefContext';
 import { useAppDispatch } from '../../../../../../reduxStore/hook';
 import { changeListModalState } from '../../../../../../reduxStore/modal/modalSlice';
+import checkMark from '/assets/Check_MarkIcon.svg';
+import cancelIcon from '/assets/x_Icon.svg';
 
 const AddNewListName = () => {
 
@@ -51,15 +53,35 @@ const AddNewListName = () => {
           console.log('test')
           dispatch(changeListModalState(false))
         }}>
-            <input value={inputName} onChange={(e)=> setInputName(e.target.value)} type="text" />
+            <input className='
+              flex-grow
+            ' value={inputName} onChange={(e)=> setInputName(e.target.value)} type="text" />
             <div className='
             flex
             flex-row
             '>
-                <img onClick={()=> {
+                <img className='
+                  sLaptop:h-[1.145rem]
+                  mLaptop:h-[1.432rem]
+                  desktop:h-[1.719rem]
+                  largeDesktop:h-[2.148rem]
+
+                  opacity-75
+
+                  hover:cursor-pointer
+                  hover:opacity-100
+                ' onClick={()=> {
                   dispatch(changeListModalState(false))
-                }} src="" alt="Cancel Name" />
-                <input type="image" src="" alt="Approve Name" />
+                }} src={cancelIcon} alt="Cancel Name" />
+                <input className='
+                  sLaptop:h-[1.145rem]
+                  mLaptop:h-[1.432rem]
+                  desktop:h-[1.719rem]
+                  largeDesktop:h-[2.148rem]
+
+                  opacity-75
+                  hover:opacity-100
+                ' type="image" src={checkMark} alt="Approve Name" />
             </div>
         </form>
     </motion.div>

@@ -24,6 +24,7 @@ const BoardNameInput = memo(({boardName, boardId}:{boardName:string, boardId:str
 
       console.log("Name size!",e.target.value.trim().length)
 
+      console.log("From Event Listener:",e.target.value);
       console.log("Should run save!");
 
       dispatch(updateBoardNameFromWorkspace({boardName:e.target.value.trim(),boardId:boardId}))
