@@ -67,6 +67,7 @@ const index = memo(() => {
 
       sLaptop:relative
 
+      overflow-hidden
       sLaptop:overflow-visible
     `}>
         <div

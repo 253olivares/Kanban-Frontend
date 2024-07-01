@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { useContext, useEffect, useRef } from "react"
+import { memo, useContext, useEffect, useRef } from "react"
 import { AppContext } from "../../../appRefContext";
 import { useState } from "react";
 
@@ -10,8 +10,9 @@ import { addNewWorkspace, changeModal, getWorkspaceSelect, updateWorkspaceBoard 
 import { sanitize } from "../../../../customLogic";
 import { updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
 import { addBoards, changeBoardModal } from "../../../../reduxStore/boards/boardsSlice";
+import { changeListModalState, changeMobileBoardNameState } from "../../../../reduxStore/modal/modalSlice";
 
-const index = ({boardsModal,mobileWorkspace,modaal}:{boardsModal:boolean,mobileWorkspace:boolean,modaal:string}) => {
+const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardNameModal}:{boardsModal:boolean,mobileWorkspace:boolean,modal:string,listModal:boolean,mobileBoardNameModal:boolean}) => {
 
     const dispatch = useAppDispatch();
 
@@ -21,10 +22,16 @@ const index = ({boardsModal,mobileWorkspace,modaal}:{boardsModal:boolean,mobileW
     const selectWorkspace = useAppSelector(getWorkspaceSelect);
 
     const workspaceRef = useRef<HTMLInputElement>(null);
-    const boardRef = useRef<HTMLInputElement>(null)
+    const boardRef = useRef<HTMLInputElement>(null);
+    // @ts-ignore
+    const listRef = useRef<HTMLInputElement>(null);
+    // @ts-ignore
+    const newBoardNameRef = useRef<HTMLInputElement>(null);
 
     const [newWorkspaceName,setNewWorkspaceName] = useState<string>("");
     const [newBoardName, setNewBoardName] = useState<string>("");
+    const [newList, setNewList] = useState<string>("");
+    const [updatedBoardName, setUpdatedBoardName] = useState<string>("");
 
     const checkInputNewworkspace = ():void => {
       if(newWorkspaceName.trim().length > 15){
@@ -58,6 +65,14 @@ const index = ({boardsModal,mobileWorkspace,modaal}:{boardsModal:boolean,mobileW
         setNewBoardName('');
       })
     } 
+
+    const checkListName =():void => {
+      alert("Working on this feature!");
+    }
+
+    const checkNewBoardName = ():void => {
+
+    }
 
     useEffect(()=> {
 
@@ -133,13 +148,39 @@ const index = ({boardsModal,mobileWorkspace,modaal}:{boardsModal:boolean,mobileW
         </AnimatePresence> : ''
       }
       {
-        modaal === 'deleteConfirm' ? 
+        modal === 'deleteConfirm' ? 
         <AnimatePresence>
             <ConfirmDelete />
         </AnimatePresence> : ''
       }
+      {
+        listModal ?
+        <AnimatePresence>
+          <AddModal 
+            label="Add New List:"
+            placeholder="New List..."
+            valueHolder={newList}
+            setHolder = {(e:React.ChangeEvent<HTMLInputElement>)=> setNewList(e.target.value)}
+            checkInputHolder = {checkListName}
+            closeModal={()=> dispatch(changeListModalState(false))}
+            />
+        </AnimatePresence> : ''
+      }
+      {
+        mobileBoardNameModal ?
+        <AnimatePresence>
+          <AddModal 
+            label="Update Board Name:"
+            placeholder="New Board Name..."
+            valueHolder={updatedBoardName}
+            setHolder={(e:React.ChangeEvent<HTMLInputElement>)=> setUpdatedBoardName(e.target.value)}
+            checkInputHolder={checkNewBoardName}
+            closeModal={()=>dispatch(changeMobileBoardNameState(false))}
+          />
+        </AnimatePresence> : ''
+      }
     </motion.div>
   )
-}
+})
 
 export default index

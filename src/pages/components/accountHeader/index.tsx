@@ -1,6 +1,6 @@
 import { checkRemembered, getUser } from '../../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
-import { getModalStatus, getModalType } from '../../../reduxStore/modal/modalSlice';
+import { getListModal, getMobileBoardNameModal, getModalStatus, getModalType } from '../../../reduxStore/modal/modalSlice';
 import { useLayoutEffect, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -32,6 +32,8 @@ const index = memo(() => {
   const mobileWorkspace = useAppSelector(getWorkSpaceModal);
   const boardsModal = useAppSelector(getBoardModal);
   const modalType = useAppSelector(getModalType);
+  const listModal = useAppSelector(getListModal);
+  const mobileBoardNameModal = useAppSelector(getMobileBoardNameModal);
 
   // a cache check to have the application ato login a user 
   // if they click on this page
@@ -101,11 +103,17 @@ const index = memo(() => {
       `}>
         <AnimatePresence>
         {
-          mobileWorkspace || boardsModal || modalType ==='deleteConfirm' ? 
+          mobileWorkspace || 
+          boardsModal || 
+          modalType ==='deleteConfirm' || 
+          listModal || 
+          mobileBoardNameModal  ? 
           <MobileModal 
           boardsModal={boardsModal} 
           mobileWorkspace={mobileWorkspace} 
-          modaal = {modalType}
+          modal = {modalType}
+          listModal={listModal}
+          mobileBoardNameModal = {mobileBoardNameModal }
           /> : ''
         }
         </AnimatePresence>

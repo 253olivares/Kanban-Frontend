@@ -312,7 +312,7 @@ const index = memo(() => {
           sLaptop:text-left
           sLaptop:hover:opacity-50
           hover:cursor-pointer
-          ">Help</p>
+          ">Help</p>  
         </div>
         <hr 
         className="

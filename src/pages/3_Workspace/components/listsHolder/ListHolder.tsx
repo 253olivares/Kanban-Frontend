@@ -10,13 +10,19 @@ const ListHolder = () => {
 
     overflow-auto
 
+    py-[0.976rem]
+    mobile:py-[1.302rem]
+    sMobile:py-[2.082rem]
+    mMobile:py-[2.5rem]
+    px-[5.5%]
     sLaptop:p-[1.249rem]
     mLaptop:p-[1.562rem]
     desktop:p-[1.875rem]
     largeDesktop:p-[2.343rem]
 
     flex
-    flex-row
+    flex-col
+    sLaptop:flex-row
 
     sLaptop:gap-[1.041rem]
     mLaptop:gap-[1.302rem]

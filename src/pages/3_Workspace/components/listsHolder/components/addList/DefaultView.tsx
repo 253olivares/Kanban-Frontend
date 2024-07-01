@@ -9,6 +9,12 @@ const DefaultView = () => {
 
   return (
     <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+          duration:.5
+      }}
      onClick={()=> dispatch(changeListModalState(true))}
      className="
       w-full
@@ -22,6 +28,17 @@ const DefaultView = () => {
       opacity-50
       hover:opacity-100
       hover:cursor-pointer
+      
+      sLaptop:px-[0.833rem]
+      mLaptop:px-[1.041rem]
+      desktop:px-[1.25rem]
+      largeDesktop:px-[1.562rem]
+
+      sLaptop:py-[0.562rem]
+      mLaptop:py-[0.703rem]
+      desktop:py-[0.844rem]
+      largeDesktop:py-[1.055rem]
+
      "
     > 
         <h1 className="
