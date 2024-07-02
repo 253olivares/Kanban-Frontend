@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import closeButton from '/assets/Add_New_Workspace.svg';
 import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook";
 import { addBoards, changeBoardModal, getBoardModal } from "../../../../../reduxStore/boards/boardsSlice";
-import { useContext, useEffect, useRef, useState } from "react";
+import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { updateUserBoards } from "../../../../../reduxStore/users/userSlice";
 import { updateWorkspaceBoard } from "../../../../../reduxStore/workspace/workspaceSlice";
 import { AppContext } from "../../../../appRefContext";
@@ -23,6 +23,10 @@ const addName = ({workspace}:{workspace:string}) => {
     const submitBoardName = () => {
       if(boardsName.trim().length > 16) {
         alert('Please make sure the board name is less than 16 characters. (Includes spaces)');
+        return;
+      }
+      if(boardsName.trim() === '') {
+        alert("Please enter a name");
         return;
       }
       dispatch(addBoards({boardName:boardsName.trim(),workspaceId:workspace}))
@@ -132,7 +136,12 @@ const addName = ({workspace}:{workspace:string}) => {
             hover:cursor-pointer
             " src={closeButton} alt="Close Button" />
         </div>
-        <div className="
+        <form 
+        onSubmit={(e:FormEvent)=>{
+          e.preventDefault();
+          submitBoardName();
+        }}
+        className="
         w-full
         flex flex-col
         px-[8.6%]
@@ -183,8 +192,7 @@ const addName = ({workspace}:{workspace:string}) => {
             ">
                 <button 
                 
-                onClick={()=> submitBoardName()}
-
+                type="submit"
                 className="
                 text-white
                 site-borders
@@ -212,7 +220,7 @@ const addName = ({workspace}:{workspace:string}) => {
                 focus:outline-none
                 ">Create</button>
             </div>
-        </div>
+        </form>
     </motion.div>
   )
 }

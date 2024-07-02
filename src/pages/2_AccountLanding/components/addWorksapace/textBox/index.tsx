@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react"
+import { FormEvent, useEffect, useRef, useState } from "react"
 import { useAppDispatch} from "../../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal } from "../../../../../reduxStore/workspace/workspaceSlice";
 import { sanitize } from "../../../../../customLogic";
@@ -42,7 +42,31 @@ const index = () => {
 
 
   return (
-    <>
+    <form 
+    onSubmit={(e:FormEvent)=> {
+      e.preventDefault();
+      checkInput();
+    }}
+    className="
+        w-full
+        flex 
+        flex-row
+        relative
+        z-[10]
+
+        sLaptop:px-[0.533rem]
+        mLaptop:px-[0.666rem]
+        desktop:px-[0.8rem]
+        largeDesktop:px-[1rem]
+        4k:px-[1.333rem]
+        
+        sLaptop:pb-[0.500rem]
+        mLaptop:pb-[0.625rem]
+        desktop:pb-[0.750rem]
+        largeDesktop:pb-[0.938rem]
+        4k:pb-[1.250rem]
+
+        ">  
         <input
           value={text}
           onChange={(e)=>setText(e.target.value)}
@@ -82,9 +106,9 @@ const index = () => {
           focus:outline-none
           "
           id="newWorkSpaceInput" type="text" />
-        <button 
+        <button
+        type="submit" 
         disabled={text.trim() === ''}
-        onClick={()=>checkInput()}
         className="
           text-white
           site-borders
@@ -105,8 +129,11 @@ const index = () => {
           4k:rounded-r-[0.541rem]
 
           focus:outline-none
+
+          disabled:opacity-75
+
           ">Create</button>
-    </>
+      </form>
   )
 }
 

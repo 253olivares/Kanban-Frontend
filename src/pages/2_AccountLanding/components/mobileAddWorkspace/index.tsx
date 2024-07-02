@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion"
-import { memo, useContext, useEffect, useRef } from "react"
+import { memo, useContext } from "react"
 import { AppContext } from "../../../appRefContext";
 import { useState } from "react";
 
@@ -9,10 +9,11 @@ import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal, getWorkspaceSelect, updateWorkspaceBoard } from "../../../../reduxStore/workspace/workspaceSlice";
 import { sanitize } from "../../../../customLogic";
 import { updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
-import { addBoards, changeBoardModal } from "../../../../reduxStore/boards/boardsSlice";
+import { addBoards, changeBoardModal, updateBoardNameFromWorkspace } from "../../../../reduxStore/boards/boardsSlice";
 import { changeListModalState, changeMobileBoardNameState } from "../../../../reduxStore/modal/modalSlice";
+import { Params } from "react-router-dom";
 
-const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardNameModal}:{boardsModal:boolean,mobileWorkspace:boolean,modal:string,listModal:boolean,mobileBoardNameModal:boolean}) => {
+const index = memo(({params, boardsModal,mobileWorkspace,modal,listModal,mobileBoardNameModal}:{params:Readonly<Params<string>>,boardsModal:boolean,mobileWorkspace:boolean,modal:string,listModal:boolean,mobileBoardNameModal:boolean}) => {
 
     const dispatch = useAppDispatch();
 
@@ -20,13 +21,6 @@ const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardName
     const {mobileAddNewWorkspace} = appContext!;
 
     const selectWorkspace = useAppSelector(getWorkspaceSelect);
-
-    const workspaceRef = useRef<HTMLInputElement>(null);
-    const boardRef = useRef<HTMLInputElement>(null);
-    // @ts-ignore
-    const listRef = useRef<HTMLInputElement>(null);
-    // @ts-ignore
-    const newBoardNameRef = useRef<HTMLInputElement>(null);
 
     const [newWorkspaceName,setNewWorkspaceName] = useState<string>("");
     const [newBoardName, setNewBoardName] = useState<string>("");
@@ -36,6 +30,10 @@ const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardName
     const checkInputNewworkspace = ():void => {
       if(newWorkspaceName.trim().length > 15){
         alert('Please make sure your workspace name is less than 15 characters. (Including spaces)');
+        return;
+      }
+      if(newWorkspaceName.trim()===''){
+        alert("Please enter a workspace name!");
         return;
       }
       dispatch(addNewWorkspace(sanitize(newWorkspaceName.trim())))
@@ -53,6 +51,10 @@ const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardName
         alert('Please make sure the board name is less than 16 characters. (Including spaces)')
         return;
       }
+      if(newBoardName.trim()===''){
+        alert("Please enter a board Name!");
+        return
+      }
       dispatch(addBoards({boardName:newBoardName.trim(),workspaceId:selectWorkspace}))
       .unwrap()
       .then((x) => {
@@ -67,26 +69,30 @@ const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardName
     } 
 
     const checkListName =():void => {
+      if(newList.trim() === "") {
+        alert("Please enter a list Name!");
+        return;
+      }
       alert("Working on this feature!");
     }
 
     const checkNewBoardName = ():void => {
-
-    }
-
-    useEffect(()=> {
-
-      if(workspaceRef.current && newWorkspaceName.trim().length >15){
-        workspaceRef.current.style.color = 'red';
-      } else if (boardRef.current && newBoardName.trim().length >16){
-        boardRef.current.style.color = 'red';
-      } else if (workspaceRef.current && newWorkspaceName.trim().length <= 15){
-        workspaceRef.current.style.color = 'black';
-      } else if (boardRef.current && newBoardName.trim().length <= 16){
-        boardRef.current.style.color = 'black';
+      if(updatedBoardName.trim().length !> 18) {
+        alert("Please make sure your workspace name is less then 16 letters or until letters are no longer red!");
+        return;
+      }
+      if(updatedBoardName.trim() === "" ){
+        alert("Please enter a new board name!");
       }
 
-    },[])
+      dispatch(updateBoardNameFromWorkspace({boardName:updatedBoardName.trim(),boardId: params?.workspaceId || ""}))
+      .unwrap().then(()=> {
+        dispatch(changeMobileBoardNameState(false))
+      }).catch(()=>{
+        alert("Ran into problem updating board name!")
+      })
+
+    }
 
   return (
     <motion.div 
@@ -125,6 +131,7 @@ const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardName
         mobileWorkspace ? 
         <AnimatePresence>
             <AddModal 
+            limit={15}
             label="Add New Workspace:"
             placeholder="New Workspace..."
             valueHolder = {newWorkspaceName}
@@ -137,7 +144,8 @@ const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardName
       {
         boardsModal ? 
         <AnimatePresence>
-            <AddModal 
+            <AddModal
+            limit={16} 
             label="Add New Board:"
             placeholder="New Board..."
             valueHolder={newBoardName}
@@ -157,6 +165,7 @@ const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardName
         listModal ?
         <AnimatePresence>
           <AddModal 
+            limit={16}
             label="Add New List:"
             placeholder="New List..."
             valueHolder={newList}
@@ -170,6 +179,7 @@ const index = memo(({boardsModal,mobileWorkspace,modal,listModal,mobileBoardName
         mobileBoardNameModal ?
         <AnimatePresence>
           <AddModal 
+            limit={16}
             label="Update Board Name:"
             placeholder="New Board Name..."
             valueHolder={updatedBoardName}

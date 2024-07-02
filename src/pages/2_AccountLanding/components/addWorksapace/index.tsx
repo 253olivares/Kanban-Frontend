@@ -138,28 +138,7 @@ const index = () => {
           " />
         </div>
         {/* our input */}
-        <div className="
-        w-full
-        flex 
-        flex-row
-        relative
-        z-[10]
-
-        sLaptop:px-[0.533rem]
-        mLaptop:px-[0.666rem]
-        desktop:px-[0.8rem]
-        largeDesktop:px-[1rem]
-        4k:px-[1.333rem]
-        
-        sLaptop:pb-[0.500rem]
-        mLaptop:pb-[0.625rem]
-        desktop:pb-[0.750rem]
-        largeDesktop:pb-[0.938rem]
-        4k:pb-[1.250rem]
-
-        ">  
           <TextInput />
-        </div>
       </div>
     </motion.div> 
   )

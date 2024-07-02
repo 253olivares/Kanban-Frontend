@@ -9,7 +9,7 @@ const BoardSpaceSettingBody = memo(() => {
     const dispatch = useAppDispatch();
 
     const appContext = useContext(AppContext);
-    const {settingsBodyRef, settingsRef} = appContext!;
+    const {settingsBodyRef, settingsRef, mobileMembersRef} = appContext!;
 
     useLayoutEffect(()=> {
         const checkClick = (e:MouseEvent | TouchEvent) => {
@@ -18,7 +18,9 @@ const BoardSpaceSettingBody = memo(() => {
             if(settingsBodyRef.current && !settingsBodyRef.current.contains(element) &&
             settingsRef.current && !settingsRef.current.contains(element)
             || !settingsBodyRef.current
-            ) dispatch (setSettingModal(false))
+            ) {
+              if(!mobileMembersRef.current?.contains(element))dispatch (setSettingModal(false))
+            } 
 
         }   
         window.addEventListener('click',checkClick,true);
@@ -50,8 +52,14 @@ const BoardSpaceSettingBody = memo(() => {
         top-[102.5%]
         right-[-25%]
 
-        w-[300px]
-        h-[300px]
+        sLaptop:w-[159.999px]
+        sLaptop:h-[133.333px]
+        mLaptop:w-[199.999px]
+        mLaptop:h-[166.666px]
+        desktop:w-[240px]
+        desktop:h-[200px]
+        largeDesktop:w-[300px]
+        largeDesktop:h-[250px]
 
         dropDownShadow
 

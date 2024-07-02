@@ -1,7 +1,8 @@
+import { memo } from "react";
 import { useAppDispatch } from "../../../../../reduxStore/hook"
 import { changeFilter } from "../../../../../reduxStore/tasks/tasksSlice";
 
-const index = ({k,v}: {k:string, v:boolean}) => {
+const index = memo(({k,v}: {k:string, v:boolean}) => {
 
     const dispatch = useAppDispatch();
 
@@ -84,10 +85,10 @@ const index = ({k,v}: {k:string, v:boolean}) => {
 
          leading-none
 
-         py-[0.195rem]
-         mobile:py-[0.260rem]
-         sMobile:py-[0.416rem]
-         mMobile:py-[0.5rem]
+         py-[0.390rem]
+         mobile:py-[0.520rem]
+         sMobile:py-[0.833rem]
+         mMobile:py-[1rem]
          sLaptop:py-[0.125rem]
          mLaptop:py-[0.156rem]
          desktop:py-[0.188rem]
@@ -104,10 +105,10 @@ const index = ({k,v}: {k:string, v:boolean}) => {
          largeDesktop:rounded-[0.235rem]
          4k:rounded-[0.313rem]
 
-         w-[8.178rem]
-         mobile:w-[10.905rem]
-         sMobile:w-[17.448rem]
-         mMobile:w-[20.938rem]
+         w-[10.253rem]
+         mobile:w-[13.671rem]
+         sMobile:w-[21.875rem]
+         mMobile:w-[26.25rem]
          sLaptop:w-[3.800rem]
          mLaptop:w-[4.750rem]
          desktop:w-[5.701rem]
@@ -131,6 +132,6 @@ const index = ({k,v}: {k:string, v:boolean}) => {
         >{capitalized}</label>
     </div>
   )
-}
+})
 
 export default index

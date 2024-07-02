@@ -3,6 +3,8 @@ import MobileMembers from "./components/MobileMembers";
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../../../../reduxStore/hook";
 import { selectBoardById } from "../../../../reduxStore/boards/boardsSlice";
+import MobileFilter from "./components/MobileFilter";
+import MobileSettings from "./components/MobileSettings";
 
 const Container = memo(() => {
 
@@ -32,6 +34,8 @@ const Container = memo(() => {
     sLaptop:hidden
     ">
       <MobileMembers boardMembers={selectBoard.members} />
+      <MobileFilter />
+      <MobileSettings />
     </div>
   )
 })

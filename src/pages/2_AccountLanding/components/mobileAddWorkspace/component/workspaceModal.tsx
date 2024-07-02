@@ -1,7 +1,8 @@
 import { motion } from "framer-motion"
-import { memo } from "react"
+import { FormEvent, memo } from "react"
 
 const workspaceModal = memo(({
+    limit,
     label,
     placeholder,
     valueHolder,
@@ -10,6 +11,7 @@ const workspaceModal = memo(({
     closeModal
 
 }:{
+    limit:number,
     label:string,
     placeholder:string,
     valueHolder:string,
@@ -20,7 +22,7 @@ const workspaceModal = memo(({
 }) => {
 
   return (
-    <motion.div
+    <motion.form
     initial={{
         y:25
     }}
@@ -33,6 +35,11 @@ const workspaceModal = memo(({
     transition={{
         duration:.3
       }}
+
+    onSubmit={(e:FormEvent)=> {
+        e.preventDefault();
+        checkInputHolder();
+    }}
 
     className="
 
@@ -77,7 +84,14 @@ const workspaceModal = memo(({
         >{label}</h1>
         <input 
         value={valueHolder}
-        onChange={(e)=>setHolder(e)}
+        onChange={(e)=> {
+            if(e.target.value.trim().length > limit){
+                e.target.style.color = "red";
+            } else {
+                e.target.style.color = "white";
+            }
+            setHolder(e)
+        }}
         placeholder={placeholder}
         className="
         w-full
@@ -108,8 +122,6 @@ const workspaceModal = memo(({
         focus:ring
         focus:ring-SelectorBlue
 
-        text-white
-
         " type="text" />
         <div className="
         py-[0.732rem]
@@ -123,7 +135,9 @@ const workspaceModal = memo(({
         flex-row
         justify-between
         ">
-            <button className="
+            <button 
+            type="reset"
+            className="
             font-bold
             bg-PrimaryWhite
 
@@ -152,7 +166,12 @@ const workspaceModal = memo(({
             " 
             onClick={()=>closeModal()} >Cancel</button>
 
-            <button disabled={valueHolder.trim()===''} className="
+            <button 
+
+            type="submit"
+
+            disabled={valueHolder.trim()===''} 
+            className="
             
             font-bold
 
@@ -183,10 +202,9 @@ const workspaceModal = memo(({
             bg-SelectorBlue
 
             " 
-            onClick={()=> checkInputHolder()}
             >Save</button>
         </div>
-    </motion.div>
+    </motion.form>
   )
 })
 

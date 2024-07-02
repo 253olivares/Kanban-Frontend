@@ -1,6 +1,6 @@
 import { checkRemembered, getUser } from '../../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
-import { getListModal, getMembersModal, getMobileBoardNameModal, getModalStatus, getModalType } from '../../../reduxStore/modal/modalSlice';
+import { getListModal, getMembersModal, getMobileBoardNameModal, getModalStatus, getModalType, getSettingsModal } from '../../../reduxStore/modal/modalSlice';
 import { useLayoutEffect, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -15,7 +15,7 @@ import { initialComments } from '../../../reduxStore/comments/commentsSlice';
 import { initiateList } from '../../../reduxStore/lists/listsSlice';
 import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
 import { initiateUserList } from '../../../reduxStore/userList/userList';
-import MembersModal from '../../3_Workspace/components/membersModal/MembersModal';
+import MembersModal from '../../3_Workspace/components/membersModal/MultiMobileModal';
 
 const index = memo(() => {
   const dispatch = useAppDispatch();
@@ -36,6 +36,7 @@ const index = memo(() => {
   const listModal = useAppSelector(getListModal);
   const mobileBoardNameModal = useAppSelector(getMobileBoardNameModal);
   const memberModal = useAppSelector(getMembersModal);
+  const settingsModal = useAppSelector(getSettingsModal);
 
   // a cache check to have the application ato login a user 
   // if they click on this page
@@ -105,8 +106,8 @@ const index = memo(() => {
       `}>
         <AnimatePresence>
           {
-            memberModal ?
-            <MembersModal /> : ''
+            memberModal || settingsModal ?
+            <MembersModal params={params} memberModal={memberModal} settingsModal={settingsModal} /> : ''
           }
         </AnimatePresence>
         <AnimatePresence>
@@ -117,6 +118,7 @@ const index = memo(() => {
           listModal || 
           mobileBoardNameModal  ? 
           <MobileModal 
+          params = {params}
           boardsModal={boardsModal} 
           mobileWorkspace={mobileWorkspace} 
           modal = {modalType}

@@ -13,7 +13,7 @@ const BoardNameInput = memo(({boardName, boardId}:{boardName:string, boardId:str
 
   const updateBoardName = (e:React.ChangeEvent<HTMLInputElement>) =>{
     if(e.target.value.trim().length !> 18){
-      alert('Please make sure your name is workspace name is less then 16 letters or until letters are no longer red!');
+      alert('Please make sure your workspace name is less then 16 letters or until letters are no longer red!');
     } else {
       setBoardNameState(e.target.value);
     }
@@ -21,11 +21,6 @@ const BoardNameInput = memo(({boardName, boardId}:{boardName:string, boardId:str
 
     if(e.target.value.trim().length<= 16){
       // save to state and update localStorage
-
-      console.log("Name size!",e.target.value.trim().length)
-
-      console.log("From Event Listener:",e.target.value);
-      console.log("Should run save!");
 
       dispatch(updateBoardNameFromWorkspace({boardName:e.target.value.trim(),boardId:boardId}))
       .unwrap().catch(()=>{

@@ -55,8 +55,15 @@ const BoardPageFilterBody = () => {
 
      hidden
      sLaptop:block
-     w-[300px]
-     h-[300px] 
+     
+     sLaptop:w-[159.999px]
+     sLaptop:h-[133.333px]
+     mLaptop:w-[199.999px]
+     mLaptop:h-[166.666px]
+     desktop:w-[240px]
+     desktop:h-[200px]
+     largeDesktop:w-[300px]
+     largeDesktop:h-[250px]
      
      dropDownShadow
 
