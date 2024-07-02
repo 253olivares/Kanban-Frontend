@@ -19,6 +19,10 @@ const index = memo(() => {
     relative
     flex-grow
     overflow-hidden
+
+    flex-col
+    sLaptop:block
+
     ">
       <BoardAndWorkspaces />
       <AnimatePresence>

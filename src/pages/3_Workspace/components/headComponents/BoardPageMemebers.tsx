@@ -25,7 +25,8 @@ const BoardPageMemebers = memo(({boardMembers}:{boardMembers:string[][]}) => {
       relative
 
       hidden
-      sLaptop:block
+      sLaptop:flex
+      items-center
 
       shrink-0
     ">
@@ -92,6 +93,7 @@ const BoardPageMemebers = memo(({boardMembers}:{boardMembers:string[][]}) => {
 
         <img 
         className={`
+          
           sLaptop:w-[0.875rem]
           mLaptop:w-[1.094rem]
           desktop:w-[1.313rem]

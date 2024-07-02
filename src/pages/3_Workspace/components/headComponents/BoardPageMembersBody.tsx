@@ -9,7 +9,7 @@ const BoardPageMembersBody = ({members}: {members:string[][]}) => {
     const dispatch = useAppDispatch();
 
     const appContext =  useContext(AppContext);
-    const {memberBodyRef, membersRefHead} = appContext!;
+    const {memberBodyRef, membersRefHead,mobileMembersRef} = appContext!;
 
     console.log(members);
 
@@ -25,8 +25,10 @@ const BoardPageMembersBody = ({members}: {members:string[][]}) => {
 
             if(memberBodyRef.current && !memberBodyRef.current.contains(element) &&
             membersRefHead.current && !membersRefHead.current.contains(element) ||
-            !memberBodyRef.current
-            ) dispatch(setOpenMemberModal(false));
+            !memberBodyRef.current 
+            ) {
+              if(!mobileMembersRef.current?.contains(element))dispatch(setOpenMemberModal(false));
+            } 
         }
         window.addEventListener('click',checkClick,true);
         return () => {

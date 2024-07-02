@@ -11,7 +11,7 @@ const BoardPageFilterBody = () => {
     const dispatch = useAppDispatch();
 
     const appContext = useContext(AppContext);
-    const {filterBodyRef, filterRefHead2} = appContext!;
+    const {filterBodyRef, filterRefHead2, filterModalRef, closeFilterModal} = appContext!;
 
     useLayoutEffect(()=> {
         const checkClick = (e: MouseEvent | TouchEvent) => {
@@ -20,8 +20,9 @@ const BoardPageFilterBody = () => {
             if(filterBodyRef.current && !filterBodyRef.current.contains(element) &&
             filterRefHead2 && !filterRefHead2.current?.contains(element) ||
             !filterBodyRef.current
-            ) dispatch(setOpenModal(false));
-
+            ) {
+              if(!filterModalRef.current?.contains(element) || closeFilterModal.current?.contains(element))dispatch(setOpenModal(false));
+            }
         }
         window.addEventListener('click',checkClick,true);
         return ()=> {

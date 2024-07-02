@@ -10,10 +10,10 @@ const ListHolder = () => {
 
     overflow-auto
 
-    py-[0.976rem]
-    mobile:py-[1.302rem]
-    sMobile:py-[2.082rem]
-    mMobile:py-[2.5rem]
+    pb-[0.878rem]
+    mobile:pb-[1.171rem]
+    sMobile:pb-[1.875rem]
+    mMobile:pb-[2.25rem]
     px-[5.5%]
     sLaptop:p-[1.249rem]
     mLaptop:p-[1.562rem]
