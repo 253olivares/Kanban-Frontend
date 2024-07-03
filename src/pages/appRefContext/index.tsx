@@ -23,7 +23,8 @@ export type contextType = {
     settingsRef:MutableRefObject<HTMLImageElement | null>,
     settingsBodyRef:MutableRefObject<HTMLDivElement | null>,
     addNewListNameRef: MutableRefObject<HTMLDivElement | null>,
-    mobileMembersRef:MutableRefObject<HTMLDivElement | null>
+    mobileMembersRef:MutableRefObject<HTMLDivElement | null>,
+    settingsModalArrowRef:MutableRefObject<HTMLDivElement | null>
 }
 
 export const AppContext = createContext<contextType | null>(null);
@@ -64,6 +65,8 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
 
     const mobileMembersRef = useRef<HTMLDivElement>(null);
 
+    const settingsModalArrowRef = useRef<HTMLDivElement>(null);
+
     const contextValues = {
         accountSettingsRef,
         modalRef,
@@ -87,7 +90,8 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
         settingsRef,
         settingsBodyRef,
         addNewListNameRef,
-        mobileMembersRef
+        mobileMembersRef,
+        settingsModalArrowRef
     }
 
     return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

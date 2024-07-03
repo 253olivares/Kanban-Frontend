@@ -1,4 +1,4 @@
-import { useContext, useLayoutEffect } from "react"
+import { memo, useContext, useLayoutEffect } from "react"
 import { AppContext } from "../../../appRefContext"
 import { useAppDispatch } from "../../../../reduxStore/hook";
 import { setOpenModal } from "../../../../reduxStore/modal/modalSlice";
@@ -75,9 +75,36 @@ const BoardPageFilterBody = () => {
      desktop:rounded-[0.572rem]
      largeDesktop:rounded-[0.715rem]
     ">
-
+      <ArrowHead />
     </motion.div>
   )
 }
+
+const ArrowHead = memo(()=> {
+  return <div className="
+  absolute
+
+  bg-PrimaryWhite
+
+  block
+
+  sLaptop:w-[0.833rem]
+  mLaptop:w-[1.041rem]
+  desktop:w-[1.250rem]
+  largeDesktop:w-[1.563rem]
+  sLaptop:h-[0.833rem]
+  mLaptop:h-[1.041rem]
+  desktop:h-[1.250rem]
+  largeDesktop:h-[1.563rem]
+  rotate-45
+ 
+  sLaptop:top-[calc(-0.833rem/2)]
+  mLaptop:top-[calc(-1.041rem/2)]
+  desktop:top-[calc(-1.250rem/2)]
+  largeDesktop:top-[calc(-1.563rem/2)]
+
+  left-[19.5%]
+  " />
+})
 
 export default BoardPageFilterBody
