@@ -45,6 +45,7 @@ const BoardPageFilterBody = () => {
       opacity: 0 
     }}
     transition={{
+      ease: "easeInOut",
       duration:.3
     }}
     ref={filterBodyRef}

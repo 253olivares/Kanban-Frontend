@@ -10,12 +10,12 @@ import { AppContext } from '../appRefContext';
 import SecondaryModalMobile from './components/SecondaryModal';
 import ModalContainer from '../../modals'
 
-const MainSection = lazy(()=> import('./section-1_Main-Head'))
-const PMSection = lazy(()=>import('./section-2_PM-Section'))
-const PricingSection = lazy(()=> import('./section-3_Pricing'));
+const MainSection = lazy(()=> import('./section-1_Main-Head/MainHead'))
+const PMSection = lazy(()=>import('./section-2_PM-Section/PMSection'))
+const PricingSection = lazy(()=> import('./section-3_Pricing/Pricing'));
 const Footer = lazy(()=> import('./footer'));
 
-const index = memo(():JSX.Element => {
+const HomePage = memo(():JSX.Element => {
   
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -47,11 +47,7 @@ const index = memo(():JSX.Element => {
   return (
     <main
     ref={pageRef}
-    className={`
-    z-0
-    block
-    relative
-    `}>
+    className={`homePage`}>
       <AnimatePresence>
         {/* open and close our modal */}
         { modalStatus &&  <ModalContainer /> }
@@ -70,4 +66,4 @@ const index = memo(():JSX.Element => {
   )
 })
 
-export default index
+export default HomePage;

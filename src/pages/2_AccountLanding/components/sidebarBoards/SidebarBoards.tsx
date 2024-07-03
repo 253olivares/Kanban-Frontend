@@ -7,7 +7,7 @@ import scrollbarImage from '/assets/scrollBarTrack.png'
 import BoardItem from '../boardItems/BoardItems'
 
 // sidebarBoards
-const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
+const SidebarBoards = memo(({selectWorkspace}:{selectWorkspace: string}) => {
 
   const workspace = useAppSelector(state=>selectWorkspaceById(state,selectWorkspace))
 
@@ -191,4 +191,4 @@ const index = memo(({selectWorkspace}:{selectWorkspace: string}) => {
   )
 })
 
-export default index
+export default SidebarBoards;

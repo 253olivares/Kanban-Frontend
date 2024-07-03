@@ -4,7 +4,7 @@ import { openCreateProfile } from "../../../reduxStore/modal/modalSlice"
 import { memo } from "react"
 
 // use memo caches our component and only updates when it detects changes have been made to the component itself
-const index = memo(() => {
+const PMSection = memo(() => {
   const dispatch = useAppDispatch();
   return (
     <section className="
@@ -224,4 +224,4 @@ const index = memo(() => {
   )
 })
 
-export default index
+export default PMSection;

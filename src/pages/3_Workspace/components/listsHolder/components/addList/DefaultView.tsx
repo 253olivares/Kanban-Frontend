@@ -1,20 +1,22 @@
+import { memo } from "react";
 import { useAppDispatch } from "../../../../../../reduxStore/hook";
 import { changeListModalState } from "../../../../../../reduxStore/modal/modalSlice";
 import AddList from '/assets/addBoard.png'
 import {motion} from 'framer-motion'
 
-const DefaultView = () => {
+const DefaultView = memo(() => {
 
     const dispatch = useAppDispatch();
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{
-          duration:.5
-      }}
+    initial={{ opacity: 0 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 0 }}
+    transition={{
+        ease:'easeInOut',
+        duration:.5
+    }}
      onClick={()=> dispatch(changeListModalState(true))}
      className="
       w-full
@@ -62,6 +64,6 @@ const DefaultView = () => {
         " src={AddList} alt="Add List Button!" />
     </motion.div>
   )
-}
+})
 
 export default DefaultView

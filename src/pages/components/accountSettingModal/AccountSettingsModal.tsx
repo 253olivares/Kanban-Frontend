@@ -8,7 +8,7 @@ import Account from "./Account";
 import Logout from "./Logout";
 import Options from "./Options";
 
-const index = memo(() => {
+const AccountSettingsModal = memo(() => {
     const dispatch = useAppDispatch();
 
     const appContext = useContext(AppContext);
@@ -45,11 +45,11 @@ const index = memo(() => {
   return (
     <motion.div
     initial={{ 
-      y:'-50%',
+       y:'-50%',
       opacity: 0 
     }}
     animate={{ 
-      y:0,
+       y:0,
       opacity: 1 
     }}
     exit={{ 
@@ -57,8 +57,10 @@ const index = memo(() => {
       opacity: 0 
     }}
     transition={{
+      ease: "easeInOut",
       duration:.3
-    }}
+     }}
+
     ref={accountSettingsRef}
     className="
     absolute
@@ -153,4 +155,4 @@ const index = memo(() => {
   )
 })
 
-export default index
+export default AccountSettingsModal;

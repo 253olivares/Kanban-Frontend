@@ -51,6 +51,7 @@ const BoardPageMembersBody = ({members}: {members:string[][]}) => {
       opacity: 0 
     }}
     transition={{
+      ease: "easeInOut",
       duration:.3
     }}
     ref={memberBodyRef}

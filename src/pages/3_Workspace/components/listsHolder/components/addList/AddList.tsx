@@ -4,17 +4,18 @@ import { useAppDispatch, useAppSelector } from "../../../../../../reduxStore/hoo
 import { changeListModalState, getListModal } from "../../../../../../reduxStore/modal/modalSlice";
 import { AnimatePresence } from "framer-motion";
 import AddListImage from '/assets/addBoard.png'
-
+import { memo } from "react";
+import { motion } from "framer-motion";
 
 // Our div to add a new list
-const AddList = () => {
+const AddList = memo(() => {
   
   const openModal = useAppSelector(getListModal);
 
   const dispatch = useAppDispatch();
 
   return (
-    <>
+    <motion.div>
       <div 
       onClick={()=> dispatch(changeListModalState(true))}
       className="
@@ -123,15 +124,14 @@ const AddList = () => {
             <AnimatePresence>
               <AddNewListName />
             </AnimatePresence>
-
             :
             <AnimatePresence>
               <DefaultView />
             </AnimatePresence>
           }
       </div>
-    </>
+    </motion.div>
   )
-}
+})
 
 export default AddList

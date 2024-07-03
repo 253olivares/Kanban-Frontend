@@ -13,7 +13,7 @@ import scrollbarImage from '/assets/scrollBarTrack.png';
 import scrollbarImageX from '/assets/scrollBarTrackX.png'
 
 
-const index = memo((
+const SidebarWorkspace = memo((
   {
     setWorkspace,
     workspaces,
@@ -248,4 +248,4 @@ const index = memo((
   )
 })
 
-export default index
+export default SidebarWorkspace;

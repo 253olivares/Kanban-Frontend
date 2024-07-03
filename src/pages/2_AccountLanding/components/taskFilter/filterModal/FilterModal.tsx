@@ -4,9 +4,9 @@ import { AppContext } from '../../../../appRefContext';
 import { useAppSelector } from '../../../../../reduxStore/hook';
 import { getFilters } from '../../../../../reduxStore/tasks/tasksSlice';
 
-import FilterLabels from '../label'
+import FilterLabels from '../label/Label'
 
-const index = memo(() => {
+const FilterModal = memo(() => {
 
     const appContext = useContext(AppContext);
     const {filterModalRef} = appContext!;
@@ -31,39 +31,7 @@ const index = memo(() => {
         duration:.3
       }}
       ref={filterModalRef}
-      className='
-      absolute
-      top-0
-      right-0
-      z-[10]
-
-      w-full
-      sLaptop:hidden
-
-      dropDownShadow
-
-      rounded-b-[0.244rem]
-      mobile:rounded-b-[0.326rem]
-      sMobile:rounded-b-[0.521rem]
-      mMobile:rounded-b-[0.625rem]
-
-      ring-SelectorBlue
-
-      ring-[0.122rem]
-      mobile:ring-[0.163rem]
-      sMobile:ring-[0.261rem]
-      mMobile:ring-[0.313rem]
-
-      bg-SpaceBlue
-
-      min-h-[100px]
-
-      flex
-      flex-col
-      
-      items-center
-
-      '
+      className='filterModal'
     >
         <Header />
         <div className='
@@ -148,4 +116,4 @@ const Header = memo(() => {
   ">Select Labels:</h1>
 })
 
-export default index
+export default FilterModal;

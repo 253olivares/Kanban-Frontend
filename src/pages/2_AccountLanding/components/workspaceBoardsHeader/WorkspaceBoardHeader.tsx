@@ -4,7 +4,7 @@ import { closeAccountLandingModal, getAccountLandingModal, openAccountLadingModa
 import arrow from '/assets/DropDown_Icon.svg'
 import { AppContext } from '../../../appRefContext';
 
-const index = () => {
+const WorkspaceBoardHeader = () => {
     const dispatch = useAppDispatch();
 
     const modalState = useAppSelector(getAccountLandingModal);
@@ -85,4 +85,4 @@ const index = () => {
   )
 }
 
-export default index
+export default WorkspaceBoardHeader;

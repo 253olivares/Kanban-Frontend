@@ -6,7 +6,7 @@ import { AppContext } from "../../../appRefContext";
 
 import arrow from '/assets/Polygon_4.svg'
 
-import FilterLabels from './label'
+import FilterLabels from './label/Label'
 import { getFilterModal, setOpenModal } from "../../../../reduxStore/modal/modalSlice";
 
 

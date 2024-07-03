@@ -14,7 +14,7 @@ export type pricingPlansType = {
 
  // use memo caches our component and only updates when it detects changes have been made to the component itself
 //  difference of usecallback is that usememo updates depending on the return value which is our jsx
-const index = memo(() => {
+const Pricing = memo(() => {
   const pricingPlans: pricingPlansType[]  = [
     {
     tier: "Starter Kit", 
@@ -232,4 +232,4 @@ const index = memo(() => {
   )
 })
 
-export default index
+export default Pricing;

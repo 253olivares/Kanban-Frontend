@@ -174,15 +174,22 @@
         box-shadow: 0 1.176rem 2.353rem 0 rgba(0,0,0,.5);
     }
 
+    .animationNone {
+        animation: reversebounce 1s infinite;
+        animation-direction: reverse;
+    }
     .animationDelay1s {
+        animation: reversebounce 1s infinite;
         animation-direction: reverse;
         animation-delay: .25s;
     }
     .animationDelay2s {
+        animation: reversebounce 1s infinite;
         animation-direction: reverse;
         animation-delay: .5s;
     } 
     .animationDelay3s {
+        animation: reversebounce 1s infinite;
         animation-direction: reverse;
         animation-delay: .75s;
     } 
@@ -217,6 +224,339 @@
         relative
         hover:cursor-pointer
     }
+    .addNewBoardHolder{
+        @apply
+        w-[15.789rem]
+        mobile:w-[21.051rem]
+        sMobile:w-[33.684rem]
+        /* mMobile:w-[40.421rem] */
+        sLaptop:w-[12.499rem]
+        mLaptop:w-[15.624rem]
+        desktop:w-[18.75rem]
+        largeDesktop:w-[23.437rem]
+        4k:w-[31.249rem]
+    
+        h-[6.578rem]
+        mobile:h-[8.771rem]
+        sMobile:h-[14.034rem]
+        /* mMobile:h-[16.840rem] */
+        sLaptop:h-[5.208rem]
+        mLaptop:h-[6.510rem]
+        desktop:h-[7.813rem]
+        largeDesktop:h-[9.766rem]
+        4k:h-[13.021rem]
+    
+        block
+        relative
+    
+        shrink-0
+    
+        rounded-[0.366rem]
+        mobile:rounded-[0.488rem]
+        sMobile:rounded-[0.781rem]
+        /* mMobile:rounded-[0.937rem] */
+        sLaptop:rounded-[0.333rem]
+        mLaptop:rounded-[0.416rem]
+        desktop:rounded-[0.5rem]
+        largeDesktop:rounded-[0.625rem]
+        4k:rounded-[0.833rem]
+    
+        conic-gradient
+    
+        ring-[1.875px]
+        mobile:ring-[2.5px]
+        sMobile:ring-[4px]
+        /* mMobile:ring-[4.8px] */
+        sLaptop:ring-[1.999px]
+        mLaptop:ring-[2.499px]
+        desktop:ring-[3px]
+        largeDesktop:ring-[3.75px]
+        4k:ring-[4.999px]
+    }
+
+    .accountLandingIndex{
+        @apply
+        z-0
+        relative
+        
+        bg-SpaceBlue 
+        flex-grow
+        overflow-hidden
+        flex flex-row
+    }
+
+    .workspacesIndex {
+        @apply
+        z-[0]
+        relative
+        flex-grow
+        overflow-hidden
+
+        flex-col
+        sLaptop:block
+    }
+
+    .homePage {
+        @apply
+        z-0
+        block
+        relative
+    }
+
+    .filterModal {
+        @apply
+        absolute
+        top-0
+        right-0
+        z-[10]
+
+        w-full
+        sLaptop:hidden
+
+        dropDownShadow
+
+        rounded-b-[0.244rem]
+        mobile:rounded-b-[0.326rem]
+        sMobile:rounded-b-[0.521rem]
+        /* mMobile:rounded-b-[0.625rem] */
+
+        ring-SelectorBlue
+
+        ring-[0.122rem]
+        mobile:ring-[0.163rem]
+        sMobile:ring-[0.261rem]
+        /* mMobile:ring-[0.313rem] */
+
+        bg-SpaceBlue
+
+        min-h-[100px]
+
+        flex
+        flex-col
+        
+        items-center
+    }
+
+    .filterInput {
+        @apply
+        hidden
+        sLaptop:block
+
+        sLaptop:w-[0.927rem]
+        sLaptop:h-[0.927rem]
+        mLaptop:w-[1.16rem]
+        mLaptop:h-[1.16rem]
+        desktop:w-[1.392rem]
+        desktop:h-[1.392rem]
+        largeDesktop:w-[1.74rem]
+        largeDesktop:h-[1.74rem]
+        4k:w-[2.319rem]
+        4k:h-[2.319rem]
+    }
+
+    .filterLabels {
+        @apply
+        text-white
+         font-medium
+        
+         text-[1.098rem]
+         mobile:text-[1.465rem]
+         sMobile:text-[2.344rem]
+         /* mMobile:text-[2.813rem] */
+         sLaptop:text-[0.668rem]
+         mLaptop:text-[0.835rem]
+         desktop:text-[1.003rem]
+         largeDesktop:text-[1.253rem]
+         4k:text-[1.670rem]
+
+         leading-none
+
+         py-[0.390rem]
+         mobile:py-[0.520rem]
+         sMobile:py-[0.833rem]
+         /* mMobile:py-[1rem] */
+         sLaptop:py-[0.125rem]
+         mLaptop:py-[0.156rem]
+         desktop:py-[0.188rem]
+         largeDesktop:py-[0.235rem]
+         4k:py-[0.313rem]
+
+         rounded-[0.159rem]
+         mobile:rounded-[0.213rem]
+         sMobile:rounded-[0.340rem]
+         /* mMobile:rounded-[0.409rem] */
+         sLaptop:rounded-[0.125rem]
+         mLaptop:rounded-[0.156rem]
+         desktop:rounded-[0.188rem]
+         largeDesktop:rounded-[0.235rem]
+         4k:rounded-[0.313rem]
+
+         w-[10.253rem]
+         mobile:w-[13.671rem]
+         sMobile:w-[21.875rem]
+         /* mMobile:w-[26.25rem] */
+         sLaptop:w-[3.800rem]
+         mLaptop:w-[4.750rem]
+         desktop:w-[5.701rem]
+         largeDesktop:w-[7.126rem]
+         4k:w-[9.501rem]
+
+         text-center
+    }
+
+    .bubble1 {
+        @apply
+        w-[4.785rem]
+       h-[4.785rem]
+       mobile:w-[6.38rem]
+       mobile:h-[6.38rem]
+       sMobile:w-[10.208rem]
+       sMobile:h-[10.208rem]
+       /* mMobile:w-[12.25rem]
+       mMobile:h-[12.25rem] */
+       sLaptop:w-[3.042rem]
+       sLaptop:h-[3.042rem]
+       mLaptop:w-[3.802rem]
+       mLaptop:h-[3.802rem]
+       desktop:w-[4.563rem]
+       desktop:h-[4.563rem]
+       largeDesktop:w-[5.703rem]
+       largeDesktop:h-[5.703rem]
+       4k:w-[7.604rem]
+       4k:h-[7.604rem]
+
+       bottom-[-1.807rem]
+       left-[-2.393rem]
+       mobile:bottom-[-2.409rem]
+       mobile:left-[-3.19rem]
+       sMobile:bottom-[-3.854rem]
+       sMobile:left-[-5.104rem]
+       /* mMobile:bottom-[-4.625rem]
+       mMobile:left-[-6.125rem] */
+       sLaptop:bottom-0
+       sLaptop:left-[-1.542rem]
+       mLaptop:left-[-1.927rem]
+       desktop:left-[-2.313rem]
+       largeDesktop:left-[-2.891rem]
+    }
+    .bubble2 {
+        @apply
+        w-[3.028rem]
+       h-[3.028rem]
+       mobile:w-[4.036rem]
+       mobile:h-[4.036rem]
+       sMobile:w-[6.458rem]
+       sMobile:h-[6.458rem]
+       /* mMobile:w-[7.75rem]
+       mMobile:h-[7.75rem] */
+       sLaptop:w-[4.083rem]
+       sLaptop:h-[4.083rem]
+       mLaptop:w-[5.104rem]
+       mLaptop:h-[5.104rem]
+       desktop:w-[6.125rem]
+       desktop:h-[6.125rem]
+       largeDesktop:w-[7.656rem]
+       largeDesktop:h-[7.656rem]
+       4k:w-[10.208rem]
+       4k:h-[10.208rem]
+
+       bottom-[-1.514rem]
+       left-[0.83rem]
+       mobile:bottom-[-2.018rem]
+       mobile:left-[1.107rem]
+       sMobile:bottom-[-3.229rem]
+       sMobile:left-[1.771rem]
+       /* mMobile:bottom-[-3.875rem]
+       mMobile:left-[2.125rem] */
+       sLaptop:bottom-[-2.042rem]
+       sLaptop:left-[24.60%]
+       mLaptop:bottom-[-2.552rem]
+       desktop:bottom-[-3.063rem]
+       largeDesktop:bottom-[-3.828rem]
+    }
+    .bubble3 {
+        @apply
+        sLaptop:w-[2.792rem]
+       sLaptop:h-[2.792rem]
+       mLaptop:w-[3.489rem]
+       mLaptop:h-[3.489rem]
+       desktop:w-[4.188rem]
+       desktop:h-[4.188rem]
+       largeDesktop:w-[5.234rem]
+       largeDesktop:h-[5.234rem]
+       4k:w-[6.979rem]
+       4k:h-[6.979rem]
+       
+       hidden
+       sLaptop:block
+       sLaptop:bottom-[-1.167rem]
+       sLaptop:left-[34.17%]
+       mLaptop:bottom-[-1.458rem]
+       desktop:bottom-[-1.75rem]
+       largeDesktop:bottom-[-2.188rem]
+    }
+
+    .bubble4 {
+        @apply
+        sLaptop:w-[7.333rem]
+       sLaptop:h-[7.333rem]
+       mLaptop:w-[9.167rem]
+       mLaptop:h-[9.167rem]
+       desktop:w-[11rem]
+       desktop:h-[11rem]
+       largeDesktop:w-[13.75rem]
+       largeDesktop:h-[13.75rem]
+       4k:w-[18.333rem]
+       4k:h-[18.333rem]
+
+       hidden
+       sLaptop:block
+       sLaptop:bottom-[-5.708rem]
+       sLaptop:right-[1.125rem]
+       mLaptop:bottom-[-7.136rem]
+       mLaptop:right-[1.406rem]
+       desktop:bottom-[-8.563rem]
+       desktop:right-[1.688rem]
+       largeDesktop:bottom-[-10.703rem]
+       largeDesktop:right-[2.109rem]
+    }
+    .bubble5 {
+        @apply
+        w-[2.832rem]
+       h-[2.832rem]
+       mobile:w-[3.776rem]
+       mobile:h-[3.776rem]
+       sMobile:w-[6.042rem]
+       sMobile:h-[6.042rem]
+       /* mMobile:w-[7.25rem]
+       mMobile:h-[7.25rem] */
+       sLaptop:w-[8.25rem]
+       sLaptop:h-[8.25rem]
+       mLaptop:w-[10.313rem]
+       mLaptop:h-[10.313rem]
+       desktop:w-[12.375rem]
+       desktop:h-[12.375rem]
+       largeDesktop:w-[15.469rem]
+       largeDesktop:h-[15.469rem]
+       4k:w-[20.625rem]
+       4k:h-[20.625rem]
+       
+       top-[9.87%]
+       right-[-1.831rem]
+       mobile:right-[-2.441rem]
+       sMobile:right-[-3.906rem]
+       /* mMobile:right-[-4.688rem] */
+       sLaptop:top-auto
+       sLaptop:bottom-[-1.083rem]
+       sLaptop:right-[-4.792rem]
+       mLaptop:bottom-[-1.354rem]
+       mLaptop:right-[-5.989rem]
+       desktop:bottom-[-1.625rem]
+       desktop:right-[-7.188rem]
+       largeDesktop:bottom-[-2.031rem]
+       largeDesktop:right-[-8.984rem]
+    }
+
     .closeMark::before, .closeMark::after{
         @apply 
         content-[""]

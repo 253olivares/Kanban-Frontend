@@ -44,6 +44,7 @@ const BoardSpaceSettingBody = memo(() => {
         opacity: 0 
       }}
       transition={{
+        ease: "easeInOut",
         duration:.3
       }}
     ref={settingsBodyRef} 

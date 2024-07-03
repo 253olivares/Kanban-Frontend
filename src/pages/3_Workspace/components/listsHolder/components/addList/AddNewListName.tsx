@@ -1,12 +1,12 @@
 import {motion} from 'framer-motion';
-import { useContext, useEffect, useState } from 'react';
+import { memo, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../../../../appRefContext';
 import { useAppDispatch } from '../../../../../../reduxStore/hook';
 import { changeListModalState } from '../../../../../../reduxStore/modal/modalSlice';
 import checkMark from '/assets/Check_MarkIcon.svg';
 import cancelIcon from '/assets/x_Icon.svg';
 
-const AddNewListName = () => {
+const AddNewListName = memo(() => {
 
   const dispatch =  useAppDispatch();
 
@@ -39,8 +39,9 @@ const AddNewListName = () => {
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
     transition={{
-          duration:.5
-      }}
+        ease:'easeInOut',
+        duration:.5
+    }}
     ref={addNewListNameRef}
     className='
     w-full
@@ -156,6 +157,6 @@ const AddNewListName = () => {
         </form>
     </motion.div>
   )
-}
+})
 
 export default AddNewListName

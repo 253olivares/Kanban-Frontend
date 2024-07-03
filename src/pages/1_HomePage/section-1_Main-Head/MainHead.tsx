@@ -9,7 +9,7 @@ import Header from '../header';
 
 
 // use memo caches our component and only updates when it detects changes have been made to the component itself
-const index = memo(() => {
+const MainHead = memo(() => {
   return (
     <section className='
   
@@ -302,6 +302,7 @@ const index = memo(() => {
         w-full 
         bottom-0 
         left-0' src={HomeCover} alt="HomeCover" />
+        
         <img className='
         absolute
         block 
@@ -315,4 +316,4 @@ const index = memo(() => {
   )
 })
 
-export default index
+export default MainHead;

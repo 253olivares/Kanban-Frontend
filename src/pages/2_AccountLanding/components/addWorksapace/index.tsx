@@ -115,8 +115,8 @@ const index = () => {
         4k:pb-[0.833rem]
 
         sLaptop:px-[0.533rem]
-        mLaptop:px-[0.416rem]
-        desktop:px-[.8rem]
+        mLaptop:px-[0.666rem]
+        desktop:px-[0.8rem]
         largeDesktop:px-[1rem]
         4k:px-[1.333rem]
         ">

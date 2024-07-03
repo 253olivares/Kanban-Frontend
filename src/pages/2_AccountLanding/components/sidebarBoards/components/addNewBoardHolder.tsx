@@ -24,57 +24,13 @@ const addNewBoardHolder = memo(({workspace,durat}:{workspace:string,durat:number
     exit={{ opacity: 0 }}
     transition={{
         duration: .5,
-        delay:durat
+        delay:durat,
+        ease: "easeInOut",
     }}
     
     className={`
     
-    w-[15.789rem]
-    mobile:w-[21.051rem]
-    sMobile:w-[33.684rem]
-    mMobile:w-[40.421rem]
-    sLaptop:w-[12.499rem]
-    mLaptop:w-[15.624rem]
-    desktop:w-[18.75rem]
-    largeDesktop:w-[23.437rem]
-    4k:w-[31.249rem]
-
-    h-[6.578rem]
-    mobile:h-[8.771rem]
-    sMobile:h-[14.034rem]
-    mMobile:h-[16.840rem]
-    sLaptop:h-[5.208rem]
-    mLaptop:h-[6.510rem]
-    desktop:h-[7.813rem]
-    largeDesktop:h-[9.766rem]
-    4k:h-[13.021rem]
-
-    block
-    relative
-
-    shrink-0
-
-    rounded-[0.366rem]
-    mobile:rounded-[0.488rem]
-    sMobile:rounded-[0.781rem]
-    mMobile:rounded-[0.937rem]
-    sLaptop:rounded-[0.333rem]
-    mLaptop:rounded-[0.416rem]
-    desktop:rounded-[0.5rem]
-    largeDesktop:rounded-[0.625rem]
-    4k:rounded-[0.833rem]
-
-    conic-gradient
-
-    ring-[1.875px]
-    mobile:ring-[2.5px]
-    sMobile:ring-[4px]
-    mMobile:ring-[4.8px]
-    sLaptop:ring-[1.999px]
-    mLaptop:ring-[2.499px]
-    desktop:ring-[3px]
-    largeDesktop:ring-[3.75px]
-    4k:ring-[4.999px]
+    addNewBoardHolder
 
     ${boardsModal?
     `

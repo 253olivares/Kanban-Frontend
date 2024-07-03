@@ -4,13 +4,13 @@ import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 import { getAccountLandingModal } from '../../../../reduxStore/modal/modalSlice';
 import { AppContext } from '../../../appRefContext';
 
-import SidebarBoards from '../sidebarBoards';
-import SidebarWorkspaces from '../sidebarWorkspaces';
-import WorkspaceBoardHeader from '../workspaceBoardsHeader';
+import SidebarBoards from '../sidebarBoards/SidebarBoards';
+import SidebarWorkspaces from '../sidebarWorkspaces/SidebarWorkspace';
+import WorkspaceBoardHeader from '../workspaceBoardsHeader/WorkspaceBoardHeader';
 import { getWorkspaceSelect, setNewSelect} from '../../../../reduxStore/workspace/workspaceSlice';
 import { getUserWorkspaces } from '../../../../reduxStore/users/userSlice';
 
-const index = memo(() => {
+const Sidebarinfo = memo(() => {
     const modal: boolean  = useAppSelector(getAccountLandingModal);
     const dispatch = useAppDispatch();
 
@@ -130,4 +130,4 @@ const index = memo(() => {
   )
 })
 
-export default index
+export default Sidebarinfo;
