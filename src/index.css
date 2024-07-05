@@ -41,6 +41,222 @@
 
 @layer components { 
 
+    .boardMembersBodyArrow {
+        @apply
+        absolute
+
+        bg-PrimaryWhite
+
+        block
+
+        sLaptop:w-[0.833rem]
+        mLaptop:w-[1.041rem]
+        desktop:w-[1.250rem]
+        largeDesktop:w-[1.563rem]
+        sLaptop:h-[0.833rem]
+        mLaptop:h-[1.041rem]
+        desktop:h-[1.250rem]
+        largeDesktop:h-[1.563rem]
+        rotate-45
+        
+        sLaptop:top-[calc(-0.833rem/2)]
+        mLaptop:top-[calc(-1.041rem/2)]
+        desktop:top-[calc(-1.250rem/2)]
+        largeDesktop:top-[calc(-1.563rem/2)]
+        sLaptop:left-[calc(50%-(0.833rem/2))]
+        mLaptop:left-[calc(50%-(1.041rem/2))]
+        desktop:left-[calc(50%-(1.250rem/2))]
+        largeDesktop:left-[calc(50%-(1.563rem/2))]
+    }
+
+    .boardMemberBody {
+        @apply
+        absolute
+        top-[160%]
+
+        hidden
+        sLaptop:block
+
+        sLaptop:w-[159.999px]
+        sLaptop:h-[133.333px]
+        mLaptop:w-[199.999px]
+        mLaptop:h-[166.666px]
+        desktop:w-[240px]
+        desktop:h-[200px]
+        largeDesktop:w-[300px]
+        largeDesktop:h-[250px]
+
+        dropDownShadow
+
+        bg-PrimaryWhite
+
+        sLaptop:rounded-[0.381rem]
+        mLaptop:rounded-[0.476rem]
+        desktop:rounded-[0.572rem]
+        largeDesktop:rounded-[0.715rem]
+    }
+
+    .boardSettingsBody {
+        @apply
+        absolute
+        top-[102.5%]
+        right-[-50%]
+
+        sLaptop:w-[159.999px] 
+        mLaptop:w-[199.999px]
+        desktop:w-[240px]
+        largeDesktop:w-[300px]
+
+        dropDownShadow
+
+        bg-PrimaryWhite
+
+        sLaptop:rounded-[0.381rem]
+        mLaptop:rounded-[0.476rem]
+        desktop:rounded-[0.572rem]
+        largeDesktop:rounded-[0.715rem]
+
+        flex
+        flex-col
+
+        sLaptop:p-[0.533rem]
+        mLaptop:p-[0.666rem]
+        desktop:p-[0.8rem]
+        largeDesktop:p-[1rem]
+
+        sLaptop:gap-[.266rem]
+        mLaptop:gap-[.333rem]
+        desktop:gap-[0.4rem]
+        largeDesktop:gap-[.5rem]
+    }
+
+    .boardSettingsBodyArrow {
+        @apply
+        absolute
+
+        bg-PrimaryWhite
+
+        block
+
+        sLaptop:w-[0.833rem]
+        mLaptop:w-[1.041rem]
+        desktop:w-[1.250rem]
+        largeDesktop:w-[1.563rem]
+        sLaptop:h-[0.833rem]
+        mLaptop:h-[1.041rem]
+        desktop:h-[1.250rem]
+        largeDesktop:h-[1.563rem]
+        rotate-45
+
+        sLaptop:top-[calc(-0.833rem/2)]
+        mLaptop:top-[calc(-1.041rem/2)]
+        desktop:top-[calc(-1.250rem/2)]
+        largeDesktop:top-[calc(-1.563rem/2)]
+        right-[8%]
+    }
+
+    .boardPageFilterBodyArrow{
+        @apply
+        absolute
+
+        bg-PrimaryWhite
+
+        block
+
+        sLaptop:w-[0.833rem]
+        mLaptop:w-[1.041rem]
+        desktop:w-[1.250rem]
+        largeDesktop:w-[1.563rem]
+        sLaptop:h-[0.833rem]
+        mLaptop:h-[1.041rem]
+        desktop:h-[1.250rem]
+        largeDesktop:h-[1.563rem]
+        rotate-45
+        
+        sLaptop:top-[calc(-0.833rem/2)]
+        mLaptop:top-[calc(-1.041rem/2)]
+        desktop:top-[calc(-1.250rem/2)]
+        largeDesktop:top-[calc(-1.563rem/2)]
+
+        left-[27.60%]
+    }
+
+    .boardPageFilterBody {
+        @apply
+        absolute
+        top-[160%]
+        left-0
+
+        hidden
+        
+        sLaptop:w-[7.166rem]
+        mLaptop:w-[8.958rem]
+        desktop:w-[10.750rem]
+        largeDesktop:w-[13.438rem]
+        
+        dropDownShadow
+
+        bg-PrimaryWhite
+
+        sLaptop:rounded-[0.381rem]
+        mLaptop:rounded-[0.476rem]
+        desktop:rounded-[0.572rem]
+        largeDesktop:rounded-[0.715rem]
+
+        sLaptop:flex
+        flex-col
+
+        sLaptop:py-[0.533rem]
+        mLaptop:py-[0.666rem]
+        desktop:py-[0.8rem]
+        largeDesktop:py-[1rem]
+
+        sLaptop:gap-[0.375rem]
+        mLaptop:gap-[0.469rem]
+        desktop:gap-[0.563rem]
+        largeDesktop:gap-[0.703rem]
+    }
+
+    .settingsItems {
+        @apply
+        relative
+        flex
+        justify-between
+        items-center
+
+        z-[5]
+        
+        opacity-75
+        hover:opacity-100
+
+        hover:bg-[rgba(0,0,0,.1)]
+        hover:cursor-pointer
+
+        font-medium
+
+        sLaptop:text-[0.773rem]
+        mLaptop:text-[0.966rem]
+        desktop:text-[1.16rem]
+        largeDesktop:text-[1.45rem]
+
+        sLaptop:py-[0.399rem]
+        mLaptop:py-[0.499rem]
+        desktop:py-[0.6rem]
+        largeDesktop:py-[.75rem]
+
+        sLaptop:rounded-[0.25rem]
+        mLaptop:rounded-[0.312rem]
+        desktop:rounded-[0.376rem]
+        largeDesktop:rounded-[0.47rem]
+
+        pl-[5%]
+
+        transition-all
+        duration-300
+
+        leading-none
+    }
+
     .boardsScroll {
         overflow-y: auto;
     }

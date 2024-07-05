@@ -40,7 +40,8 @@ const userListSlice = createSlice({
 });
 
 export const {
-    selectAll:selectAllUserLists
+    selectAll:selectAllUserLists,
+    selectById:selectUserById,
 } = userListAdapter.getSelectors((state:RootState)=>state.userList);
 
 export const  {} = userListSlice.actions;

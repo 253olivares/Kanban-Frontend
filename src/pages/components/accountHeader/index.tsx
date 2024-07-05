@@ -45,7 +45,7 @@ const index = memo(() => {
     // if a user who does not have a user account visit this page check first if they do not have an account
     // check to see if a user is logged in
     if(!user){
-      dispatch(checkRemembered()).unwrap().then((x)=> {
+      dispatch(checkRemembered()).unwrap().then((x:any)=> {
         console.log("User exists");
 
         // security checks to make sure user is logged into correct account and not access boards not registered to them or shared

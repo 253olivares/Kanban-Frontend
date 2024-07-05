@@ -150,7 +150,8 @@ export const getRemember = async ():Promise<rememberUser | null> => {
     return rememberUser;
 }
 
-export const getUserFromList = async (id:string):Promise<user|void> => {
+
+export const getUserFromList = (id:string):user|void => {
     const data = localStorage.getItem(userKey);
     if(!data){
         reloadApplication();

@@ -1,9 +1,10 @@
 import { memo, useContext, useLayoutEffect } from "react"
 import { AppContext } from "../../../appRefContext"
-import { useAppDispatch } from "../../../../reduxStore/hook";
+import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
 import { setOpenModal } from "../../../../reduxStore/modal/modalSlice";
 import { motion } from "framer-motion";
-
+import { getFilters } from "../../../../reduxStore/tasks/tasksSlice";
+import FilterLabel from '../../../2_AccountLanding/components/taskFilter/label/Label'
 
 
 const BoardPageFilterBody = () => {
@@ -12,6 +13,9 @@ const BoardPageFilterBody = () => {
 
     const appContext = useContext(AppContext);
     const {filterBodyRef, filterRefHead2, filterModalRef, closeFilterModal} = appContext!;
+
+
+    const filter = useAppSelector(getFilters);
 
     useLayoutEffect(()=> {
         const checkClick = (e: MouseEvent | TouchEvent) => {
@@ -49,62 +53,22 @@ const BoardPageFilterBody = () => {
       duration:.3
     }}
     ref={filterBodyRef}
-    className="
-     absolute
-     top-[160%]
-     left-0
+    className=" boardPageFilterBody ">
 
-     hidden
-     sLaptop:block
-     
-     sLaptop:w-[159.999px]
-     sLaptop:h-[133.333px]
-     mLaptop:w-[199.999px]
-     mLaptop:h-[166.666px]
-     desktop:w-[240px]
-     desktop:h-[200px]
-     largeDesktop:w-[300px]
-     largeDesktop:h-[250px]
-     
-     dropDownShadow
-
-     bg-PrimaryWhite
-
-     sLaptop:rounded-[0.381rem]
-     mLaptop:rounded-[0.476rem]
-     desktop:rounded-[0.572rem]
-     largeDesktop:rounded-[0.715rem]
-    ">
       <ArrowHead />
+
+      {
+        Object.entries(filter).map(([k,v],index)=> 
+          <FilterLabel key={v+`${index}`} k={k} v={v} />
+        )
+      }
+
     </motion.div>
   )
 }
 
 const ArrowHead = memo(()=> {
-  return <div className="
-  absolute
-
-  bg-PrimaryWhite
-
-  block
-
-  sLaptop:w-[0.833rem]
-  mLaptop:w-[1.041rem]
-  desktop:w-[1.250rem]
-  largeDesktop:w-[1.563rem]
-  sLaptop:h-[0.833rem]
-  mLaptop:h-[1.041rem]
-  desktop:h-[1.250rem]
-  largeDesktop:h-[1.563rem]
-  rotate-45
- 
-  sLaptop:top-[calc(-0.833rem/2)]
-  mLaptop:top-[calc(-1.041rem/2)]
-  desktop:top-[calc(-1.250rem/2)]
-  largeDesktop:top-[calc(-1.563rem/2)]
-
-  left-[19.5%]
-  " />
+  return <div className=" boardPageFilterBodyArrow " />
 })
 
 export default BoardPageFilterBody

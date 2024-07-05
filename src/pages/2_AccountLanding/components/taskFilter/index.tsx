@@ -221,7 +221,7 @@ const index = () => {
         {/* display all our filter options from our filter state that keeps track of our
         importance levels and if they are triggered or not */}
         {
-          Object.entries(filters).map(([k,v],index)=> <FilterLabels key={index} k={k} v={v} />)
+          Object.entries(filters).map(([k,v],index)=> <FilterLabels key={v+`${index}`} k={k} v={v} />)
         }
       </div>
     </div>
