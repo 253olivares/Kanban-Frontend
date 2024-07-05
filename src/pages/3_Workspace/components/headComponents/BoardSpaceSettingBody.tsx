@@ -5,7 +5,6 @@ import { motion } from 'framer-motion'
 import { setSettingModal } from "../../../../reduxStore/modal/modalSlice";
 import DeleteBoard from "./settingsComponents/DeleteBoard";
 import ChangeBackground from "./settingsComponents/ChangeBackground";
-import ViewUsers from "./settingsComponents/ViewUsers";
 import AddNewUser from "./settingsComponents/AddNewUser";
 
 const BoardSpaceSettingBody = memo(() => {
@@ -62,8 +61,6 @@ const BoardSpaceSettingBody = memo(() => {
       w-full
       
       ">
-      <ViewUsers />
-
       <AddNewUser />
 
       <ChangeBackground />

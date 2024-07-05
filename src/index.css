@@ -41,6 +41,46 @@
 
 @layer components { 
 
+    .boardListHolder {
+        @apply 
+        w-full
+        h-full
+
+        overflow-auto
+
+        pb-[0.878rem]
+        mobile:pb-[1.171rem]
+        sMobile:pb-[1.875rem]
+        /* mMobile:pb-[2.25rem] */
+        px-[5.5%]
+        sLaptop:p-[1.249rem]
+        mLaptop:p-[1.562rem]
+        desktop:p-[1.875rem]
+        largeDesktop:p-[2.343rem]
+
+        flex
+        flex-col
+        sLaptop:flex-row
+
+        sLaptop:gap-[1.041rem]
+        mLaptop:gap-[1.302rem]
+        desktop:gap-[1.563rem]
+        largeDesktop:gap-[1.953rem]
+    }
+
+    .userIconMembersBody {
+        @apply
+        flex-grow-0
+        flex-shrink-0
+
+        sLaptop:w-[1.786rem]
+        mLaptop:w-[2.233rem]
+        desktop:w-[2.68rem]
+        largeDesktop:w-[3.35rem]
+        
+        rounded-full
+    }
+
     .boardMembersBodyArrow {
         @apply
         absolute
@@ -77,14 +117,15 @@
         hidden
         sLaptop:block
 
-        sLaptop:w-[159.999px]
-        sLaptop:h-[133.333px]
-        mLaptop:w-[199.999px]
-        mLaptop:h-[166.666px]
-        desktop:w-[240px]
-        desktop:h-[200px]
-        largeDesktop:w-[300px]
-        largeDesktop:h-[250px]
+        sLaptop:w-[8.333rem]
+        mLaptop:w-[10.416rem]
+        desktop:w-[12.5rem]
+        largeDesktop:w-[15.625rem]
+     
+        sLaptop:max-h-[9.999rem]
+        mLaptop:max-h-[12.499rem]
+        desktop:max-h-[15rem]
+        largeDesktop:max-h-[18.75rem]
 
         dropDownShadow
 
@@ -94,6 +135,11 @@
         mLaptop:rounded-[0.476rem]
         desktop:rounded-[0.572rem]
         largeDesktop:rounded-[0.715rem]
+
+        sLaptop:p-[0.533rem]
+        mLaptop:p-[0.666rem]
+        desktop:p-[0.8rem]
+        largeDesktop:p-[1rem]
     }
 
     .boardSettingsBody {

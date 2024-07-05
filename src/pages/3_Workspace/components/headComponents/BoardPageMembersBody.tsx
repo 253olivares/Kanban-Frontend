@@ -61,6 +61,7 @@ const BoardPageMembersBody = ({members}: {members:string[][]}) => {
       <ArrowHead />
       {
         members.map((x)=> 
+          
           <MembersHolder key={x[0]} member={x} />
         )
       }
