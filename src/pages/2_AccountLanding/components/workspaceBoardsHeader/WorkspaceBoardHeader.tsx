@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook'
 import { closeAccountLandingModal, getAccountLandingModal, openAccountLadingModal } from '../../../../reduxStore/modal/modalSlice';
 import arrow from '/assets/DropDown_Icon.svg'
-import { AppContext } from '../../../appRefContext';
+import { AppContext } from '../../../appRefContext/appRefContext';
 
 const WorkspaceBoardHeader = () => {
     const dispatch = useAppDispatch();

@@ -7,7 +7,13 @@ import { RootState } from "../store";
 type initialStateType = {
     openModal:boolean,
     mobileModal:boolean,
-    modal: 'logIn' | 'createProfile' | 'profile' | 'deleteConfirm' | '',
+    modal: 'logIn' |
+     'createProfile' |
+     'profile' |
+     'deleteConfirm' | 
+     'deleteConfirmBoard' | 
+     'addNewUser' |
+     '',
     accountSettings:boolean,
     accountLandingMobile:boolean,
     croppingTool:boolean,
@@ -64,6 +70,14 @@ const modalSlice = createSlice({
         },
         openConfirmDelete (state) {
             state.modal = 'deleteConfirm';
+            state.openModal = true;
+        },
+        openConfirmDeleteBoard (state) {
+            state.modal = 'deleteConfirmBoard';
+            state.openModal = true;
+        },
+        openAddNewUser (state) {
+            state.modal = 'addNewUser';
             state.openModal = true;
         },
         closeModal (state) {
@@ -140,7 +154,9 @@ export const {
     setOpenMemberModal,
     setSettingModal,
     changeListModalState,
-    changeMobileBoardNameState
+    changeMobileBoardNameState,
+    openConfirmDeleteBoard,
+    openAddNewUser
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

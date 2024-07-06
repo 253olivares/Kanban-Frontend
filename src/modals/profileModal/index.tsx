@@ -1,8 +1,8 @@
 import { changeAccountDetails, getUser } from '../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
-import { checkIfEmailExistsEdit} from '../../customLogic';
+import { checkIfEmailExistsEdit} from '../../customLogic/CustomeLogic';
 
-import { useLayoutEffect, useRef, useState } from 'react';
+import { memo, useLayoutEffect, useRef, useState } from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
 
 import CroppingTool from '../cropingTool';
@@ -13,7 +13,7 @@ import RestrictedInputBoxes from './components/restrictedInputBoxes';
 import PasswordInput from './components/password';
 import Footer from '../component/footer';
 import { getCroppingTool, openCloseCroppingTool } from '../../reduxStore/modal/modalSlice';
-import { sanitize, emailValidation} from '../../customLogic';
+import { sanitize, emailValidation} from '../../customLogic/CustomeLogic';
 
 type userInfo = {
     firstname:string,
@@ -29,7 +29,7 @@ type userInfo = {
     pfp:string,
 }
 
-const index = () => {
+const index = memo(() => {
   const user = useAppSelector(getUser);
 
   if(!user){
@@ -128,10 +128,6 @@ const index = () => {
     }
   }
 
-  
-
- 
-
   useLayoutEffect(()=> {
     if(userInfo.newPassword !== ''){
       checkPassword()
@@ -192,7 +188,7 @@ const index = () => {
             reTypeNewPassword:'',
           }))
         });
-      }else {
+      } else {
         dispatch(changeAccountDetails({
           ...user,
           first_name:sanitizedFirstname,
@@ -279,27 +275,7 @@ const index = () => {
       desktop:gap-[1.98rem]
       largeDesktop:gap-[2.475rem]
       '>
-        <h1 className='
-        w-full
-        text-center
-
-        text-linear-gradient 
-        text-[1.333rem]
-        mobile:text-[1.666rem]
-        sMobile:text-[2rem]
-        mMobile:text-[2.5rem]
-
-        pt-[2.686rem]
-        pb-[1.658rem]
-        mobile:pt-[3.581rem]
-        mobile:pb-[2.224rem]
-        sMobile:pt-[5.729rem]
-        sMobile:pb-[3.563rem]
-        mMobile:pt-[6.875rem]
-        mMobile:pb-[4.25rem]
-
-        sLaptop:hidden
-        '>Account Details</h1>
+        <HeaderInfo />
         {/* left items */}
         <div
          className='
@@ -310,101 +286,7 @@ const index = () => {
          '
         >
           {/* image and change image */}
-          <div className='
-          flex flex-col
-          items-center
-
-          sLaptop:pt-[1.72rem]
-          mLaptop:pt-[2.15rem]
-          desktop:pt-[2.58rem]
-          largeDesktop:pt-[3.225rem]
-
-          gap-[1.227rem]
-          mobile:gap-[1.636rem]
-          sMobile:gap-[2.618rem]
-          mMobile:gap-[3.141rem]
-          sLaptop:gap-[0.8rem]
-          mLaptop:gap-[1rem]
-          desktop:gap-[1.2rem]
-          largeDesktop:gap-[1.5rem]
-
-          '>
-            <div 
-            className='
-
-            p-[0.224rem]
-            mobile:p-[0.298rem]
-            sMobile:p-[0.477rem]
-            mMobile:p-[0.573rem]
-            sLaptop:p-[0.12rem]
-            mLaptop:p-[0.15rem]
-            desktop:p-[0.18rem]
-            largeDesktop:p-[0.225rem]
-
-            bg-[#b1b1b1]
-            rounded-full 
-            '>
-              <img 
-              className='
-              w-[5.219rem]
-              mobile:w-[6.958rem]
-              sMobile:w-[11.133rem]
-              mMobile:w-[13.359rem]
-              sLaptop:w-[7.703rem]
-              mLaptop:w-[9.629rem]
-              desktop:w-[11.556rem]
-              largeDesktop:w-[14.445rem]
-
-              rounded-full
-              '
-              src={`${userInfo.pfp}`} alt="AccountImage" />
-            </div>
-            <button 
-            onClick={()=> dispatch(openCloseCroppingTool())}
-            className='
-            font-bold 
-            sLaptop:font-medium
-
-            text-[0.674rem]
-            mobile:text-[0.899rem]
-            sMobile:text-[1.438rem]
-            mMobile:text-[1.725rem]
-            leading-none
-            sLaptop:leading-normal
-            sLaptop:text-[0.92rem]
-            mLaptop:text-[1.15rem]
-            desktop:text-[1.38rem]
-            largeDesktop:text-[1.725rem]
-
-            px-[0.512rem]
-            mobile:px-[0.683rem]
-            sMobile:px-[1.094rem]
-            mMobile:px-[1.313rem]
-            sLaptop:px-0
-
-            py-[0.449rem]
-            mobile:py-[0.598rem]
-            sMobile:py-[0.958rem]
-            mMobile:py-[1.15rem]
-            sLaptop:py-0
-
-            rounded-[0.175rem]
-            mobile:rounded-[0.234rem]
-            sMobile:rounded-[0.374rem]
-            mMobile:rounded-[0.45rem]
-            sLaptop:rounded-none
-
-            bg-[#CECECE]
-            sLaptop:bg-transparent
-
-            text-Slate-gray
-
-            sLaptop:cursor-pointer
-            sLaptop:hover:underline
-            ' >
-              Change Icon
-            </button>
-          </div>
+          <Image userInfo={userInfo.pfp} changeInfo={()=>dispatch(openCloseCroppingTool())} />
           {/* username and email inputs */}
           <div className='
           mt-[1.216rem]
@@ -569,21 +451,151 @@ const index = () => {
           </div>
         </div>
       </div>
-      <div className='
-      absolute
-      bottom-0
-      w-full
-      h-[3.026rem]
-      mobile:h-[4.004rem]
-      sMobile:h-[6.406rem]
-      mMobile:h-[7.688rem]
-      sLaptop:relative 
-      sLaptop:h-auto
-      '>
-        <Footer/>
-      </div>
+      <FooterHolder />
     </motion.div>
   )
-}
+})
+
+// const LeftItem = memo(()=> {
+//   return
+// })
+
+const Image = memo(({userInfo,changeInfo}: {userInfo:string,changeInfo: () => void})=> {
+  return <div className='
+  flex flex-col
+  items-center
+
+  sLaptop:pt-[1.72rem]
+  mLaptop:pt-[2.15rem]
+  desktop:pt-[2.58rem]
+  largeDesktop:pt-[3.225rem]
+
+  gap-[1.227rem]
+  mobile:gap-[1.636rem]
+  sMobile:gap-[2.618rem]
+  mMobile:gap-[3.141rem]
+  sLaptop:gap-[0.8rem]
+  mLaptop:gap-[1rem]
+  desktop:gap-[1.2rem]
+  largeDesktop:gap-[1.5rem]
+
+  '>
+    <div 
+    className='
+
+    p-[0.224rem]
+    mobile:p-[0.298rem]
+    sMobile:p-[0.477rem]
+    mMobile:p-[0.573rem]
+    sLaptop:p-[0.12rem]
+    mLaptop:p-[0.15rem]
+    desktop:p-[0.18rem]
+    largeDesktop:p-[0.225rem]
+
+    bg-[#b1b1b1]
+    rounded-full 
+    '>
+      <img 
+      className='
+      w-[5.219rem]
+      mobile:w-[6.958rem]
+      sMobile:w-[11.133rem]
+      mMobile:w-[13.359rem]
+      sLaptop:w-[7.703rem]
+      mLaptop:w-[9.629rem]
+      desktop:w-[11.556rem]
+      largeDesktop:w-[14.445rem]
+
+      rounded-full
+      '
+      src={`${userInfo}`} alt="AccountImage" />
+    </div>
+    <button 
+    onClick={()=> changeInfo()}
+    className='
+    font-bold 
+    sLaptop:font-medium
+
+    text-[0.674rem]
+    mobile:text-[0.899rem]
+    sMobile:text-[1.438rem]
+    mMobile:text-[1.725rem]
+    leading-none
+    sLaptop:leading-normal
+    sLaptop:text-[0.92rem]
+    mLaptop:text-[1.15rem]
+    desktop:text-[1.38rem]
+    largeDesktop:text-[1.725rem]
+
+    px-[0.512rem]
+    mobile:px-[0.683rem]
+    sMobile:px-[1.094rem]
+    mMobile:px-[1.313rem]
+    sLaptop:px-0
+
+    py-[0.449rem]
+    mobile:py-[0.598rem]
+    sMobile:py-[0.958rem]
+    mMobile:py-[1.15rem]
+    sLaptop:py-0
+
+    rounded-[0.175rem]
+    mobile:rounded-[0.234rem]
+    sMobile:rounded-[0.374rem]
+    mMobile:rounded-[0.45rem]
+    sLaptop:rounded-none
+
+    bg-[#CECECE]
+    sLaptop:bg-transparent
+
+    text-Slate-gray
+
+    sLaptop:cursor-pointer
+    sLaptop:hover:underline
+    ' >
+      Change Icon
+    </button>
+  </div>
+})
+
+const FooterHolder = memo(() => {
+  return <div className='
+  absolute
+  bottom-0
+  w-full
+  h-[3.026rem]
+  mobile:h-[4.004rem]
+  sMobile:h-[6.406rem]
+  mMobile:h-[7.688rem]
+  sLaptop:relative 
+  sLaptop:h-auto
+  '>
+    <Footer/>
+  </div>
+})
+
+const HeaderInfo = memo(() => {
+  return <h1 className='
+  w-full
+  text-center
+
+  text-linear-gradient 
+  text-[1.333rem]
+  mobile:text-[1.666rem]
+  sMobile:text-[2rem]
+  mMobile:text-[2.5rem]
+
+  pt-[2.686rem]
+  pb-[1.658rem]
+  mobile:pt-[3.581rem]
+  mobile:pb-[2.224rem]
+  sMobile:pt-[5.729rem]
+  sMobile:pb-[3.563rem]
+  mMobile:pt-[6.875rem]
+  mMobile:pb-[4.25rem]
+
+  sLaptop:hidden
+  '>Account Details</h1>
+})
 
 export default index

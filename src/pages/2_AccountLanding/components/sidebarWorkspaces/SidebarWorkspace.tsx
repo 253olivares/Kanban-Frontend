@@ -6,7 +6,7 @@ import { memo, useContext } from 'react';
 
 import addWorkspace from '/assets/Add_New_Workspace.svg';
 import WorkspaceModal from '../addWorksapace';
-import { AppContext } from '../../../appRefContext';
+import { AppContext } from '../../../appRefContext/appRefContext';
 import { openAccountLadingModal } from '../../../../reduxStore/modal/modalSlice';
 import WorkspaceItem from './components/workspaceItems';
 import scrollbarImage from '/assets/scrollBarTrack.png';

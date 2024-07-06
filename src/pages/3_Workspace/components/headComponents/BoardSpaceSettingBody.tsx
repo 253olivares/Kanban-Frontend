@@ -1,6 +1,6 @@
 import { memo, useContext, useLayoutEffect } from "react"
 import { useAppDispatch } from "../../../../reduxStore/hook"
-import { AppContext } from "../../../appRefContext";
+import { AppContext } from "../../../appRefContext/appRefContext";
 import { motion } from 'framer-motion'
 import { setSettingModal } from "../../../../reduxStore/modal/modalSlice";
 import DeleteBoard from "./settingsComponents/DeleteBoard";
@@ -12,7 +12,7 @@ const BoardSpaceSettingBody = memo(() => {
     const dispatch = useAppDispatch();
 
     const appContext = useContext(AppContext);
-    const {settingsBodyRef, settingsRef, mobileMembersRef} = appContext!;
+    const {settingsBodyRef, settingsRef, mobileMembersRef, modalRef} = appContext!;
 
     useLayoutEffect(()=> {
         const checkClick = (e:MouseEvent | TouchEvent) => {
@@ -22,7 +22,7 @@ const BoardSpaceSettingBody = memo(() => {
             settingsRef.current && !settingsRef.current.contains(element)
             || !settingsBodyRef.current
             ) {
-              if(!mobileMembersRef.current?.contains(element))dispatch (setSettingModal(false))
+              if(!mobileMembersRef.current?.contains(element) && !modalRef.current?.contains(element)) dispatch (setSettingModal(false))
             } 
 
         }   

@@ -41,6 +41,204 @@
 
 @layer components { 
 
+    .modalCss {
+        @apply 
+        fixed
+        z-[15]
+        top-0 
+        left-0 
+
+        w-dvw
+        h-dvh
+
+        overflow-x-hidden
+        overflow-y-auto
+
+        no-scrollbar
+
+        sLaptop:flex 
+        sLaptop:justify-center 
+        sLaptop:items-center
+    }
+
+    .deleteModalButton {
+        @apply
+
+        w-full
+
+        opacity-50
+        hover:opacity-100
+
+        sLaptop:text-[0.986rem]
+        mLaptop:text-[1.233rem]
+        desktop:text-[1.48rem]
+        largeDesktop:text-[1.85rem]
+
+        sLaptop:py-[0.266rem]
+        mLaptop:py-[0.333rem]
+        desktop:py-[0.4rem]
+        largeDesktop:py-[.5rem]
+
+        font-bold
+        
+        sLaptop:rounded-[0.266rem]
+        mLaptop:rounded-[0.333rem]
+        desktop:rounded-[.4rem]
+        largeDesktop:rounded-[.5rem]
+
+        bg-[#F9453E]
+    }
+
+    .deleteModalConfirmation {
+        @apply
+        sLaptop:text-[0.933rem]
+        mLaptop:text-[1.166rem]
+        desktop:text-[1.4rem]
+        largeDesktop:text-[1.75rem]
+    }
+
+    .deleteModalMainWarning {
+        @apply
+        sLaptop:text-[1.066rem]
+        mLaptop:text-[1.333rem]
+        desktop:text-[1.6rem]
+        largeDesktop:text-[2rem]
+        
+        leading-tight
+        font-medium
+    }
+
+    .deleteModalHolder {
+        @apply
+        relative
+    
+        bg-SpaceBlue
+
+        hidden
+        sLaptop:flex
+        flex-col
+
+        justify-center
+
+        sLaptop:max-w-[23.999rem] 
+        mLaptop:max-w-[29.999rem]  
+        desktop:max-w-[36rem] 
+        largeDesktop:max-w-[45rem]
+
+        sLaptop:rounded-[0.471rem] 
+        mLaptop:rounded-[0.588rem]
+        desktop:rounded-[0.706rem]
+        largeDesktop:rounded-[0.883rem]
+
+        px-[7.5%]
+
+        sLaptop:py-[1.066rem]
+        mLaptop:py-[1.333rem]
+        desktop:py-[1.6rem]
+        largeDesktop:py-[2rem]
+
+        sLaptop:gap-[1.066rem]
+        mLaptop:gap-[1.333rem]
+        desktop:gap-[1.6rem]
+        largeDesktop:gap-[2rem]
+
+        text-PrimaryWhite
+    }
+    
+    .workspaceDeleteButtonModal {
+        @apply
+        opacity-50
+        hover:opacity-100
+
+        sLaptop:text-[0.986rem]
+        mLaptop:text-[1.233rem]
+        desktop:text-[1.48rem]
+        largeDesktop:text-[1.85rem]
+
+        sLaptop:py-[0.266rem]
+        mLaptop:py-[0.333rem]
+        desktop:py-[0.4rem]
+        largeDesktop:py-[.5rem]
+
+        font-bold
+        
+        sLaptop:rounded-[0.266rem]
+        mLaptop:rounded-[0.333rem]
+        desktop:rounded-[.4rem]
+        largeDesktop:rounded-[.5rem]
+
+        bg-[#F9453E]
+    }
+
+    .deleteBoardButton {
+        @apply
+        relative
+        z-[5]
+        bg-transparent
+        hover:bg-[red]
+
+        text-[red]
+
+        hover:text-PrimaryWhite
+
+        hover:cursor-pointer
+
+        font-medium
+
+        sLaptop:text-[0.773rem]
+        mLaptop:text-[0.966rem]
+        desktop:text-[1.16rem]
+        largeDesktop:text-[1.45rem]
+
+        sLaptop:py-[0.399rem]
+        mLaptop:py-[0.499rem]
+        desktop:py-[0.6rem]
+        largeDesktop:py-[.75rem]
+
+        sLaptop:rounded-[0.25rem]
+        mLaptop:rounded-[0.312rem]
+        desktop:rounded-[0.376rem]
+        largeDesktop:rounded-[0.47rem]
+
+        text-center
+        leading-none
+
+        transition-all
+        duration-300
+    }
+
+    .addListHolder{
+        @apply
+        bg-SpaceBlue
+
+        w-full
+        sLaptop:w-[14.999rem]
+        mLaptop:w-[18.749rem]
+        desktop:w-[22.5rem]
+        largeDesktop:w-[28.125rem]
+
+        sLaptop:min-h-[2.583rem]
+        mLaptop:min-h-[3.229rem]
+        desktop:min-h-[3.875rem]
+        largeDesktop:min-h-[4.843rem]
+
+        self-start
+
+        sLaptop:rounded-[0.333rem]
+        mLaptop:rounded-[0.416rem]
+        desktop:rounded-[0.5rem]
+        largeDesktop:rounded-[0.625rem]
+
+        hidden
+        sLaptop:flex
+        flex-row
+        justify-between
+        items-center
+
+        shrink-0
+        grow-0
+    }
+
     .boardListHolder {
         @apply 
         w-full

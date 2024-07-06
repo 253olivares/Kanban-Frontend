@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react"
 
 import { getFilters } from "../../../../reduxStore/tasks/tasksSlice";
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
-import { AppContext } from "../../../appRefContext";
+import { AppContext } from "../../../appRefContext/appRefContext";
 
 import arrow from '/assets/Polygon_4.svg'
 
@@ -10,7 +10,7 @@ import FilterLabels from './label/Label'
 import { getFilterModal, setOpenModal } from "../../../../reduxStore/modal/modalSlice";
 
 
-const index = () => {
+const TaskFilter = () => {
     const dispatch = useAppDispatch();
 
     const appContext= useContext(AppContext);
@@ -228,4 +228,4 @@ const index = () => {
   )
 }
 
-export default index
+export default TaskFilter

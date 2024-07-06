@@ -1,8 +1,13 @@
+import { useAppDispatch } from "../../../../../reduxStore/hook"
+import { openAddNewUser } from "../../../../../reduxStore/modal/modalSlice";
 
 
 const AddNewUser = () => {
+  const dispatch = useAppDispatch();
   return (
-    <div className="
+    <div 
+    onClick={()=>dispatch(openAddNewUser())}
+    className="
     settingsItems
     ">Add New User</div>
   )

@@ -1,6 +1,6 @@
 import { changeCreateAccountEmail, changeCreateAccountFirstname, changeCreateAccountLastname, changeCreateAccountPassword, changeCreateAccountUsername, changeCreateAccountretypePassword, createAccount, getCreateAccountInfo } from '../../reduxStore/users/userSlice';
 import {useState, useLayoutEffect, useRef } from 'react';
-import { checkIfEmailExists } from '../../customLogic';
+import { checkIfEmailExists } from '../../customLogic/CustomeLogic';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
 import {motion} from 'framer-motion';
 
@@ -9,7 +9,7 @@ import CreateAccountButton from '../component/modalButton';
 import PasswordReq from './components/passwordRequirments';
 import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
-import { sanitize,emailValidation } from '../../customLogic';
+import { sanitize,emailValidation } from '../../customLogic/CustomeLogic';
 import { closeModal } from '../../reduxStore/modal/modalSlice';
 import { useNavigate } from 'react-router-dom';
 

@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { getComments } from "../../customLogic";
+import { getComments } from "../../customLogic/CustomeLogic";
 import { RootState } from "../store";
 
 export type comments = {

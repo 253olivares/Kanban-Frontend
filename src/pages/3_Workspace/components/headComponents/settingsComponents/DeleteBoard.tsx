@@ -1,43 +1,36 @@
 import { memo } from "react";
+import { useAppDispatch } from "../../../../../reduxStore/hook";
+import { openConfirmDeleteBoard } from "../../../../../reduxStore/modal/modalSlice";
 
 const DeleteBoard = memo(() => {
 
+  const dispatch = useAppDispatch();
+
   return (
-    <div className="
-        relative
-        z-[5]
-        bg-transparent
-        hover:bg-[red]
+    <div 
+    onClick={()=> {
+      // delete board button
+      // if(params.workspaceId) dispatch(deleteBoard(params.workspaceId))
+      // .unwrap()
+      // .then((x) => {
+      //   // in here we are going to remove the board from other places
+      //   // places to remove
+      //   dispatch(removeUserBoards([x.board.b_id]))
+      //   dispatch(updateWorkspacBoardRemove(x.board))
+      //   // -- workspace its from
+      //   // -- user board array of all involved users
+      //   // -- 
 
-        text-[red]
-
-        hover:text-PrimaryWhite
-
-        hover:cursor-pointer
-
-        font-medium
-
-        sLaptop:text-[0.773rem]
-        mLaptop:text-[0.966rem]
-        desktop:text-[1.16rem]
-        largeDesktop:text-[1.45rem]
-
-        sLaptop:py-[0.399rem]
-        mLaptop:py-[0.499rem]
-        desktop:py-[0.6rem]
-        largeDesktop:py-[.75rem]
-
-        sLaptop:rounded-[0.25rem]
-        mLaptop:rounded-[0.312rem]
-        desktop:rounded-[0.376rem]
-        largeDesktop:rounded-[0.47rem]
-
-        text-center
-        leading-none
-
-        transition-all
-        duration-300
-    ">
+      //   alert("Board successfully removed!");
+      //   dispatch(setSettingModal(false))
+      //   navigate(`/u/${params.userId}`)
+      // })
+      // .catch(()=> {
+      //   alert("Command unsuccessful!");
+      // })
+      dispatch(openConfirmDeleteBoard())
+    }}
+    className=" deleteBoardButton ">
         DeleteBoard
     </div>
   )

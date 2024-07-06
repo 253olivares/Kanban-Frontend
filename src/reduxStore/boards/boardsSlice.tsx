@@ -1,5 +1,5 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit"
-import { addBoard, getBoards, removeBoardsFromWorkspaceLS, updateBoardNameFromWorkspaceLS } from "../../customLogic"
+import { addBoard, getBoards, removeBoardsFromWorkspaceLS, updateBoardNameFromWorkspaceLS } from "../../customLogic/CustomeLogic"
 import { RootState } from "../store"
 import { workspace } from "../workspace/workspaceSlice"
 export type board = {
@@ -27,6 +27,19 @@ const boardsAdapter = createEntityAdapter({
     sortComparer: (a,b) => a.b_id.localeCompare(b.b_id)
 });
 
+// function to run when users want to delete boards from board page
+export const deleteBoard = createAsyncThunk('boards/deleteBoard',async(boardId:string,{getState,rejectWithValue})=> {
+    try{
+        if(boardId.trim() === "") throw new Error;
+        const state = getState() as RootState;
+        return {board:state.boards.entities[boardId],prevState:selectAllBoards(state)}
+    }catch(e:any) {
+        console.log("Ran into issue");
+        return rejectWithValue(e);
+    }
+})
+
+// Get our boards
 export const initializeBoards = createAsyncThunk('boards/initialize', async(_,{rejectWithValue})=>{
     try{
         const data: board[] | null = getBoards();
@@ -38,6 +51,7 @@ export const initializeBoards = createAsyncThunk('boards/initialize', async(_,{r
     }
 })
 
+// Adding a new board a user adds a new board from the account page when a workspace is selected
 export const addBoards = createAsyncThunk('boards/addBoard', async({
     boardName,
     workspaceId
@@ -68,6 +82,8 @@ export const addBoards = createAsyncThunk('boards/addBoard', async({
     }
 })
 
+// Update board name when we are in the board page that runs whenever the board name is change
+// additionally when the new name is submitted from mobile
 export const updateBoardNameFromWorkspace = createAsyncThunk('boards/updateBoardName',async({boardName,boardId}: {boardName:string, boardId:string}, 
     {rejectWithValue, getState}) => {
         try {
@@ -101,14 +117,10 @@ const boardSlice = createSlice({
             state.newBoardName = action.payload;
         },
         removeBoardsFromWorkspace(state,action:PayloadAction<workspace>){
+            
             removeBoardsFromWorkspaceLS(action.payload.boards);
             boardsAdapter.removeMany(state,action.payload.boards);
         }
-        // updateBoardNameFromWorkspace(state,action:PayloadAction<{boardName:string,boardId:string}>){
-        //     const {boardId,boardName} = action.payload;
-
-        //     boardsAdapter.updateOne(state,{id:boardId,changes:{...state.entities[boardId],name:boardName }})
-        // }
     },
     extraReducers:(builder) => {
         builder.addCase(initializeBoards.pending,(state,_)=> {
@@ -119,11 +131,12 @@ const boardSlice = createSlice({
         })
         .addCase(initializeBoards.fulfilled,(state,action: PayloadAction<board[]>)=> {
             state.status = 'succeeded';
+            
             boardsAdapter.upsertMany(state,action.payload);
         })
         .addCase(addBoards.fulfilled,(state,action: PayloadAction<{newBoard:board,prevStates:board[]}>)=> {
-            
             state.status = 'succeeded';
+            
             addBoard(action.payload.newBoard,action.payload.prevStates);
             boardsAdapter.addOne(state,action.payload.newBoard);
         })
@@ -135,9 +148,15 @@ const boardSlice = createSlice({
         })
         .addCase(updateBoardNameFromWorkspace.fulfilled,(state,action:PayloadAction<{boardName:string,boardId:string,prevStates:board[]}>)=> {
             const {boardId,boardName,prevStates} = action.payload;
-            console.log("From toolkit listener:",boardName)
+            //console.log("From toolkit listener:",boardName)
+            
             updateBoardNameFromWorkspaceLS(boardId,boardName,prevStates);
             boardsAdapter.updateOne(state,{id:boardId,changes:{...state.entities[boardId],name:boardName}});
+        })
+        .addCase(deleteBoard.fulfilled,(state,action:PayloadAction<{board:board,prevState:board[]}>)=> {
+            
+            removeBoardsFromWorkspaceLS([action.payload.board.b_id])
+            boardsAdapter.removeOne(state,action.payload.board.b_id);
         })
     }
 })

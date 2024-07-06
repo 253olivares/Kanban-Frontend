@@ -2,7 +2,7 @@ import { memo, useContext } from 'react';
 import cogWheel from '/assets/cog.svg';
 import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 import { getSettingsModal, setSettingModal } from '../../../../reduxStore/modal/modalSlice';
-import { AppContext } from '../../../appRefContext';
+import { AppContext } from '../../../appRefContext/appRefContext';
 import { AnimatePresence } from 'framer-motion';
 import BoardSpaceSettingBody from './BoardSpaceSettingBody';
 

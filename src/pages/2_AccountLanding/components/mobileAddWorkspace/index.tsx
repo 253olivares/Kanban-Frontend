@@ -1,13 +1,13 @@
 import { AnimatePresence, motion } from "framer-motion"
 import { memo, useContext } from "react"
-import { AppContext } from "../../../appRefContext";
+import { AppContext } from "../../../appRefContext/appRefContext";
 import { useState } from "react";
 
 import AddModal from './component/workspaceModal';
 import ConfirmDelete from './component/confirmDelete';
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal, getWorkspaceSelect, updateWorkspaceBoard } from "../../../../reduxStore/workspace/workspaceSlice";
-import { sanitize } from "../../../../customLogic";
+import { sanitize } from "../../../../customLogic/CustomeLogic";
 import { updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
 import { addBoards, changeBoardModal, updateBoardNameFromWorkspace } from "../../../../reduxStore/boards/boardsSlice";
 import { changeListModalState, changeMobileBoardNameState } from "../../../../reduxStore/modal/modalSlice";

@@ -25,7 +25,7 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
     const selectBoard = useAppSelector(state => selectBoardById(state,params?.workspaceId || '')) || null;
     const filters = useAppSelector(getFilters);
     const workspaceSelect = useAppSelector(getWorkspaceSelect);
-
+    
     if(!user) return;
     if(selectBoard !== null && !selectBoard.members){
         alert('Project has recently been updated with new back end build! If you are getting this error it needs to be updated. Project will soon reset the localstorage to make sure its build is up to date!');
@@ -120,7 +120,7 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
         largeDesktop:gap-[2.812rem]
         '>
             {
-                params.workspaceId && selectBoard ?
+                params.workspaceId && selectBoard && user.u_id === selectBoard.u_id?
                 <CogBoard /> : ''
             }
 

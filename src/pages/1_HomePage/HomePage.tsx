@@ -5,10 +5,10 @@ import { useNavigate } from "react-router-dom";
 import { getMobileModal, getModalStatus } from '../../reduxStore/modal/modalSlice';
 import { checkRemembered } from '../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
-import { AppContext } from '../appRefContext';
+import { AppContext } from '../appRefContext/appRefContext';
 
 import SecondaryModalMobile from './components/SecondaryModal';
-import ModalContainer from '../../modals'
+import ModalContainer from '../../modals/Modal'
 
 const MainSection = lazy(()=> import('./section-1_Main-Head/MainHead'))
 const PMSection = lazy(()=>import('./section-2_PM-Section/PMSection'))

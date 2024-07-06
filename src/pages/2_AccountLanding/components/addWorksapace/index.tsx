@@ -1,5 +1,5 @@
 import { useContext, useEffect } from "react"
-import { AppContext } from "../../../appRefContext"
+import { AppContext } from "../../../appRefContext/appRefContext"
 import { useAppDispatch } from "../../../../reduxStore/hook";
 import { changeModal} from "../../../../reduxStore/workspace/workspaceSlice";
 import { motion } from "framer-motion";

@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { getUserFromList } from "../../../../../customLogic";
+import { getUserFromList } from "../../../../../customLogic/CustomeLogic";
 import UserImage from "./UserImage";
 import AdminUserImage from "./AdminUserImage";
 
@@ -23,9 +23,9 @@ const MembersHolder = memo(({member}:{member:string[]}) => {
     flex-row
     justify-between
     
-    sLaptop:gap-[]
-    mLaptop:gap-[]
-    desktop:gap-[]
+    sLaptop:gap-[0.333rem]
+    mLaptop:gap-[0.416rem]
+    desktop:gap-[0.5rem]
     largeDesktop:gap-[0.625rem]
 
     items-center

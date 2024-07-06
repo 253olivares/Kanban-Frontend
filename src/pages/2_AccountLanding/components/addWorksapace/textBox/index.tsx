@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useRef, useState } from "react"
 import { useAppDispatch} from "../../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal } from "../../../../../reduxStore/workspace/workspaceSlice";
-import { sanitize } from "../../../../../customLogic";
+import { sanitize } from "../../../../../customLogic/CustomeLogic";
 import { updateUserWorkspaces } from "../../../../../reduxStore/users/userSlice";
 
 const index = () => {

@@ -2,7 +2,7 @@
 import { createAsyncThunk, createEntityAdapter,createSlice,PayloadAction  } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
-import { addWorkspace, getWorkspaces, removeWorkspace, updateWorkspaceBoardLS} from "../../customLogic";
+import { addWorkspace, getWorkspaces, removeWorkspace, updateWorkspaceBoardLS} from "../../customLogic/CustomeLogic";
 import { board } from "../boards/boardsSlice";
 
 export type workspace = {
@@ -89,7 +89,7 @@ export const addNewWorkspace = createAsyncThunk('workspace/addWorkspaces', async
 
 export const updateWorkspaceBoard = createAsyncThunk('workspace/updateWorkspace', async(newBoard:board, {getState,rejectWithValue})=> {
     try{
-        const state = getState() as RootState
+        const state = getState() as RootState;
         const selectWorkspace = selectWorkspaceById(state,newBoard.w_id);
         const updatedWorkspace = {
             ...selectWorkspace,
@@ -98,6 +98,23 @@ export const updateWorkspaceBoard = createAsyncThunk('workspace/updateWorkspace'
         return {newBoard:newBoard, updatedWorkspace:updatedWorkspace, prevState:selectAllWorkspaces(state)}
     } catch(e:any){
         console.log('ran into error adding board to workspace')
+        return rejectWithValue(e);
+    }
+})
+
+export const updateWorkspacBoardRemove = createAsyncThunk('workspace/updateWorkspaceRemove',async(board:board, {getState,rejectWithValue})=> {
+    try {
+        const state = getState() as RootState;
+        const selectWorkspace = selectWorkspaceById(state,board.w_id);
+
+        const updatedWorkspace = {
+            ...selectWorkspace,
+            boards: selectWorkspace.boards.filter(x => x !== board.b_id)
+        }
+
+        return {updatedWorkspace:updatedWorkspace, prevState:selectAllWorkspaces(state)}
+    } catch(e:any) {
+        console.log("Ran into issue removing board from workspace!");
         return rejectWithValue(e);
     }
 })
@@ -156,8 +173,14 @@ const workspaceSlice = createSlice({
             })
             .addCase(updateWorkspaceBoard.fulfilled, (state,action:PayloadAction<{newBoard:board,updatedWorkspace:workspace, prevState:workspace[]}>)=> {
                 console.log(action.payload);
+
                 updateWorkspaceBoardLS(action.payload.updatedWorkspace,action.payload.prevState);
                 workspaceAdapter.updateOne(state,{id:action.payload.updatedWorkspace.w_id,changes:action.payload.updatedWorkspace});
+            })
+            .addCase(updateWorkspacBoardRemove.fulfilled,(state,action:PayloadAction<{updatedWorkspace:workspace,prevState:workspace[]}>)=> {
+
+                updateWorkspaceBoardLS(action.payload.updatedWorkspace, action.payload.prevState);
+                workspaceAdapter.updateOne(state,{id:action.payload.updatedWorkspace.w_id,changes:action.payload.updatedWorkspace})
             })
     }
 })

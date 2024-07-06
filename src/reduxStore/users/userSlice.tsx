@@ -1,4 +1,4 @@
-import { createDefaultBaseImage, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser} from "../../customLogic";
+import { createDefaultBaseImage, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser} from "../../customLogic/CustomeLogic";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { workspace } from "../workspace/workspaceSlice";
@@ -239,9 +239,9 @@ const userSlice = createSlice({
                 updateUser(state.user);
             }
         },
-        removeUserBoards(state,action: PayloadAction<workspace>){
+        removeUserBoards (state,action: PayloadAction<string[]>){
             if(state.user){
-                state.user.boards = state.user.boards.filter(b=> !action.payload.boards.includes(b));
+                state.user.boards = state.user.boards.filter(b=> !action.payload.includes(b));
                 updateUser(state.user);
             }
         }

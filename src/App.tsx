@@ -3,14 +3,14 @@ import { lazy,Fragment,Suspense, useLayoutEffect  } from "react";
 import { useAppDispatch } from "./reduxStore/hook";
 import { Route, Routes } from "react-router-dom";
 
-import { AppProvider } from "./pages/appRefContext";
+import { AppProvider } from "./pages/appRefContext/appRefContext";
 import LoadingPage from './pages/components/loadingSpinner/LoadingSpinner';
 import Errorpage from './pages/0_404Page';
 
 
 const HomePage = lazy(()=> import('./pages/1_HomePage/HomePage'));
 const AccountLanding = lazy(()=> import('./pages/2_AccountLanding/AccountLanding'));
-const LayoutAccount = lazy(()=> import('./pages/components/accountHeader'));
+const LayoutAccount = lazy(()=> import('./pages/components/accountHeader/AccountHeader'));
 const Workspace = lazy(()=> import('./pages/3_Workspace/WorkspacesPage'));
 
 import 'react-image-crop/dist/ReactCrop.css';

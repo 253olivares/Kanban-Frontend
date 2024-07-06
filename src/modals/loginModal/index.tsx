@@ -6,7 +6,7 @@ import Inputs from '../component/entryFields';
 import Footer from '../component/footer';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
 import { getUserInfo, changeUserInfoEmail,changeUserInfoPassword,changeUserInfoRemember } from '../../reduxStore/users/userSlice';
-import { sanitize } from '../../customLogic';
+import { sanitize } from '../../customLogic/CustomeLogic';
 import { closeModal } from '../../reduxStore/modal/modalSlice';
 import { useNavigate } from 'react-router-dom';
 

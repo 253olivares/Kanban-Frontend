@@ -1,6 +1,6 @@
 import {motion} from 'framer-motion';
 import { memo, useContext } from 'react';
-import { AppContext } from '../../../../appRefContext';
+import { AppContext } from '../../../../appRefContext/appRefContext';
 import { useAppSelector } from '../../../../../reduxStore/hook';
 import { getFilters } from '../../../../../reduxStore/tasks/tasksSlice';
 

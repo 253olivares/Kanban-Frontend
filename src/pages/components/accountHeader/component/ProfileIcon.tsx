@@ -2,7 +2,7 @@ import { memo, useContext } from "react";
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook"
 import { closeAccountModal, getAccountSettings, openAccountModal } from "../../../../reduxStore/modal/modalSlice";
 import { user } from "../../../../reduxStore/users/userSlice";
-import { AppContext } from "../../../appRefContext";
+import { AppContext } from "../../../appRefContext/appRefContext";
 
 
 const ProfileIcon = memo(({user}:{user:user}) => {

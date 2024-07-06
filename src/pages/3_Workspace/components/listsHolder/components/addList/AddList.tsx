@@ -13,40 +13,22 @@ const AddList = memo(() => {
   const openModal = useAppSelector(getListModal);
 
   return (
-    <motion.div>
+    <motion.div
+    initial={{ opacity: 1 }}
+    animate={{ opacity: 1 }}
+    exit={{ opacity: 1 }}
+    transition={{
+      duration: .5,
+      delay: 0,
+      ease: "easeInOut",
+  }}
+    >
       
       <MobileAddList />
 
       <div 
       className="
-      bg-SpaceBlue
-
-      w-full
-      sLaptop:w-[14.999rem]
-      mLaptop:w-[18.749rem]
-      desktop:w-[22.5rem]
-      largeDesktop:w-[28.125rem]
-
-      sLaptop:min-h-[2.583rem]
-      mLaptop:min-h-[3.229rem]
-      desktop:min-h-[3.875rem]
-      largeDesktop:min-h-[4.843rem]
-
-      self-start
-
-      sLaptop:rounded-[0.333rem]
-      mLaptop:rounded-[0.416rem]
-      desktop:rounded-[0.5rem]
-      largeDesktop:rounded-[0.625rem]
-
-      hidden
-      sLaptop:flex
-      flex-row
-      justify-between
-      items-center
-
-      shrink-0
-      grow-0
+      addListHolder
       ">
           {
             openModal ? 

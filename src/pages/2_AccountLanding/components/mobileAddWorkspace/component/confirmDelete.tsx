@@ -145,14 +145,14 @@ const confirmDelete = () => {
                     .then((x)=>{
                         dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
                         dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
-                        dispatch(removeUserBoards(x.workspaceInfo));
+                        dispatch(removeUserBoards(x.workspaceInfo.boards));
                         dispatch(closeModal());
                     }).catch(()=>alert("Issue encountered trying to delete"+workspace.name))
                  }}
                  className="
                  font-bold
 
-                 text-[0.703rem]
+                 text-[0.703rem] 
                  mobile:text-[0.937rem]
                  sMobile:text-[1.5rem]
                  mMobile:text-[1.8rem]

@@ -2,7 +2,7 @@
 import { memo, useContext} from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 import { getAccountLandingModal } from '../../../../reduxStore/modal/modalSlice';
-import { AppContext } from '../../../appRefContext';
+import { AppContext } from '../../../appRefContext/appRefContext';
 
 import SidebarBoards from '../sidebarBoards/SidebarBoards';
 import SidebarWorkspaces from '../sidebarWorkspaces/SidebarWorkspace';

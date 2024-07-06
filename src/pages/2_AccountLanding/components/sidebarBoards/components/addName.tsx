@@ -5,7 +5,7 @@ import { addBoards, changeBoardModal, getBoardModal } from "../../../../../redux
 import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { updateUserBoards } from "../../../../../reduxStore/users/userSlice";
 import { updateWorkspaceBoard } from "../../../../../reduxStore/workspace/workspaceSlice";
-import { AppContext } from "../../../../appRefContext";
+import { AppContext } from "../../../../appRefContext/appRefContext";
 
 
 const addName = ({workspace}:{workspace:string}) => {

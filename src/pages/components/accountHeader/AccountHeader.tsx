@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Outlet, useParams } from 'react-router-dom';
 
-import ModalContainer from '../../../modals'; 
+import ModalContainer from '../../../modals/Modal'; 
 import Header from './component/Header';
 import { getWorkSpaceModal, initiateWorkspace } from '../../../reduxStore/workspace/workspaceSlice';
 import MobileModal from '../../2_AccountLanding/components/mobileAddWorkspace';
@@ -17,7 +17,7 @@ import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
 import { initiateUserList } from '../../../reduxStore/userList/userList';
 import MembersModal from '../../3_Workspace/components/membersModal/MultiMobileModal';
 
-const index = memo(() => {
+const AccountHeader = memo(() => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -116,14 +116,17 @@ const index = memo(() => {
           boardsModal || 
           modalType ==='deleteConfirm' || 
           listModal || 
-          mobileBoardNameModal  ? 
+          mobileBoardNameModal ||
+          modalType === 'deleteConfirmBoard' ||
+          modalType === 'addNewUser'
+           ? 
           <MobileModal 
           params = {params}
           boardsModal={boardsModal} 
           mobileWorkspace={mobileWorkspace} 
           modal = {modalType}
           listModal={listModal}
-          mobileBoardNameModal = {mobileBoardNameModal }
+          mobileBoardNameModal = {mobileBoardNameModal}
           /> : ''
         }
         </AnimatePresence>
@@ -181,4 +184,4 @@ const index = memo(() => {
   )
 })
 
-export default index  
+export default AccountHeader;

@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit"
-import { getList } from "../../customLogic"
+import { getList } from "../../customLogic/CustomeLogic"
 import { RootState } from "../store"
 
 export type list = {

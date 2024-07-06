@@ -1,5 +1,5 @@
 import { memo, useContext, useLayoutEffect } from "react"
-import { AppContext } from "../../../appRefContext"
+import { AppContext } from "../../../appRefContext/appRefContext"
 import { useAppDispatch } from "../../../../reduxStore/hook";
 import { setOpenMemberModal } from "../../../../reduxStore/modal/modalSlice";
 import { motion } from "framer-motion";

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { memo, useContext } from "react";
-import { AppContext } from "../../../appRefContext";
+import { AppContext } from "../../../appRefContext/appRefContext";
 import MembersModal from "./components/MembersModal";
 import { Params } from "react-router-dom";
 import SettingsModal from "./components/SettingsModal";

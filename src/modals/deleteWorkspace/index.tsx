@@ -1,18 +1,15 @@
 import { motion } from "framer-motion"
 import { useAppDispatch, useAppSelector } from "../../reduxStore/hook"
-import { getWorkspaceSelect, removeExistingWorkspace, selectWorkspaceById } from "../../reduxStore/workspace/workspaceSlice"
+import { getWorkspaceSelect, removeExistingWorkspace, selectWorkspaceById, workspace } from "../../reduxStore/workspace/workspaceSlice"
 import { closeModal } from "../../reduxStore/modal/modalSlice";
 import { removeUserBoards, removeUserWorkspace } from "../../reduxStore/users/userSlice";
 import { removeBoardsFromWorkspace } from "../../reduxStore/boards/boardsSlice";
 
 const index = () => {
-  const dispatch = useAppDispatch();
 
   const workspaceId = useAppSelector(getWorkspaceSelect);
 
   const workspace = useAppSelector(state => selectWorkspaceById(state,workspaceId));
-
-  if(!workspace)return;
 
   return (
     <motion.div
@@ -40,10 +37,10 @@ const index = () => {
 
       justify-center
 
-      sLaptop:w-[23.999rem] 
-      mLaptop:w-[29.999rem]  
-      desktop:w-[36rem] 
-      largeDesktop:w-[45rem]
+      sLaptop:max-w-[23.999rem] 
+      mLaptop:max-w-[29.999rem]  
+      desktop:max-w-[36rem] 
+      largeDesktop:max-w-[45rem]
 
       sLaptop:rounded-[0.471rem] 
       mLaptop:rounded-[0.588rem]
@@ -91,45 +88,34 @@ const index = () => {
         desktop:text-[1.4rem]
         largeDesktop:text-[1.75rem]
         ">Yes delete "<span className="opacity-50">{workspace.name}</span>"</span>
-        <button 
-        
-        onClick={()=>{
-          dispatch(removeExistingWorkspace(workspaceId))
-          .unwrap()
-          .then((x)=>{
-            dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
-            dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
-            dispatch(removeUserBoards(x.workspaceInfo));
-            dispatch(closeModal());
-          })
-          .catch(()=>alert("Issue encountered trying to delete"+workspace.name));
-        }}
-        className="
-        opacity-50
-        hover:opacity-100
-
-        sLaptop:text-[0.986rem]
-        mLaptop:text-[1.233rem]
-        desktop:text-[1.48rem]
-        largeDesktop:text-[1.85rem]
-
-        sLaptop:py-[0.266rem]
-        mLaptop:py-[0.333rem]
-        desktop:py-[0.4rem]
-        largeDesktop:py-[.5rem]
-
-        font-bold
-        
-        sLaptop:rounded-[0.266rem]
-        mLaptop:rounded-[0.333rem]
-        desktop:rounded-[.4rem]
-        largeDesktop:rounded-[.5rem]
-
-        bg-[#F9453E]
-        ">Delete work space</button>
+        <WorkspaceDeleteButton workspace={workspace} />
       </div>
     </motion.div>
   )   
+}
+
+const WorkspaceDeleteButton = ({workspace}:{workspace:workspace}) => {
+
+  const dispatch = useAppDispatch();
+
+
+  if(!workspace)return;
+
+  return <button 
+  onClick={()=>{
+    dispatch(removeExistingWorkspace(workspace.w_id))
+    .unwrap()
+    .then((x)=>{
+      dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
+      dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
+      dispatch(removeUserBoards(x.workspaceInfo.boards));
+      dispatch(closeModal());
+    })
+    .catch(()=>alert("Issue encountered trying to delete"+workspace.name));
+  }}
+  className="
+  workspaceDeleteButtonModal
+  ">Delete Workspace</button>
 }
 
 export default index

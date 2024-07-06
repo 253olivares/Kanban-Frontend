@@ -3,7 +3,7 @@ import triangle from '/assets/Polygon_6.svg';
 import { useAppSelector } from "../../../../reduxStore/hook";
 import { getFilterModal, setOpenModal } from "../../../../reduxStore/modal/modalSlice";
 import { useDispatch } from "react-redux";
-import { AppContext } from "../../../appRefContext";
+import { AppContext } from "../../../appRefContext/appRefContext";
 
 import BoardPageFilterBody from "./BoardPageFilterBody";
 import { AnimatePresence } from "framer-motion";

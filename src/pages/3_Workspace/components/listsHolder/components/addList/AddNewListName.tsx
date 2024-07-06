@@ -1,6 +1,6 @@
 import {motion} from 'framer-motion';
 import { memo, useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../../../../appRefContext';
+import { AppContext } from '../../../../../appRefContext/appRefContext';
 import { useAppDispatch } from '../../../../../../reduxStore/hook';
 import { changeListModalState } from '../../../../../../reduxStore/modal/modalSlice';
 import checkMark from '/assets/Check_MarkIcon.svg';

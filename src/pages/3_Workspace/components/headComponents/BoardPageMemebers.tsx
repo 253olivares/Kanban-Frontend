@@ -1,6 +1,6 @@
 import { memo, useContext } from "react"
 import { useDispatch } from "react-redux";
-import { AppContext } from "../../../appRefContext";
+import { AppContext } from "../../../appRefContext/appRefContext";
 import { useAppSelector } from "../../../../reduxStore/hook";
 import { getMembersModal, setOpenMemberModal } from "../../../../reduxStore/modal/modalSlice";
 import triangle from '/assets/Polygon_6.svg';

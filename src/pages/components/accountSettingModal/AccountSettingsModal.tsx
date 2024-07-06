@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../../../reduxStore/hook";
 import { motion } from 'framer-motion';
 import { memo, useContext, useEffect} from 'react';
 import { closeAccountModal,getCroppingImage } from "../../../reduxStore/modal/modalSlice";
-import { AppContext } from "../../appRefContext";
+import { AppContext } from "../../appRefContext/appRefContext";
 import Account from "./Account";
 import Logout from "./Logout";
 import Options from "./Options";
