@@ -1,4 +1,4 @@
-import { getCroppingTool, getModalType, setSettingModal } from "../reduxStore/modal/modalSlice";
+import { changeUserRoleNameState, getCroppingTool, getModalType, getRolState, setSettingModal } from "../reduxStore/modal/modalSlice";
 import { useAppDispatch,useAppSelector  } from "../reduxStore/hook";
 import { closeModal } from "../reduxStore/modal/modalSlice";
 
@@ -34,7 +34,8 @@ const Modal = memo(() => {
   const board = useAppSelector(state => selectBoardById(state,params?.workspaceId || "")) || null;
   const selectWorkspace = useAppSelector(getWorkspaceSelect);
   const workspace = useAppSelector (state => selectWorkspaceById(state,selectWorkspace)) || null;
-  
+  const rolestate = useAppSelector (getRolState);
+
   const deleteWorkspaceFn = () => {
     dispatch(removeExistingWorkspace(workspace.w_id))
     .unwrap()
@@ -103,7 +104,10 @@ const Modal = memo(() => {
         </AnimatePresence>
       </div>
 
-      <div onClick={()=> !croppingTool && dispatch(closeModal())} 
+      <div onClick={()=> {
+        !croppingTool && !rolestate && dispatch(closeModal())
+        rolestate && dispatch(changeUserRoleNameState(false))
+      }} 
       className="
       hidden 
       sLaptop:block 

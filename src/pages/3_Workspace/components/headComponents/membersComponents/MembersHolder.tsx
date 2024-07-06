@@ -8,9 +8,6 @@ const MembersHolder = memo(({member}:{member:string[]}) => {
 
   const user = getUserFromList(member[0])
   const role = member[1];
-
-  console.log(user);
-  console.log(role);
   
   if(!user) return;
 
@@ -23,10 +20,10 @@ const MembersHolder = memo(({member}:{member:string[]}) => {
     flex-row
     justify-between
     
-    sLaptop:gap-[0.333rem]
-    mLaptop:gap-[0.416rem]
-    desktop:gap-[0.5rem]
-    largeDesktop:gap-[0.625rem]
+    sLaptop:gap-[0.426rem]
+    mLaptop:gap-[0.533rem]
+    desktop:gap-[0.64rem]
+    largeDesktop:gap-[.8rem]
 
     items-center
     ">

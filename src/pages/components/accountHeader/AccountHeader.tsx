@@ -63,6 +63,7 @@ const AccountHeader = memo(() => {
         } 
 
       }).catch(()=>{
+        
         console.log("No user found or wrong user logged in!");
         navigate('/');
       });
@@ -74,6 +75,7 @@ const AccountHeader = memo(() => {
     dispatch(initiateTask());
     dispatch(initialComments());
     dispatch(initiateUserList());
+
   },[])
 
   return (

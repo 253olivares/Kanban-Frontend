@@ -41,6 +41,50 @@
 
 @layer components { 
 
+    .addNewUserHolder{
+        @apply
+        relative
+
+        bg-SpaceBlue
+
+        hidden
+        sLaptop:flex
+        flex-col
+
+        justify-center
+
+        sLaptop:w-[34.666rem]
+        mLaptop:w-[43.333rem]
+        desktop:w-[52rem]
+        largeDesktop:w-[65rem]
+
+        max-h-[80%]
+
+        sLaptop:rounded-[0.471rem] 
+        mLaptop:rounded-[0.588rem]
+        desktop:rounded-[0.706rem]
+        largeDesktop:rounded-[0.883rem]
+
+        px-[5%]
+
+        sLaptop:py-[1.066rem]
+        mLaptop:py-[1.333rem]
+        desktop:py-[1.6rem]
+        largeDesktop:py-[2rem]
+
+        sLaptop:gap-[1.066rem]
+        mLaptop:gap-[1.333rem]
+        desktop:gap-[1.6rem]
+        largeDesktop:gap-[2rem]
+
+        text-PrimaryWhite
+
+        transition-[height]
+
+        overflow-hidden
+
+    }
+
     .modalCss {
         @apply 
         fixed

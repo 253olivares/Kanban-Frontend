@@ -23,7 +23,8 @@ type initialStateType = {
     deleteWorkspace:boolean,
     settingsModal:boolean,
     addListModal:boolean,
-    mobileBoardNameModal:boolean
+    mobileBoardNameModal:boolean,
+    userRoleName:boolean
 }
 
 const initialState: initialStateType = {
@@ -39,7 +40,8 @@ const initialState: initialStateType = {
     deleteWorkspace: false,
     settingsModal: false,
     addListModal: false,
-    mobileBoardNameModal:false
+    mobileBoardNameModal:false,
+    userRoleName:false
 }   
 
 // create a slice of our state
@@ -117,6 +119,9 @@ const modalSlice = createSlice({
         },
         changeMobileBoardNameState (state,action){
             state.mobileBoardNameModal = action.payload as boolean;
+        },
+        changeUserRoleNameState (state,action) {
+            state.userRoleName = action.payload as boolean;
         }
     }
 })
@@ -135,6 +140,7 @@ export const getMembersModal = (state:RootState) => state.modal.memberModal;
 export const getSettingsModal = (state:RootState) => state.modal.settingsModal;
 export const getListModal = (state:RootState) => state.modal.addListModal;
 export const getMobileBoardNameModal = (state:RootState) => state.modal.mobileBoardNameModal;
+export const getRolState = (state:RootState) => state.modal.userRoleName;
 
 export const {
     setCroppingImageData,
@@ -156,7 +162,8 @@ export const {
     changeListModalState,
     changeMobileBoardNameState,
     openConfirmDeleteBoard,
-    openAddNewUser
+    openAddNewUser,
+    changeUserRoleNameState
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

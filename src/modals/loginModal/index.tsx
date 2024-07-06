@@ -137,7 +137,10 @@ const index = () => {
         sLaptop:px-[12.30%]
 
         font-normal
-        " onSubmit={(e)=> e.preventDefault()}>
+        " onSubmit={(e)=> {
+          e.preventDefault()
+          checkInputs();
+        }}>
           {/* username */}
           <div className="modalPasswordInputDiv">
             <Inputs 
@@ -251,9 +254,7 @@ const index = () => {
           mLaptop:pb-[2.939rem]
           desktop:pb-[3.528rem] 
           largeDesktop:pb-[4.409rem]'>
-            <CreateAccountBtn message="Login" fn={async()=>{
-              checkInputs();
-              }} />
+            <CreateAccountBtn message="Login" fn={async()=>{}} />
           </div>    
         </form>
 

@@ -5,13 +5,14 @@ import { task } from '../reduxStore/tasks/tasksSlice';
 import {rememberUser, user} from '../reduxStore/users/userSlice';
 import { workspace } from '../reduxStore/workspace/workspaceSlice';
 
-export const rememberKey ='RememberUser';
-export const boardKey = 'boardList';
-export const commentKey = 'commentList';
-export const listKey = 'listList';
-export const taskKey = 'taskList';
-export const userKey = 'userList';
-export const workspaceKey = 'workspaceList';
+const rememberKey ='RememberUser';
+const boardKey = 'boardList';
+const commentKey = 'commentList';
+const listKey = 'listList';
+const taskKey = 'taskList';
+const userKey = 'userList';
+const workspaceKey = 'workspaceList';
+const userHistory = 'userHistory'
 
 export const getTask = ():task[] | null => {
     const data = localStorage.getItem(taskKey);
@@ -263,6 +264,45 @@ export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | 
     return match;
 }
 
+export const createUserHistory = (board:board) => {
+    const data = localStorage.getItem(userHistory);
+
+    if(!data){
+        reloadApplication();
+        return null
+    }
+
+    const date = new Date;
+
+    const user = getUserFromList(board.u_id);
+
+    if(!user) return
+    
+    const addUserHistory:Record<string,string[]> = {};
+    addUserHistory[user.email] = [user.u_id,board.members[0][1],date.toLocaleString()]
+
+    const userHistoryData:Record<string,Record<string,string[]>> = JSON.parse(data);
+    userHistoryData[board.b_id] = addUserHistory;
+
+    localStorage.setItem(userHistory,JSON.stringify(userHistoryData));
+}
+
+
+export const getUserHistory = (boardId:string):Record<string,string> | null => {
+    const data = localStorage.getItem(userHistory);
+
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+
+    const userHistoryData:Record<string,Record<string,string>> = JSON.parse(data);
+
+    if(userHistoryData[boardId]) return userHistoryData[boardId];
+
+    return null;
+}
+
 export const resetBackend = async() => {
     localStorage.removeItem(rememberKey);
     localStorage.removeItem(boardKey);
@@ -271,6 +311,7 @@ export const resetBackend = async() => {
     localStorage.removeItem(taskKey);
     localStorage.removeItem(userKey);
     localStorage.removeItem(workspaceKey);
+    localStorage.removeItem(userHistory);
 
     reloadApplication();
 }
@@ -284,6 +325,7 @@ export const checkStorages= async():Promise<void> => {
     !localStorage.getItem(taskKey)&& localStorage.setItem(taskKey,JSON.stringify([]));
     !localStorage.getItem(userKey)&& localStorage.setItem(userKey,JSON.stringify({}));
     !localStorage.getItem(workspaceKey)&& localStorage.setItem(workspaceKey,JSON.stringify([]));
+    !localStorage.getItem(userHistory)&& localStorage.setItem(userHistory,JSON.stringify({}));
 
 }
 

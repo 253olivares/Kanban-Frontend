@@ -29,17 +29,15 @@ const AddList = memo(() => {
       <div 
       className="
       addListHolder
-      ">
+      ">  
+      <AnimatePresence>
           {
             openModal ? 
-            <AnimatePresence>
               <AddNewListName />
-            </AnimatePresence>
             :
-            <AnimatePresence>
               <DefaultView />
-            </AnimatePresence>
           }
+      </AnimatePresence>
       </div>
     </motion.div>
   )

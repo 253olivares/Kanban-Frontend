@@ -4,6 +4,7 @@ const index = ({message,fn}:{message:string,fn: ()=>void}) => {
     <button
     tabIndex={-1}
     onClick={()=>fn()}
+    type="submit"
     className="
     site-borders
     text-PrimaryWhite

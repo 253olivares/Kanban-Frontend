@@ -293,7 +293,10 @@ const index = () => {
             sLaptop:px-[11.5%]
             font-normal
 
-        ' onSubmit={(e)=> e.preventDefault()}>
+        ' onSubmit={(e)=> {
+            e.preventDefault()
+            checkInputs()
+        }}>
             {/* first name last name */}
             <div className='
             flex 
@@ -449,7 +452,7 @@ const index = () => {
             mLaptop:py-[1.607rem]
             desktop:py-[1.829rem] 
             largeDesktop:py-[2.349rem]'>
-                <CreateAccountButton message="Create Account" fn={()=>{checkInputs()}} />
+                <CreateAccountButton message="Create Account" fn={()=>{}} />
             </div>
         </form>
     </div>

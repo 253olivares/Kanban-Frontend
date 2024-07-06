@@ -12,7 +12,6 @@ const DefaultView = memo(() => {
     <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
     transition={{
         ease:'easeInOut',
         duration:.5
@@ -27,8 +26,6 @@ const DefaultView = memo(() => {
       justify-between
       items-center
 
-      opacity-50
-      hover:opacity-100
       hover:cursor-pointer
       
       sLaptop:px-[0.833rem]
