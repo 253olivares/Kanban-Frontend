@@ -42,9 +42,9 @@ const AddUserHistoryItem = ({v}:{v:string[]}) => {
         justify-center
         items-center
 
-        sLaptop:gap-[]
-        mLaptop:gap-[]
-        desktop:gap-[]
+        sLaptop:gap-[0.799rem]
+        mLaptop:gap-[0.999rem]
+        desktop:gap-[1.2rem]
         largeDesktop:gap-[1.5rem]
         ">
             <UserIcon userImage = {user.pfp}/>
