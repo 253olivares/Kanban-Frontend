@@ -75,10 +75,10 @@ const UserName = memo(({userName}:{userName:string})=> {
     return <h1 className="
         font-medium
 
-        sLaptop:text-[0.799rem]
-        mLaptop:text-[0.999rem]
-        desktop:text-[1.2rem]
-        largeDesktop:text-[1.5rem]
+        sLaptop:text-[0.879rem]
+        mLaptop:text-[1.098rem]
+        desktop:text-[1.32rem]
+        largeDesktop:text-[1.65rem]
 
         sLaptop:w-[8.333rem]
         mLaptop:w-[10.416rem]
@@ -94,10 +94,10 @@ const UserName = memo(({userName}:{userName:string})=> {
 
 const Role = memo(({userRole}:{userRole:string})=> {
     return <span className="
-        sLaptop:text-[.533rem]
-        mLaptop:text-[.666rem]
-        desktop:text-[.8rem]
-        largeDesktop:text-[1rem]
+        sLaptop:text-[.666rem]    
+        mLaptop:text-[.832rem]    
+        desktop:text-[1rem]
+        largeDesktop:text-[1.25rem]
     ">
         Role: <span className="opacity-50 font-medium">{userRole}</span>
     </span>
@@ -105,10 +105,10 @@ const Role = memo(({userRole}:{userRole:string})=> {
 
 const Joined = memo(({dateJoined}:{dateJoined:Date})=> {
     return <span className="
-        sLaptop:text-[.5333rem]    
-        mLaptop:text-[.666rem]    
-        desktop:text-[.8rem]
-        largeDesktop:text-[1rem]
+        sLaptop:text-[.666rem]    
+        mLaptop:text-[.832rem]    
+        desktop:text-[1rem]
+        largeDesktop:text-[1.25rem]
     ">
         User Joined: { 
         dateJoined.toLocaleDateString('en-US',{weekday:'short'})

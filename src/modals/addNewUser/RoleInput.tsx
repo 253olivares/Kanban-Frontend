@@ -49,6 +49,9 @@ const RoleInput = memo((
      desktop:rounded-[0.706rem]
      largeDesktop:rounded-[0.883rem]
 
+     sLaptop:gap-[.719rem]
+     mLaptop:gap-[.899rem]
+     desktop:gap-[1.08rem]
      largeDesktop:gap-[1.35rem]
 
      relative 
