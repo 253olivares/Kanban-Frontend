@@ -50,6 +50,7 @@
         hidden
         sLaptop:flex
         flex-col
+        flex-grow
 
         justify-center
 
@@ -58,7 +59,6 @@
         desktop:w-[52rem]
         largeDesktop:w-[65rem]
 
-        max-h-[80%]
 
         sLaptop:rounded-[0.471rem] 
         mLaptop:rounded-[0.588rem]
@@ -79,10 +79,7 @@
 
         text-PrimaryWhite
 
-        transition-[height]
-
         overflow-hidden
-
     }
 
     .modalCss {

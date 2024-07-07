@@ -5,11 +5,13 @@ const EmailInput = memo((
   {
     emailInput,
     setInput,
+    userRole,
     inputRef,
     checkEmailInput
   }:{
     emailInput:string,
     setInput:(emailInput:string)=> void,
+    userRole:boolean,
     inputRef:React.RefObject<HTMLInputElement>,
     checkEmailInput:()=> void
   }) => {
@@ -18,7 +20,7 @@ const EmailInput = memo((
     <form 
     onSubmit={(e)=> {
       e.preventDefault();
-
+      inputRef.current?.blur();
       checkEmailInput();
 
     }}
@@ -30,6 +32,7 @@ const EmailInput = memo((
           if(inputRef.current) inputRef.current.style.color='#F5F5F5';
           setInput(e.target.value)
         }}
+        disabled={userRole}
         className="
         w-full
         

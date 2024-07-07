@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { getUserHistory } from "../../customLogic/CustomeLogic";
 
 
 // just a slice to control when our modals are open and which modals we want to open
@@ -24,7 +25,8 @@ type initialStateType = {
     settingsModal:boolean,
     addListModal:boolean,
     mobileBoardNameModal:boolean,
-    userRoleName:boolean
+    userRoleName:boolean,
+    userHistory:Record<string,string[]>
 }
 
 const initialState: initialStateType = {
@@ -41,7 +43,8 @@ const initialState: initialStateType = {
     settingsModal: false,
     addListModal: false,
     mobileBoardNameModal:false,
-    userRoleName:false
+    userRoleName:false,
+    userHistory:{}
 }   
 
 // create a slice of our state
@@ -122,6 +125,14 @@ const modalSlice = createSlice({
         },
         changeUserRoleNameState (state,action) {
             state.userRoleName = action.payload as boolean;
+        },
+        initializeUserHistory (state,action) {
+            const userHistoryData = getUserHistory(action.payload);
+
+            if(userHistoryData) state.userHistory = userHistoryData;
+        },
+        addUserHistoryToState (state,action) {
+            state.userHistory = {...state.userHistory,...action.payload};
         }
     }
 })
@@ -141,6 +152,7 @@ export const getSettingsModal = (state:RootState) => state.modal.settingsModal;
 export const getListModal = (state:RootState) => state.modal.addListModal;
 export const getMobileBoardNameModal = (state:RootState) => state.modal.mobileBoardNameModal;
 export const getRolState = (state:RootState) => state.modal.userRoleName;
+export const getUserHistoryState = (state:RootState) => state.modal.userHistory;
 
 export const {
     setCroppingImageData,
@@ -163,7 +175,9 @@ export const {
     changeMobileBoardNameState,
     openConfirmDeleteBoard,
     openAddNewUser,
-    changeUserRoleNameState
+    changeUserRoleNameState,
+    initializeUserHistory,
+    addUserHistoryToState
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

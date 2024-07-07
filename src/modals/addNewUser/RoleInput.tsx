@@ -1,21 +1,35 @@
 import { memo, useState } from "react"
 import { useAppDispatch } from "../../reduxStore/hook";
 import { changeUserRoleNameState } from "../../reduxStore/modal/modalSlice";
+import { getUserByEmail } from "../../customLogic/CustomeLogic";
 
 
-const RoleInput = memo(({emailInput}:{emailInput:string}) => {
+const RoleInput = memo((
+    {
+        emailInput,
+        addusertohistory
+    }:{
+        emailInput:string,
+        addusertohistory:(user: Record<string, string[]>)=>void
+    }) => {
 
     const dispatch = useAppDispatch();
 
     const [input,setInput] = useState<string>("");
+    const user = getUserByEmail(emailInput);
 
+    if(!user) return;
     const addUserToBoard = () => {
         const date = new Date;
 
-        alert(`New user added to board user history: ${emailInput}, ${input},${date.toLocaleString()}`)
+        const addUserHistory:Record<string,string[]> = {};
+        addUserHistory[user.email] = [user.u_id,input,date.toLocaleString()];
+
+        addusertohistory(addUserHistory);
+        // alert(`New user added to board user history: ${user.email}, ${input},${date.toLocaleString()}`)
         dispatch(changeUserRoleNameState(false))
     }
-
+    
   return (
     <form 
     onSubmit={(e)=> {

@@ -2,14 +2,15 @@ import { memo, useLayoutEffect, useRef, useState } from "react";
 import Header from "./Header";
 import EmailInput from "./EmailInput";
 import AddHistory from "./AddHistory";
-import { checkIfEmailExists, emailValidation, getUserHistory } from "../../customLogic/CustomeLogic";
+import { checkIfEmailExists, emailValidation } from "../../customLogic/CustomeLogic";
 import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../reduxStore/hook";
-import { changeUserRoleNameState, getRolState } from "../../reduxStore/modal/modalSlice";
+import { addUserHistoryToState, changeUserRoleNameState, getRolState, getUserHistoryState } from "../../reduxStore/modal/modalSlice";
 import RoleModal from "./RoleModal";
+import AnimateHeight, { Height } from "react-animate-height";
 
-const AddNewUser = memo(() => {
+const AddNewUser = memo(({...props}) => {
 
   const params = useParams();
   const dispatch = useAppDispatch();
@@ -17,20 +18,21 @@ const AddNewUser = memo(() => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const [emailInput,setEmailInput] = useState<string>("");
-  const [userHistory,setUserHistory] = useState<Record<string,string>|null>(null);
+  const [height,setHeight] = useState<Height>('auto');
+
+  const contentDiv = useRef<HTMLDivElement | null>(null);
+
+  const userHistory  = useAppSelector(getUserHistoryState);
   const userRole = useAppSelector(getRolState);
 
-  useLayoutEffect(()=>{
-
-    // check for new user
-    const userHistoryData = getUserHistory(params?.workspaceId||"");
-
-    setUserHistory(userHistoryData);
-
-  },[])
 
   if(!params.workspaceId) return;
   if(!userHistory) return;
+
+  const addusertohistory = (user:Record<string,string[]>) => {
+    if(inputRef.current) inputRef.current.style.color='green';
+    dispatch(addUserHistoryToState(user));
+  }
 
   const checkEmailInput = () => {
 
@@ -45,6 +47,7 @@ const AddNewUser = memo(() => {
     }
 
     if(userHistory[emailInput]) {
+      if(inputRef.current) inputRef.current.style.color='green';
       alert("User already exists in board!");
       return;
     }
@@ -61,40 +64,70 @@ const AddNewUser = memo(() => {
 
   }
 
-  return <div className=" addNewUserHolder ">
-    <AnimatePresence>
-    {
-      userRole ? <RoleModal emailInput={emailInput} /> : ""
-    }
-    </AnimatePresence>
-    <Header />
+  useLayoutEffect(()=> {
+    const element = contentDiv.current as HTMLDivElement;
+    const resizeObserver = new ResizeObserver(()=> {
+      setHeight(element.clientHeight);
+    })
+    resizeObserver.observe(element);
+    return ()=> resizeObserver.disconnect();
+  },[])
+
+  return <AnimateHeight 
+      {...props}
+      height={height}
+      contentClassName="auto-content addNewUserHolder"
+      contentRef={contentDiv}
+      disableDisplayNone>
+      <AnimatePresence>
+      {
+        userRole ? <RoleModal emailInput={emailInput} addusertohistory={addusertohistory} /> : ""
+      }
+      </AnimatePresence>
+      <Header />
+      <div className="
+      flex
+      flex-col
+
+      sLaptop:gap-[.533rem]
+      mLaptop:gap-[.666rem]
+      desktop:gap-[.8rem]
+      largeDesktop:gap-[1rem]
+
+      ">
+        <EmailInput 
+        emailInput = {emailInput} 
+        setInput = {(emailInput:string)=> setEmailInput(emailInput)} 
+        userRole={userRole}
+        inputRef = {inputRef}
+        checkEmailInput = {checkEmailInput}
+        />
+        <p className="
+          sLaptop:text-[0.799rem]
+          mLaptop:text-[0.999rem]
+          desktop:text-[1.2rem]
+          largeDesktop:text-[1.5rem]
+
+          leading-none
+
+        ">Please enter a valid user email address! </p>
+      </div>
+
     <div className="
     flex
     flex-col
-
     sLaptop:gap-[.533rem]
     mLaptop:gap-[.666rem]
     desktop:gap-[.8rem]
     largeDesktop:gap-[1rem]
 
+    flex-grow
+
+    h-auto
+
+    transition-all
+
     ">
-      <EmailInput 
-      emailInput = {emailInput} 
-      setInput = {(emailInput:string)=> setEmailInput(emailInput)} 
-      inputRef = {inputRef}
-      checkEmailInput = {checkEmailInput}
-      />
-      <p className="
-        sLaptop:text-[0.799rem]
-        mLaptop:text-[0.999rem]
-        desktop:text-[1.2rem]
-        largeDesktop:text-[1.5rem]
-
-        leading-none
-
-      ">Please enter a valid user email address! </p>
-    </div>
-
     <hr className="
         w-full
         bg-PrimaryWhite
@@ -106,13 +139,12 @@ const AddNewUser = memo(() => {
         largeDesktop:h-[.25rem]
         
         rounded-full 
-        " />
-
-    {
-      Object.keys(userHistory).length !== 0 ?
-      <AddHistory userHistory={userHistory} /> : ''
-    }
-  </div>
+      " />
+      <AnimatePresence>
+        <AddHistory userHistory={userHistory} />
+      </AnimatePresence>
+    </div>
+  </AnimateHeight>
 })
 
 export default AddNewUser 

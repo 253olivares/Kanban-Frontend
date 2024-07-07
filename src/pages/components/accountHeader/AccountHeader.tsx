@@ -1,6 +1,6 @@
 import { checkRemembered, getUser } from '../../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
-import { getListModal, getMembersModal, getMobileBoardNameModal, getModalStatus, getModalType, getSettingsModal } from '../../../reduxStore/modal/modalSlice';
+import { getListModal, getMembersModal, getMobileBoardNameModal, getModalStatus, getModalType, getSettingsModal, initializeUserHistory } from '../../../reduxStore/modal/modalSlice';
 import { useLayoutEffect, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
@@ -75,6 +75,7 @@ const AccountHeader = memo(() => {
     dispatch(initiateTask());
     dispatch(initialComments());
     dispatch(initiateUserList());
+    dispatch(initializeUserHistory(params.workspaceId))
 
   },[])
 

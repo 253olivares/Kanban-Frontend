@@ -3,7 +3,14 @@ import { changeUserRoleNameState } from "../../reduxStore/modal/modalSlice";
 import { motion } from "framer-motion";
 import RoleInput from "./RoleInput";
 
-const RoleModal = ({emailInput}:{emailInput:string}) => {
+const RoleModal = (
+    {
+        emailInput,
+        addusertohistory
+    }:{
+        emailInput:string,
+        addusertohistory:(user: Record<string, string[]>)=>void
+    }) => {
  
     const dispatch = useAppDispatch();
 
@@ -25,7 +32,7 @@ const RoleModal = ({emailInput}:{emailInput:string}) => {
     items-center
     z-[5]
     ">
-        <RoleInput emailInput={emailInput} />
+        <RoleInput emailInput={emailInput} addusertohistory={addusertohistory} />
         <div 
         className="
         absolute

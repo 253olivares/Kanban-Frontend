@@ -220,6 +220,23 @@ export const addUser = (newUser:user):void => {
     localStorage.setItem(userKey,JSON.stringify(users));
 }
 
+export const getUserByEmail =(email:string):user | null => {
+    const data = localStorage.getItem(userKey);
+    if(!data){
+        reloadApplication();
+        return null
+    }
+    const users:Record<string,user> = JSON.parse(data);
+
+    for(const[_,value] of Object.entries(users)){
+        if(value.email.toUpperCase()=== email.toUpperCase()){
+           
+            return value;
+        }
+    }
+    return null;
+}
+
 export const checkIfEmailExists = (email:string):boolean | null => {
     const data = localStorage.getItem(userKey);
     
@@ -288,7 +305,7 @@ export const createUserHistory = (board:board) => {
 }
 
 
-export const getUserHistory = (boardId:string):Record<string,string> | null => {
+export const getUserHistory = (boardId:string):Record<string,string[]> | null => {
     const data = localStorage.getItem(userHistory);
 
     if(!data){
@@ -296,7 +313,7 @@ export const getUserHistory = (boardId:string):Record<string,string> | null => {
         return null;
     }
 
-    const userHistoryData:Record<string,Record<string,string>> = JSON.parse(data);
+    const userHistoryData:Record<string,Record<string,string[]>> = JSON.parse(data);
 
     if(userHistoryData[boardId]) return userHistoryData[boardId];
 
