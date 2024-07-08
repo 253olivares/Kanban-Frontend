@@ -1,7 +1,7 @@
 import { memo, useState } from "react"
 import { useAppDispatch } from "../../reduxStore/hook";
 import { changeUserRoleNameState } from "../../reduxStore/modal/modalSlice";
-import { getUserByEmail } from "../../customLogic/CustomeLogic";
+import { getUserByEmail } from "../../customLogic/CustomLogic";
 
 
 const RoleInput = memo((

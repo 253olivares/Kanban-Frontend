@@ -1,5 +1,5 @@
-import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction} from "@reduxjs/toolkit"
-import { addBoard, getBoards, removeBoardsFromWorkspaceLS, updateBoardNameFromWorkspaceLS } from "../../customLogic/CustomeLogic"
+import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction, Update} from "@reduxjs/toolkit"
+import { addBoard, getBoards, removeBoardsFromWorkspaceLS, updateBoardLS, userLeaveUpdateBoard } from "../../customLogic/CustomLogic"
 import { RootState } from "../store"
 import { workspace } from "../workspace/workspaceSlice"
 export type board = {
@@ -84,19 +84,78 @@ export const addBoards = createAsyncThunk('boards/addBoard', async({
 
 // Update board name when we are in the board page that runs whenever the board name is change
 // additionally when the new name is submitted from mobile
-export const updateBoardNameFromWorkspace = createAsyncThunk('boards/updateBoardName',async({boardName,boardId}: {boardName:string, boardId:string}, 
+export const updateBoardNameFromWorkspace = createAsyncThunk('boards/updateBoardName',async(
+    {boardName,boardId}: 
+    {boardName:string, boardId:string}, 
     {rejectWithValue, getState}) => {
         try {
             const state = getState() as RootState;
 
-           console.log("From slice:", boardName);
+            const board = selectBoardById(state,boardId);
 
-            return{boardName:boardName, boardId:boardId, prevStates:selectAllBoards(state)}
+            const newBoard = {
+                ...board,
+               name:boardName
+            }
+
+            return{updateBoard:newBoard, prevStates:selectAllBoards(state)}
 
         } catch (e:any){
             console.log(e);
             return rejectWithValue(e);
         }
+})
+
+export const addUserToBoard = createAsyncThunk('boards/addUserToBoard',async(
+    {boardId,u_id,role}:
+    {boardId:string,u_id:string,role:string},{rejectWithValue,getState})=>{
+    try{
+
+        const state = getState() as RootState;
+
+        const board = selectBoardById(state,boardId);
+        
+        const newBoard = {
+            ...board,
+            members:[...board.members,[u_id,role]]
+        }
+
+        return{updatedBoard:newBoard,prevState:selectAllBoards(state)}
+    } catch(e:any){
+        console.log(e);
+        return rejectWithValue(e);
+    }
+})
+
+export const removeUserFromMulitpleBoards = createAsyncThunk('boards/removeUsersFromBoards',async(
+    {boards,u_id}:{
+        boards:string[],
+        u_id:string
+    },
+    {getState,rejectWithValue}
+)=> {
+    try{
+
+        console.log("test2123")
+        const state = getState() as RootState;
+
+        const statesToUpdate:Update<board, string>[] = [];
+
+        for(const board of boards){
+            const prevBoard = selectBoardById(state,board)
+            const updatedBoard = {
+                ...prevBoard,
+                members: prevBoard.members.filter((x:string[])=> x[0] !== u_id)
+            }
+            statesToUpdate.push({id:updatedBoard.b_id,changes:updatedBoard})
+        }
+
+        console.log("States To Update",statesToUpdate)
+        return {updateState:statesToUpdate};
+    }catch(e:any){
+        console.log(e);
+        return rejectWithValue(e);
+    }
 })
 
 const initialState:initialStateType = boardsAdapter.getInitialState({
@@ -146,17 +205,25 @@ const boardSlice = createSlice({
         .addCase(addBoards.rejected,(state,_)=> {
             state.status = 'failed';
         })
-        .addCase(updateBoardNameFromWorkspace.fulfilled,(state,action:PayloadAction<{boardName:string,boardId:string,prevStates:board[]}>)=> {
-            const {boardId,boardName,prevStates} = action.payload;
-            //console.log("From toolkit listener:",boardName)
+        .addCase(updateBoardNameFromWorkspace.fulfilled,(state,action:PayloadAction<{updateBoard:board,prevStates:board[]}>)=> {
+            const {updateBoard,prevStates} = action.payload;
             
-            updateBoardNameFromWorkspaceLS(boardId,boardName,prevStates);
-            boardsAdapter.updateOne(state,{id:boardId,changes:{...state.entities[boardId],name:boardName}});
+            updateBoardLS(updateBoard,prevStates);
+            boardsAdapter.updateOne(state,{id:updateBoard.b_id,changes:updateBoard});
         })
         .addCase(deleteBoard.fulfilled,(state,action:PayloadAction<{board:board,prevState:board[]}>)=> {
             
             removeBoardsFromWorkspaceLS([action.payload.board.b_id])
             boardsAdapter.removeOne(state,action.payload.board.b_id);
+        })
+        .addCase(addUserToBoard.fulfilled,(state,action:PayloadAction<{updatedBoard:board,prevState:board[]}>)=>{
+
+            updateBoardLS(action.payload.updatedBoard,action.payload.prevState);
+            boardsAdapter.updateOne(state,{id:action.payload.updatedBoard.b_id,changes:action.payload.updatedBoard})
+        })
+        .addCase(removeUserFromMulitpleBoards.fulfilled,(state,action:PayloadAction<{updateState:Update<board, string>[]}>) => {
+            boardsAdapter.updateMany(state,action.payload.updateState);
+            userLeaveUpdateBoard(Object.values(state.entities))
         })
     }
 })

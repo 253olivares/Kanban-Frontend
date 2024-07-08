@@ -2,13 +2,15 @@ import { memo, useLayoutEffect, useRef, useState } from "react";
 import Header from "./Header";
 import EmailInput from "./EmailInput";
 import AddHistory from "./AddHistory";
-import { checkIfEmailExists, emailValidation } from "../../customLogic/CustomeLogic";
+import { checkIfEmailExists, emailValidation, updateSelectUser } from "../../customLogic/CustomLogic";
 import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../reduxStore/hook";
 import { addUserHistoryToState, changeUserRoleNameState, getRolState, getUserHistoryState } from "../../reduxStore/modal/modalSlice";
 import RoleModal from "./RoleModal";
 import AnimateHeight, { Height } from "react-animate-height";
+import { addUserToWorkspace, getWorkspaceSelect } from "../../reduxStore/workspace/workspaceSlice";
+import { addUserToBoard } from "../../reduxStore/boards/boardsSlice";
 
 const AddNewUser = memo(({...props}) => {
 
@@ -24,6 +26,7 @@ const AddNewUser = memo(({...props}) => {
 
   const userHistory  = useAppSelector(getUserHistoryState);
   const userRole = useAppSelector(getRolState);
+  const selectWorkspace = useAppSelector(getWorkspaceSelect);
 
 
   if(!params.workspaceId) return;
@@ -31,7 +34,15 @@ const AddNewUser = memo(({...props}) => {
 
   const addusertohistory = (user:Record<string,string[]>) => {
     if(inputRef.current) inputRef.current.style.color='green';
-    dispatch(addUserHistoryToState(user));
+    dispatch(addUserHistoryToState({user:user,boardId:params.workspaceId!}));
+
+    // Add user to board and workspace member collection
+    dispatch(addUserToWorkspace({workspaceId:selectWorkspace,u_id:Object.values(user)[0][0]}))
+
+    // adding user to board members array
+    dispatch(addUserToBoard({boardId:params.workspaceId!,u_id:Object.values(user)[0][0],role:Object.values(user)[0][1]}))
+
+    updateSelectUser(Object.values(user)[0][0],params.workspaceId!,selectWorkspace);
   }
 
   const checkEmailInput = () => {

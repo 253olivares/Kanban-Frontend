@@ -5,14 +5,18 @@ import AddNewBoards from './components/addNewBoardHolder';
 import scrollbarImage from '/assets/scrollBarTrack.png'
 
 import BoardItem from '../boardItems/BoardItems'
+import { getUser } from "../../../../reduxStore/users/userSlice";
 
 // sidebarBoards
 const SidebarBoards = memo(({selectWorkspace}:{selectWorkspace: string}) => {
 
+  const user = useAppSelector(getUser);
   const workspace = useAppSelector(state=>selectWorkspaceById(state,selectWorkspace))
 
   // create a const to set all boards in our select workspace
   const getBoardsFromSelectWorkspace:string[] = workspace?.boards || [];
+
+  if(!user) return;
 
   return (
     <div className={`
@@ -183,7 +187,43 @@ const SidebarBoards = memo(({selectWorkspace}:{selectWorkspace: string}) => {
             )
           }
           {/* add workspace div */}
-            <AddNewBoards workspace={workspace.w_id} durat={getBoardsFromSelectWorkspace.length!==0?(getBoardsFromSelectWorkspace.length+1)*.15: .15} key={`addBoard_${workspace.w_id}`} />
+          {
+            workspace.u_id === user.u_id ?
+            <AddNewBoards 
+            workspace={workspace?.w_id} 
+            durat={getBoardsFromSelectWorkspace.length!==0?(getBoardsFromSelectWorkspace.length+1)*.15: .15} 
+            key={`addBoard_${workspace?.w_id}`} />
+            :
+            ""
+          }
+           {
+            workspace.u_id !== user.u_id && getBoardsFromSelectWorkspace.length === 0 ? 
+            <div className="
+
+            w-full
+
+            px-[3%]
+
+            text-PrimaryWhite
+            items-center
+            justify-center
+            text-center
+
+            font-medium
+
+            sLaptop:text-[0.7995rem]
+            mLaptop:text-[0.999rem]
+            desktop:text-[1.2rem]
+            largeDesktop:text-[1.5rem]
+
+            absolute
+
+            top-[30%]
+           
+
+            ">You have not been invited to any boards. Please speak to your team lead to be includes or leave the workspace.</div> : ''
+          }
+         
           </>
         }
       </div>

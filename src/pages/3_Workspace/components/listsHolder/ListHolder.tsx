@@ -17,12 +17,30 @@ const ListHolder = () => {
   if(!user) return;
 
   return (
-    <div className="
+    <div className={`
     boardListHolder
-    ">
+    ${user.u_id !== board.u_id && board.lists.length ===0 ?
+    `
+    flex
+    justify-center
+    items-center
+
+    text-white
+
+    sLaptop:text-[1.333rem]
+    mLaptop:text-[1.666rem]
+    desktop:text-[2rem]
+    largeDesktop:text-[2.5rem]
+    ` : ''
+    }
+    `}>
       {
         user.u_id === board.u_id ?
         <AddList /> : '' 
+      }
+      {
+        user.u_id !== board.u_id && board.lists.length ===0 ? 
+        "No lists found please wait for administrator to add lists & tasks!" : ''
       }
     </div>
   )

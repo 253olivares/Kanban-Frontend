@@ -1,6 +1,5 @@
 import { memo } from "react";
-import { getUserFromList } from "../../../../../customLogic/CustomeLogic";
-import UserImage from "./UserImage";
+import { getUserFromList } from "../../../../../customLogic/CustomLogic";
 import AdminUserImage from "./AdminUserImage";
 
 
@@ -27,13 +26,8 @@ const MembersHolder = memo(({member}:{member:string[]}) => {
 
     items-center
     ">
-      {
-        role === "Admin" || role === "admin"?
-        <AdminUserImage image={user.pfp} />
-        :
-        <UserImage image={user.pfp} />
-      }
-
+        <AdminUserImage image={user.pfp} role={role} />
+  
       <div 
       className="
       flex

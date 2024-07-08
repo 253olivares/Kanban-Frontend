@@ -1,9 +1,9 @@
 import { memo } from "react"
 
 
-const AdminUserImage = memo(({image}:{image:string}) => {
+const AdminUserImage = memo(({image,role}:{image:string,role:string}) => {
   return (
-    <div className="
+    <div className={`
     flex-grow-0
 
     sLaptop:p-[0.11rem]
@@ -13,8 +13,8 @@ const AdminUserImage = memo(({image}:{image:string}) => {
     4k:p-[0.276rem]
 
     rounded-full
-    linear-gradientFooter
-    ">
+    ${role === 'admin' || role ==="Admin" ? 'linear-gradientFooter' : 'bg-transparent'}
+    `}>
         <img className=" userIconMembersBody " src={image} alt="UserImage" />
     </div>
   )

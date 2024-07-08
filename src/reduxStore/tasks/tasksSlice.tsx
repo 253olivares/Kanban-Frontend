@@ -1,6 +1,6 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../store";
-import { getTask } from "../../customLogic/CustomeLogic";
+import { getTask } from "../../customLogic/CustomLogic";
 
 export type task = {
     t_id:string,

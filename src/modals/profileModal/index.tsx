@@ -1,6 +1,6 @@
 import { changeAccountDetails, getUser } from '../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../reduxStore/hook';
-import { checkIfEmailExistsEdit} from '../../customLogic/CustomeLogic';
+import { checkIfEmailExistsEdit} from '../../customLogic/CustomLogic';
 
 import { memo, useLayoutEffect, useRef, useState } from 'react';
 import {motion, AnimatePresence} from 'framer-motion';
@@ -13,7 +13,7 @@ import RestrictedInputBoxes from './components/restrictedInputBoxes';
 import PasswordInput from './components/password';
 import Footer from '../component/footer';
 import { getCroppingTool, openCloseCroppingTool } from '../../reduxStore/modal/modalSlice';
-import { sanitize, emailValidation} from '../../customLogic/CustomeLogic';
+import { sanitize, emailValidation} from '../../customLogic/CustomLogic';
 
 type userInfo = {
     firstname:string,

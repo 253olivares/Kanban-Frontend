@@ -6,13 +6,17 @@ const Delete = memo((
         warning,
         deleteName,
         deleteFn,
-        type
+        type,
+        action,
+        action2
     }:
     {
         warning:string,
         deleteName:string,
         deleteFn:()=> void,
-        type:string 
+        type:string,
+        action:string,
+        action2:string
     }
 ) => {
 
@@ -44,8 +48,8 @@ const Delete = memo((
         desktop:gap-[.8rem]
         largeDesktop:gap-[1rem]
         ">
-            <ConfirmBoard deleteName={deleteName} />
-            <DeleteButton deleteFn={deleteFn} type={type}/>
+            <ConfirmBoard deleteName={deleteName} action2={action2} />
+            <DeleteButton deleteFn={deleteFn} type={type} action={action}/>
         </div>
     </motion.div>
   )
@@ -59,20 +63,20 @@ const MainWarning = memo(({warningMessage}:{warningMessage:string}) => {
     </h1>
 })
 
-const ConfirmBoard = memo(({deleteName}:{deleteName:string}) => {
+const ConfirmBoard = memo(({deleteName,action2}:{deleteName:string,action2:string}) => {
     return <span className="
     deleteModalConfirmation
     ">
-        Yes delete "<span className=" opacity-50 ">{deleteName}</span>"
+        Yes {action2} "<span className=" opacity-50 ">{deleteName}</span>"
     </span>
 })
 
-const DeleteButton = memo(({deleteFn,type}:{deleteFn:()=> void, type:string}) => {
+const DeleteButton = memo(({deleteFn,type,action}:{deleteFn:()=> void, type:string,action:string}) => {
     return <button
     className="deleteModalButton"
     onClick={()=> deleteFn()}
     >  
-        Delete {type}
+        {action} {type}
     </button>
 })
 

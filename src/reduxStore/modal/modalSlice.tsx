@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { getUserHistory } from "../../customLogic/CustomeLogic";
+import { addUserToHistoryCL, deleteUserHistoryCL, getUserHistory } from "../../customLogic/CustomLogic";
+import { PayloadAction } from "@reduxjs/toolkit";
 
 
 // just a slice to control when our modals are open and which modals we want to open
@@ -14,6 +15,7 @@ type initialStateType = {
      'deleteConfirm' | 
      'deleteConfirmBoard' | 
      'addNewUser' |
+     'leaveWorkspace' |
      '',
     accountSettings:boolean,
     accountLandingMobile:boolean,
@@ -81,6 +83,10 @@ const modalSlice = createSlice({
             state.modal = 'deleteConfirmBoard';
             state.openModal = true;
         },
+        openLeaveWorkspace (state) {
+            state.modal = 'leaveWorkspace';
+            state.openModal = true;
+        },
         openAddNewUser (state) {
             state.modal = 'addNewUser';
             state.openModal = true;
@@ -131,8 +137,14 @@ const modalSlice = createSlice({
 
             if(userHistoryData) state.userHistory = userHistoryData;
         },
-        addUserHistoryToState (state,action) {
-            state.userHistory = {...state.userHistory,...action.payload};
+        addUserHistoryToState (state,action:PayloadAction<{user:Record<string,string[]>,boardId:string}>) {
+
+            state.userHistory = {...state.userHistory,...action.payload.user};
+            addUserToHistoryCL(state.userHistory,action.payload.boardId);
+        },
+        deleteUserHistory (state,action:PayloadAction<string>) {
+            state.userHistory = {};
+            deleteUserHistoryCL(action.payload)
         }
     }
 })
@@ -177,7 +189,9 @@ export const {
     openAddNewUser,
     changeUserRoleNameState,
     initializeUserHistory,
-    addUserHistoryToState
+    addUserHistoryToState,
+    openLeaveWorkspace,
+    deleteUserHistory
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

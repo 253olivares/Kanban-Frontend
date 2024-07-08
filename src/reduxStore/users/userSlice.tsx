@@ -1,7 +1,7 @@
-import { createDefaultBaseImage, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser} from "../../customLogic/CustomeLogic";
+import { createDefaultBaseImage, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser} from "../../customLogic/CustomLogic";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
-import { workspace } from "../workspace/workspaceSlice";
+import { selectWorkspaceById, workspace } from "../workspace/workspaceSlice";
 import { board } from "../boards/boardsSlice";
 
 // this is to create a list of users that we can invite to workspaces
@@ -147,6 +147,37 @@ export const changeAccountDetails = createAsyncThunk('user/changeAccountDetails'
 
 })
 
+export const leaveWorkspaceUser = createAsyncThunk('user/leaveWorkspaceFn',async(workspaceId:string,{getState,rejectWithValue})=> {
+    try{
+
+
+        const state = getState() as RootState;
+
+        const workspace = selectWorkspaceById(state,workspaceId);
+        
+        const user = getUser(state);
+        if(!user) throw Error;
+
+        const updatedWorkspace = user.workspaces.filter((x:string)=> x !== workspace.w_id);
+        const updatedBoard = user.workspaces.filter((x:string) => workspace.boards.includes(x));
+
+        const updateUser = {
+            ...user,
+            workspaces: updatedWorkspace,
+            boards: updatedBoard
+        }   
+
+        // state.user.workspaces = state.user.workspaces.filter(x=> x !== action.payload.w_id);
+
+        // state.user.boards = state.user.boards.filter((x:string) => !action.payload.boards.includes(x));
+
+        return updateUser;
+    }catch(e:any){
+        console.log(e)
+        return rejectWithValue(e);
+    }
+})
+
 type initialStateType = {
     user:user | null,
     status:'idle' | 'fulfilled' | 'failed' | 'pending',
@@ -285,6 +316,11 @@ const userSlice = createSlice({
                     alert('File size too large for local storage! Please make a smaller crop or use a smaller image. Thank you');
                 }
             })
+            .addCase(leaveWorkspaceUser.fulfilled,(state,action:PayloadAction<user>) => {
+                state.user = action.payload;
+                updateUser(action.payload);
+            })
+
     }
 })
 

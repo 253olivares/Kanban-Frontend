@@ -1,4 +1,4 @@
-import { changeUserRoleNameState, getCroppingTool, getModalType, getRolState, setSettingModal } from "../reduxStore/modal/modalSlice";
+import { changeUserRoleNameState, deleteUserHistory, getCroppingTool, getModalType, getRolState, setSettingModal } from "../reduxStore/modal/modalSlice";
 import { useAppDispatch,useAppSelector  } from "../reduxStore/hook";
 import { closeModal } from "../reduxStore/modal/modalSlice";
 
@@ -11,10 +11,11 @@ import ProfileModal from './profileModal';
 import LoginModal from './loginModal';
 import Delete from "./delete/Delete";
 import { useNavigate, useParams } from "react-router-dom";
-import { deleteBoard, removeBoardsFromWorkspace, selectBoardById } from "../reduxStore/boards/boardsSlice";
-import { getWorkspaceSelect, removeExistingWorkspace, selectWorkspaceById, updateWorkspacBoardRemove } from "../reduxStore/workspace/workspaceSlice";
-import { removeUserBoards, removeUserWorkspace } from "../reduxStore/users/userSlice";
+import { deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, selectBoardById } from "../reduxStore/boards/boardsSlice";
+import { getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove } from "../reduxStore/workspace/workspaceSlice";
+import { getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace } from "../reduxStore/users/userSlice";
 import AddNewUser from "./addNewUser/AddNewUser";
+import { deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspace } from "../customLogic/CustomLogic";
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const Modal = memo(() => {
@@ -35,14 +36,17 @@ const Modal = memo(() => {
   const selectWorkspace = useAppSelector(getWorkspaceSelect);
   const workspace = useAppSelector (state => selectWorkspaceById(state,selectWorkspace)) || null;
   const rolestate = useAppSelector (getRolState);
+  const user = useAppSelector(getUser);
 
   const deleteWorkspaceFn = () => {
     dispatch(removeExistingWorkspace(workspace.w_id))
     .unwrap()
     .then((x)=> {
       dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
+      removeAdditionalUsersWorkspace(x.workspaceInfo.members,x.workspaceInfo.w_id);
       dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
       dispatch(removeUserBoards(x.workspaceInfo.boards))
+      deleteBoardsUserHistory(x.workspaceInfo.boards);
       dispatch(closeModal());
     }).catch(()=> alert("Issue encountered trying to delete"+workspace.name))
   }
@@ -54,16 +58,40 @@ const Modal = memo(() => {
       // In here we are going to remove the board from other parts of the project
       // remove board from user information
       dispatch(removeUserBoards([x.board.b_id]))
+
+      removeAdditionalUsersBoard(x.board.members,x.board.b_id);
+
       // remove board from workspace where its from
       dispatch(updateWorkspacBoardRemove(x.board))
+
+      dispatch(deleteUserHistory(x.board.b_id))
 
       dispatch(closeModal());
       // close settings modal
       dispatch(setSettingModal(false));
       alert("Board successfully removed!");
-      navigate(`/u/${params.u_id}`);
+      navigate(`/u/${params.userId}`);
 
     }).catch(()=> alert(`Deleting ${board.name} unsuccessful!`))
+  }
+
+  const leaveWorkspaceFn = () => {
+
+    console.log(workspace.w_id);
+
+    dispatch(leaveWorkspaceUser(workspace.w_id))
+    .unwrap().then(()=> {
+
+      if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id}));
+      if(user) dispatch(removeUserFromWorkspace({workspace:workspace,u_id:user.u_id}));
+
+      if(user) deleteUserFromHistory(workspace.boards,user.email);
+
+      dispatch(setNewSelect(""));
+      dispatch(closeModal());
+    }).catch((e:any)=>{
+      alert(e);
+    })
   }
 
   return (
@@ -90,6 +118,8 @@ const Modal = memo(() => {
           deleteName={workspace?.name || ""}
           deleteFn={deleteWorkspaceFn}
           type={"Workspace"}
+          action={"Delete"}
+          action2={"delete"}
           />
           }
           {modal == 'deleteConfirmBoard' && 
@@ -99,8 +129,21 @@ const Modal = memo(() => {
           created within this board will be deleted! This cannot be reversed!"
           deleteName={board?.name || ""} 
           deleteFn={deleteBoardFn} 
-          type={"Board"} /> }
+          type={"Board"}
+          action={"Delete"}
+          action2={"delete"}
+          /> }
           {modal === 'addNewUser' && <AddNewUser />}
+          {modal === 'leaveWorkspace' && 
+          <Delete 
+          warning="Are you sure you want to leave the workspace. Team leaders will have to add you again!"
+          deleteName={workspace?.name || ""}
+          deleteFn = {leaveWorkspaceFn}
+          type={"Workspace"}
+          action={"Leave"}
+          action2 ={"leave"}
+          />
+          }
         </AnimatePresence>
       </div>
 

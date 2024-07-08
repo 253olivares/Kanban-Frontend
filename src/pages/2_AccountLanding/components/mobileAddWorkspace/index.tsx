@@ -7,7 +7,7 @@ import AddModal from './component/workspaceModal';
 import ConfirmDelete from './component/confirmDelete';
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal, getWorkspaceSelect, updateWorkspaceBoard } from "../../../../reduxStore/workspace/workspaceSlice";
-import { createUserHistory, sanitize } from "../../../../customLogic/CustomeLogic";
+import { createUserHistory, sanitize } from "../../../../customLogic/CustomLogic";
 import { updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
 import { addBoards, changeBoardModal, updateBoardNameFromWorkspace } from "../../../../reduxStore/boards/boardsSlice";
 import { changeListModalState, changeMobileBoardNameState } from "../../../../reduxStore/modal/modalSlice";

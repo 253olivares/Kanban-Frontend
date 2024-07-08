@@ -354,7 +354,9 @@
         top-[160%]
 
         hidden
-        sLaptop:block
+        sLaptop:flex
+
+        flex-col
 
         sLaptop:w-[8.333rem]
         mLaptop:w-[10.416rem]
@@ -379,6 +381,11 @@
         mLaptop:p-[0.666rem]
         desktop:p-[0.8rem]
         largeDesktop:p-[1rem]
+
+        sLaptop:gap-[0.266rem]
+        mLaptop:gap-[0.333rem]
+        desktop:gap-[0.4rem] 
+        largeDesktop:gap-[.5rem]
     }
 
     .boardSettingsBody {

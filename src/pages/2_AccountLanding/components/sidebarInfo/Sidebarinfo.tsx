@@ -8,21 +8,21 @@ import SidebarBoards from '../sidebarBoards/SidebarBoards';
 import SidebarWorkspaces from '../sidebarWorkspaces/SidebarWorkspace';
 import WorkspaceBoardHeader from '../workspaceBoardsHeader/WorkspaceBoardHeader';
 import { getWorkspaceSelect, setNewSelect} from '../../../../reduxStore/workspace/workspaceSlice';
-import { getUserWorkspaces } from '../../../../reduxStore/users/userSlice';
+import { getUser } from '../../../../reduxStore/users/userSlice';
 
 const Sidebarinfo = memo(() => {
-    const modal: boolean  = useAppSelector(getAccountLandingModal);
+  
     const dispatch = useAppDispatch();
+    const modal: boolean  = useAppSelector(getAccountLandingModal);
 
     const appContext = useContext(AppContext);
     const {mobileSideBarRef} = appContext!;
 
     const selectWorkspace: string = useAppSelector(getWorkspaceSelect);
-
     const setSelectWorkspace = (x:string) => dispatch(setNewSelect(x));
+    const user = useAppSelector(getUser);
 
-    const getUserWorkSpaces:string[] = useAppSelector(getUserWorkspaces) as string[];
-  
+    const getUserWorkSpaces:string[] = user?.workspaces || [];
 
   return (
     <div

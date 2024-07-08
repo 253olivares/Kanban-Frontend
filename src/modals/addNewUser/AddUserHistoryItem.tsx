@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { getUserFromList } from "../../customLogic/CustomeLogic";
+import { getUserFromList } from "../../customLogic/CustomLogic";
 import { memo } from "react";
 
 const AddUserHistoryItem = ({v}:{v:string[]}) => {

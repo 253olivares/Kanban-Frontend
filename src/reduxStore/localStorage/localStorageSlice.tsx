@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { checkStorages } from "../../customLogic/CustomeLogic";
+import { checkStorages } from "../../customLogic/CustomLogic";
 
 export const storageKey = 'KanBanServerInstance';
 

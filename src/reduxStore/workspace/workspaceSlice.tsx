@@ -2,7 +2,7 @@
 import { createAsyncThunk, createEntityAdapter,createSlice,PayloadAction  } from "@reduxjs/toolkit";
 
 import { RootState } from "../store";
-import { addWorkspace, getWorkspaces, removeWorkspace, updateWorkspaceBoardLS} from "../../customLogic/CustomeLogic";
+import { addWorkspace, getWorkspaces, removeWorkspace, updateWorkspaceBoardLS} from "../../customLogic/CustomLogic";
 import { board } from "../boards/boardsSlice";
 
 export type workspace = {
@@ -119,6 +119,59 @@ export const updateWorkspacBoardRemove = createAsyncThunk('workspace/updateWorks
     }
 })
 
+export const addUserToWorkspace = createAsyncThunk('workspace/addUserToWorkspace', async(
+    {workspaceId,u_id}:
+    {workspaceId:string, u_id:string},{getState,rejectWithValue}) => {
+    try{
+
+       console.log("Add New user to workspace:",u_id);
+       console.log("WorkspaceId",workspaceId);
+
+        const state = getState() as RootState;
+        
+        const workspace = selectWorkspaceById(state,workspaceId);
+
+        // user already exists in workspace no need to update it with new user
+        if(workspace.members.includes(u_id)) {
+            return{updatedWorkspace:workspace,prevState:selectAllWorkspaces(state)}
+        }
+
+        const newWorkspace  = {
+            ...workspace,
+            members:[...workspace.members,u_id]
+        }
+
+       console.log("NewWorkspace:",newWorkspace)
+        
+        return{updatedWorkspace:newWorkspace,prevState:selectAllWorkspaces(state)}
+    } catch(e:any){
+        console.log("Ran into problem adding new user to workspace");
+        return rejectWithValue(e);
+    }
+})
+
+export const removeUserFromWorkspace = createAsyncThunk('workspace/leaveWorkspace',async(
+    {workspace:workspaceToRemoveUser,u_id}:
+    {
+    workspace:workspace,
+    u_id:string
+    },
+    {rejectWithValue,getState}) => {
+    try{
+        const state = getState() as RootState;
+        
+        const updatedWorkpace = {
+            ...workspaceToRemoveUser,
+            members:workspaceToRemoveUser.members.filter(x=> x!==u_id)
+        }
+
+        return {updateWorkspace:updatedWorkpace,prevState:selectAllWorkspaces(state)}        
+    }catch(e:any){
+        console.log(e); 
+        return rejectWithValue(e);
+    }
+})
+
 const workspaceSlice = createSlice({
     name:'workspace',
     initialState,
@@ -182,6 +235,15 @@ const workspaceSlice = createSlice({
                 updateWorkspaceBoardLS(action.payload.updatedWorkspace, action.payload.prevState);
                 workspaceAdapter.updateOne(state,{id:action.payload.updatedWorkspace.w_id,changes:action.payload.updatedWorkspace})
             })
+            .addCase(addUserToWorkspace.fulfilled,(state,action:PayloadAction<{updatedWorkspace:workspace,prevState:workspace[]}>) => {
+                updateWorkspaceBoardLS(action.payload.updatedWorkspace,action.payload.prevState);
+                workspaceAdapter.updateOne(state,{id:action.payload.updatedWorkspace.w_id,changes:action.payload.updatedWorkspace});
+            })
+            .addCase(removeUserFromWorkspace.fulfilled,(state,action:PayloadAction<{updateWorkspace:workspace,prevState:workspace[]}>)=> {
+                updateWorkspaceBoardLS(action.payload.updateWorkspace,action.payload.prevState);
+                workspaceAdapter.updateOne(state,{id:action.payload.updateWorkspace.w_id,changes:action.payload.updateWorkspace});
+            })
+            
     }
 })
 

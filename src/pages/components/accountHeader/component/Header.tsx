@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 
-import { memo, useEffect} from 'react';
+import { memo, useEffect, useLayoutEffect} from 'react';
 
 import { user } from '../../../../reduxStore/users/userSlice';
 import { Params } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { selectBoardById } from '../../../../reduxStore/boards/boardsSlice';
 import { getFilters } from '../../../../reduxStore/tasks/tasksSlice';
 import ProfileIcon from './ProfileIcon';
 import { getWorkspaceSelect, setNewSelect } from '../../../../reduxStore/workspace/workspaceSlice';
+import { initializeUserHistory } from '../../../../reduxStore/modal/modalSlice';
 
 // pass out user information to our header
 const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>}) => {
@@ -35,6 +36,11 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
             dispatch(setNewSelect(selectBoard.w_id))
         }   
     },[])
+
+    useLayoutEffect(()=> {
+        dispatch(initializeUserHistory(params.workspaceId));
+    },[selectBoard])
+
   return (
     <div className={`
 

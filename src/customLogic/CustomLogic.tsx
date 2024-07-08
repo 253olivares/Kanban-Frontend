@@ -41,6 +41,15 @@ export const getComments = ():comments[] | null => {
     return JSON.parse(data);
 };
 
+export const userLeaveUpdateBoard = (boardData:board[]) => {
+    const data = localStorage.getItem(boardKey);
+    if(!data){
+        reloadApplication();
+        return;
+    }
+    localStorage.setItem(boardKey,JSON.stringify(boardData));
+}
+
 export const removeBoardsFromWorkspaceLS = (boardsToRemove:string[]) => {
     const data = localStorage.getItem(boardKey);
     if(!data){
@@ -54,22 +63,12 @@ export const removeBoardsFromWorkspaceLS = (boardsToRemove:string[]) => {
     localStorage.setItem(boardKey,JSON.stringify(updatedBoardList));    
 }
 
-export const updateBoardNameFromWorkspaceLS = (boardId:string, boardName:string, prevStates:board[]) => {
+export const updateBoardLS = (updatedBoard:board,prevState:board[])=>{
     if(!localStorage.getItem(boardKey)){
         reloadApplication();
         return
     }
-    console.log('From function to update Local storage:',boardName);
-
-    const newArray = prevStates.map(b=> {
-        if(b.b_id === boardId){
-            return {
-                ...b,
-                name:boardName
-            }
-        }
-        return b
-    })
+    const newArray = prevState.map(b=> b.b_id === updatedBoard.b_id? updatedBoard : b);
     localStorage.setItem(boardKey,JSON.stringify(newArray));
 }
 
@@ -151,6 +150,28 @@ export const getRemember = async ():Promise<rememberUser | null> => {
     return rememberUser;
 }
 
+export const updateSelectUser = (u_id:string,boardId:string,workspaceId:string):void => {
+    const data = localStorage.getItem(userKey);
+    if(!data){
+        reloadApplication();
+        return;
+    }
+    
+    const userList:Record<string,user> = JSON.parse(data);
+    userList[u_id] = {
+        ...userList[u_id],
+        boards: [...userList[u_id].boards,boardId]
+    }
+
+    if(!userList[u_id].workspaces.includes(workspaceId)  ) {
+        userList[u_id] = {
+            ...userList[u_id],
+            workspaces : [...userList[u_id].workspaces,workspaceId],
+        }
+    }
+
+    localStorage.setItem(userKey,JSON.stringify(userList));
+}
 
 export const getUserFromList = (id:string):user|void => {
     const data = localStorage.getItem(userKey);
@@ -280,20 +301,123 @@ export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | 
 
     return match;
 }
+// @ts-ignore
+export const removeAdditionalUsersWorkspace = (usersToRemoveFromWorkspace:string[],workspaceId:string) => {
+    try{
 
-export const createUserHistory = (board:board) => {
+    const data = localStorage.getItem(userKey);
+
+    if(!data) {
+        reloadApplication()
+        return;
+    }
+
+    const users:Record<string,user> = JSON.parse(data);
+
+    for(const user of usersToRemoveFromWorkspace){
+        users[user].workspaces = users[user].workspaces.filter(x=>x!==workspaceId);
+    }
+
+    localStorage.setItem(userKey,JSON.stringify(users));
+
+    } catch (e:any){
+        alert(e);
+        console.log(e);
+    }
+    
+}
+
+export const removeAdditionalUsersBoard = (usersFromRemoveBoard:string[][],boardId:string) => {
+    try{
+        const data = localStorage.getItem(userKey);
+
+        if(!data) {
+            reloadApplication()
+            return;
+        }
+
+        const users:Record<string,user> = JSON.parse(data);
+
+        for(const user of usersFromRemoveBoard){
+            const u_id:string = user[0];
+            users[u_id].boards = users[u_id].boards.filter(x=>x!==boardId);
+        }
+        
+        localStorage.setItem(userKey,JSON.stringify(users));
+
+    }catch(e:any){
+        alert(e);
+        console.log(e);
+    }
+}
+
+export const deleteBoardsUserHistory = (boards:string[]) => {
     const data = localStorage.getItem(userHistory);
 
     if(!data){
         reloadApplication();
-        return null
+        return;
+    }
+
+    const userHistoryData:Record<string,Record<string,string[]>> = JSON.parse(data);
+
+    for(const board of boards) {
+        delete userHistoryData[board];
+    }
+
+    localStorage.setItem(userHistory,JSON.stringify(userHistoryData)); 
+}
+
+export const deleteUserHistoryCL = (boardId:string) => {
+    const data = localStorage.getItem(userHistory);
+
+    if(!data){
+        reloadApplication();
+        return;
+    }
+
+    const userHistoryData:Record<string,Record<string,string[]>> = JSON.parse(data);
+
+    delete userHistoryData[boardId];
+
+    localStorage.setItem(userHistory,JSON.stringify(userHistoryData));  
+}
+
+export const deleteUserFromHistory = (boardIds:string[],email:string) => {
+    const data = localStorage.getItem(userHistory);
+
+    if(!data){
+        reloadApplication();
+        return;
+    }
+
+    const userHistoryData:Record<string,Record<string,string[]>> = JSON.parse(data);
+
+    console.log("UserHistory",userHistoryData);
+
+    for(const board of boardIds){
+        const histoty = userHistoryData[board]
+        console.log("Board History:",histoty);
+        console.log("user:",histoty[email])
+        delete histoty[email];
+    }
+
+    localStorage.setItem(userHistory,JSON.stringify(userHistoryData));
+}
+
+export const createUserHistory = (board:board):void => {
+    const data = localStorage.getItem(userHistory);
+
+    if(!data){
+        reloadApplication();
+        return;
     }
 
     const date = new Date;
 
     const user = getUserFromList(board.u_id);
 
-    if(!user) return
+    if(!user) return;
     
     const addUserHistory:Record<string,string[]> = {};
     addUserHistory[user.email] = [user.u_id,board.members[0][1],date.toLocaleString()]
@@ -303,6 +427,23 @@ export const createUserHistory = (board:board) => {
 
     localStorage.setItem(userHistory,JSON.stringify(userHistoryData));
 }
+
+export const addUserToHistoryCL = (user:Record<string,string[]>, boardId:string):void => {
+
+    const data = localStorage.getItem(userHistory);
+
+    if(!data){
+        reloadApplication();
+        return;
+    }
+    // 
+
+    const userHistoryData:Record<string,Record<string,string[]>> = JSON.parse(data);
+
+    userHistoryData[boardId] = user;
+
+    localStorage.setItem(userHistory,JSON.stringify(userHistoryData));
+}   
 
 
 export const getUserHistory = (boardId:string):Record<string,string[]> | null => {

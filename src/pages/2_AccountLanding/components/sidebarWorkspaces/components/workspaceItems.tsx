@@ -2,8 +2,9 @@ import { memo } from 'react'
 import { useAppDispatch, useAppSelector } from '../../../../../reduxStore/hook'
 import { selectWorkspaceById } from '../../../../../reduxStore/workspace/workspaceSlice';
 import trashIcon from '/assets/Trash_IconRed.svg'
-import { openConfirmDelete } from '../../../../../reduxStore/modal/modalSlice';
+import { openConfirmDelete, openLeaveWorkspace } from '../../../../../reduxStore/modal/modalSlice';
 import { getUser } from '../../../../../reduxStore/users/userSlice';
+import leave from '/assets/leaveWorkspace.svg'
 
 const workspaceItems = memo((
     {
@@ -18,9 +19,6 @@ const workspaceItems = memo((
         selectedWorkspace:string
     }
 ) => {
-
-    const dispatch = useAppDispatch();
-
     const item = useAppSelector((state) => selectWorkspaceById(state,String(workspaceId)));
     const user = useAppSelector(state => getUser(state))
 
@@ -131,27 +129,59 @@ const workspaceItems = memo((
 
         {
             selectedWorkspace === item.w_id && item.u_id === user.u_id ?
-            <img 
-            onClick={()=>dispatch(openConfirmDelete())}
-            className='
-            sLaptop:opacity-50
-            sLaptop:hover:opacity-100
-            sLaptop:hover:cursor-pointer
-
-            h-[0.878rem]
-            mobile:h-[1.171rem]
-            sMobile:h-[1.875rem]
-            mMobile:h-[2.25rem]
-
-            sLaptop:h-[0.999rem]
-            mLaptop:h-[1.249rem]
-            desktop:h-[1.5rem]
-            largeDesktop:h-[1.875rem]
-            4k:h-[2.499rem]
-            ' src={trashIcon} alt="trashIcon" /> : ''
+            <TrashCan /> : ''
+        }
+        {
+            selectedWorkspace === item.w_id && item.u_id !== user.u_id ?
+            <Leave /> : ''
         }
     </div>
   )
 })
+
+const TrashCan = () => {
+    const dispatch = useAppDispatch();
+    return <img 
+    onClick={()=>dispatch(openConfirmDelete())}
+    className='
+    sLaptop:opacity-50
+    sLaptop:hover:opacity-100
+    sLaptop:hover:cursor-pointer
+
+    h-[0.878rem]
+    mobile:h-[1.171rem]
+    sMobile:h-[1.875rem]
+    mMobile:h-[2.25rem]
+
+    sLaptop:h-[0.999rem]
+    mLaptop:h-[1.249rem]
+    desktop:h-[1.5rem]
+    largeDesktop:h-[1.875rem]
+    4k:h-[2.499rem]
+    ' src={trashIcon} alt="trashIcon" /> 
+}
+
+const Leave = () => {
+    const dispatch = useAppDispatch();
+    return <img 
+    onClick={()=> dispatch(openLeaveWorkspace())}
+    className='
+    sLaptop:opacity-50
+    sLaptop:hover:opacity-100
+    sLaptop:hover:cursor-pointer
+
+    h-[0.878rem]
+    mobile:h-[1.171rem]
+    sMobile:h-[1.875rem]
+    mMobile:h-[2.25rem]
+
+    sLaptop:h-[0.999rem]
+    mLaptop:h-[1.249rem]
+    desktop:h-[1.5rem]
+    largeDesktop:h-[1.875rem]
+    4k:h-[2.499rem]
+    '
+    src={leave} alt="Leave workspace" />
+}
 
 export default workspaceItems
