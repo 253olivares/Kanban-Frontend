@@ -6,6 +6,10 @@ const AdminUserImage = memo(({image,role}:{image:string,role:string}) => {
     <div className={`
     flex-grow-0
 
+    p-[0.117rem]
+    mobile:p-[0.156rem]
+    sMobile:p-[.25rem]
+    mMobile:p-[0.3rem]
     sLaptop:p-[0.11rem]
     mLaptop:p-[0.138rem]
     desktop:p-[0.166rem]

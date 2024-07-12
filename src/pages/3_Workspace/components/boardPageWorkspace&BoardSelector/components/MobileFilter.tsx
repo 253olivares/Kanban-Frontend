@@ -8,6 +8,7 @@ const MobileFilter = () => {
     <div className="relative
     flex
     items-center
+    cursor-pointer
     ">
         <div 
         onClick={()=> dispatch(setOpenModal(true))}

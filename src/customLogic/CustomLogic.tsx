@@ -302,7 +302,7 @@ export const checkIfEmailExistsEdit = (email:string,prevEmail:string):boolean | 
     return match;
 }
 // @ts-ignore
-export const removeAdditionalUsersWorkspace = (usersToRemoveFromWorkspace:string[],workspaceId:string) => {
+export const removeAdditionalUsersWorkspaceAndBoards = (workspace:workspace) => {
     try{
 
     const data = localStorage.getItem(userKey);
@@ -314,8 +314,13 @@ export const removeAdditionalUsersWorkspace = (usersToRemoveFromWorkspace:string
 
     const users:Record<string,user> = JSON.parse(data);
 
-    for(const user of usersToRemoveFromWorkspace){
-        users[user].workspaces = users[user].workspaces.filter(x=>x!==workspaceId);
+    const workspaceId = workspace.w_id;
+
+    const boardsToRemove = workspace.boards;
+
+    for(const user of workspace.members){
+        users[user].workspaces = users[user].workspaces.filter(x=> x !== workspaceId );
+        users[user].boards = users[user].workspaces.filter((x)=> !boardsToRemove.includes(x));
     }
 
     localStorage.setItem(userKey,JSON.stringify(users));

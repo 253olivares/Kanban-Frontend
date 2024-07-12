@@ -15,7 +15,7 @@ import { deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, s
 import { getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove } from "../reduxStore/workspace/workspaceSlice";
 import { getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace } from "../reduxStore/users/userSlice";
 import AddNewUser from "./addNewUser/AddNewUser";
-import { deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspace } from "../customLogic/CustomLogic";
+import { deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspaceAndBoards } from "../customLogic/CustomLogic";
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const Modal = memo(() => {
@@ -43,7 +43,9 @@ const Modal = memo(() => {
     .unwrap()
     .then((x)=> {
       dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
-      removeAdditionalUsersWorkspace(x.workspaceInfo.members,x.workspaceInfo.w_id);
+
+      removeAdditionalUsersWorkspaceAndBoards(x.workspaceInfo);
+
       dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
       dispatch(removeUserBoards(x.workspaceInfo.boards))
       deleteBoardsUserHistory(x.workspaceInfo.boards);

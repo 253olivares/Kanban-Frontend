@@ -1,18 +1,28 @@
 import { motion } from "framer-motion"
 import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook"
-import { getWorkspaceSelect, removeExistingWorkspace, selectWorkspaceById } from "../../../../../reduxStore/workspace/workspaceSlice"
+import { getWorkspaceSelect, removeExistingWorkspace, selectWorkspaceById, workspace } from "../../../../../reduxStore/workspace/workspaceSlice"
 import { closeModal} from "../../../../../reduxStore/modal/modalSlice"
 import { removeUserBoards, removeUserWorkspace } from "../../../../../reduxStore/users/userSlice"
 import { removeBoardsFromWorkspace } from "../../../../../reduxStore/boards/boardsSlice"
+import { deleteBoardsUserHistory, removeAdditionalUsersWorkspaceAndBoards } from "../../../../../customLogic/CustomLogic"
 
-const confirmDelete = () => {
+const confirmDelete = ({
+    warning,
+    deleteName,
+    deleteFn,
+    action,
+    action2
+}: {
+    warning:string,
+    deleteName:string,
+    deleteFn:()=>void,
+    action:string,
+    action2:string
+}) => {
+
     const dispatch = useAppDispatch();
 
-    const workspaceId = useAppSelector(getWorkspaceSelect);
-
-    const workspace = useAppSelector(state => selectWorkspaceById(state,workspaceId));
-
-    if(!workspace) return;
+    if(deleteName === "") return;
   return (
     <motion.div
     initial={{
@@ -68,7 +78,7 @@ const confirmDelete = () => {
         mMobile:py-[1.875rem]
         "
         >
-        Are you sure you want to delete your workspace. This action can not be undone!
+        {warning}
         </h1>
         <div className="
         flex
@@ -81,10 +91,10 @@ const confirmDelete = () => {
         sMobile:pb-[1.563rem]
         mMobile:pb-[1.875rem]
 
-        gap-[0.532rem]
-        mobile:gap-[0.666rem]
-        sMobile:gap-[0.8rem]
-        mMobile:gap-[1rem]
+        gap-[0.732rem]
+        mobile:gap-[0.866rem]
+        sMobile:gap-[1rem]
+        mMobile:gap-[1.2rem]
         ">
             <span className="
             text-[0.747rem]
@@ -92,7 +102,7 @@ const confirmDelete = () => {
             sMobile:text-[1.593rem]
             mMobile:text-[1.912rem]
             ">
-            Yes delete "<span className="opacity-50">{workspace.name}</span>"
+            Yes {action2} "<span className="opacity-50">{deleteName}</span>"
             </span>
             <div className="
             w-full
@@ -140,14 +150,7 @@ const confirmDelete = () => {
 
                 <button
                  onClick={()=>{
-                    dispatch(removeExistingWorkspace(workspaceId))
-                    .unwrap()
-                    .then((x)=>{
-                        dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
-                        dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
-                        dispatch(removeUserBoards(x.workspaceInfo.boards));
-                        dispatch(closeModal());
-                    }).catch(()=>alert("Issue encountered trying to delete"+workspace.name))
+                    deleteFn()
                  }}
                  className="
                  font-bold
@@ -179,7 +182,7 @@ const confirmDelete = () => {
                  bg-[#F9453E]
                  "
                 >
-                    Delete
+                    {action}
                 </button>
 
             </div>

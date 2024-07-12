@@ -41,6 +41,37 @@
 
 @layer components { 
 
+    .addNewUserMobile{
+        @apply
+        relative
+
+        bg-SpaceBlue
+
+        flex
+        flex-col
+        
+        justify-center
+
+        text-PrimaryWhite
+
+        overflow-hidden
+
+        rounded-[0.610rem]
+        mobile:rounded-[0.814rem]
+        sMobile:rounded-[1.302rem]
+        /* mMobile:rounded-[1.563rem] */
+
+        px-[0.915rem]
+        mobile:px-[1.220rem]
+        sMobile:px-[1.953rem]
+        /* mMobile:px-[2.344rem] */
+
+        py-[1.196rem]
+        mobile:py-[1.595rem]
+        sMobile:py-[2.552rem]
+        /* mMobile:py-[3.063rem] */
+    }   
+
     .addNewUserHolder{
         @apply
         relative
@@ -53,7 +84,7 @@
         flex-grow
 
         justify-center
-
+       
         sLaptop:w-[34.666rem]
         mLaptop:w-[43.333rem]
         desktop:w-[52rem]
@@ -312,6 +343,10 @@
         flex-grow-0
         flex-shrink-0
 
+        w-[2.460rem]
+        mobile:w-[3.281rem]
+        sMobile:w-[5.25rem]
+        /* mMobile:w-[6.3rem] */
         sLaptop:w-[1.786rem]
         mLaptop:w-[2.233rem]
         desktop:w-[2.68rem]
@@ -518,35 +553,50 @@
 
         z-[5]
         
-        opacity-75
-        hover:opacity-100
+        opacity-100
+        sLaptop:opacity-75
+        sLaptop:hover:opacity-100
 
-        hover:bg-[rgba(0,0,0,.1)]
+        sLaptop:hover:bg-[rgba(0,0,0,.1)]
         hover:cursor-pointer
 
-        font-medium
+        text-[1.289rem]
+        mobile:text-[1.718rem]
+        sMobile:text-[2.75rem]
+        /* mMobile:text-[3.3rem] */
 
         sLaptop:text-[0.773rem]
         mLaptop:text-[0.966rem]
         desktop:text-[1.16rem]
         largeDesktop:text-[1.45rem]
 
+        font-medium
+
+        py-[0.468rem]
+        mobile:py-[.625rem]
+        sMobile:py-[1rem]
+        /* mMobile:py-[1.2rem] */
+
         sLaptop:py-[0.399rem]
         mLaptop:py-[0.499rem]
         desktop:py-[0.6rem]
         largeDesktop:py-[.75rem]
+
 
         sLaptop:rounded-[0.25rem]
         mLaptop:rounded-[0.312rem]
         desktop:rounded-[0.376rem]
         largeDesktop:rounded-[0.47rem]
 
-        pl-[5%]
+        sLaptop:pl-[5%]
 
         transition-all
         duration-300
 
         leading-none
+
+        text-PrimaryWhite
+        sLaptop:text-black
     }
 
     .boardsScroll {

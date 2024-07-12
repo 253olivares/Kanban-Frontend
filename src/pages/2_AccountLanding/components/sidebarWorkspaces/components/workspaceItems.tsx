@@ -166,9 +166,9 @@ const Leave = () => {
     return <img 
     onClick={()=> dispatch(openLeaveWorkspace())}
     className='
-    sLaptop:opacity-50
-    sLaptop:hover:opacity-100
-    sLaptop:hover:cursor-pointer
+    opacity-75
+    hover:opacity-100
+    cursor-pointer
 
     h-[0.878rem]
     mobile:h-[1.171rem]

@@ -50,6 +50,8 @@ const WorkspaceBoardHeader = () => {
     mobile:h-[3.666rem]
     sMobile:h-[4.4rem]
     mMobile:h-[5.5rem]
+
+    cursor-pointer
     ">
         <h1
         className="

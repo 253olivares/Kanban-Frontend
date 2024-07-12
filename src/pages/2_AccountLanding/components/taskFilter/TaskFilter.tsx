@@ -116,7 +116,7 @@ const TaskFilter = () => {
       largeDesktop:px-[0.938rem]
       4k:px-[1.250rem]
 
-      sLaptop:hover:cursor-pointer
+      cursor-pointer
       ">
 
         <span className="
@@ -135,6 +135,7 @@ const TaskFilter = () => {
         font-bold
 
         text-PrimaryWhite
+        cursor-pointer
         ">Filter List</span>
 
         <img className={`

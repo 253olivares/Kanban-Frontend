@@ -22,7 +22,7 @@ const AppIcon = memo(({user}:{user:user}) => {
             desktop:w-[3.125rem]
             largeDesktop:w-[3.906rem]
             4k:w-[5.208rem]
-            sLaptop:hover:cursor-pointer
+            cursor-pointer
             `}
             src={icon} alt="" />
         

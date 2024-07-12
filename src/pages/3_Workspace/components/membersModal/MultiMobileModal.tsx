@@ -51,6 +51,9 @@ const MulitMobileModal = memo(({params,memberModal,settingsModal}: {params:Reado
         settingsModal? 
         <SettingsModal/> : ''
       }
+      {
+        
+      }
     </motion.div>
   )
 })

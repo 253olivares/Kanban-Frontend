@@ -49,6 +49,8 @@ const ProfileIcon = memo(({user}:{user:user}) => {
             }
             sLaptop:hover:cursor-pointer
             rounded-full 
+
+            cursor-pointer
             `}>
                 <img 
                 className='

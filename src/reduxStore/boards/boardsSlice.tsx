@@ -19,7 +19,8 @@ type initialStateType = {
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: null | string ,
     addBoardModal:boolean,
-    newBoardName:string
+    newBoardName:string,
+    changeBoardName:string
 }
 
 const boardsAdapter = createEntityAdapter({
@@ -162,7 +163,8 @@ const initialState:initialStateType = boardsAdapter.getInitialState({
     status: 'idle',
     error: null,
     addBoardModal:false,
-    newBoardName:''
+    newBoardName:'',
+    changeBoardName: ''
 })
 
 const boardSlice = createSlice({
@@ -179,6 +181,9 @@ const boardSlice = createSlice({
             
             removeBoardsFromWorkspaceLS(action.payload.boards);
             boardsAdapter.removeMany(state,action.payload.boards);
+        },
+        updateBoardNameStart(state,action:PayloadAction<string>) {
+            state.changeBoardName = action.payload;
         }
     },
     extraReducers:(builder) => {
@@ -234,13 +239,14 @@ export const {
 } = boardsAdapter.getSelectors((state:RootState)=> state.boards);
 
 export const getBoardName = (state:RootState) => state.boards.newBoardName;
-
 export const getBoardModal = (state:RootState) => state.boards.addBoardModal;
+export const getUpdateBoardName = (state:RootState) => state.boards.changeBoardName;
 
 export const {  
     changeBoardModal,
     newBoardNameUpdate,
-    removeBoardsFromWorkspace
+    removeBoardsFromWorkspace,
+    updateBoardNameStart
     // updateBoardNameFromWorkspace
 } = boardSlice.actions;
 

@@ -27,8 +27,14 @@ const ListHolder = () => {
 
     text-white
 
-    sLaptop:text-[1.333rem]
-    mLaptop:text-[1.666rem]
+    text-[1.172rem]
+    mobile:text-[1.562rem]
+    sMobile:text-[2.083rem]
+    mMobile:text-[3rem]
+    font-medium
+    text-center
+    sLaptop:text-[1.172rem]
+    mLaptop:text-[1.562rem]
     desktop:text-[2rem]
     largeDesktop:text-[2.5rem]
     ` : ''

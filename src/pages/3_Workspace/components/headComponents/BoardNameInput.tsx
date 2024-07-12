@@ -1,21 +1,25 @@
-import { memo, useEffect, useRef, useState } from "react"
-import { useAppDispatch } from "../../../../reduxStore/hook";
-import { updateBoardNameFromWorkspace } from "../../../../reduxStore/boards/boardsSlice";
+import { memo, useEffect, useLayoutEffect, useRef, useState } from "react"
+import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
+import { getUpdateBoardName, updateBoardNameFromWorkspace, updateBoardNameStart } from "../../../../reduxStore/boards/boardsSlice";
 
 const BoardNameInput = memo(({boardName, boardId}:{boardName:string, boardId:string}) => {
 
   const dispatch = useAppDispatch();
 
-  const [boardNameState, setBoardNameState] = useState<string>(boardName);
+  const boardNameState = useAppSelector(getUpdateBoardName);
   const [limit, setLimit] = useState<boolean>(false);
 
   const inputRef = useRef<HTMLInputElement>(null);
+
+  useLayoutEffect(()=> {
+    dispatch(updateBoardNameStart(boardName))
+  },[])
 
   const updateBoardName = (e:React.ChangeEvent<HTMLInputElement>) =>{
     if(e.target.value.trim().length !> 18){
       alert('Please make sure your workspace name is less then 16 letters or until letters are no longer red!');
     } else {
-      setBoardNameState(e.target.value);
+      dispatch(updateBoardNameStart(e.target.value));
     }
     
 
@@ -29,6 +33,7 @@ const BoardNameInput = memo(({boardName, boardId}:{boardName:string, boardId:str
 
     }
   }
+  
 
   useEffect(()=>{
 

@@ -9,7 +9,7 @@ import { Outlet, useParams } from 'react-router-dom';
 import ModalContainer from '../../../modals/Modal'; 
 import Header from './component/Header';
 import { getWorkSpaceModal, initiateWorkspace } from '../../../reduxStore/workspace/workspaceSlice';
-import MobileModal from '../../2_AccountLanding/components/mobileAddWorkspace';
+import MobileModal from '../../2_AccountLanding/components/mobileAddWorkspace/MobileModal';
 import { getBoardModal, initializeBoards } from '../../../reduxStore/boards/boardsSlice';
 import { initialComments } from '../../../reduxStore/comments/commentsSlice';
 import { initiateList } from '../../../reduxStore/lists/listsSlice';
@@ -37,6 +37,7 @@ const AccountHeader = memo(() => {
   const mobileBoardNameModal = useAppSelector(getMobileBoardNameModal);
   const memberModal = useAppSelector(getMembersModal);
   const settingsModal = useAppSelector(getSettingsModal);
+ 
 
   // a cache check to have the application ato login a user 
   // if they click on this page
@@ -119,7 +120,8 @@ const AccountHeader = memo(() => {
           listModal || 
           mobileBoardNameModal ||
           modalType === 'deleteConfirmBoard' ||
-          modalType === 'addNewUser'
+          modalType === 'addNewUser' ||
+          modalType === 'leaveWorkspace'
            ? 
           <MobileModal 
           params = {params}
