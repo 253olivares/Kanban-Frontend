@@ -6,7 +6,7 @@ import { useState } from "react";
 import AddModal from './component/workspaceModal';
 import ConfirmDelete from './component/confirmDelete';
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
-import { addNewWorkspace, changeModal, getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove, updateWorkspaceBoard, workspace } from "../../../../reduxStore/workspace/workspaceSlice";
+import { addNewWorkspace, changeModal, getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove, updateWorkspaceBoard } from "../../../../reduxStore/workspace/workspaceSlice";
 import { createUserHistory, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspaceAndBoards, sanitize } from "../../../../customLogic/CustomLogic";
 import { getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace, updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
 import { addBoards, changeBoardModal, deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, selectBoardById, updateBoardNameFromWorkspace, updateBoardNameStart } from "../../../../reduxStore/boards/boardsSlice";

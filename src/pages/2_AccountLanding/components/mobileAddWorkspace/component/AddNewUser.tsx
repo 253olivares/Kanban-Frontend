@@ -9,27 +9,33 @@ import x_mark from '/assets/addBoard.png'
 const AddNewUser = memo(({...props}) => {
 
     const params = useParams();
+    // @ts-ignore
     const dispatch = useAppDispatch();
 
+    // @ts-ignore
     const inputRef = useRef<HTMLInputElement>(null);
 
+    // @ts-ignore
     const [emailInput,setEmailInput] = useState<string>("");
     const [height,setHeight] = useState<Height>('auto');
 
     const contentDiv = useRef<HTMLDivElement | null>(null);
 
     const userHistory = useAppSelector(getUserHistoryState);
+    // @ts-ignore
     const userRole = useAppSelector(getRolState);
+    // @ts-ignore
     const selectWorkspace = useAppSelector(getWorkspaceSelect);
 
     if(!params.workspaceId) return;
     if(!userHistory) return;
 
+    // @ts-ignore
     const addusertohistory = () => {
 
     }
 
-
+    // @ts-ignore
     const checkEmailInput = () => {
 
     }
@@ -52,11 +58,18 @@ const AddNewUser = memo(({...props}) => {
     contentRef={contentDiv}
     height={height}
     style={{
-        width: '85%'
+        width: '90%'
     }}
     disableDisplayNone
     >
         <AddNewUserHolder />
+        <div className="
+        flex
+        flex-col
+
+        ">
+
+        </div>
     </AnimateHeight>
   )
 })

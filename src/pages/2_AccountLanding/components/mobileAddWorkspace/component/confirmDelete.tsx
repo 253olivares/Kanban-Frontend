@@ -1,10 +1,6 @@
 import { motion } from "framer-motion"
-import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook"
-import { getWorkspaceSelect, removeExistingWorkspace, selectWorkspaceById, workspace } from "../../../../../reduxStore/workspace/workspaceSlice"
+import { useAppDispatch} from "../../../../../reduxStore/hook"
 import { closeModal} from "../../../../../reduxStore/modal/modalSlice"
-import { removeUserBoards, removeUserWorkspace } from "../../../../../reduxStore/users/userSlice"
-import { removeBoardsFromWorkspace } from "../../../../../reduxStore/boards/boardsSlice"
-import { deleteBoardsUserHistory, removeAdditionalUsersWorkspaceAndBoards } from "../../../../../customLogic/CustomLogic"
 
 const confirmDelete = ({
     warning,

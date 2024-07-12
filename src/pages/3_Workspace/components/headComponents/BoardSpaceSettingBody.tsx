@@ -4,8 +4,6 @@ import { AppContext } from "../../../appRefContext/appRefContext";
 import { motion } from 'framer-motion'
 import { openAddNewUser, setSettingModal } from "../../../../reduxStore/modal/modalSlice";
 import DeleteBoard from "./settingsComponents/DeleteBoard";
-import ChangeBackground from "./settingsComponents/ChangeBackground";
-import AddNewUser from "./settingsComponents/AddNewUser";
 
 const BoardSpaceSettingBody = memo(() => {
 
