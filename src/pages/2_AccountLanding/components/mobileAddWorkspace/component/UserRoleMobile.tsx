@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion"
+import { motion } from "framer-motion"
 import RoleInput from "../../../../../modals/addNewUser/RoleInput";
 import { useContext } from "react";
 import { AppContext } from "../../../../appRefContext/appRefContext";
