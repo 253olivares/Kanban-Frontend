@@ -279,7 +279,7 @@ const MobileModal = memo(({params, boardsModal,mobileWorkspace,modal,listModal,m
           warning="Are you sure you want to delete this board. 
           Users involved will be removed and any lists and tasks 
           created within this board will be deleted! This cannot be reversed!"
-          deleteName={board.name}
+          deleteName={board?.name || ""}
           deleteFn={deleteBoardFn}
           action="Delete"
           action2="delete"

@@ -70,6 +70,14 @@
         mobile:py-[1.595rem]
         sMobile:py-[2.552rem]
         /* mMobile:py-[3.063rem] */
+
+        gap-[0.703rem]
+        mobile:gap-[0.937rem]
+        sMobile:gap-[1.5rem]
+        /* mMobile:gap-[1.8rem] */
+
+        
+
     }   
 
     .addNewUserHolder{

@@ -44,7 +44,6 @@ const SettingsModal = () => {
     mMobile:gap-[3rem]
 
     ">
-      {/* userHistory  */}
 
       {/*  */}
         <SettingsHolder /> 

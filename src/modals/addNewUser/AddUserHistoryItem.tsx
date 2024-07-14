@@ -27,7 +27,10 @@ const AddUserHistoryItem = ({v}:{v:string[]}) => {
 
     px-[2%]
 
-    py-[.5rem]
+    sLaptop:py-[]
+    mLaptop:py-[]
+    desktop:py-[.5rem]
+    largeDesktop:
 
     hover:bg-[rgba(0,0,0,.25)]
    

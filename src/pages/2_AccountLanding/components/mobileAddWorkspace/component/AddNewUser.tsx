@@ -2,9 +2,15 @@ import { memo, useLayoutEffect, useRef, useState } from "react"
 import AnimateHeight, { Height } from "react-animate-height"
 import { useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook";
-import { closeModal, getRolState, getUserHistoryState } from "../../../../../reduxStore/modal/modalSlice";
-import { getWorkspaceSelect } from "../../../../../reduxStore/workspace/workspaceSlice";
+import { addUserEmail, addUserHistoryToState, changeUserRoleNameState, closeModal, getAddUserEmail, getRolState, getUserHistoryState } from "../../../../../reduxStore/modal/modalSlice";
+import { addUserToWorkspace, getWorkspaceSelect } from "../../../../../reduxStore/workspace/workspaceSlice";
 import x_mark from '/assets/addBoard.png'
+import AddNewUserInput from "./AddNewUserInput";
+import AddHistoryComp from "./AddHistory";
+import UserRoleMobile from "./UserRoleMobile";
+import { addUserToBoard } from "../../../../../reduxStore/boards/boardsSlice";
+import { checkIfEmailExists, emailValidation, updateSelectUser } from "../../../../../customLogic/CustomLogic";
+import { AnimatePresence } from "framer-motion";
 
 const AddNewUser = memo(({...props}) => {
 
@@ -16,28 +22,62 @@ const AddNewUser = memo(({...props}) => {
     const inputRef = useRef<HTMLInputElement>(null);
 
     // @ts-ignore
-    const [emailInput,setEmailInput] = useState<string>("");
+    // const [emailInput,setEmailInput] = useState<string>("");
     const [height,setHeight] = useState<Height>('auto');
 
     const contentDiv = useRef<HTMLDivElement | null>(null);
 
+    const setEmailInput = (text:string) => dispatch(addUserEmail(text));
+
+    const emailInput = useAppSelector(getAddUserEmail);
     const userHistory = useAppSelector(getUserHistoryState);
-    // @ts-ignore
     const userRole = useAppSelector(getRolState);
-    // @ts-ignore
     const selectWorkspace = useAppSelector(getWorkspaceSelect);
 
     if(!params.workspaceId) return;
     if(!userHistory) return;
 
     // @ts-ignore
-    const addusertohistory = () => {
+    const addusertohistory = (user:Record<string,string[]>) => {
+        if(inputRef.current) inputRef.current.style.color = "green"
+        dispatch(addUserHistoryToState({user:user,boardId:params.workspaceId!}))
 
-    }
+        dispatch(addUserToWorkspace({workspaceId:selectWorkspace,u_id:Object.values(user)[0][0]}));
+
+        dispatch(addUserToBoard({boardId:params.workspaceId!,u_id:Object.values(user)[0][0],role:Object.values(user)[0][1]}));
+
+        updateSelectUser(Object.values(user)[0][0],params.workspaceId!,selectWorkspace);
+    }   
+    
 
     // @ts-ignore
     const checkEmailInput = () => {
 
+        if(emailInput.trim()===""){
+            alert("Please enter an email!")
+            return;
+        }
+
+        if(!emailValidation(emailInput.trim())){
+            alert("Please enter a valid email address!");
+            return 
+        }
+
+        if(userHistory[emailInput]){
+            if(inputRef.current) inputRef.current.style.color = "green";
+            alert("User already exists in board!");
+            return;
+        }
+
+        const match = checkIfEmailExists(emailInput);
+
+        if(!match){
+            alert("User does not exist!");
+            if(inputRef.current) inputRef.current.style.color = "red";
+            return;
+        } else {
+            dispatch(changeUserRoleNameState(true));
+        }
     }
 
     useLayoutEffect(()=> {
@@ -48,8 +88,6 @@ const AddNewUser = memo(({...props}) => {
         resizeObserver.observe(element);
         return () => resizeObserver.disconnect();
     },[])
-
-    console.log("adafk;flkasfkasl");
 
   return (
     <AnimateHeight
@@ -62,13 +100,54 @@ const AddNewUser = memo(({...props}) => {
     }}
     disableDisplayNone
     >
+        <AnimatePresence>
+        {
+            userRole ? <UserRoleMobile emailInput={emailInput} addusertohistory={addusertohistory} /> : ""
+        }
+        </AnimatePresence>
         <AddNewUserHolder />
         <div className="
         flex
         flex-col
 
         ">
+            <AddNewUserInput 
+            emailInput={emailInput} 
+            setInput={setEmailInput}
+            userRole ={userRole}
+            inputRef={inputRef}
+            checkEmailInput={checkEmailInput}
+            />
+        </div>
+        <div className="
+        flex
+        flex-col
 
+        flex-grow
+
+        h-auto
+
+        transition-all
+        ">
+            <hr className="
+            w-full
+
+            bg-PrimaryWhite
+            opacity-50
+
+            h-[0.117rem]
+            mobile:h-[0.156rem] 
+            sMobile:h-[.25rem]
+            mMobile:h-[.3rem]
+
+            rounded-full
+
+            mb-[0.820rem]
+            mobile:mb-[1.093rem]
+            sMobile:mb-[1.75rem]
+            mMobile:mb-[2.1rem]
+            " />
+                <AddHistoryComp userHistory={userHistory} />
         </div>
     </AnimateHeight>
   )

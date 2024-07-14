@@ -6,7 +6,7 @@ import { checkIfEmailExists, emailValidation, updateSelectUser } from "../../cus
 import { useParams } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../reduxStore/hook";
-import { addUserHistoryToState, changeUserRoleNameState, getRolState, getUserHistoryState } from "../../reduxStore/modal/modalSlice";
+import { addUserEmail, addUserHistoryToState, changeUserRoleNameState, getAddUserEmail, getRolState, getUserHistoryState } from "../../reduxStore/modal/modalSlice";
 import RoleModal from "./RoleModal";
 import AnimateHeight, { Height } from "react-animate-height";
 import { addUserToWorkspace, getWorkspaceSelect } from "../../reduxStore/workspace/workspaceSlice";
@@ -19,11 +19,15 @@ const AddNewUser = memo(({...props}) => {
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const [emailInput,setEmailInput] = useState<string>("");
+  // const [emailInput,setEmailInput] = useState<string>("");
+  
   const [height,setHeight] = useState<Height>('auto');
 
   const contentDiv = useRef<HTMLDivElement | null>(null);
 
+  const setEmailInput = (text:string) => dispatch(addUserEmail(text));
+
+  const emailInput = useAppSelector(getAddUserEmail);
   const userHistory  = useAppSelector(getUserHistoryState);
   const userRole = useAppSelector(getRolState);
   const selectWorkspace = useAppSelector(getWorkspaceSelect);

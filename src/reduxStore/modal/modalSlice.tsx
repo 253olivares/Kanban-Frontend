@@ -28,7 +28,9 @@ type initialStateType = {
     addListModal:boolean,
     mobileBoardNameModal:boolean,
     userRoleName:boolean,
-    userHistory:Record<string,string[]>
+    userHistory:Record<string,string[]>,
+    addUserEmail:string,
+    addUserRole:string
 }
 
 const initialState: initialStateType = {
@@ -46,7 +48,9 @@ const initialState: initialStateType = {
     addListModal: false,
     mobileBoardNameModal:false,
     userRoleName:false,
-    userHistory:{}
+    userHistory:{},
+    addUserEmail:"",
+    addUserRole:""
 }   
 
 // create a slice of our state
@@ -92,6 +96,10 @@ const modalSlice = createSlice({
             state.openModal = true;
         },
         closeModal (state) {
+            if(state.modal == "addNewUser") {
+                state.addUserEmail = "" ;
+                state.addUserRole = "";
+            }
             // set our modal to blank and close our modal
             state.modal = '';
             state.openModal = false;
@@ -130,6 +138,9 @@ const modalSlice = createSlice({
             state.mobileBoardNameModal = action.payload as boolean;
         },
         changeUserRoleNameState (state,action) {
+            if(state.userRoleName == true) {
+                state.addUserRole = "";
+            }
             state.userRoleName = action.payload as boolean;
         },
         initializeUserHistory (state,action) {
@@ -145,6 +156,12 @@ const modalSlice = createSlice({
         deleteUserHistory (state,action:PayloadAction<string>) {
             state.userHistory = {};
             deleteUserHistoryCL(action.payload)
+        },
+        addUserEmail(state,action:PayloadAction<string>){
+            state.addUserEmail = action.payload;
+        },
+        setAddUserRole(state,action:PayloadAction<string>){
+            state.addUserRole = action.payload;
         }
     }
 })
@@ -165,6 +182,8 @@ export const getListModal = (state:RootState) => state.modal.addListModal;
 export const getMobileBoardNameModal = (state:RootState) => state.modal.mobileBoardNameModal;
 export const getRolState = (state:RootState) => state.modal.userRoleName;
 export const getUserHistoryState = (state:RootState) => state.modal.userHistory;
+export const getAddUserEmail = (state:RootState) => state.modal.addUserEmail;
+export const getUserRole = (state:RootState) => state.modal.addUserRole;
 
 export const {
     setCroppingImageData,
@@ -191,7 +210,9 @@ export const {
     initializeUserHistory,
     addUserHistoryToState,
     openLeaveWorkspace,
-    deleteUserHistory
+    deleteUserHistory,
+    addUserEmail,
+    setAddUserRole
 } = modalSlice.actions;
 
 export default modalSlice.reducer;
