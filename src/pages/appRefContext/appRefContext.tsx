@@ -25,7 +25,11 @@ export type contextType = {
     addNewListNameRef: MutableRefObject<HTMLDivElement | null>,
     mobileMembersRef:MutableRefObject<HTMLDivElement | null>,
     settingsModalArrowRef:MutableRefObject<HTMLDivElement | null>,
-    addRoleRef:MutableRefObject<HTMLDivElement | null>
+    addRoleRef:MutableRefObject<HTMLDivElement | null>,
+    closeListSettings:MutableRefObject<HTMLImageElement | null>,
+    deleteListRef:MutableRefObject<HTMLDivElement | null> ,
+    addListTask:MutableRefObject<HTMLButtonElement | null>,
+    addListTaskSubmit:MutableRefObject<HTMLButtonElement | null>
 }
 
 export const AppContext = createContext<contextType | null>(null);
@@ -70,6 +74,12 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
 
     const addRoleRef = useRef<HTMLDivElement>(null);
 
+    const closeListSettings = useRef<HTMLImageElement>(null);
+    const deleteListRef = useRef<HTMLDivElement>(null);
+
+    const addListTask = useRef<HTMLButtonElement>(null);
+    const addListTaskSubmit = useRef<HTMLButtonElement>(null);
+
     const contextValues = {
         accountSettingsRef,
         modalRef,
@@ -95,7 +105,11 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
         addNewListNameRef,
         mobileMembersRef,
         settingsModalArrowRef,
-        addRoleRef
+        addRoleRef,
+        closeListSettings,
+        deleteListRef,
+        addListTask,
+        addListTaskSubmit 
     }
 
     return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

@@ -1,21 +1,50 @@
 import {motion} from 'framer-motion';
-import { memo, useContext, useEffect, useState } from 'react';
+import { memo, useContext, useLayoutEffect, useRef, useState } from 'react';
 import { AppContext } from '../../../../../appRefContext/appRefContext';
 import { useAppDispatch } from '../../../../../../reduxStore/hook';
 import { changeListModalState } from '../../../../../../reduxStore/modal/modalSlice';
 import checkMark from '/assets/Check_MarkIcon.svg';
 import cancelIcon from '/assets/x_Icon.svg';
+import { createListState } from '../../../../../../reduxStore/lists/listsSlice';
+import { useParams } from 'react-router-dom';
 
-const AddNewListName = memo(() => {
+const AddNewListName = memo(({listLength}:{listLength:number}) => {
 
   const dispatch =  useAppDispatch();
 
   const appContext = useContext(AppContext);
   const {addNewListNameRef, mobileAddNewWorkspace} = appContext!;
 
+  const addListRef = useRef<HTMLInputElement>(null);
+  const params = useParams();
+  const boardId = params?.workspaceId || "";
+
   const [inputName, setInputName] = useState<string>('');
 
-  useEffect(()=>{
+  const createList = () => {
+    if(inputName.trim().length === 0) {
+      alert("Please make sure create a name for the list.");
+      return;
+    }
+    if(inputName.trim().length >= 18) {
+      alert("Please make sure your list name is less than 18 letters.");
+      return
+    }
+
+    dispatch(createListState({listName:inputName, boardId:boardId, boardNumber:listLength}));
+
+    dispatch(changeListModalState(false))
+  }
+
+  useLayoutEffect(()=>{
+    if(inputName.trim().length >= 18){
+      if (addListRef.current) addListRef.current.style.color = "red";
+    } else  {   
+      if(addListRef.current) addListRef.current.style.color = "black"
+    }
+  },[inputName])
+
+  useLayoutEffect(()=>{
     const checkClick = (e:MouseEvent | TouchEvent) => {
       const element = e.target as Node;
 
@@ -32,6 +61,8 @@ const AddNewListName = memo(() => {
       window.removeEventListener('click', checkClick,true)
     }
   },[])
+
+
 
   return (
     <motion.div
@@ -80,12 +111,12 @@ const AddNewListName = memo(() => {
         largeDesktop:gap-[1rem]
 
         ' onSubmit={(e)=>  {
-          e.preventDefault()
-          alert("Working on this feature currently");
-          console.log('test');
-          dispatch(changeListModalState(false))
+          e.preventDefault();
+          createList();
         }}>
-            <input className='
+            <input 
+            ref={addListRef}
+            className='
 
               box-border
 

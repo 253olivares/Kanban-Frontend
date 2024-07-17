@@ -17,6 +17,7 @@ import { getFilters } from '../../../../reduxStore/tasks/tasksSlice';
 import ProfileIcon from './ProfileIcon';
 import { getWorkspaceSelect, setNewSelect } from '../../../../reduxStore/workspace/workspaceSlice';
 import { initializeUserHistory } from '../../../../reduxStore/modal/modalSlice';
+import { initiateList } from '../../../../reduxStore/lists/listsSlice';
 
 // pass out user information to our header
 const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>}) => {
@@ -38,7 +39,8 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
     },[])
 
     useLayoutEffect(()=> {
-        dispatch(initializeUserHistory(params.workspaceId));
+        if(params.workspaceId !== "" && params.workspaceId) dispatch(initiateList(params.workspaceId))
+        dispatch(initializeUserHistory(params?.workspaceId||""));
     },[selectBoard])
 
   return (

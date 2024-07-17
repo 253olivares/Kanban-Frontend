@@ -6,7 +6,7 @@ import { FormEvent, useContext, useEffect, useRef, useState } from "react";
 import { updateUserBoards } from "../../../../../reduxStore/users/userSlice";
 import { updateWorkspaceBoard } from "../../../../../reduxStore/workspace/workspaceSlice";
 import { AppContext } from "../../../../appRefContext/appRefContext";
-import { createUserHistory } from "../../../../../customLogic/CustomLogic";
+import { createBoardListCL, createUserHistory } from "../../../../../customLogic/CustomLogic";
 
 
 const addName = ({workspace}:{workspace:string}) => {
@@ -39,6 +39,7 @@ const addName = ({workspace}:{workspace:string}) => {
           dispatch(updateWorkspaceBoard(x.newBoard));
         }
         createUserHistory(x.newBoard);
+        createBoardListCL(x.newBoard.b_id);
         dispatch(changeBoardModal(false));
         setBoardName('');
       })

@@ -15,7 +15,8 @@ import { deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, s
 import { getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove } from "../reduxStore/workspace/workspaceSlice";
 import { getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace } from "../reduxStore/users/userSlice";
 import AddNewUser from "./addNewUser/AddNewUser";
-import { deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspaceAndBoards } from "../customLogic/CustomLogic";
+import { deleteBoardListCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspaceAndBoards } from "../customLogic/CustomLogic";
+import ChangeBackground from "./changeBackground/ChangeBackground";
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const Modal = memo(() => {
@@ -67,6 +68,8 @@ const Modal = memo(() => {
       dispatch(updateWorkspacBoardRemove(x.board))
 
       dispatch(deleteUserHistory(x.board.b_id))
+
+      deleteBoardListCL(x.board.b_id);
 
       dispatch(closeModal());
       // close settings modal
@@ -145,6 +148,10 @@ const Modal = memo(() => {
           action={"Leave"}
           action2 ={"leave"}
           />
+          }
+          {
+            modal === 'changeBackground' &&
+            <ChangeBackground />
           }
         </AnimatePresence>
       </div>

@@ -8,7 +8,7 @@ import { motion } from "framer-motion";
 import MobileAddList from "./MobileAddList";
 
 // Our div to add a new list
-const AddList = memo(() => {
+const AddList = memo(({listLength}:{listLength:number}) => {
   
   const openModal = useAppSelector(getListModal);
 
@@ -33,7 +33,7 @@ const AddList = memo(() => {
       <AnimatePresence>
           {
             openModal ? 
-              <AddNewListName />
+              <AddNewListName listLength={listLength} />
             :
               <DefaultView />
           }

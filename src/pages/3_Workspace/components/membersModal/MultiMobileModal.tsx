@@ -4,8 +4,20 @@ import { AppContext } from "../../../appRefContext/appRefContext";
 import MembersModal from "./components/MembersModal";
 import { Params } from "react-router-dom";
 import SettingsModal from "./components/SettingsModal";
+import ListSettings from "./components/ListSettings";
 
-const MulitMobileModal = memo(({params,memberModal,settingsModal}: {params:Readonly<Params<string>> ,memberModal:boolean,settingsModal:boolean}) => {
+const MulitMobileModal = memo((
+  {
+    params,
+    memberModal,
+    settingsModal,
+    listSettings
+  }: {
+    params:Readonly<Params<string>> ,
+    memberModal:boolean,
+    settingsModal:boolean,
+    listSettings:boolean
+  }) => {
 
   const appContext = useContext(AppContext);
   const {mobileMembersRef} = appContext!;
@@ -36,6 +48,7 @@ const MulitMobileModal = memo(({params,memberModal,settingsModal}: {params:Reado
     overflow-y-auto
     no-scrollbar
     ${memberModal && 'bg-[rgba(0,0,0,0.75)]'}
+    ${listSettings && 'bg-[rgba(0,0,0,0.75)]'}
 
     flex
     justify-center
@@ -48,11 +61,12 @@ const MulitMobileModal = memo(({params,memberModal,settingsModal}: {params:Reado
         <MembersModal paramsBoardId = {params?.workspaceId || "" } /> : ''
       }
       {
-        settingsModal? 
+        settingsModal ? 
         <SettingsModal/> : ''
       }
       {
-        
+        listSettings ? 
+        <ListSettings /> : ""
       }
     </motion.div>
   )

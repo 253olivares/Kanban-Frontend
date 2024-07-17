@@ -1,6 +1,6 @@
 import { memo } from "react"
 import { useAppDispatch } from "../../../../../reduxStore/hook"
-import { openAddNewUser, openConfirmDeleteBoard } from "../../../../../reduxStore/modal/modalSlice"
+import { openAddNewUser, openChangeBackground, openConfirmDeleteBoard } from "../../../../../reduxStore/modal/modalSlice"
 
 const SettingsMobileModalOptions = memo(() => {
   return (
@@ -27,7 +27,7 @@ const Options = memo(() => {
 
   const adminTools = {
     "Add New User": ()=>dispatch(openAddNewUser()) ,
-    "Change Background": ()=> {}
+    "Change Background": ()=> dispatch(openChangeBackground())
   }
 
     return <div className="

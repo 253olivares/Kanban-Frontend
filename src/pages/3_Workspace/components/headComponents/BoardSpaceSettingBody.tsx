@@ -2,7 +2,7 @@ import { memo, useContext, useLayoutEffect } from "react"
 import { useAppDispatch } from "../../../../reduxStore/hook"
 import { AppContext } from "../../../appRefContext/appRefContext";
 import { motion } from 'framer-motion'
-import { openAddNewUser, setSettingModal } from "../../../../reduxStore/modal/modalSlice";
+import { openAddNewUser, openChangeBackground, setSettingModal } from "../../../../reduxStore/modal/modalSlice";
 import DeleteBoard from "./settingsComponents/DeleteBoard";
 
 const BoardSpaceSettingBody = memo(() => {
@@ -14,7 +14,7 @@ const BoardSpaceSettingBody = memo(() => {
 
     const adminTools = {
       "Add New User": ()=>dispatch(openAddNewUser()) ,
-      "Change Background": ()=> {}
+      "Change Background": ()=> dispatch(openChangeBackground()),
     }
 
     useLayoutEffect(()=> {
@@ -28,7 +28,8 @@ const BoardSpaceSettingBody = memo(() => {
               if(!mobileMembersRef.current?.contains(element) && 
               !modalRef.current?.contains(element) &&
               !mobileAddNewWorkspace.current?.contains(element)
-              ) dispatch (setSettingModal(false))
+              )
+                dispatch (setSettingModal(false))
             } 
 
         }   

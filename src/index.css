@@ -322,15 +322,24 @@
     .boardListHolder {
         @apply 
         w-full
-        h-full
 
-        overflow-auto
+        max-h-[calc(100%-3.25rem)]
+        mobile:max-h-[calc(100%-4.331rem)]
+        sMobile:max-h-[calc(100%-6.938rem)]
+        /* mMobile:max-h-[calc(100%-)] */
+
+        sLaptop:max-h-none
+        sLaptop:h-full
+        sLaptop:flex-grow
+
+
 
         pb-[0.878rem]
         mobile:pb-[1.171rem]
         sMobile:pb-[1.875rem]
         /* mMobile:pb-[2.25rem] */
         px-[5.5%]
+
         sLaptop:p-[1.249rem]
         mLaptop:p-[1.562rem]
         desktop:p-[1.875rem]
@@ -338,12 +347,21 @@
 
         flex
         flex-col
+
         sLaptop:flex-row
+        sLaptop:justify-start
+        sLaptop:items-start
+
+        gap-[.937rem]
+        mobile:gap-[1.25rem]
+        sMobile:gap-[2rem]
+        /* mMobile:gap-[2.4rem] */
 
         sLaptop:gap-[1.041rem]
         mLaptop:gap-[1.302rem]
         desktop:gap-[1.563rem]
         largeDesktop:gap-[1.953rem]
+
     }
 
     .userIconMembersBody {
@@ -855,7 +873,9 @@
         @apply
         z-[0]
         relative
+
         flex-grow
+            
         overflow-hidden
 
         flex-col

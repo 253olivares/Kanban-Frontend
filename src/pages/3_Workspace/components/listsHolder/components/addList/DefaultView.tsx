@@ -38,6 +38,8 @@ const DefaultView = memo(() => {
       desktop:py-[0.844rem]
       largeDesktop:py-[1.055rem]
 
+      
+
      "
     > 
         <h1 className="

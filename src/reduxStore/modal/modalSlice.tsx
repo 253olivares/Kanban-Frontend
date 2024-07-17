@@ -16,6 +16,7 @@ type initialStateType = {
      'deleteConfirmBoard' | 
      'addNewUser' |
      'leaveWorkspace' |
+     'changeBackground' |
      '',
     accountSettings:boolean,
     accountLandingMobile:boolean,
@@ -93,6 +94,10 @@ const modalSlice = createSlice({
         },
         openAddNewUser (state) {
             state.modal = 'addNewUser';
+            state.openModal = true;
+        },
+        openChangeBackground(state){
+            state.modal = "changeBackground";
             state.openModal = true;
         },
         closeModal (state) {
@@ -212,7 +217,8 @@ export const {
     openLeaveWorkspace,
     deleteUserHistory,
     addUserEmail,
-    setAddUserRole
+    setAddUserRole,
+    openChangeBackground
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -1,5 +1,6 @@
 import { motion } from "framer-motion"
-import { FormEvent, memo } from "react"
+import { FormEvent, memo, useContext } from "react"
+import { AppContext } from "../../../../appRefContext/appRefContext"
 
 const workspaceModal = memo(({
     limit,
@@ -20,6 +21,9 @@ const workspaceModal = memo(({
     closeModal:()=>void
 
 }) => {
+
+    const appContext = useContext(AppContext);
+    const {addListTask, addListTaskSubmit} = appContext!;
 
   return (
     <motion.form
@@ -164,6 +168,7 @@ const workspaceModal = memo(({
             opacity-75
 
             " 
+            ref={addListTask}
             onClick={()=>closeModal()} >Cancel</button>
 
             <button 
@@ -202,6 +207,7 @@ const workspaceModal = memo(({
             bg-SelectorBlue
 
             " 
+            ref={addListTaskSubmit}
             >Save</button>
         </div>
     </motion.form>

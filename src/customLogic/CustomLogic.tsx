@@ -1,3 +1,4 @@
+
 import { board } from '../reduxStore/boards/boardsSlice';
 import { comments } from '../reduxStore/comments/commentsSlice';
 import { list } from '../reduxStore/lists/listsSlice';
@@ -23,13 +24,101 @@ export const getTask = ():task[] | null => {
     return JSON.parse(data);
 }
 
-export const getList = ():list[] | null => {
+export const updateListDeleteCL = (deleteList:list,updateLists:Record<string,list>):void => {
+    const data = localStorage.getItem(listKey);
+    if(!data) {
+        reloadApplication();
+        return;
+    }
+
+    const listData:Record<string,list[]> = JSON.parse(data);
+
+    listData[deleteList.b_id] = Object.values(updateLists);
+
+    localStorage.setItem(listKey,JSON.stringify(listData));
+}
+
+export const addListCL = (newList:list):void => {
+    const data = localStorage.getItem(listKey);
+    if(!data){
+        reloadApplication();
+        return;
+    }
+    const lists:Record<string,list[]> = JSON.parse(data);
+    
+    const newListArray = [
+        ...lists[newList.b_id],
+        newList
+    ]
+
+    lists[newList.b_id] = newListArray;
+
+    localStorage.setItem(listKey,JSON.stringify(lists));
+}
+
+export const deleteBoardListCL = (boardId:string):void => {
+    const data = localStorage.getItem(listKey);
+    if(!data){
+        reloadApplication();
+        return;
+    }
+
+    const convertData:Record<string,list[]> = JSON.parse(data);
+
+    delete convertData[boardId];
+
+    localStorage.setItem(listKey,JSON.stringify(convertData))
+
+}
+
+export const createBoardListCL = (boardId:string):void => {
+    const data = localStorage.getItem(listKey);
+    if(!data){
+        reloadApplication();
+        return;
+    }
+
+    const convertData:Record<string,list[]> = JSON.parse(data);
+
+    if(convertData instanceof Array){
+        const newInstance:Record<string,list[]> = {};
+        newInstance[boardId] = [];
+        localStorage.setItem(listKey,JSON.stringify(newInstance));
+    }
+
+    convertData[boardId] = [];
+
+    localStorage.setItem(listKey,JSON.stringify(convertData))
+
+}
+ 
+export const getList = (boardId:string):list[] | null => {
     const data = localStorage.getItem(listKey);
     if(!data){
         reloadApplication();
         return null;
     }
-    return JSON.parse(data);
+
+    const convertData:Record<string,list[]> = JSON.parse(data);
+
+    if( convertData instanceof Array){
+        const NewInstance:Record<string,list[]> = {
+
+        } 
+        NewInstance[boardId] = []
+        localStorage.setItem(listKey,JSON.stringify(NewInstance));
+        return [];
+    }
+
+    if(!convertData[boardId]){
+        convertData[boardId] = [];
+        console.log(convertData);
+        console.log("test");
+        localStorage.setItem(listKey,JSON.stringify(convertData));
+        return []
+    }
+    
+    return convertData[boardId];
 };
 
 export const getComments = ():comments[] | null => {
@@ -484,7 +573,7 @@ export const checkStorages= async():Promise<void> => {
     !localStorage.getItem(rememberKey)&& localStorage.setItem(rememberKey,JSON.stringify(null));
     !localStorage.getItem(boardKey)&& localStorage.setItem(boardKey,JSON.stringify([]));
     !localStorage.getItem(commentKey)&& localStorage.setItem(commentKey,JSON.stringify([]));
-    !localStorage.getItem(listKey)&& localStorage.setItem(listKey,JSON.stringify([]));
+    !localStorage.getItem(listKey)&& localStorage.setItem(listKey,JSON.stringify({}));
     !localStorage.getItem(taskKey)&& localStorage.setItem(taskKey,JSON.stringify([]));
     !localStorage.getItem(userKey)&& localStorage.setItem(userKey,JSON.stringify({}));
     !localStorage.getItem(workspaceKey)&& localStorage.setItem(workspaceKey,JSON.stringify([]));

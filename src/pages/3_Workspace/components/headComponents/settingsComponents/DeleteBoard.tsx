@@ -13,7 +13,7 @@ const DeleteBoard = memo(() => {
       dispatch(openConfirmDeleteBoard())
     }}
     className=" deleteBoardButton ">
-        DeleteBoard
+        Delete Board
     </div>
   )
 })

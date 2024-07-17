@@ -66,7 +66,7 @@ const MembersHolder = memo(({member}:{member:string[]}) => {
 
         text-PrimaryWhite
         opacity-75
-        sLaptop:text-[rgba(109,109,109,.75)]
+        sLaptop:text-[rgba(109,109,109,.85)]
         text-[0.703rem]
         mobile:text-[0.937rem]
         sMobile:text-[1.5rem]

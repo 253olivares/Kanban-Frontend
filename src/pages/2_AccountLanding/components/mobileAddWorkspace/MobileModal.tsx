@@ -7,14 +7,33 @@ import AddModal from './component/workspaceModal';
 import ConfirmDelete from './component/confirmDelete';
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal, getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove, updateWorkspaceBoard } from "../../../../reduxStore/workspace/workspaceSlice";
-import { createUserHistory, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspaceAndBoards, sanitize } from "../../../../customLogic/CustomLogic";
+import { createBoardListCL, createUserHistory, deleteBoardListCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspaceAndBoards, sanitize } from "../../../../customLogic/CustomLogic";
 import { getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace, updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
 import { addBoards, changeBoardModal, deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, selectBoardById, updateBoardNameFromWorkspace, updateBoardNameStart } from "../../../../reduxStore/boards/boardsSlice";
 import { changeListModalState, changeMobileBoardNameState, closeModal, deleteUserHistory, setSettingModal } from "../../../../reduxStore/modal/modalSlice";
 import { Params, useNavigate } from "react-router-dom";
 import AddNewUser from "./component/AddNewUser";
+import { createListState, getSelectedList, selectAllLists } from "../../../../reduxStore/lists/listsSlice";
+import CheckBackground from "./component/CheckBackground";
 
-const MobileModal = memo(({params, boardsModal,mobileWorkspace,modal,listModal,mobileBoardNameModal}:{params:Readonly<Params<string>>,boardsModal:boolean,mobileWorkspace:boolean,modal:string,listModal:boolean,mobileBoardNameModal:boolean}) => {
+const MobileModal = memo((
+  {
+    params, 
+    boardsModal,
+    mobileWorkspace,
+    modal,
+    listModal,
+    mobileBoardNameModal,
+    addTaskModal
+  }:{
+    params:Readonly<Params<string>>,
+    boardsModal:boolean,
+    mobileWorkspace:boolean,
+    modal:string,
+    listModal:boolean,
+    mobileBoardNameModal:boolean,
+    addTaskModal:boolean
+  }) => {
 
     const dispatch = useAppDispatch();
 
@@ -29,10 +48,15 @@ const MobileModal = memo(({params, boardsModal,mobileWorkspace,modal,listModal,m
     const [newBoardName, setNewBoardName] = useState<string>("");
     const [newList, setNewList] = useState<string>("");
     const [updatedBoardName, setUpdatedBoardName] = useState<string>("");
+    const [newTaskList,setNewTaskList] = useState<string>("");
 
     const workspace = useAppSelector(state => selectWorkspaceById(state,selectWorkspace))
     const user = useAppSelector(getUser);
     const board = useAppSelector(state => selectBoardById(state,workspaceId||"")) || null;
+    const lists = useAppSelector(selectAllLists).length;
+
+    // @ts-ignore
+    const selectList = useAppSelector(getSelectedList);
 
     const checkInputNewworkspace = ():void => {
       if(newWorkspaceName.trim().length > 15){
@@ -71,17 +95,25 @@ const MobileModal = memo(({params, boardsModal,mobileWorkspace,modal,listModal,m
           dispatch(updateWorkspaceBoard(x.newBoard))
         } 
         createUserHistory(x.newBoard);
+        createBoardListCL(x.newBoard.b_id);
         dispatch(changeBoardModal(false));
         setNewBoardName('');
       })
     } 
 
     const checkListName =():void => {
-      if(newList.trim() === "") {
-        alert("Please enter a list Name!");
+      if(newList.trim().length === 0) {
+        alert("Please make sure create a name for the list.");
         return;
       }
-      alert("Working on this feature!");
+      if(newList.trim().length >= 18) {
+        alert("Please make sure your list name is less than 18 letters.");
+        return
+      }
+
+      dispatch(createListState({listName:newList, boardId:workspaceId || "", boardNumber:lists}));
+
+      dispatch(changeListModalState(false));
     }
 
     const checkNewBoardName = ():void => {
@@ -148,6 +180,8 @@ const MobileModal = memo(({params, boardsModal,mobileWorkspace,modal,listModal,m
       dispatch(updateWorkspacBoardRemove(x.board))
 
       dispatch(deleteUserHistory(x.board.b_id))
+
+      deleteBoardListCL(x.board.b_id);
 
       dispatch(closeModal());
       // close settings modal
@@ -288,6 +322,24 @@ const MobileModal = memo(({params, boardsModal,mobileWorkspace,modal,listModal,m
       }
       {
         modal === 'addNewUser' ? <AddNewUser /> : ''
+      }
+      {
+        modal === 'changeBackground' ? <CheckBackground /> : ''
+      }
+      {
+        addTaskModal ? <AnimatePresence>
+          <AddModal 
+          limit={16} 
+          label={"New Task:"} 
+          placeholder={"Enter Task Name..."} 
+          valueHolder={newTaskList} 
+          setHolder={(e:React.ChangeEvent<HTMLInputElement>)=> setNewTaskList(e.target.value)} 
+          checkInputHolder={()=>{
+            alert("Working on this feature!");
+          }} 
+          closeModal={()=>{}}           
+          />
+        </AnimatePresence> : ""
       }
     </motion.div>
   )

@@ -12,10 +12,10 @@ import { getWorkSpaceModal, initiateWorkspace } from '../../../reduxStore/worksp
 import MobileModal from '../../2_AccountLanding/components/mobileAddWorkspace/MobileModal';
 import { getBoardModal, initializeBoards } from '../../../reduxStore/boards/boardsSlice';
 import { initialComments } from '../../../reduxStore/comments/commentsSlice';
-import { initiateList } from '../../../reduxStore/lists/listsSlice';
 import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
 import { initiateUserList } from '../../../reduxStore/userList/userList';
 import MembersModal from '../../3_Workspace/components/membersModal/MultiMobileModal';
+import { getAddTaskModal, getListSettings } from '../../../reduxStore/lists/listsSlice';
 
 const AccountHeader = memo(() => {
   const dispatch = useAppDispatch();
@@ -37,6 +37,8 @@ const AccountHeader = memo(() => {
   const mobileBoardNameModal = useAppSelector(getMobileBoardNameModal);
   const memberModal = useAppSelector(getMembersModal);
   const settingsModal = useAppSelector(getSettingsModal);
+  const addTaskModal = useAppSelector(getAddTaskModal);
+  const listSettings = useAppSelector(getListSettings);
  
 
   // a cache check to have the application ato login a user 
@@ -72,7 +74,6 @@ const AccountHeader = memo(() => {
     // initiate our states
     dispatch(initiateWorkspace());
     dispatch(initializeBoards());
-    dispatch(initiateList());
     dispatch(initiateTask());
     dispatch(initialComments());
     dispatch(initiateUserList());
@@ -108,8 +109,8 @@ const AccountHeader = memo(() => {
       `}>
         <AnimatePresence>
           {
-            memberModal || settingsModal ?
-            <MembersModal params={params} memberModal={memberModal} settingsModal={settingsModal} /> : ''
+            memberModal || settingsModal || listSettings ?
+            <MembersModal params={params} memberModal={memberModal} settingsModal={settingsModal} listSettings={listSettings} /> : ''
           }
         </AnimatePresence>
         <AnimatePresence>
@@ -121,7 +122,9 @@ const AccountHeader = memo(() => {
           mobileBoardNameModal ||
           modalType === 'deleteConfirmBoard' ||
           modalType === 'addNewUser' ||
-          modalType === 'leaveWorkspace'
+          modalType === 'leaveWorkspace' ||
+          modalType === 'changeBackground' ||
+          addTaskModal
            ? 
           <MobileModal 
           params = {params}
@@ -130,6 +133,7 @@ const AccountHeader = memo(() => {
           modal = {modalType}
           listModal={listModal}
           mobileBoardNameModal = {mobileBoardNameModal}
+          addTaskModal ={addTaskModal}
           /> : ''
         }
         </AnimatePresence>
