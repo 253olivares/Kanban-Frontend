@@ -1,6 +1,7 @@
+import { memo } from "react"
 
 
-const ChangeBackgroundHead = () => {
+const ChangeBackgroundHead = memo(() => {
   return (
     <div className="
     w-full
@@ -25,6 +26,6 @@ const ChangeBackgroundHead = () => {
         <h1>Change Board Background:</h1>
     </div>
   )
-}
+})
 
 export default ChangeBackgroundHead

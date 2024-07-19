@@ -10,7 +10,7 @@ import ModalContainer from '../../../modals/Modal';
 import Header from './component/Header';
 import { getWorkSpaceModal, initiateWorkspace } from '../../../reduxStore/workspace/workspaceSlice';
 import MobileModal from '../../2_AccountLanding/components/mobileAddWorkspace/MobileModal';
-import { getBoardModal, initializeBoards } from '../../../reduxStore/boards/boardsSlice';
+import { getBoardModal, initializeBoards, selectBoardById } from '../../../reduxStore/boards/boardsSlice';
 import { initialComments } from '../../../reduxStore/comments/commentsSlice';
 import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
 import { initiateUserList } from '../../../reduxStore/userList/userList';
@@ -22,6 +22,7 @@ const AccountHeader = memo(() => {
   const navigate = useNavigate();
 
   const params = useParams();
+  const {workspaceId} = params;
 
   // console.log('Location: ', location);
   // console.log('params', params);
@@ -39,7 +40,8 @@ const AccountHeader = memo(() => {
   const settingsModal = useAppSelector(getSettingsModal);
   const addTaskModal = useAppSelector(getAddTaskModal);
   const listSettings = useAppSelector(getListSettings);
- 
+  
+  const board = useAppSelector(state => selectBoardById(state,workspaceId||""))||null;
 
   // a cache check to have the application ato login a user 
   // if they click on this page
@@ -89,7 +91,14 @@ const AccountHeader = memo(() => {
 
       w-dvw
       h-dvh
-      conic-gradient-noshade 
+      ${
+        !board || board.background === 0 ?
+        "conic-gradient-noshade" : ""
+      }
+      ${
+        board?.background === 1 ?
+        "site-borders" : ""
+      }
       overflow-hidden
       ${
         !user && `
@@ -182,7 +191,7 @@ const AccountHeader = memo(() => {
           :
           <>
           {/* our app header */}
-            <Header user={user} params={params} />
+            <Header user={user} params={params} board ={board} />
             {/* our application itself */}
             <Outlet/>
           </>

@@ -31,7 +31,8 @@ type initialStateType = {
     userRoleName:boolean,
     userHistory:Record<string,string[]>,
     addUserEmail:string,
-    addUserRole:string
+    addUserRole:string,
+    previewSelect:number
 }
 
 const initialState: initialStateType = {
@@ -51,7 +52,8 @@ const initialState: initialStateType = {
     userRoleName:false,
     userHistory:{},
     addUserEmail:"",
-    addUserRole:""
+    addUserRole:"",
+    previewSelect:0
 }   
 
 // create a slice of our state
@@ -167,6 +169,9 @@ const modalSlice = createSlice({
         },
         setAddUserRole(state,action:PayloadAction<string>){
             state.addUserRole = action.payload;
+        },
+        setPreview (state,action:PayloadAction<number>) {
+            state.previewSelect = action.payload;
         }
     }
 })
@@ -189,6 +194,7 @@ export const getRolState = (state:RootState) => state.modal.userRoleName;
 export const getUserHistoryState = (state:RootState) => state.modal.userHistory;
 export const getAddUserEmail = (state:RootState) => state.modal.addUserEmail;
 export const getUserRole = (state:RootState) => state.modal.addUserRole;
+export const getPreviewSelect = (state:RootState) => state.modal.previewSelect;
 
 export const {
     setCroppingImageData,
@@ -218,7 +224,8 @@ export const {
     deleteUserHistory,
     addUserEmail,
     setAddUserRole,
-    openChangeBackground
+    openChangeBackground,
+    setPreview
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -5,7 +5,7 @@ import { user } from "../../../../reduxStore/users/userSlice";
 import { AppContext } from "../../../appRefContext/appRefContext";
 
 
-const ProfileIcon = memo(({user}:{user:user}) => {
+const ProfileIcon = memo(({boardBackground,user}:{boardBackground:number | null,user:user}) => {
     const dispatch = useAppDispatch();
 
     const accountSettings = useAppSelector(getAccountSettings);
@@ -43,7 +43,14 @@ const ProfileIcon = memo(({user}:{user:user}) => {
                 ` 
                 :
                 `
-                linear-gradientFooter
+                ${
+                   !boardBackground || boardBackground === 0 ?
+                   "linear-gradientFooter" : ""
+                }
+                ${
+                    boardBackground === 1 ?
+                    "conic-gradient-noshade" : ""
+                }
                 sLaptop:hover:hoverBlue
                 `
             }

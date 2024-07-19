@@ -19,10 +19,10 @@ const AddHistory = memo(({userHistory}:{userHistory:Record<string,string[]>}) =>
 
     boardsScroll
 
-    max-h-[14.648rem]
-    mobile:max-h-[19.531rem]
-    sMobile:max-h-[31.25rem]
-    mMobile:max-h-[37.5rem]
+    max-h-[10.937rem]
+    mobile:max-h-[14.582rem]
+    sMobile:max-h-[23.332rem]
+    mMobile:max-h-[27.998rem]
 
     ">
          <AnimatePresence>

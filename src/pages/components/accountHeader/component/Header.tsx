@@ -12,7 +12,7 @@ import InputHeader from '../../../3_Workspace/components/headComponents/BoardNam
 import FilterBoard from '../../../3_Workspace/components/headComponents/BoardPageFilter';
 import MemebersBoard from '../../../3_Workspace/components/headComponents/BoardPageMemebers';
 import CogBoard from '../../../3_Workspace/components/headComponents/BoardSpaceSetting';
-import { selectBoardById } from '../../../../reduxStore/boards/boardsSlice';
+import { board, selectBoardById } from '../../../../reduxStore/boards/boardsSlice';
 import { getFilters } from '../../../../reduxStore/tasks/tasksSlice';
 import ProfileIcon from './ProfileIcon';
 import { getWorkspaceSelect, setNewSelect } from '../../../../reduxStore/workspace/workspaceSlice';
@@ -20,7 +20,7 @@ import { initializeUserHistory } from '../../../../reduxStore/modal/modalSlice';
 import { initiateList } from '../../../../reduxStore/lists/listsSlice';
 
 // pass out user information to our header
-const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>}) => {
+const Header = memo(({user,params,board}:{user:user, params:Readonly<Params<string>>,board:board | null}) => {
     
     const dispatch = useAppDispatch();
 
@@ -132,7 +132,7 @@ const Header = memo(({user,params}:{user:user, params:Readonly<Params<string>>})
                 <CogBoard /> : ''
             }
 
-            <ProfileIcon user={user} />
+            <ProfileIcon boardBackground ={board?.background || null} user={user} />
         </div>
     </div>  
   )

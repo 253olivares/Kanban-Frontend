@@ -181,20 +181,24 @@ const BoardItems = ({boardId, durat}:{boardId:string, durat:number}) => {
         " src={backgroundMobile} alt="" />
       </div>
       {/* transparent glass */}
-      <div
-      className={`
+      {
+        board.background === 0 ?
+        <div
+        className={`
+        
+        boardGlass  
+
+        absolute
+
+        z-[1]
+
+        w-full
+        h-full
+        block
+        `}
+        /> : ""
+      }
       
-      boardGlass  
-
-      absolute
-
-      z-[1]
-
-      w-full
-      h-full
-      block
-      `}
-       />
       {
         board.background === 2 ? 
         <>

@@ -83,6 +83,22 @@ export const addBoards = createAsyncThunk('boards/addBoard', async({
     }
 })
 
+export const updateBoardBackground = createAsyncThunk('board/updateBackground', async (
+    {board,newBackground}: {board:board, newBackground:number},
+    {rejectWithValue,getState}
+) => {
+    try{
+        const state = getState() as RootState;
+        const newBoardInfo:board = {
+            ...board,
+            background:newBackground
+        }
+        return {boardInfo:newBoardInfo,prevState:selectAllBoards(state)}
+    } catch(e:any) {
+        return rejectWithValue(e);
+    }
+})
+
 // Update board name when we are in the board page that runs whenever the board name is change
 // additionally when the new name is submitted from mobile
 export const updateBoardNameFromWorkspace = createAsyncThunk('boards/updateBoardName',async(
@@ -229,6 +245,10 @@ const boardSlice = createSlice({
         .addCase(removeUserFromMulitpleBoards.fulfilled,(state,action:PayloadAction<{updateState:Update<board, string>[]}>) => {
             boardsAdapter.updateMany(state,action.payload.updateState);
             userLeaveUpdateBoard(Object.values(state.entities))
+        })
+        .addCase(updateBoardBackground.fulfilled,(state,action:PayloadAction<{boardInfo:board,prevState:board[]}>)=>{
+            updateBoardLS(action.payload.boardInfo,action.payload.prevState);
+            boardsAdapter.updateOne(state,{id:action.payload.boardInfo.b_id,changes:action.payload.boardInfo})
         })
     }
 })

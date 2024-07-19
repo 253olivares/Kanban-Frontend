@@ -1,8 +1,10 @@
+import { memo } from "react";
 import { useAppDispatch } from "../../../../../reduxStore/hook"
 import { setOpenModal } from "../../../../../reduxStore/modal/modalSlice";
+import { board } from "../../../../../reduxStore/boards/boardsSlice";
 
 
-const MobileFilter = () => {
+const MobileFilter = memo(({selectBoard}:{selectBoard:board}) => {
     const dispatch = useAppDispatch();
   return (
     <div className="relative
@@ -12,13 +14,22 @@ const MobileFilter = () => {
     ">
         <div 
         onClick={()=> dispatch(setOpenModal(true))}
-        className="
+        className={`
         relative
         z-[5]
 
         flex flex-row
 
-        linear-gradientFooter2
+        ${
+          selectBoard.background===0 ?
+          "linear-gradientFooter2" : ""
+        }
+
+        
+        ${
+          selectBoard.background===1 ?
+          "conic-gradient-noshade" : ""
+        }
 
         items-center
 
@@ -38,7 +49,7 @@ const MobileFilter = () => {
         mMobile:px-[2.625rem]
 
         sLaptop:hover:cursor-pointer
-        "
+        `}
         >
             <span className="
             text-[0.763rem]
@@ -58,6 +69,6 @@ const MobileFilter = () => {
         </div>
     </div>
   )
-}
+})
 
 export default MobileFilter

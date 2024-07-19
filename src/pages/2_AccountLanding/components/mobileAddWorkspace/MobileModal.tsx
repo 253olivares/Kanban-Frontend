@@ -324,7 +324,7 @@ const MobileModal = memo((
         modal === 'addNewUser' ? <AddNewUser /> : ''
       }
       {
-        modal === 'changeBackground' ? <CheckBackground /> : ''
+        modal === 'changeBackground' ? <CheckBackground boardData ={board} /> : ''
       }
       {
         addTaskModal ? <AnimatePresence>

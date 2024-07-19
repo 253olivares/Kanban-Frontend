@@ -34,7 +34,7 @@ const Container = memo(() => {
     sLaptop:hidden
     ">
       <MobileMembers boardMembers={selectBoard.members} />
-      <MobileFilter />
+      <MobileFilter selectBoard={selectBoard} />
       <MobileSettings />
     </div>
   )

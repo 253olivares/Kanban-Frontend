@@ -151,7 +151,7 @@ const Modal = memo(() => {
           }
           {
             modal === 'changeBackground' &&
-            <ChangeBackground />
+            <ChangeBackground board={board} />
           }
         </AnimatePresence>
       </div>
