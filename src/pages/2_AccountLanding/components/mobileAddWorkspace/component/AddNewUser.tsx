@@ -63,7 +63,7 @@ const AddNewUser = memo(({...props}) => {
             return 
         }
 
-        if(userHistory[emailInput]){
+        if(userHistory[emailInput.toLowerCase()]){
             if(inputRef.current) inputRef.current.style.color = "green";
             alert("User already exists in board!");
             return;

@@ -28,7 +28,7 @@ const RoleInput = memo((
         const date = new Date;
 
         const addUserHistory:Record<string,string[]> = {};
-        addUserHistory[user.email] = [user.u_id,input,date.toLocaleString()];
+        addUserHistory[user.email.toLowerCase()] = [user.u_id,input,date.toLocaleString()];
 
         addusertohistory(addUserHistory);
         // alert(`New user added to board user history: ${user.email}, ${input},${date.toLocaleString()}`)
