@@ -56,6 +56,22 @@ export const addListCL = (newList:list):void => {
     localStorage.setItem(listKey,JSON.stringify(lists));
 }
 
+export const deleteBoardListMultipleCL = (boardIds:string[]):void => {
+    const data = localStorage.getItem(listKey);
+    if(!data){
+        reloadApplication();
+        return;
+    } 
+
+    const convertData:Record<string,list[]> = JSON.parse(data);
+
+    for(const boardId of boardIds) {
+        delete convertData[boardId];
+    }
+
+    localStorage.setItem(listKey,JSON.stringify(convertData));
+}
+
 export const deleteBoardListCL = (boardId:string):void => {
     const data = localStorage.getItem(listKey);
     if(!data){
