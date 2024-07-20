@@ -36,8 +36,11 @@ const initialState:initialStateType = listAdapter.getInitialState({
 
 export const initiateList = createAsyncThunk('list/getList', async(boardId:string,{rejectWithValue})=> {
     try{
+
         const data:list[] | null = getList(boardId);
+
         if(!data) throw new Error("Ran into issues!");
+        
         return data;
     }catch(e:any) {
         console.log('Ran into issue gathering the list data!');
@@ -103,6 +106,9 @@ const listSlice = createSlice({
             console.log("test");
             state.listSetting = action.payload.listSettingsBool;
             state.selectedlist = action.payload.listData;
+        },
+        deleteListState (state) {
+            listAdapter.removeAll(state);
         }
     },
     extraReducers(builder){
@@ -141,7 +147,8 @@ export const getSelectedList = (state:RootState) => state.list.selectedlist;
 
 export const {
     changeAddTask,
-    changeSettings
+    changeSettings,
+    deleteListState
 } = listSlice.actions;
 
 

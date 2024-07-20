@@ -17,7 +17,7 @@ import { getFilters } from '../../../../reduxStore/tasks/tasksSlice';
 import ProfileIcon from './ProfileIcon';
 import { getWorkspaceSelect, setNewSelect } from '../../../../reduxStore/workspace/workspaceSlice';
 import { initializeUserHistory } from '../../../../reduxStore/modal/modalSlice';
-import { initiateList } from '../../../../reduxStore/lists/listsSlice';
+import { deleteListState, initiateList } from '../../../../reduxStore/lists/listsSlice';
 
 // pass out user information to our header
 const Header = memo(({user,params,board}:{user:user, params:Readonly<Params<string>>,board:board | null}) => {
@@ -32,6 +32,7 @@ const Header = memo(({user,params,board}:{user:user, params:Readonly<Params<stri
     if(selectBoard !== null && !selectBoard.members){
         alert('Project has recently been updated with new back end build! If you are getting this error it needs to be updated. Project will soon reset the localstorage to make sure its build is up to date!');
     }
+    
     useEffect(()=> {
         if(selectBoard !== null && workspaceSelect === ''){
             dispatch(setNewSelect(selectBoard.w_id))
@@ -39,9 +40,14 @@ const Header = memo(({user,params,board}:{user:user, params:Readonly<Params<stri
     },[])
 
     useLayoutEffect(()=> {
-        if(params.workspaceId !== "" && params.workspaceId) dispatch(initiateList(params.workspaceId))
-        dispatch(initializeUserHistory(params?.workspaceId||""));
-    },[selectBoard])
+        if(params.workspaceId !== undefined) {
+            dispatch(initiateList(params.workspaceId))
+        } else {
+            dispatch(deleteListState())
+        }
+
+        dispatch(initializeUserHistory(params.workspaceId));
+    },[params.workspaceId])
 
   return (
     <div className={`

@@ -94,6 +94,7 @@ export const createBoardListCL = (boardId:string):void => {
  
 export const getList = (boardId:string):list[] | null => {
     const data = localStorage.getItem(listKey);
+
     if(!data){
         reloadApplication();
         return null;
@@ -111,6 +112,7 @@ export const getList = (boardId:string):list[] | null => {
     }
 
     if(!convertData[boardId]){
+        
         convertData[boardId] = [];
         console.log(convertData);
         console.log("test");
