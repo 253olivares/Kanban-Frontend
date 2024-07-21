@@ -16,7 +16,7 @@ const ListHolder = () => {
   const params = useParams();
   const user = useAppSelector(getUser);
   const board = useAppSelector(state => selectBoardById(state,params?.workspaceId || ""))
-  const lists = useAppSelector(state => selectAllLists(state));
+  const list = useAppSelector(selectAllLists);
 
   if(!board) return
   if(!params.workspaceId) return;
@@ -37,6 +37,7 @@ const ListHolder = () => {
     boardsScroll
     sLaptop:overflow-y-none
     sLaptop:boardsScrollx 
+
     ${user.u_id !== board.u_id && board.lists.length ===0 ?
     `
     flex
@@ -56,17 +57,17 @@ const ListHolder = () => {
     mLaptop:text-[1.562rem]
     desktop:text-[2rem]
     largeDesktop:text-[2.5rem]
-    ` : ''
+    ` : ""
     }
     `}>
       {
-        lists.map((x:list)=>
-          <List adminId = {""} user={user} key={x.l_id} list={x} />
+        list.map((x:list)=>
+          <List user={user} key={x.l_id} list={x} />
         )
       }
       {
         user.u_id === board.u_id ?
-        <AddList listLength={lists.length} /> : '' 
+        <AddList listLength={list.length} /> : '' 
       }
       {
         user.u_id !== board.u_id && board.lists.length ===0 ? 

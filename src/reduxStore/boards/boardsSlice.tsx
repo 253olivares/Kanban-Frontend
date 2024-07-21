@@ -2,6 +2,7 @@ import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction, Upda
 import { addBoard, getBoards, removeBoardsFromWorkspaceLS, updateBoardLS, userLeaveUpdateBoard } from "../../customLogic/CustomLogic"
 import { RootState } from "../store"
 import { workspace } from "../workspace/workspaceSlice"
+import { list } from "../lists/listsSlice"
 export type board = {
     b_id:string,
     u_id:string,
@@ -48,6 +49,57 @@ export const initializeBoards = createAsyncThunk('boards/initialize', async(_,{r
         return data;
     }catch(e:any){
         console.log("Ran into issue getting all the workspace data!");
+        return rejectWithValue(e);
+    }
+})
+
+export const deleteTaskFromBoardListDelete = createAsyncThunk('board/deleteTaskFromBoardListDelete', async(
+    {
+        boardId,
+        listId
+    } : {
+        boardId:string,
+        listId:string
+    } , {rejectWithValue,getState}
+) => {
+    try{
+        const state = getState() as RootState;
+
+        const selectBoard = selectBoardById(state,boardId);
+
+        const updateBoard = {
+            ...selectBoard,
+            lists: selectBoard.lists.filter((list)=> list !== listId)
+        }
+
+        return{updateBoard: updateBoard,prevState:selectAllBoards(state)}
+    } catch (e:any) {
+        return rejectWithValue(e);
+    }
+})
+
+export const addListToBoard = createAsyncThunk('board/addListToBoard', async(
+    {
+        boardId,
+        list
+    } : {
+        boardId:string,
+        list:list
+    } , {rejectWithValue,getState}
+)=>{
+    try{
+
+        const state = getState() as RootState;
+
+        const selectBoard = selectBoardById(state,boardId)
+
+        const updateBoard = {
+            ...selectBoard,
+            lists: [...selectBoard.lists,list.l_id]
+        }
+
+        return {updateBoard:updateBoard,prevState:selectAllBoards(state)}
+    } catch (e:any) {
         return rejectWithValue(e);
     }
 })
@@ -249,6 +301,14 @@ const boardSlice = createSlice({
         .addCase(updateBoardBackground.fulfilled,(state,action:PayloadAction<{boardInfo:board,prevState:board[]}>)=>{
             updateBoardLS(action.payload.boardInfo,action.payload.prevState);
             boardsAdapter.updateOne(state,{id:action.payload.boardInfo.b_id,changes:action.payload.boardInfo})
+        })
+        .addCase(addListToBoard.fulfilled,(state,action:PayloadAction<{updateBoard:board,prevState:board[]}>)=>{
+            updateBoardLS(action.payload.updateBoard,action.payload.prevState);
+            boardsAdapter.updateOne(state,{id:action.payload.updateBoard.b_id,changes:action.payload.updateBoard});
+        })
+        .addCase(deleteTaskFromBoardListDelete.fulfilled,(state,action:PayloadAction<{updateBoard:board,prevState:board[]}>)=>{
+            updateBoardLS(action.payload.updateBoard,action.payload.prevState);
+            boardsAdapter.updateOne(state,{id:action.payload.updateBoard.b_id,changes:action.payload.updateBoard});
         })
     }
 })

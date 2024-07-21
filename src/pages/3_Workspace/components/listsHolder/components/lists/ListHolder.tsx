@@ -24,14 +24,12 @@ const ListHolder = memo((
 
     justify-between
 
-    sLaptop:px-[0.416rem]
-    mLaptop:px-[0.520rem]
-    desktop:px-[0.625rem]
-    largeDesktop:px-[0.761rem]
     sLaptop:py-[0.281rem]
     mLaptop:py-[0.351rem]
     desktop:py-[0.422rem]
     largeDesktop:py-[0.527rem]
+    
+    px-[2.5%]
 
     ">
         <h1 className="

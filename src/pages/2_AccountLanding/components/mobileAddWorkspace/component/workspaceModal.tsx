@@ -87,6 +87,11 @@ const workspaceModal = memo(({
          "
         >{label}</h1>
         <input 
+        style={
+            {
+                color:"white"
+            }
+        }
         value={valueHolder}
         onChange={(e)=> {
             if(e.target.value.trim().length > limit){

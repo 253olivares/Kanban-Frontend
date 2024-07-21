@@ -625,16 +625,48 @@
         sLaptop:text-black
     }
 
+    
     .boardsScroll {
         overflow-y: auto;
     }
     .boardsScroll::-webkit-scrollbar,
-    ::-webkit-scrollbar-thumb,
+    ::-webkit-scrollbar-thumb,  
     ::-webkit-scrollbar-track { 
         width: 10px;
         border: none;
         background: transparent;
     }
+    @media only screen and (min-width: 1024px) {
+        .boardsScroll::-webkit-scrollbar,
+        ::-webkit-scrollbar-thumb,  
+        ::-webkit-scrollbar-track {
+            width: 5.333px;
+        }
+    }
+
+    @media only screen and (min-width: 1280px) {
+        .boardsScroll::-webkit-scrollbar,
+        ::-webkit-scrollbar-thumb,  
+        ::-webkit-scrollbar-track {
+            width: 6.666px;
+        }
+    }
+    @media only screen and (min-width: 1536px) {
+        .boardsScroll::-webkit-scrollbar,
+        ::-webkit-scrollbar-thumb,  
+        ::-webkit-scrollbar-track {
+            width: 8px;
+        }
+    }
+
+    @media only screen and (min-width: 1820px) {
+        .boardsScroll::-webkit-scrollbar,
+        ::-webkit-scrollbar-thumb,  
+        ::-webkit-scrollbar-track {
+            width: 10px;
+        }
+    }
+
     .boardsScroll::-webkit-scrollbar-button,
     ::-webkit-scrollbar-track-piece,
     ::-webkit-scrollbar-corner,

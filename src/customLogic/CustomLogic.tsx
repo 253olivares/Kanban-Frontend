@@ -15,6 +15,40 @@ const userKey = 'userList';
 const workspaceKey = 'workspaceList';
 const userHistory = 'userHistory'
 
+export const addTask = (newTask:task):void => {
+    const data = localStorage.getItem(taskKey);
+    if(!data){
+        reloadApplication();
+        return; 
+    }
+
+    const convertData = JSON.parse(data);
+
+    const updateTask:task[] = [...convertData ,newTask];
+    localStorage.setItem(taskKey,JSON.stringify(updateTask));
+}
+
+export const deleteTasksFromListCL = (tasksToDelete:string[]):void => {
+    try{
+        const data = localStorage.getItem(taskKey);
+        if(!data) {
+            reloadApplication();
+            return;
+        }
+
+        const convertData:task[] = JSON.parse(data);
+
+        const update = convertData.filter((task) => !tasksToDelete.includes(task.t_id));
+    
+        console.log("test",update);
+    
+        localStorage.setItem(taskKey,JSON.stringify(update));
+    } catch(e:any) {
+        alert(e);
+    }
+    
+} 
+ 
 export const getTask = ():task[] | null => {
     const data = localStorage.getItem(taskKey);
     if(!data){
@@ -36,6 +70,21 @@ export const updateListDeleteCL = (deleteList:list,updateLists:Record<string,lis
     listData[deleteList.b_id] = Object.values(updateLists);
 
     localStorage.setItem(listKey,JSON.stringify(listData));
+}
+
+export const updateListCL = (updateList:list):void => {
+    const data = localStorage.getItem(listKey);
+    if(!data){
+        reloadApplication();
+        return;
+    }
+    const converData:Record<string,list[]> = JSON.parse(data);
+    const updatedListData = converData[updateList.b_id].map((list)=>
+        list.l_id === updateList.l_id ? updateList : list
+    )
+    converData[updateList.b_id] = updatedListData;
+
+    localStorage.setItem(listKey,JSON.stringify(converData));
 }
 
 export const addListCL = (newList:list):void => {

@@ -109,7 +109,7 @@ export const updateWorkspacBoardRemove = createAsyncThunk('workspace/updateWorks
 
         const updatedWorkspace = {
             ...selectWorkspace,
-            boards: selectWorkspace.boards.filter(x => x !== board.b_id)
+            boards: selectWorkspace.boards.filter((x:string) => x !== board.b_id)
         }
 
         return {updatedWorkspace:updatedWorkspace, prevState:selectAllWorkspaces(state)}

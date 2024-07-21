@@ -1,4 +1,4 @@
-import { createDefaultBaseImage, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser} from "../../customLogic/CustomLogic";
+import { createDefaultBaseImage, addUser, searchUser, resetRemember, getRemember, setRemember, getUserFromList, updateUser, removeAdditionalUsersBoard} from "../../customLogic/CustomLogic";
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { selectWorkspaceById, workspace } from "../workspace/workspaceSlice";
@@ -270,9 +270,12 @@ const userSlice = createSlice({
                 updateUser(state.user);
             }
         },
-        removeUserBoards (state,action: PayloadAction<string[]>){
+        removeUserBoards (state,action: PayloadAction<{removeBoard:string[],members:string[][]| null}>){
+            if(action.payload.members) {
+                removeAdditionalUsersBoard(action.payload.members,action.payload.removeBoard[0]);
+            }
             if(state.user){
-                state.user.boards = state.user.boards.filter(b=> !action.payload.includes(b));
+                state.user.boards = state.user.boards.filter(b=> !action.payload.removeBoard.includes(b));
                 updateUser(state.user);
             }
         }

@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { useAppDispatch } from "../../../../../../reduxStore/hook";
 import { deleteList, list } from "../../../../../../reduxStore/lists/listsSlice";
 import { AppContext } from "../../../../../appRefContext/appRefContext";
+import { deleteTasksFromListDelete } from "../../../../../../reduxStore/tasks/tasksSlice";
+import { deleteTaskFromBoardListDelete } from "../../../../../../reduxStore/boards/boardsSlice";
 
 const ListOptionsBody = (
     {
@@ -109,8 +111,17 @@ const ListOptionsBody = (
 const DeleteList = memo(({listData}:{listData:list}) => {
 
     const dispatch = useAppDispatch();
+
+    const deleteListFunction = () => {
+        dispatch(deleteList(listData))
+        .unwrap().then((x)=> {
+            dispatch(deleteTaskFromBoardListDelete({boardId:x.listToDelete.b_id,listId:x.listToDelete.l_id}))
+            dispatch(deleteTasksFromListDelete(x.listToDelete.tasks))
+        })
+    }
+
     return <div 
-    onClick={()=> dispatch(deleteList(listData))}
+    onClick={()=> deleteListFunction()}
     className="
         relative
 

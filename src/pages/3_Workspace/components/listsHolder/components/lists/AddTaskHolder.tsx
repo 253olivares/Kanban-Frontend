@@ -4,17 +4,19 @@ import AddTaskDefault from "./AddTaskDefault";
 import InputTaskName from "./InputTaskName";
 import AddList from '/assets/addBoard.png'
 import { list } from "../../../../../../reduxStore/lists/listsSlice";
+import { user } from "../../../../../../reduxStore/users/userSlice";
 
 
 const AddTaskHolder = memo((
   {
-    // @ts-ignore
+    user,
     listData,
     openTaskName, 
     setOpenTaskName
   }
   :
   {
+    user:user,
     listData:list,
     openTaskName:boolean,
     setOpenTaskName:React.Dispatch<React.SetStateAction<boolean>>
@@ -33,16 +35,12 @@ const AddTaskHolder = memo((
     desktop:rounded-[0.5rem]
     largeDesktop:rounded-[0.625rem]
 
-    sLaptop:min-h-[1.874rem]
-    mLaptop:min-h-[2.343rem]
-    desktop:min-h-[2.812rem]
-    largeDesktop:min-h-[3.515rem]
+    sLaptop:min-h-[2.266rem]
+    mLaptop:min-h-[2.833rem]
+    desktop:min-h-[3.4rem]
+    largeDesktop:min-h-[4.25rem]
 
-    sLaptop:hover:bg-SpaceBlueSelected
-    ${
-      openTaskName ?
-      "sLaptop:bg-SpaceBlueSelected" : ""
-    }
+    bg-SpaceBlueSelected
     `}>
 
         <InputTaskMobile openTaskName={openTaskName} setOpenTaskName={setOpenTaskName} />
@@ -50,7 +48,7 @@ const AddTaskHolder = memo((
         <AnimatePresence>
             {
               openTaskName ?
-              <InputTaskName  openTaskName={openTaskName} setOpenTaskName={setOpenTaskName}/>
+              <InputTaskName user={user} listData={listData} setOpenTaskName={setOpenTaskName}/>
               :
               <AddTaskDefault openTaskName={openTaskName} setOpenTaskName={setOpenTaskName} />
             }
@@ -74,6 +72,8 @@ export const InputTaskMobile = ({openTaskName,setOpenTaskName}:{openTaskName:boo
   sLaptop:hidden
 
   cursor-pointer
+
+  px-[4%]
 
   ">
     <h1 className="

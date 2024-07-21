@@ -108,7 +108,7 @@ const WorkspaceDeleteButton = ({workspace}:{workspace:workspace}) => {
     .then((x)=>{
       dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
       dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
-      dispatch(removeUserBoards(x.workspaceInfo.boards));
+      dispatch(removeUserBoards({removeBoard:x.workspaceInfo.boards,members:null}));
       dispatch(closeModal());
     })
     .catch(()=>alert("Issue encountered trying to delete"+workspace.name));

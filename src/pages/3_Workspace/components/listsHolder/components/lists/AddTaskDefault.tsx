@@ -35,10 +35,7 @@ const AddTaskDefault = (
 
     hover:cursor-pointer
 
-    sLaptop:px-[0.416rem]
-    mLaptop:px-[0.520rem]
-    desktop:px-[0.625rem]
-    largeDesktop:px-[0.761rem]
+    px-[4%]
 
     '>
         <h1 className='

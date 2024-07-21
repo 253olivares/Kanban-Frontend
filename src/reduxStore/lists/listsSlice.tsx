@@ -1,6 +1,7 @@
 import { PayloadAction, Update, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit"
-import { addListCL, getList, updateListDeleteCL } from "../../customLogic/CustomLogic"
+import { addListCL, deleteBoardListCL, getList, updateListCL, updateListDeleteCL } from "../../customLogic/CustomLogic"
 import { RootState } from "../store"
+import { task } from "../tasks/tasksSlice"
 
 export type list = {
     l_id:string,
@@ -84,12 +85,42 @@ export const deleteList = createAsyncThunk('list/deleteList',async(listData:list
             return{id:list.l_id,changes:updateList};
         })  
 
-        console.log("All lists to update:",listsPositionsToUpdate);
-        console.log("lists:",listsIds);
-        console.log(`List to delete:`,listData.l_id);
 
         return {listToDelete:listData,listsToUpdate:updateLists}
     } catch (e:any){
+        return rejectWithValue(e);
+    }
+})
+
+export const updateListTasks = createAsyncThunk("list/updateTasks", async (
+    {
+        list,
+        newTask
+    } : {
+        list:list,
+        newTask:task
+    }, {rejectWithValue})=>{
+        try  {
+            const updateList:list = {
+                ...list,
+                tasks: [...list.tasks,newTask.t_id]
+            }
+
+            return updateList;
+        } catch(e:any) {
+            console.log(e);
+            return rejectWithValue(e);
+        }
+})
+
+export const deleteListStateBoardDelete = createAsyncThunk('list/deleteListState', async(
+    {boardId} : {boardId:string},
+    {rejectWithValue}
+)=> {
+    try {
+
+        return {boardId:boardId}
+    } catch (e:any) {
         return rejectWithValue(e);
     }
 })
@@ -102,7 +133,7 @@ const listSlice = createSlice({
             state.addTask = action.payload.addTaskBool;
             state.selectedlist = action.payload.listData;
         },
-        changeSettings (state,action:PayloadAction<{listSettingsBool:boolean,listData:list}>) {
+        changeSettings (state,action:PayloadAction<{listSettingsBool:boolean,listData:list | null}>) {
             console.log("test");
             state.listSetting = action.payload.listSettingsBool;
             state.selectedlist = action.payload.listData;
@@ -130,6 +161,14 @@ const listSlice = createSlice({
             listAdapter.removeOne(state,action.payload.listToDelete.l_id);
             listAdapter.updateMany(state,action.payload.listsToUpdate);
             updateListDeleteCL(action.payload.listToDelete,state.entities);
+        })
+        .addCase(updateListTasks.fulfilled, (state,action:PayloadAction<list>) => {
+            updateListCL(action.payload);
+            listAdapter.updateOne(state,{id:action.payload.l_id,changes:action.payload})
+        })
+        .addCase(deleteListStateBoardDelete.fulfilled, (state,action:PayloadAction<{boardId:string}>) => {
+            deleteBoardListCL(action.payload.boardId);
+            listAdapter.removeAll(state);
         })
     }
 })

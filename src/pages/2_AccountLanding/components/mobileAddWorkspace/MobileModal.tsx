@@ -7,14 +7,15 @@ import AddModal from './component/workspaceModal';
 import ConfirmDelete from './component/confirmDelete';
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal, getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove, updateWorkspaceBoard } from "../../../../reduxStore/workspace/workspaceSlice";
-import { createBoardListCL, createUserHistory, deleteBoardListCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspaceAndBoards, sanitize } from "../../../../customLogic/CustomLogic";
+import { createBoardListCL, createUserHistory, deleteBoardListMultipleCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersWorkspaceAndBoards, sanitize } from "../../../../customLogic/CustomLogic";
 import { getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace, updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
 import { addBoards, changeBoardModal, deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, selectBoardById, updateBoardNameFromWorkspace, updateBoardNameStart } from "../../../../reduxStore/boards/boardsSlice";
-import { changeListModalState, changeMobileBoardNameState, closeModal, deleteUserHistory, setSettingModal } from "../../../../reduxStore/modal/modalSlice";
+import { changeListModalState, changeMobileBoardNameState, closeModal, deleteUserHistory, getAddTaskInput, setAddTaskInput, setSettingModal } from "../../../../reduxStore/modal/modalSlice";
 import { Params, useNavigate } from "react-router-dom";
 import AddNewUser from "./component/AddNewUser";
-import { createListState, getSelectedList, selectAllLists } from "../../../../reduxStore/lists/listsSlice";
+import { createListState, getSelectedList, list, selectAllLists, updateListTasks } from "../../../../reduxStore/lists/listsSlice";
 import CheckBackground from "./component/CheckBackground";
+import { createTask, deleteMulitpleTasksFromBoardDeletion, deleteTasksFromMulitpleBoards } from "../../../../reduxStore/tasks/tasksSlice";
 
 const MobileModal = memo((
   {
@@ -48,7 +49,7 @@ const MobileModal = memo((
     const [newBoardName, setNewBoardName] = useState<string>("");
     const [newList, setNewList] = useState<string>("");
     const [updatedBoardName, setUpdatedBoardName] = useState<string>("");
-    const [newTaskList,setNewTaskList] = useState<string>("");
+    const newTaskList = useAppSelector(getAddTaskInput);
 
     const workspace = useAppSelector(state => selectWorkspaceById(state,selectWorkspace))
     const user = useAppSelector(getUser);
@@ -56,7 +57,17 @@ const MobileModal = memo((
     const lists = useAppSelector(selectAllLists).length;
 
     // @ts-ignore
-    const selectList = useAppSelector(getSelectedList);
+    const selectList:list = useAppSelector(getSelectedList);
+
+    const submitTaskName = () => {
+      if(user?.u_id && selectList) dispatch(createTask({listData:selectList,adminId:user.u_id,taskName:newTaskList}))
+      .unwrap()
+    .then((x)=>{
+        dispatch(updateListTasks({list:x.list,newTask:x.newTask}))
+      }).catch((e)=>{
+        console.log(e);
+      })
+    }
 
     const checkInputNewworkspace = ():void => {
       if(newWorkspaceName.trim().length > 15){
@@ -139,13 +150,20 @@ const MobileModal = memo((
       dispatch(removeExistingWorkspace(workspace.w_id))
     .unwrap()
     .then((x)=> {
-      dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
-
-      removeAdditionalUsersWorkspaceAndBoards(x.workspaceInfo);
+      dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo}));
 
       dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
-      dispatch(removeUserBoards(x.workspaceInfo.boards))
+
+      dispatch(removeUserBoards({removeBoard:x.workspaceInfo.boards,members:null}))
+
+      dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
+
       deleteBoardsUserHistory(x.workspaceInfo.boards);
+
+      removeAdditionalUsersWorkspaceAndBoards(x.workspaceInfo)
+
+      deleteBoardListMultipleCL(x.workspaceInfo.boards)
+
       dispatch(closeModal());
     }).catch(()=> alert("Issue encountered trying to delete"+workspace.name))
     }
@@ -172,16 +190,13 @@ const MobileModal = memo((
     .then((x)=> {
       // In here we are going to remove the board from other parts of the project
       // remove board from user information
-      dispatch(removeUserBoards([x.board.b_id]))
+      dispatch(removeUserBoards({removeBoard:[x.board.b_id],members:x.board.members}));
 
-      removeAdditionalUsersBoard(x.board.members,x.board.b_id);
+      dispatch(updateWorkspacBoardRemove(x.board));
 
-      // remove board from workspace where its from
-      dispatch(updateWorkspacBoardRemove(x.board))
+      dispatch(deleteUserHistory(x.board.b_id));
 
-      dispatch(deleteUserHistory(x.board.b_id))
-
-      deleteBoardListCL(x.board.b_id);
+      dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists));
 
       dispatch(closeModal());
       // close settings modal
@@ -329,13 +344,13 @@ const MobileModal = memo((
       {
         addTaskModal ? <AnimatePresence>
           <AddModal 
-          limit={16} 
+          limit={18} 
           label={"New Task:"} 
           placeholder={"Enter Task Name..."} 
           valueHolder={newTaskList} 
-          setHolder={(e:React.ChangeEvent<HTMLInputElement>)=> setNewTaskList(e.target.value)} 
+          setHolder={(e:React.ChangeEvent<HTMLInputElement>)=> dispatch(setAddTaskInput(e.target.value))} 
           checkInputHolder={()=>{
-            alert("Working on this feature!");
+            submitTaskName();
           }} 
           closeModal={()=>{}}           
           />

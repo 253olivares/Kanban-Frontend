@@ -15,7 +15,7 @@ import { initialComments } from '../../../reduxStore/comments/commentsSlice';
 import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
 import { initiateUserList } from '../../../reduxStore/userList/userList';
 import MembersModal from '../../3_Workspace/components/membersModal/MultiMobileModal';
-import { getAddTaskModal, getListSettings } from '../../../reduxStore/lists/listsSlice';
+import { getAddTaskModal, getListSettings} from '../../../reduxStore/lists/listsSlice';
 
 const AccountHeader = memo(() => {
   const dispatch = useAppDispatch();

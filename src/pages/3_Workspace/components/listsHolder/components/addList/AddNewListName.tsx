@@ -7,6 +7,7 @@ import checkMark from '/assets/Check_MarkIcon.svg';
 import cancelIcon from '/assets/x_Icon.svg';
 import { createListState } from '../../../../../../reduxStore/lists/listsSlice';
 import { useParams } from 'react-router-dom';
+import { addListToBoard } from '../../../../../../reduxStore/boards/boardsSlice';
 
 const AddNewListName = memo(({listLength}:{listLength:number}) => {
 
@@ -31,7 +32,13 @@ const AddNewListName = memo(({listLength}:{listLength:number}) => {
       return
     }
 
-    dispatch(createListState({listName:inputName, boardId:boardId, boardNumber:listLength}));
+    dispatch(createListState({listName:inputName, boardId:boardId, boardNumber:listLength}))
+    .unwrap()
+    .then((x)=>{
+      dispatch(addListToBoard({boardId:x.newList.b_id,list:x.newList}));
+    }).catch((e)=>{
+      console.log(e);
+    });
 
     dispatch(changeListModalState(false))
   }

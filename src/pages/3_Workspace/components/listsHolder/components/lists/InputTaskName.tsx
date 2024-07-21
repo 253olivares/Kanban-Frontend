@@ -3,16 +3,22 @@ import { memo, useContext, useLayoutEffect, useRef } from "react";
 import checkMark from '/assets/Check_MarkIcon.svg';
 import cancelIcon from '/assets/x_Icon.svg';
 import { AppContext } from "../../../../../appRefContext/appRefContext";
+import { list, updateListTasks } from "../../../../../../reduxStore/lists/listsSlice";
+import { useAppDispatch, useAppSelector } from "../../../../../../reduxStore/hook";
+import { createTask } from "../../../../../../reduxStore/tasks/tasksSlice";
+import { getAddTaskInput, setAddTaskInput } from "../../../../../../reduxStore/modal/modalSlice";
+import { user } from "../../../../../../reduxStore/users/userSlice";
 
 const InputTaskName = memo((
   {
-    // @ts-ignore
-    openTaskName, 
+    user,
+    listData,
     setOpenTaskName
   }
   :
   {
-    openTaskName:boolean,
+    user:user,
+    listData:list,
     setOpenTaskName:React.Dispatch<React.SetStateAction<boolean>>
   }) => {
 
@@ -20,6 +26,9 @@ const InputTaskName = memo((
     const {mobileAddNewWorkspace,addListTask,addListTaskSubmit} = appContext!;
 
     const addNewListNameRef = useRef<HTMLInputElement>(null);
+    const addTaskListName = useAppSelector(getAddTaskInput);
+    const dispatch = useAppDispatch();
+
 
     useLayoutEffect(()=>{
       const checkClick = (e:MouseEvent | TouchEvent) => {
@@ -40,6 +49,21 @@ const InputTaskName = memo((
       }
     },[])
 
+    const submitTaskName = (taskName:string) => {
+      if(taskName.trim().length>=18) {
+        alert("Please enter a shorter name!");
+        return; 
+      }
+      dispatch(createTask({listData:listData,adminId:user.u_id,taskName:taskName}))
+      .unwrap()
+      .then((x)=>{
+        dispatch(updateListTasks({list:x.list,newTask:x.newTask}))
+      }).catch((e)=>{
+        console.log(e);
+      })
+      setOpenTaskName(false);
+    }
+
   return (
     <motion.div
     initial={{ opacity: 0 }}
@@ -59,7 +83,7 @@ const InputTaskName = memo((
     flex-row
     items-center
 
-    px-[2.5%]
+    px-[4%]
 
     "
     >
@@ -82,10 +106,11 @@ const InputTaskName = memo((
         "
         onSubmit={(e)=>{
             e.preventDefault();
-            alert("Currently Working on this feature!");
-            setOpenTaskName(false);
+            submitTaskName(addTaskListName);
         }}>
-            <input className="
+            <input 
+            value={addTaskListName}
+            className="
             bg-PrimaryWhite
         
             box-border
@@ -108,14 +133,15 @@ const InputTaskName = memo((
             desktop:rounded-[.25rem]
             largeDesktop:rounded-[0.312rem]
 
-            sLaptop:py-[0.066rem]
-            mLaptop:py-[0.083rem]
-            desktop:py-[0.1rem]
-            largeDesktop:py-[.125rem]
             " 
             type="text" 
-            onChange={()=>{
-
+            onChange={(e)=>{
+              if(e.target.value.trim().length >=18) {
+                e.target.style.color = "red";
+              } else {
+                e.target.style.color = "black";
+              }
+              dispatch(setAddTaskInput(e.target.value));  
             }}
             />
 

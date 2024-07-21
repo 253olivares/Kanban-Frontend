@@ -15,8 +15,10 @@ import { deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, s
 import { getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove } from "../reduxStore/workspace/workspaceSlice";
 import { getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace } from "../reduxStore/users/userSlice";
 import AddNewUser from "./addNewUser/AddNewUser";
-import { deleteBoardListCL, deleteBoardListMultipleCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersBoard, removeAdditionalUsersWorkspaceAndBoards } from "../customLogic/CustomLogic";
+import { deleteBoardListMultipleCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersWorkspaceAndBoards } from "../customLogic/CustomLogic";
 import ChangeBackground from "./changeBackground/ChangeBackground";
+import { deleteListStateBoardDelete } from "../reduxStore/lists/listsSlice";
+import { deleteMulitpleTasksFromBoardDeletion, deleteTasksFromMulitpleBoards } from "../reduxStore/tasks/tasksSlice";
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const Modal = memo(() => {
@@ -43,15 +45,20 @@ const Modal = memo(() => {
     dispatch(removeExistingWorkspace(workspace.w_id))
     .unwrap()
     .then((x)=> {
+      dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo}));
+
+      dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
+
+      dispatch(removeUserBoards({removeBoard:x.workspaceInfo.boards,members:null}))
+
       dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
+
+      deleteBoardsUserHistory(x.workspaceInfo.boards);
 
       removeAdditionalUsersWorkspaceAndBoards(x.workspaceInfo);
 
       deleteBoardListMultipleCL(x.workspaceInfo.boards);
 
-      dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
-      dispatch(removeUserBoards(x.workspaceInfo.boards))
-      deleteBoardsUserHistory(x.workspaceInfo.boards);
       dispatch(closeModal());
     }).catch(()=> alert("Issue encountered trying to delete"+workspace.name))
   }
@@ -62,16 +69,16 @@ const Modal = memo(() => {
     .then((x)=> {
       // In here we are going to remove the board from other parts of the project
       // remove board from user information
-      dispatch(removeUserBoards([x.board.b_id]))
-
-      removeAdditionalUsersBoard(x.board.members,x.board.b_id);
+      dispatch(removeUserBoards({removeBoard:[x.board.b_id],members:x.board.members}))
 
       // remove board from workspace where its from
       dispatch(updateWorkspacBoardRemove(x.board))
 
       dispatch(deleteUserHistory(x.board.b_id))
 
-      deleteBoardListCL(x.board.b_id);
+      dispatch(deleteListStateBoardDelete({boardId:x.board.b_id}))
+
+      dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists))
 
       dispatch(closeModal());
       // close settings modal
@@ -83,8 +90,6 @@ const Modal = memo(() => {
   }
 
   const leaveWorkspaceFn = () => {
-
-    console.log(workspace.w_id);
 
     dispatch(leaveWorkspaceUser(workspace.w_id))
     .unwrap().then(()=> {
