@@ -23,10 +23,22 @@ const TaskHolders = memo(({
     grid
     grid-cols-1
 
-    sLaptop:gap-y-[1.066rem]
-    mLaptop:gap-y-[1.333rem]
-    desktop:gap-y-[1.6rem]
-    largeDesktop:gap-y-[2rem]
+    max-h-[14.062rem]
+    mobile:max-h-[18.75rem]
+    sMobile:max-h-[30em]
+    mMobile:max-h-[36rem]
+
+    sLaptop:max-h-none
+
+    gap-y-[0.703rem]
+    mobile:gap-y-[.937rem]
+    sMobile:gap-y-[1.5rem]
+    mMobile:gap-y-[1.8rem]
+
+    sLaptop:gap-y-[.433rem]
+    mLaptop:gap-y-[.541rem]
+    desktop:gap-y-[.65rem]   
+    largeDesktop:gap-y-[.812rem]
 
     justify-items-center
     items-center

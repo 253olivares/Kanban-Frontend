@@ -3,7 +3,7 @@ import { memo, useContext, useLayoutEffect, useRef } from "react";
 import checkMark from '/assets/Check_MarkIcon.svg';
 import cancelIcon from '/assets/x_Icon.svg';
 import { AppContext } from "../../../../../appRefContext/appRefContext";
-import { list, updateListTasks } from "../../../../../../reduxStore/lists/listsSlice";
+import { changeAddTask, list, updateListTasks } from "../../../../../../reduxStore/lists/listsSlice";
 import { useAppDispatch, useAppSelector } from "../../../../../../reduxStore/hook";
 import { createTask } from "../../../../../../reduxStore/tasks/tasksSlice";
 import { getAddTaskInput, setAddTaskInput } from "../../../../../../reduxStore/modal/modalSlice";
@@ -40,7 +40,16 @@ const InputTaskName = memo((
           setOpenTaskName(false);
         }
 
-        if(addListTask.current?.contains(element) || addListTaskSubmit.current?.contains(element))  setOpenTaskName(false);
+        if(addListTask.current?.contains(element))  setOpenTaskName(false);
+
+        if(addListTaskSubmit.current?.contains(element)) {
+
+          setTimeout(()=>{
+            setOpenTaskName(false)
+          },300
+          )
+ 
+        }
 
       }
       window.addEventListener('click',checkClick,true);
@@ -63,6 +72,16 @@ const InputTaskName = memo((
       })
       setOpenTaskName(false);
     }
+
+    useLayoutEffect(()=>{
+
+      dispatch(changeAddTask({addTaskBool:true,listData:listData}))
+
+      return ()=>{
+        dispatch(changeAddTask({addTaskBool:false,listData:null}))
+        dispatch(setAddTaskInput(""))
+      }
+    },[])
 
   return (
     <motion.div

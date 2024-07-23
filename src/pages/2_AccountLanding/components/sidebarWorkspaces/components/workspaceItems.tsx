@@ -146,7 +146,7 @@ const TrashCan = () => {
     className='
     sLaptop:opacity-50
     sLaptop:hover:opacity-100
-    sLaptop:hover:cursor-pointer
+    cursor-pointer
 
     h-[0.878rem]
     mobile:h-[1.171rem]

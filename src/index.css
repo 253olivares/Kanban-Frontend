@@ -340,10 +340,10 @@
         /* mMobile:pb-[2.25rem] */
         px-[5.5%]
 
-        sLaptop:p-[1.249rem]
-        mLaptop:p-[1.562rem]
-        desktop:p-[1.875rem]
-        largeDesktop:p-[2.343rem]
+        sLaptop:p-[.8rem]
+        mLaptop:p-[1rem]
+        desktop:p-[1.2rem]
+        largeDesktop:p-[1.5rem]
 
         flex
         flex-col

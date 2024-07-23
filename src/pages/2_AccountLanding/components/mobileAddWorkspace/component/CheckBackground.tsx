@@ -102,15 +102,17 @@ const SaveNewBackground = (
   text-white
   bg-SelectorBlue
 
-  py-[.539rem]
-  mobile:py-[.718rem]
-  sMobile:py-[1.15rem]
-  mMobile:py-[1.38rem]
+  py-[.351rem]
+  mobile:py-[.468rem]
+  sMobile:py-[.75rem]
+  mMobile:py-[.9rem]
 
   text-[1.406rem]
   mobile:text-[1.875rem]
   sMobile:text-[3rem]
   mMobile:text-[3.6rem]
+
+  font-medium
 
   text-center
 

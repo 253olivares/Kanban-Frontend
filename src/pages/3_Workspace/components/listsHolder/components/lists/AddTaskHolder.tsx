@@ -30,10 +30,20 @@ const AddTaskHolder = memo((
     flex-row
     items-center
 
+    rounded-[.234rem]
+    mobile:rounded-[.312rem]
+    sMobile:rounded-[.5rem]
+    mMobile:rounded-[.6rem]
+
     sLaptop:rounded-[0.333rem]
     mLaptop:rounded-[0.416rem]
     desktop:rounded-[0.5rem]
     largeDesktop:rounded-[0.625rem]
+
+    min-h-[2.226rem]
+    mobile:min-h-[2.968rem]
+    sMobile:min-h-[4.75rem]
+    mMobile:min-h-[5.7rem]
 
     sLaptop:min-h-[2.266rem]
     mLaptop:min-h-[2.833rem]

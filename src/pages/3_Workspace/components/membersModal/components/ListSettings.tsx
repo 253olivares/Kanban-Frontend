@@ -4,6 +4,8 @@ import  x_Mark from '/assets/Add_New_Workspace.svg'
 import { AppContext } from "../../../../appRefContext/appRefContext"
 import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook"
 import { deleteList, getSelectedList } from "../../../../../reduxStore/lists/listsSlice"
+import { deleteTaskFromBoardListDelete } from "../../../../../reduxStore/boards/boardsSlice"
+import { deleteTasksFromListDelete } from "../../../../../reduxStore/tasks/tasksSlice"
 
 
 const ListSettings = memo(() => {
@@ -63,10 +65,16 @@ const DeleteList = () => {
 
     const listData = useAppSelector(getSelectedList);
 
-    if(!listData) return;
     return <div
     ref={deleteListRef}
-    onClick={()=> dispatch(deleteList(listData))}
+    onClick={()=> {
+        listData && dispatch(deleteList(listData))
+        .unwrap().then((x)=>{
+            dispatch(deleteTaskFromBoardListDelete({boardId:x.listToDelete.b_id,listId:x.listToDelete.l_id}))
+            dispatch(deleteTasksFromListDelete(x.listToDelete.tasks))
+
+        })
+    }}
     className="
     bg-[red]
     text-PrimaryWhite
@@ -75,15 +83,15 @@ const DeleteList = () => {
 
     font-medium
 
-    text-[1.406rem]
-    mobile:text-[1.875rem]
-    sMobile:text-[3rem]
-    mMobile:text-[3.6rem]
+    text-[1.289rem]
+    mobile:text-[1.718rem]
+    sMobile:text-[2.75rem]
+    mMobile:text-[3.3rem]
 
-    py-[.7033rem]
-    mobile:py-[.9375rem]
-    sMobile:py-[1.5rem]
-    mMobile:py-[1.8rem]
+    py-[.585rem]
+    mobile:py-[.781rem]
+    sMobile:py-[1.25rem]
+    mMobile:py-[1.5rem]
 
     rounded-[0.234rem]
     mobile:rounded-[0.3125rem]

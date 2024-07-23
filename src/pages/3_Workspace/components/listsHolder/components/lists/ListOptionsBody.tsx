@@ -1,7 +1,7 @@
 import { memo, useContext, useLayoutEffect, useRef } from "react"
 import { motion } from "framer-motion";
 import { useAppDispatch } from "../../../../../../reduxStore/hook";
-import { deleteList, list } from "../../../../../../reduxStore/lists/listsSlice";
+import { changeSettings, deleteList, list } from "../../../../../../reduxStore/lists/listsSlice";
 import { AppContext } from "../../../../../appRefContext/appRefContext";
 import { deleteTasksFromListDelete } from "../../../../../../reduxStore/tasks/tasksSlice";
 import { deleteTaskFromBoardListDelete } from "../../../../../../reduxStore/boards/boardsSlice";
@@ -16,6 +16,8 @@ const ListOptionsBody = (
         ListSettingsRef:React.RefObject<HTMLImageElement>,
         setOpenListSettings:React.Dispatch<React.SetStateAction<boolean>>
     }) => {
+
+        const dispatch = useAppDispatch();
 
         // @ts-ignore
         const listOptions = {
@@ -39,12 +41,22 @@ const ListOptionsBody = (
                     ) 
                         setOpenListSettings(false);
 
-                if(closeListSettings.current?.contains(element) || deleteListRef.current?.contains(element)) setOpenListSettings(false);
+                if(closeListSettings.current?.contains(element)) setOpenListSettings(false);
+                if(deleteListRef.current?.contains(element)) {
+                    setOpenListSettings(false)
+                }
             }
 
             window.addEventListener('click',checkClick,true);
             return ()=>{
                 window.removeEventListener('click',checkClick,true);
+            }
+        },[])
+
+        useLayoutEffect(()=>{
+            dispatch(changeSettings({listSettingsBool:true,listData:listData}))
+            return () =>{
+                dispatch(changeSettings({listSettingsBool:false,listData:null}))
             }
         },[])
 

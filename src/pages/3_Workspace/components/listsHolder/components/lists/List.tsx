@@ -1,9 +1,7 @@
-import { memo, useLayoutEffect, useState } from "react"
-import { changeAddTask, changeSettings, list } from "../../../../../../reduxStore/lists/listsSlice"
+import { memo, useState } from "react"
+import { list } from "../../../../../../reduxStore/lists/listsSlice"
 import ListHolder from "./ListHolder"
 import AddTaskHolder from "./AddTaskHolder"
-import { useAppDispatch } from "../../../../../../reduxStore/hook"
-import { setAddTaskInput } from "../../../../../../reduxStore/modal/modalSlice"
 import TaskHolders from "./TaskHolders"
 import { user } from "../../../../../../reduxStore/users/userSlice"
 
@@ -16,40 +14,8 @@ const List = memo((
     list:list
   }) => {
 
-    const dispatch = useAppDispatch();
-
     const [openTaskName,setOpenTaskName] = useState<boolean>(false);
     const [listSetting,setListSetting] = useState<boolean>(false);
-
-    useLayoutEffect(()=>{
-      if(openTaskName === true) {
-        dispatch(changeAddTask({addTaskBool:true,listData:list}))
-      } else {
-        dispatch(changeAddTask({addTaskBool:false,listData:null}))
-        dispatch(setAddTaskInput(""))
-      }
-    },[openTaskName]);
-
-    useLayoutEffect(()=>{
-      if(listSetting === true) {
-        console.log("Settings true")
-        dispatch(changeSettings({listSettingsBool:true,listData:list}))
-      } else {
-        console.log("settings false")
-        dispatch(changeSettings({listSettingsBool:false,listData:null}))
-      }
-    }),[listSetting]
-
-    useLayoutEffect(()=>{
-      return ()=>{
-        dispatch(changeSettings({listSettingsBool:false,listData:null}))
-        dispatch(changeAddTask({addTaskBool:false,listData:null}))
-        dispatch(setAddTaskInput(""))
-      }
-    },[])
-
-    // console.log(adminId);
-    // console.log(user);
 
   return (
     <div 
@@ -69,17 +35,14 @@ const List = memo((
 
     bg-SpaceBlue
 
-    px-[0.976rem]
-    mobile:px-[1.301rem]
-    sMobile:px-[2.083rem]
-    mMobile:px-[2.499rem]
+    px-[4%]
 
     sLaptop:px-[1%]
 
-    py-[0.732rem]
-    mobile:py-[0.976rem]
-    sMobile:py-[1.563rem]
-    mMobile:py-[1.875rem]
+    py-[.820rem]
+    mobile:py-[1.093rem]
+    sMobile:py-[1.75rem]
+    mMobile:py-[2.1rem]
 
     sLaptop:py-[0.562rem]
     mLaptop:py-[0.702rem]
@@ -94,10 +57,10 @@ const List = memo((
 
     sLaptop:max-h-full
 
-    gap-[.937rem]
-    mobile:gap-[1.25rem]
-    sMobile:gap-[2rem]
-    mMobile:gap-[2.4rem]
+    gap-[0.703rem]
+    mobile:gap-[.937rem]
+    sMobile:gap-[1.5rem]
+    mMobile:gap-[1.8rem]
 
     sLaptop:gap-[.666rem]
     mLaptop:gap-[.833rem]
