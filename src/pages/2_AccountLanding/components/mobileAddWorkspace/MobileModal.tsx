@@ -13,7 +13,7 @@ import { addBoards, changeBoardModal, deleteBoard, removeBoardsFromWorkspace, re
 import { changeListModalState, changeMobileBoardNameState, closeModal, deleteUserHistory, getAddTaskInput, setAddTaskInput, setSettingModal } from "../../../../reduxStore/modal/modalSlice";
 import { Params, useNavigate } from "react-router-dom";
 import AddNewUser from "./component/AddNewUser";
-import { createListState, getSelectedList, list, selectAllLists, updateListTasks } from "../../../../reduxStore/lists/listsSlice";
+import { createListState, deleteListStateBoardDelete, getSelectedList, list, selectAllLists, updateListTasks } from "../../../../reduxStore/lists/listsSlice";
 import CheckBackground from "./component/CheckBackground";
 import { createTask, deleteMulitpleTasksFromBoardDeletion, deleteTasksFromMulitpleBoards } from "../../../../reduxStore/tasks/tasksSlice";
 
@@ -200,13 +200,15 @@ const MobileModal = memo((
     .then((x)=> {
       // In here we are going to remove the board from other parts of the project
       // remove board from user information
-      dispatch(removeUserBoards({removeBoard:[x.board.b_id],members:x.board.members}));
+      dispatch(removeUserBoards({removeBoard:[x.board.b_id],members:x.board.members}))
 
-      dispatch(updateWorkspacBoardRemove(x.board));
+      dispatch(updateWorkspacBoardRemove(x.board))
 
-      dispatch(deleteUserHistory(x.board.b_id));
+      dispatch(deleteUserHistory(x.board.b_id))
 
-      dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists));
+      dispatch(deleteListStateBoardDelete({boardId:x.board.b_id}))
+
+      dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists))
 
       dispatch(closeModal());
       // close settings modal
