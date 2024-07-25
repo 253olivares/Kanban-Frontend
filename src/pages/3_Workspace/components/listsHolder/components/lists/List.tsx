@@ -4,12 +4,15 @@ import ListHolder from "./ListHolder"
 import AddTaskHolder from "./AddTaskHolder"
 import TaskHolders from "./TaskHolders"
 import { user } from "../../../../../../reduxStore/users/userSlice"
+import { board } from "../../../../../../reduxStore/boards/boardsSlice"
 
 const List = memo((
   {
+    board,
     user,
     list,
   }:{
+    board:board,
     user:user,
     list:list
   }) => {
@@ -74,14 +77,57 @@ const List = memo((
     "
     >
 
-        <ListHolder listData ={list} listName={list.name} listSetting={listSetting} setListSetting = {setListSetting} />
+        <ListHolder userId={user.u_id} boardAdmin={board.u_id} listData ={list} listName={list.name} listSetting={listSetting} setListSetting = {setListSetting} />
         {
           list.tasks.length !== 0 ?
           <TaskHolders taskLists={list.tasks} /> : ""
         }
-        <AddTaskHolder user={user} listData ={list}  openTaskName={openTaskName} setOpenTaskName={setOpenTaskName} />
+        {
+          user.u_id === board.u_id &&
+          <AddTaskHolder user={user} listData ={list}  openTaskName={openTaskName} setOpenTaskName={setOpenTaskName} />
+        }
+        {
+          user.u_id !== board.u_id && list.tasks.length === 0 && <NoAdminNoTasks />
+        }
     </div>
   )
 })
+
+const NoAdminNoTasks = () => {
+  return <div className="
+  flex
+  flex-row
+
+  justify-center
+  items-center
+
+  text-[0.820rem]
+  mobile:text-[1.093rem]
+  sMobile:text-[1.75rem]
+  mMobile:text-[2.1rem]
+
+  sLaptop:text-[0.933rem]
+  mLaptop:text-[1.166rem]
+  desktop:text-[1.4rem]
+  largeDesktop:text-[1.75rem]
+
+  py-[0.468rem]
+  mobile:py-[0.625rem]
+  sMobile:py-[1rem]
+  mMobile:py-[1.2rem]
+
+  sLaptop:py-[0.666rem]
+  mLaptop:py-[0.833rem]
+  desktop:py-[1rem]
+  largeDesktop:py-[1.25rem]
+
+  font-medium
+
+  text-PrimaryWhite
+
+  ">
+    No tasks currently found!
+  </div>
+}
 
 export default List

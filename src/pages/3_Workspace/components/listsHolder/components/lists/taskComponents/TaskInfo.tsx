@@ -1,21 +1,28 @@
 import usersIcon from '/assets/User_Icon.svg';
 import speechBubble from '/assets/SpeechBubbl_Icon.svg'
+import { memo } from 'react';
 
 type dataShare = {
   icon:string,
   numbers:number
 }
 
-const TaskInfo = () => {
+const TaskInfo = memo(( { 
+  members,
+  comments
+} : {
+  members:number,
+  comments:number
+}) => {
 
   const data:Record<string,dataShare> = {
     members: {
       icon:usersIcon,
-      numbers:1
+      numbers:members,
     },
     comments: {
       icon:speechBubble,
-      numbers:0
+      numbers:comments
     }
   }
   return (  
@@ -43,9 +50,9 @@ const TaskInfo = () => {
         }
     </div>
   )
-}
+})
 
-const TaskInfos = ({
+const TaskInfos = memo(({
   values
 } : {
   values: dataShare
@@ -67,7 +74,7 @@ const TaskInfos = ({
   items-center
 
   opacity-50
-  group-hover:opacity-100
+  group-hover/task:opacity-100
 
   '>
     <img className='
@@ -104,6 +111,6 @@ const TaskInfos = ({
       {values.numbers}
     </h1>
   </div>
-}
+})
 
 export default TaskInfo

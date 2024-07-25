@@ -1,6 +1,10 @@
 import FilterLabel from "./FilterLabel"
 
-const TasksFilterHead = () => {
+const TasksFilterHead = ({
+  filter
+} : {
+  filter:string[]
+}) => {
 
   const filters:Record<string,string> = {
     'low' : "bg-[#57DF35]",
@@ -30,7 +34,7 @@ const TasksFilterHead = () => {
     ">
       {
         Object.entries(filters).map(([k,v])=>
-          <FilterLabel key={`TaskFilter_${k}`} filter={k} color={v} />
+            filter.includes(k) &&  <FilterLabel key={`TaskFilter_${k}`} filter={k} color={v} />
         )
       }
     </div>

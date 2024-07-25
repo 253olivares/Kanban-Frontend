@@ -64,7 +64,7 @@ const MobileModal = memo((
         alert("Please make sure to enter a name!")
         return;
       }
-      if(newTaskList.trim().length>=18) {
+      if(newTaskList.trim().length>=20) {
         alert("please enter a short name!");
         return;
       }

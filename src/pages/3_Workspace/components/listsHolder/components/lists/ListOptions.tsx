@@ -5,10 +5,14 @@ import { AnimatePresence } from 'framer-motion';
 import { list } from '../../../../../../reduxStore/lists/listsSlice';
 
 const ListOptions = memo(({
+    userId,
+    boardAdmin,
     listData,
     listSetting,
     setListSetting
 } : {
+    userId:string,
+    boardAdmin:string,
     listData:list,
     listSetting:boolean,
     setListSetting:React.Dispatch<React.SetStateAction<boolean>>
@@ -27,6 +31,7 @@ const ListOptions = memo(({
       }
       }
       className={`
+
       text-PrimaryWhite
       
       cursor-pointer
@@ -57,6 +62,9 @@ const ListOptions = memo(({
 
       transition-all
       duration-500
+
+      ${boardAdmin !== userId && 'hidden'}
+
       `}
 
       src={cog}

@@ -1,5 +1,9 @@
 
-const StoryPoint = () => {
+const StoryPoint = ({
+  points
+} : {
+  points:number
+}) => {
   return (
     <div className="
       flex
@@ -92,7 +96,7 @@ const StoryPoint = () => {
 
           text-PrimaryWhite
          "
-        >0</span>
+        >{points}</span>
       </div>
     </div>
   )

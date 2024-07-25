@@ -4,11 +4,15 @@ import { list } from "../../../../../../reduxStore/lists/listsSlice"
 
 const ListHolder = memo((
     {
+        userId,
+        boardAdmin,
         listData,
         listName,
         listSetting,
         setListSetting
     }:{
+        userId:string,
+        boardAdmin:string,
         listData:list,
         listName:string,
         listSetting:boolean,
@@ -55,11 +59,14 @@ const ListHolder = memo((
 
         leading-none
         ">{listName}</h1>
-        <ListOptions 
-        listData = {listData}
-        listSetting={listSetting} 
-        setListSetting = {setListSetting}  
-        />
+
+          <ListOptions 
+          userId = {userId}
+          boardAdmin= {boardAdmin}
+          listData = {listData}
+          listSetting={listSetting} 
+          setListSetting = {setListSetting}  
+          />
     </div>
   )
 })

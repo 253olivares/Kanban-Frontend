@@ -26,6 +26,7 @@ export type user = {
     workspaces: string[]
     boards: string[],
     lists: string[],
+    tasks:string[]
 }
 
 // function that will check to see if a users login information is cached 
@@ -109,17 +110,18 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
         const imageTest = createDefaultBaseImage(firstname[0].toUpperCase(),lastname[0].toUpperCase());
 
         const newUser:user = {
-            u_id:`user_${requestId}`,
-            first_name:firstname,
-            last_name:lastname,
-            username:username,
-            email:email,    
-            password:password,
-            pfp: imageTest? imageTest : 'null',
-            createdAt:(new Date).toLocaleString(),
+            u_id: `user_${requestId}`,
+            first_name: firstname,
+            last_name: lastname,
+            username: username,
+            email: email,
+            password: password,
+            pfp: imageTest ? imageTest : 'null',
+            createdAt: (new Date).toLocaleString(),
             workspaces: [],
             boards: [],
             lists: [],
+            tasks: []
         }
         
         return newUser;

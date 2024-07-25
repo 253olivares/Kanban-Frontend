@@ -45,14 +45,14 @@ const Tasks = ({
     desktop:py-[0.64rem]
     largeDesktop:py-[.8rem]
 
-    group
+    group/task
 
     px-[5%]
 
     overflow-hidden
 
     `}>
-      <TasksFilterHead/>
+      <TasksFilterHead filter = {task.priority} />
       <div className="
        flex
        flex-row 
@@ -63,10 +63,10 @@ const Tasks = ({
 
         flex-grow
         ">
-            <TaskName />
-            <TaskInfo />
+            <TaskName taskName={task.name} />
+            <TaskInfo members={task.assignees.length +1} comments={task.comments.length} />
         </div>
-        <StoryPoint />
+        <StoryPoint points={task.story} />
       </div>      
     </div>
   )

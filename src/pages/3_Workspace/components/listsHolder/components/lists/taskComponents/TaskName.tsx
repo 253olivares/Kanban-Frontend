@@ -1,6 +1,12 @@
 
 
-const TaskName = () => {
+const TaskName = (
+  {
+    taskName
+  } : {
+    taskName:string
+  }
+) => {
   return (
     <div
     className="
@@ -38,7 +44,7 @@ const TaskName = () => {
     leading-snug
     "
     >
-      Initial Technical Interview
+      {taskName}
     </div>
   )
 }

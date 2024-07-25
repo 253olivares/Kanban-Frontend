@@ -62,7 +62,7 @@ const InputTaskName = memo((
         alert("Please make sure to enter a name!");
         return
       }
-      if(taskName.trim().length>=18) {
+      if(taskName.trim().length>=20) {
         alert("Please enter a shorter name!");
         return; 
       }

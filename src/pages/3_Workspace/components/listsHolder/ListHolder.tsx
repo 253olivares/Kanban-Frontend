@@ -62,7 +62,7 @@ const ListHolder = () => {
     `}>
       {
         list.map((x:list)=>
-          <List user={user} key={x.l_id} list={x} />
+          <List board={board} user={user} key={x.l_id} list={x} />
         )
       }
       {
