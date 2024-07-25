@@ -4,12 +4,10 @@ import { motion } from 'framer-motion'
 const AddTaskDefault = (
     {
         openTaskName, 
-        setOpenTaskName
       }
       :
       {
         openTaskName:boolean,
-        setOpenTaskName:React.Dispatch<React.SetStateAction<boolean>>
       }
 ) => {  
   console.log(openTaskName);
@@ -21,7 +19,7 @@ const AddTaskDefault = (
         ease:'easeInOut',
         duration:.5
     }}
-    onClick={()=>setOpenTaskName(true)}
+
     className='
     w-full
     h-full

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { memo, useContext, useLayoutEffect, useRef } from "react";
+import { memo, useContext, useLayoutEffect } from "react";
 import checkMark from '/assets/Check_MarkIcon.svg';
 import cancelIcon from '/assets/x_Icon.svg';
 import { AppContext } from "../../../../../appRefContext/appRefContext";
@@ -23,9 +23,8 @@ const InputTaskName = memo((
   }) => {
 
     const appContext = useContext(AppContext);
-    const {mobileAddNewWorkspace,addListTask,addListTaskSubmit} = appContext!;
+    const {addNewTaskNameRef, mobileAddNewWorkspace,addListTask,addListTaskSubmit} = appContext!;
 
-    const addNewListNameRef = useRef<HTMLInputElement>(null);
     const addTaskListName = useAppSelector(getAddTaskInput);
     const dispatch = useAppDispatch();
 
@@ -34,9 +33,9 @@ const InputTaskName = memo((
       const checkClick = (e:MouseEvent | TouchEvent) => {
         const element = e.target as Node;
 
-        if(!addNewListNameRef.current) setOpenTaskName(false);
+        if(!addNewTaskNameRef.current) setOpenTaskName(false);
 
-        if(!addNewListNameRef.current?.contains(element) && !mobileAddNewWorkspace.current?.contains(element)) {
+        if(!addNewTaskNameRef.current?.contains(element) && !mobileAddNewWorkspace.current?.contains(element)) {
           setOpenTaskName(false);
         }
 
@@ -59,13 +58,17 @@ const InputTaskName = memo((
     },[])
 
     const submitTaskName = (taskName:string) => {
+      if(taskName.trimEnd() === ""){
+        alert("Please make sure to enter a name!");
+        return
+      }
       if(taskName.trim().length>=18) {
         alert("Please enter a shorter name!");
         return; 
       }
       dispatch(createTask({listData:listData,adminId:user.u_id,taskName:taskName}))
       .unwrap()
-      .then((x)=>{
+      .then(x=>{
         dispatch(updateListTasks({list:x.list,newTask:x.newTask}))
       }).catch((e)=>{
         console.log(e);
@@ -91,7 +94,6 @@ const InputTaskName = memo((
         ease:'easeInOut',
         duration:.5
     }}
-    ref={addNewListNameRef}
     className="
     w-full
     h-full

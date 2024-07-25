@@ -18,6 +18,11 @@ const TasksFilterHead = () => {
 
     justify-between
 
+    pb-[0.468rem]
+    mobile:pb-[0.625rem]
+    sMobile:pb-[1rem]
+    mMobile:pb-[1.2rem]
+
     sLaptop:pb-[.666rem]
     mLaptop:pb-[.833rem]
     desktop:pb-[1rem]

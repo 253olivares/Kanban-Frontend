@@ -25,6 +25,11 @@ const TaskInfo = () => {
 
       w-full
 
+      gap-[0.671rem]
+      mobile:gap-[0.895rem]
+      sMobile:gap-[1.432rem]
+      mMobile:gap-[1.719rem]
+
       sLaptop:gap-[0.933rem]
       mLaptop:gap-[1.166rem]
       desktop:gap-[1.4rem]
@@ -49,6 +54,11 @@ const TaskInfos = ({
   flex
   flex-row
 
+  gap-[0.234rem]
+  mobile:gap-[0.312rem]
+  sMobile:gap-[0.5rem]
+  mMobile:gap-[0.6rem]
+
   sLaptop:gap-[0.266rem]
   mLaptop:gap-[0.333rem]
   desktop:gap-[0.4rem]
@@ -61,6 +71,12 @@ const TaskInfos = ({
 
   '>
     <img className='
+
+      h-[1.318rem]
+      mobile:h-[1.758rem]
+      sMobile:h-[2.813rem]
+      mMobile:h-[3.375rem]
+
       sLaptop:h-[1.2rem]
       mLaptop:h-[1.5rem]
       desktop:h-[1.8rem]
@@ -68,12 +84,17 @@ const TaskInfos = ({
     ' src={values.icon} alt="IconFor TaskInfo" />
     <h1 className='
 
+      text-[0.703rem]
+      mobile:ext-[0.937rem]
+      sMobile:text-[1.5rem]
+      mMobile:text-[1.8rem]
+
       sLaptop:text-[.799rem]
       mLaptop:text-[.999rm]
       desktop:text-[1.2rem]
       largeDesktop:text-[1.5rem]
 
-      font-medium
+      font-bold
 
       text-PrimaryWhite
 

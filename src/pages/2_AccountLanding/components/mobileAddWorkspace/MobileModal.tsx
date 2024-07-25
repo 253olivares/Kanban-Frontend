@@ -60,6 +60,10 @@ const MobileModal = memo((
     const selectList:list = useAppSelector(getSelectedList);
 
     const submitTaskName = () => {
+      if(newTaskList.trim()==="") {
+        alert("Please make sure to enter a name!")
+        return;
+      }
       if(newTaskList.trim().length>=18) {
         alert("please enter a short name!");
         return;
@@ -67,7 +71,8 @@ const MobileModal = memo((
 
       if(user?.u_id && selectList) dispatch(createTask({listData:selectList,adminId:user.u_id,taskName:newTaskList}))
       .unwrap()
-    .then((x)=>{
+    .then(x=>{
+
         dispatch(updateListTasks({list:x.list,newTask:x.newTask}))
       }).catch((e)=>{
         console.log(e);

@@ -1,10 +1,11 @@
 import { AnimatePresence } from "framer-motion"
-import React, { memo } from "react"
+import React, { memo, useContext } from "react"
 import AddTaskDefault from "./AddTaskDefault";
 import InputTaskName from "./InputTaskName";
 import AddList from '/assets/addBoard.png'
 import { list } from "../../../../../../reduxStore/lists/listsSlice";
 import { user } from "../../../../../../reduxStore/users/userSlice";
+import { AppContext } from "../../../../../appRefContext/appRefContext";
 
 
 const AddTaskHolder = memo((
@@ -22,8 +23,18 @@ const AddTaskHolder = memo((
     setOpenTaskName:React.Dispatch<React.SetStateAction<boolean>>
   }) => {
 
+    const appContext = useContext(AppContext);
+    const {addNewTaskNameRef} = appContext!;
+
   return (
     <div 
+
+    ref={addNewTaskNameRef}
+
+    onClick={()=>{
+      !openTaskName && setOpenTaskName(true);
+    }}
+
     className={`w-full
 
     flex
@@ -60,7 +71,7 @@ const AddTaskHolder = memo((
               openTaskName ?
               <InputTaskName user={user} listData={listData} setOpenTaskName={setOpenTaskName}/>
               :
-              <AddTaskDefault openTaskName={openTaskName} setOpenTaskName={setOpenTaskName} />
+              <AddTaskDefault openTaskName={openTaskName}/>
             }
         </AnimatePresence>
     </div>

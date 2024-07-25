@@ -13,19 +13,7 @@ const Tasks = ({
 
   // @ts-ignore
   const task = useAppSelector(state => selectTaskById(state,taskId));
-
-  // 
-//   min-h-[4.687rem]
-//   mobile:min-h-[6.25rem]
-//   sMobile:min-h-[10rem]
-//   mMobile:min-h-[12rem]
-
-//   sLaptop:min-h-[4.266rem]
-//   mLaptop:min-h-[5.333rem]
-//   desktop:min-h-[6.4rem]
-//   largeDesktop:min-h-[8rem]
-// // // 
-//   
+  
   return (
     <div className={`
     w-full
@@ -47,6 +35,11 @@ const Tasks = ({
     flex 
     flex-col
 
+    py-[0.488rem]
+    mobile:py-[0.651rem]
+    sMobile:py-[1.041rem]
+    mMobile:py-[1.25rem]
+
     sLaptop:py-[0.426rem]
     mLaptop:py-[0.533rem]
     desktop:py-[0.64rem]
@@ -55,6 +48,8 @@ const Tasks = ({
     group
 
     px-[5%]
+
+    overflow-hidden
 
     `}>
       <TasksFilterHead/>
