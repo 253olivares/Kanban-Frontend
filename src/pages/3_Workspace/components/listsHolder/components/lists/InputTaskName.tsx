@@ -7,7 +7,7 @@ import { changeAddTask, list, updateListTasks } from "../../../../../../reduxSto
 import { useAppDispatch, useAppSelector } from "../../../../../../reduxStore/hook";
 import { createTask } from "../../../../../../reduxStore/tasks/tasksSlice";
 import { getAddTaskInput, setAddTaskInput } from "../../../../../../reduxStore/modal/modalSlice";
-import { user } from "../../../../../../reduxStore/users/userSlice";
+import { addTaskToUser, user } from "../../../../../../reduxStore/users/userSlice";
 
 const InputTaskName = memo((
   {
@@ -69,7 +69,8 @@ const InputTaskName = memo((
       dispatch(createTask({listData:listData,adminId:user.u_id,taskName:taskName}))
       .unwrap()
       .then(x=>{
-        dispatch(updateListTasks({list:x.list,newTask:x.newTask}))
+        dispatch(updateListTasks({list:x.list,newTask:x.newTask}));
+        dispatch(addTaskToUser(x.newTask))
       }).catch((e)=>{
         console.log(e);
       })

@@ -13,7 +13,7 @@ import Delete from "./delete/Delete";
 import { useNavigate, useParams } from "react-router-dom";
 import { deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, selectBoardById } from "../reduxStore/boards/boardsSlice";
 import { getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove } from "../reduxStore/workspace/workspaceSlice";
-import { getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace } from "../reduxStore/users/userSlice";
+import { deleteTaskFromUsers, getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace } from "../reduxStore/users/userSlice";
 import AddNewUser from "./addNewUser/AddNewUser";
 import { deleteBoardListMultipleCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersWorkspaceAndBoards } from "../customLogic/CustomLogic";
 import ChangeBackground from "./changeBackground/ChangeBackground";
@@ -45,7 +45,11 @@ const Modal = memo(() => {
     dispatch(removeExistingWorkspace(workspace.w_id))
     .unwrap()
     .then((x)=> {
-      dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo}));
+      dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo}))
+      .unwrap()
+      .then(y=> {
+        dispatch(deleteTaskFromUsers(y.tasksToDelete));
+      });
 
       dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
 
@@ -66,7 +70,7 @@ const Modal = memo(() => {
   const deleteBoardFn = () => {
     dispatch(deleteBoard(board.b_id))
     .unwrap()
-    .then((x)=> {
+    .then(x=> {
       // In here we are going to remove the board from other parts of the project
       // remove board from user information
       dispatch(removeUserBoards({removeBoard:[x.board.b_id],members:x.board.members}))
@@ -79,6 +83,10 @@ const Modal = memo(() => {
       dispatch(deleteListStateBoardDelete({boardId:x.board.b_id}))
 
       dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists))
+      .unwrap()
+      .then(y=>{
+        dispatch(deleteTaskFromUsers(y.tasksToDelete));
+      })
 
       dispatch(closeModal());
       // close settings modal

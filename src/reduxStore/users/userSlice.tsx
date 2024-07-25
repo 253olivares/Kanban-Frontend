@@ -3,6 +3,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store";
 import { selectWorkspaceById, workspace } from "../workspace/workspaceSlice";
 import { board } from "../boards/boardsSlice";
+import { task } from "../tasks/tasksSlice";
 
 // this is to create a list of users that we can invite to workspaces
 // without getting sensitive userData;
@@ -131,6 +132,50 @@ export const createAccount = createAsyncThunk('user/createAccount',async({firstn
         return rejectWithValue(error);
     }
 });
+
+export const deleteTaskFromUsers = createAsyncThunk('task/deleteTaskFromUsers', async(tasksToDelete:string[],{rejectWithValue,getState}) => {
+    try {
+        const state = getState() as RootState;
+
+        const users = getUser(state);
+
+        if(!users ) throw new Error();
+
+        const updateTasks = users?.tasks.filter(x=> !tasksToDelete.includes(x))|| [];
+
+        const updateUser = {
+            ...users,
+            tasks: updateTasks
+        }
+
+        return{tasksToRemove:tasksToDelete, updateUser:updateUser }
+    } catch (e:any) {
+        return rejectWithValue(e);
+    }
+})
+
+export const addTaskToUser = createAsyncThunk('task/addTaskToUser', async (newTask:task,{rejectWithValue, getState}) => {
+    try{
+
+        const state = getState() as RootState;
+
+        const user = getUser(state);
+
+        if(!user) throw new Error("No user found!");
+
+        const preExisting = user?.tasks || []
+
+        const updateUser:user = {
+            ...user,
+            tasks:[...preExisting,newTask.t_id]
+        }
+
+        return updateUser;
+    } catch (e:any) {
+        console.log("Ran into issue added task to user.");
+        return rejectWithValue(e);
+    }
+})
 
 export const changeAccountDetails = createAsyncThunk('user/changeAccountDetails',async(user:user,{rejectWithValue}) => {
     try{
@@ -324,6 +369,14 @@ const userSlice = createSlice({
             .addCase(leaveWorkspaceUser.fulfilled,(state,action:PayloadAction<user>) => {
                 state.user = action.payload;
                 updateUser(action.payload);
+            })
+            .addCase(addTaskToUser.fulfilled,(state,action:PayloadAction<user>) => {
+                state.user = action.payload;
+                updateUser(action.payload);
+            })
+            .addCase(deleteTaskFromUsers.fulfilled, (state,action:PayloadAction<{tasksToRemove:string[],updateUser:user}>) => {
+                state.user = action.payload.updateUser;
+                updateUser(action.payload.updateUser);
             })
 
     }

@@ -5,6 +5,7 @@ import { changeSettings, deleteList, list } from "../../../../../../reduxStore/l
 import { AppContext } from "../../../../../appRefContext/appRefContext";
 import { deleteTasksFromListDelete } from "../../../../../../reduxStore/tasks/tasksSlice";
 import { deleteTaskFromBoardListDelete } from "../../../../../../reduxStore/boards/boardsSlice";
+import { deleteTaskFromUsers } from "../../../../../../reduxStore/users/userSlice";
 
 const ListOptionsBody = (
     {
@@ -127,8 +128,9 @@ const DeleteList = memo(({listData}:{listData:list}) => {
     const deleteListFunction = () => {
         dispatch(deleteList(listData))
         .unwrap().then((x)=> {
-            dispatch(deleteTaskFromBoardListDelete({boardId:x.listToDelete.b_id,listId:x.listToDelete.l_id}))
-            dispatch(deleteTasksFromListDelete(x.listToDelete.tasks))
+            dispatch(deleteTaskFromBoardListDelete({boardId:x.listToDelete.b_id,listId:x.listToDelete.l_id}));
+            dispatch(deleteTasksFromListDelete(x.listToDelete.tasks));
+            dispatch(deleteTaskFromUsers(x.listToDelete.tasks));
         })
     }
 
