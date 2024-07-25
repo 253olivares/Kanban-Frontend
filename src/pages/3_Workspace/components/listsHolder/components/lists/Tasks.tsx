@@ -47,10 +47,12 @@ const Tasks = ({
     flex 
     flex-col
 
-    sLaptop:
-    mLaptop:
-    desktop:py-[.75rem]
-    largeDesktop:py-[.937rem]
+    sLaptop:py-[0.426rem]
+    mLaptop:py-[0.533rem]
+    desktop:py-[0.64rem]
+    largeDesktop:py-[.8rem]
+
+    group
 
     px-[5%]
 

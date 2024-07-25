@@ -16,12 +16,15 @@ const FilterLabel = ({
 
     ${color}
 
-    sLaptop:h-[]
-    mLaptop:h-[]
-    desktop:h-[]
+    sLaptop:h-[0.613rem]
+    mLaptop:h-[0.766rem]
+    desktop:h-[0.92rem]
     largeDesktop:h-[1.15rem]
 
-    rounded-[.2rem]
+    sLaptop:rounded-[0.056rem]
+    mLaptop:rounded-[0.106rem]
+    desktop:rounded-[0.16rem]
+    largeDesktop:rounded-[.2rem]
 
     `}>
 

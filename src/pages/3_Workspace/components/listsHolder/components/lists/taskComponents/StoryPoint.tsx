@@ -5,9 +5,9 @@ const StoryPoint = () => {
       flex
       flex-row
 
-      sLaptop:pb-
-      mLaptop:pb-[]
-      desktop:pb-[]
+      sLaptop:pb-[0.933rem]
+      mLaptop:pb-[1.166rem]
+      desktop:pb-[1.4rem]
       largeDesktop:pb-[1.75rem]
     
       justify-center
@@ -16,14 +16,14 @@ const StoryPoint = () => {
 
         relative
 
-        sLaptop:w-[]
-        mLaptop:w-[]
-        desktop:w-[]
+        sLaptop:w-[2.933rem]
+        mLaptop:w-[3.666rem]
+        desktop:w-[4.4rem]
         largeDesktop:w-[5.5rem]
 
-        sLaptop:h-[]
-        mLaptop:h-[]
-        desktop:h-[]
+        sLaptop:h-[2.933rem]
+        mLaptop:h-[3.666rem]
+        desktop:h-[4.4rem]
         largeDesktop:h-[5.5rem]
 
         rounded-full
@@ -35,7 +35,10 @@ const StoryPoint = () => {
         items-center
       ">
         <h1 className="
-          text-[1.15rem]
+          sLaptop:text-[0.613rem]
+          mLaptop:text-[0.766rem]
+          desktop:text-[0.92rem]
+          largeDesktop:text-[1.15rem]
           text-PrimaryWhite
 
           font-medium
@@ -54,9 +57,9 @@ const StoryPoint = () => {
          className="
           font-medium
 
-          sLaptop:text-[]
-          mLaptop:text-[]
-          desktop:text-[]
+          sLaptop:text-[1.333rem]
+          mLaptop:text-[1.666rem]
+          desktop:text-[2rem]
           largeDesktop:text-[2.5rem]
 
           text-PrimaryWhite
