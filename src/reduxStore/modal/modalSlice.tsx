@@ -33,7 +33,9 @@ type initialStateType = {
     addUserEmail:string,
     addUserRole:string,
     previewSelect:number,
-    addTaskInput:string
+    addTaskInput:string,
+    taskModal:boolean,
+    selectTask:string
 }
 
 const initialState: initialStateType = {
@@ -55,7 +57,9 @@ const initialState: initialStateType = {
     addUserEmail:"",
     addUserRole:"",
     previewSelect:0,
-    addTaskInput:""
+    addTaskInput:"",
+    taskModal:false,
+    selectTask:""
 }   
 
 // create a slice of our state
@@ -177,6 +181,12 @@ const modalSlice = createSlice({
         },
         setAddTaskInput (state,action:PayloadAction<string>) {
             state.addTaskInput = action.payload;
+        },
+        changeTaskModal (state,action:PayloadAction<boolean>) {
+            state.taskModal = action.payload;
+        },
+        setSelectTask (state,action:PayloadAction<string>){
+            state.selectTask = action.payload;
         }
     }
 })
@@ -201,6 +211,8 @@ export const getAddUserEmail = (state:RootState) => state.modal.addUserEmail;
 export const getUserRole = (state:RootState) => state.modal.addUserRole;
 export const getPreviewSelect = (state:RootState) => state.modal.previewSelect;
 export const getAddTaskInput = (state:RootState) => state.modal.addTaskInput;
+export const getTaskModal = (state:RootState) => state.modal.taskModal;
+export const getSelectTaskId = (state:RootState) => state.modal.selectTask;
 
 export const {
     setCroppingImageData,
@@ -232,7 +244,9 @@ export const {
     setAddUserRole,
     openChangeBackground,
     setPreview,
-    setAddTaskInput
+    setAddTaskInput,
+    changeTaskModal,
+    setSelectTask
 } = modalSlice.actions;
 
 export default modalSlice.reducer;

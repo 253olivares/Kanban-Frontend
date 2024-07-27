@@ -1,4 +1,5 @@
-import { useAppSelector } from "../../../../../../reduxStore/hook"
+import { useAppDispatch, useAppSelector } from "../../../../../../reduxStore/hook"
+import { changeTaskModal, setSelectTask } from "../../../../../../reduxStore/modal/modalSlice";
 import { selectTaskById } from "../../../../../../reduxStore/tasks/tasksSlice"
 import StoryPoint from "./taskComponents/StoryPoint";
 import TaskInfo from "./taskComponents/TaskInfo";
@@ -11,11 +12,20 @@ const Tasks = ({
     taskId:string
 }) => {
 
+  const dispatch = useAppDispatch();
+
   // @ts-ignore
   const task = useAppSelector(state => selectTaskById(state,taskId));
   
   return (
-    <div className={`
+    <div 
+    onClick={
+      ()=>{
+        dispatch(changeTaskModal(true));
+        dispatch(setSelectTask(taskId));
+      }
+    }
+    className={`
     w-full
 
     rounded-[.234rem]

@@ -1,7 +1,7 @@
 import { checkRemembered, getUser } from '../../../reduxStore/users/userSlice';
 import { useAppDispatch, useAppSelector } from '../../../reduxStore/hook';
-import { getListModal, getMembersModal, getMobileBoardNameModal, getModalStatus, getModalType, getSettingsModal } from '../../../reduxStore/modal/modalSlice';
-import { useLayoutEffect, memo } from 'react';
+import { getListModal, getMembersModal, getMobileBoardNameModal, getModalStatus, getModalType, getSettingsModal, getTaskModal } from '../../../reduxStore/modal/modalSlice';
+import { useLayoutEffect, memo, ReactNode } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { Outlet, useParams } from 'react-router-dom';
@@ -16,8 +16,9 @@ import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
 import { initiateUserList } from '../../../reduxStore/userList/userList';
 import MembersModal from '../../3_Workspace/components/membersModal/MultiMobileModal';
 import { getAddTaskModal, getListSettings} from '../../../reduxStore/lists/listsSlice';
+import TaskDetailModal from '../tasksDetailModal/TaskDetailModal';
 
-const AccountHeader = memo(() => {
+const AccountHeader = memo(() :ReactNode => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -40,7 +41,8 @@ const AccountHeader = memo(() => {
   const settingsModal = useAppSelector(getSettingsModal);
   const addTaskModal = useAppSelector(getAddTaskModal);
   const listSettings = useAppSelector(getListSettings);
-  
+  const taskModal = useAppSelector(getTaskModal);
+
   const board = useAppSelector(state => selectBoardById(state,workspaceId||""))||null;
 
   // a cache check to have the application ato login a user 
@@ -116,6 +118,11 @@ const AccountHeader = memo(() => {
         `
       }
       `}>
+        <AnimatePresence>
+          {
+            taskModal && <TaskDetailModal userInfo={user} board={board} />
+          }
+        </AnimatePresence>
         <AnimatePresence>
           {
             memberModal || settingsModal || listSettings ?
