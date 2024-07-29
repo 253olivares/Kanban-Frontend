@@ -24,7 +24,6 @@ const WorkspacesPage = memo(() => {
   return (
     <div className={`
     workspacesIndex
-
     `}>
       <BoardAndWorkspaces />
       <AnimatePresence>

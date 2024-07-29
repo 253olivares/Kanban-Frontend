@@ -118,11 +118,7 @@ const AccountHeader = memo(() :ReactNode => {
         `
       }
       `}>
-        <AnimatePresence>
-          {
-            taskModal && <TaskDetailModal userInfo={user} board={board} />
-          }
-        </AnimatePresence>
+
         <AnimatePresence>
           {
             memberModal || settingsModal || listSettings ?
@@ -152,6 +148,11 @@ const AccountHeader = memo(() :ReactNode => {
           addTaskModal ={addTaskModal}
           /> : ''
         }
+        </AnimatePresence>
+        <AnimatePresence>
+          {
+            taskModal && <TaskDetailModal userInfo={user} board={board} />
+          }
         </AnimatePresence>
         <AnimatePresence>
           { modalStatus && <ModalContainer /> }

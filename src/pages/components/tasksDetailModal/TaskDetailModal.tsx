@@ -1,33 +1,37 @@
-import { ReactNode, memo, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { ReactNode, memo, useLayoutEffect } from "react";
+import {   motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../../reduxStore/hook";
 import { changeTaskModal, getSelectTaskId, setSelectTask } from "../../../reduxStore/modal/modalSlice";
-import { user } from "../../../reduxStore/users/userSlice";
 import TaskDetail from "./components/TaskDetail";
+import { user } from "../../../reduxStore/users/userSlice";
 import { board } from "../../../reduxStore/boards/boardsSlice";
 import { selectTaskById } from "../../../reduxStore/tasks/tasksSlice";
+import { selectWorkspaceById } from "../../../reduxStore/workspace/workspaceSlice";
 
 
 const TaskDetailModal= memo((
   {
     userInfo,
     board
-  } : {
-    userInfo:user|null,
+  }: {
+    userInfo:user | null,
     board:board
   }
 ):ReactNode => {
+  const dispatch = useAppDispatch();
 
-    const dispatch = useAppDispatch();
+  const taskId = useAppSelector(getSelectTaskId);
+  const task = useAppSelector(state => selectTaskById(state,taskId));
+  const workspace = useAppSelector(state=>selectWorkspaceById(state,board.w_id))
 
-    const taskId = useAppSelector(getSelectTaskId);
+  useLayoutEffect(()=>{
+    return () =>{
+      dispatch(setSelectTask(""))
+    }
+  },[])
 
-    const task = useAppSelector(state=>selectTaskById(state,taskId));
-
-    const taskModalRef = useRef<HTMLDivElement>(null);
-
-    if(!userInfo || !board || !task) return;
-
+  if(!userInfo || !task || !board) return
+  
   return (
     <motion.div
     initial={{ opacity: 0 }}
@@ -36,7 +40,6 @@ const TaskDetailModal= memo((
     transition={{
       duration:.3
     }}
-    ref={taskModalRef}
     className="
         fixed
 
@@ -54,18 +57,11 @@ const TaskDetailModal= memo((
         sLaptop:flex 
         sLaptop:justify-center 
         sLaptop:items-center
-    "
-    >
-
-        <AnimatePresence>
-          <TaskDetail />
-        </AnimatePresence>
+    ">
+           <TaskDetail workspace={workspace} task={task} board={board} />
         <div
         onClick={()=>{
-
           dispatch(changeTaskModal(false));
-          dispatch(setSelectTask(""));
-
         }}
          className="
          hidden

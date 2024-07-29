@@ -2,7 +2,7 @@ import usersIcon from '/assets/User_Icon.svg';
 import speechBubble from '/assets/SpeechBubbl_Icon.svg'
 import { memo } from 'react';
 
-type dataShare = {
+export type dataShare = {
   icon:string,
   numbers:number
 }

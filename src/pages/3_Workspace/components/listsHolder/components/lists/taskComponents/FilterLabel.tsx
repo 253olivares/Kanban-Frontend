@@ -9,22 +9,14 @@ const FilterLabel = ({
     color:string
 }) => {
   return (
-    <div className={`
+    <div 
+    className={`
     block
 
     w-[30%]
+    h-full
 
     ${color}
-
-    h-[0.507rem]
-    mobile:h-[0.677rem]
-    sMobile:h-[1.083rem]
-    mMobile:h-[1.3rem]
-
-    sLaptop:h-[0.613rem]
-    mLaptop:h-[0.766rem]
-    desktop:h-[0.92rem]
-    largeDesktop:h-[1.15rem]
 
     rounded-[0.052rem]
     mobile:rounded-[0.135rem]

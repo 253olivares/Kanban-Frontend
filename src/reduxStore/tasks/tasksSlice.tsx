@@ -154,6 +154,31 @@ export const deleteMulitpleTasksFromBoardDeletion = createAsyncThunk('tasks/dele
     }
 })
 
+export const updateTask = createAsyncThunk('task/updateTask', async({
+    taskId,
+    update
+}:{
+    taskId:string,
+    update:Record<string,any>
+},{
+    rejectWithValue,getState
+}) =>{
+    try{
+        const state = getState() as RootState;
+
+        const task = selectTaskById(state,taskId)
+
+        const updateTask = {
+            ...task,
+            ...update
+        }
+
+        return{updateTask:updateTask,prevTasks:selectAllTasks(state)}
+    } catch(e:any) {
+        return rejectWithValue(e);
+    }
+})
+
 
 const taskSlice = createSlice ({
     name:'tasks',
@@ -194,6 +219,9 @@ const taskSlice = createSlice ({
         .addCase(deleteTasksFromMulitpleBoards.fulfilled,(state,action:PayloadAction<{tasksToDelete:string[],prevState:task[]}>) =>{
             deleteTasksFromListCL(action.payload.tasksToDelete);
             taskAdapter.removeMany(state,action.payload.tasksToDelete)
+        })
+        .addCase(updateTask.fulfilled,(state,action:PayloadAction<{updateTask:task,prevTasks:task[]}>)=>{
+            taskAdapter.updateOne(state,{id:action.payload.updateTask.t_id,changes:action.payload.updateTask});
         })
       
     }

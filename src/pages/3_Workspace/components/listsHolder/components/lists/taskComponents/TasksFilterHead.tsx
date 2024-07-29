@@ -22,15 +22,25 @@ const TasksFilterHead = ({
 
     justify-between
 
-    pb-[0.468rem]
-    mobile:pb-[0.625rem]
-    sMobile:pb-[1rem]
-    mMobile:pb-[1.2rem]
+    mb-[0.234rem]
+    mobile:mb-[0.312rem]
+    sMobile:mb-[0.5rem]
+    mMobile:mb-[0.6rem]
 
-    sLaptop:pb-[.666rem]
-    mLaptop:pb-[.833rem]
-    desktop:pb-[1rem]
-    largeDesktop:pb-[1rem]
+    sLaptop:mb-[0.266rem]
+    mLaptop:mb-[0.333rem]
+    desktop:mb-[0.4rem]
+    largeDesktop:mb-[.5rem]
+
+    h-[0.507rem]
+    mobile:h-[0.677rem]
+    sMobile:h-[1.083rem]
+    mMobile:h-[1.3rem]
+
+    sLaptop:h-[0.613rem]
+    mLaptop:h-[0.766rem]
+    desktop:h-[0.92rem]
+    largeDesktop:h-[1.15rem]
     ">
       {
         Object.entries(filters).map(([k,v])=>
