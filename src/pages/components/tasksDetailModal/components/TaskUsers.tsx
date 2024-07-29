@@ -2,6 +2,7 @@ import { memo } from "react"
 import { getUserFromList } from "../../../../customLogic/CustomLogic"
 import { useAppSelector } from "../../../../reduxStore/hook"
 import { getUserHistoryState } from "../../../../reduxStore/modal/modalSlice"
+import scrollbarImage from '/assets/scrollBarTrack.png';
 
 
 const TaskUsers = memo(( {
@@ -79,7 +80,12 @@ const MembersBody = ( {
   users:string[],
   admin:string
 }) =>{
-    return <div className="
+    return <div 
+    style={{
+      // @ts-ignore
+      "--img": `url(${scrollbarImage})`
+    }}
+    className="
     w-full
     flex
     flex-col
@@ -94,7 +100,7 @@ const MembersBody = ( {
     desktop:gap-[0.68rem]
     largeDesktop:gap-[.85rem] 
 
-    overflow-y-auto
+    boardsScroll
     ">
       <Members userId={admin} />
       {
