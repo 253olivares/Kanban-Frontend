@@ -23,10 +23,10 @@ const TaskUsers = memo(( {
         desktop:gap-[0.8rem]
         largeDesktop:gap-[1rem]
 
-        sLaptop:pt-[1.363rem]
-        mLaptop:pt-[1.704rem]
-        desktop:pt-[2.045rem]
-        largeDesktop:pt-[2.556rem]
+        sLaptop:pt-[1.022rem]
+        mLaptop:pt-[1.278rem]
+        desktop:pt-[1.533rem]
+        largeDesktop:pt-[1.917rem]
     ">
         <TaskHead />
         <MembersBody users={usersAdded} admin={admin} />
@@ -83,6 +83,18 @@ const MembersBody = ( {
     w-full
     flex
     flex-col
+
+    sLaptop:h-[9.6rem]
+    mLaptop:h-[12rem]
+    desktop:h-[14.4rem]
+    largeDesktop:h-[18rem]
+
+    sLaptop:gap-[0.453rem]
+    mLaptop:gap-[0.566rem]
+    desktop:gap-[0.68rem]
+    largeDesktop:gap-[.85rem] 
+
+    overflow-y-auto
     ">
       <Members userId={admin} />
       {

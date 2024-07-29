@@ -21,10 +21,10 @@ const TaskFilterSection = memo(({
     desktop:gap-[0.8rem]
     largeDesktop:gap-[1rem]
 
-    sLaptop:pb-[1.363rem]
-    mLaptop:pb-[1.704rem]
-    desktop:pb-[2.045rem]
-    largeDesktop:pb-[2.556rem]
+    sLaptop:pb-[1.022rem]
+    mLaptop:pb-[1.278rem]
+    desktop:pb-[1.533rem]
+    largeDesktop:pb-[1.917rem]
 
     '>
         <TaskHeader />
@@ -145,6 +145,8 @@ const TaskHeader = memo(() =>{
     font-medium
 
     text-PrimaryWhite
+
+   leading-none
 
     '>
         Labels

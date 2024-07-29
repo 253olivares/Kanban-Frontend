@@ -16,10 +16,10 @@ const RightContent = ({
 
     w-[32.5%]
 
-    sLaptop:gap-[1.458rem]
-    mLaptop:gap-[1.823rem]
-    desktop:gap-[2.188rem]
-    largeDesktop:gap-[2.735rem]
+    sLaptop:gap-[0.8rem]
+    mLaptop:gap-[1rem]
+    desktop:gap-[1.2rem]
+    largeDesktop:gap-[1.5rem]
 
     ">
         <TaskUsers usersAdded ={task.assignees} admin = {task.admin_id} />
