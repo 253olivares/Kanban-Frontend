@@ -1,15 +1,17 @@
 import { memo } from "react"
 import { user } from "../../../../../reduxStore/users/userSlice"
-
+ 
 const AddComment = memo(({
+  adminCred,
   userInfo,
   assignees
 } : {
+  adminCred:boolean,
   userInfo:user,
   assignees:string[]
 }) => {
 
-  if(!assignees.includes(userInfo.u_id)) return <div className="
+  if(!assignees.includes(userInfo.u_id) && !adminCred) return <div className="
     w-full
 
     flex-grow

@@ -23,6 +23,7 @@
     "bcryptjs": "^2.4.3",
     "clsx": "^2.1.0",
     "framer-motion": "^11.1.8",
+    "frontend-webapplication": "file:",
     "react": "^18.2.0",
     "react-animate-height": "^3.2.3",
     "react-dom": "^18.2.0",

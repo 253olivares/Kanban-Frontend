@@ -29,7 +29,7 @@ const TaskComments = memo(({
         largeDesktop:gap-[0.75rem]
        
     '>   
-        <AddComment userInfo={userInfo} assignees={assignees}  />
+        <AddComment adminCred={adminCred} userInfo={userInfo} assignees={assignees}  />
         <CommentsHolder userInfo={userInfo} adminCred={adminCred} comments = {taskComments} assignees={assignees} />
     </div>
   )
