@@ -80,7 +80,7 @@ const EditDeleteReactions = memo(({
 
   justify-between
   ">
-    <Reactions assignees={assignees} userInfo={userInfo} commentsReactions={commentsReactions} usersReacted={usersReacted} />
+    <Reactions adminCred={adminCred} assignees={assignees} userInfo={userInfo} commentsReactions={commentsReactions} usersReacted={usersReacted} />
     <CommentsAdminControl commentUser={commentUser} userInfo={userInfo} adminCred={adminCred} />
   </div>
 })

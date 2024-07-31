@@ -13,6 +13,8 @@ const CommentsAdminControl = ({
   userInfo:user,
   adminCred:boolean
 }) => {
+
+  console.log("admin use",adminCred)
   return (
     <div className="
     flex
@@ -29,7 +31,7 @@ const CommentsAdminControl = ({
           userInfo.u_id === commentUser && <EditIcon/>
         }
         {
-          adminCred || userInfo.u_id === commentUser && <DeleteIcon/>
+          adminCred || userInfo.u_id === commentUser ? <DeleteIcon/> : ""
         }
     </div>
   )

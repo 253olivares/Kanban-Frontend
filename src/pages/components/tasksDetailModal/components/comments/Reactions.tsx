@@ -4,11 +4,13 @@ import { user } from "../../../../../reduxStore/users/userSlice";
 
 
 const Reactions = memo(({
+  adminCred,
   assignees,
   userInfo,
   commentsReactions,
   usersReacted
 } : {
+  adminCred:boolean,
   assignees:string[],
   userInfo:user,
   commentsReactions:Record<string,number>,
@@ -38,7 +40,7 @@ const Reactions = memo(({
         <Emoticons emoji={key} number={value} />
       )}
       {
-        assignees.includes(userInfo.u_id) && <AddReaction />
+        assignees.includes(userInfo.u_id) || adminCred &&  <AddReaction />
       }
     </div>
   )
