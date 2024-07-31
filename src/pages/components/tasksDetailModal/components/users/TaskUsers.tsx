@@ -1,14 +1,17 @@
 import { memo } from "react"
-import { getUserFromList } from "../../../../customLogic/CustomLogic"
-import { useAppSelector } from "../../../../reduxStore/hook"
-import { getUserHistoryState } from "../../../../reduxStore/modal/modalSlice"
+import { getUserFromList } from "../../../../../customLogic/CustomLogic"
+import { useAppSelector } from "../../../../../reduxStore/hook"
+import { getUserHistoryState } from "../../../../../reduxStore/modal/modalSlice"
 import scrollbarImage from '/assets/scrollBarTrack.png';
+import addWorkspace from '/assets/Add_New_Workspace.svg';
 
 
 const TaskUsers = memo(( {
+  adminCred,
   usersAdded,
   admin
 } : {
+  adminCred:boolean,
   usersAdded:string[],
   admin:string
 }) => {
@@ -24,18 +27,18 @@ const TaskUsers = memo(( {
         desktop:gap-[0.8rem]
         largeDesktop:gap-[1rem]
 
-        sLaptop:pt-[1.022rem]
-        mLaptop:pt-[1.278rem]
-        desktop:pt-[1.533rem]
-        largeDesktop:pt-[1.917rem]
     ">
-        <TaskHead />
+        <TaskHead  adminCred={adminCred} />
         <MembersBody users={usersAdded} admin={admin} />
     </div>
   )
 })
 
-const TaskHead = () =>{
+const TaskHead = memo(({
+  adminCred
+} : {
+  adminCred:boolean
+}) =>{
 return<div className="
     w-full
 
@@ -52,28 +55,44 @@ return<div className="
 
     text-PrimaryWhite
 
-    items-end
+    items-center
 
     leading-none
 ">
     Members
-    <span className="
-
-      sLaptop:text-[0.666rem]
-      mLaptop:text-[0.833rem]
-      desktop:text-[1rem]
-      largeDesktop:text-[1.25rem]
-
-      hover:underline
-
-      cursor-pointer
-
-      opacity-75
-    ">See All</span>
+    {
+      adminCred && <div className="
+      sLaptop:hover:bg-SpaceBlueSelected
+  
+      sLaptop:rounded-[0.133rem]
+      mLaptop:rounded-[0.166rem]
+      desktop:rounded-[0.2rem]
+      largeDesktop:rounded-[.25rem]
+  
+      sLaptop:p-[0.066rem]
+      mLaptop:p-[0.083rem]
+      desktop:p-[0.1rem]
+      largeDesktop:p-[0.125rem]
+  
+      sLaptop:hover:cursor-pointer
+  
+      transition-[background-color]
+      duration-500
+      ">
+        <img className="
+        sLaptop:w-[0.866rem]
+        mLaptop:w-[1.083rem]
+        desktop:w-[1.3rem]
+        largeDesktop:w-[1.625rem]
+     
+        " src={addWorkspace} alt="Add Workspace" />
+      </div>
+    }
+    
 </div>
-}
+})
 
-const MembersBody = ( {
+const MembersBody = memo(( {
   users,
   admin
 } : {
@@ -109,7 +128,8 @@ const MembersBody = ( {
         )
       }
     </div>
-}
+})
+
 const Members = memo(( {
   userId
 } : {
@@ -162,7 +182,7 @@ const Members = memo(( {
   </div>
 })
 
-const UserIcon = (
+const UserIcon = memo((
     {
       userImg
     } : {
@@ -189,9 +209,9 @@ const UserIcon = (
 
     rounded-full
   " src={userImg} alt="UserImage" />
-}
+})
 
-const UserName = ({
+const UserName = memo(({
   name
 } : {
   name:string
@@ -218,9 +238,9 @@ const UserName = ({
   ">
     {name}
   </h1>
-}
+})
 
-const UserRole =(
+const UserRole = memo((
   {
     role
   } : {
@@ -246,6 +266,6 @@ const UserRole =(
   ">
       {userHistory[role][1]}
   </h1>
-}
+})
 
 export default TaskUsers

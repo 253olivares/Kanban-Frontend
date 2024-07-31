@@ -58,7 +58,7 @@ const TaskDetailModal= memo((
         sLaptop:justify-center 
         sLaptop:items-center
     ">
-           <TaskDetail workspace={workspace} task={task} board={board} />
+           <TaskDetail userInfo={userInfo} userId={userInfo.u_id} workspace={workspace} task={task} board={board} />
         <div
         onClick={()=>{
           dispatch(changeTaskModal(false));

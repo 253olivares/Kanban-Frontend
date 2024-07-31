@@ -625,7 +625,14 @@
         sLaptop:text-black
     }
 
-    
+    .text{
+        white-space: pre-wrap !important;  
+    }
+
+    .scrollGutter {
+        scrollbar-gutter: stable;
+    }
+
     .boardsScroll {
         overflow-y: auto;
     }

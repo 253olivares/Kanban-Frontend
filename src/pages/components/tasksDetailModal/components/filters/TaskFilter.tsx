@@ -1,11 +1,13 @@
 import  { memo } from 'react'
-import { useAppDispatch } from '../../../../reduxStore/hook'
-import { updateTask } from '../../../../reduxStore/tasks/tasksSlice'
+import { useAppDispatch } from '../../../../../reduxStore/hook'
+import { updateTask } from '../../../../../reduxStore/tasks/tasksSlice'
 
 const TaskFilterSection = memo(({
+    adminCred,
     taskId,
     taskPrio
 } : {
+    adminCred:boolean,
     taskId:string,
     taskPrio:string[]
 }) => {
@@ -21,23 +23,20 @@ const TaskFilterSection = memo(({
     desktop:gap-[0.8rem]
     largeDesktop:gap-[1rem]
 
-    sLaptop:pb-[1.022rem]
-    mLaptop:pb-[1.278rem]
-    desktop:pb-[1.533rem]
-    largeDesktop:pb-[1.917rem]
-
     '>
         <TaskHeader />
-        <TaskBody taskId={taskId} taskPrio={taskPrio}/>
+        <TaskBody adminCred={adminCred} taskId={taskId} taskPrio={taskPrio}/>
     </div>
   )
 })
 
 const TaskBody = memo((
     {
+        adminCred,
         taskId,
         taskPrio
     } : {
+        adminCred:boolean,
         taskId:string,
         taskPrio:string[]
     }
@@ -61,7 +60,7 @@ const TaskBody = memo((
     '>
         {
             Object.entries(filters).map(([key,value],_)=>{
-                return <Filter key={`TaskDetails_${key}`} filter={key} taskId={taskId} select={taskPrio.includes(key)} color={value} />
+                return <Filter adminCred={adminCred} key={`TaskDetails_${key}`} filter={key} taskId={taskId} select={taskPrio.includes(key)} color={value} />
             })
         }
     </div>
@@ -69,11 +68,13 @@ const TaskBody = memo((
 
 const Filter = memo((
     {
+        adminCred,
         filter,
         taskId,
         select,
         color
     } : {
+        adminCred:boolean,
         filter:string,
         taskId:string,
         select:boolean,
@@ -83,10 +84,11 @@ const Filter = memo((
     const dispatch = useAppDispatch();
     return <div 
     onClick={()=>{
-        if(select) {
-            dispatch(updateTask({taskId:taskId,update:{priority:[``]}}))
+
+    if(select) {
+        adminCred&& dispatch(updateTask({taskId:taskId,update:{priority:[``]}}))
         } else {
-            dispatch(updateTask({taskId:taskId,update:{priority:[`${filter}`]}}))
+        adminCred&& dispatch(updateTask({taskId:taskId,update:{priority:[`${filter}`]}}))
         }
     }}
     className={`
@@ -95,10 +97,15 @@ const Filter = memo((
 
     ${
         select ?
-        `opacity-100` : `opacity-50 hover:opacity-75`
+        `opacity-100` 
+        : 
+        `opacity-50 
+        ${adminCred && 'hover:opacity-75'}`
     }
 
-    cursor-pointer
+    ${
+        adminCred && 'cursor-pointer'
+    }
 
     sLaptop:text-[0.764rem]
     mLaptop:text-[0.955rem]

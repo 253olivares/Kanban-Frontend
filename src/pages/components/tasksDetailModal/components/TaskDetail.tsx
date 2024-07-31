@@ -8,18 +8,25 @@ import { task } from '../../../../reduxStore/tasks/tasksSlice';
 import { board } from '../../../../reduxStore/boards/boardsSlice';
 import { workspace } from '../../../../reduxStore/workspace/workspaceSlice';
 import TaskBottomInfo from './TaskBottomInfo';
+import { user } from '../../../../reduxStore/users/userSlice';
 
 const TaskDetail = memo((
   {
+    userInfo,
+    userId,
     workspace,
     task,
     board
   } : {
+    userInfo:user,
+    userId:string,
     workspace:workspace,
     task:task,
     board:board
   }
 ):ReactNode => {
+
+  const adminCred = userId === task.admin_id;
 
   return (
     <motion.div
@@ -59,8 +66,8 @@ const TaskDetail = memo((
     `}
     >
       <ImageHeader workspaceName={workspace.name} boardName={board.name} selectList={task.l_id} imgSrc={headerBackground} />
-      <TaskInformation task={task} />
-      <TaskBottomInfo task={task}/>
+      <TaskInformation adminCred={adminCred}  task={task} />
+      <TaskBottomInfo userInfo={userInfo} adminCred={adminCred} task={task}/>
     </motion.div>
   )
 })
@@ -91,6 +98,11 @@ const ImageHeader = memo((
   '>
     <img className='
     w-full
+
+    sLaptop:h-[1.916rem]
+    mLaptop:h-[2.396rem]
+    desktop:h-[2.875rem]
+    largeDesktop:h-[3.594rem]
     ' src={imgSrc} alt="HeaderBackground" />
 
     <div className='

@@ -1,12 +1,15 @@
+import { memo } from "react"
 import { task } from "../../../../reduxStore/tasks/tasksSlice"
-import TaskFilterSection from "./TaskFilter"
-import TaskUsers from "./TaskUsers"
+import TaskFilterSection from "./filters/TaskFilter"
+import TaskUsers from "./users/TaskUsers"
 
 
 
-const RightContent = ({
+const RightContent = memo(({
+    adminCred,
     task
 }:{
+    adminCred:boolean,
     task:task
 }) => {
   return (
@@ -21,11 +24,13 @@ const RightContent = ({
     desktop:gap-[1.2rem]
     largeDesktop:gap-[1.5rem]
 
+    flex-shrink-0
+    
     ">
-        <TaskUsers usersAdded ={task.assignees} admin = {task.admin_id} />
-        <TaskFilterSection taskId={task.t_id} taskPrio={task.priority} />
+        <TaskUsers adminCred={adminCred} usersAdded ={task.assignees} admin = {task.admin_id} />
+        <TaskFilterSection adminCred={adminCred} taskId={task.t_id} taskPrio={task.priority} />
     </div>
   )
-}
+})
 
 export default RightContent

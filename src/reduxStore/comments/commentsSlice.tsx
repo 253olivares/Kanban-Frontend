@@ -7,8 +7,8 @@ export type comments = {
     u_id:string,
     t_id:string,
     message:string,
-    createdAt:Date,
-    updatedAt:Date
+    createdAt:string,
+    updatedAt:string,
     reactions: {
         thumbUp:number,
         party: number,
