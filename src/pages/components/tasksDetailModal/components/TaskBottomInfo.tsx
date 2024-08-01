@@ -6,10 +6,18 @@ import { user } from "../../../../reduxStore/users/userSlice"
 
 
 const TaskBottomInfo = memo(({
+    taskDescription,
+    setTaskDescription,
+    comments,
+    setComment,
     userInfo,
     adminCred,
     task
 } : {
+    taskDescription:string,
+    setTaskDescription:React.Dispatch<React.SetStateAction<string>>,
+    comments:string,
+    setComment:React.Dispatch<React.SetStateAction<string>>,
     userInfo:user,
     adminCred:boolean,
     task:task
@@ -23,7 +31,7 @@ const TaskBottomInfo = memo(({
     desktop:py-[1.533rem]
     largeDesktop:py-[1.917rem]
     ">
-        <LeftContent userInfo={userInfo} adminCred={adminCred} task ={task}/>
+        <LeftContent taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task ={task}/>
         <RightContent adminCred={adminCred} task = {task}/>
     </div>
   )

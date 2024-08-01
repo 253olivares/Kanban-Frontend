@@ -1,4 +1,4 @@
-import { ReactNode, memo } from 'react';
+import { ReactNode, memo, useState } from 'react';
 import { motion } from 'framer-motion';
 import headerBackground from '/assets/taskModal/TaskHeaderBack.png';
 import { useAppSelector } from '../../../../reduxStore/hook';
@@ -27,6 +27,9 @@ const TaskDetail = memo((
 ):ReactNode => {
 
   const adminCred = userId === task.admin_id;
+
+  const [taskDescription,setTaskDescription] = useState<string>(task.description);
+  const [comments, setComment] = useState<string>("");
 
   return (
     <motion.div
@@ -67,7 +70,7 @@ const TaskDetail = memo((
     >
       <ImageHeader workspaceName={workspace.name} boardName={board.name} selectList={task.l_id} imgSrc={headerBackground} />
       <TaskInformation adminCred={adminCred}  task={task} />
-      <TaskBottomInfo userInfo={userInfo} adminCred={adminCred} task={task}/>
+      <TaskBottomInfo taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task={task}/>
     </motion.div>
   )
 })

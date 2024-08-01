@@ -3,9 +3,14 @@ import scrollbarImage from '/assets/scrollBarTrack.png';
 import editIcon from '/assets/Edit_Icon.png'
 
 const TaskDescription = memo(({
+  taskDescription,
+  // @ts-ignores
+  setTaskDescription,
   adminCred,
   description
 } : {
+  taskDescription:string,
+  setTaskDescription:React.Dispatch<React.SetStateAction<string>>,
   adminCred:boolean,
   description:string
 }) => {
@@ -26,7 +31,7 @@ const TaskDescription = memo(({
 
     '>
       <DescriptionHead adminCred={adminCred} />
-      <DescriptionBox />
+      <DescriptionBox taskDescription= {taskDescription}/>
     </div>
   )
 })
@@ -80,7 +85,11 @@ const DescriptionHead = memo((
   </div>
 })
 
-const DescriptionBox = memo(() =>{
+const DescriptionBox = memo(({
+  taskDescription
+} : {
+  taskDescription:string
+}) =>{
   return <div className='
   flex-grow
 
@@ -124,10 +133,7 @@ const DescriptionBox = memo(() =>{
     boardsScroll
     scrollGutter
     '>
-      {`Hello every let me introduce you to clayton. He is a new new hire for our firm. Please make sure to get him set up with a new computer. It has already been decided he will join Ryan's team. Please ask Clay and Ryan any questions you need.
-
-        Sincerely, 
-        Sam Ratson (Description Placeholder) `}
+      {`${taskDescription}`}
     </div>
   </div>
 })

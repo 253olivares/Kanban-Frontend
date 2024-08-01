@@ -2,10 +2,14 @@ import { memo } from "react"
 import { user } from "../../../../../reduxStore/users/userSlice"
  
 const AddComment = memo(({
+  comments,
+  setComment,
   adminCred,
   userInfo,
   assignees
 } : {
+  comments:string,
+    setComment:React.Dispatch<React.SetStateAction<string>>,
   adminCred:boolean,
   userInfo:user,
   assignees:string[]
@@ -58,14 +62,25 @@ const AddComment = memo(({
     desktop:gap-[.8rem]
     largeDesktop:gap-[1rem]
     ">
-      <TextArea />
-      <CommentSubmitButton />
+      <TextArea comments={comments} setComment={setComment} />
+      <CommentSubmitButton comments={comments} />
     </div>
   )
 })
 
-const TextArea = memo(() =>{
-  return <textarea className="
+const TextArea = memo((
+  {
+    comments,
+    setComment
+  } : {
+    comments:string,
+    setComment:React.Dispatch<React.SetStateAction<string>>,
+  }
+) =>{
+  return <textarea 
+  value={comments}
+  onChange={(e)=> setComment(e.target.value)}
+  className="
     bg-PrimaryWhite
 
     focus:outline-none
@@ -100,13 +115,19 @@ const TextArea = memo(() =>{
   </textarea>
 })
 
-const CommentSubmitButton = memo(() =>{
+const CommentSubmitButton = memo(({
+  comments
+} : {
+  comments:string
+}) =>{  
   return <div className="
     w-full
     flex
     justify-end
   ">
-    <button className="
+    <button
+    disabled={comments.trim() === ""}
+    className="
 
     sLaptop:text-[0.666rem]
     mLaptop:text-[0.833rem]

@@ -76,7 +76,7 @@ export const createTask = createAsyncThunk('tasks/createTask',async(
             admin_id: adminId,
             order: listData.tasks.length,
             name: taskName,
-            description: "",
+            description: "No description.",
             priority: [],
             comments: [],
             isActive: false,
