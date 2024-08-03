@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import scrollbarImage from '/assets/scrollBarTrack.png';
 import editIcon from '/assets/Edit_Icon.png'
 
@@ -7,6 +7,7 @@ const TaskDescription = memo(({
   // @ts-ignores
   setTaskDescription,
   adminCred,
+  // @ts-ignore
   description
 } : {
   taskDescription:string,
@@ -14,7 +15,8 @@ const TaskDescription = memo(({
   adminCred:boolean,
   description:string
 }) => {
-  console.log(description);
+
+  const [openDescriptionEdit, setOpenDescriptionEdit] = useState<boolean>(false);
   return (
     <div className='
     flex-grow
@@ -30,16 +32,22 @@ const TaskDescription = memo(({
     largeDesktop:gap-[0.75rem]
 
     '>
-      <DescriptionHead adminCred={adminCred} />
-      <DescriptionBox taskDescription= {taskDescription}/>
+      <DescriptionHead openDescriptionEdit={openDescriptionEdit} setOpenDescriptionEdit={setOpenDescriptionEdit}  adminCred={adminCred} />
+      <DescriptionBox openDescriptionEdit={openDescriptionEdit} setOpenDescriptionEdit={setOpenDescriptionEdit} taskDescription= {taskDescription}/>
     </div>
   )
 })
 
 const DescriptionHead = memo((
   {
+    // @ts-ignore
+    openDescriptionEdit,
+    // @ts-ignore
+    setOpenDescriptionEdit,
     adminCred
   } : {
+    openDescriptionEdit:boolean,
+    setOpenDescriptionEdit:React.Dispatch<React.SetStateAction<boolean>>,
     adminCred:boolean
   }
 ) => {
@@ -86,8 +94,14 @@ const DescriptionHead = memo((
 })
 
 const DescriptionBox = memo(({
+  // @ts-ignore
+  openDescriptionEdit,
+  // @ts-ignore
+  setOpenDescriptionEdit,
   taskDescription
 } : {
+  openDescriptionEdit:boolean,
+    setOpenDescriptionEdit:React.Dispatch<React.SetStateAction<boolean>>,
   taskDescription:string
 }) =>{
   return <div className='
