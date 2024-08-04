@@ -12,7 +12,8 @@ const TaskBottomInfo = memo(({
     setComment,
     userInfo,
     adminCred,
-    task
+    task,
+    
 } : {
     taskDescription:string,
     setTaskDescription:React.Dispatch<React.SetStateAction<string>>,

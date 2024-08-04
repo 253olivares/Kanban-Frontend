@@ -1,6 +1,6 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../store";
-import { addTask, deleteTasksFromListCL, getList, getTask } from "../../customLogic/CustomLogic";
+import { addTask, deleteTasksFromListCL, getList, getTask, updateTaskCL } from "../../customLogic/CustomLogic";
 import { list, selectListById } from "../lists/listsSlice";
 import { workspace } from "../workspace/workspaceSlice";
 
@@ -221,7 +221,9 @@ const taskSlice = createSlice ({
             taskAdapter.removeMany(state,action.payload.tasksToDelete)
         })
         .addCase(updateTask.fulfilled,(state,action:PayloadAction<{updateTask:task,prevTasks:task[]}>)=>{
+            updateTaskCL(action.payload.updateTask);
             taskAdapter.updateOne(state,{id:action.payload.updateTask.t_id,changes:action.payload.updateTask});
+
         })
       
     }

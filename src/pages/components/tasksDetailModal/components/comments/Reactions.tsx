@@ -37,7 +37,7 @@ const Reactions = memo(({
     largeDesktop:gap-[0.625rem]
     ">  
       {Object.entries(Reactions).map(([key,value],_) =>
-        <Emoticons emoji={key} number={value} />
+        <Emoticons key={key} emoji={key} number={value} />
       )}
       {
         assignees.includes(userInfo.u_id) || adminCred &&  <AddReaction />

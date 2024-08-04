@@ -15,6 +15,22 @@ const userKey = 'userList';
 const workspaceKey = 'workspaceList';
 const userHistory = 'userHistory'
 
+export const updateTaskCL = (updateTask:task):void => {
+    const data = localStorage.getItem(taskKey);
+    if(!data){
+        reloadApplication();
+        return; 
+    }
+
+    const convertData:task[] = JSON.parse(data);
+
+    const updateList:task[] = convertData.map((task:task)=> task.t_id === updateTask.t_id ? 
+    updateTask : task)
+
+    localStorage.setItem(taskKey,JSON.stringify(updateList));
+
+}
+
 export const addTask = (newTask:task):void => {
     const data = localStorage.getItem(taskKey);
     if(!data){
