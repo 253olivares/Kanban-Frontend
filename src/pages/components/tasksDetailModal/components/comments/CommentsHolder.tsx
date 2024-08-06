@@ -21,48 +21,12 @@ export type commentTest = {
     }
 }
 
-const testComments:commentTest[] = [
-    {
-        c_id: "testingId_1",
-        u_id: "user_stQN-SH55dcMJGE39h3lL",
-        t_id: "task_2K5zBHcDdY-QMP9fhvBJv",
-        message: "Please to meet you guys. Looking forward to working with everyone!",
-        date: new Date(),
-        reactions: {
-            thumbUp:0,
-            party:0,
-            smile:0,
-        },
-        userReactions: {
-            thumbUp:[],
-            party:[],
-            smile:[]
-        }
-    }, {
-        c_id: "testingId_2",
-        u_id: "user_stQN-SH55dcMJGE39h3lL",
-        t_id: "task_2K5zBHcDdY-QMP9fhvBJv",
-        message: "Nice to meet you Clay. Please get in touch with Ryan so we can get details of hardware and software you will require.",
-        date: new Date(),
-        reactions: {
-            thumbUp:0,
-            party:0,
-            smile:0,
-        },
-        userReactions: {
-            thumbUp:[],
-            party:[],
-            smile:[]
-        }
-    }
-]
-
-
 const CommentsHolder = memo((
     {
         assignees,
         userInfo,
         adminCred,
+        // @ts-ignore
         comments
     } : {
         assignees:string[],
@@ -71,7 +35,41 @@ const CommentsHolder = memo((
         comments:string[]
     }) => {
 
-       console.log(comments)
+        const testComments:commentTest[] = [
+            {
+                c_id: "testingId_1",
+                u_id: userInfo.u_id,
+                t_id: "task_2K5zBHcDdY-QMP9fhvBJv",
+                message: "Please to meet you guys. Looking forward to working with everyone!",
+                date: new Date(),
+                reactions: {
+                    thumbUp:0,
+                    party:0,
+                    smile:0,
+                },
+                userReactions: {
+                    thumbUp:[],
+                    party:[],
+                    smile:[]
+                }
+            }, {
+                c_id: "testingId_2",
+                u_id: userInfo.u_id,
+                t_id: "task_2K5zBHcDdY-QMP9fhvBJv",
+                message: "Nice to meet you Clay. Please get in touch with Ryan so we can get details of hardware and software you will require.",
+                date: new Date(),
+                reactions: {
+                    thumbUp:0,
+                    party:0,
+                    smile:0,
+                },
+                userReactions: {
+                    thumbUp:[],
+                    party:[],
+                    smile:[]
+                }
+            }
+        ]
   return (
     <div 
     style={{
