@@ -28,6 +28,7 @@ const TaskDetail = memo((
 
   const adminCred = userId === task.admin_id;
 
+  // @ts-ignore
   const [modal,setModal] = useState<boolean>(false);
 
   const [taskDescription,setTaskDescription] = useState<string>(task.description);
@@ -71,7 +72,7 @@ const TaskDetail = memo((
     `}
     >
       <ImageHeader workspaceName={workspace.name} boardName={board.name} selectList={task.l_id} imgSrc={headerBackground} />
-      <TaskInformation adminCred={adminCred}  task={task} />
+      <TaskInformation setModal={setModal} adminCred={adminCred} taskId={task.t_id} taskName={task.name} filter={task.priority} members={task.assignees} comments={task.comments} story={task.story} />
       <TaskBottomInfo taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task={task}/>
     </motion.div>
   )

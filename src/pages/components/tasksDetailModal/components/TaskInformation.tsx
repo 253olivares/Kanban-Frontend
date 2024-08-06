@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef, useState } from "react"
-import { task, updateTask } from "../../../../reduxStore/tasks/tasksSlice"
+import { updateTask } from "../../../../reduxStore/tasks/tasksSlice"
 import TaskName from './TaskName';
 import Filters from "./Filters";
 import TaskInfoExtra from "./TaskInfo";
@@ -12,16 +12,28 @@ import { useAppDispatch } from "../../../../reduxStore/hook";
 
 const TaskInformation = memo((
   {
-    adminCred,
-    task
+    taskId,
+    taskName,
+    filter,
+    members,
+    comments,
+    story,
+    setModal,
+    adminCred
   } : {
-    adminCred:boolean,
-    task:task
+    taskId:string,
+    taskName:string,
+    filter:string[],
+    members:string[],
+    comments:string[],
+    story:number,
+    setModal:React.Dispatch<React.SetStateAction<boolean>>,
+    adminCred:boolean
   }
 ) => {
 
-  const [editTaskName,setEditTaskName] = useState<string>(task.name);
-  const [storyScore,setStoryScore] = useState<number>(task.story);
+  const [editTaskName,setEditTaskName] = useState<string>(taskName);
+  const [storyScore,setStoryScore] = useState<number>(story);
   const [taskDetail,setTaskDetail] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
@@ -50,20 +62,21 @@ const TaskInformation = memo((
 
       overflow-visible
       ">
-        <TaskInfo editTaskName={editTaskName} setEditTaskName={setEditTaskName} taskDetail={taskDetail} setTaskDetail={setTaskDetail} taskname={task.name} filter={task.priority} members={task.assignees.length+1} comments={task.comments.length} />
+        <TaskInfo editTaskName={editTaskName} setEditTaskName={setEditTaskName} taskDetail={taskDetail} setTaskDetail={setTaskDetail} taskname={taskName} filter={filter} members={members.length+1} comments={comments.length} />
         <StoryPointAndOptions cancelChanges={()=>{
-          setEditTaskName(task.name);
-          setStoryScore(task.story);
+          setEditTaskName(taskName);
+          setStoryScore(story);
           setTaskDetail(false)
         }} acceptChanges={()=>{
-          dispatch(updateTask({taskId:task.t_id,update:{name:editTaskName,story:storyScore}}))
+          dispatch(updateTask({taskId:taskId,update:{name:editTaskName,story:storyScore}}))
           setTaskDetail(false)
         }} 
         storyScore={storyScore}
         setStoryScore={setStoryScore} 
         taskDetail={taskDetail}
         setTaskDetail={setTaskDetail} 
-        storyPoint={task.story} 
+        storyPoint={story} 
+        setModal={setModal}
         adminCred={adminCred}/>
       </div>
     </div>
@@ -86,7 +99,7 @@ const TaskInfo = memo(({
   taskname:string,
   filter:string[],
   members:number,
-  comments:number
+  comments:number,
 }) => {
 
   return <div className="
@@ -119,7 +132,8 @@ const StoryPointAndOptions = memo(({
   taskDetail,
   setTaskDetail,
   storyPoint,
-  adminCred
+  adminCred,
+  setModal
 } : {
   cancelChanges:()=>void,
   acceptChanges:()=>void,
@@ -128,7 +142,8 @@ const StoryPointAndOptions = memo(({
   taskDetail:boolean,
   setTaskDetail:React.Dispatch<React.SetStateAction<boolean>>,
   storyPoint:number,
-  adminCred:boolean
+  adminCred:boolean,
+  setModal:React.Dispatch<React.SetStateAction<boolean>>
 })=>{
 
   return <div className="
@@ -139,7 +154,7 @@ const StoryPointAndOptions = memo(({
   ">
     <StoryPoints taskDetail={taskDetail} storyScore={storyScore} setStoryScore={setStoryScore} storyPoint={storyPoint} />
     {
-      adminCred && <TaskAdminOptions cancelChanges={cancelChanges} acceptChanges={acceptChanges} taskDetail={taskDetail} setTaskDetail={setTaskDetail}  />
+      adminCred && <TaskAdminOptions setModal={setModal} cancelChanges={cancelChanges} acceptChanges={acceptChanges} taskDetail={taskDetail} setTaskDetail={setTaskDetail}  />
     }
     
   </div>
@@ -149,12 +164,14 @@ const TaskAdminOptions = memo(({
   cancelChanges,
   acceptChanges,
   taskDetail,
-  setTaskDetail
+  setTaskDetail,
+  setModal
 } : {
   cancelChanges:()=>void,
   acceptChanges:()=>void,
   taskDetail:boolean,
-  setTaskDetail:React.Dispatch<React.SetStateAction<boolean>>
+  setTaskDetail:React.Dispatch<React.SetStateAction<boolean>>,
+  setModal:React.Dispatch<React.SetStateAction<boolean>>
 })=>{
 
   return <div className="
@@ -179,7 +196,7 @@ const TaskAdminOptions = memo(({
       : 
       <EditButton setTaskDetail={setTaskDetail} />
     }
-    <Delete/>
+    <Delete setModal={setModal}/>
   </div>
 })
 
