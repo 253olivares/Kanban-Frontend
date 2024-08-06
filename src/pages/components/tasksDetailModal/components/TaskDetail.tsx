@@ -28,6 +28,8 @@ const TaskDetail = memo((
 
   const adminCred = userId === task.admin_id;
 
+  const [modal,setModal] = useState<boolean>(false);
+
   const [taskDescription,setTaskDescription] = useState<string>(task.description);
   const [comments, setComment] = useState<string>("");
 

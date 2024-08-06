@@ -737,6 +737,12 @@
         linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 25%));
     }
 
+    .glass-gradient2 {
+        background: 
+        linear-gradient(to right, rgb(0 0 0 / 18%), rgb(0 0 0 / 18%));
+    }
+
+
     .glass-gradient-loading {
         background: 
         linear-gradient(to right, rgb(0 0 0 / 50%), rgb(0 0 0 / 50%));

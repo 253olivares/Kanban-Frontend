@@ -41,6 +41,8 @@ const TasksFilterHead = ({
     mLaptop:h-[0.766rem]
     desktop:h-[0.92rem]
     largeDesktop:h-[1.15rem]
+
+    shrink-0
     ">
       {
         Object.entries(filters).map(([k,v])=>

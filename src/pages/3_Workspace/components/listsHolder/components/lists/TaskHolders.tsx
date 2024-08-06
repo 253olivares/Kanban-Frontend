@@ -22,6 +22,7 @@ const TaskHolders = memo(({
 
     grid
     grid-cols-1
+    auto-rows-auto
 
     max-h-[14.062rem]
     mobile:max-h-[18.75rem]

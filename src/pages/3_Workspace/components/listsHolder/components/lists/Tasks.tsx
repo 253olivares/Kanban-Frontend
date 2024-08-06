@@ -59,17 +59,21 @@ const Tasks = ({
 
     px-[5%]
 
-    overflow-hidden
+    shrink-0
 
     `}>
       <TasksFilterHead filter = {task.priority} />
       <div className="
        flex
        flex-row 
+
+       shrink-0
       "> 
         <div className="
         flex
         flex-col
+
+        shrink-0
 
         flex-grow
         ">

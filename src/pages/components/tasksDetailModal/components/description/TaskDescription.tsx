@@ -233,6 +233,12 @@ const EditDescription = memo(({
 
     w-full
 
+    boardsScroll
+    scrollGutter
+
+    focus:outline-none
+    focus:opacity-100
+
     sLaptop:h-[5.696rem]
     mLaptop:h-[7.12rem]
     desktop:h-[8.544rem]
@@ -243,14 +249,17 @@ const EditDescription = memo(({
     desktop:text-[0.9rem]
     largeDesktop:text-[1.125rem]
 
-    text-black
+    sLaptop:rounded-[0.186rem]
+    mLaptop:rounded-[0.233rem]
+    desktop:rounded-[0.35rem]
+    largeDesktop:rounded-[0.35rem]
+
+    text-PrimaryWhite
 
     p-[1.5%]
 
-    boardsScroll
-    scrollGutter
-
-    focus:outline-none
+    glass-gradient2
+    bg-transparent
     '
     onChange={(e)=>setTaskDescription(e.target.value)}
     value={taskDescription}

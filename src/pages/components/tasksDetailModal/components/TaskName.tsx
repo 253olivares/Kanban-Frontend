@@ -96,7 +96,6 @@ const TaskName = (
         desktop:rounded-[0.35rem]
         largeDesktop:rounded-[0.35rem]
         
-  
         ring-gray-600 
         focus:ring-SelectorBlue
         sLaptop:ring-[1.999px]

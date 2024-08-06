@@ -26,6 +26,8 @@ const ListHolder = memo((
     flex
     flex-row
 
+    shrink-0
+
     justify-between
 
     sLaptop:py-[0.281rem]
