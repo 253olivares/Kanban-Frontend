@@ -1,8 +1,12 @@
 import editIcon from '/assets/Edit_Icon.png'
 
-const EditButton = () => {
+const EditButton = ({
+  setTaskDetail
+} : {
+  setTaskDetail:React.Dispatch<React.SetStateAction<boolean>>
+}) => {
   return (
-    <img className='sLaptop:h-[0.733rem]
+    <img onClick={()=> setTaskDetail(true)} className='sLaptop:h-[0.733rem]
     mLaptop:h-[0.916rem]
     desktop:h-[1.1rem]
     largeDesktop:h-[1.375rem] 

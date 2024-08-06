@@ -93,7 +93,7 @@ const DescriptionHead = memo((
   </div>
 })
 
-const CancelOrSaveChanges = memo(({
+export const CancelOrSaveChanges = memo(({
   taskId,
   description,
   taskDescription,
@@ -132,7 +132,7 @@ const CancelOrSaveChanges = memo(({
   </div>
 })
 
-const Mark = memo(({
+export const Mark = memo(({
   onclick,
   imgSrc
 } : {
