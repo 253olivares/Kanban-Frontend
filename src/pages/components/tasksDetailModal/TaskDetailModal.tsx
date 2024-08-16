@@ -1,4 +1,4 @@
-import { ReactNode, memo, useLayoutEffect } from "react";
+import { ReactNode, memo, useLayoutEffect, useState } from "react";
 import {   motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "../../../reduxStore/hook";
 import { changeTaskModal, getSelectTaskId, setSelectTask } from "../../../reduxStore/modal/modalSlice";
@@ -23,6 +23,8 @@ const TaskDetailModal= memo((
   const taskId = useAppSelector(getSelectTaskId);
   const task = useAppSelector(state => selectTaskById(state,taskId));
   const workspace = useAppSelector(state=>selectWorkspaceById(state,board.w_id))
+
+  const [openTaskMiniModal,setOpenTaskMiniModal] = useState<boolean>(false);
 
   useLayoutEffect(()=>{
     return () =>{
@@ -58,10 +60,11 @@ const TaskDetailModal= memo((
         sLaptop:justify-center 
         sLaptop:items-center
     ">
-           <TaskDetail userInfo={userInfo} userId={userInfo.u_id} workspace={workspace} task={task} board={board} />
+           <TaskDetail openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} userInfo={userInfo} userId={userInfo.u_id} workspace={workspace} task={task} board={board} />
         <div
         onClick={()=>{
-          dispatch(changeTaskModal(false));
+          !openTaskMiniModal && dispatch(changeTaskModal(false));
+          openTaskMiniModal&& setOpenTaskMiniModal(false)
         }}
          className="
          hidden

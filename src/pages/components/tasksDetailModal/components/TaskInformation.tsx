@@ -12,22 +12,22 @@ import { useAppDispatch } from "../../../../reduxStore/hook";
 
 const TaskInformation = memo((
   {
+    setOpenTaskMiniModal,
     taskId,
     taskName,
     filter,
     members,
     comments,
     story,
-    setModal,
     adminCred
   } : {
+    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<boolean>> ,
     taskId:string,
     taskName:string,
     filter:string[],
     members:string[],
     comments:string[],
     story:number,
-    setModal:React.Dispatch<React.SetStateAction<boolean>>,
     adminCred:boolean
   }
 ) => {
@@ -63,7 +63,8 @@ const TaskInformation = memo((
       overflow-visible
       ">
         <TaskInfo editTaskName={editTaskName} setEditTaskName={setEditTaskName} taskDetail={taskDetail} setTaskDetail={setTaskDetail} taskname={taskName} filter={filter} members={members.length+1} comments={comments.length} />
-        <StoryPointAndOptions cancelChanges={()=>{
+        <StoryPointAndOptions 
+        cancelChanges={()=>{
           setEditTaskName(taskName);
           setStoryScore(story);
           setTaskDetail(false)
@@ -76,7 +77,7 @@ const TaskInformation = memo((
         taskDetail={taskDetail}
         setTaskDetail={setTaskDetail} 
         storyPoint={story} 
-        setModal={setModal}
+        setModal={setOpenTaskMiniModal}
         adminCred={adminCred}/>
       </div>
     </div>

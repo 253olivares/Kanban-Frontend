@@ -6,9 +6,11 @@ import TaskUsers from "./users/TaskUsers"
 
 
 const RightContent = memo(({
+    setOpenTaskMiniModal,
     adminCred,
     task
 }:{
+    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<boolean>>,
     adminCred:boolean,
     task:task
 }) => {
@@ -27,7 +29,7 @@ const RightContent = memo(({
     flex-shrink-0
     
     ">
-        <TaskUsers adminCred={adminCred} usersAdded ={task.assignees} admin = {task.admin_id} />
+        <TaskUsers setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} usersAdded ={task.assignees} admin = {task.admin_id} />
         <TaskFilterSection adminCred={adminCred} taskId={task.t_id} taskPrio={task.priority} />
     </div>
   )
