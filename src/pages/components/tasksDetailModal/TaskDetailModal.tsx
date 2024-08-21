@@ -9,6 +9,8 @@ import { selectTaskById } from "../../../reduxStore/tasks/tasksSlice";
 import { selectWorkspaceById } from "../../../reduxStore/workspace/workspaceSlice";
 
 
+export type miniTaskTypes = "delete" | "users" | "";
+
 const TaskDetailModal= memo((
   {
     userInfo,
@@ -24,7 +26,7 @@ const TaskDetailModal= memo((
   const task = useAppSelector(state => selectTaskById(state,taskId));
   const workspace = useAppSelector(state=>selectWorkspaceById(state,board.w_id))
 
-  const [openTaskMiniModal,setOpenTaskMiniModal] = useState<boolean>(false);
+  const [openTaskMiniModal,setOpenTaskMiniModal] = useState<miniTaskTypes>("");
 
   useLayoutEffect(()=>{
     return () =>{
@@ -63,8 +65,8 @@ const TaskDetailModal= memo((
            <TaskDetail openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} userInfo={userInfo} userId={userInfo.u_id} workspace={workspace} task={task} board={board} />
         <div
         onClick={()=>{
-          !openTaskMiniModal && dispatch(changeTaskModal(false));
-          openTaskMiniModal&& setOpenTaskMiniModal(false)
+          openTaskMiniModal ==="" && dispatch(changeTaskModal(false));
+          openTaskMiniModal&& setOpenTaskMiniModal("")
         }}
          className="
          hidden

@@ -3,6 +3,7 @@ import { task } from "../../../../reduxStore/tasks/tasksSlice"
 import LeftContent from "./LeftContent"
 import RightContent from "./RightContent"
 import { user } from "../../../../reduxStore/users/userSlice"
+import { miniTaskTypes } from "../TaskDetailModal"
 
 
 const TaskBottomInfo = memo(({
@@ -16,7 +17,7 @@ const TaskBottomInfo = memo(({
     task,
     
 } : {
-    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<boolean>>,
+    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>,
     taskDescription:string,
     setTaskDescription:React.Dispatch<React.SetStateAction<string>>,
     comments:string,

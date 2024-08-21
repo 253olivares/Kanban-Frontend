@@ -1,14 +1,15 @@
+import { miniTaskTypes } from '../../TaskDetailModal';
 import deleteIcon from '/assets/trashIcon.svg';
 
 const Delete = ({
   setModal
 } : {
-  setModal:React.Dispatch<React.SetStateAction<boolean>>
+  setModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>
 }) => {
   return (
     <img 
     onClick={()=>{
-      setModal(true);
+      setModal("delete");
     }}
     className='sLaptop:h-[0.733rem]
     mLaptop:h-[0.916rem]

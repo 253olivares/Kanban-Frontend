@@ -1,11 +1,17 @@
+import { task } from "../../../../../reduxStore/tasks/tasksSlice";
+import { miniTaskTypes } from "../../TaskDetailModal";
 import Content from "./content/Content";
 import { motion } from "framer-motion";
 
 
 const TaskMiniModal = ({
+  task,
+  openTaskMiniModal,
   setOpenTaskMiniModal
 } : {
-  setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<boolean>>
+  task:task,
+  openTaskMiniModal:miniTaskTypes,
+  setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>
 }) => {
 
   return (
@@ -29,7 +35,7 @@ const TaskMiniModal = ({
       items-center
       z-10
     '>
-      <Content />
+      <Content task={task} setOpenTaskMiniModal={setOpenTaskMiniModal} openTaskMiniModal={openTaskMiniModal} />
       <div
       className="
       absolute
@@ -38,7 +44,7 @@ const TaskMiniModal = ({
         h-full
         sLaptop:bg-[rgba(0,0,0,0.75)]
       "
-      onClick={()=> setOpenTaskMiniModal(false)}
+      onClick={()=> setOpenTaskMiniModal("")}
       />
     </motion.div>
   )

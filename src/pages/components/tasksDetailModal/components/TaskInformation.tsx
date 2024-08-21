@@ -9,6 +9,7 @@ import checkMark from '/assets/Check_MarkIcon.svg';
 import cancelButton from '/assets/x_Icon.png';
 import { Mark } from "./description/TaskDescription";
 import { useAppDispatch } from "../../../../reduxStore/hook";
+import { miniTaskTypes } from "../TaskDetailModal";
 
 const TaskInformation = memo((
   {
@@ -21,7 +22,7 @@ const TaskInformation = memo((
     story,
     adminCred
   } : {
-    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<boolean>> ,
+    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>> ,
     taskId:string,
     taskName:string,
     filter:string[],
@@ -144,7 +145,7 @@ const StoryPointAndOptions = memo(({
   setTaskDetail:React.Dispatch<React.SetStateAction<boolean>>,
   storyPoint:number,
   adminCred:boolean,
-  setModal:React.Dispatch<React.SetStateAction<boolean>>
+  setModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>
 })=>{
 
   return <div className="
@@ -172,7 +173,7 @@ const TaskAdminOptions = memo(({
   acceptChanges:()=>void,
   taskDetail:boolean,
   setTaskDetail:React.Dispatch<React.SetStateAction<boolean>>,
-  setModal:React.Dispatch<React.SetStateAction<boolean>>
+  setModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>
 })=>{
 
   return <div className="

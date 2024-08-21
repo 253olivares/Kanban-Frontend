@@ -10,6 +10,7 @@ import { workspace } from '../../../../reduxStore/workspace/workspaceSlice';
 import TaskBottomInfo from './TaskBottomInfo';
 import { user } from '../../../../reduxStore/users/userSlice';
 import TaskMiniModal from './TasksMiniModal/TaskMiniModal';
+import { miniTaskTypes } from '../TaskDetailModal';
 
 const TaskDetail = memo((
   {
@@ -21,8 +22,8 @@ const TaskDetail = memo((
     task,
     board
   } : {
-    openTaskMiniModal:boolean,
-    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<boolean>>,
+    openTaskMiniModal:miniTaskTypes,
+    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>,
     userInfo:user,
     userId:string,
     workspace:workspace,
@@ -77,7 +78,7 @@ const TaskDetail = memo((
     `}
     >
       <AnimatePresence>
-      {openTaskMiniModal && <TaskMiniModal setOpenTaskMiniModal={setOpenTaskMiniModal} />}
+      {openTaskMiniModal && <TaskMiniModal task={task} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} />}
       </AnimatePresence>
       <ImageHeader workspaceName={workspace.name} boardName={board.name} selectList={task.l_id} imgSrc={headerBackground} />
       <TaskInformation setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} taskId={task.t_id} taskName={task.name} filter={task.priority} members={task.assignees} comments={task.comments} story={task.story} />

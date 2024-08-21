@@ -1,7 +1,20 @@
 import { useContext } from 'react'
 import { AppContext } from '../../../../../appRefContext/appRefContext';
+import { AnimatePresence } from 'framer-motion';
+import { miniTaskTypes } from '../../../TaskDetailModal';
+import DeleteModal from './modals/deleteModal/DeleteModal';
+import UserModal from './modals/users/Users'
+import { task } from '../../../../../../reduxStore/tasks/tasksSlice';
 
-const Content = () => {
+const Content = ({
+  task,
+  openTaskMiniModal,
+  setOpenTaskMiniModal
+} : {
+  task:task,
+  openTaskMiniModal:miniTaskTypes,
+  setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>
+}) => {
 
     const appContext = useContext(AppContext);
     const{taskMiniModal} = appContext!;
@@ -12,19 +25,34 @@ const Content = () => {
     className='
       bg-SpaceBlue
 
-      w-96
-
-      h-52
-
       block
 
       rounded-xl
 
       relative
       z-[1]
+
+      sLaptop:p-[0.766rem]
+      mLaptop:p-[0.958rem]
+      desktop:p-[1.15rem]
+      largeDesktop:p-[1.437rem]
+
+      max-w-[75%]
     '
     >
-
+      <AnimatePresence>
+        {
+          openTaskMiniModal === "delete" && <DeleteModal 
+          taskId={task.t_id} 
+          listId={task.l_id}
+          setOpenTaskMiniModal={setOpenTaskMiniModal}
+          />
+        }
+        {
+          openTaskMiniModal === "users" && <UserModal />
+        }
+        
+      </AnimatePresence>
     </div>
   )
 }

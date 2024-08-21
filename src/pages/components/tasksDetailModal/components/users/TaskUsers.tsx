@@ -4,6 +4,7 @@ import { useAppSelector } from "../../../../../reduxStore/hook"
 import { getUserHistoryState } from "../../../../../reduxStore/modal/modalSlice"
 import scrollbarImage from '/assets/scrollBarTrack.png';
 import addWorkspace from '/assets/Add_New_Workspace.svg';
+import { miniTaskTypes } from "../../TaskDetailModal";
 
 
 const TaskUsers = memo(( {
@@ -12,7 +13,7 @@ const TaskUsers = memo(( {
   usersAdded,
   admin
 } : {
-  setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<boolean>>,
+  setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>,
   adminCred:boolean,
   usersAdded:string[],
   admin:string
@@ -40,7 +41,7 @@ const TaskHead = memo(({
   setOpenTaskMiniModal,
   adminCred
 } : {
-  setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<boolean>>,
+  setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
   adminCred:boolean
 }) =>{
 return<div className="
@@ -84,7 +85,7 @@ return<div className="
       duration-500
       ">
         <img 
-        onClick={()=>setOpenTaskMiniModal(true)}
+        onClick={()=>setOpenTaskMiniModal("users")}
         className="
         sLaptop:w-[0.866rem]
         mLaptop:w-[1.083rem]

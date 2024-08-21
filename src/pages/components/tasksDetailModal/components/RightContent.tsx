@@ -2,6 +2,7 @@ import { memo } from "react"
 import { task } from "../../../../reduxStore/tasks/tasksSlice"
 import TaskFilterSection from "./filters/TaskFilter"
 import TaskUsers from "./users/TaskUsers"
+import { miniTaskTypes } from "../TaskDetailModal"
 
 
 
@@ -10,7 +11,7 @@ const RightContent = memo(({
     adminCred,
     task
 }:{
-    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<boolean>>,
+    setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>,
     adminCred:boolean,
     task:task
 }) => {
