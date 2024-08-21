@@ -15,6 +15,25 @@ const userKey = 'userList';
 const workspaceKey = 'workspaceList';
 const userHistory = 'userHistory'
 
+export const removeUsersTasks = (assignees:string[], taskId:string)=>{
+    const data = localStorage.getItem(userKey);
+    if(!data){
+        reloadApplication();
+        return; 
+    }
+
+    const userList:Record<string,user> = JSON.parse(data);
+    for(const user in assignees){
+        userList[user]= {
+            ...userList[user],
+            tasks: userList[user].tasks.filter(x=>x !==taskId)
+        }
+    }
+
+    localStorage.setItem(userKey,JSON.stringify(userList));
+    
+}
+
 export const updateTaskCL = (updateTask:task):void => {
     const data = localStorage.getItem(taskKey);
     if(!data){
@@ -55,8 +74,6 @@ export const deleteTasksFromListCL = (tasksToDelete:string[]):void => {
         const convertData:task[] = JSON.parse(data);
 
         const update = convertData.filter((task) => !tasksToDelete.includes(task.t_id));
-    
-        console.log("test",update);
     
         localStorage.setItem(taskKey,JSON.stringify(update));
     } catch(e:any) {

@@ -115,12 +115,33 @@ export const updateListTasks = createAsyncThunk("list/updateTasks", async (
 
 export const deleteListStateBoardDelete = createAsyncThunk('list/deleteListState', async(
     {boardId} : {boardId:string},
-    {rejectWithValue}
+    {rejectWithValue }
 )=> {
     try {
-
         return {boardId:boardId}
     } catch (e:any) {
+        return rejectWithValue(e);
+    }
+})
+
+export const deleteTaskFromList = createAsyncThunk('list/deleteTaskFromList',async({
+    listId,
+    deleteTask
+} : {
+    listId:string,
+    deleteTask:string
+},{rejectWithValue,getState})=>{
+    try{
+        const state = getState() as RootState;
+
+        const currentList = selectListById(state,listId);
+
+        const updateList:list={
+            ...currentList,
+            tasks:currentList.tasks.filter(x=>x!==deleteTask)
+        }
+        return{updateList:updateList}
+    }catch(e:any){
         return rejectWithValue(e);
     }
 })
@@ -169,6 +190,10 @@ const listSlice = createSlice({
         .addCase(deleteListStateBoardDelete.fulfilled, (state,action:PayloadAction<{boardId:string}>) => {
             deleteBoardListCL(action.payload.boardId);
             listAdapter.removeAll(state);
+        })
+        .addCase(deleteTaskFromList.fulfilled,(state,action:PayloadAction<{updateList:list}>)=>{
+            updateListCL(action.payload.updateList)
+            listAdapter.updateOne(state,{id:action.payload.updateList.l_id,changes:action.payload.updateList})
         })
     }
 })

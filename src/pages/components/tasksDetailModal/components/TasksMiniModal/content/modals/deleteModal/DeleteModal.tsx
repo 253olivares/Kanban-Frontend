@@ -1,16 +1,27 @@
+import { removeUsersTasks } from "../../../../../../../../customLogic/CustomLogic"
 import { useAppDispatch } from "../../../../../../../../reduxStore/hook"
+import { deleteTaskFromList } from "../../../../../../../../reduxStore/lists/listsSlice"
 import { changeTaskModal } from "../../../../../../../../reduxStore/modal/modalSlice"
+import { deleteTasksFromListDelete } from "../../../../../../../../reduxStore/tasks/tasksSlice"
+import { deleteTaskFromUsers } from "../../../../../../../../reduxStore/users/userSlice"
 import { miniTaskTypes } from "../../../../../TaskDetailModal"
 
 const DeleteModal = ({
   setOpenTaskMiniModal,
   taskId,
-  listId
+  listId,
+  admin,
+  comments,
+  taskUsers
 } : {
   setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
   taskId:string,
   listId:string,
+  admin:string,
+  comments:string[],
+  taskUsers:string[]
 }) => {
+
   return (
     <div className="
       flex
@@ -22,7 +33,7 @@ const DeleteModal = ({
       largeDesktop:gap-[1.562rem]
     ">
       <Message message = {"Are you sure you want to delete this task. Users involved will be removed and action will not be recoverable!"} />
-      <DeleteButton setOpenTaskMiniModal={setOpenTaskMiniModal}  listId={listId} taskId={taskId}/>
+      <DeleteButton admin={admin} comments={comments} taskUsers={taskUsers} setOpenTaskMiniModal={setOpenTaskMiniModal}  listId={listId} taskId={taskId}/>
     </div>
   )
 }
@@ -49,12 +60,21 @@ const DeleteButton = (
     taskId,
     // @ts-ignore
     listId,
+    // @ts-ignore
+    taskUsers,
+    // @ts-ignore
+    admin,
+    // @ts-ignore
+    comments,
     setOpenTaskMiniModal
   }
   :
   {
     taskId:string,
     listId:string,
+    taskUsers:string[],
+    admin:string,
+    comments:string[],
     setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>
   }) => {
   const dispatch = useAppDispatch();
@@ -62,6 +82,23 @@ const DeleteButton = (
     onClick={()=>{
       dispatch(changeTaskModal(false))
       setOpenTaskMiniModal("")
+
+      // places to remove task
+      // - From Users
+      // - From List
+      // - DeleteTask
+
+
+      dispatch(deleteTaskFromUsers([taskId])).unwrap().then(()=>{
+        dispatch(deleteTaskFromList({listId:listId,deleteTask:taskId}));
+        removeUsersTasks(taskUsers,taskId)
+        dispatch(deleteTasksFromListDelete([taskId]))
+      }).finally(()=>{
+        console.log("Task has been removed")
+      }).catch(()=>{
+        console.log("Ran into issue!nbn")
+      })
+
     }}
     className="
 
