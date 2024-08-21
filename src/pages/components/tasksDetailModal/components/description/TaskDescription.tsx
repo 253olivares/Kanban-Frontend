@@ -87,8 +87,7 @@ const DescriptionHead = memo((
 
     '>Description</h1>
     {
-      adminCred && 
-      openDescriptionEdit ? <CancelOrSaveChanges taskId={taskId} taskDescription={taskDescription} description={description} setTaskDescription={setTaskDescription} setOpenDescriptionEdit={()=>{setOpenDescriptionEdit(!openDescriptionEdit)}} /> : <EditIcon setOpenDescriptionEdit={ ()=>setOpenDescriptionEdit(!openDescriptionEdit)} />
+      openDescriptionEdit ? adminCred &&  <CancelOrSaveChanges taskId={taskId} taskDescription={taskDescription} description={description} setTaskDescription={setTaskDescription} setOpenDescriptionEdit={()=>{setOpenDescriptionEdit(!openDescriptionEdit)}} /> : adminCred &&  <EditIcon setOpenDescriptionEdit={ ()=>setOpenDescriptionEdit(!openDescriptionEdit)} />
     }
   </div>
 })
