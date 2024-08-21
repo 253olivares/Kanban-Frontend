@@ -131,7 +131,7 @@ const MembersBody = memo(( {
       <Members userId={admin} />
       {
         users.map((userId)=>
-          <Members userId={userId} />
+          <Members key={userId} userId={userId} />
         )
       }
     </div>

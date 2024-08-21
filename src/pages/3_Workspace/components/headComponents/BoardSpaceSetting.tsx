@@ -23,7 +23,6 @@ const BoardSpaceSetting = memo(() => {
        hidden
        sLaptop:flex
 
-
        items-center
     '>
         <img 

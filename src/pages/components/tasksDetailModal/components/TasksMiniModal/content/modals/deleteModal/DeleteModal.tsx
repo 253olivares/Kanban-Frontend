@@ -1,4 +1,4 @@
-import { removeUsersTasks } from "../../../../../../../../customLogic/CustomLogic"
+import { removeMultipleUsersFromTask } from "../../../../../../../../customLogic/CustomLogic"
 import { useAppDispatch } from "../../../../../../../../reduxStore/hook"
 import { deleteTaskFromList } from "../../../../../../../../reduxStore/lists/listsSlice"
 import { changeTaskModal } from "../../../../../../../../reduxStore/modal/modalSlice"
@@ -83,20 +83,16 @@ const DeleteButton = (
       dispatch(changeTaskModal(false))
       setOpenTaskMiniModal("")
 
-      // places to remove task
-      // - From Users
-      // - From List
-      // - DeleteTask
-
-
       dispatch(deleteTaskFromUsers([taskId])).unwrap().then(()=>{
         dispatch(deleteTaskFromList({listId:listId,deleteTask:taskId}));
-        removeUsersTasks(taskUsers,taskId)
+
+        removeMultipleUsersFromTask(taskUsers,taskId);
+
         dispatch(deleteTasksFromListDelete([taskId]))
       }).finally(()=>{
         console.log("Task has been removed")
-      }).catch(()=>{
-        console.log("Ran into issue!nbn")
+      }).catch((e:any)=>{
+        console.log("Ran into issue!nbn",e)
       })
 
     }}

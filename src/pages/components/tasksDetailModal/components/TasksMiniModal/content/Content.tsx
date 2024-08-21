@@ -52,7 +52,7 @@ const Content = ({
           />
         }
         {
-          openTaskMiniModal === "users" && <UserModal />
+          openTaskMiniModal === "users" && <UserModal taskId={task.t_id} admin={task.admin_id} taskUsers={task.assignees} />
         }
         
       </AnimatePresence>

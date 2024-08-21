@@ -1,6 +1,6 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../store";
-import { addTask, deleteTasksFromListCL, getList, getTask, updateTaskCL } from "../../customLogic/CustomLogic";
+import { addTask, deleteTasksFromListCL, getList, getTask, removeMultipleUsersFromTask, updateTaskCL } from "../../customLogic/CustomLogic";
 import { list, selectListById } from "../lists/listsSlice";
 import { workspace } from "../workspace/workspaceSlice";
 
@@ -99,6 +99,11 @@ export const deleteTasksFromListDelete = createAsyncThunk('task/deleteTasksFromL
     try {
         const state = getState() as RootState;
         
+        tasksToDelete.forEach((taskId:string) => {
+            const task = selectTaskById(state,taskId);
+            removeMultipleUsersFromTask(task.assignees,task.t_id)
+        });
+
         return {tasksToDelete:tasksToDelete,prevState:selectAllTasks(state)}
     } catch(e:any) {
         return rejectWithValue(e);
@@ -128,6 +133,12 @@ export const deleteTasksFromMulitpleBoards = createAsyncThunk('tasks/deleteTasks
             }
         }
 
+        tasks.forEach((taskId:string)=> {
+            const task = selectTaskById(state,taskId);
+            removeMultipleUsersFromTask(task.assignees,task.t_id)
+        })
+
+
         return {tasksToDelete:tasks,prevState:selectAllTasks(state)}
     } catch (e:any) {
         return rejectWithValue(e);
@@ -146,6 +157,11 @@ export const deleteMulitpleTasksFromBoardDeletion = createAsyncThunk('tasks/dele
             const list = selectListById(state,listId);
             tasksToDelete = [...tasksToDelete,...list.tasks];
         }
+
+        tasksToDelete.forEach((taskId:string) => {
+            const task = selectTaskById(state,taskId);
+            removeMultipleUsersFromTask(task.assignees,task.t_id)
+        });
 
         return {tasksToDelete:tasksToDelete,prevState:selectAllTasks(state)};
 
@@ -175,6 +191,56 @@ export const updateTask = createAsyncThunk('task/updateTask', async({
 
         return{updateTask:updateTask,prevTasks:selectAllTasks(state)}
     } catch(e:any) {
+        return rejectWithValue(e);
+    }
+})
+
+export const removeUserFromTask = createAsyncThunk('task/removeUserFromTask',async(
+    {
+        taskToAddToo,
+        userIdToAdd
+    } : {
+        taskToAddToo:string,
+        userIdToAdd:string
+    }, {rejectWithValue,getState}
+)=>{
+try{
+    const state = getState() as RootState;
+
+    const task = selectTaskById(state,taskToAddToo);
+
+    const updateTask = {
+        ...task,
+        assignees:task.assignees.filter((x)=>x!== userIdToAdd)
+    }
+    return {updateTask:updateTask,prevTasks:selectAllTasks(state)}
+    
+}catch(e:any) {
+    return rejectWithValue(e);
+}
+})
+
+export const addUserToTask = createAsyncThunk('task/addUserToTask',async(
+    {
+        taskToAddToo,
+        userIdToAdd
+    } : {
+        taskToAddToo:string,
+        userIdToAdd:string
+    }
+    , {rejectWithValue, getState}
+)=>{
+    try{
+        const state = getState() as RootState;
+
+        const task = selectTaskById(state,taskToAddToo);
+
+        const updateTask = {
+            ...task,
+            assignees:[...task.assignees,userIdToAdd]
+        }
+        return {updateTask:updateTask,prevTasks:selectAllTasks(state)}
+    }catch(e:any) {
         return rejectWithValue(e);
     }
 })
@@ -223,7 +289,14 @@ const taskSlice = createSlice ({
         .addCase(updateTask.fulfilled,(state,action:PayloadAction<{updateTask:task,prevTasks:task[]}>)=>{
             updateTaskCL(action.payload.updateTask);
             taskAdapter.updateOne(state,{id:action.payload.updateTask.t_id,changes:action.payload.updateTask});
-
+        })
+        .addCase(addUserToTask.fulfilled,(state,action:PayloadAction<{updateTask:task,prevTasks:task[]}>)=>{
+            updateTaskCL(action.payload.updateTask);
+            taskAdapter.updateOne(state,{id:action.payload.updateTask.t_id,changes:action.payload.updateTask});
+        })
+        .addCase(removeUserFromTask.fulfilled,(state,action:PayloadAction<{updateTask:task,prevTasks:task[]}>)=>{
+            updateTaskCL(action.payload.updateTask);
+            taskAdapter.updateOne(state,{id:action.payload.updateTask.t_id,changes:action.payload.updateTask});
         })
       
     }

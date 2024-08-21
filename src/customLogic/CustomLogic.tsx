@@ -15,7 +15,7 @@ const userKey = 'userList';
 const workspaceKey = 'workspaceList';
 const userHistory = 'userHistory'
 
-export const removeUsersTasks = (assignees:string[], taskId:string)=>{
+export const addUsersTasks = (userId:string,taskId:string) => {
     const data = localStorage.getItem(userKey);
     if(!data){
         reloadApplication();
@@ -23,10 +23,69 @@ export const removeUsersTasks = (assignees:string[], taskId:string)=>{
     }
 
     const userList:Record<string,user> = JSON.parse(data);
-    for(const user in assignees){
+    userList[userId] = {
+        ...userList[userId],
+        tasks:[...userList[userId].tasks,taskId]
+    }
+    localStorage.setItem(userKey,JSON.stringify(userList));
+
+}
+
+
+export const removeUsersTasks2 = (userId:string,taskId:string) => {
+    const data = localStorage.getItem(userKey);
+    if(!data){
+        reloadApplication();
+        return; 
+    }
+
+    const userList:Record<string,user> = JSON.parse(data);
+    const updatedTask = userList[userId].tasks.filter(x=>x!==taskId);
+    userList[userId] = {
+        ...userList[userId],
+        tasks:updatedTask
+    }
+    localStorage.setItem(userKey,JSON.stringify(userList));
+
+}
+
+export const removeMultipleUsersFromTask = (users:string[],taskId:string) => {
+    const data = localStorage.getItem(userKey);
+    if(!data){
+        reloadApplication();
+        return; 
+    }
+    console.log("CHECKING",users);
+    const userList:Record<string,user> = JSON.parse(data);
+
+    users.forEach((user:string) => {
+        const updatedTask = userList[user].tasks.filter(x=>x!==taskId);
         userList[user]= {
             ...userList[user],
-            tasks: userList[user].tasks.filter(x=>x !==taskId)
+            tasks:  updatedTask
+        }   
+    });
+
+    localStorage.setItem(userKey,JSON.stringify(userList));
+
+}
+
+export const removeUsersTasks = (assignees:string[], taskId:string)=>{
+    const data = localStorage.getItem(userKey);
+    if(!data){
+        reloadApplication();
+        return; 
+    }
+
+    console.log("FurtherTesting",assignees);
+
+    const userList:Record<string,user> = JSON.parse(data);
+    for(const user in assignees){
+        console.log("USER",user);
+        const updatedTask = userList[user].tasks.filter(x=>x!==taskId);
+        userList[user]= {
+            ...userList[user],
+            tasks:  updatedTask
         }
     }
 

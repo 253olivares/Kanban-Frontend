@@ -3,6 +3,7 @@ import { addBoard, getBoards, removeBoardsFromWorkspaceLS, updateBoardLS, userLe
 import { RootState } from "../store"
 import { workspace } from "../workspace/workspaceSlice"
 import { list } from "../lists/listsSlice"
+
 export type board = {
     b_id:string,
     u_id:string,
