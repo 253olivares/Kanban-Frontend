@@ -1,5 +1,5 @@
 import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction, Update} from "@reduxjs/toolkit"
-import { addBoard, getBoards, removeBoardsFromWorkspaceLS, updateBoardLS, userLeaveUpdateBoard } from "../../customLogic/CustomLogic"
+import { addBoard, getBoards, getListsFromBoardsCL, removeBoardsFromWorkspaceLS, updateBoardLS, userLeaveUpdateBoard } from "../../customLogic/CustomLogic"
 import { RootState } from "../store"
 import { workspace } from "../workspace/workspaceSlice"
 import { list } from "../lists/listsSlice"
@@ -206,10 +206,11 @@ export const removeUserFromMulitpleBoards = createAsyncThunk('boards/removeUsers
 )=> {
     try{
 
-        console.log("test2123")
         const state = getState() as RootState;
 
         const statesToUpdate:Update<board, string>[] = [];
+
+        let tasksToRemoveFrom:string[] = []
 
         for(const board of boards){
             const prevBoard = selectBoardById(state,board)
@@ -218,10 +219,16 @@ export const removeUserFromMulitpleBoards = createAsyncThunk('boards/removeUsers
                 members: prevBoard.members.filter((x:string[])=> x[0] !== u_id)
             }
             statesToUpdate.push({id:updatedBoard.b_id,changes:updatedBoard})
+            
+            const lists = getListsFromBoardsCL(prevBoard.b_id);
+            
+            if(lists) {
+                lists.forEach((list)=>{
+                    tasksToRemoveFrom = [...tasksToRemoveFrom,...list.tasks]
+                })
+            }
         }
-
-        console.log("States To Update",statesToUpdate)
-        return {updateState:statesToUpdate};
+        return {updateState:statesToUpdate,tasksToRemoveFrom:tasksToRemoveFrom};
     }catch(e:any){
         console.log(e);
         return rejectWithValue(e);
@@ -295,8 +302,9 @@ const boardSlice = createSlice({
             updateBoardLS(action.payload.updatedBoard,action.payload.prevState);
             boardsAdapter.updateOne(state,{id:action.payload.updatedBoard.b_id,changes:action.payload.updatedBoard})
         })
-        .addCase(removeUserFromMulitpleBoards.fulfilled,(state,action:PayloadAction<{updateState:Update<board, string>[]}>) => {
+        .addCase(removeUserFromMulitpleBoards.fulfilled,(state,action:PayloadAction<{updateState:Update<board, string>[],tasksToRemoveFrom:string[]}>) => {
             boardsAdapter.updateMany(state,action.payload.updateState);
+            console.log(action.payload.tasksToRemoveFrom)
             userLeaveUpdateBoard(Object.values(state.entities))
         })
         .addCase(updateBoardBackground.fulfilled,(state,action:PayloadAction<{boardInfo:board,prevState:board[]}>)=>{

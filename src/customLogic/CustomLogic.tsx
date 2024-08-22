@@ -91,6 +91,16 @@ export const removeUsersTasks = (assignees:string[], taskId:string)=>{
 
     localStorage.setItem(userKey,JSON.stringify(userList));
     
+} 
+
+export const updateMutliTasksCL = (updateTasks:task[]) => {
+    const data = localStorage.getItem(taskKey);
+    if(!data){
+        reloadApplication();
+        return; 
+    }
+ 
+    localStorage.setItem(taskKey,JSON.stringify(updateTasks));
 }
 
 export const updateTaskCL = (updateTask:task):void => {
@@ -148,6 +158,20 @@ export const getTask = ():task[] | null => {
         return null;
     }
     return JSON.parse(data);
+}
+
+export const getListsFromBoardsCL = (boardId:string):list[] | void=> {
+    const data = localStorage.getItem(listKey);
+    if(!data) {
+        reloadApplication();
+        return;
+    }
+
+    const listData:Record<string,list[]> = JSON.parse(data);
+
+    const lists = listData[boardId]
+
+    return lists;
 }
 
 export const updateListDeleteCL = (deleteList:list,updateLists:Record<string,list>):void => {

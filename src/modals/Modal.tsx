@@ -18,7 +18,7 @@ import AddNewUser from "./addNewUser/AddNewUser";
 import { deleteBoardListMultipleCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersWorkspaceAndBoards } from "../customLogic/CustomLogic";
 import ChangeBackground from "./changeBackground/ChangeBackground";
 import { deleteListStateBoardDelete } from "../reduxStore/lists/listsSlice";
-import { deleteMulitpleTasksFromBoardDeletion, deleteTasksFromMulitpleBoards } from "../reduxStore/tasks/tasksSlice";
+import { deleteMulitpleTasksFromBoardDeletion, deleteTasksFromMulitpleBoards, updateMultipleTasks } from "../reduxStore/tasks/tasksSlice";
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const Modal = memo(() => {
@@ -102,7 +102,11 @@ const Modal = memo(() => {
     dispatch(leaveWorkspaceUser(workspace.w_id))
     .unwrap().then(()=> {
 
-      if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id}));
+      if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id})).unwrap().then((x)=>{
+        console.log(x.tasksToRemoveFrom);
+        dispatch(deleteTaskFromUsers(x.tasksToRemoveFrom))
+        dispatch(updateMultipleTasks({tasks:x.tasksToRemoveFrom,removeUser:user.u_id}));
+      });
       if(user) dispatch(removeUserFromWorkspace({workspace:workspace,u_id:user.u_id}));
 
       if(user) deleteUserFromHistory(workspace.boards,user.email);

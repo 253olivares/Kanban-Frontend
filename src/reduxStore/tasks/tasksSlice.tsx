@@ -1,6 +1,6 @@
-import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction, Update } from "@reduxjs/toolkit"
 import { RootState } from "../store";
-import { addTask, deleteTasksFromListCL, getList, getTask, removeMultipleUsersFromTask, updateTaskCL } from "../../customLogic/CustomLogic";
+import { addTask, deleteTasksFromListCL, getList, getTask, removeMultipleUsersFromTask, updateMutliTasksCL, updateTaskCL } from "../../customLogic/CustomLogic";
 import { list, selectListById } from "../lists/listsSlice";
 import { workspace } from "../workspace/workspaceSlice";
 
@@ -220,6 +220,35 @@ try{
 }
 })
 
+export const updateMultipleTasks = createAsyncThunk('task/updateMultipleTasks',async(
+    {
+        tasks,
+        removeUser
+    } : {
+        tasks:string[]
+        removeUser:string
+    }, {getState,rejectWithValue}
+)=>{
+    try{
+        const state = getState() as RootState;
+
+        const tasksToUpdate:Update<task,string>[] = [];
+
+        for(const taskId of tasks) {
+            const prevTask = selectTaskById(state,taskId);
+            const updatedTasks = {
+                ...prevTask,
+                assignees: prevTask.assignees.filter((id)=> id !==removeUser)
+            }
+            tasksToUpdate.push({id:updatedTasks.t_id,changes:updatedTasks})
+        }
+
+        return {tasksToUpdate:tasksToUpdate,userId:removeUser, prevState:selectAllTasks(state)}
+    } catch (e:any){
+        return rejectWithValue(e);
+    }
+})
+
 export const addUserToTask = createAsyncThunk('task/addUserToTask',async(
     {
         taskToAddToo,
@@ -298,7 +327,10 @@ const taskSlice = createSlice ({
             updateTaskCL(action.payload.updateTask);
             taskAdapter.updateOne(state,{id:action.payload.updateTask.t_id,changes:action.payload.updateTask});
         })
-      
+        .addCase(updateMultipleTasks.fulfilled,(state,action:PayloadAction<{tasksToUpdate:Update<task,string>[] ,userId:string, prevState:task[]}>)=>{
+            taskAdapter.updateMany(state,action.payload.tasksToUpdate);
+            updateMutliTasksCL(Object.values(state.entities));
+        })
     }
 })
 
