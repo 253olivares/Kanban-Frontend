@@ -5,15 +5,14 @@ const Comment = ({
     comment:string
 }) => {
   return (
-    <div className="
+    <span className="
     w-full
+    max-w-full
 
     sLaptop:text-[0.6rem]
     mLaptop:text-[0.75rem]
     desktop:text-[0.9rem]
     largeDesktop:text-[1.125rem]
-
-    whitespace-pre-line
 
     leading-tight
 
@@ -21,7 +20,13 @@ const Comment = ({
 
     text-PrimaryWhite
 
-    ">{`${comment}`}</div>
+    whitespace-pre-line
+
+    text-wrap
+
+    break-all
+
+    ">{comment}</span>
   )
 }
 

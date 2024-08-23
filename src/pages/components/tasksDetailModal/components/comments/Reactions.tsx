@@ -40,7 +40,10 @@ const Reactions = memo(({
         <Emoticons key={key} emoji={key} number={value} />
       )}
       {
-        assignees.includes(userInfo.u_id) || adminCred &&  <AddReaction />
+         assignees.includes(userInfo.u_id) && <AddReaction />
+      }
+      {
+        adminCred && <AddReaction />
       }
     </div>
   )

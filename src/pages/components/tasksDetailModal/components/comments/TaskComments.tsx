@@ -9,14 +9,16 @@ const TaskComments = memo(({
     userInfo,
     adminCred,
     taskComments,
-    assignees
+    assignees,
+    addNewComment
 } : {
     comments:string,
     setComment:React.Dispatch<React.SetStateAction<string>>,
     userInfo:user,
     adminCred:boolean,
     taskComments:string[],
-    assignees:string[]
+    assignees:string[],
+    addNewComment:()=>void
 }) => {
 
 
@@ -33,7 +35,7 @@ const TaskComments = memo(({
         largeDesktop:gap-[0.75rem]
        
     '>   
-        <AddComment comments={comments} setComment={setComment} adminCred={adminCred} userInfo={userInfo} assignees={assignees}  />
+        <AddComment addNewComment={addNewComment} comments={comments} setComment={setComment} adminCred={adminCred} userInfo={userInfo} assignees={assignees}  />
         <CommentsHolder userInfo={userInfo} adminCred={adminCred} comments = {taskComments} assignees={assignees} />
     </div>
   )

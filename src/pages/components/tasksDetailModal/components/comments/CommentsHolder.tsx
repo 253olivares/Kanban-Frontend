@@ -26,7 +26,6 @@ const CommentsHolder = memo((
         assignees,
         userInfo,
         adminCred,
-        // @ts-ignore
         comments
     } : {
         assignees:string[],
@@ -35,77 +34,61 @@ const CommentsHolder = memo((
         comments:string[]
     }) => {
 
-        const testComments:commentTest[] = [
-            {
-                c_id: "testingId_1",
-                u_id: userInfo.u_id,
-                t_id: "task_2K5zBHcDdY-QMP9fhvBJv",
-                message: "Please to meet you guys. Looking forward to working with everyone!",
-                date: new Date(),
-                reactions: {
-                    thumbUp:0,
-                    party:0,
-                    smile:0,
-                },
-                userReactions: {
-                    thumbUp:[],
-                    party:[],
-                    smile:[]
-                }
-            }, {
-                c_id: "testingId_2",
-                u_id: userInfo.u_id,
-                t_id: "task_2K5zBHcDdY-QMP9fhvBJv",
-                message: "Nice to meet you Clay. Please get in touch with Ryan so we can get details of hardware and software you will require.",
-                date: new Date(),
-                reactions: {
-                    thumbUp:0,
-                    party:0,
-                    smile:0,
-                },
-                userReactions: {
-                    thumbUp:[],
-                    party:[],
-                    smile:[]
-                }
-            }
-        ]
   return (
     <div 
     style={{
         // @ts-ignore
         "--img": `url(${scrollbarImage})`
     }}
-    className="
-    flex
-    flex-col
+    className={
+        `
+        flex
+        flex-col
 
-    sLaptop:gap-[0.500rem]
-    mLaptop:gap-[0.625rem]
-    desktop:gap-[0.750rem]
-    largeDesktop:gap-[0.938rem]
+        sLaptop:gap-[0.500rem]
+        mLaptop:gap-[0.625rem]
+        desktop:gap-[0.750rem]
+        largeDesktop:gap-[0.938rem]
 
-    pl-[3.5%]
+        pl-[3.5%]
 
-    sLaptop:pr-[calc(3.5%-5.333px)]
-    mLaptop:pr-[calc(3.5%-6.666px)]
-    desktop:pr-[calc(3.5%-8px)]
-    largeDesktop:pr-[calc(3.5%-10px)]
+        sLaptop:pr-[calc(3.5%-5.333px)]
+        mLaptop:pr-[calc(3.5%-6.666px)]
+        desktop:pr-[calc(3.5%-8px)]
+        largeDesktop:pr-[calc(3.5%-10px)]
 
-    sLaptop:h-[5.333rem]
-    mLaptop:h-[6.666rem]
-    desktop:h-[8rem]
-    largeDesktop:h-[10rem]
+        sLaptop:h-[5.333rem]
+        mLaptop:h-[6.666rem]
+        desktop:h-[8rem]
+        largeDesktop:h-[10rem]
 
-    boardsScroll
+        boardsScroll
 
-    scrollGutter
+        scrollGutter
 
-    ">
+        overflow-x-hidden
+
+        ${
+            comments.length === 0 && "justify-center items-center"
+        }
+        `
+    }>
         {
-            testComments.map((comment)=>
-                <TaskComment userInfo={userInfo} adminCred={adminCred} key={comment.c_id} comment={comment} assignees={assignees} />
+            comments.map((comment)=>
+                <TaskComment userInfo={userInfo} adminCred={adminCred} key={comment} comment={comment} assignees={assignees} />
             )
+        }
+        {
+            comments.length === 0 && <p className="
+             text-PrimaryWhite
+
+             sLaptop:text-[0.8rem]
+             mLaptop:text-[1rem]
+             desktop:text-[1.2rem]
+             largeDesktop:text-[1.5rem]
+
+             font-medium
+            ">No Comments.</p>
         }
     </div>
   )

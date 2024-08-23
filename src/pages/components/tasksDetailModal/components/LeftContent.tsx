@@ -12,7 +12,8 @@ const LeftContent = memo(({
   setComment,
   userInfo,
   adminCred,
-  task
+  task,
+  addNewComment
 } : {
   taskDescription:string,
   setTaskDescription:React.Dispatch<React.SetStateAction<string>>,
@@ -20,7 +21,8 @@ const LeftContent = memo(({
   setComment:React.Dispatch<React.SetStateAction<string>>,
   userInfo:user,
   adminCred:boolean,
-  task:task
+  task:task,
+  addNewComment:()=>void
 }) => {
   return (
     <div className="
@@ -34,7 +36,7 @@ const LeftContent = memo(({
 
     ">
       <TaskDescription taskId={task.t_id}  taskDescription={taskDescription} setTaskDescription={setTaskDescription} adminCred={adminCred} description={task.description} />
-      <TaskComments comments={comments} setComment={setComment} userInfo={userInfo}  adminCred={adminCred} taskComments={task.comments} assignees={task.assignees}/>
+      <TaskComments addNewComment={addNewComment} comments={comments} setComment={setComment} userInfo={userInfo}  adminCred={adminCred} taskComments={task.comments} assignees={task.assignees}/>
     </div>
   )
 })

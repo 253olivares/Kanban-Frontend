@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { getComments } from "../../customLogic/CustomLogic";
+import { addCommentCL, getComments } from "../../customLogic/CustomLogic";
 import { RootState } from "../store";
 
 export type comments = {
@@ -8,6 +8,7 @@ export type comments = {
     t_id:string,
     message:string,
     createdAt:string,
+    createTime:string,
     updatedAt:string,
     reactions: {
         thumbUp:number,
@@ -49,6 +50,48 @@ export const initialComments = createAsyncThunk('comments/getComments',async(_,{
     }
 })
 
+export const createNewComments = createAsyncThunk('comments/createNewComments',async(
+    {
+        taskId,
+        userId,
+        comments
+    } : {
+        taskId:string,
+        userId:string,
+        comments:string
+    },{rejectWithValue,getState,requestId}
+)=>{
+    try{
+        const state = getState() as RootState;
+
+        const currentDate = new Date();
+
+        const newComment:comments = {
+            c_id: `comments_${requestId}`,
+            u_id: userId,
+            t_id: taskId,
+            message: comments,
+            createdAt: currentDate.toLocaleString(),
+            createTime: `${currentDate.getHours()>12 ?currentDate.getHours() - 12 : currentDate.getHours() }:${(currentDate.getMinutes() < 10 ? '0' : '') + currentDate.getMinutes()} ${currentDate.getHours() >= 12 ? 'pm' : 'am'}`,
+            updatedAt: currentDate.toLocaleString(),
+            reactions: {
+                thumbUp: 0,
+                party: 0,
+                smile: 0
+            },
+            userReactions: {
+                thumbUp: [],
+                party: [],
+                smile: []
+            }
+        }
+
+        return {newComment:newComment,prevComments:selectAllComments(state)}
+    }catch (e:any) {
+        return rejectWithValue(e);
+    }
+})
+
 const commentSlice = createSlice({
     name:'comments',
     initialState,
@@ -67,11 +110,16 @@ const commentSlice = createSlice({
             state.status = 'succeeded';
             commentAdapter.upsertMany(state,action.payload);
         })
+        .addCase(createNewComments.fulfilled, (state,action:PayloadAction<{newComment:comments,prevComments:comments[]}>)=> {
+            addCommentCL(action.payload.newComment,action.payload.prevComments);
+            commentAdapter.addOne(state,action.payload.newComment);
+        })
     }
 })
 
 export const {
     selectAll:selectAllComments,
+    selectById:selectCommentById
 } = commentAdapter.getSelectors((state:RootState)=> state.comments);
  
 export const {} = commentSlice.actions;

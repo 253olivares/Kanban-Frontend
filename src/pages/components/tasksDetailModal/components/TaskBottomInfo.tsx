@@ -15,7 +15,7 @@ const TaskBottomInfo = memo(({
     userInfo,
     adminCred,
     task,
-    
+    addNewComment
 } : {
     setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>,
     taskDescription:string,
@@ -24,7 +24,8 @@ const TaskBottomInfo = memo(({
     setComment:React.Dispatch<React.SetStateAction<string>>,
     userInfo:user,
     adminCred:boolean,
-    task:task
+    task:task,
+    addNewComment:()=>void
 }) => {
   return (
     <div className="
@@ -35,7 +36,7 @@ const TaskBottomInfo = memo(({
     desktop:py-[1.533rem]
     largeDesktop:py-[1.917rem]
     ">
-        <LeftContent taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task ={task}/>
+        <LeftContent addNewComment={addNewComment} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task ={task}/>
         <RightContent setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} task = {task}/>
     </div>
   )

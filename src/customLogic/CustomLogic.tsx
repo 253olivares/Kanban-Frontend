@@ -304,6 +304,16 @@ export const getList = (boardId:string):list[] | null => {
     return convertData[boardId];
 };
 
+export const addCommentCL = (newComment:comments, prevComments:comments[]) => {
+    const data = localStorage.getItem(commentKey);
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+    const updateList = [...prevComments,newComment];
+    localStorage.setItem(commentKey,JSON.stringify(updateList));
+}
+
 export const getComments = ():comments[] | null => {
     const data = localStorage.getItem(commentKey);
     if(!data){

@@ -6,13 +6,15 @@ const AddComment = memo(({
   setComment,
   adminCred,
   userInfo,
-  assignees
+  assignees,
+  addNewComment
 } : {
   comments:string,
     setComment:React.Dispatch<React.SetStateAction<string>>,
   adminCred:boolean,
   userInfo:user,
-  assignees:string[]
+  assignees:string[],
+  addNewComment:()=>void
 }) => {
 
   if(!assignees.includes(userInfo.u_id) && !adminCred) return <div className="
@@ -63,7 +65,7 @@ const AddComment = memo(({
     largeDesktop:gap-[1rem]
     ">
       <TextArea comments={comments} setComment={setComment} />
-      <CommentSubmitButton comments={comments} />
+      <CommentSubmitButton addNewComment={addNewComment} comments={comments} />
     </div>
   )
 })
@@ -110,15 +112,15 @@ const TextArea = memo((
     largeDesktop:p-[.75rem]
 
     resize-none
-  " name="TaskComment" id="taskComment" >
-
-  </textarea>
+  " name="TaskComment" id="taskComment" />
 })
 
 const CommentSubmitButton = memo(({
-  comments
+  comments,
+  addNewComment
 } : {
-  comments:string
+  comments:string,
+  addNewComment:()=>void
 }) =>{  
   return <div className="
     w-full
@@ -126,6 +128,7 @@ const CommentSubmitButton = memo(({
     justify-end
   ">
     <button
+    onClick={addNewComment}
     disabled={comments.trim() === ""}
     className="
 
@@ -154,7 +157,7 @@ const CommentSubmitButton = memo(({
     text-PrimaryWhite
     bg-SelectorBlue
     opacity-75
-    hover:opacity-90
+    hover:opacity-95
     active:opacity-100
 
     outline-none

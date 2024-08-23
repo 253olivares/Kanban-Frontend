@@ -3,8 +3,9 @@ import UserIconNameRole from "./UserIconNameRole"
 import Comment from './Comment';
 import CommentsAdminControl from "./CommentsAdminControl";
 import Reactions from "./Reactions";
-import { commentTest } from "./CommentsHolder";
 import { user } from "../../../../../reduxStore/users/userSlice";
+import { useAppSelector } from "../../../../../reduxStore/hook";
+import { selectCommentById } from "../../../../../reduxStore/comments/commentsSlice";
 
 
 const TaskComment = memo(({
@@ -16,9 +17,11 @@ const TaskComment = memo(({
     assignees:string[]
     userInfo:user,
     adminCred:boolean,
-    comment:commentTest
+    comment:string
 }) => {
-  console.log(comment)
+  
+  const commentData = useAppSelector(state => selectCommentById(state,comment))
+
   return (
     <div className="
     w-full
@@ -48,9 +51,9 @@ const TaskComment = memo(({
     desktop:rounded-[0.473rem]
     largeDesktop:rounded-[0.591rem]
     ">
-        <CommentHead commentUser={comment.u_id} postDate ={comment.date}/>
-        <Comment comment={comment.message}/>
-        <EditDeleteReactions assignees={assignees} commentUser={comment.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={comment.reactions} usersReacted={comment.userReactions} />
+        <CommentHead commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
+        <Comment comment={commentData.message}/>
+        <EditDeleteReactions assignees={assignees} commentUser={commentData.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={commentData.reactions} usersReacted={commentData.userReactions} />
     </div>
   )
 })
@@ -87,10 +90,12 @@ const EditDeleteReactions = memo(({
 
 const CommentHead = memo(({
   commentUser,
-  postDate
+  postDate,
+  createTime
 } : {
   commentUser:string,
-  postDate:Date
+  postDate:Date,
+  createTime:string
 })=>{
   return <div className="
   flex
@@ -99,15 +104,17 @@ const CommentHead = memo(({
   justify-between
   ">
     <UserIconNameRole userId={commentUser} /> 
-    <PostDate postDate={postDate} /> 
+    <PostDate postDate={postDate} createTime={createTime} /> 
   </div>
 })
 
 
 const PostDate = memo(({
-  postDate
+  postDate,
+  createTime
 } : {
-  postDate:Date
+  postDate:Date,
+  createTime:string
 })=>{
 
   const weekdayString = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -115,12 +122,6 @@ const PostDate = memo(({
   const weekDay = postDate.getDay();
 
   const date = postDate.getDate();
-
-  const hours = postDate.getHours();
-
-  const minutes = postDate.getMinutes();
-
-  const ampm = hours >= 12 ? 'pm' : 'am';
 
   const nthNumber = (number:number) => {
     if (number > 3 && number < 21) return "th";
@@ -148,7 +149,7 @@ const PostDate = memo(({
 
   opacity-75
   ">
-    {weekdayString[weekDay]+ " " + date+nthNumber(date)+" at "+ hours+":"+minutes+ " " +ampm}
+    {weekdayString[weekDay]+ " " + date+nthNumber(date)+" at "+ createTime}
   </h1>
 })
 

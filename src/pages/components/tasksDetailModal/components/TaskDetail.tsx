@@ -1,16 +1,17 @@
 import { ReactNode, memo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import headerBackground from '/assets/taskModal/TaskHeaderBack.png';
-import { useAppSelector } from '../../../../reduxStore/hook';
+import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
 import { selectListById } from '../../../../reduxStore/lists/listsSlice';
 import TaskInformation from './TaskInformation';
-import { task } from '../../../../reduxStore/tasks/tasksSlice';
+import { addCommentToTask, task } from '../../../../reduxStore/tasks/tasksSlice';
 import { board } from '../../../../reduxStore/boards/boardsSlice';
 import { workspace } from '../../../../reduxStore/workspace/workspaceSlice';
 import TaskBottomInfo from './TaskBottomInfo';
 import { user } from '../../../../reduxStore/users/userSlice';
 import TaskMiniModal from './TasksMiniModal/TaskMiniModal';
 import { miniTaskTypes } from '../TaskDetailModal';
+import { createNewComments } from '../../../../reduxStore/comments/commentsSlice';
 
 const TaskDetail = memo((
   {
@@ -32,11 +33,19 @@ const TaskDetail = memo((
   }
 ):ReactNode => {
 
+  const dispatch = useAppDispatch();
+
   const adminCred = userId === task.admin_id;
 
   const [taskDescription,setTaskDescription] = useState<string>(task.description);
   const [comments, setComment] = useState<string>("");
 
+  const addNewComment = () => {
+    dispatch(createNewComments({ taskId:task.t_id,userId:userId,comments:comments})).unwrap().then((x)=>{
+      dispatch(addCommentToTask({taskId:task.t_id,commentId:x.newComment.c_id}))
+      setComment("");
+    })
+  }
 
   return (
     <motion.div
@@ -82,7 +91,7 @@ const TaskDetail = memo((
       </AnimatePresence>
       <ImageHeader workspaceName={workspace.name} boardName={board.name} selectList={task.l_id} imgSrc={headerBackground} />
       <TaskInformation setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} taskId={task.t_id} taskName={task.name} filter={task.priority} members={task.assignees} comments={task.comments} story={task.story} />
-      <TaskBottomInfo setOpenTaskMiniModal={setOpenTaskMiniModal} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task={task}/>
+      <TaskBottomInfo addNewComment={addNewComment} setOpenTaskMiniModal={setOpenTaskMiniModal} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task={task}/>
     </motion.div>
   )
 })

@@ -274,6 +274,33 @@ export const addUserToTask = createAsyncThunk('task/addUserToTask',async(
     }
 })
 
+export const addCommentToTask = createAsyncThunk('task/addCommentToTask',async(
+    {
+        taskId,
+        commentId
+    } : {
+        taskId:string,
+        commentId:string
+    }, {rejectWithValue,getState}
+)=>{
+    try{
+        const state = getState() as RootState;
+
+        const task = selectTaskById(state,taskId);
+
+        const updateTask = {
+            ...task,
+            comments:[...task.comments,commentId],
+            updatedAt:(new Date).toLocaleString()
+        }
+
+        return {updateTask:updateTask,prevTask:selectAllTasks(state)}
+
+    } catch(e:any) {
+        return rejectWithValue(e);
+    }
+})
+
 
 const taskSlice = createSlice ({
     name:'tasks',
@@ -330,6 +357,10 @@ const taskSlice = createSlice ({
         .addCase(updateMultipleTasks.fulfilled,(state,action:PayloadAction<{tasksToUpdate:Update<task,string>[] ,userId:string, prevState:task[]}>)=>{
             taskAdapter.updateMany(state,action.payload.tasksToUpdate);
             updateMutliTasksCL(Object.values(state.entities));
+        })
+        .addCase(addCommentToTask.fulfilled,(state,action:PayloadAction<{updateTask:task,prevTask:task[]}>)=>{
+            updateTaskCL(action.payload.updateTask);
+            taskAdapter.updateOne(state,{id:action.payload.updateTask.t_id,changes:action.payload.updateTask})
         })
     }
 })
