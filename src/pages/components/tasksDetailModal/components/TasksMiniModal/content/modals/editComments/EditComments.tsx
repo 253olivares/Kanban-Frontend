@@ -4,9 +4,10 @@ const EditComments = (
     {
         comment
     } : {
-        comment:comments
+        comment:comments | null
     }
 ) => {
+    if(!comment) return
   return (
     <div>{comment.message}</div>
   )

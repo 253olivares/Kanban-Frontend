@@ -14,7 +14,7 @@ const TaskMiniModal = ({
   task:task,
   openTaskMiniModal:miniTaskTypes,
   setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
-  comment:comments
+  comment:comments | null
 }) => {
 
   return (

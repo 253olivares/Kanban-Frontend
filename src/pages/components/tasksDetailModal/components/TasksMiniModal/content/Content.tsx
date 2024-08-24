@@ -17,7 +17,7 @@ const Content = ({
   task:task,
   openTaskMiniModal:miniTaskTypes,
   setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
-  comment:comments
+  comment:comments | null
 }) => {
 
     const appContext = useContext(AppContext);

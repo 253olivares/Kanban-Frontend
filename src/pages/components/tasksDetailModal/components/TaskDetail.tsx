@@ -35,7 +35,7 @@ const TaskDetail = memo((
     board:board,
     openCommentEdit:()=>void,
     setCommentFn: (comment:comments)=>void,
-    comment:comments
+    comment:comments | null
   }
 ):ReactNode => {
 
