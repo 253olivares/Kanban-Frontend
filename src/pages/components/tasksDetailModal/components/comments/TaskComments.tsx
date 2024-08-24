@@ -2,6 +2,7 @@ import { memo } from 'react'
 import AddComment from './AddComment'
 import CommentsHolder from './CommentsHolder';
 import {  user } from '../../../../../reduxStore/users/userSlice';
+import { comments } from '../../../../../reduxStore/comments/commentsSlice';
 
 const TaskComments = memo(({
     comments,
@@ -10,7 +11,9 @@ const TaskComments = memo(({
     adminCred,
     taskComments,
     assignees,
-    addNewComment
+    addNewComment,
+    openCommentEdit,
+    setCommentFn
 } : {
     comments:string,
     setComment:React.Dispatch<React.SetStateAction<string>>,
@@ -18,7 +21,9 @@ const TaskComments = memo(({
     adminCred:boolean,
     taskComments:string[],
     assignees:string[],
-    addNewComment:()=>void
+    addNewComment:()=>void,
+    openCommentEdit:()=>void,
+    setCommentFn:(comment:comments)=>void
 }) => {
 
 
@@ -36,7 +41,7 @@ const TaskComments = memo(({
        
     '>   
         <AddComment addNewComment={addNewComment} comments={comments} setComment={setComment} adminCred={adminCred} userInfo={userInfo} assignees={assignees}  />
-        <CommentsHolder userInfo={userInfo} adminCred={adminCred} comments = {taskComments} assignees={assignees} />
+        <CommentsHolder setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} userInfo={userInfo} adminCred={adminCred} comments = {taskComments} assignees={assignees} />
     </div>
   )
 })

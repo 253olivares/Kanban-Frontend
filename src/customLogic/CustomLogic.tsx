@@ -314,6 +314,18 @@ export const addCommentCL = (newComment:comments, prevComments:comments[]) => {
     localStorage.setItem(commentKey,JSON.stringify(updateList));
 }
 
+export const removeCommentCl = (commentId:string,prevState:comments[]) => {
+    const data = localStorage.getItem(commentKey);
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+
+    const updatedList = prevState.filter(x=>x.c_id !== commentId);
+
+    localStorage.setItem(commentKey,JSON.stringify(updatedList))
+} 
+
 export const getComments = ():comments[] | null => {
     const data = localStorage.getItem(commentKey);
     if(!data){

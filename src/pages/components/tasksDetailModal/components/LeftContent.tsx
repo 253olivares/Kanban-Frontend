@@ -3,6 +3,7 @@ import { task } from "../../../../reduxStore/tasks/tasksSlice"
 import TaskDescription from "./description/TaskDescription"
 import TaskComments from "./comments/TaskComments"
 import { user } from "../../../../reduxStore/users/userSlice"
+import { comments } from "../../../../reduxStore/comments/commentsSlice"
 
 
 const LeftContent = memo(({
@@ -13,7 +14,9 @@ const LeftContent = memo(({
   userInfo,
   adminCred,
   task,
-  addNewComment
+  addNewComment,
+  openCommentEdit,
+  setCommentFn
 } : {
   taskDescription:string,
   setTaskDescription:React.Dispatch<React.SetStateAction<string>>,
@@ -22,7 +25,9 @@ const LeftContent = memo(({
   userInfo:user,
   adminCred:boolean,
   task:task,
-  addNewComment:()=>void
+  addNewComment:()=>void,
+  openCommentEdit:()=>void,
+  setCommentFn:(comment:comments)=>void
 }) => {
   return (
     <div className="
@@ -36,7 +41,7 @@ const LeftContent = memo(({
 
     ">
       <TaskDescription taskId={task.t_id}  taskDescription={taskDescription} setTaskDescription={setTaskDescription} adminCred={adminCred} description={task.description} />
-      <TaskComments addNewComment={addNewComment} comments={comments} setComment={setComment} userInfo={userInfo}  adminCred={adminCred} taskComments={task.comments} assignees={task.assignees}/>
+      <TaskComments setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} comments={comments} setComment={setComment} userInfo={userInfo}  adminCred={adminCred} taskComments={task.comments} assignees={task.assignees}/>
     </div>
   )
 })

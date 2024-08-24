@@ -300,6 +300,31 @@ export const addCommentToTask = createAsyncThunk('task/addCommentToTask',async(
         return rejectWithValue(e);
     }
 })
+ 
+export const removeCommentFromTask = createAsyncThunk('task/removeCommentFromTask',(
+    {
+        taskId,
+        commentId
+    } : {
+        taskId:string,
+        commentId:string
+    }, {rejectWithValue,getState}
+)=>{
+    try{
+        const state = getState() as RootState;
+
+        const task = selectTaskById(state,taskId);
+
+        const updateTask = {
+            ...task,
+            comments: task.comments.filter(x=>x !== commentId)
+        }
+
+        return {updateTask:updateTask,prevTasks:selectAllTasks(state)}
+    } catch(e:any) {
+        return rejectWithValue(e);
+    }
+})
 
 
 const taskSlice = createSlice ({
@@ -361,6 +386,10 @@ const taskSlice = createSlice ({
         .addCase(addCommentToTask.fulfilled,(state,action:PayloadAction<{updateTask:task,prevTask:task[]}>)=>{
             updateTaskCL(action.payload.updateTask);
             taskAdapter.updateOne(state,{id:action.payload.updateTask.t_id,changes:action.payload.updateTask})
+        })
+        .addCase(removeCommentFromTask.fulfilled, (state,action:PayloadAction<{updateTask:task,prevTasks:task[]}>) => {
+            updateTaskCL(action.payload.updateTask);
+            taskAdapter.updateOne(state,{id:action.payload.updateTask.t_id,changes:action.payload.updateTask});
         })
     }
 })

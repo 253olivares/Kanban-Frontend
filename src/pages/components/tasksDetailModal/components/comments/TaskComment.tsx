@@ -4,23 +4,36 @@ import Comment from './Comment';
 import CommentsAdminControl from "./CommentsAdminControl";
 import Reactions from "./Reactions";
 import { user } from "../../../../../reduxStore/users/userSlice";
-import { useAppSelector } from "../../../../../reduxStore/hook";
-import { selectCommentById } from "../../../../../reduxStore/comments/commentsSlice";
+import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook";
+import { comments, removeComments, selectCommentById } from "../../../../../reduxStore/comments/commentsSlice";
+import { removeCommentFromTask } from "../../../../../reduxStore/tasks/tasksSlice";
 
 
 const TaskComment = memo(({
     assignees,
     userInfo,
     adminCred,
-    comment
+    comment,
+    openCommentEdit,
+    setCommentFn
 } : {
     assignees:string[]
     userInfo:user,
     adminCred:boolean,
-    comment:string
+    comment:string,
+    openCommentEdit:()=>void,
+    setCommentFn:(comment:comments)=>void
 }) => {
   
+  const dispatch = useAppDispatch();
+
   const commentData = useAppSelector(state => selectCommentById(state,comment))
+
+  const deleteComment = () => {
+    dispatch(removeCommentFromTask({taskId:commentData.t_id,commentId:commentData.c_id})).unwrap().then(()=>{
+      dispatch(removeComments({commentId:commentData.c_id}))
+    })
+  }
 
   return (
     <div className="
@@ -53,7 +66,7 @@ const TaskComment = memo(({
     ">
         <CommentHead commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
         <Comment comment={commentData.message}/>
-        <EditDeleteReactions assignees={assignees} commentUser={commentData.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={commentData.reactions} usersReacted={commentData.userReactions} />
+        <EditDeleteReactions commentId={commentData} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment={deleteComment} assignees={assignees} commentUser={commentData.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={commentData.reactions} usersReacted={commentData.userReactions} />
     </div>
   )
 })
@@ -64,14 +77,22 @@ const EditDeleteReactions = memo(({
   userInfo,
   adminCred,
   commentsReactions,
-  usersReacted
+  usersReacted,
+  deleteComment,
+  openCommentEdit,
+  setCommentFn,
+  commentId
 } : {
   assignees:string[],
   commentUser:string,
   userInfo:user,
   adminCred:boolean,
   commentsReactions:Record<string,number>,
-  usersReacted:Record<string,string[]>
+  usersReacted:Record<string,string[]>,
+  deleteComment:()=>void,
+  openCommentEdit:()=>void,
+  setCommentFn:(comment:comments)=>void,
+  commentId:comments
 }) => {
   return <div className="
   w-full
@@ -84,7 +105,7 @@ const EditDeleteReactions = memo(({
   justify-between
   ">
     <Reactions adminCred={adminCred} assignees={assignees} userInfo={userInfo} commentsReactions={commentsReactions} usersReacted={usersReacted} />
-    <CommentsAdminControl commentUser={commentUser} userInfo={userInfo} adminCred={adminCred} />
+    <CommentsAdminControl commentId={commentId} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment = {deleteComment} commentUser={commentUser} userInfo={userInfo} adminCred={adminCred} />
   </div>
 })
 

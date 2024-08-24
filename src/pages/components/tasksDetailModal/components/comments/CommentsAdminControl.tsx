@@ -2,19 +2,28 @@ import { memo } from 'react';
 import editIcon from '/assets/Edit_Icon.png';
 import deleteIcon from '/assets/trashIcon.svg';
 import { user } from '../../../../../reduxStore/users/userSlice';
+import { comments } from '../../../../../reduxStore/comments/commentsSlice';
 
 
 const CommentsAdminControl = ({
   commentUser,
   userInfo,
-  adminCred
+  adminCred,
+  deleteComment,
+  openCommentEdit,
+  setCommentFn,
+  commentId
 } : {
   commentUser:string,
   userInfo:user,
-  adminCred:boolean
+  adminCred:boolean,
+  deleteComment:()=>void,
+  openCommentEdit:()=>void,
+  setCommentFn:(comment:comments)=>void,
+  commentId:comments
 }) => {
 
-  console.log("admin use",adminCred)
+
   return (
     <div className="
     flex
@@ -28,17 +37,26 @@ const CommentsAdminControl = ({
     ">
       
         { 
-          userInfo.u_id === commentUser && <EditIcon/>
+          userInfo.u_id === commentUser && <EditIcon clickFn={()=>{
+            openCommentEdit()
+            setCommentFn(commentId);
+          }}/>
         }
         {
-          adminCred || userInfo.u_id === commentUser ? <DeleteIcon/> : ""
+          adminCred || userInfo.u_id === commentUser ? <DeleteIcon deleteComment={deleteComment} /> : ""
         }
     </div>
   )
 }
 
-const DeleteIcon = memo(() => {
-    return <img className='
+const DeleteIcon = memo((
+  {
+    deleteComment
+  } : {
+    deleteComment:() => void
+  }
+) => {
+    return <img onClick={deleteComment} className='
     sLaptop:h-[0.766rem]
     mLaptop:h-[0.958rem]
     desktop:h-[1.15rem]
@@ -51,8 +69,12 @@ const DeleteIcon = memo(() => {
     ' src={deleteIcon} alt="deleteIcon" />
 })
 
-const EditIcon = memo(()=>{
-    return <img className='
+const EditIcon = memo(({
+  clickFn
+} : {
+  clickFn:()=>void
+})=>{
+    return <img onClick={clickFn} className='
     sLaptop:h-[0.766rem]
     mLaptop:h-[0.958rem]
     desktop:h-[1.15rem]

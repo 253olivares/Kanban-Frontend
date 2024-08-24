@@ -4,6 +4,7 @@ import LeftContent from "./LeftContent"
 import RightContent from "./RightContent"
 import { user } from "../../../../reduxStore/users/userSlice"
 import { miniTaskTypes } from "../TaskDetailModal"
+import { comments } from "../../../../reduxStore/comments/commentsSlice"
 
 
 const TaskBottomInfo = memo(({
@@ -15,7 +16,9 @@ const TaskBottomInfo = memo(({
     userInfo,
     adminCred,
     task,
-    addNewComment
+    addNewComment,
+    openCommentEdit,
+    setCommentFn
 } : {
     setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>,
     taskDescription:string,
@@ -25,7 +28,9 @@ const TaskBottomInfo = memo(({
     userInfo:user,
     adminCred:boolean,
     task:task,
-    addNewComment:()=>void
+    addNewComment:()=>void,
+    openCommentEdit:()=>void,
+    setCommentFn:(comment:comments) => void
 }) => {
   return (
     <div className="
@@ -36,7 +41,7 @@ const TaskBottomInfo = memo(({
     desktop:py-[1.533rem]
     largeDesktop:py-[1.917rem]
     ">
-        <LeftContent addNewComment={addNewComment} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task ={task}/>
+        <LeftContent setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task ={task}/>
         <RightContent setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} task = {task}/>
     </div>
   )

@@ -7,9 +7,10 @@ import { user } from "../../../reduxStore/users/userSlice";
 import { board } from "../../../reduxStore/boards/boardsSlice";
 import { selectTaskById } from "../../../reduxStore/tasks/tasksSlice";
 import { selectWorkspaceById } from "../../../reduxStore/workspace/workspaceSlice";
+import { comments } from "../../../reduxStore/comments/commentsSlice";
 
 
-export type miniTaskTypes = "delete" | "users" | "";
+export type miniTaskTypes = "delete" | "users" | "editComment" | "";
 
 const TaskDetailModal= memo((
   {
@@ -27,6 +28,15 @@ const TaskDetailModal= memo((
   const workspace = useAppSelector(state=>selectWorkspaceById(state,board.w_id))
 
   const [openTaskMiniModal,setOpenTaskMiniModal] = useState<miniTaskTypes>("");
+  const [comment,setComment] = useState<comments | null>(null);
+
+  const setCommentFn = (comment:comments) => {
+    setComment(comment);
+  }
+
+  const openCommentEdit = () => {
+    setOpenTaskMiniModal("editComment");
+  }
 
   useLayoutEffect(()=>{
     return () =>{
@@ -62,7 +72,7 @@ const TaskDetailModal= memo((
         sLaptop:justify-center 
         sLaptop:items-center
     ">
-           <TaskDetail openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} userInfo={userInfo} userId={userInfo.u_id} workspace={workspace} task={task} board={board} />
+           <TaskDetail comment={comment} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} userInfo={userInfo} userId={userInfo.u_id} workspace={workspace} task={task} board={board} />
         <div
         onClick={()=>{
           openTaskMiniModal ==="" && dispatch(changeTaskModal(false));

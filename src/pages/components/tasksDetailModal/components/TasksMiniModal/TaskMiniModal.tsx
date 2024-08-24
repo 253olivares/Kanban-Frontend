@@ -1,3 +1,4 @@
+import { comments } from "../../../../../reduxStore/comments/commentsSlice";
 import { task } from "../../../../../reduxStore/tasks/tasksSlice";
 import { miniTaskTypes } from "../../TaskDetailModal";
 import Content from "./content/Content";
@@ -7,11 +8,13 @@ import { motion } from "framer-motion";
 const TaskMiniModal = ({
   task,
   openTaskMiniModal,
-  setOpenTaskMiniModal
+  setOpenTaskMiniModal,
+  comment
 } : {
   task:task,
   openTaskMiniModal:miniTaskTypes,
-  setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>
+  setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
+  comment:comments
 }) => {
 
   return (
@@ -35,7 +38,7 @@ const TaskMiniModal = ({
       items-center
       z-10
     '>
-      <Content task={task} setOpenTaskMiniModal={setOpenTaskMiniModal} openTaskMiniModal={openTaskMiniModal} />
+      <Content comment={comment} task={task} setOpenTaskMiniModal={setOpenTaskMiniModal} openTaskMiniModal={openTaskMiniModal} />
       <div
       className="
       absolute

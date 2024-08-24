@@ -2,6 +2,7 @@ import { memo } from "react";
 import TaskComment from "./TaskComment";
 import scrollbarImage from '/assets/scrollBarTrack.png';
 import { user } from "../../../../../reduxStore/users/userSlice";
+import { comments } from "../../../../../reduxStore/comments/commentsSlice";
 
 export type commentTest = {
     c_id: string,
@@ -26,12 +27,16 @@ const CommentsHolder = memo((
         assignees,
         userInfo,
         adminCred,
-        comments
+        comments,
+        openCommentEdit,
+        setCommentFn
     } : {
         assignees:string[],
         userInfo:user,
         adminCred:boolean
-        comments:string[]
+        comments:string[],
+        openCommentEdit:()=>void,
+        setCommentFn:(comment:comments)=>void
     }) => {
 
   return (
@@ -75,7 +80,7 @@ const CommentsHolder = memo((
     }>
         {
             comments.map((comment)=>
-                <TaskComment userInfo={userInfo} adminCred={adminCred} key={comment} comment={comment} assignees={assignees} />
+                <TaskComment setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} userInfo={userInfo} adminCred={adminCred} key={comment} comment={comment} assignees={assignees} />
             )
         }
         {

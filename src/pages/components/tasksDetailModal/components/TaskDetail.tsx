@@ -11,7 +11,7 @@ import TaskBottomInfo from './TaskBottomInfo';
 import { user } from '../../../../reduxStore/users/userSlice';
 import TaskMiniModal from './TasksMiniModal/TaskMiniModal';
 import { miniTaskTypes } from '../TaskDetailModal';
-import { createNewComments } from '../../../../reduxStore/comments/commentsSlice';
+import { comments, createNewComments } from '../../../../reduxStore/comments/commentsSlice';
 
 const TaskDetail = memo((
   {
@@ -21,7 +21,10 @@ const TaskDetail = memo((
     userId,
     workspace,
     task,
-    board
+    board,
+    openCommentEdit,
+    setCommentFn,
+    comment
   } : {
     openTaskMiniModal:miniTaskTypes,
     setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>,
@@ -29,7 +32,10 @@ const TaskDetail = memo((
     userId:string,
     workspace:workspace,
     task:task,
-    board:board
+    board:board,
+    openCommentEdit:()=>void,
+    setCommentFn: (comment:comments)=>void,
+    comment:comments
   }
 ):ReactNode => {
 
@@ -87,11 +93,11 @@ const TaskDetail = memo((
     `}
     >
       <AnimatePresence>
-      {openTaskMiniModal && <TaskMiniModal task={task} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} />}
+      {openTaskMiniModal && <TaskMiniModal comment={comment} task={task} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} />}
       </AnimatePresence>
       <ImageHeader workspaceName={workspace.name} boardName={board.name} selectList={task.l_id} imgSrc={headerBackground} />
       <TaskInformation setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} taskId={task.t_id} taskName={task.name} filter={task.priority} members={task.assignees} comments={task.comments} story={task.story} />
-      <TaskBottomInfo addNewComment={addNewComment} setOpenTaskMiniModal={setOpenTaskMiniModal} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task={task}/>
+      <TaskBottomInfo setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} setOpenTaskMiniModal={setOpenTaskMiniModal} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task={task}/>
     </motion.div>
   )
 })

@@ -5,15 +5,19 @@ import { miniTaskTypes } from '../../../TaskDetailModal';
 import DeleteModal from './modals/deleteModal/DeleteModal';
 import UserModal from './modals/users/Users'
 import { task } from '../../../../../../reduxStore/tasks/tasksSlice';
+import EditComments from './modals/editComments/EditComments';
+import { comments } from '../../../../../../reduxStore/comments/commentsSlice';
 
 const Content = ({
   task,
   openTaskMiniModal,
-  setOpenTaskMiniModal
+  setOpenTaskMiniModal,
+  comment
 } : {
   task:task,
   openTaskMiniModal:miniTaskTypes,
-  setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>
+  setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
+  comment:comments
 }) => {
 
     const appContext = useContext(AppContext);
@@ -53,6 +57,9 @@ const Content = ({
         }
         {
           openTaskMiniModal === "users" && <UserModal taskId={task.t_id} admin={task.admin_id} taskUsers={task.assignees} />
+        }
+        {
+          openTaskMiniModal === "editComment" && <EditComments comment={comment} />
         }
         
       </AnimatePresence>
