@@ -304,6 +304,18 @@ export const getList = (boardId:string):list[] | null => {
     return convertData[boardId];
 };
 
+export const updateCommentCL = (updateComment:comments,prevComments:comments[]) => {
+    const data = localStorage.getItem(commentKey);
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+
+    const updateList = prevComments.map((x)=> x.c_id === updateComment.c_id ? updateComment : x);
+
+    localStorage.setItem(commentKey,JSON.stringify(updateList));
+}
+
 export const addCommentCL = (newComment:comments, prevComments:comments[]) => {
     const data = localStorage.getItem(commentKey);
     if(!data){
@@ -475,7 +487,7 @@ export const getUserFromList = (id:string):user|void => {
     }
     const users:Record<string,user> = JSON.parse(data);
 
-    return users[id];
+    return users[id] ||null;
 }
 
 export const searchUser = (email:string,password:string):user|null => {

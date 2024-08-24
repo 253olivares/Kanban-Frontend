@@ -12,12 +12,14 @@ const Content = ({
   task,
   openTaskMiniModal,
   setOpenTaskMiniModal,
-  comment
+  comment,
+  setCommentFn
 } : {
   task:task,
   openTaskMiniModal:miniTaskTypes,
   setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
-  comment:comments | null
+  comment:comments | null,
+  setCommentFn:(comment:comments|null)=>void
 }) => {
 
     const appContext = useContext(AppContext);
@@ -59,7 +61,7 @@ const Content = ({
           openTaskMiniModal === "users" && <UserModal taskId={task.t_id} admin={task.admin_id} taskUsers={task.assignees} />
         }
         {
-          openTaskMiniModal === "editComment" && <EditComments comment={comment} />
+          openTaskMiniModal === "editComment" && <EditComments setOpenTaskMiniModal={setOpenTaskMiniModal} setCommentFn={setCommentFn} comment={comment} />
         }
         
       </AnimatePresence>

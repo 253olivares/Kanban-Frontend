@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { addCommentCL, getComments, removeCommentCl } from "../../customLogic/CustomLogic";
+import { addCommentCL, getComments, removeCommentCl, updateCommentCL } from "../../customLogic/CustomLogic";
 import { RootState } from "../store";
 
 export type comments = {
@@ -62,6 +62,32 @@ export const removeComments = createAsyncThunk('comments/removeComments',async(
         return {commentId:commentId,prevState:selectAllComments(state)}
     } catch(e:any) {
         return rejectWithValue(e)
+    }
+})
+
+export const updateComment = createAsyncThunk('comments/updateComment', async(
+    {
+        commentChange,
+        commentId
+    } : {
+        commentChange:string,
+        commentId:string
+    }, {rejectWithValue,getState}
+)=> {
+    try{
+        const state = getState() as RootState;
+
+        const comment = selectCommentById(state,commentId);
+
+        const updateComment = {
+            ...comment,
+            message:commentChange
+        }
+
+        return{commentChange:updateComment,prevComments:selectAllComments(state)}
+
+    } catch(e:any) {
+        return rejectWithValue(e);
     }
 })
 
@@ -132,6 +158,10 @@ const commentSlice = createSlice({
         .addCase(removeComments.fulfilled,(state,action:PayloadAction<{commentId:string,prevState:comments[]}>)=>{
             removeCommentCl(action.payload.commentId,action.payload.prevState);
             commentAdapter.removeOne(state,action.payload.commentId);
+        })
+        .addCase(updateComment.fulfilled,(state,action:PayloadAction<{commentChange:comments,prevComments:comments[]}>)=> {
+            updateCommentCL(action.payload.commentChange,action.payload.prevComments);
+            commentAdapter.updateOne(state,{id:action.payload.commentChange.c_id,changes:action.payload.commentChange});
         })
     }
 })

@@ -2,15 +2,17 @@ import { memo } from "react";
 import { getUserFromList } from "../../../../../customLogic/CustomLogic";
 import { useAppSelector } from "../../../../../reduxStore/hook";
 import { getUserHistoryState } from "../../../../../reduxStore/modal/modalSlice";
-
+import defaultImg from "/assets/default.png";
 
 const UserIconNameRole = memo(({
+    assignees,
     userId
   } : {
+    assignees:string[],
     userId:string
   })=>{
   
-    const user = getUserFromList(userId);
+    const user = getUserFromList(userId) || null;
   
     const userHistory =  useAppSelector(getUserHistoryState);
   
@@ -26,7 +28,7 @@ const UserIconNameRole = memo(({
     desktop:gap-[1rem]
     largeDesktop:gap-[1.2rem]
     ">
-        <Icon iconImage={user.pfp} />
+        <Icon hidden={assignees.includes(userId)} iconImage={user.pfp} />
         <div className="
         flex
         flex-col
@@ -36,8 +38,8 @@ const UserIconNameRole = memo(({
         desktop:gap-[.25rem]
         largeDesktop:gap-[0.312rem]
         ">
-            <UserName userName={user.first_name + " " + user.last_name} />
-            <UserRole role={userHistory[user.email][1]}/>
+            <UserName  hidden={assignees.includes(userId)} userName={user.first_name + " " + user.last_name} />
+            <UserRole  hidden={assignees.includes(userId)} role={userHistory[user.email][1]}/>
         </div>
     </div>
   })
@@ -45,8 +47,10 @@ const UserIconNameRole = memo(({
 
   const UserRole = memo((
     {
+        hidden,
         role
     }: {
+        hidden:boolean,
         role:string
     }
   )=>{
@@ -63,13 +67,15 @@ const UserIconNameRole = memo(({
     font-medium
     opacity-50
     ">
-        {role}
+        {hidden ? role : "No Role"}
     </span>
   })
 
 const UserName = memo(({
+    hidden,
     userName
 } : {
+    hidden:boolean,
     userName:string
 }) =>{
     return <h1 className="
@@ -82,11 +88,13 @@ const UserName = memo(({
     leading-none
     text-PrimaryWhite
     font-medium
-    ">{userName}</h1>
+    ">{hidden ? userName : "Removed User"}</h1>
 })
 const Icon = memo(({
+    hidden,
     iconImage
 } : {
+    hidden:boolean,
     iconImage:string
 }) => {
     return <img className="
@@ -106,6 +114,6 @@ const Icon = memo(({
       largeDesktop:ring-[0.156rem]
 
       rounded-full
-    " src={iconImage} alt="Icon Image" />
+    " src={hidden ? iconImage : defaultImg} alt="Icon Image" />
 })
 export default UserIconNameRole

@@ -9,12 +9,15 @@ const TaskMiniModal = ({
   task,
   openTaskMiniModal,
   setOpenTaskMiniModal,
-  comment
+  comment,
+  setCommentFn
 } : {
   task:task,
   openTaskMiniModal:miniTaskTypes,
   setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
-  comment:comments | null
+  comment:comments | null,
+  setCommentFn: (comment:comments|null)=>void
+
 }) => {
 
   return (
@@ -38,7 +41,7 @@ const TaskMiniModal = ({
       items-center
       z-10
     '>
-      <Content comment={comment} task={task} setOpenTaskMiniModal={setOpenTaskMiniModal} openTaskMiniModal={openTaskMiniModal} />
+      <Content comment={comment} setCommentFn={setCommentFn} task={task} setOpenTaskMiniModal={setOpenTaskMiniModal} openTaskMiniModal={openTaskMiniModal} />
       <div
       className="
       absolute

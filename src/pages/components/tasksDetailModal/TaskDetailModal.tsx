@@ -30,7 +30,7 @@ const TaskDetailModal= memo((
   const [openTaskMiniModal,setOpenTaskMiniModal] = useState<miniTaskTypes>("");
   const [comment,setComment] = useState<comments | null>(null);
 
-  const setCommentFn = (comment:comments) => {
+  const setCommentFn = (comment:comments | null) => {
     setComment(comment);
   }
 
@@ -40,7 +40,8 @@ const TaskDetailModal= memo((
 
   useLayoutEffect(()=>{
     return () =>{
-      dispatch(setSelectTask(""))
+      dispatch(setSelectTask(""));
+      setOpenTaskMiniModal("");
     }
   },[])
 
@@ -75,8 +76,8 @@ const TaskDetailModal= memo((
            <TaskDetail comment={comment} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} userInfo={userInfo} userId={userInfo.u_id} workspace={workspace} task={task} board={board} />
         <div
         onClick={()=>{
-          openTaskMiniModal ==="" && dispatch(changeTaskModal(false));
-          openTaskMiniModal&& setOpenTaskMiniModal("")
+          openTaskMiniModal === "" && dispatch(changeTaskModal(false));
+          openTaskMiniModal && setOpenTaskMiniModal("")
         }}
          className="
          hidden

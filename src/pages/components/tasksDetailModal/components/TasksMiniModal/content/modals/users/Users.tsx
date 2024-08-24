@@ -34,10 +34,10 @@ const Users = memo((
 
 const Header = () =>{
   return <h1 className="
-    sLaptop:text-[1.333rem]
-    mLaptop:text-[1.666rem]
-    desktop:text-[2rem]
-    largeDesktop:text-[2.5rem]
+    sLaptop:text-[1.2rem]
+    mLaptop:text-[1.5rem]
+    desktop:text-[1.8rem]
+    largeDesktop:text-[2.25rem]
 
     leading-none
 

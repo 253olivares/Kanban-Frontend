@@ -64,9 +64,9 @@ const TaskComment = memo(({
     desktop:rounded-[0.473rem]
     largeDesktop:rounded-[0.591rem]
     ">
-        <CommentHead commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
+        <CommentHead assignees={assignees} commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
         <Comment comment={commentData.message}/>
-        <EditDeleteReactions commentId={commentData} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment={deleteComment} assignees={assignees} commentUser={commentData.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={commentData.reactions} usersReacted={commentData.userReactions} />
+        <EditDeleteReactions hide={assignees.includes(commentData.u_id)} commentId={commentData} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment={deleteComment} assignees={assignees} commentUser={commentData.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={commentData.reactions} usersReacted={commentData.userReactions} />
     </div>
   )
 })
@@ -81,7 +81,8 @@ const EditDeleteReactions = memo(({
   deleteComment,
   openCommentEdit,
   setCommentFn,
-  commentId
+  commentId,
+  hide
 } : {
   assignees:string[],
   commentUser:string,
@@ -92,7 +93,8 @@ const EditDeleteReactions = memo(({
   deleteComment:()=>void,
   openCommentEdit:()=>void,
   setCommentFn:(comment:comments)=>void,
-  commentId:comments
+  commentId:comments,
+  hide:boolean
 }) => {
   return <div className="
   w-full
@@ -104,16 +106,21 @@ const EditDeleteReactions = memo(({
 
   justify-between
   ">
-    <Reactions adminCred={adminCred} assignees={assignees} userInfo={userInfo} commentsReactions={commentsReactions} usersReacted={usersReacted} />
+    {
+      hide ?
+      <Reactions adminCred={adminCred} assignees={assignees} userInfo={userInfo} commentsReactions={commentsReactions} usersReacted={usersReacted} /> : <div/>
+    }
     <CommentsAdminControl commentId={commentId} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment = {deleteComment} commentUser={commentUser} userInfo={userInfo} adminCred={adminCred} />
   </div>
 })
 
 const CommentHead = memo(({
+  assignees,
   commentUser,
   postDate,
   createTime
 } : {
+  assignees: string[],
   commentUser:string,
   postDate:Date,
   createTime:string
@@ -124,7 +131,7 @@ const CommentHead = memo(({
 
   justify-between
   ">
-    <UserIconNameRole userId={commentUser} /> 
+    <UserIconNameRole assignees={assignees} userId={commentUser} /> 
     <PostDate postDate={postDate} createTime={createTime} /> 
   </div>
 })
