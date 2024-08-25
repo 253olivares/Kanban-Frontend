@@ -30,8 +30,9 @@ export type contextType = {
     deleteListRef:MutableRefObject<HTMLDivElement | null> ,
     addListTask:MutableRefObject<HTMLButtonElement | null>,
     addListTaskSubmit:MutableRefObject<HTMLButtonElement | null>,
-    addNewTaskNameRef:MutableRefObject<HTMLDivElement | null>
-    taskMiniModal:MutableRefObject<HTMLDivElement | null>
+    addNewTaskNameRef:MutableRefObject<HTMLDivElement | null>,
+    taskMiniModal:MutableRefObject<HTMLDivElement | null>,
+    reactionButton:MutableRefObject<HTMLDivElement | null>
 }
 
 export const AppContext = createContext<contextType | null>(null);
@@ -86,6 +87,8 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
 
     const taskMiniModal = useRef<HTMLDivElement>(null);
 
+    const reactionButton = useRef<HTMLDivElement>(null);
+
     const contextValues = {
         accountSettingsRef,
         modalRef,
@@ -117,7 +120,8 @@ export const AppProvider = ({children}: {children:ReactElement})=> {
         addListTask,
         addListTaskSubmit,
         addNewTaskNameRef,
-        taskMiniModal
+        taskMiniModal,
+        reactionButton
     }
 
     return <AppContext.Provider value={contextValues}>{children}</AppContext.Provider>

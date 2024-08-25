@@ -1,6 +1,9 @@
-import { memo } from "react"
+import { memo, useContext, useLayoutEffect, useRef, useState } from "react"
 import reactionIcon from '/assets/Reaction_Icon.svg';
 import { user } from "../../../../../reduxStore/users/userSlice";
+import { AppContext } from "../../../../appRefContext/appRefContext";
+import { AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 
 const Reactions = memo(({
@@ -8,6 +11,7 @@ const Reactions = memo(({
   assignees,
   userInfo,
   commentsReactions,
+  // @ts-ignore
   usersReacted
 } : {
   adminCred:boolean,
@@ -23,7 +27,6 @@ const Reactions = memo(({
     "😊": commentsReactions.smile
   }
 
-  console.log(commentsReactions,usersReacted)
   return (
     <div className="
     flex
@@ -87,24 +90,108 @@ const Emoticons = memo((
 })
 
 const AddReaction = memo(()=>{
-  return <img onClick={
-    ()=>{
 
+  const [openCloseOptions,setOpenCloseOptions] = useState<boolean>(false);
+
+  const appContext = useContext(AppContext);
+  const {reactionButton} = appContext!;
+
+  return <div ref={reactionButton} className="
+  relative
+  ">
+    <AnimatePresence>
+    {
+      openCloseOptions && <ReactionOptions setOpenCloseOptions={setOpenCloseOptions} />
     }
-  } 
-  className="
-  sLaptop:h-[0.766rem]
-  mLaptop:h-[0.958rem]
-  desktop:h-[1.15rem]
-  largeDesktop:h-[1.437rem]
+    </AnimatePresence>
+    
+    <img onClick={
+      ()=>{
+        setOpenCloseOptions(!openCloseOptions);
+      }
+    } 
+    className="
+    sLaptop:h-[0.766rem]
+    mLaptop:h-[0.958rem]
+    desktop:h-[1.15rem]
+    largeDesktop:h-[1.437rem]
 
-  opacity-75
+    opacity-75
 
-  hover:opacity-100
+    hover:opacity-100
 
-  cursor-pointer
-  "
-  src={reactionIcon} alt="" />
+    cursor-pointer
+    "
+    src={reactionIcon} alt="" />
+  </div> 
+})
+
+const ReactionOptions = memo((
+  {
+    setOpenCloseOptions
+  } : {
+    setOpenCloseOptions:React.Dispatch<React.SetStateAction<boolean>>
+  }
+) => {
+
+  const appContext = useContext(AppContext);
+  const {reactionButton} = appContext!;
+
+  const reactionBox = useRef<HTMLDivElement> (null);
+
+  useLayoutEffect(()=>{
+    
+    const checkClick = (e:MouseEvent | TouchEvent) => {
+      const target = e.target as Node;
+
+      if(reactionBox.current && !reactionBox.current.contains(target) &&
+      reactionButton.current && !reactionButton.current.contains(target)
+    ) {
+      setOpenCloseOptions(false)
+    } 
+    
+    } 
+
+    window.addEventListener('click', checkClick, true);
+
+    return () => {
+      window.removeEventListener('click', checkClick, true);
+    }
+  },[])
+
+  return  <motion.div 
+    initial={{ 
+      y:'15%',
+      opacity: 0 
+    }}
+    animate={{ 
+      y:0,
+      opacity: 1 
+    }}
+    exit={{ 
+      y:'15%',
+      opacity: 0 
+    }}
+    transition={{
+      ease: "easeInOut",
+      duration:.3
+    }}
+    ref={reactionBox} 
+    className="
+   absolute
+
+   bottom-[150%] 
+   left-[-40%]
+  
+   block
+
+   min-w-48
+   min-h-9
+
+   bg-PrimaryWhite
+  ">
+
+  </motion.div>
 })
 
 export default Reactions
