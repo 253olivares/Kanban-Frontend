@@ -1,4 +1,5 @@
 import { removeMultipleUsersFromTask } from "../../../../../../../../customLogic/CustomLogic"
+import { removeMulitpleComments } from "../../../../../../../../reduxStore/comments/commentsSlice"
 import { useAppDispatch } from "../../../../../../../../reduxStore/hook"
 import { deleteTaskFromList } from "../../../../../../../../reduxStore/lists/listsSlice"
 import { changeTaskModal } from "../../../../../../../../reduxStore/modal/modalSlice"
@@ -10,14 +11,12 @@ const DeleteModal = ({
   setOpenTaskMiniModal,
   taskId,
   listId,
-  admin,
   comments,
   taskUsers
 } : {
   setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
   taskId:string,
   listId:string,
-  admin:string,
   comments:string[],
   taskUsers:string[]
 }) => {
@@ -33,7 +32,7 @@ const DeleteModal = ({
       largeDesktop:gap-[1.562rem]
     ">
       <Message message = {"Are you sure you want to delete this task. Users involved will be removed and action will not be recoverable!"} />
-      <DeleteButton admin={admin} comments={comments} taskUsers={taskUsers} setOpenTaskMiniModal={setOpenTaskMiniModal}  listId={listId} taskId={taskId}/>
+      <DeleteButton comments={comments} taskUsers={taskUsers} setOpenTaskMiniModal={setOpenTaskMiniModal}  listId={listId} taskId={taskId}/>
     </div>
   )
 }
@@ -56,15 +55,9 @@ const Message = ({message}:{message:string}) => {
 
 const DeleteButton = (
   {
-    // @ts-ignore
     taskId,
-    // @ts-ignore
     listId,
-    // @ts-ignore
     taskUsers,
-    // @ts-ignore
-    admin,
-    // @ts-ignore
     comments,
     setOpenTaskMiniModal
   }
@@ -73,7 +66,6 @@ const DeleteButton = (
     taskId:string,
     listId:string,
     taskUsers:string[],
-    admin:string,
     comments:string[],
     setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>
   }) => {
@@ -89,6 +81,8 @@ const DeleteButton = (
         removeMultipleUsersFromTask(taskUsers,taskId);
 
         dispatch(deleteTasksFromListDelete([taskId]))
+
+        dispatch(removeMulitpleComments({commentsToDelete:comments}))
       }).finally(()=>{
         console.log("Task has been removed")
       }).catch((e:any)=>{

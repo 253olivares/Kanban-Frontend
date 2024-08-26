@@ -8,14 +8,15 @@ import ConfirmDelete from './component/confirmDelete';
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal, getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove, updateWorkspaceBoard } from "../../../../reduxStore/workspace/workspaceSlice";
 import { createBoardListCL, createUserHistory, deleteBoardListMultipleCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersWorkspaceAndBoards, sanitize } from "../../../../customLogic/CustomLogic";
-import { getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace, updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
+import { deleteTaskFromUsers, getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace, updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
 import { addBoards, changeBoardModal, deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, selectBoardById, updateBoardNameFromWorkspace, updateBoardNameStart } from "../../../../reduxStore/boards/boardsSlice";
 import { changeListModalState, changeMobileBoardNameState, closeModal, deleteUserHistory, getAddTaskInput, setAddTaskInput, setSettingModal } from "../../../../reduxStore/modal/modalSlice";
 import { Params, useNavigate } from "react-router-dom";
 import AddNewUser from "./component/AddNewUser";
 import { createListState, deleteListStateBoardDelete, getSelectedList, list, selectAllLists, updateListTasks } from "../../../../reduxStore/lists/listsSlice";
 import CheckBackground from "./component/CheckBackground";
-import { createTask, deleteMulitpleTasksFromBoardDeletion, deleteTasksFromMulitpleBoards } from "../../../../reduxStore/tasks/tasksSlice";
+import { createTask, deleteMulitpleTasksFromBoardDeletion, deleteTasksFromMulitpleBoards, updateMultipleTasks } from "../../../../reduxStore/tasks/tasksSlice";
+import { removeMulitpleComments } from "../../../../reduxStore/comments/commentsSlice";
 
 const MobileModal = memo((
   {
@@ -160,7 +161,10 @@ const MobileModal = memo((
       dispatch(removeExistingWorkspace(workspace.w_id))
     .unwrap()
     .then((x)=> {
-      dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo}));
+      dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo})).unwrap().then((y)=>{
+        dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}));
+        dispatch(deleteTaskFromUsers(y.tasksToDelete));
+      });
 
       dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
 
@@ -182,7 +186,10 @@ const MobileModal = memo((
       dispatch(leaveWorkspaceUser(workspace.w_id))
     .unwrap().then(()=> {
 
-      if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id}));
+      if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id})).unwrap().then((y)=>{
+        dispatch(deleteTaskFromUsers(y.tasksToRemoveFrom));
+        dispatch(updateMultipleTasks({tasks:y.tasksToRemoveFrom,removeUser:user.u_id}))
+      });
       if(user) dispatch(removeUserFromWorkspace({workspace:workspace,u_id:user.u_id}));
 
       if(user) deleteUserFromHistory(workspace.boards,user.email);
@@ -208,7 +215,10 @@ const MobileModal = memo((
 
       dispatch(deleteListStateBoardDelete({boardId:x.board.b_id}))
 
-      dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists))
+      dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists)).unwrap().then((y)=>{
+        dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}))
+        dispatch(deleteTaskFromUsers(y.tasksToDelete));
+      })
 
       dispatch(closeModal());
       // close settings modal

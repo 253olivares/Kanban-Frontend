@@ -64,7 +64,7 @@ const TaskComment = memo(({
     desktop:rounded-[0.473rem]
     largeDesktop:rounded-[0.591rem]
     ">
-        <CommentHead assignees={assignees} commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
+        <CommentHead adminCred={adminCred} assignees={assignees} commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
         <Comment comment={commentData.message}/>
         <EditDeleteReactions hide={assignees.includes(commentData.u_id)} commentId={commentData} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment={deleteComment} assignees={assignees} commentUser={commentData.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={commentData.reactions} usersReacted={commentData.userReactions} />
     </div>
@@ -116,6 +116,7 @@ const   EditDeleteReactions = memo(({
 
 const CommentHead = memo(({
   assignees,
+  adminCred,
   commentUser,
   postDate,
   createTime
@@ -123,7 +124,8 @@ const CommentHead = memo(({
   assignees: string[],
   commentUser:string,
   postDate:Date,
-  createTime:string
+  createTime:string,
+  adminCred:boolean
 })=>{
   return <div className="
   flex
@@ -131,7 +133,7 @@ const CommentHead = memo(({
 
   justify-between
   ">
-    <UserIconNameRole assignees={assignees} userId={commentUser} /> 
+    <UserIconNameRole adminCred={adminCred} assignees={assignees} userId={commentUser} /> 
     <PostDate postDate={postDate} createTime={createTime} /> 
   </div>
 })

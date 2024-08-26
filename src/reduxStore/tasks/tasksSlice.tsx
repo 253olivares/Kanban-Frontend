@@ -98,13 +98,16 @@ export const deleteTasksFromListDelete = createAsyncThunk('task/deleteTasksFromL
 ) => {
     try {
         const state = getState() as RootState;
+
+        let commentsToDelete:string[] = [];
         
         tasksToDelete.forEach((taskId:string) => {
             const task = selectTaskById(state,taskId);
+            commentsToDelete = [...commentsToDelete,...task.comments]
             removeMultipleUsersFromTask(task.assignees,task.t_id)
         });
 
-        return {tasksToDelete:tasksToDelete,prevState:selectAllTasks(state)}
+        return {tasksToDelete:tasksToDelete,prevState:selectAllTasks(state), commentsToDelete:commentsToDelete}
     } catch(e:any) {
         return rejectWithValue(e);
     }
@@ -124,6 +127,7 @@ export const deleteTasksFromMulitpleBoards = createAsyncThunk('tasks/deleteTasks
         const boardsToSearch = workspace.boards;
 
         let tasks:string[] = []
+        let commentsToDelete:string[] = [];
 
         for(const board of boardsToSearch){
             const lists = getList(board) || null;
@@ -135,11 +139,12 @@ export const deleteTasksFromMulitpleBoards = createAsyncThunk('tasks/deleteTasks
 
         tasks.forEach((taskId:string)=> {
             const task = selectTaskById(state,taskId);
+            commentsToDelete=[...commentsToDelete, ...task.comments];
             removeMultipleUsersFromTask(task.assignees,task.t_id)
         })
 
 
-        return {tasksToDelete:tasks,prevState:selectAllTasks(state)}
+        return {tasksToDelete:tasks,prevState:selectAllTasks(state),commentsToDelete:commentsToDelete}
     } catch (e:any) {
         return rejectWithValue(e);
     }
@@ -151,7 +156,8 @@ export const deleteMulitpleTasksFromBoardDeletion = createAsyncThunk('tasks/dele
     try{
         const state = getState() as RootState;
 
-        let tasksToDelete:string[] = []
+        let tasksToDelete:string[] = [];
+        let commentsToDelete:string[] = [];
 
         for(const listId of listOfTasksToDeleteFromLists) {
             const list = selectListById(state,listId);
@@ -160,10 +166,11 @@ export const deleteMulitpleTasksFromBoardDeletion = createAsyncThunk('tasks/dele
 
         tasksToDelete.forEach((taskId:string) => {
             const task = selectTaskById(state,taskId);
+            commentsToDelete=[...commentsToDelete, ...task.comments];
             removeMultipleUsersFromTask(task.assignees,task.t_id)
         });
 
-        return {tasksToDelete:tasksToDelete,prevState:selectAllTasks(state)};
+        return {tasksToDelete:tasksToDelete,prevState:selectAllTasks(state),commentsToDelete:commentsToDelete};
 
     } catch(e:any) {
         return rejectWithValue(e);
@@ -355,7 +362,7 @@ const taskSlice = createSlice ({
             addTask(action.payload.newTask);
             taskAdapter.addOne(state,action.payload.newTask);
         })
-        .addCase(deleteTasksFromListDelete.fulfilled,(state,action:PayloadAction<{tasksToDelete:string[],prevState:task[]}>) => {
+        .addCase(deleteTasksFromListDelete.fulfilled,(state,action:PayloadAction<{tasksToDelete:string[],prevState:task[], commentsToDelete:string[]}>) => {
             deleteTasksFromListCL(action.payload.tasksToDelete);
             taskAdapter.removeMany(state,action.payload.tasksToDelete);
         })
@@ -363,7 +370,7 @@ const taskSlice = createSlice ({
             deleteTasksFromListCL(action.payload.tasksToDelete);
             taskAdapter.removeMany(state,action.payload.tasksToDelete);
         })  
-        .addCase(deleteTasksFromMulitpleBoards.fulfilled,(state,action:PayloadAction<{tasksToDelete:string[],prevState:task[]}>) =>{
+        .addCase(deleteTasksFromMulitpleBoards.fulfilled,(state,action:PayloadAction<{tasksToDelete:string[],prevState:task[],commentsToDelete:string[]}>) =>{
             deleteTasksFromListCL(action.payload.tasksToDelete);
             taskAdapter.removeMany(state,action.payload.tasksToDelete)
         })

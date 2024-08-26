@@ -304,6 +304,20 @@ export const getList = (boardId:string):list[] | null => {
     return convertData[boardId];
 };
 
+export const removeMulitpleCommentsCL = (comments:string[]) => {
+    const data = localStorage.getItem(commentKey);
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+
+    const commentsList:comments[] = JSON.parse(data);
+
+    const updateComments = commentsList.filter((x)=> comments.includes(x.c_id));
+    localStorage.setItem(commentKey,JSON.stringify(updateComments));
+
+}
+
 export const updateCommentCL = (updateComment:comments,prevComments:comments[]) => {
     const data = localStorage.getItem(commentKey);
     if(!data){

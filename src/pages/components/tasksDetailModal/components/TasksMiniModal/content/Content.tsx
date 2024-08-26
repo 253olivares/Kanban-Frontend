@@ -51,7 +51,6 @@ const Content = ({
           openTaskMiniModal === "delete" && <DeleteModal 
           taskId={task.t_id} 
           listId={task.l_id}
-          admin={task.admin_id}
           taskUsers={task.assignees}
           comments={task.comments}
           setOpenTaskMiniModal={setOpenTaskMiniModal}

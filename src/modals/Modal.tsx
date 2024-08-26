@@ -19,6 +19,7 @@ import { deleteBoardListMultipleCL, deleteBoardsUserHistory, deleteUserFromHisto
 import ChangeBackground from "./changeBackground/ChangeBackground";
 import { deleteListStateBoardDelete } from "../reduxStore/lists/listsSlice";
 import { deleteMulitpleTasksFromBoardDeletion, deleteTasksFromMulitpleBoards, updateMultipleTasks } from "../reduxStore/tasks/tasksSlice";
+import { removeMulitpleComments } from "../reduxStore/comments/commentsSlice";
 
 // this is our modal container that will show and hide modals based on what is suppose to be showing
 const Modal = memo(() => {
@@ -48,6 +49,7 @@ const Modal = memo(() => {
       dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo}))
       .unwrap()
       .then(y=> {
+        dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}))
         dispatch(deleteTaskFromUsers(y.tasksToDelete));
       });
 
@@ -85,8 +87,9 @@ const Modal = memo(() => {
       dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists))
       .unwrap()
       .then(y=>{
+        dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}));
         dispatch(deleteTaskFromUsers(y.tasksToDelete));
-      })
+      })  
 
       dispatch(closeModal());
       // close settings modal
@@ -103,7 +106,7 @@ const Modal = memo(() => {
     .unwrap().then(()=> {
 
       if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id})).unwrap().then((x)=>{
-        console.log(x.tasksToRemoveFrom);
+
         dispatch(deleteTaskFromUsers(x.tasksToRemoveFrom))
         dispatch(updateMultipleTasks({tasks:x.tasksToRemoveFrom,removeUser:user.u_id}));
       });

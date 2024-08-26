@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createEntityAdapter, createSlice } from "@reduxjs/toolkit";
-import { addCommentCL, getComments, removeCommentCl, updateCommentCL } from "../../customLogic/CustomLogic";
+import { addCommentCL, getComments, removeCommentCl, removeMulitpleCommentsCL, updateCommentCL } from "../../customLogic/CustomLogic";
 import { RootState } from "../store";
 
 export type comments = {
@@ -62,6 +62,22 @@ export const removeComments = createAsyncThunk('comments/removeComments',async(
         return {commentId:commentId,prevState:selectAllComments(state)}
     } catch(e:any) {
         return rejectWithValue(e)
+    }
+})
+
+export const removeMulitpleComments = createAsyncThunk('comments/removeMulitpleComments', async(
+    {
+        commentsToDelete
+    } : {
+        commentsToDelete:string[]
+    }, {rejectWithValue}
+)=>{
+    try{
+        
+        console.log("Comments To Delete1312321",commentsToDelete);
+        return commentsToDelete
+    } catch (e:any) {
+        return rejectWithValue(e);
     }
 })
 
@@ -205,6 +221,10 @@ const commentSlice = createSlice({
         .addCase(updateCommentsReaction.fulfilled, (state,action:PayloadAction<{updateComment:comments, prevComments:comments[]}>)=>{
             updateCommentCL(action.payload.updateComment,action.payload.prevComments);
             commentAdapter.updateOne(state,{id:action.payload.updateComment.c_id,changes:action.payload.updateComment})
+        })
+        .addCase(removeMulitpleComments.fulfilled, (state,action:PayloadAction<string[]>) =>{
+            commentAdapter.removeMany(state,action.payload);
+            removeMulitpleCommentsCL(action.payload);
         })
     }
 })

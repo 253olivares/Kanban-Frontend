@@ -6,10 +6,12 @@ import defaultImg from "/assets/default.png";
 
 const UserIconNameRole = memo(({
     assignees,
-    userId
+    userId,
+    adminCred
   } : {
     assignees:string[],
-    userId:string
+    userId:string,
+    adminCred:boolean
   })=>{
   
     const user = getUserFromList(userId) || null;
@@ -28,7 +30,7 @@ const UserIconNameRole = memo(({
     desktop:gap-[1rem]
     largeDesktop:gap-[1.2rem]
     ">
-        <Icon hidden={assignees.includes(userId)} iconImage={user.pfp} />
+        <Icon hidden={assignees.includes(userId) || adminCred} iconImage={user.pfp} />
         <div className="
         flex
         flex-col
@@ -38,8 +40,8 @@ const UserIconNameRole = memo(({
         desktop:gap-[.25rem]
         largeDesktop:gap-[0.312rem]
         ">
-            <UserName  hidden={assignees.includes(userId)} userName={user.first_name + " " + user.last_name} />
-            <UserRole  hidden={assignees.includes(userId)} role={userHistory[user.email][1]}/>
+            <UserName  hidden={assignees.includes(userId) || adminCred} userName={user.first_name + " " + user.last_name} />
+            <UserRole  hidden={assignees.includes(userId) || adminCred} role={userHistory[user.email][1]}/>
         </div>
     </div>
   })

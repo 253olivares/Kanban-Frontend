@@ -6,6 +6,7 @@ import { AppContext } from "../../../../../appRefContext/appRefContext";
 import { deleteTasksFromListDelete } from "../../../../../../reduxStore/tasks/tasksSlice";
 import { deleteTaskFromBoardListDelete } from "../../../../../../reduxStore/boards/boardsSlice";
 import { deleteTaskFromUsers } from "../../../../../../reduxStore/users/userSlice";
+import { removeMulitpleComments } from "../../../../../../reduxStore/comments/commentsSlice";
 
 const ListOptionsBody = (
     {
@@ -129,7 +130,9 @@ const DeleteList = memo(({listData}:{listData:list}) => {
         dispatch(deleteList(listData))
         .unwrap().then((x)=> {
             dispatch(deleteTaskFromBoardListDelete({boardId:x.listToDelete.b_id,listId:x.listToDelete.l_id}));
-            dispatch(deleteTasksFromListDelete(x.listToDelete.tasks));
+            dispatch(deleteTasksFromListDelete(x.listToDelete.tasks)).unwrap().then((y)=>{
+                dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}))
+            });
             dispatch(deleteTaskFromUsers(x.listToDelete.tasks));
         })
     }
