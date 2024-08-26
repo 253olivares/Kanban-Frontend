@@ -46,6 +46,7 @@ export default {
         "SpaceBlue": "var(--rSpaceBlue)",
         "SpaceBlueSelected": "var(--rSpaceBlueSelected)",
         "SelectorBlue" : "var(--rSelectorBlue)",
+        "SelectorBlue50": "var(--rSelectorBlue50)",
         "GlassBackground": "var(--rGlassBackground)"
       }
     },

@@ -4,6 +4,7 @@ import { user } from "../../../../../reduxStore/users/userSlice";
 import { AppContext } from "../../../../appRefContext/appRefContext";
 import { AnimatePresence } from "framer-motion";
 import { motion } from "framer-motion";
+import ReactionButtons from "./ReactionButtons";
 
 
 const Reactions = memo(({
@@ -11,14 +12,15 @@ const Reactions = memo(({
   assignees,
   userInfo,
   commentsReactions,
-  // @ts-ignore
-  usersReacted
+  usersReacted,
+  commentID
 } : {
   adminCred:boolean,
   assignees:string[],
   userInfo:user,
   commentsReactions:Record<string,number>,
-  usersReacted:Record<string,string[]>
+  usersReacted:Record<string,string[]>,
+  commentID:string
 }) => {
 
   const Reactions:Record<string,number> = {
@@ -43,10 +45,10 @@ const Reactions = memo(({
         <Emoticons key={key} emoji={key} number={value} />
       )}
       {
-         assignees.includes(userInfo.u_id) && <AddReaction />
+         assignees.includes(userInfo.u_id) && <AddReaction commentID={commentID} userId={userInfo.u_id} commentsReactions={commentsReactions} usersReacted={usersReacted} />
       }
       {
-        adminCred && <AddReaction />
+        adminCred && <AddReaction commentID={commentID} commentsReactions={commentsReactions} userId={userInfo.u_id}  usersReacted={usersReacted} />
       }
     </div>
   )
@@ -89,7 +91,19 @@ const Emoticons = memo((
   </div>
 })
 
-const AddReaction = memo(()=>{
+const AddReaction = memo((
+  {
+    userId,
+    commentsReactions,
+    usersReacted,
+    commentID
+  } : {
+    userId:string,
+    commentsReactions:Record<string,number>,
+    usersReacted:Record<string,string[]>,
+    commentID:string
+  }
+)=>{
 
   const [openCloseOptions,setOpenCloseOptions] = useState<boolean>(false);
 
@@ -101,7 +115,7 @@ const AddReaction = memo(()=>{
   ">
     <AnimatePresence>
     {
-      openCloseOptions && <ReactionOptions setOpenCloseOptions={setOpenCloseOptions} />
+      openCloseOptions && <ReactionOptions commentID={commentID} commentsReactions={commentsReactions} userId={userId} usersReacted={usersReacted} setOpenCloseOptions={setOpenCloseOptions} />
     }
     </AnimatePresence>
     
@@ -128,9 +142,17 @@ const AddReaction = memo(()=>{
 
 const ReactionOptions = memo((
   {
-    setOpenCloseOptions
+    userId,
+    usersReacted,
+    commentsReactions,
+    setOpenCloseOptions,
+    commentID
   } : {
-    setOpenCloseOptions:React.Dispatch<React.SetStateAction<boolean>>
+    userId:string,
+    usersReacted:Record<string,string[]>,
+    commentsReactions:Record<string,number>,
+    setOpenCloseOptions:React.Dispatch<React.SetStateAction<boolean>>,
+    commentID:string
   }
 ) => {
 
@@ -159,6 +181,8 @@ const ReactionOptions = memo((
     }
   },[])
 
+  console.log("UserReacted",usersReacted)
+
   return  <motion.div 
     initial={{ 
       y:'15%',
@@ -178,19 +202,69 @@ const ReactionOptions = memo((
     }}
     ref={reactionBox} 
     className="
-   absolute
+    absolute
 
-   bottom-[150%] 
-   left-[-40%]
-  
-   block
+    bottom-[150%] 
+    left-[-40%]
 
-   min-w-48
-   min-h-9
+    rounded-full
 
-   bg-PrimaryWhite
+    flex
+    flex-row
+
+    sLaptop:px-[0.4rem]
+    mLaptop:px-[0.5rem]
+    desktop:px-[0.6rem]
+    largeDesktop:px-[.75rem]
+
+    sLaptop:py-[0.266rem]
+    mLaptop:py-[0.333rem]
+    desktop:py-[0.4rem]
+    largeDesktop:py-[.5rem]
+
+    sLaptop:gap-[0.266rem]
+    mLaptop:gap-[0.333rem]
+    desktop:gap-[0.4rem]
+    largeDesktop:gap-[.5rem]
+
+    bg-PrimaryWhite
   ">
+    {
+      Object.entries(usersReacted).map(([key,value],index)=>
+        <ReactionButtons 
+        key={`${userId} + ${key}`}
+        commentID={commentID} 
+        commentsReactions={commentsReactions} 
+        durat={(index+1)*.15} 
+        userId={userId} 
+        reaction={key} 
+        usersReacted={value} 
+      />
+      )
+    }
+    <div 
+    className="
+      absolute
 
+      sLaptop:w-[0.733rem]
+      mLaptop:w-[0.916rem]
+      desktop:w-[1.1rem]
+      largeDesktop:w-[1.375rem]
+      sLaptop:h-[0.733rem]
+      mLaptop:h-[0.916rem]
+      desktop:h-[1.1rem]
+      largeDesktop:h-[1.375rem]
+
+      bottom-[-15%]
+      left-[7.5%]
+      z-[-1]
+
+      bg-PrimaryWhite
+      rounded-full
+
+      block
+    "
+    />
   </motion.div>
 })
 

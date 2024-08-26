@@ -71,7 +71,7 @@ const TaskComment = memo(({
   )
 })
 
-const EditDeleteReactions = memo(({
+const   EditDeleteReactions = memo(({
   assignees,
   commentUser,
   userInfo,
@@ -108,7 +108,7 @@ const EditDeleteReactions = memo(({
   ">
     {
       hide ?
-      <Reactions adminCred={adminCred} assignees={assignees} userInfo={userInfo} commentsReactions={commentsReactions} usersReacted={usersReacted} /> : <div/>
+      <Reactions commentID={commentId.c_id} adminCred={adminCred} assignees={assignees} userInfo={userInfo} commentsReactions={commentsReactions} usersReacted={usersReacted} /> : <div/>
     }
     <CommentsAdminControl commentId={commentId} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment = {deleteComment} commentUser={commentUser} userInfo={userInfo} adminCred={adminCred} />
   </div>

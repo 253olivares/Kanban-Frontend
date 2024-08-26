@@ -24,7 +24,8 @@
         --rSlateGray: #6D6D6D;
         --rSpaceBlue: #393D5E;
         --rSpaceBlueSelected: #202338;
-        --rSelectorBlue: #4699E5;
+        --rSelectorBlue: rgba(70, 153, 229,1);
+        --rSelectorBlue50: rgba(146, 202, 255, 1);
         --rGlassBackground: #010101;
     }
 

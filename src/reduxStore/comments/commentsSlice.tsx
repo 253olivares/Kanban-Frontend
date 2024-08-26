@@ -91,6 +91,45 @@ export const updateComment = createAsyncThunk('comments/updateComment', async(
     }
 })
 
+export const updateCommentsReaction = createAsyncThunk('comments/updateCommentsReaction',async(
+    {
+        commentId,
+        updateList,
+        updateCount
+    } : {
+        commentId:string,
+        updateList:Record<string,string[]>
+        updateCount:Record<string,number>
+    }, {rejectWithValue, getState}
+)=>{
+    try{
+        const state = getState() as RootState;
+
+        const prevComment = selectCommentById(state,commentId);
+
+        console.log(updateList);
+        console.log(updateCount);
+
+        const updateCommentInfo = {
+            ...prevComment,
+            reactions:{
+                ...prevComment.reactions,
+                ...updateCount
+            },
+            userReactions: {
+                ...prevComment.userReactions,
+                ...updateList
+            }
+            
+        }
+
+        return {updateComment:updateCommentInfo, prevComments:selectAllComments(state)}
+
+    } catch(e:any) {
+        return rejectWithValue(e);
+    }
+})
+
 export const createNewComments = createAsyncThunk('comments/createNewComments',async(
     {
         taskId,
@@ -162,6 +201,10 @@ const commentSlice = createSlice({
         .addCase(updateComment.fulfilled,(state,action:PayloadAction<{commentChange:comments,prevComments:comments[]}>)=> {
             updateCommentCL(action.payload.commentChange,action.payload.prevComments);
             commentAdapter.updateOne(state,{id:action.payload.commentChange.c_id,changes:action.payload.commentChange});
+        })
+        .addCase(updateCommentsReaction.fulfilled, (state,action:PayloadAction<{updateComment:comments, prevComments:comments[]}>)=>{
+            updateCommentCL(action.payload.updateComment,action.payload.prevComments);
+            commentAdapter.updateOne(state,{id:action.payload.updateComment.c_id,changes:action.payload.updateComment})
         })
     }
 })
