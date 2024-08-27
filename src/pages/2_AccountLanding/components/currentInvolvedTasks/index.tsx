@@ -3,13 +3,13 @@ import UserActiveTasks from '../activeUserTasks';
 import Heading from '../mainPageHeader';
 import { getUser, user } from '../../../../reduxStore/users/userSlice';
 import { useAppSelector } from '../../../../reduxStore/hook';
+import { getAndFilterUserTasks, task } from '../../../../reduxStore/tasks/tasksSlice';
 
 const index = memo(() => {
 
-  
   const user:user | null =  useAppSelector(getUser);
 
-  const getUserTasks = [];
+  const getUserTasks:task[] = useAppSelector(getAndFilterUserTasks);
 
   if(!user)return;
   return (
@@ -51,7 +51,7 @@ const index = memo(() => {
             '>No tasks currently found! <br/> All caught up!</p>
           </div>
           : 
-          <UserActiveTasks />
+          <UserActiveTasks getUserTasks={getUserTasks} />
         }
     </div> 
   )

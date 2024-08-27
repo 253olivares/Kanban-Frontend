@@ -1,8 +1,9 @@
-import { createAsyncThunk, createEntityAdapter, createSlice, PayloadAction, Update } from "@reduxjs/toolkit"
+import { createAsyncThunk, createEntityAdapter, createSelector, createSlice, PayloadAction, Update } from "@reduxjs/toolkit"
 import { RootState } from "../store";
 import { addTask, deleteTasksFromListCL, getList, getTask, removeMultipleUsersFromTask, updateMutliTasksCL, updateTaskCL } from "../../customLogic/CustomLogic";
 import { list, selectListById } from "../lists/listsSlice";
 import { workspace } from "../workspace/workspaceSlice";
+import { getUserTasks } from "../users/userSlice";
 
 export type task = {
     t_id:string,
@@ -82,8 +83,8 @@ export const createTask = createAsyncThunk('tasks/createTask',async(
             isActive: false,
             assignees: [],
             story: 0,
-            createdAt: newDate.toLocaleString(),
-            updatedAt: newDate.toLocaleString()
+            createdAt: newDate.valueOf().toString(),
+            updatedAt: newDate.valueOf().toString()
         }
 
         return {newTask:newTask,list:listData, prevState:selectAllTasks(state)}
@@ -407,6 +408,20 @@ export const {
 } = taskAdapter.getSelectors((state:RootState)=>state.tasks);
 
 
+export const getAndFilterUserTasks = createSelector(
+    [selectAllTasks,getUserTasks],
+    (tasks,usersTasks)=>{
+        const taskFilter = tasks.filter(x=>usersTasks?.includes(x.t_id) || false)
+
+        const sortTasks = taskFilter.sort((a,b)=>{
+            const date1 = new Date(a.createdAt);
+            const date2 = new Date(b.createdAt);
+            return date1.valueOf() - date2.valueOf();
+        })
+
+        return sortTasks;
+    }
+)
 
 export const getFilters = (state:RootState) => state.tasks.filters;
 

@@ -386,6 +386,7 @@ export const getUser = (state:RootState) => state.user.user;
 export const getUserInfo = (state:RootState) => state.user.loginUserInfo;
 export const getCreateAccountInfo = (state:RootState) => state.user.createUserInfo;
 export const getUserWorkspaces = (state:RootState) => state.user.user?.workspaces;
+export const getUserTasks = (state:RootState) => state.user.user?.tasks;
 
 export const {
     changeCreateAccountFirstname,
