@@ -3,10 +3,12 @@ import { motion } from 'framer-motion'
 
 const AddTaskDefault = (
     {
+      setOpenTaskName,
         openTaskName, 
       }
       :
       {
+        setOpenTaskName:React.Dispatch<React.SetStateAction<boolean>>,
         openTaskName:boolean,
       }
 ) => {  
@@ -19,10 +21,18 @@ const AddTaskDefault = (
         ease:'easeInOut',
         duration:.5
     }}
-
+    onClick={()=>setOpenTaskName(true)}
     className='
     w-full
-    h-full
+    min-h-[2.226rem]
+    mobile:min-h-[2.968rem]
+    sMobile:min-h-[4.75rem]
+    mMobile:min-h-[5.7rem]
+
+    sLaptop:min-h-[2.266rem]
+    mLaptop:min-h-[2.833rem]
+    desktop:min-h-[3.4rem]
+    largeDesktop:min-h-[4.25rem]
 
     hidden
 

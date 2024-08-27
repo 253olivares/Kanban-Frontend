@@ -1,11 +1,10 @@
 import { AnimatePresence } from "framer-motion"
-import React, { memo, useContext } from "react"
+import React, { memo } from "react"
 import AddTaskDefault from "./AddTaskDefault";
 import InputTaskName from "./InputTaskName";
 import AddList from '/assets/addBoard.png'
 import { list } from "../../../../../../reduxStore/lists/listsSlice";
 import { user } from "../../../../../../reduxStore/users/userSlice";
-import { AppContext } from "../../../../../appRefContext/appRefContext";
 
 
 const AddTaskHolder = memo((
@@ -23,18 +22,8 @@ const AddTaskHolder = memo((
     setOpenTaskName:React.Dispatch<React.SetStateAction<boolean>>
   }) => {
 
-    const appContext = useContext(AppContext);
-    const {addNewTaskNameRef} = appContext!;
-
   return (
     <div 
-
-    ref={addNewTaskNameRef}
-
-    onClick={()=>{
-      !openTaskName && setOpenTaskName(true);
-    }}
-
     className={`w-full
 
     flex
@@ -51,16 +40,6 @@ const AddTaskHolder = memo((
     desktop:rounded-[0.5rem]
     largeDesktop:rounded-[0.625rem]
 
-    min-h-[2.226rem]
-    mobile:min-h-[2.968rem]
-    sMobile:min-h-[4.75rem]
-    mMobile:min-h-[5.7rem]
-
-    sLaptop:min-h-[2.266rem]
-    mLaptop:min-h-[2.833rem]
-    desktop:min-h-[3.4rem]
-    largeDesktop:min-h-[4.25rem]
-
     bg-SpaceBlueSelected
     `}>
 
@@ -71,7 +50,7 @@ const AddTaskHolder = memo((
               openTaskName ?
               <InputTaskName user={user} listData={listData} setOpenTaskName={setOpenTaskName}/>
               :
-              <AddTaskDefault openTaskName={openTaskName}/>
+              <AddTaskDefault setOpenTaskName={setOpenTaskName} openTaskName={openTaskName}/>
             }
         </AnimatePresence>
     </div>
@@ -83,7 +62,16 @@ export const InputTaskMobile = ({openTaskName,setOpenTaskName}:{openTaskName:boo
   onClick={()=> setOpenTaskName(!openTaskName)}
   className="
   w-full
-  h-full
+
+  min-h-[2.226rem]
+  mobile:min-h-[2.968rem]
+  sMobile:min-h-[4.75rem]
+  mMobile:min-h-[5.7rem]
+
+  sLaptop:min-h-[2.266rem]
+  mLaptop:min-h-[2.833rem]
+  desktop:min-h-[3.4rem]
+  largeDesktop:min-h-[4.25rem]
 
   flex
   flex-row

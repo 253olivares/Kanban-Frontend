@@ -1,11 +1,17 @@
 import { memo } from 'react';
 import UserActiveTasks from '../activeUserTasks';
 import Heading from '../mainPageHeader';
+import { getUser, user } from '../../../../reduxStore/users/userSlice';
+import { useAppSelector } from '../../../../reduxStore/hook';
 
 const index = memo(() => {
 
+  
+  const user:user | null =  useAppSelector(getUser);
+
   const getUserTasks = [];
 
+  if(!user)return;
   return (
     <div className='
       w-full
