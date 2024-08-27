@@ -24,6 +24,7 @@ export type commentTest = {
 
 const CommentsHolder = memo((
     {
+        taskId,
         assignees,
         userInfo,
         adminCred,
@@ -31,6 +32,7 @@ const CommentsHolder = memo((
         openCommentEdit,
         setCommentFn
     } : {
+        taskId:string,
         assignees:string[],
         userInfo:user,
         adminCred:boolean
@@ -80,7 +82,7 @@ const CommentsHolder = memo((
     }>
         {
             comments.map((comment)=>
-                <TaskComment setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} userInfo={userInfo} adminCred={adminCred} key={comment} comment={comment} assignees={assignees} />
+                <TaskComment taskId={taskId} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} userInfo={userInfo} adminCred={adminCred} key={comment} comment={comment} assignees={assignees} />
             )
         }
         {

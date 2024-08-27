@@ -8,6 +8,7 @@ import { comments } from "../../../../reduxStore/comments/commentsSlice"
 
 
 const TaskBottomInfo = memo(({
+    taskId,
     setOpenTaskMiniModal,
     taskDescription,
     setTaskDescription,
@@ -20,6 +21,7 @@ const TaskBottomInfo = memo(({
     openCommentEdit,
     setCommentFn
 } : {
+    taskId:string,
     setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>,
     taskDescription:string,
     setTaskDescription:React.Dispatch<React.SetStateAction<string>>,
@@ -41,7 +43,7 @@ const TaskBottomInfo = memo(({
     desktop:py-[1.533rem]
     largeDesktop:py-[1.917rem]
     ">
-        <LeftContent setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task ={task}/>
+        <LeftContent taskId={taskId} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task ={task}/>
         <RightContent setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} task = {task}/>
     </div>
   )

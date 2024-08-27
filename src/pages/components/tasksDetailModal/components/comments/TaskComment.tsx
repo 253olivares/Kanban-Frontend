@@ -10,6 +10,7 @@ import { removeCommentFromTask } from "../../../../../reduxStore/tasks/tasksSlic
 
 
 const TaskComment = memo(({
+    taskId,
     assignees,
     userInfo,
     adminCred,
@@ -17,6 +18,7 @@ const TaskComment = memo(({
     openCommentEdit,
     setCommentFn
 } : {
+    taskId:string,
     assignees:string[]
     userInfo:user,
     adminCred:boolean,
@@ -64,9 +66,9 @@ const TaskComment = memo(({
     desktop:rounded-[0.473rem]
     largeDesktop:rounded-[0.591rem]
     ">
-        <CommentHead adminCred={adminCred} assignees={assignees} commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
+        <CommentHead commentid={commentData.u_id} taskId={taskId} assignees={assignees} commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
         <Comment comment={commentData.message}/>
-        <EditDeleteReactions hide={assignees.includes(commentData.u_id)} commentId={commentData} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment={deleteComment} assignees={assignees} commentUser={commentData.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={commentData.reactions} usersReacted={commentData.userReactions} />
+        <EditDeleteReactions hide={assignees.includes(commentData.u_id) || commentData.u_id===taskId} commentId={commentData} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment={deleteComment} assignees={assignees} commentUser={commentData.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={commentData.reactions} usersReacted={commentData.userReactions} />
     </div>
   )
 })
@@ -115,17 +117,19 @@ const   EditDeleteReactions = memo(({
 })
 
 const CommentHead = memo(({
+  commentid,
+  taskId,
   assignees,
-  adminCred,
   commentUser,
   postDate,
   createTime
 } : {
+  commentid:string,
+  taskId:string,
   assignees: string[],
   commentUser:string,
   postDate:Date,
   createTime:string,
-  adminCred:boolean
 })=>{
   return <div className="
   flex
@@ -133,7 +137,7 @@ const CommentHead = memo(({
 
   justify-between
   ">
-    <UserIconNameRole adminCred={adminCred} assignees={assignees} userId={commentUser} /> 
+    <UserIconNameRole adminCred={commentid === taskId} assignees={assignees} userId={commentUser} /> 
     <PostDate postDate={postDate} createTime={createTime} /> 
   </div>
 })

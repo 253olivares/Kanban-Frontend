@@ -7,6 +7,7 @@ import { comments } from "../../../../reduxStore/comments/commentsSlice"
 
 
 const LeftContent = memo(({
+  taskId,
   taskDescription,
   setTaskDescription,
   comments,
@@ -18,6 +19,7 @@ const LeftContent = memo(({
   openCommentEdit,
   setCommentFn
 } : {
+  taskId:string,
   taskDescription:string,
   setTaskDescription:React.Dispatch<React.SetStateAction<string>>,
   comments:string,
@@ -41,7 +43,7 @@ const LeftContent = memo(({
 
     ">
       <TaskDescription taskId={task.t_id}  taskDescription={taskDescription} setTaskDescription={setTaskDescription} adminCred={adminCred} description={task.description} />
-      <TaskComments setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} comments={comments} setComment={setComment} userInfo={userInfo}  adminCred={adminCred} taskComments={task.comments} assignees={task.assignees}/>
+      <TaskComments taskId={taskId} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} comments={comments} setComment={setComment} userInfo={userInfo}  adminCred={adminCred} taskComments={task.comments} assignees={task.assignees}/>
     </div>
   )
 })
