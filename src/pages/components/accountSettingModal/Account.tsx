@@ -30,6 +30,8 @@ const Account = memo(({user}: {user:user}) => {
           largeDesktop:py-[1.906rem]
           4k:py-[2.541rem]
 
+          mx-auto
+
           "> 
             <div className="
             flex-grow-0
@@ -72,12 +74,7 @@ const Account = memo(({user}: {user:user}) => {
             mobile:gap-[0.302rem]
             sMobile:gap-[0.483rem]
             mMobile:gap-[0.579rem]
-            sLaptop:gap-[0.258rem]
-            mLaptop:gap-[0.322rem]
-            desktop:gap-[0.386rem]
-            largeDesktop:gap-[0.483rem]
-            4k:gap-[0.643rem]
-
+        
             ">
               <h1 className="
               text-PrimaryWhite
@@ -93,7 +90,14 @@ const Account = memo(({user}: {user:user}) => {
               largeDesktop:text-[1.723rem]
               4k:text-[2.298rem]
 
-              leading-none
+              sLaptop:max-w-[8.333rem]
+              mLaptop:max-w-[10.416rem]
+              desktop:max-w-[12.5rem]
+              largeDesktop:max-w-[15.625rem]
+              overflow-hidden
+              text-ellipsis
+
+              leading-tight
               ">{user.username}</h1>
               <p className="
               font-medium
@@ -109,8 +113,14 @@ const Account = memo(({user}: {user:user}) => {
               largeDesktop:text-[1.034rem]
               4k:text-[1.379rem]
 
+              sLaptop:max-w-[8.333rem]
+              mLaptop:max-w-[10.416rem]
+              desktop:max-w-[12.5rem]
+              largeDesktop:max-w-[15.625rem]
+              text-ellipsis
+
               opacity-50
-              leading-none
+              leading-tight
               ">{user.email}</p>
             </div>  
         </div>

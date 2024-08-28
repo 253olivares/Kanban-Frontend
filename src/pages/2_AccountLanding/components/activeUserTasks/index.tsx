@@ -13,6 +13,11 @@ const index = memo((
     <div className="
      w-[70%]
      grow 
+
+     flex
+     flex-col
+    
+     gap-5
     ">
       {
         getUserTasks.map((task)=>
