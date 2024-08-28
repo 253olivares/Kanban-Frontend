@@ -21,12 +21,18 @@ export type task = {
     updatedAt:string,
 }
 
+export type stateFilter = {
+    low:boolean,
+    medium:boolean,
+    urgent:boolean
+}
+
 type initialStateType = {
     ids: string[],
     entities: Record<string,task>,
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: null | string ,
-    filters: Record<string,boolean>
+    filters: stateFilter
 }
 
 const taskAdapter = createEntityAdapter({
@@ -78,7 +84,7 @@ export const createTask = createAsyncThunk('tasks/createTask',async(
             order: listData.tasks.length,
             name: taskName,
             description: "No description.",
-            priority: [],
+            priority: [""],
             comments: [],
             isActive: false,
             assignees: [],

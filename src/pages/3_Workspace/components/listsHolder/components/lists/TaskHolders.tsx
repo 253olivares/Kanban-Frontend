@@ -8,6 +8,7 @@ const TaskHolders = memo(({
 }: {
     taskLists:string[]
 }) => {
+
   return (
     <div 
     style={{

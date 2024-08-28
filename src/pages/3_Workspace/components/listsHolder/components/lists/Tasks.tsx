@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "../../../../../../reduxStore/hook"
 import { changeTaskModal, setSelectTask } from "../../../../../../reduxStore/modal/modalSlice";
-import { selectTaskById } from "../../../../../../reduxStore/tasks/tasksSlice"
+import { getFilters, selectTaskById, stateFilter } from "../../../../../../reduxStore/tasks/tasksSlice"
 import StoryPoint from "./taskComponents/StoryPoint";
 import TaskInfo from "./taskComponents/TaskInfo";
 import TaskName from "./taskComponents/TaskName";
@@ -14,9 +14,19 @@ const Tasks = ({
 
   const dispatch = useAppDispatch();
 
-  // @ts-ignore
+  const getAppFilter:stateFilter = useAppSelector(getFilters);
+
   const task = useAppSelector(state => selectTaskById(state,taskId));
   
+  const noFilterSelected = !getAppFilter.low && !getAppFilter.medium && !getAppFilter.urgent
+
+  const filterList:Record<string,boolean>  = {
+    low: getAppFilter.low,
+    medium: getAppFilter.medium,
+    urgent: getAppFilter.urgent,
+    "" : false
+  }
+
   return (
     <div 
     onClick={
@@ -60,6 +70,14 @@ const Tasks = ({
     px-[5%]
 
     shrink-0
+
+    ${
+      !filterList[task.priority[0]] && 'opacity-50'
+    }
+
+    ${
+      noFilterSelected && 'opacity-[1]'
+    }
 
     `}>
       <TasksFilterHead filter = {task.priority} />
