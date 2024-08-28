@@ -1,6 +1,4 @@
 import { memo } from "react"
-import { useAppSelector } from "../../../../../../../../reduxStore/hook"
-import { getUserHistoryState } from "../../../../../../../../reduxStore/modal/modalSlice"
 import UserEntity from "./UserEntity"
 import scrollbarImage from '/assets/scrollBarTrack.png'
 import { getUserHistory } from "../../../../../../../../customLogic/CustomLogic"

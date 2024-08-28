@@ -1,6 +1,5 @@
 import { memo } from "react";
 import { getUserFromList, getUserHistory } from "../../../../../customLogic/CustomLogic";
-import { useAppSelector } from "../../../../../reduxStore/hook";
 import defaultImg from "/assets/default.png";
 
 const UserIconNameRole = memo(({
