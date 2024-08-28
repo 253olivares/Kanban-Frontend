@@ -3,14 +3,17 @@ import { useAppSelector } from "../../../../../../../../reduxStore/hook"
 import { getUserHistoryState } from "../../../../../../../../reduxStore/modal/modalSlice"
 import UserEntity from "./UserEntity"
 import scrollbarImage from '/assets/scrollBarTrack.png'
+import { getUserHistory } from "../../../../../../../../customLogic/CustomLogic"
 
 
 const Users = memo((
   {
-    taskUsers,
-    taskId,
-    admin
+  boardId,
+  taskUsers,
+  taskId,
+  admin
   }:{
+  boardId:string,
   taskUsers:string[],
   taskId:string,
   admin:string
@@ -27,7 +30,7 @@ const Users = memo((
       largeDesktop:gap-[1.25rem]
     ">
       <Header />
-      <UsersInBoard taskUsers={taskUsers}  taskId={taskId} admin={admin} />
+      <UsersInBoard boardId={boardId} taskUsers={taskUsers}  taskId={taskId} admin={admin} />
     </div>
   )
 })
@@ -49,18 +52,21 @@ const Header = () =>{
 
 const UsersInBoard = (
   {
+  boardId,
   taskUsers,
   taskId,
   admin
   }:{
+  boardId:string,
   taskUsers:string[],
   taskId:string,
   admin:string
   }
 ) =>{
 
-  const userHistory = useAppSelector(getUserHistoryState);
+  const userHistory = getUserHistory(boardId);
 
+  if(!userHistory) return
   return <div 
   // @ts-ignore
   style={{"--img":`url(${scrollbarImage})`}}

@@ -93,11 +93,11 @@ const TaskDetail = memo((
     `}
     >
       <AnimatePresence>
-      {openTaskMiniModal && <TaskMiniModal setCommentFn={setCommentFn} comment={comment} task={task} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} />}
+      {openTaskMiniModal && <TaskMiniModal boardId={board.b_id} setCommentFn={setCommentFn} comment={comment} task={task} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} />}
       </AnimatePresence>
       <ImageHeader workspaceName={workspace.name} boardName={board.name} selectList={task.l_id} imgSrc={headerBackground} />
       <TaskInformation setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} taskId={task.t_id} taskName={task.name} filter={task.priority} members={task.assignees} comments={task.comments} story={task.story} />
-      <TaskBottomInfo taskId={task.admin_id} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} setOpenTaskMiniModal={setOpenTaskMiniModal} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task={task}/>
+      <TaskBottomInfo boardId={board.b_id} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} setOpenTaskMiniModal={setOpenTaskMiniModal} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task={task}/>
     </motion.div>
   )
 })

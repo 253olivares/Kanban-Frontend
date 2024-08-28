@@ -6,12 +6,14 @@ import { motion } from "framer-motion";
 
 
 const TaskMiniModal = ({
+  boardId,
   task,
   openTaskMiniModal,
   setOpenTaskMiniModal,
   comment,
   setCommentFn
 } : {
+  boardId:string,
   task:task,
   openTaskMiniModal:miniTaskTypes,
   setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
@@ -41,7 +43,7 @@ const TaskMiniModal = ({
       items-center
       z-10
     '>
-      <Content comment={comment} setCommentFn={setCommentFn} task={task} setOpenTaskMiniModal={setOpenTaskMiniModal} openTaskMiniModal={openTaskMiniModal} />
+      <Content boardId={boardId} comment={comment} setCommentFn={setCommentFn} task={task} setOpenTaskMiniModal={setOpenTaskMiniModal} openTaskMiniModal={openTaskMiniModal} />
       <div
       className="
       absolute

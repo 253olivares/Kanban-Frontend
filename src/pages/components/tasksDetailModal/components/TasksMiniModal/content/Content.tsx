@@ -9,12 +9,14 @@ import EditComments from './modals/editComments/EditComments';
 import { comments } from '../../../../../../reduxStore/comments/commentsSlice';
 
 const Content = ({
+  boardId,
   task,
   openTaskMiniModal,
   setOpenTaskMiniModal,
   comment,
   setCommentFn
 } : {
+  boardId:string,
   task:task,
   openTaskMiniModal:miniTaskTypes,
   setOpenTaskMiniModal: React.Dispatch<React.SetStateAction<miniTaskTypes>>,
@@ -57,7 +59,7 @@ const Content = ({
           />
         }
         {
-          openTaskMiniModal === "users" && <UserModal taskId={task.t_id} admin={task.admin_id} taskUsers={task.assignees} />
+          openTaskMiniModal === "users" && <UserModal boardId={boardId} taskId={task.t_id} admin={task.admin_id} taskUsers={task.assignees} />
         }
         {
           openTaskMiniModal === "editComment" && <EditComments setOpenTaskMiniModal={setOpenTaskMiniModal} setCommentFn={setCommentFn} comment={comment} />

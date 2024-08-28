@@ -1,14 +1,15 @@
 import { memo } from "react";
-import { getUserFromList } from "../../../../../customLogic/CustomLogic";
+import { getUserFromList, getUserHistory } from "../../../../../customLogic/CustomLogic";
 import { useAppSelector } from "../../../../../reduxStore/hook";
-import { getUserHistoryState } from "../../../../../reduxStore/modal/modalSlice";
 import defaultImg from "/assets/default.png";
 
 const UserIconNameRole = memo(({
+    boardId,
     assignees,
     userId,
     adminCred
   } : {
+    boardId:string,
     assignees:string[],
     userId:string,
     adminCred:boolean
@@ -16,9 +17,9 @@ const UserIconNameRole = memo(({
   
     const user = getUserFromList(userId) || null;
   
-    const userHistory =  useAppSelector(getUserHistoryState);
+    const userHistory:Record<string,string[]> | null =  getUserHistory(boardId);
   
-    if(!user) return
+    if(!user || !userHistory) return
     return <div className="
     flex
     flex-row

@@ -5,6 +5,7 @@ import {  user } from '../../../../../reduxStore/users/userSlice';
 import { comments } from '../../../../../reduxStore/comments/commentsSlice';
 
 const TaskComments = memo(({
+    boardId,
     taskId,
     comments,
     setComment,
@@ -16,6 +17,7 @@ const TaskComments = memo(({
     openCommentEdit,
     setCommentFn
 } : {
+    boardId:string,
     taskId:string,
     comments:string,
     setComment:React.Dispatch<React.SetStateAction<string>>,
@@ -43,7 +45,7 @@ const TaskComments = memo(({
        
     '>   
         <AddComment addNewComment={addNewComment} comments={comments} setComment={setComment} adminCred={adminCred} userInfo={userInfo} assignees={assignees}  />
-        <CommentsHolder taskId={taskId} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} userInfo={userInfo} adminCred={adminCred} comments = {taskComments} assignees={assignees} />
+        <CommentsHolder boardId={boardId} taskId={taskId} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} userInfo={userInfo} adminCred={adminCred} comments = {taskComments} assignees={assignees} />
     </div>
   )
 })

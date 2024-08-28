@@ -10,6 +10,7 @@ import { removeCommentFromTask } from "../../../../../reduxStore/tasks/tasksSlic
 
 
 const TaskComment = memo(({
+    boardId,
     taskId,
     assignees,
     userInfo,
@@ -18,6 +19,7 @@ const TaskComment = memo(({
     openCommentEdit,
     setCommentFn
 } : {
+    boardId:string,
     taskId:string,
     assignees:string[]
     userInfo:user,
@@ -66,7 +68,7 @@ const TaskComment = memo(({
     desktop:rounded-[0.473rem]
     largeDesktop:rounded-[0.591rem]
     ">
-        <CommentHead commentid={commentData.u_id} taskId={taskId} assignees={assignees} commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
+        <CommentHead boardId={boardId} commentid={commentData.u_id} taskId={taskId} assignees={assignees} commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
         <Comment comment={commentData.message}/>
         <EditDeleteReactions hide={assignees.includes(commentData.u_id) || commentData.u_id===taskId} commentId={commentData} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} deleteComment={deleteComment} assignees={assignees} commentUser={commentData.u_id} userInfo={userInfo} adminCred={adminCred} commentsReactions={commentData.reactions} usersReacted={commentData.userReactions} />
     </div>
@@ -117,6 +119,7 @@ const   EditDeleteReactions = memo(({
 })
 
 const CommentHead = memo(({
+  boardId,
   commentid,
   taskId,
   assignees,
@@ -124,6 +127,7 @@ const CommentHead = memo(({
   postDate,
   createTime
 } : {
+  boardId:string,
   commentid:string,
   taskId:string,
   assignees: string[],
@@ -137,7 +141,7 @@ const CommentHead = memo(({
 
   justify-between
   ">
-    <UserIconNameRole adminCred={commentid === taskId} assignees={assignees} userId={commentUser} /> 
+    <UserIconNameRole boardId={boardId} adminCred={commentid === taskId} assignees={assignees} userId={commentUser} /> 
     <PostDate postDate={postDate} createTime={createTime} /> 
   </div>
 })
