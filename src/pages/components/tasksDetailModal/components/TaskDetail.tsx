@@ -1,8 +1,7 @@
 import { ReactNode, memo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import headerBackground from '/assets/taskModal/TaskHeaderBack.png';
-import { useAppDispatch, useAppSelector } from '../../../../reduxStore/hook';
-import { selectListById } from '../../../../reduxStore/lists/listsSlice';
+import { useAppDispatch} from '../../../../reduxStore/hook';
 import TaskInformation from './TaskInformation';
 import { addCommentToTask, task } from '../../../../reduxStore/tasks/tasksSlice';
 import { board } from '../../../../reduxStore/boards/boardsSlice';
@@ -12,6 +11,7 @@ import { user } from '../../../../reduxStore/users/userSlice';
 import TaskMiniModal from './TasksMiniModal/TaskMiniModal';
 import { miniTaskTypes } from '../TaskDetailModal';
 import { comments, createNewComments } from '../../../../reduxStore/comments/commentsSlice';
+import { getIndividualList } from '../../../../customLogic/CustomLogic';
 
 const TaskDetail = memo((
   {
@@ -116,8 +116,11 @@ const ImageHeader = memo((
   }
 ) => {
 
-  const list = useAppSelector(state=>selectListById(state,selectList));
+  // const list = useAppSelector(state=>selectListById(state,selectList));
   
+  const list = getIndividualList(selectList);
+  
+  if(!list) return;
   return <div className='
   w-full
 
@@ -167,7 +170,7 @@ const ImageHeader = memo((
       text-nowrap
       overflow-hidden
       text-ellipsis
-      '>{workspaceName} / {boardName} / {list.name}</p>
+      '>{workspaceName} / {boardName} / {list[0].name}</p>
     </div>
   </div>
 })

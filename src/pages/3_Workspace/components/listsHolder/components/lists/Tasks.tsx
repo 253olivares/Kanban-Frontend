@@ -1,6 +1,8 @@
+import { getIndividualList } from "../../../../../../customLogic/CustomLogic";
+import { selectBoardById } from "../../../../../../reduxStore/boards/boardsSlice";
 import { useAppDispatch, useAppSelector } from "../../../../../../reduxStore/hook"
 import { changeTaskModal, setSelectTask } from "../../../../../../reduxStore/modal/modalSlice";
-import { getFilters, selectTaskById, stateFilter } from "../../../../../../reduxStore/tasks/tasksSlice"
+import { getFilters, selectTaskById, setBoard, stateFilter } from "../../../../../../reduxStore/tasks/tasksSlice"
 import StoryPoint from "./taskComponents/StoryPoint";
 import TaskInfo from "./taskComponents/TaskInfo";
 import TaskName from "./taskComponents/TaskName";
@@ -17,6 +19,11 @@ const Tasks = ({
   const getAppFilter:stateFilter = useAppSelector(getFilters);
 
   const task = useAppSelector(state => selectTaskById(state,taskId));
+
+  const listTaskFrom = getIndividualList(task.l_id);
+  listTaskFrom && console.log(listTaskFrom[0]);
+  const board = useAppSelector(state => selectBoardById(state,listTaskFrom ? listTaskFrom[0].b_id : ""))
+
   
   const noFilterSelected = !getAppFilter.low && !getAppFilter.medium && !getAppFilter.urgent
 
@@ -26,13 +33,14 @@ const Tasks = ({
     urgent: getAppFilter.urgent,
     "" : false
   }
-
+  if(!listTaskFrom) return;
   return (
     <div 
     onClick={
       ()=>{
         dispatch(changeTaskModal(true));
         dispatch(setSelectTask(taskId));
+        dispatch(setBoard(board))
       }
     }
     className={`

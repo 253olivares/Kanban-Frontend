@@ -304,6 +304,25 @@ export const getList = (boardId:string):list[] | null => {
     return convertData[boardId];
 };
 
+export const getIndividualList = (listId:string):list[] | null => {
+    const data = localStorage.getItem(listKey);
+
+    if(!data){
+        reloadApplication();
+        return null;
+    }
+
+    const lists:Record<string,list[]> = JSON.parse(data);
+
+    let list:list[] | null = null;
+
+    Object.entries(lists).forEach(([_,listArray])=>{
+        list = listArray.filter(x=>x.l_id === listId);     
+    })
+
+    return list;
+}
+
 export const removeMulitpleCommentsCL = (comments:string[]) => {
     const data = localStorage.getItem(commentKey);
     if(!data){

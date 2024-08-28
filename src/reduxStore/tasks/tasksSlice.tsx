@@ -4,6 +4,7 @@ import { addTask, deleteTasksFromListCL, getList, getTask, removeMultipleUsersFr
 import { list, selectListById } from "../lists/listsSlice";
 import { workspace } from "../workspace/workspaceSlice";
 import { getUserTasks } from "../users/userSlice";
+import { board } from "../boards/boardsSlice";
 
 export type task = {
     t_id:string,
@@ -32,7 +33,8 @@ type initialStateType = {
     entities: Record<string,task>,
     status: 'idle' | 'loading' | 'succeeded' | 'failed',
     error: null | string ,
-    filters: stateFilter
+    filters: stateFilter,
+    selectedBoard: board | null
 }
 
 const taskAdapter = createEntityAdapter({
@@ -47,7 +49,8 @@ const initialState:initialStateType = taskAdapter.getInitialState({
         low:false,
         medium:false,
         urgent:false
-    }
+    },
+    selectedBoard:null
 })  
 
 export const initiateTask = createAsyncThunk('task/getTask', async(_,{rejectWithValue})=> {
@@ -351,6 +354,9 @@ const taskSlice = createSlice ({
             urgent?:boolean
         }>) {
             state.filters = {...state.filters, ...action.payload};
+        },
+        setBoard(state,action:PayloadAction<board>) {
+            state.selectedBoard = action.payload;
         }
     },
     extraReducers(builder){
@@ -430,7 +436,8 @@ export const getAndFilterUserTasks = createSelector(
 )
 
 export const getFilters = (state:RootState) => state.tasks.filters;
+export const getSelectBoard = (state:RootState) => state.tasks.selectedBoard;
 
-export const {changeFilter} = taskSlice.actions;
+export const {changeFilter, setBoard} = taskSlice.actions;
 
 export default taskSlice.reducer;

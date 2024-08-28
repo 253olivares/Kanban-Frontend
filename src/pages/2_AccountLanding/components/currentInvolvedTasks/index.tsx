@@ -20,7 +20,7 @@ const index = memo(() => {
       flex 
       flex-col
       items-center 
-      justify-center
+      justify-start
       '>
          <Heading />
         {

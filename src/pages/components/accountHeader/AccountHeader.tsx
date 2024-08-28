@@ -12,7 +12,7 @@ import { getWorkSpaceModal, initiateWorkspace } from '../../../reduxStore/worksp
 import MobileModal from '../../2_AccountLanding/components/mobileAddWorkspace/MobileModal';
 import { getBoardModal, initializeBoards, selectBoardById } from '../../../reduxStore/boards/boardsSlice';
 import { initialComments } from '../../../reduxStore/comments/commentsSlice';
-import { initiateTask } from '../../../reduxStore/tasks/tasksSlice';
+import { getSelectBoard, initiateTask } from '../../../reduxStore/tasks/tasksSlice';
 import { initiateUserList } from '../../../reduxStore/userList/userList';
 import MembersModal from '../../3_Workspace/components/membersModal/MultiMobileModal';
 import { getAddTaskModal, getListSettings} from '../../../reduxStore/lists/listsSlice';
@@ -45,6 +45,7 @@ const AccountHeader = memo(() :ReactNode => {
 
   const board = useAppSelector(state => selectBoardById(state,workspaceId||""))||null;
 
+  const taskSelectedBoard = useAppSelector(getSelectBoard);
   // a cache check to have the application ato login a user 
   // if they click on this page
   useLayoutEffect(()=> {
@@ -151,7 +152,7 @@ const AccountHeader = memo(() :ReactNode => {
         </AnimatePresence>
         <AnimatePresence>
           {
-            taskModal && <TaskDetailModal userInfo={user} board={board} />
+            taskModal && <TaskDetailModal userInfo={user} board={taskSelectedBoard!} />
           }
         </AnimatePresence>
         <AnimatePresence>
