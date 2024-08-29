@@ -22,6 +22,11 @@ const index = memo((
     
       boardsScroll
 
+      w-full
+
+      relative
+      z-[5]
+
       sLaptop:w-[33.333rem]
       mLaptop:w-[41.666rem]
       desktop:w-[50rem]
@@ -36,14 +41,14 @@ const index = memo((
       desktop:gap-y-[1.563rem]
       largeDesktop:gap-y-[1.953rem]
 
-      pr-[1.5%]
+      sLaptop:pr-[1.5%]
 
       sLaptop:mb-[2.342rem]
       mLaptop:mb-[2.916rem]
       desktop:mb-[3.5rem]
       largeDesktop:mb-[4.375rem]
 
-      scrollGutter
+      sLaptop:scrollGutter
      
     ">
       {

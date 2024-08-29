@@ -46,6 +46,9 @@ const Tasks = memo((
     className='
     w-full
     
+    h-20
+    sLaptop:h-auto
+
     bg-SpaceBlueSelected
 
     text-PrimaryWhite
@@ -66,7 +69,9 @@ const Tasks = memo((
     '>
       <TaskHead head={taskHeaders[board.background]} workspaceName = {workspace.name} boardName = {board.name} listName = {listTaskFrom[0].name} />
       <div className='
-      flex
+      hidden
+      sLaptop:flex
+
       flex-row
 
       px-[2.5%]

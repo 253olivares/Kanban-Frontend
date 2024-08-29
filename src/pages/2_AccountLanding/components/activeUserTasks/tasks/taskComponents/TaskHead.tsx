@@ -16,6 +16,9 @@ const TaskHead = (
   
     h-auto
     relative
+
+    hidden
+    sLaptop:block
     '>
         <div className='
         top-0
