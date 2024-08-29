@@ -2,6 +2,7 @@ import { memo } from "react";
 import { task } from "../../../../reduxStore/tasks/tasksSlice"
 import Tasks from "./tasks/Tasks";
 import scrollbarImage from '/assets/scrollBarTrack.png';
+import { AnimatePresence } from "framer-motion";
 
 const index = memo((
   {
@@ -10,6 +11,7 @@ const index = memo((
     getUserTasks:task[]
   }
 ) => {
+
   return (
     <div
     style={{
@@ -38,8 +40,10 @@ const index = memo((
      
     ">
       {
-        getUserTasks.map((task)=> {
-          return  <Tasks key={task.t_id} task={task} /> 
+        getUserTasks.map((task,index)=> {
+          return  <AnimatePresence key={task.t_id}>
+            <Tasks durat={(index+1)*.15} task={task} />
+          </AnimatePresence>
         })
       }
     </div>

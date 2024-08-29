@@ -58,6 +58,8 @@ const TaskFilter = () => {
   return (
     <div className="
     relative
+
+     z-[5]
     ">
       <div
       ref={filterRefHead}

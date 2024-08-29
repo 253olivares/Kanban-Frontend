@@ -420,9 +420,13 @@ export const {
 } = taskAdapter.getSelectors((state:RootState)=>state.tasks);
 
 
+export const getFilters = (state:RootState) => state.tasks.filters;
+export const getSelectBoard = (state:RootState) => state.tasks.selectedBoard;
+
 export const getAndFilterUserTasks = createSelector(
-    [selectAllTasks,getUserTasks],
-    (tasks,usersTasks)=>{
+    [selectAllTasks,getUserTasks,getFilters],
+    (tasks,usersTasks,filters)=>{
+
         const taskFilter = tasks.filter(x=>usersTasks?.includes(x.t_id) || false)
 
         const sortTasks = taskFilter.sort((a,b)=>{
@@ -431,12 +435,25 @@ export const getAndFilterUserTasks = createSelector(
             return date1.valueOf() - date2.valueOf();
         })
 
-        return sortTasks;
+        const filter2 = (tasks:task[]):task[] => {
+
+            const noFilterSelected = !filters.low && !filters.medium && !filters.urgent
+
+            if(noFilterSelected) return tasks;
+
+            const filterList:Record<string,boolean>  = {
+                low: filters.low,
+                medium: filters.medium,
+                urgent: filters.urgent,
+                "" : false
+              }
+
+            return tasks.filter((task)=> filterList[task.priority[0]])
+        }
+
+        return  filter2(sortTasks);
     }
 )
-
-export const getFilters = (state:RootState) => state.tasks.filters;
-export const getSelectBoard = (state:RootState) => state.tasks.selectedBoard;
 
 export const {changeFilter, setBoard} = taskSlice.actions;
 

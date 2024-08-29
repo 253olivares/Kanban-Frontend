@@ -3,13 +3,17 @@ import UserActiveTasks from '../activeUserTasks';
 import Heading from '../mainPageHeader';
 import { getUser, user } from '../../../../reduxStore/users/userSlice';
 import { useAppSelector } from '../../../../reduxStore/hook';
-import { getAndFilterUserTasks, task } from '../../../../reduxStore/tasks/tasksSlice';
+import { getAndFilterUserTasks, getFilters, task } from '../../../../reduxStore/tasks/tasksSlice';
 
 const index = memo(() => {
 
   const user:user | null =  useAppSelector(getUser);
 
   const getUserTasks:task[] = useAppSelector(getAndFilterUserTasks);
+
+  const getAppFilter = useAppSelector(getFilters);
+
+  const noFilterSelected = !getAppFilter.low && !getAppFilter.medium && !getAppFilter.urgent
 
   if(!user)return;
   return (
@@ -48,7 +52,7 @@ const index = memo(() => {
 
             px-[5%]
             text-center
-            '>No tasks currently found! <br/> All caught up!</p>
+            '> {noFilterSelected ? <span>No tasks currently found! <br/> All caught up!</span> : <span>No tasks found with current filter</span>}</p>
           </div>
           : 
           <UserActiveTasks getUserTasks={getUserTasks} />
