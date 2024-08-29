@@ -1,6 +1,5 @@
 import { ReactNode, memo, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import headerBackground from '/assets/taskModal/TaskHeaderBack.png';
 import { useAppDispatch} from '../../../../reduxStore/hook';
 import TaskInformation from './TaskInformation';
 import { addCommentToTask, task } from '../../../../reduxStore/tasks/tasksSlice';
@@ -12,6 +11,15 @@ import TaskMiniModal from './TasksMiniModal/TaskMiniModal';
 import { miniTaskTypes } from '../TaskDetailModal';
 import { comments, createNewComments } from '../../../../reduxStore/comments/commentsSlice';
 import { getIndividualList } from '../../../../customLogic/CustomLogic';
+import TaskHead0 from '/assets/TaskHead_0.png';
+import TaskHead1 from '/assets/TaskHead_1.png';
+
+export const taskHeaders:Record<string,string> = {
+  0: TaskHead0 ,
+  1: TaskHead1 ,
+  2: ''
+}
+
 
 const TaskDetail = memo((
   {
@@ -95,7 +103,11 @@ const TaskDetail = memo((
       <AnimatePresence>
       {openTaskMiniModal && <TaskMiniModal boardId={board.b_id} setCommentFn={setCommentFn} comment={comment} task={task} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} />}
       </AnimatePresence>
-      <ImageHeader workspaceName={workspace.name} boardName={board.name} selectList={task.l_id} imgSrc={headerBackground} />
+      <ImageHeader 
+      workspaceName={workspace.name} 
+      boardName={board.name} 
+      selectList={task.l_id} 
+      imgSrc={taskHeaders[board.background]} />
       <TaskInformation setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} taskId={task.t_id} taskName={task.name} filter={task.priority} members={task.assignees} comments={task.comments} story={task.story} />
       <TaskBottomInfo boardId={board.b_id} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} setOpenTaskMiniModal={setOpenTaskMiniModal} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task={task}/>
     </motion.div>

@@ -5,6 +5,11 @@ import { changeTaskModal, setSelectTask } from '../../../../../reduxStore/modal/
 import { getIndividualList } from '../../../../../customLogic/CustomLogic'
 import { selectBoardById } from '../../../../../reduxStore/boards/boardsSlice'
 import { motion } from 'framer-motion'
+import { selectWorkspaceById } from '../../../../../reduxStore/workspace/workspaceSlice'
+import TaskHead from './taskComponents/TaskHead'
+import { taskHeaders } from '../../../../components/tasksDetailModal/components/TaskDetail'
+import TaskNameFilter from './taskNameAndFilter/TaskNameFilter'
+import StoryPoint from './storyPoint/StoryPoint'
 
 const Tasks = memo((
     {
@@ -20,6 +25,8 @@ const Tasks = memo((
   const listTaskFrom = getIndividualList(task.l_id);
 
   const board = useAppSelector(state => selectBoardById(state,listTaskFrom ? listTaskFrom[0].b_id : ""))
+
+  const workspace = useAppSelector(state=>selectWorkspaceById(state,board.w_id));
 
   if(!listTaskFrom) return;
   return (
@@ -38,16 +45,42 @@ const Tasks = memo((
     }}
     className='
     w-full
-
-    h-28
     
     bg-SpaceBlueSelected
 
     text-PrimaryWhite
 
     cursor-pointer
+
+    sLaptop:rounded-[0.305rem]
+    mLaptop:rounded-[0.381rem]
+    desktop:rounded-[0.458rem]
+    largeDesktop:rounded-[0.572rem]
+
+    flex
+    flex-col
+
+    overflow-clip
+
+    shrink-0  
     '>
-        {task.name} WIP*
+      <TaskHead head={taskHeaders[board.background]} workspaceName = {workspace.name} boardName = {board.name} listName = {listTaskFrom[0].name} />
+      <div className='
+      flex
+      flex-row
+
+      px-[2.5%]
+      '>
+        <TaskNameFilter
+        taskName={task.name}
+        filter = {task.priority}
+        members={task.assignees.length+1}
+        comments={task.comments.length}
+        />
+        <StoryPoint
+        storyPoint = {task.story}
+        />
+      </div>
     </motion.div>
   )
 })
