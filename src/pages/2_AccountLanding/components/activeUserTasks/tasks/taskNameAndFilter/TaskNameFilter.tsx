@@ -21,10 +21,20 @@ const TaskNameFilter = (
 
     flex-grow
 
+    my-[0.439rem]
+    mobile:my-[0.586rem]
+    sMobile:my-[0.938rem]
+    mMobile:my-[1.125rem]
+
     sLaptop:my-[0.5rem]
     mLaptop:my-[0.625rem]
     desktop:my-[0.75rem]
     largeDesktop:my-[0.937rem]
+
+    gap-[0.439rem]
+    mobile:gap-[0.586rem]
+    sMobile:gap-[0.938rem]
+    mMobile:gap-[1.125rem]
 
     sLaptop:gap-[0.5rem]
     mLaptop:gap-[0.625rem]
@@ -58,6 +68,11 @@ const TaskName = (
         text-nowrap
         text-ellipsis
         overflow-hidden
+
+        text-[0.732rem]
+        mobile:text-[0.976rem]
+        sMobile:text-[1.563rem]
+        mMobile:text-[1.875rem]
 
         sLaptop:text-[1.238rem]
         mLaptop:text-[1.541rem]
@@ -94,7 +109,12 @@ const TaskFilter = (
     flex-row
     items-center
 
-     gap-[2.5%]
+    gap-[2.5%]
+
+    h-[0.585rem]
+    mobile:h-[0.781rem]
+    sMobile:h-[1.25rem]
+    mMobile:h-[1.5rem]
 
     sLaptop:h-[0.955rem]
     mLaptop:h-[1.194rem]
@@ -123,6 +143,11 @@ const FilterLabel = memo(({
         ${color}
 
         h-full
+
+        rounded-[0.070rem]
+        mobile:rounded-[0.093rem]
+        sMobile:rounded-[.15rem]
+        mMobile:rounded-[0.18rem]
 
         sLaptop:rounded-[0.066rem]
         mLaptop:rounded-[0.083rem]

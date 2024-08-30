@@ -36,12 +36,24 @@ const index = memo((
       grid-cols-1
       auto-rows-auto
 
+      gap-y-[1.084rem]
+      mobile:gap-y-[1.445rem]
+      sMobile:gap-y-[2.313rem]
+      mMobile:gap-y-[2.775rem]
       sLaptop:gap-y-[1.042rem]
       mLaptop:gap-y-[1.302rem]
       desktop:gap-y-[1.563rem]
       largeDesktop:gap-y-[1.953rem]
 
+      px-[3.125%]
+
       sLaptop:pr-[1.5%]
+      sLaptop:pl-0
+
+      mb-[2.933rem]
+      mobile:mb-[3.666rem]
+      sMobile:mb-[4.4rem]
+      mMobile:mb-[5.28rem]
 
       sLaptop:mb-[2.342rem]
       mLaptop:mb-[2.916rem]

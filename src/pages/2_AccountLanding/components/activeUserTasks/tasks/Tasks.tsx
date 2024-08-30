@@ -7,7 +7,6 @@ import { selectBoardById } from '../../../../../reduxStore/boards/boardsSlice'
 import { motion } from 'framer-motion'
 import { selectWorkspaceById } from '../../../../../reduxStore/workspace/workspaceSlice'
 import TaskHead from './taskComponents/TaskHead'
-import { taskHeaders } from '../../../../components/tasksDetailModal/components/TaskDetail'
 import TaskNameFilter from './taskNameAndFilter/TaskNameFilter'
 import StoryPoint from './storyPoint/StoryPoint'
 
@@ -46,14 +45,17 @@ const Tasks = memo((
     className='
     w-full
     
-    h-20
-    sLaptop:h-auto
 
     bg-SpaceBlueSelected
 
     text-PrimaryWhite
 
     cursor-pointer
+
+    rounded-[0.234rem]
+    mobile:rounded-[0.312rem]
+    sMobile:rounded-[0.5rem]
+    mMobile:rounded-[0.6rem]
 
     sLaptop:rounded-[0.305rem]
     mLaptop:rounded-[0.381rem]
@@ -67,11 +69,9 @@ const Tasks = memo((
 
     shrink-0  
     '>
-      <TaskHead head={taskHeaders[board.background]} workspaceName = {workspace.name} boardName = {board.name} listName = {listTaskFrom[0].name} />
+      <TaskHead head={board.background} workspaceName = {workspace.name} boardName = {board.name} listName = {listTaskFrom[0].name} />
       <div className='
-      hidden
-      sLaptop:flex
-
+      flex
       flex-row
 
       px-[2.5%]
