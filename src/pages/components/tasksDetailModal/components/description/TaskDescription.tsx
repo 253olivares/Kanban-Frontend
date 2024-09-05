@@ -30,6 +30,16 @@ const TaskDescription = memo(({
   
     w-full
 
+    my-[0.732rem]
+    mobile:my-[0.976rem]
+    sMobile:my-[1.563rem]
+    mMobile:my-[1.875rem]
+    sLaptop:my-0
+
+    gap-[0.468rem]
+    mobile:gap-[0.625rem]
+    sMobile:gap-[1rem]
+    mMobile:gap-[1.2rem]
     sLaptop:gap-[0.4rem]
     mLaptop:gap-[0.5rem]
     desktop:gap-[0.6rem]
@@ -69,9 +79,15 @@ const DescriptionHead = memo((
 
   justify-between
 
-  px-[3.5%]
+  px-[2.5%]
+  sLaptop:px-[3.5%]
   '>
     <h1 className='
+
+    text-[0.937rem]
+    mobile:text-[1.249rem]
+    sMobile:text-[1.999rem]
+    mMobile:text-[2.398rem]
 
     sLaptop:text-[1rem]
     mLaptop:text-[1.25rem]
@@ -111,6 +127,10 @@ export const CancelOrSaveChanges = memo(({
   flex-row
   items-center
 
+  gap-[0.468rem]
+  mobile:gap-[0.625rem]
+  sMobile:gap-[1rem]
+  mMobile:gap-[1.2rem]
   sLaptop:gap-[.333rem]
   mLaptop:gap-[0.416rem]
   desktop:gap-[.5rem]
@@ -139,6 +159,11 @@ export const Mark = memo(({
   imgSrc:string
 }) =>{
   return <img className='
+
+    h-[0.878rem]
+    mobile:h-[1.171rem]
+    sMobile:h-[1.875rem]
+    mMobile:h-[2.25rem]
     sLaptop:h-[0.733rem]
     mLaptop:h-[0.916rem]
     desktop:h-[1.1rem]
@@ -161,6 +186,11 @@ const EditIcon = ({
 
   onClick={setOpenDescriptionEdit}
   className='
+
+  h-[0.878rem]
+  mobile:h-[1.171rem]
+  sMobile:h-[1.875rem]
+  mMobile:h-[2.25rem]
   sLaptop:h-[0.733rem]
   mLaptop:h-[0.916rem]
   desktop:h-[1.1rem]
@@ -188,6 +218,9 @@ const DescriptionBox = memo(({
   return <div className='
   flex-grow
 
+  px-[2.5%]
+  sLaptop:px-0
+
   w-full
   '>
 
@@ -213,15 +246,14 @@ const EditDescription = memo(({
   return <div className='
   w-full
 
-  pl-[3.5%]
-
+  sLaptop:pl-[3.5%]
   sLaptop:pr-[calc(3.5%-5.333px)]
   mLaptop:pr-[calc(3.5%-6.666px)]
   desktop:pr-[calc(3.5%-8px)]
   largeDesktop:pr-[calc(3.5%-10px)]
 
   boardsScroll
-  scrollGutter
+  sLaptop:scrollGutter
   '>
     <textarea 
     style={{
@@ -238,16 +270,29 @@ const EditDescription = memo(({
     focus:outline-none
     focus:opacity-100
 
+    h-[5.859rem]
+    mobile:h-[7.812rem]
+    sMobile:h-[12.5rem]
+    mMobile:h-[15rem]
     sLaptop:h-[5.696rem]
     mLaptop:h-[7.12rem]
     desktop:h-[8.544rem]
     largeDesktop:h-[10.68rem]
 
+    text-[0.644rem]
+    mobile:text-[0.859rem]
+    sMobile:text-[1.375rem]
+    mMobile:text-[1.65rem]
     sLaptop:text-[0.6rem]
     mLaptop:text-[0.75rem]
     desktop:text-[0.9rem]
     largeDesktop:text-[1.125rem]
 
+    rounded-[0.093rem]
+    mobile:rounded-[0.125rem]
+    sMobile:rounded-[.2rem]
+    mMobile:rounded-[0.24rem]
+    
     sLaptop:rounded-[0.186rem]
     mLaptop:rounded-[0.233rem]
     desktop:rounded-[0.35rem]
@@ -279,19 +324,25 @@ const Description = memo(({
   }}
   className='
   w-full
-
-  pl-[3.5%]
-
+  
   sLaptop:pr-[calc(3.5%-5.333px)]
   mLaptop:pr-[calc(3.5%-6.666px)]
   desktop:pr-[calc(3.5%-8px)]
   largeDesktop:pr-[calc(3.5%-10px)]
 
+  h-[5.859rem]
+  mobile:h-[7.812rem]
+  sMobile:h-[12.5rem]
+  mMobile:h-[15rem]
   sLaptop:h-[5.696rem]
   mLaptop:h-[7.12rem]
   desktop:h-[8.544rem]
   largeDesktop:h-[10.68rem]
 
+  text-[0.644rem]
+  mobile:text-[0.859rem]
+  sMobile:text-[1.375rem]
+  mMobile:text-[1.65rem]
   sLaptop:text-[0.6rem]
   mLaptop:text-[0.75rem]
   desktop:text-[0.9rem]
@@ -308,7 +359,7 @@ const Description = memo(({
   opacity-75
 
   boardsScroll
-  scrollGutter
+  sLaptop:scrollGutter
   '>
     {`${taskDescription}`}
   </div>

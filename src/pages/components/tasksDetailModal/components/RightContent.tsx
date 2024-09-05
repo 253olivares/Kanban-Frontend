@@ -17,7 +17,8 @@ const RightContent = memo(({
 }) => {
   return (
     <div className="
-    flex
+    hidden
+    sLaptop:flex
     flex-col
 
     w-[32.5%]

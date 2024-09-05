@@ -35,14 +35,14 @@ const LeftContent = memo(({
 }) => {
   return (
     <div className="
-
+     
+     w-full
+     sLaptop:w-[calc(100%-32.5%)]
+     
      flex
      flex-col
 
-     w-[calc(100%-32.5%)]
-
      flex-grow-0
-
     ">
       <TaskDescription taskId={task.t_id} taskDescription={taskDescription} setTaskDescription={setTaskDescription} adminCred={adminCred} description={task.description} />
       <TaskComments boardId={boardId} taskId={taskId} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} comments={comments} setComment={setComment} userInfo={userInfo}  adminCred={adminCred} taskComments={task.comments} assignees={task.assignees}/>
