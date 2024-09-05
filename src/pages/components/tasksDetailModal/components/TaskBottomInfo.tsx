@@ -36,7 +36,8 @@ const TaskBottomInfo = memo(({
 }) => {
   return (
     <div className="
-    flex
+    hidden
+    sLaptop:flex
     flex-row
     sLaptop:py-[1.022rem]
     mLaptop:py-[1.278rem]

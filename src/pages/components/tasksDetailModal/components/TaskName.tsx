@@ -120,6 +120,10 @@ const TaskName = (
         text-ellipsis
         overflow-hidden
         
+        text-[0.937rem]
+        mobile:text-[1.250rem]
+        sMobile:text-[2.001rem]
+        mMobile:text-[2.401rem]
         sLaptop:text-[1.333rem]
         mLaptop:text-[1.666rem]
         desktop:text-[2rem]

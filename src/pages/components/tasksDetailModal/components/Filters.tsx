@@ -25,6 +25,10 @@ const Filters = memo((
 
     gap-[2.5%]
 
+    h-[0.683rem]
+    mobile:h-[0.911rem]
+    sMobile:h-[1.459rem]
+    mMobile:h-[1.750rem]
     sLaptop:h-[0.955rem]
     mLaptop:h-[1.194rem]
     desktop:h-[1.433rem]
@@ -54,7 +58,11 @@ const FilterLabel = memo(({
         ${color}
 
         h-full
-
+        
+        rounded-[0.093rem]
+        mobile:rounded-[0.125rem]
+        sMobile:rounded-[.2rem]
+        mMobile:rounded-[0.24rem]
         sLaptop:rounded-[0.066rem]
         mLaptop:rounded-[0.083rem]
         desktop:rounded-[0.1rem]

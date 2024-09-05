@@ -42,11 +42,11 @@ const TaskInformation = memo((
   return (
     <div className="
     w-full
-    
+  
     flex
     flex-row
 
-    flex-grow
+    sLaptop:flex-grow
     px-[2.5%]
 
     bg-SpaceBlueSelected
@@ -110,11 +110,19 @@ const TaskInfo = memo(({
   flex
   flex-col
 
+  my-[0.498rem]
+  mobile:my-[0.664rem]
+  sMobile:my-[1.063rem]
+  mMobile:my-[1.275rem]
   sLaptop:my-[0.5rem]
   mLaptop:my-[0.625rem]
   desktop:my-[0.75rem]
   largeDesktop:my-[0.937rem]
 
+  gap-[0.498rem]
+  mobile:gap-[0.664rem]
+  sMobile:gap-[1.063rem]
+  mMobile:gap-[1.275rem]
   sLaptop:gap-[0.5rem]
   mLaptop:gap-[0.625rem]
   desktop:gap-[.75rem]
@@ -149,6 +157,7 @@ const StoryPointAndOptions = memo(({
 })=>{
 
   return <div className="
+  
   flex
   flex-col
 
@@ -177,7 +186,8 @@ const TaskAdminOptions = memo(({
 })=>{
 
   return <div className="
-  flex
+  hidden
+  sLaptop:flex
   flex-row
 
   justify-end
@@ -248,16 +258,25 @@ const StoryPoints = memo(({
 
     bg-SpaceBlue
 
+    h-[2.929rem]
+    mobile:h-[3.906rem]
+    sMobile:h-[6.25rem]
+    mMobile:h-[7.5rem]
     sLaptop:h-[4.048rem]
     mLaptop:h-[5.060rem]
     desktop:h-[6.073rem]
     largeDesktop:h-[7.591rem]
 
+    w-[3.906rem]
+    mobile:w-[3.906rem]
+    sMobile:w-[6.25rem]
+    mMobile:w-[7.5rem]
     sLaptop:w-[4.048rem]
     mLaptop:w-[5.060rem]
     desktop:w-[6.073rem]
     largeDesktop:w-[7.591rem]
 
+    mt-0
     sLaptop:mt-[calc(-4.048rem/6)]
     mLaptop:mt-[calc(-5.060rem/6)]
     desktop:mt-[calc(-6.073rem/6)]
@@ -266,6 +285,11 @@ const StoryPoints = memo(({
     flex
     justify-center
     items-center
+
+    text-[1.406rem]
+    mobile:text-[1.875rem]
+    sMobile:text-[3rem]
+    mMobile:text-[3.6rem]
 
     sLaptop:text-[1.493rem]
     mLaptop:text-[1.866rem]
@@ -282,7 +306,7 @@ const StoryPoints = memo(({
       opacity-0
       z-[-1]
       whitespace-pre  
-      
+
       sLaptop:text-[1.066rem]
       mLaptop:text-[1.866rem]
       desktop:text-[1.6rem]
@@ -367,6 +391,11 @@ const StoryPoints = memo(({
 const StoryPoint = memo(()=>{
   return <h1 className="
 
+  text-[0.675rem]
+  mobile:text-[0.900rem]
+  sMobile:text-[1.441rem]
+  mMobile:text-[1.729rem]
+
   sLaptop:text-[0.833rem]
   mLaptop:text-[1.041rem]
   desktop:text-[1.25rem]
@@ -377,8 +406,10 @@ const StoryPoint = memo(()=>{
 
   absolute
 
-  bottom-[5%]
-  left-[-25%]
+  bottom-[2.5%]
+  sLaptop:bottom-[5%]
+  left-[-35%]
+  sLaptop:left-[-25%]
 
   leading-tight
 ">

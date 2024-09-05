@@ -38,7 +38,8 @@ const TaskMiniModal = ({
       w-full
       h-full
 
-      flex
+      hidden
+      sLaptop:flex
       justify-center
       items-center
       z-10

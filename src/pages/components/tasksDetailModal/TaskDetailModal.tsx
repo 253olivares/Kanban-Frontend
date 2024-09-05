@@ -56,6 +56,7 @@ const TaskDetailModal= memo((
       duration:.3
     }}
     className="
+
         fixed
 
         z-[15]
