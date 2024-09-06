@@ -6,13 +6,19 @@ import { selectBoardById } from "../../../../reduxStore/boards/boardsSlice";
 import MobileFilter from "./components/MobileFilter";
 import MobileSettings from "./components/MobileSettings";
 
-const Container = memo(() => {
+const Container = memo((
+  {
+    boardAdmin
+  } : {
+    boardAdmin:string
+  }
+) => {
 
   const params = useParams();
 
   const selectBoard = useAppSelector(state => selectBoardById(state,params?.workspaceId || '')) || null;
 
-  if(!selectBoard) return;
+  if(!selectBoard || !params.userId ) return;
     
   return (
     <div className="
@@ -35,7 +41,9 @@ const Container = memo(() => {
     ">
       <MobileMembers boardMembers={selectBoard.members} />
       <MobileFilter selectBoard={selectBoard} />
-      <MobileSettings />
+      {
+        params.userId === boardAdmin ? <MobileSettings /> : ""
+      }
     </div>
   )
 })

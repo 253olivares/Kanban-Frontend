@@ -31,27 +31,33 @@ const TaskMiniModal = ({
         duration:.3 
     }}
     className='
-      absolute
+      fixed
+      sLaptop:absolute
 
       top-0
       left-0
+
       w-full
       h-full
 
-      hidden
-      sLaptop:flex
+      flex
       justify-center
       items-center
-      z-10
+
+      bg-[rgba(0,0,0,0.75)]
+      sLaptop:bg-transparent
+
+      z-[10]
     '>
-      <Content boardId={boardId} comment={comment} setCommentFn={setCommentFn} task={task} setOpenTaskMiniModal={setOpenTaskMiniModal} openTaskMiniModal={openTaskMiniModal} />
+        <Content setOpenTaskMiniModal={setOpenTaskMiniModal} boardId={boardId} comment={comment} setCommentFn={setCommentFn} task={task} openTaskMiniModal={openTaskMiniModal} />
       <div
       className="
       absolute
-        block
-        w-full
-        h-full
-        sLaptop:bg-[rgba(0,0,0,0.75)]
+      hidden
+      sLaptop:block
+      w-full
+      h-full
+      sLaptop:bg-[rgba(0,0,0,0.75)]
       "
       onClick={()=> setOpenTaskMiniModal("")}
       />

@@ -34,11 +34,19 @@ const TaskName = (
       z-[-1]
       whitespace-pre  
 
+      h-[1.107rem]
+      mobile:h-[1.476rem]
+      sMobile:h-[2.363rem]
+      mMobile:h-[2.835rem]
       sLaptop:h-[1.333rem]
       mLaptop:h-[1.666rem]
       desktop:h-[2rem]
       largeDesktop:h-[2.5rem]
 
+      text-[0.75rem]
+      mobile:text-[1rem]
+      sMobile:text-[1.6rem]
+      mMobile:text-[1.92rem]
       sLaptop:text-[1.066rem]
       mLaptop:text-[1.866rem]
       desktop:text-[1.6rem]
@@ -47,12 +55,20 @@ const TaskName = (
 
       text-PrimaryWhite
 
+      rounded-[0.164rem]
+      mobile:rounded-[0.218rem]
+      sMobile:rounded-[.35rem]
+      mMobile:rounded-[0.42rem]
       sLaptop:rounded-[0.186rem]
       mLaptop:rounded-[0.233rem]
       desktop:rounded-[0.35rem]
       largeDesktop:rounded-[0.35rem]
 
       box-content
+      px-[0.468rem]
+      mobile:px-[0.625rem]
+      sMobile:px-[1rem]
+      mMobile:px-[1.2rem]
       sLaptop:px-[0.4rem]
       mLaptop:px-[0.5rem]
       desktop:px-[0.6rem]
@@ -60,6 +76,10 @@ const TaskName = (
 
       ring-gray-600 
       focus:ring-SelectorBlue
+      ring-[1.171px]
+      mobile:ring-[1.562px]
+      sMobile:ring-[2.5px]
+      mMobile:ring-[3px]
       sLaptop:ring-[1.999px]
       mLaptop:ring-[2.499px]
       desktop:ring-[3px]
@@ -77,11 +97,19 @@ const TaskName = (
         focus:outline-none
         focus:opacity-100
 
+        h-[1.107rem]
+        mobile:h-[1.476rem]
+        sMobile:h-[2.363rem]
+        mMobile:h-[2.835rem]
         sLaptop:h-[1.333rem]
         mLaptop:h-[1.666rem]
         desktop:h-[2rem]
         largeDesktop:h-[2.5rem]
 
+        text-[0.75rem]
+        mobile:text-[1rem]
+        sMobile:text-[1.6rem]
+        mMobile:text-[1.92rem]
         sLaptop:text-[1.066rem]
         mLaptop:text-[1.866rem]
         desktop:text-[1.6rem]
@@ -91,6 +119,10 @@ const TaskName = (
         text-PrimaryWhite
         text-center
 
+        rounded-[0.164rem]
+        mobile:rounded-[0.218rem]
+        sMobile:rounded-[.35rem]
+        mMobile:rounded-[0.42rem]
         sLaptop:rounded-[0.186rem]
         mLaptop:rounded-[0.233rem]
         desktop:rounded-[0.35rem]
@@ -98,6 +130,10 @@ const TaskName = (
         
         ring-gray-600 
         focus:ring-SelectorBlue
+        ring-[1.171px]
+        mobile:ring-[1.562px]
+        sMobile:ring-[2.5px]
+        mMobile:ring-[3px]
         sLaptop:ring-[1.999px]
         mLaptop:ring-[2.499px]
         desktop:ring-[3px]
@@ -119,6 +155,12 @@ const TaskName = (
         text-nowrap
         text-ellipsis
         overflow-hidden
+
+        h-[1.107rem]
+        mobile:h-[1.476rem]
+        sMobile:h-[2.363rem]
+        mMobile:h-[2.835rem]
+        sLaptop:h-auto
         
         text-[0.937rem]
         mobile:text-[1.250rem]

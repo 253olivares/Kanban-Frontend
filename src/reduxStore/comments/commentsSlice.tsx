@@ -74,7 +74,7 @@ export const removeMulitpleComments = createAsyncThunk('comments/removeMulitpleC
 )=>{
     try{
         
-        console.log("Comments To Delete1312321",commentsToDelete);
+    
         return commentsToDelete
     } catch (e:any) {
         return rejectWithValue(e);

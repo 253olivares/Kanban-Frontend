@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from "../../../../../reduxStore/hook"
 import { deleteList, getSelectedList } from "../../../../../reduxStore/lists/listsSlice"
 import { deleteTaskFromBoardListDelete } from "../../../../../reduxStore/boards/boardsSlice"
 import { deleteTasksFromListDelete } from "../../../../../reduxStore/tasks/tasksSlice"
+import { removeMulitpleComments } from "../../../../../reduxStore/comments/commentsSlice"
+import { deleteTaskFromUsers } from "../../../../../reduxStore/users/userSlice"
 
 
 const ListSettings = memo(() => {
@@ -70,9 +72,11 @@ const DeleteList = () => {
     onClick={()=> {
         listData && dispatch(deleteList(listData))
         .unwrap().then((x)=>{
-            dispatch(deleteTaskFromBoardListDelete({boardId:x.listToDelete.b_id,listId:x.listToDelete.l_id}))
-            dispatch(deleteTasksFromListDelete(x.listToDelete.tasks))
-
+            dispatch(deleteTaskFromBoardListDelete({boardId:x.listToDelete.b_id,listId:x.listToDelete.l_id}));
+            dispatch(deleteTasksFromListDelete(x.listToDelete.tasks)).unwrap().then((y)=>{
+                dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}))
+            });
+            dispatch(deleteTaskFromUsers(x.listToDelete.tasks));
         })
     }}
     className="

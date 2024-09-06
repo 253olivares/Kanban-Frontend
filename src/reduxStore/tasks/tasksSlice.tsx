@@ -164,6 +164,8 @@ export const deleteMulitpleTasksFromBoardDeletion = createAsyncThunk('tasks/dele
     listOfTasksToDeleteFromLists:string[], {rejectWithValue,getState}
 )=> {
     try{
+
+        console.log("Lists of Tasks to delete from", listOfTasksToDeleteFromLists)
         const state = getState() as RootState;
 
         let tasksToDelete:string[] = [];
@@ -171,7 +173,9 @@ export const deleteMulitpleTasksFromBoardDeletion = createAsyncThunk('tasks/dele
 
         for(const listId of listOfTasksToDeleteFromLists) {
             const list = selectListById(state,listId);
+            console.log("TESTLIST",list)
             tasksToDelete = [...tasksToDelete,...list.tasks];
+            console.log("TasksToDelete",tasksToDelete)
         }
 
         tasksToDelete.forEach((taskId:string) => {

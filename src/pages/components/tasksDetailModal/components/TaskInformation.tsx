@@ -161,7 +161,13 @@ const StoryPointAndOptions = memo(({
   flex
   flex-col
 
+  items-end
   justify-between
+
+  w-[25%]
+  sLaptop:w-auto
+
+  relative
   ">
     <StoryPoints taskDetail={taskDetail} storyScore={storyScore} setStoryScore={setStoryScore} storyPoint={storyPoint} />
     {
@@ -186,17 +192,24 @@ const TaskAdminOptions = memo(({
 })=>{
 
   return <div className="
-  hidden
-  sLaptop:flex
+
+  flex
   flex-row
 
   justify-end
-
+  mb-[0.498rem]
+  mobile:mb-[0.664rem]
+  sMobile:mb-[1.063rem]
+  mMobile:mb-[1.275rem]
   sLaptop:mb-[0.5rem]
   mLaptop:mb-[0.625rem]
   desktop:mb-[0.75rem]
   largeDesktop:mb-[0.937rem]
 
+  gap-[0.498rem]
+  mobile:gap-[0.664rem]
+  sMobile:gap-[1.063rem]
+  mMobile:gap-[1.275rem]
   sLaptop:gap-[.533rem]
   mLaptop:gap-[.666rem]
   desktop:gap-[.8rem]
@@ -206,7 +219,9 @@ const TaskAdminOptions = memo(({
       taskDetail ? 
       <AcceptAndCancelChanges cancelChanges={cancelChanges} acceptChanges={acceptChanges}/>
       : 
-      <EditButton setTaskDetail={setTaskDetail} />
+      <>
+        <EditButton setTaskDetail={setTaskDetail} />
+      </>
     }
     <Delete setModal={setModal}/>
   </div>
@@ -224,6 +239,10 @@ const AcceptAndCancelChanges = ({
   flex-row
   items-center
 
+  gap-[0.498rem]
+  mobile:gap-[0.664rem]
+  sMobile:gap-[1.063rem]
+  mMobile:gap-[1.275rem]
   sLaptop:gap-[.333rem]
   mLaptop:gap-[0.416rem]
   desktop:gap-[.5rem]
@@ -290,7 +309,6 @@ const StoryPoints = memo(({
     mobile:text-[1.875rem]
     sMobile:text-[3rem]
     mMobile:text-[3.6rem]
-
     sLaptop:text-[1.493rem]
     mLaptop:text-[1.866rem]
     desktop:text-[2.24rem]
@@ -307,6 +325,10 @@ const StoryPoints = memo(({
       z-[-1]
       whitespace-pre  
 
+      text-[1.171rem]
+      mobile:text-[1.562rem]
+      sMobile:text-[2.5rem]
+      mMobile:text-[3rem]
       sLaptop:text-[1.066rem]
       mLaptop:text-[1.866rem]
       desktop:text-[1.6rem]
@@ -315,12 +337,20 @@ const StoryPoints = memo(({
 
       text-PrimaryWhite
 
+      rounded-[0.164rem]
+      mobile:rounded-[0.218rem]
+      sMobile:rounded-[.35rem]
+      mMobile:rounded-[0.42rem]
       sLaptop:rounded-[0.186rem]
       mLaptop:rounded-[0.233rem]
       desktop:rounded-[0.35rem]
       largeDesktop:rounded-[0.35rem]
 
       box-content
+      px-[0.351rem]
+      mobile:px-[0.468rem]
+      sMobile:px-[.75rem]
+      mMobile:px-[0.9rem]
       sLaptop:px-[0.4rem]
       mLaptop:px-[0.5rem]
       desktop:px-[0.6rem]
@@ -328,6 +358,10 @@ const StoryPoints = memo(({
 
        ring-gray-600 
       focus:ring-SelectorBlue
+      ring-[1.171px]
+      mobile:ring-[1.562px]
+      sMobile:ring-[2.5px]
+      mMobile:ring-[3px]
       sLaptop:ring-[1.999px]
       mLaptop:ring-[2.499px]
       desktop:ring-[3px]
@@ -344,6 +378,10 @@ const StoryPoints = memo(({
         focus:outline-none
         focus:opacity-100
 
+        text-[1.171rem]
+        mobile:text-[1.562rem]
+        sMobile:text-[2.5rem]
+        mMobile:text-[3rem]
         sLaptop:text-[1.066rem]
         mLaptop:text-[1.866rem]
         desktop:text-[1.6rem]
@@ -352,7 +390,11 @@ const StoryPoints = memo(({
 
         text-PrimaryWhite
         text-center
-
+        
+        rounded-[0.164rem]
+        mobile:rounded-[0.218rem]
+        sMobile:rounded-[.35rem]
+        mMobile:rounded-[0.42rem]
         sLaptop:rounded-[0.186rem]
         mLaptop:rounded-[0.233rem]
         desktop:rounded-[0.35rem]
@@ -360,6 +402,10 @@ const StoryPoints = memo(({
       
       ring-gray-600 
         focus:ring-SelectorBlue
+        ring-[1.171px]
+        mobile:ring-[1.562px]
+        sMobile:ring-[2.5px]
+        mMobile:ring-[3px]
         sLaptop:ring-[1.999px]
         mLaptop:ring-[2.499px]
         desktop:ring-[3px]

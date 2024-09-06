@@ -5,7 +5,9 @@ import { deleteTaskFromList } from "../../../../../../../../reduxStore/lists/lis
 import { changeTaskModal } from "../../../../../../../../reduxStore/modal/modalSlice"
 import { deleteTasksFromListDelete } from "../../../../../../../../reduxStore/tasks/tasksSlice"
 import { deleteTaskFromUsers } from "../../../../../../../../reduxStore/users/userSlice"
-import { miniTaskTypes } from "../../../../../TaskDetailModal"
+import { miniTaskTypes } from "../../../../../TaskDetailModal";
+import x_icon from '/assets/addBoard.png';
+
 
 const DeleteModal = ({
   setOpenTaskMiniModal,
@@ -26,11 +28,49 @@ const DeleteModal = ({
       flex
       flex-col
 
+      gap-[0.585rem]
+      mobile:gap-[0.781rem]
+      sMobile:gap-[1.25rem]
+      mMobile:gap-[1.5rem]
       sLaptop:gap-[0.833rem]
       mLaptop:gap-[1.041rem]
       desktop:gap-[1.25rem]
       largeDesktop:gap-[1.562rem]
-    ">
+    "> 
+      <div className="
+      flex
+      sLaptop:hidden
+      flex-row
+    
+      justify-between
+      items-center
+      ">
+        <h1 className="
+        text-[0.937rem]
+        mobile:text-[1.25rem]
+        sMobile:text-[2rem]
+        mMobile:text-[2.4rem]
+
+        font-medium
+
+        text-PrimaryWhite
+
+        leading-none
+        ">Delete Task:</h1>
+        <img onClick={(
+          () =>setOpenTaskMiniModal("")
+        )} className="
+
+          cursor-pointer
+
+          w-[1.054rem]
+          mobile:w-[1.406rem]
+          sMobile:w-[2.25rem]
+          mMobile:W-[2.7rem]
+
+          rotate-45
+        " src={x_icon} alt="" />
+      </div>
       <Message message = {"Are you sure you want to delete this task. Users involved will be removed and action will not be recoverable!"} />
       <DeleteButton comments={comments} taskUsers={taskUsers} setOpenTaskMiniModal={setOpenTaskMiniModal}  listId={listId} taskId={taskId}/>
     </div>
@@ -42,6 +82,10 @@ const Message = ({message}:{message:string}) => {
 
       text-PrimaryWhite
 
+      text-[0.703rem]
+      mobile:text-[0.937rem]
+      sMobile:text-[1.5rem]
+      mMobile:text-[1.8rem]
       sLaptop:text-[1.066rem]
       mLaptop:text-[1.333rem]
       desktop:text-[1.6rem]
@@ -81,7 +125,7 @@ const DeleteButton = (
         removeMultipleUsersFromTask(taskUsers,taskId);
 
         dispatch(deleteTasksFromListDelete([taskId]))
-
+        
         dispatch(removeMulitpleComments({commentsToDelete:comments}))
       }).finally(()=>{
         console.log("Task has been removed")
@@ -99,11 +143,19 @@ const DeleteButton = (
     opacity-50
     hover:opacity-100
 
+    text-[0.820rem]
+    mobile:text-[1.093rem]
+    sMobile:text-[1.75rem]
+    mMobile:text-[2.1rem]
     sLaptop:text-[0.986rem]
     mLaptop:text-[1.233rem]
     desktop:text-[1.48rem]
     largeDesktop:text-[1.85rem]
 
+    py-[0.234rem]
+    mobile:py-[0.312rem]
+    sMobile:py-[.5rem]
+    mMobile:py-[0.6rem]
     sLaptop:py-[0.266rem]
     mLaptop:py-[0.333rem]
     desktop:py-[0.4rem]

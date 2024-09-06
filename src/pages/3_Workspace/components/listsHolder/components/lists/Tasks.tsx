@@ -22,7 +22,7 @@ const Tasks = ({
 
   const listTaskFrom = getIndividualList(task.l_id);
   
-  const board = useAppSelector(state => selectBoardById(state,listTaskFrom ? listTaskFrom[0].b_id : ""))
+  const board = useAppSelector(state => selectBoardById(state,listTaskFrom ? listTaskFrom[0]?.b_id : ""))
 
   const noFilterSelected = !getAppFilter.low && !getAppFilter.medium && !getAppFilter.urgent
 
@@ -32,7 +32,7 @@ const Tasks = ({
     urgent: getAppFilter.urgent,
     "" : false
   }
-  if(!listTaskFrom) return;
+  if(!listTaskFrom || !board) return;
   return (
     <div 
     onClick={

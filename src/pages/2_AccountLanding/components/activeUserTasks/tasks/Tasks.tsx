@@ -21,11 +21,11 @@ const Tasks = memo((
 ) => {
   const dispatch = useAppDispatch();
 
-  const listTaskFrom = getIndividualList(task.l_id);
+  const listTaskFrom = getIndividualList(task?.l_id || "");
 
-  const board = useAppSelector(state => selectBoardById(state,listTaskFrom ? listTaskFrom[0].b_id : ""))
+  const board = useAppSelector(state => selectBoardById(state,listTaskFrom ? listTaskFrom[0]?.b_id || "" : ""))
 
-  const workspace = useAppSelector(state=>selectWorkspaceById(state, board ? board.w_id : ""));
+  const workspace = useAppSelector(state=>selectWorkspaceById(state, board ? board?.w_id || "" : ""));
   if(!listTaskFrom || !workspace || !listTaskFrom) return;
   return (
     <motion.div 

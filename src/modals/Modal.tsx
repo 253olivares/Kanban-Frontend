@@ -71,54 +71,57 @@ const Modal = memo(() => {
 
   const deleteBoardFn = () => {
     dispatch(deleteBoard(board.b_id))
-    .unwrap()
-    .then(x=> {
-      // In here we are going to remove the board from other parts of the project
-      // remove board from user information
-      dispatch(removeUserBoards({removeBoard:[x.board.b_id],members:x.board.members}))
-
-      // remove board from workspace where its from
-      dispatch(updateWorkspacBoardRemove(x.board))
-
-      dispatch(deleteUserHistory(x.board.b_id))
-
-      dispatch(deleteListStateBoardDelete({boardId:x.board.b_id}))
-
-      dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists))
       .unwrap()
-      .then(y=>{
-        dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}));
-        dispatch(deleteTaskFromUsers(y.tasksToDelete));
-      })  
+      .then(x=> {
+        // In here we are going to remove the board from other parts of the project
+        // remove board from user information
+        dispatch(removeUserBoards({removeBoard:[x.board.b_id],members:x.board.members}))
+  
+        // remove board from workspace where its from
+        dispatch(updateWorkspacBoardRemove(x.board))
+  
+        dispatch(deleteUserHistory(x.board.b_id))
+  
+        dispatch(deleteListStateBoardDelete({boardId:x.board.b_id}))
+  
+        dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists))
+        .unwrap()
+        .then(y=>{
+          dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}));
+          dispatch(deleteTaskFromUsers(y.tasksToDelete));
+        }).then(() => {
+          alert("Board successfully removed!");
 
-      dispatch(closeModal());
-      // close settings modal
-      dispatch(setSettingModal(false));
-      alert("Board successfully removed!");
-      navigate(`/u/${params.userId}`);
-
-    }).catch(()=> alert(`Deleting ${board.name} unsuccessful!`))
+          dispatch(closeModal());
+          // close settings modal
+          dispatch(setSettingModal(false));
+          navigate(`/u/${params.userId}`);
+        }).catch(()=>{
+          console.log("RAN INTO ERROR!")
+        }) 
+  
+      }).catch(()=> alert(`Deleting ${board.name} unsuccessful!`))
   }
 
   const leaveWorkspaceFn = () => {
 
     dispatch(leaveWorkspaceUser(workspace.w_id))
-    .unwrap().then(()=> {
-
-      if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id})).unwrap().then((x)=>{
-
-        dispatch(deleteTaskFromUsers(x.tasksToRemoveFrom))
-        dispatch(updateMultipleTasks({tasks:x.tasksToRemoveFrom,removeUser:user.u_id}));
-      });
-      if(user) dispatch(removeUserFromWorkspace({workspace:workspace,u_id:user.u_id}));
-
-      if(user) deleteUserFromHistory(workspace.boards,user.email);
-
-      dispatch(setNewSelect(""));
-      dispatch(closeModal());
-    }).catch((e:any)=>{
-      alert(e);
-    })
+      .unwrap().then(()=> {
+  
+        if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id})).unwrap().then((x)=>{
+  
+          dispatch(deleteTaskFromUsers(x.tasksToRemoveFrom))
+          dispatch(updateMultipleTasks({tasks:x.tasksToRemoveFrom,removeUser:user.u_id}));
+        });
+        if(user) dispatch(removeUserFromWorkspace({workspace:workspace,u_id:user.u_id}));
+  
+        if(user) deleteUserFromHistory(workspace.boards,user.email);
+  
+        dispatch(setNewSelect(""));
+        dispatch(closeModal());
+      }).catch((e:any)=>{
+        alert(e);
+      })
   }
 
   return (

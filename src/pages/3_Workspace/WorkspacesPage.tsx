@@ -25,7 +25,7 @@ const WorkspacesPage = memo(() => {
     <div className={`
     workspacesIndex
     `}>
-      <BoardAndWorkspaces />
+      <BoardAndWorkspaces boardAdmin= {board.u_id} />
       <AnimatePresence>
         {
           accountSettings ? <AccountSettingModal /> : ''

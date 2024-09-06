@@ -8,15 +8,16 @@ import ConfirmDelete from './component/confirmDelete';
 import { useAppDispatch, useAppSelector } from "../../../../reduxStore/hook";
 import { addNewWorkspace, changeModal, getWorkspaceSelect, removeExistingWorkspace, removeUserFromWorkspace, selectWorkspaceById, setNewSelect, updateWorkspacBoardRemove, updateWorkspaceBoard } from "../../../../reduxStore/workspace/workspaceSlice";
 import { createBoardListCL, createUserHistory, deleteBoardListMultipleCL, deleteBoardsUserHistory, deleteUserFromHistory, removeAdditionalUsersWorkspaceAndBoards, sanitize } from "../../../../customLogic/CustomLogic";
-import { deleteTaskFromUsers, getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace, updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
-import { addBoards, changeBoardModal, deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, selectBoardById, updateBoardNameFromWorkspace, updateBoardNameStart } from "../../../../reduxStore/boards/boardsSlice";
+import { addTaskToUser, deleteTaskFromUsers, getUser, leaveWorkspaceUser, removeUserBoards, removeUserWorkspace, updateUserBoards, updateUserWorkspaces } from "../../../../reduxStore/users/userSlice";
+import { addBoards, addListToBoard, changeBoardModal, deleteBoard, removeBoardsFromWorkspace, removeUserFromMulitpleBoards, selectBoardById, updateBoardNameFromWorkspace, updateBoardNameStart } from "../../../../reduxStore/boards/boardsSlice";
 import { changeListModalState, changeMobileBoardNameState, closeModal, deleteUserHistory, getAddTaskInput, setAddTaskInput, setSettingModal } from "../../../../reduxStore/modal/modalSlice";
 import { Params, useNavigate } from "react-router-dom";
 import AddNewUser from "./component/AddNewUser";
 import { createListState, deleteListStateBoardDelete, getSelectedList, list, selectAllLists, updateListTasks } from "../../../../reduxStore/lists/listsSlice";
 import CheckBackground from "./component/CheckBackground";
-import { createTask, deleteMulitpleTasksFromBoardDeletion, deleteTasksFromMulitpleBoards, updateMultipleTasks } from "../../../../reduxStore/tasks/tasksSlice";
+import { createTask, deleteTasksFromMulitpleBoards, updateMultipleTasks } from "../../../../reduxStore/tasks/tasksSlice";
 import { removeMulitpleComments } from "../../../../reduxStore/comments/commentsSlice";
+import { deleteMulitpleTasksFromBoardDeletion } from "../../../../reduxStore/tasks/tasksSlice";
 
 const MobileModal = memo((
   {
@@ -72,12 +73,13 @@ const MobileModal = memo((
 
       if(user?.u_id && selectList) dispatch(createTask({listData:selectList,adminId:user.u_id,taskName:newTaskList}))
       .unwrap()
-    .then(x=>{
-
-        dispatch(updateListTasks({list:x.list,newTask:x.newTask}))
+      .then(x=>{
+        dispatch(updateListTasks({list:x.list,newTask:x.newTask}));
+        dispatch(addTaskToUser(x.newTask))
       }).catch((e)=>{
         console.log(e);
       })
+
     }
 
     const checkInputNewworkspace = ():void => {
@@ -108,14 +110,15 @@ const MobileModal = memo((
         alert("Please enter a board Name!");
         return
       }
+
       dispatch(addBoards({boardName:newBoardName.trim(),workspaceId:selectWorkspace}))
       .unwrap()
       .then((x) => {
         alert('New board successfully added!');
-        if(x) {
+        if(x){
           dispatch(updateUserBoards(x.newBoard));
-          dispatch(updateWorkspaceBoard(x.newBoard))
-        } 
+          dispatch(updateWorkspaceBoard(x.newBoard));
+        }
         createUserHistory(x.newBoard);
         createBoardListCL(x.newBoard.b_id);
         dispatch(changeBoardModal(false));
@@ -133,9 +136,15 @@ const MobileModal = memo((
         return
       }
 
-      dispatch(createListState({listName:newList, boardId:workspaceId || "", boardNumber:lists}));
-
-      dispatch(changeListModalState(false));
+      dispatch(createListState({listName:newList, boardId:workspaceId || "", boardNumber:lists}))
+      .unwrap()
+      .then((x)=>{
+        dispatch(addListToBoard({boardId:x.newList.b_id,list:x.newList}));
+      }).catch((e)=>{
+        console.log(e);
+      });
+  
+      dispatch(changeListModalState(false))
     }
 
     const checkNewBoardName = ():void => {
@@ -158,78 +167,87 @@ const MobileModal = memo((
     }
 
     const deleteWorkspaceFn = ():void => {
-      dispatch(removeExistingWorkspace(workspace.w_id))
+    dispatch(removeExistingWorkspace(workspace.w_id))
+    .unwrap()
+    .then((x)=> {
+      dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo}))
       .unwrap()
-      .then((x)=> {
-        dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo}))
-        .unwrap()
-        .then(y=> {
-          dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}))
-          dispatch(deleteTaskFromUsers(y.tasksToDelete));
-        });
+      .then(y=> {
+        dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}))
+        dispatch(deleteTaskFromUsers(y.tasksToDelete));
+      });
 
-        dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
+      dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
 
-        dispatch(removeUserBoards({removeBoard:x.workspaceInfo.boards,members:null}))
+      dispatch(removeUserBoards({removeBoard:x.workspaceInfo.boards,members:null}))
 
-        dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
+      dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
 
-        deleteBoardsUserHistory(x.workspaceInfo.boards);
+      deleteBoardsUserHistory(x.workspaceInfo.boards);
 
-        removeAdditionalUsersWorkspaceAndBoards(x.workspaceInfo);
+      removeAdditionalUsersWorkspaceAndBoards(x.workspaceInfo);
 
-        deleteBoardListMultipleCL(x.workspaceInfo.boards);
+      deleteBoardListMultipleCL(x.workspaceInfo.boards);
 
-        dispatch(closeModal());
-      }).catch(()=> alert("Issue encountered trying to delete"+workspace.name))
+      dispatch(closeModal());
+    }).catch(()=> alert("Issue encountered trying to delete"+workspace.name))
     }
 
     const leaveWorkspaceFn = ():void => {
       dispatch(leaveWorkspaceUser(workspace.w_id))
-    .unwrap().then(()=> {
-
-      if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id})).unwrap().then((y)=>{
-        dispatch(deleteTaskFromUsers(y.tasksToRemoveFrom));
-        dispatch(updateMultipleTasks({tasks:y.tasksToRemoveFrom,removeUser:user.u_id}))
-      });
-      if(user) dispatch(removeUserFromWorkspace({workspace:workspace,u_id:user.u_id}));
-
-      if(user) deleteUserFromHistory(workspace.boards,user.email);
-
-      dispatch(setNewSelect(""));
-      dispatch(closeModal());
-    }).catch((e:any)=>{
-      alert(e);
-    })
-    }
-
-    const deleteBoardFn = ():void => {
-      dispatch(deleteBoard(board.b_id))
-    .unwrap()
-    .then((x)=> {
-      // In here we are going to remove the board from other parts of the project
-      // remove board from user information
-      dispatch(removeUserBoards({removeBoard:[x.board.b_id],members:x.board.members}))
-
-      dispatch(updateWorkspacBoardRemove(x.board))
-
-      dispatch(deleteUserHistory(x.board.b_id))
-
-      dispatch(deleteListStateBoardDelete({boardId:x.board.b_id}))
-
-      dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists)).unwrap().then((y)=>{
-        dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}))
-        dispatch(deleteTaskFromUsers(y.tasksToDelete));
+      .unwrap().then(()=> {
+  
+        if(user) dispatch(removeUserFromMulitpleBoards({boards:workspace.boards,u_id:user.u_id})).unwrap().then((x)=>{
+  
+          dispatch(deleteTaskFromUsers(x.tasksToRemoveFrom))
+          dispatch(updateMultipleTasks({tasks:x.tasksToRemoveFrom,removeUser:user.u_id}));
+        });
+        if(user) dispatch(removeUserFromWorkspace({workspace:workspace,u_id:user.u_id}));
+  
+        if(user) deleteUserFromHistory(workspace.boards,user.email);
+  
+        dispatch(setNewSelect(""));
+        dispatch(closeModal());
+      }).catch((e:any)=>{
+        alert(e);
       })
-
-      dispatch(closeModal());
-      // close settings modal
-      dispatch(setSettingModal(false));
-      alert("Board successfully removed!");
-      navigate(`/u/${params.userId}`);
-
-    }).catch(()=> alert(`Deleting ${board.name} unsuccessful!`))
     }
+
+    const deleteBoardFn = () => {
+      dispatch(deleteBoard(board.b_id))
+        .unwrap()
+        .then(x=> {
+          // In here we are going to remove the board from other parts of the project
+          // remove board from user information
+          dispatch(removeUserBoards({removeBoard:[x.board.b_id],members:x.board.members}))
+    
+          // remove board from workspace where its from
+          dispatch(updateWorkspacBoardRemove(x.board))
+    
+          dispatch(deleteUserHistory(x.board.b_id))
+    
+          dispatch(deleteListStateBoardDelete({boardId:x.board.b_id}))
+    
+          console.log("TESTSETSETSES", x)
+
+          dispatch(deleteMulitpleTasksFromBoardDeletion(x.board.lists))
+          .unwrap()
+          .then(y=>{
+
+            console.log("SOMETIHASLODKALSF", y)
+            dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}));
+            dispatch(deleteTaskFromUsers(y.tasksToDelete))
+          })
+          alert("Board successfully removed!");
+    
+          dispatch(closeModal());
+          // close settings modal
+          dispatch(setSettingModal(false));
+          navigate(`/u/${params.userId}`);
+    
+        }).catch(()=> alert(`Deleting ${board.name} unsuccessful!`))
+    }
+
   return (
     <motion.div 
 

@@ -330,9 +330,10 @@ export const removeMulitpleCommentsCL = (comments:string[]) => {
         return null;
     }
 
+    console.log("Remove multiple comments CL", comments)
     const commentsList:comments[] = JSON.parse(data);
 
-    const updateComments = commentsList.filter((x)=> comments.includes(x.c_id));
+    const updateComments = commentsList.filter((x)=> !comments.includes(x.c_id));
     localStorage.setItem(commentKey,JSON.stringify(updateComments));
 
 }

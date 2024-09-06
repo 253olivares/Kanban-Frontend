@@ -123,7 +123,7 @@ const TaskDetail = memo((
     `}
     >
       <AnimatePresence>
-      {openTaskMiniModal && <TaskMiniModal boardId={board.b_id} setCommentFn={setCommentFn} comment={comment} task={task} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} />}
+        {openTaskMiniModal && <TaskMiniModal boardId={board.b_id} setCommentFn={setCommentFn} comment={comment} task={task} openTaskMiniModal={openTaskMiniModal} setOpenTaskMiniModal={setOpenTaskMiniModal} />}
       </AnimatePresence>
       <ImageHeader 
       workspaceName={workspace.name} 

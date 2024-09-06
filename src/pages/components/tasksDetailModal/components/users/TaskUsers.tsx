@@ -1,6 +1,7 @@
 import { memo } from "react"
 import { getUserFromList, getUserHistory } from "../../../../../customLogic/CustomLogic"
 import scrollbarImage from '/assets/scrollBarTrack.png';
+import scrollbarImageX from '/assets/scrollBarTrackX.png'
 import addWorkspace from '/assets/Add_New_Workspace.svg';
 import { miniTaskTypes } from "../../TaskDetailModal";
 
@@ -123,10 +124,9 @@ const MembersBody = memo(( {
   admin:string
 }) =>{
     return <div 
-    style={{
-      // @ts-ignore
-      "--img": `url(${scrollbarImage})`
-    }}
+    // @ts-ignore
+    style={{"--img": `url(${scrollbarImage})`,
+    "--img2": `url(${scrollbarImageX})`}}
     className="
     w-full
 
@@ -148,7 +148,8 @@ const MembersBody = memo(( {
     desktop:gap-[0.68rem]
     largeDesktop:gap-[.85rem] 
 
-    boardsScroll
+     boardsScrollx 
+      sLaptop:boardsScroll
     ">
       <Members boardId={boardId} userId={admin} />
       {
@@ -171,6 +172,8 @@ const Members = memo(( {
 
   if(!user) return;
   return <div className="
+
+  flex-shrink-0
   w-[8.789rem]
   mobile:w-[11.718rem]
   sMobile:w-[18.75rem]

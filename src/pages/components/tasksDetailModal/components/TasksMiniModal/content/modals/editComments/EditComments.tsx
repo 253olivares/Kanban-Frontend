@@ -1,7 +1,7 @@
 import { useLayoutEffect, useState } from "react"
 import { comments, updateComment } from "../../../../../../../../reduxStore/comments/commentsSlice"
-import { miniTaskTypes } from "../../../../../TaskDetailModal"
-import { useAppDispatch } from "../../../../../../../../reduxStore/hook"
+import { miniTaskTypes } from "../../../../../TaskDetailModal";
+import { useAppDispatch } from "../../../../../../../../reduxStore/hook";
 
 const EditComments = (
     {
@@ -27,6 +27,10 @@ const EditComments = (
       flex 
       flex-col
       
+      gap-[0.585rem]
+      mobile:gap-[0.781rem]
+      sMobile:gap-[1.25rem]
+      mMobile:gap-[1.5rem]
       sLaptop:gap-[0.666rem]
       mLaptop:gap-[0.833rem]
       desktop:gap-[1rem]
@@ -38,9 +42,22 @@ const EditComments = (
   )
 }
 
-const Header = () => {
-  return <h1 className="
-  sLaptop:text-[1.2rem]
+const Header = (
+) => {
+  return <div className="
+  w-full
+  
+  flex
+  flex-row
+
+  justify-between
+  ">
+    <h1 className="
+    text-[0.937rem]
+    mobile:text-[1.25rem]
+    sMobile:text-[2rem]
+    mMobile:text-[2.4rem]
+    sLaptop:text-[1.2rem]
     mLaptop:text-[1.5rem]
     desktop:text-[1.8rem]
     largeDesktop:text-[2.25rem]
@@ -51,6 +68,7 @@ const Header = () => {
 
     text-PrimaryWhite
   ">Edit Comments:</h1>
+  </div> 
 }
 
 const EditCommentsHolder = (
@@ -68,6 +86,10 @@ const EditCommentsHolder = (
     flex 
     flex-col
     
+    gap-[0.585rem]
+    mobile:gap-[0.781rem]
+    sMobile:gap-[1.25rem]
+    mMobile:gap-[1.5rem]
     sLaptop:gap-[.533rem]
     mLaptop:gap-[.666rem]
     desktop:gap-[0.8rem]
@@ -81,7 +103,6 @@ const EditCommentsHolder = (
 
     justify-between
 
-    px-[2.5%]
     ">
       <CancelButton setOpenTaskMiniModal={setOpenTaskMiniModal} />
       <SaveChanges setOpenTaskMiniModal={setOpenTaskMiniModal} commentChange={commentChange} commentId={comment.c_id}/>
@@ -100,7 +121,11 @@ const CommentTextArea = (
 ) => {
  
   return <textarea className="
-    
+
+    w-[13.476rem]
+    mobile:w-[17.968rem]
+    sMobile:w-[28.75rem]
+    mMobile:w-[34.5rem]
     sLaptop:w-[20rem]
     mLaptop:w-[25rem]
     desktop:w-[30rem]
@@ -108,6 +133,10 @@ const CommentTextArea = (
 
     bg-PrimaryWhite
 
+    text-[0.632rem]
+    mobile:text-[0.843rem]
+    sMobile:text-[1.35rem]
+    mMobile:text-[1.62rem]
     sLaptop:text-[0.533rem]
     mLaptop:text-[0.666rem]
     desktop:text-[0.8rem]
@@ -120,6 +149,10 @@ const CommentTextArea = (
     px-[1.5%]
     py-[1%]
 
+    rounded-[0.140rem]
+    mobile:rounded-[0.187rem]
+    sMobile:rounded-[.3rem]
+    mMobile:rounded-[0.36rem]
     sLaptop:rounded-[0.106rem]
     mLaptop:rounded-[0.133rem]
     desktop:rounded-[0.16rem]
@@ -144,6 +177,10 @@ const CancelButton = ({
   onClick={()=>{setOpenTaskMiniModal("")}}
   className="
 
+  text-[0.703rem]
+  mobile:text-[0.937rem]
+  sMobile:text-[1.5rem]
+  mMobile:text-[1.8rem]
   sLaptop:text-[0.666rem]
   mLaptop:text-[0.833rem]
   desktop:text-[1rem]
@@ -151,16 +188,28 @@ const CancelButton = ({
 
   leading-none
 
+  py-[0.351rem]
+  mobile:py-[0.468rem]
+  sMobile:py-[.75rem]
+  mMobile:py-[0.9rem]
   sLaptop:py-[0.4rem]
   mLaptop:py-[0.5rem]
   desktop:py-[0.6rem]
   largeDesktop:py-[.75rem]
 
+  px-[0.632rem]
+  mobile:px-[0.843rem]
+  sMobile:px-[1.35rem]
+  mMobile:px-[1.62rem]
   sLaptop:px-[1.066rem]
   mLaptop:px-[1.333rem]
   desktop:px-[1.6rem]
   largeDesktop:px-[2rem]
 
+  rounded-[0.117rem]
+  mobile:rounded-[0.156rem]
+  sMobile:rounded-[.25rem]
+  mMobile:rounded-[0.3rem]
   sLaptop:rounded-[0.186rem]
   mLaptop:rounded-[0.233rem]
   desktop:rounded-[0.28rem]
@@ -199,6 +248,11 @@ const SaveChanges = ({
     })
   }}
   className="
+
+  text-[0.703rem]
+  mobile:text-[0.937rem]
+  sMobile:text-[1.5rem]
+  mMobile:text-[1.8rem]
   sLaptop:text-[0.666rem]
   mLaptop:text-[0.833rem]
   desktop:text-[1rem]
@@ -206,16 +260,28 @@ const SaveChanges = ({
   
   leading-none
 
+  py-[0.351rem]
+  mobile:py-[0.468rem]
+  sMobile:py-[.75rem]
+  mMobile:py-[0.9rem]
   sLaptop:py-[0.4rem]
   mLaptop:py-[0.5rem]
   desktop:py-[0.6rem]
   largeDesktop:py-[.75rem]
 
+  px-[0.632rem]
+  mobile:px-[0.843rem]
+  sMobile:px-[1.35rem]
+  mMobile:px-[1.62rem]
   sLaptop:px-[1.066rem]
   mLaptop:px-[1.333rem]
   desktop:px-[1.6rem]
   largeDesktop:px-[2rem]
 
+  rounded-[0.117rem]
+  mobile:rounded-[0.156rem]
+  sMobile:rounded-[.25rem]
+  mMobile:rounded-[0.3rem]
   sLaptop:rounded-[0.186rem]
   mLaptop:rounded-[0.233rem]
   desktop:rounded-[0.28rem]
@@ -224,7 +290,7 @@ const SaveChanges = ({
   text-PrimaryWhite
   bg-SelectorBlue
 
-  opacity-75
+  sLaptop:opacity-75
   hover:opacity-95
   active:opacity-100
 

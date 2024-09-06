@@ -44,11 +44,19 @@ const UserEntity = memo((
   return (
     <div className='
 
+    w-[13.476rem]
+    mobile:w-[17.968rem]
+    sMobile:w-[28.75rem]
+    mMobile:w-[34.5rem]
     sLaptop:w-[24.500rem]
     mLaptop:w-[30.625rem]
     desktop:w-[36.750rem]
     largeDesktop:w-[45.938rem]
 
+    py-[0.351rem]
+    mobile:py-[0.468rem]
+    sMobile:py-[.75rem]
+    mMobile:py-[0.9rem]
     sLaptop:py-[0.266rem]
     mLaptop:py-[0.333rem]
     desktop:py-[0.4rem]
@@ -59,6 +67,10 @@ const UserEntity = memo((
     justify-between
     items-center
 
+    px-[0.468rem]
+    mobile:px-[0.625rem]
+    sMobile:px-[1rem]
+    mMobile:px-[1.2rem]
     sLaptop:px-[0.666rem]
     mLaptop:px-[0.833rem]
     desktop:px-[1rem]
@@ -76,14 +88,29 @@ const UserEntity = memo((
         justify-center
         items-center
 
+        gap-[0.468rem]
+        mobile:gap-[0.625rem]
+        sMobile:gap-[1rem]
+        mMobile:gap-[1.2rem]
         sLaptop:gap-[0.799rem]
         mLaptop:gap-[0.999rem]
         desktop:gap-[1.2rem]
         largeDesktop:gap-[1.5rem]
         '>
             <UserIcon userImage = {user.pfp} />
-            <UserName userName={`${user.first_name} ${user.last_name}`} />
-            <Role userRole={role}/>
+            <div className='
+                flex
+                flex-col
+                sLaptop:flex-row
+
+                sLaptop:gap-[0.799rem]
+                mLaptop:gap-[0.999rem]
+                desktop:gap-[1.2rem]
+                largeDesktop:gap-[1.5rem]
+            '>
+                <UserName userName={`${user.first_name} ${user.last_name}`} />
+                <Role userRole={role}/>
+            </div>
         </div>
 
         {
@@ -104,6 +131,10 @@ const UserIcon = memo((
     return <img className='
     rounded-full
 
+    w-[2.050rem]
+    mobile:w-[2.734rem]
+    sMobile:w-[4.375rem]
+    mMobile:w-[5.25rem]
     sLaptop:w-[1.599rem]
     mLaptop:w-[1.999rem]
     desktop:w-[2.4rem]
@@ -120,6 +151,11 @@ const UserName = memo((
 )=>{
     return <h1 className='
         font-medium
+
+        text-[0.703rem]
+        mobile:text-[0.937rem]
+        sMobile:text-[1.5rem]
+        mMobile:text-[1.8rem]
 
         sLaptop:text-[0.879rem]
         mLaptop:text-[1.098rem]
@@ -150,6 +186,11 @@ const Role = (
     return <span className="
 
     text-PrimaryWhite
+
+    text-[0.539rem]
+    mobile:text-[0.718rem]
+    sMobile:text-[1.15rem]
+    mMobile:text-[1.38rem]
 
     sLaptop:text-[.666rem]    
     mLaptop:text-[.832rem]    
@@ -193,8 +234,13 @@ const ActionButton = (
 
     text-PrimaryWhite
 
-    opacity-50
-    hover:opacity-100
+    sLaptop:opacity-50
+    hover:opacity-100    
+
+    gap-[0.234rem]
+    mobile:gap-[0.312rem]
+    sMobile:gap-[.5rem]
+    mMobile:gap-[0.6rem]
 
     sLaptop:gap-[0.266rem]
     mLaptop:gap-[0.332rem]
@@ -204,6 +250,11 @@ const ActionButton = (
     '>
         <img
         className='
+          w-[0.834rem]
+          mobile:w-[1.113rem]
+          sMobile:w-[1.781rem]
+          mMobile:w-[2.137rem]
+
           sLaptop:w-[0.72rem]
           mLaptop:w-[0.9rem]
           desktop:w-[1.08rem]
@@ -212,6 +263,11 @@ const ActionButton = (
         src={icon} alt="Icon" />
         <p className='
           font-medium
+
+          text-[0.539rem]
+          mobile:text-[0.718rem]
+          sMobile:text-[1.15rem]
+          mMobile:text-[1.38rem]
 
           sLaptop:text-[0.533rem]
           mLaptop:text-[0.666rem]

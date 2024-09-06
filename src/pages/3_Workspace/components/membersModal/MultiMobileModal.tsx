@@ -60,7 +60,7 @@ const MulitMobileModal = memo((
         memberModal ?
         <MembersModal paramsBoardId = {params?.workspaceId || "" } /> : ''
       }
-      {
+      { 
         settingsModal ? 
         <SettingsModal/> : ''
       }
