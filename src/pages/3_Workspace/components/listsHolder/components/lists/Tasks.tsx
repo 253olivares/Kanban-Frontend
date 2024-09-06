@@ -21,10 +21,9 @@ const Tasks = ({
   const task = useAppSelector(state => selectTaskById(state,taskId));
 
   const listTaskFrom = getIndividualList(task.l_id);
-  listTaskFrom && console.log(listTaskFrom[0]);
+  
   const board = useAppSelector(state => selectBoardById(state,listTaskFrom ? listTaskFrom[0].b_id : ""))
 
-  
   const noFilterSelected = !getAppFilter.low && !getAppFilter.medium && !getAppFilter.urgent
 
   const filterList:Record<string,boolean>  = {

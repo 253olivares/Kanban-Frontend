@@ -267,7 +267,7 @@ const StoryPoints = memo(({
     desktop:h-[6.073rem]
     largeDesktop:h-[7.591rem]
 
-    w-[3.906rem]
+    w-[2.929rem]
     mobile:w-[3.906rem]
     sMobile:w-[6.25rem]
     mMobile:w-[7.5rem]
