@@ -159,27 +159,29 @@ const MobileModal = memo((
 
     const deleteWorkspaceFn = ():void => {
       dispatch(removeExistingWorkspace(workspace.w_id))
-    .unwrap()
-    .then((x)=> {
-      dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo})).unwrap().then((y)=>{
-        dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}));
-        dispatch(deleteTaskFromUsers(y.tasksToDelete));
-      });
+      .unwrap()
+      .then((x)=> {
+        dispatch(deleteTasksFromMulitpleBoards({workspace:x.workspaceInfo}))
+        .unwrap()
+        .then(y=> {
+          dispatch(removeMulitpleComments({commentsToDelete:y.commentsToDelete}))
+          dispatch(deleteTaskFromUsers(y.tasksToDelete));
+        });
 
-      dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
+        dispatch(removeBoardsFromWorkspace(x.workspaceInfo));
 
-      dispatch(removeUserBoards({removeBoard:x.workspaceInfo.boards,members:null}))
+        dispatch(removeUserBoards({removeBoard:x.workspaceInfo.boards,members:null}))
 
-      dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
+        dispatch(removeUserWorkspace(x.workspaceInfo.w_id));
 
-      deleteBoardsUserHistory(x.workspaceInfo.boards);
+        deleteBoardsUserHistory(x.workspaceInfo.boards);
 
-      removeAdditionalUsersWorkspaceAndBoards(x.workspaceInfo)
+        removeAdditionalUsersWorkspaceAndBoards(x.workspaceInfo);
 
-      deleteBoardListMultipleCL(x.workspaceInfo.boards)
+        deleteBoardListMultipleCL(x.workspaceInfo.boards);
 
-      dispatch(closeModal());
-    }).catch(()=> alert("Issue encountered trying to delete"+workspace.name))
+        dispatch(closeModal());
+      }).catch(()=> alert("Issue encountered trying to delete"+workspace.name))
     }
 
     const leaveWorkspaceFn = ():void => {
