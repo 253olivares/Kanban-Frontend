@@ -9,6 +9,10 @@ const Comment = ({
     w-full
     max-w-full
 
+    text-[0.527rem]
+    mobile:text-[0.703rem]
+    sMobile:text-[1.125rem]
+    mMobile:text-[1.35rem]
     sLaptop:text-[0.6rem]
     mLaptop:text-[0.75rem]
     desktop:text-[0.9rem]

@@ -7,10 +7,12 @@ import { miniTaskTypes } from "../TaskDetailModal"
 
 
 const RightContent = memo(({
+    boardId,
     setOpenTaskMiniModal,
     adminCred,
     task
 }:{
+    boardId:string,
     setOpenTaskMiniModal:React.Dispatch<React.SetStateAction<miniTaskTypes>>,
     adminCred:boolean,
     task:task
@@ -31,7 +33,7 @@ const RightContent = memo(({
     flex-shrink-0
     
     ">
-        <TaskUsers setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} usersAdded ={task.assignees} admin = {task.admin_id} />
+        <TaskUsers boardId={boardId} setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} usersAdded ={task.assignees} admin = {task.admin_id} />
         <TaskFilterSection adminCred={adminCred} taskId={task.t_id} taskPrio={task.priority} />
     </div>
   )

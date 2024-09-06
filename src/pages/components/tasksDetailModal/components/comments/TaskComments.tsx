@@ -35,10 +35,19 @@ const TaskComments = memo(({
     <div className='
         w-full
 
-        hidden  
-        sLaptop:flex
+        flex
         flex-col
 
+        my-[0.732rem]
+        mobile:my-[0.976rem]
+        sMobile:my-[1.563rem]
+        mMobile:my-[1.875rem]
+        sLaptop:my-0
+
+        gap-[0.732rem]
+        mobile:gap-[0.976rem]
+        sMobile:gap-[1.563rem]
+        mMobile:gap-[1.875rem]
         sLaptop:gap-[0.4rem]
         mLaptop:gap-[0.5rem]
         desktop:gap-[0.6rem]

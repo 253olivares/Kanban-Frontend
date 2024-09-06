@@ -105,6 +105,10 @@ const ReactionButtons = memo((
     justify-center
     items-center
 
+    text-[1.054rem]
+    mobile:text-[1.406rem]
+    sMobile:text-[2.25rem]
+    mMobile:text-[2.7rem]
     sLaptop:text-[0.666rem]
     mLaptop:text-[0.833rem]
     desktop:text-[1rem]

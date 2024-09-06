@@ -44,8 +44,8 @@ const TaskBottomInfo = memo(({
     desktop:py-[1.533rem]
     largeDesktop:py-[1.917rem]
     ">
-        <LeftContent boardId={boardId} taskId={task.admin_id} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task ={task}/>
-        <RightContent setOpenTaskMiniModal={setOpenTaskMiniModal} adminCred={adminCred} task = {task}/>
+        <LeftContent setOpenTaskMiniModal={setOpenTaskMiniModal} boardId={boardId} taskId={task.admin_id} setCommentFn={setCommentFn} openCommentEdit={openCommentEdit} addNewComment={addNewComment} taskDescription={taskDescription} setTaskDescription={setTaskDescription} comments={comments} setComment={setComment} userInfo={userInfo} adminCred={adminCred} task ={task}/>
+        <RightContent setOpenTaskMiniModal={setOpenTaskMiniModal} boardId={boardId} adminCred={adminCred} task = {task}/>
     </div>
   )
 })

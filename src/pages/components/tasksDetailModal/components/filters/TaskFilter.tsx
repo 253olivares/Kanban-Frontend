@@ -16,8 +16,13 @@ const TaskFilterSection = memo(({
     flex
     flex-col
 
-    px-[7.5%]
+    px-[5%]
+    sLaptop:px-[7.5%]
 
+    gap-[0.468rem]
+    mobile:gap-[0.625rem]
+    sMobile:gap-[1rem]
+    mMobile:gap-[1.2rem]
     sLaptop:gap-[0.533rem]
     mLaptop:gap-[0.666rem]
     desktop:gap-[0.8rem]
@@ -50,7 +55,10 @@ const TaskBody = memo((
 
     return <div className='
     flex
-    flex-col
+    flex-row
+    sLaptop:flex-col
+    
+    justify-around
 
     sLaptop:gap-[0.453rem]
     mLaptop:gap-[0.566rem]
@@ -92,7 +100,10 @@ const Filter = memo((
         }
     }}
     className={`
-    w-full
+    w-[28.5%]
+    sLaptop:w-full
+    sLaptop:flex
+    sLaptop:justify-center
     ${color}
 
     ${
@@ -107,11 +118,17 @@ const Filter = memo((
         adminCred && 'cursor-pointer'
     }
 
+    text-[0.769rem]
+    mobile:text-[1.025rem]
+    sMobile:text-[1.641rem]
+    mMobile:text-[1.969rem]
     sLaptop:text-[0.764rem]
     mLaptop:text-[0.955rem]
     desktop:text-[1.146rem]
     largeDesktop:text-[1.432rem]
     font-medium
+
+    text-center
 
     leading-none
 
@@ -119,11 +136,19 @@ const Filter = memo((
 
     px-[5.6%]
 
+    py-[0.304rem]
+    mobile:py-[0.406rem]
+    sMobile:py-[.65rem]
+    mMobile:py-[0.78rem]
     sLaptop:py-[0.416rem]
     mLaptop:py-[0.520rem]
     desktop:py-[0.625rem]
     largeDesktop:py-[0.781rem]
 
+    rounded-[0.093rem]
+    mobile:rounded-[0.125rem]
+    sMobile:rounded-[.2rem]
+    mMobile:rounded-[0.24rem]
     sLaptop:rounded-[0.317rem]
     mLaptop:rounded-[0.476rem]
     desktop:rounded-[0.458rem]
@@ -132,7 +157,7 @@ const Filter = memo((
     capitalize
     
     `}>
-        {filter} Priority
+        {filter} <span className='hidden sLaptop:block'>&nbsp;Priority</span>
     </div>
 })
 
@@ -145,6 +170,10 @@ const TaskHeader = memo(() =>{
 
     justify-between
 
+    text-[0.937rem]
+    mobile:text-[1.249rem]
+    sMobile:text-[1.999rem]
+    mMobile:text-[2.398rem]
     sLaptop:text-[1rem]
     mLaptop:text-[1.25rem]
     desktop:text-[1.5rem]
@@ -153,7 +182,7 @@ const TaskHeader = memo(() =>{
 
     text-PrimaryWhite
 
-   leading-none
+    leading-none
 
     '>
         Labels

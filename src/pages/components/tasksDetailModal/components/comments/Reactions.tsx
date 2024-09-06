@@ -36,6 +36,10 @@ const Reactions = memo(({
 
     items-center
    
+    gap-[0.234rem]
+    mobile:gap-[0.312rem]
+    sMobile:gap-[.5rem]
+    mMobile:gap-[0.6rem]
     sLaptop:gap-[0.333rem]
     mLaptop:gap-[0.416rem]
     desktop:gap-[.5rem]
@@ -76,11 +80,19 @@ const Emoticons = memo((
 
   leading-none
 
+  gap-[0.070rem]
+  mobile:gap-[0.093rem]
+  sMobile:gap-[0.15rem]
+  mMobile:gap-[0.18rem]
   sLaptop:gap-[0.166rem]
   mLaptop:gap-[0.208rem]
   desktop:gap-[.25rem]
   largeDesktop:gap-[0.312rem]
 
+  text-[0.820rem]
+  mobile:text-[1.093rem]
+  sMobile:text-[1.75rem]
+  mMobile:text-[2.1rem]
   sLaptop:text-[0.666rem]
   mLaptop:text-[0.833rem]
   desktop:text-[1rem]
@@ -125,12 +137,17 @@ const AddReaction = memo((
       }
     } 
     className="
+    h-[0.878rem]
+    mobile:h-[1.171rem]
+    sMobile:h-[1.875rem]
+    mMobile:h-[2.25rem]
     sLaptop:h-[0.766rem]
     mLaptop:h-[0.958rem]
     desktop:h-[1.15rem]
     largeDesktop:h-[1.437rem]
 
-    opacity-75
+    opacity-100
+    sLaptop:opacity-75
 
     hover:opacity-100
 
@@ -212,16 +229,28 @@ const ReactionOptions = memo((
     flex
     flex-row
 
+    px-[0.351rem]
+    mobile:px-[0.468rem]
+    sMobile:px-[.75rem]
+    mMobile:px-[0.9rem]
     sLaptop:px-[0.4rem]
     mLaptop:px-[0.5rem]
     desktop:px-[0.6rem]
     largeDesktop:px-[.75rem]
 
+    py-[0.234rem]
+    mobile:py-[0.312rem]
+    sMobile:py-[.5rem]
+    mMobile:py-[0.6rem]
     sLaptop:py-[0.266rem]
     mLaptop:py-[0.333rem]
     desktop:py-[0.4rem]
     largeDesktop:py-[.5rem]
 
+    gap-[0.234rem]
+    mobile:gap-[0.312rem]
+    sMobile:gap-[.5rem]
+    mMobile:gap-[0.6rem]
     sLaptop:gap-[0.266rem]
     mLaptop:gap-[0.333rem]
     desktop:gap-[0.4rem]
@@ -262,7 +291,8 @@ const ReactionOptions = memo((
       bg-PrimaryWhite
       rounded-full
 
-      block
+      hidden
+      sLaptop:block
     "
     />
   </motion.div>

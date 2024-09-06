@@ -29,6 +29,10 @@ const CommentsAdminControl = ({
     flex
     flex-row
 
+    gap-[0.410rem]
+    mobile:gap-[0.546rem]
+    sMobile:gap-[0.875rem]
+    mMObile:gap-[1.05rem]
     sLaptop:gap-[0.333rem]
     mLaptop:gap-[0.416rem]
     desktop:gap-[.5rem]
@@ -57,6 +61,10 @@ const DeleteIcon = memo((
   }
 ) => {
     return <img onClick={deleteComment} className='
+    h-[0.878rem]
+    mobile:h-[1.171rem]
+    sMobile:h-[1.875rem]
+    mMobile:h-[2.25rem]
     sLaptop:h-[0.766rem]
     mLaptop:h-[0.958rem]
     desktop:h-[1.15rem]
@@ -75,6 +83,10 @@ const EditIcon = memo(({
   clickFn:()=>void
 })=>{
     return <img onClick={clickFn} className='
+    h-[0.878rem]
+    mobile:h-[1.171rem]
+    sMobile:h-[1.875rem]
+    mMobile:h-[2.25rem]
     sLaptop:h-[0.766rem]
     mLaptop:h-[0.958rem]
     desktop:h-[1.15rem]

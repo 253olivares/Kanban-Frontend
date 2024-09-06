@@ -17,6 +17,8 @@ import TaskHead0_Mobile from '/assets/TaskHead_1_mobile.png';
 import TaskHead1_mobile from '/assets/TaskHead_0_mobile.png';
 import x_icon from '/assets/addBoard.png';
 import { changeTaskModal } from '../../../../reduxStore/modal/modalSlice';
+import scrollbarImage from '/assets/scrollBarTrack.png';
+
 
 export const taskHeaders:Record<number,string> = {
   0: TaskHead0 ,
@@ -85,6 +87,10 @@ const TaskDetail = memo((
     transition={{
         duration:.3
     }}
+    style={{
+      // @ts-ignore
+      "--img": `url(${scrollbarImage})`
+    }}
     className={`
     
     bg-[#61647E]
@@ -103,7 +109,9 @@ const TaskDetail = memo((
     desktop:rounded-[0.516rem]
     largeDesktop:rounded-[0.645rem]
 
-    overflow-hidden
+    overflow-auto
+    boardsScroll
+    sLaptop:overflow-hidden
 
     relative
 

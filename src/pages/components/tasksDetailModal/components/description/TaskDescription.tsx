@@ -79,7 +79,7 @@ const DescriptionHead = memo((
 
   justify-between
 
-  px-[2.5%]
+  px-[5%]
   sLaptop:px-[3.5%]
   '>
     <h1 className='
@@ -169,7 +169,8 @@ export const Mark = memo(({
     desktop:h-[1.1rem]
     largeDesktop:h-[1.375rem]
 
-    opacity-50
+    opacity-100
+    sLaptop:opacity-50
 
     hover:opacity-100
 
@@ -196,7 +197,8 @@ const EditIcon = ({
   desktop:h-[1.1rem]
   largeDesktop:h-[1.375rem]
 
-  opacity-50
+  opacity-100
+  sLaptop:opacity-50
 
   hover:opacity-100
 
@@ -218,8 +220,8 @@ const DescriptionBox = memo(({
   return <div className='
   flex-grow
 
-  px-[2.5%]
-  sLaptop:px-0
+  px-[5%]
+  sLaptop:px-[3.5%]
 
   w-full
   '>
@@ -246,14 +248,7 @@ const EditDescription = memo(({
   return <div className='
   w-full
 
-  sLaptop:pl-[3.5%]
-  sLaptop:pr-[calc(3.5%-5.333px)]
-  mLaptop:pr-[calc(3.5%-6.666px)]
-  desktop:pr-[calc(3.5%-8px)]
-  largeDesktop:pr-[calc(3.5%-10px)]
-
   boardsScroll
-  sLaptop:scrollGutter
   '>
     <textarea 
     style={{
@@ -265,7 +260,6 @@ const EditDescription = memo(({
     w-full
 
     boardsScroll
-    scrollGutter
 
     focus:outline-none
     focus:opacity-100
@@ -292,7 +286,6 @@ const EditDescription = memo(({
     mobile:rounded-[0.125rem]
     sMobile:rounded-[.2rem]
     mMobile:rounded-[0.24rem]
-    
     sLaptop:rounded-[0.186rem]
     mLaptop:rounded-[0.233rem]
     desktop:rounded-[0.35rem]
@@ -300,10 +293,10 @@ const EditDescription = memo(({
 
     text-PrimaryWhite
 
-    p-[1.5%]
-
     glass-gradient2
     bg-transparent
+
+    resize-none
     '
     onChange={(e)=>setTaskDescription(e.target.value)}
     value={taskDescription}
@@ -324,11 +317,6 @@ const Description = memo(({
   }}
   className='
   w-full
-  
-  sLaptop:pr-[calc(3.5%-5.333px)]
-  mLaptop:pr-[calc(3.5%-6.666px)]
-  desktop:pr-[calc(3.5%-8px)]
-  largeDesktop:pr-[calc(3.5%-10px)]
 
   h-[5.859rem]
   mobile:h-[7.812rem]
@@ -353,7 +341,6 @@ const Description = memo(({
   leading-tight
 
   font-medium
-
   text-PrimaryWhite
 
   opacity-75

@@ -44,29 +44,47 @@ const TaskComment = memo(({
     w-full
 
     bg-SpaceBlue
-
+    
     flex
     flex-col
 
+    px-[0.527rem]
+    mobile:px-[0.703rem]
+    sMobile:px-[1.125rem]
+    mMobile:px-[1.35rem]
     sLaptop:px-[0.582rem]
     mLaptop:px-[0.728rem]
     desktop:px-[0.875rem]
     largeDesktop:px-[1.093rem]
 
+    py-[0.527rem]
+    mobile:py-[0.703rem]
+    sMobile:py-[1.125rem]
+    mMobile:py-[1.35rem]
     sLaptop:py-[0.582rem]
     mLaptop:py-[0.728rem]
     desktop:py-[0.875rem]
     largeDesktop:py-[1.093rem]
 
+    gap-[0.585rem]
+    mobile:gap-[0.781rem]
+    sMobile:gap-[1.25rem]
+    mMobile:gap-[1.5rem]
     sLaptop:gap-[0.499rem]
     mLaptop:gap-[0.624rem]
     desktop:gap-[0.75rem]
     largeDesktop:gap-[0.937rem]
 
+    rounded-[0.140rem]
+    mobile:rounded-[0.187rem]
+    sMobile:rounded-[.3rem]
+    mMobile:rounded-[0.36rem]
     sLaptop:rounded-[0.315rem]
     mLaptop:rounded-[0.394rem]
     desktop:rounded-[0.473rem]
     largeDesktop:rounded-[0.591rem]
+
+    flex-shrink-0
     ">
         <CommentHead boardId={boardId} commentid={commentData.u_id} taskId={taskId} assignees={assignees} commentUser={commentData.u_id} postDate ={ new Date(commentData.createdAt)} createTime={commentData.createTime}/>
         <Comment comment={commentData.message}/>
@@ -136,6 +154,7 @@ const CommentHead = memo(({
   createTime:string,
 })=>{
   return <div className="
+  
   flex
   flex-row
 
@@ -176,6 +195,10 @@ const PostDate = memo(({
   };
   return <h1 className="
 
+  text-[0.502rem]
+  mobile:text-[0.67rem]
+  sMobile:text-[1.072rem]
+  mMobile:text-[1.286rem]
   sLaptop:text-[0.625rem]
   mLaptop:text-[0.781rem]
   desktop:text-[0.938rem]
