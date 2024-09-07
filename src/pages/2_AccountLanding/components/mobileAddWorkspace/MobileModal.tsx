@@ -72,14 +72,13 @@ const MobileModal = memo((
       }
 
       if(user?.u_id && selectList) dispatch(createTask({listData:selectList,adminId:user.u_id,taskName:newTaskList}))
-      .unwrap()
-      .then(x=>{
-        dispatch(updateListTasks({list:x.list,newTask:x.newTask}));
-        dispatch(addTaskToUser(x.newTask))
-      }).catch((e)=>{
-        console.log(e);
-      })
-
+        .unwrap()
+        .then(x=>{
+          dispatch(updateListTasks({list:x.list,newTask:x.newTask}));
+          dispatch(addTaskToUser(x.newTask))
+        }).catch((e)=>{
+          console.log(e);
+        })
     }
 
     const checkInputNewworkspace = ():void => {

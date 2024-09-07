@@ -138,7 +138,7 @@ const AccountHeader = memo(() :ReactNode => {
           modalType === 'leaveWorkspace' ||
           modalType === 'changeBackground' ||
           addTaskModal
-           ? 
+          ? 
           <MobileModal 
           params = {params}
           boardsModal={boardsModal} 
