@@ -33,6 +33,10 @@ const AddComment = memo(({
 
     text-center
 
+    h-[4.394rem]
+    mobile:h-[5.859rem]
+    sMobile:h-[9.375rem]
+    mMobile:h-[11.25rem]
     sLaptop:h-[6rem]
     mLaptop:h-[7.5rem]
     desktop:h-[9rem]
