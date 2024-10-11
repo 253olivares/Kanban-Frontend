@@ -182,8 +182,8 @@ const Modal = memo(() => {
       </div>
 
       <div onClick={()=> {
-        !croppingTool && !rolestate && dispatch(closeModal())
-        rolestate && dispatch(changeUserRoleNameState(false))
+        !croppingTool && !rolestate && dispatch(closeModal());
+        rolestate && dispatch(changeUserRoleNameState(false));
       }} 
       className="
       hidden 

@@ -34,7 +34,7 @@ function App(): JSX.Element {
 
 // return our page
   return (
-    <Fragment>
+    <Fragment>  
       <Suspense fallback={<LoadingPage />}>
       <AppProvider>
         <Routes>
